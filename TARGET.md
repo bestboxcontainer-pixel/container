@@ -5,8 +5,11 @@ https://www.alternate.de/ (layout, color language, product-card pattern)
 
 Originally started as a faithful clone of quelle.de, then pivoted per user request into a
 **custom electronics/home-appliance store** using alternate.de as the visual/structural
-reference instead of a 1:1 clone target. Brand name is a placeholder ("ElektroStore") to be
-replaced later.
+reference instead of a 1:1 clone target.
+
+## Brand
+- Name: **Hausgeräte Pfeffer**
+- Domain: hausgeratepfeffer.de
 
 ## Scope
 
@@ -37,6 +40,6 @@ replaced later.
 Base template to build a custom-branded appliance/multimedia e-commerce front end on top of.
 
 ## Customization Plans
-- Brand name/logo: TBD (currently placeholder "ElektroStore" + generic mark icon)
+- Brand name set: "Hausgeräte Pfeffer" (hausgeratepfeffer.de) — logo mark still generic, to be replaced with a generated/designed logo
 - Sections may still be added/removed/reworked as the custom design evolves
 - Product images: currently Unsplash stock photos per category; can be swapped for real product photography later

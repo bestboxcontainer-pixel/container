@@ -1,39 +1,28 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Heart, Menu, Search, ShoppingCart, User } from "lucide-react";
-import { BrandLogo } from "@/components/icons";
-import type { NavLink } from "@/types/home";
-
-const mainNavLinks: NavLink[] = [
-  { label: "Küche", href: "/kueche" },
-  { label: "Kühlen & Gefrieren", href: "/kuehlen-gefrieren" },
-  { label: "Waschen & Trocknen", href: "/waschen-trocknen" },
-  { label: "Kleingeräte", href: "/kleingeraete" },
-  { label: "TV & Audio", href: "/tv-audio" },
-  { label: "Reinigung", href: "/reinigung" },
-  { label: "Klimageräte", href: "/klimageraete" },
-  { label: "Smart Home", href: "/smart-home" },
-  { label: "Angebote", href: "/angebote" },
-];
+import { Heart, Search, ShoppingCart, User } from "lucide-react";
+import { CategoryMenu } from "@/components/CategoryMenu";
 
 export function Header() {
   return (
-    <header className="w-full">
+    <header className="sticky top-0 z-50 w-full">
       <div className="bg-secondary text-secondary-foreground">
         <div className="mx-auto flex max-w-screen-xl flex-wrap items-center gap-3 px-3 py-3">
-          <button
-            type="button"
-            aria-label="Alle Kategorien"
-            className="flex items-center gap-2 rounded-sm bg-white/10 px-3 py-2 text-sm font-semibold hover:bg-white/20"
-          >
-            <Menu className="h-5 w-5" />
-            <span className="hidden sm:inline">Kategorien</span>
-          </button>
+          <CategoryMenu />
 
-          <Link href="/" aria-label="Startseite" className="flex items-center gap-2 text-primary">
-            <BrandLogo className="h-8 w-8" />
-            <span className="hidden text-lg font-black tracking-tight text-white sm:inline">
-              ELEKTROSTORE
-            </span>
+          <Link
+            href="/"
+            aria-label="Hausgeräte Pfeffer – Startseite"
+            className="flex items-center rounded-sm bg-white px-2 py-1.5"
+          >
+            <Image
+              src="/images/logo-full.png"
+              alt="Hausgeräte Pfeffer"
+              width={1242}
+              height={406}
+              priority
+              className="h-8 w-auto sm:h-9"
+            />
           </Link>
 
           <div className="order-3 w-full sm:order-2 sm:flex-1">
@@ -70,16 +59,6 @@ export function Header() {
           </nav>
         </div>
       </div>
-
-      <nav className="border-b border-border bg-white">
-        <div className="mx-auto flex max-w-screen-xl flex-wrap justify-center gap-x-5 gap-y-1 px-3 py-2 text-sm font-semibold">
-          {mainNavLinks.map((link) => (
-            <Link key={link.label} href={link.href} className="text-foreground hover:text-primary">
-              {link.label}
-            </Link>
-          ))}
-        </div>
-      </nav>
     </header>
   );
 }

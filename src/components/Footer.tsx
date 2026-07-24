@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { CreditCard, Mail, Phone, ShieldCheck, Truck } from "lucide-react";
 import type { NavLink } from "@/types/home";
@@ -53,11 +54,24 @@ export function Footer() {
 
         <div className="grid grid-cols-1 gap-8 text-sm sm:grid-cols-2 lg:grid-cols-4">
           <div>
+            <Link
+              href="/"
+              aria-label="Hausgeräte Pfeffer – Startseite"
+              className="mb-4 inline-flex rounded-sm bg-white px-3 py-2"
+            >
+              <Image
+                src="/images/logo-full.png"
+                alt="Hausgeräte Pfeffer"
+                width={1242}
+                height={406}
+                className="h-10 w-auto"
+              />
+            </Link>
             <h3 className="mb-3 font-bold">Kontakt</h3>
             <p className="mb-2 flex items-center gap-2">
               <Mail className="h-4 w-4" />
               <Link href="/kontakt" className="hover:underline">
-                service@elektrostore.de
+                service@hausgeratepfeffer.de
               </Link>
             </p>
             <p className="flex items-center gap-2">
@@ -109,7 +123,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 border-t border-white/10 pt-6 text-center text-xs text-white/60">
-          <p>© {new Date().getFullYear()} ElektroStore. Alle Preise inkl. gesetzl. MwSt.</p>
+          <p>© {new Date().getFullYear()} Hausgeräte Pfeffer. Alle Preise inkl. gesetzl. MwSt.</p>
         </div>
       </div>
     </footer>

@@ -9,7 +9,15 @@ export interface Category {
   image: string;
 }
 
+export interface CategoryGroup {
+  label: string;
+  href: string;
+  items: Category[];
+}
+
 export interface Product {
+  slug?: string;
+  sku?: string;
   brand: string;
   name: string;
   bullets: string[];
@@ -19,6 +27,8 @@ export interface Product {
   price: string;
   badge?: string;
   href: string;
+  rating?: number;
+  inStock?: boolean;
 }
 
 export interface PromoBanner {

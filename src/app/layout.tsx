@@ -9,7 +9,7 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: "Elektrogeräte & Multimedia online kaufen",
+  title: "Hausgeräte Pfeffer | Elektrogeräte & Multimedia online kaufen",
   description:
     "Große Auswahl an Haushaltsgeräten, Küchengeräten, TV & Audio und Smart Home Produkten zu günstigen Preisen. Schnelle Lieferung, faire Garantie.",
 };

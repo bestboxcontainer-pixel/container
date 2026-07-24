@@ -14,7 +14,7 @@ export function HeroBanner() {
           className="object-cover opacity-70"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-secondary/90 via-secondary/40 to-transparent" />
-        <div className="relative z-10 flex h-full max-w-lg flex-col justify-center gap-4 px-6 sm:px-10">
+        <div className="animate-in fade-in slide-in-from-left-8 relative z-10 flex h-full max-w-lg flex-col justify-center gap-4 px-6 duration-700 sm:px-10">
           <span className="inline-block w-fit rounded-sm bg-accent px-2 py-1 text-xs font-black text-accent-foreground">
             SOMMER SALE
           </span>
@@ -26,7 +26,7 @@ export function HeroBanner() {
           </p>
           <Link
             href="/angebote"
-            className="w-fit rounded-sm bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground hover:brightness-110"
+            className="w-fit rounded-sm bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-all hover:-translate-y-0.5 hover:brightness-110"
           >
             Jetzt shoppen
           </Link>

@@ -21,7 +21,20 @@ est limitée — voir « Build sur une machine limitée » plus bas.
 
 ## 1. Ce qu'il faut avoir sous la main
 
-- Node **20.9 minimum** (le projet est développé sous Node 26).
+- **Node 22 recommandé**, et surtout pas n'importe quelle version 20. Prisma 7
+  n'accepte que `20.19+`, `22.12+` ou `24+` — et refuse de s'installer sur les
+  autres, l'installation entière échoue :
+
+  ```
+  npm error command sh -c node scripts/preinstall-entry.js
+  Prisma only supports Node.js versions 20.19+, 22.12+, 24.0+.
+  ERROR: Failed to install dependencies
+  ```
+
+  Hostinger sert par défaut une version 20 antérieure à 20.19, qui tombe
+  exactement dans le trou. Le correctif est dans hPanel : **Avancé → Node.js →
+  Node.js version → 22**, puis relancer le déploiement. Le `.nvmrc` du dépôt
+  demande la même version pour les outils qui savent le lire.
 - L'URL de la base **PostgreSQL Neon** (chaîne « pooled », avec `sslmode=require`).
 - Les trois clés **Cloudinary** — sans elles, l'envoi d'images est refusé en
   production, et c'est par là que passeront toutes les photos produits.

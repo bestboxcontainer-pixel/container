@@ -13,12 +13,29 @@
  * l'application.
  */
 
-/** Valeurs acceptées pour allumer le mode, au cas où l'hébergeur normalise. */
-const VALEURS_ACTIVES = new Set(["1", "true", "on", "yes"]);
+/** Valeurs qui ouvrent la boutique, au cas où l'hébergeur normalise la saisie. */
+const VALEURS_OUVERTES = new Set(["0", "false", "off", "no"]);
 
+/**
+ * En production, la boutique est fermée **par défaut**.
+ *
+ * L'inverse — ouvrir tant qu'on n'a pas demandé la fermeture — fait dépendre la
+ * confidentialité d'un catalogue inachevé d'une variable qu'il suffit d'oublier
+ * une fois. Un déploiement sur un nouvel hébergeur, une variable perdue à un
+ * redémarrage, et la boutique s'ouvre toute seule. Ici l'oubli laisse le site
+ * fermé : c'est le sens sûr de l'erreur.
+ *
+ * En développement, l'inverse s'applique : la boutique est ouverte, sauf à
+ * demander explicitement la maintenance pour vérifier son rendu.
+ */
 export function maintenanceActive(): boolean {
   const valeur = (process.env.MAINTENANCE_MODE ?? "").trim().toLowerCase();
-  return VALEURS_ACTIVES.has(valeur);
+
+  if (process.env.NODE_ENV !== "production") {
+    return ["1", "true", "on", "yes"].includes(valeur);
+  }
+
+  return !VALEURS_OUVERTES.has(valeur);
 }
 
 /**

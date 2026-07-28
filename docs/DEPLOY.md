@@ -295,14 +295,12 @@ que l'heure du prochain lot n'est pas atteinte.
 
 ## 7. Mode maintenance
 
-Pour mettre le site en ligne sans l'ouvrir au public — le temps de charger le
-catalogue, de vérifier les prix, de relire les textes :
+**En production, la boutique est fermée par défaut.** Rien à faire pour cela :
+un déploiement neuf sert la page d'attente, et il faut demander explicitement
+l'ouverture. C'est le sens sûr de l'erreur — un oubli laisse le site fermé
+plutôt que d'exposer un catalogue inachevé.
 
-```
-MAINTENANCE_MODE=1
-```
-
-Puis redémarrer l'application. Ce qui se passe alors :
+Ce qui se passe tant qu'elle est fermée :
 
 | Adresse | Réponse |
 |---|---|
@@ -321,8 +319,26 @@ Le 503 n'est pas un détail : c'est le code qui dit aux moteurs de recherche
 « indisponible, revenez plus tard ». Un 200 sur une page d'attente leur ferait
 enregistrer « Wartungsarbeiten » à la place de chaque fiche produit.
 
-**Pour ouvrir la boutique** : passer `MAINTENANCE_MODE` à `0` (ou supprimer la
-variable), puis redémarrer l'application. Rien d'autre à changer.
+**Pour ouvrir la boutique**, le jour venu :
+
+```
+MAINTENANCE_MODE=0
+```
+
+puis redémarrer l'application. Rien d'autre à changer. Supprimer la variable ne
+suffit pas — c'est voulu : seule une décision écrite ouvre la boutique.
+
+### Vérifier que la fermeture fonctionne
+
+En navigation privée, sinon le test est faussé : si votre navigateur porte
+encore un cookie de session administrateur, le site vous répondra normalement,
+et c'est exactement ce qui est demandé — mais ce n'est pas ce que voit un
+visiteur.
+
+```bash
+curl -s -o /dev/null -w "%{http_code}\n" https://hausgeratepfeffer.de/
+# 503 attendu
+```
 
 L'interrupteur est une variable d'environnement et non un réglage du
 back-office : on coupe souvent le site précisément parce que la base est en

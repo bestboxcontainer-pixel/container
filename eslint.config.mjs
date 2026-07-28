@@ -20,6 +20,13 @@ const eslintConfig = defineConfig([
     // Client Prisma généré : code machine, jamais relu à la main.
     "src/generated/**",
   ]),
+  {
+    // Point d'entrée de Passenger. Il est exécuté par Node tel quel, sans
+    // passer par le compilateur de Next : `require` y est la seule forme
+    // d'import possible.
+    files: ["server.js"],
+    rules: { "@typescript-eslint/no-require-imports": "off" },
+  },
 ]);
 
 export default eslintConfig;

@@ -22,7 +22,10 @@ export function ProductGrid({
           {ctaLabel}
         </Link>
       </div>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+      {/* Quatre par ligne sur grand écran : à six, la vignette devenait trop
+          étroite pour que le nom du modèle et la liste d'arguments tiennent
+          sans être coupés. */}
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {products.map((product, index) => (
           <Reveal key={product.slug ?? product.name} delay={Math.min(index * 60, 300)}>
             <ProductCard product={product} />

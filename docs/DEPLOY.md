@@ -137,7 +137,8 @@ connexion au back-office tourne alors en boucle.
 ## 4. Déploiement sur hébergement web Node.js (hPanel)
 
 1. hPanel → **Avancé → Node.js** → créer l'application.
-   - Version de Node : **20 ou plus**
+   - Version de Node : **22** (voir l'étape 1 — une version 20 antérieure à
+     20.19 fait échouer l'installation de Prisma)
    - Racine de l'application : le dossier du site
    - Fichier de démarrage : **`server.js`** (fourni à la racine du dépôt)
 2. Déposer le code : `git clone https://github.com/hausgeratepfeffer/electro.git`
@@ -240,7 +241,46 @@ base sert le développement et la production (voir [`DATABASE.md`](DATABASE.md))
 Neon met le calcul en veille après inactivité : la première requête après une
 nuit calme peut prendre une à deux secondes. C'est normal.
 
-## 6. Tâche planifiée des campagnes e-mail
+## 6. Mode maintenance
+
+Pour ouvrir le site au public seulement une fois qu'il est vérifié :
+
+```
+MAINTENANCE_MODE=1
+```
+
+Ce que ça change :
+
+| | Maintenance active | Boutique ouverte |
+|---|---|---|
+| Pages publiques | page d'attente, **503** | normal |
+| `/api/*` (panier, commande, compte) | JSON `503` | normal |
+| `/sitemap.xml`, `/robots.txt`, `/feed/google` | `503` | normal |
+| `/admin` et `/api/admin/*` | **ouverts** | ouverts |
+| Administrateur connecté | **voit tout le site normalement** | normal |
+
+C'est le point important : tu te connectes sur `/admin`, et à partir de là tu
+navigues dans la boutique comme un client pendant que les visiteurs continuent
+de voir la page d'attente. Tu peux donc tout relire — fiches produits, panier,
+tunnel de commande — avant d'ouvrir.
+
+Pour ouvrir la boutique : passer la variable à `0` (ou la supprimer) et
+**redémarrer l'application** depuis hPanel. La variable est lue au démarrage.
+
+Deux choix volontaires derrière ce comportement :
+
+- **503 et non 200.** C'est la réponse qui dit aux moteurs de recherche
+  « revenez plus tard » au lieu de leur faire indexer la page d'attente à la
+  place de la boutique. Un `Retry-After` d'une heure l'accompagne.
+- **Un interrupteur en variable d'environnement, pas un réglage en base.** On
+  coupe souvent le site précisément parce que la base est en travaux ; une page
+  de maintenance qui interroge la base ne s'afficherait pas ce jour-là.
+
+La session admin est reconnue sur la seule signature de son jeton, sans requête
+en base — pour la même raison. Le jeton est signé et daté : il ne s'obtient pas
+sans être passé par le mot de passe **et** le code à six chiffres.
+
+## 7. Tâche planifiée des campagnes e-mail
 
 Sans elle, les campagnes programmées ne partent jamais. Toutes les minutes :
 
@@ -253,7 +293,43 @@ Sur VPS : `crontab -e`. Sur hébergement web : hPanel → **Cron Jobs**.
 Appeler la route trop souvent est sans effet : le répartiteur ne fait rien tant
 que l'heure du prochain lot n'est pas atteinte.
 
-## 7. Vérifications après mise en ligne
+## 7. Mode maintenance
+
+Pour mettre le site en ligne sans l'ouvrir au public — le temps de charger le
+catalogue, de vérifier les prix, de relire les textes :
+
+```
+MAINTENANCE_MODE=1
+```
+
+Puis redémarrer l'application. Ce qui se passe alors :
+
+| Adresse | Réponse |
+|---|---|
+| Toute la boutique | page d'attente en allemand, **503** |
+| `/api/...` (panier, commande, compte) | JSON d'erreur, **503** |
+| `/admin` et `/api/admin/...` | **ouverts** — c'est par là qu'on entre |
+| `/api/cron/...` | ouvert, déjà protégé par `CRON_SECRET` |
+| La boutique, **connecté en administrateur** | site complet et normal |
+
+Cette dernière ligne est tout l'intérêt du dispositif : on se connecte sur
+`/admin`, et la boutique se comporte comme si elle était ouverte — on peut la
+parcourir, tester le tunnel d'achat, vérifier chaque fiche, pendant que les
+visiteurs ne voient que la page d'attente.
+
+Le 503 n'est pas un détail : c'est le code qui dit aux moteurs de recherche
+« indisponible, revenez plus tard ». Un 200 sur une page d'attente leur ferait
+enregistrer « Wartungsarbeiten » à la place de chaque fiche produit.
+
+**Pour ouvrir la boutique** : passer `MAINTENANCE_MODE` à `0` (ou supprimer la
+variable), puis redémarrer l'application. Rien d'autre à changer.
+
+L'interrupteur est une variable d'environnement et non un réglage du
+back-office : on coupe souvent le site précisément parce que la base est en
+travaux, et une page de maintenance qui dépendrait de la base ne s'afficherait
+pas ce jour-là. Contrepartie assumée : il faut un redémarrage.
+
+## 8. Vérifications après mise en ligne
 
 ```bash
 curl -I https://hausgeratepfeffer.de/                    # 200
@@ -270,7 +346,7 @@ Puis, dans le navigateur :
   `res.cloudinary.com`
 - Une commande de test de bout en bout, puis la supprimer
 
-## 8. Ce qui reste à traiter avant d'ouvrir la boutique
+## 9. Ce qui reste à traiter avant d'ouvrir la boutique
 
 Repris de [`HANDOVER.md`](HANDOVER.md) — ces points ne bloquent pas le
 déploiement mais bloquent la vente réelle :

@@ -12,11 +12,13 @@ tsconfig.tsbuildinfo
 # Client Prisma généré (recréé par `prisma generate` au postinstall)
 /src/generated
 
-# Secrets — ne JAMAIS versionner
-.env
-.env.local
-.env.*.local
-.env.production
+# Secrets — ne JAMAIS versionner.
+# Tout ce qui commence par .env est exclu, y compris les copies de sauvegarde
+# (.env.local.bak et consorts) : lister les variantes une à une laissait passer
+# celles qu'on n'avait pas prévues, et le dépôt est public.
+.env*
+# Seule exception : le modèle sans valeurs.
+!.env.example
 
 # Base SQLite de l'ancienne configuration (la prod tourne sur PostgreSQL/Neon)
 *.db

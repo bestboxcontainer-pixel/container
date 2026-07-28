@@ -43,3 +43,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .vercel
+
+# Variables de production préparées pour Hostinger — contient les secrets
+/hostinger-env.txt

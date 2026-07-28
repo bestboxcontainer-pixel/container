@@ -142,15 +142,57 @@ npm run build
 `server.js` ne choisit pas son port : il lit `PORT`, imposé par Passenger. Ne
 pas le modifier.
 
+### Le build a besoin de la base
+
+`npm run build` ne compile pas seulement : il interroge PostgreSQL pour
+produire les 166 pages statiques du catalogue. Deux conséquences.
+
+**La base doit être réveillée.** Neon met le calcul en veille après inactivité,
+et le réveil est plus lent que le délai d'attente du build. Symptôme :
+
+```
+Error: Connection terminated due to connection timeout
+Failed to collect page data for /[locale]/[group]/[category]/[product]
+```
+
+Ce n'est pas une erreur de code. Réveiller la base avant de construire, puis
+relancer :
+
+```bash
+node -e "const{Client}=require('pg');const c=new Client(process.env.DATABASE_URL);c.connect().then(()=>c.query('select 1')).then(()=>{console.log('base réveillée');return c.end()})"
+npm run build
+```
+
+**`DATABASE_URL` doit être lisible au moment du build**, pas seulement au
+démarrage. Sur hPanel, saisir les variables **avant** de lancer le build.
+
 ### Build sur une machine limitée
 
-Si `npm run build` s'interrompt sans message (le processus est tué faute de
-mémoire), construire en local et n'envoyer que le résultat :
+Si `npm run build` s'interrompt sans message — le processus est tué faute de
+mémoire —, construire en local et n'envoyer que le dossier `.next/`.
+
+Ne **jamais** transférer `node_modules/` depuis un poste de développement :
+Prisma y installe un moteur de requête compilé pour le système du poste. Un
+`node_modules` construit sous macOS ne démarre pas sous le Linux d'Hostinger.
+Les dépendances s'installent toujours sur le serveur, avec `npm ci`.
 
 ```bash
 # En local
 npm run build
-# Puis transférer .next/ et node_modules/ vers le serveur, en plus du code
+
+# Sur le serveur : dépendances d'abord, puis on dépose le .next/ construit en local
+npm ci
+```
+
+### Vérifier qu'un build a réellement réussi
+
+Un détail qui coûte cher : `npm run build | tail` renvoie le code de sortie de
+`tail`, jamais celui de `npm`. Un build en échec y ressort en « succès ». Pour
+un verdict fiable :
+
+```bash
+set -o pipefail
+npm run build > build.log 2>&1; echo "code de sortie : $?"
 ```
 
 ## 5. Base de données

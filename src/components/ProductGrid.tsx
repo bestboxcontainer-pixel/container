@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ProductCard } from "@/components/ProductCard";
 import { Reveal } from "@/components/Reveal";
 import type { Product } from "@/types/home";
@@ -24,7 +24,7 @@ export function ProductGrid({
       </div>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
         {products.map((product, index) => (
-          <Reveal key={product.name} delay={Math.min(index * 60, 300)}>
+          <Reveal key={product.slug ?? product.name} delay={Math.min(index * 60, 300)}>
             <ProductCard product={product} />
           </Reveal>
         ))}

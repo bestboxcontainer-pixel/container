@@ -1,0 +1,106 @@
+/**
+ * Contenu légal et informatif d'ORIGINE — celui qui est versionné avec le code.
+ *
+ * Ce module ne doit pas être lu directement par une page : depuis que
+ * l'administration peut réécrire ces textes, la source de vérité est
+ * `src/server/legalPages.ts`, qui interroge la base et retombe ici quand aucune
+ * réécriture n'existe.
+ *
+ * Ce qui reste exporté ici est ce qui ne dépend pas de la base : la liste des
+ * slugs, les gardes de type, la construction des adresses et la répartition des
+ * liens en colonnes de pied de page.
+ */
+
+import { deLegalPages } from "./de";
+import { enLegalPages } from "./en";
+import type { LegalFooterGroup, LegalLocale, LegalPageMap, LegalSlug } from "./types";
+
+export type {
+  LegalFooterGroup,
+  LegalFooterLink,
+  LegalLocale,
+  LegalPage,
+  LegalPageMap,
+  LegalSection,
+  LegalSlug,
+} from "./types";
+
+/** Langue par défaut de la boutique (marché allemand). */
+export const DEFAULT_LEGAL_LOCALE: LegalLocale = "de";
+
+/** Toutes les langues disponibles, utile pour `generateStaticParams`. */
+export const LEGAL_LOCALES: readonly LegalLocale[] = ["de", "en"];
+
+/** Tous les slugs, dans l'ordre d'affichage souhaité. */
+export const LEGAL_SLUGS: readonly LegalSlug[] = [
+  "impressum",
+  "agb",
+  "datenschutz",
+  "widerruf",
+  "versand",
+  "zahlungsarten",
+  "retoure",
+  "elektroaltgeraete",
+  "faq",
+  "ueber-uns",
+  "kontakt",
+];
+
+/** Titre affiché dans le back-office pour chaque page. */
+export const LEGAL_SLUG_LABELS: Readonly<Record<LegalSlug, string>> = {
+  impressum: "Impressum",
+  agb: "AGB",
+  datenschutz: "Datenschutzerklärung",
+  widerruf: "Widerrufsbelehrung",
+  versand: "Versand & Lieferung",
+  zahlungsarten: "Zahlungsarten",
+  retoure: "Retoure & Rücksendung",
+  elektroaltgeraete: "Elektroaltgeräte",
+  faq: "FAQ",
+  "ueber-uns": "Über uns",
+  kontakt: "Kontakt",
+};
+
+/** Corpus d'origine, indexé par langue. */
+export const ORIGIN_PAGES: Readonly<Record<LegalLocale, LegalPageMap>> = {
+  de: deLegalPages,
+  en: enLegalPages,
+};
+
+/** Vérifie qu'une chaîne quelconque correspond bien à un slug connu. */
+export function isLegalSlug(value: string): value is LegalSlug {
+  return (LEGAL_SLUGS as readonly string[]).includes(value);
+}
+
+/** Vérifie qu'une chaîne quelconque correspond bien à une langue gérée. */
+export function isLegalLocale(value: string): value is LegalLocale {
+  return (LEGAL_LOCALES as readonly string[]).includes(value);
+}
+
+/**
+ * Construit le chemin d'une page : `/impressum` en allemand,
+ * `/en/impressum` en anglais.
+ */
+export function getLegalHref(slug: LegalSlug, locale: LegalLocale = DEFAULT_LEGAL_LOCALE): string {
+  return locale === DEFAULT_LEGAL_LOCALE ? `/${slug}` : `/${locale}/${slug}`;
+}
+
+/** Intitulés des colonnes du pied de page, par langue. */
+export const FOOTER_GROUP_TITLES: Readonly<
+  Record<LegalLocale, Readonly<Record<LegalFooterGroup["id"], string>>>
+> = {
+  de: { service: "Service", legal: "Rechtliches", company: "Unternehmen" },
+  en: { service: "Service", legal: "Legal", company: "Company" },
+};
+
+/** Ordre des colonnes du pied de page. */
+export const FOOTER_GROUP_IDS = ["service", "legal", "company"] as const;
+
+/** Répartition des slugs par colonne du pied de page. */
+export const FOOTER_GROUP_SLUGS: Readonly<Record<LegalFooterGroup["id"], readonly LegalSlug[]>> = {
+  service: ["versand", "zahlungsarten", "retoure", "faq"],
+  legal: ["impressum", "agb", "datenschutz", "widerruf", "elektroaltgeraete"],
+  company: ["ueber-uns", "kontakt"],
+};
+
+export { deLegalPages, enLegalPages };

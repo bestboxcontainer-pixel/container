@@ -1,5 +1,7 @@
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { requireAdminApi } from "@/lib/adminApi";
+import { parseProductInput, toCreateInput } from "@/server/productInput";
 import { createProduct, listProducts } from "@/server/store";
 
 export async function GET(request: Request) {
@@ -17,24 +19,26 @@ export async function POST(request: Request) {
   if (unauthorized) return unauthorized;
 
   const body = await request.json().catch(() => null);
-  if (!body?.categoryId || !body?.brand || !body?.name || !body?.price) {
+  const { values, errors } = parseProductInput(body, "create");
+  const input = errors.length === 0 ? toCreateInput(values) : undefined;
+
+  if (!input) {
     return NextResponse.json(
-      { error: "categoryId, brand, name und price sind erforderlich." },
+      {
+        error: errors[0] ?? "categoryId, brand, name et price sont obligatoires.",
+        errors,
+      },
       { status: 400 },
     );
   }
 
-  const product = await createProduct({
-    categoryId: body.categoryId,
-    brand: body.brand,
-    name: body.name,
-    bullets: Array.isArray(body.bullets) ? body.bullets : [],
-    image: body.image,
-    oldPrice: body.oldPrice,
-    price: body.price,
-    badge: body.badge,
-    rating: typeof body.rating === "number" ? body.rating : undefined,
-    inStock: typeof body.inStock === "boolean" ? body.inStock : true,
-  });
-  return NextResponse.json(product, { status: 201 });
+  try {
+    const product = await createProduct(input);
+    // Shop-Seiten neu aufbauen, damit das neue Produkt sofort sichtbar ist
+    revalidatePath("/", "layout");
+    return NextResponse.json(product, { status: 201 });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Échec de la création.";
+    return NextResponse.json({ error: message }, { status: 400 });
+  }
 }

@@ -1,12 +1,23 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/Reveal";
 import type { CategoryGuide as CategoryGuideData } from "@/server/types";
 
-export function CategoryGuide({ label, guide }: { label: string; guide: CategoryGuideData }) {
+// Le contenu du guide (intro, sections, conclusion) est déjà localisé en amont
+// par le module de traduction du catalogue ; ici seuls les habillages le sont.
+export async function CategoryGuide({
+  label,
+  guide,
+}: {
+  label: string;
+  guide: CategoryGuideData;
+}) {
+  const t = await getTranslations("category");
+
   return (
     <section className="mx-auto max-w-screen-xl px-3 py-10">
       <Reveal>
-        <h2 className="text-xl font-black text-foreground sm:text-2xl">{label} bei Hausgeräte Pfeffer</h2>
+        <h2 className="text-xl font-black text-foreground sm:text-2xl">{t("guideTitle", { label })}</h2>
         <p className="mt-3 max-w-3xl text-sm text-muted-foreground sm:text-base">{guide.intro}</p>
       </Reveal>
 
@@ -27,13 +38,13 @@ export function CategoryGuide({ label, guide }: { label: string; guide: Category
               href="#produkte"
               className="rounded-sm bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-all hover:-translate-y-0.5 hover:brightness-110"
             >
-              {label} entdecken
+              {t("guideDiscover", { label })}
             </Link>
             <Link
               href="/kontakt"
               className="rounded-sm bg-white/10 px-5 py-2.5 text-sm font-bold transition-all hover:-translate-y-0.5 hover:bg-white/20"
             >
-              Beratung anfragen
+              {t("guideAdvice")}
             </Link>
           </div>
         </div>

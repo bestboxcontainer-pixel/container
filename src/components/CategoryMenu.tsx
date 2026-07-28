@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Menu, X } from "lucide-react";
-import { categoryGroups } from "@/components/CategoryRow";
+import { Link } from "@/i18n/navigation";
+import { categoryGroups } from "@/data/categoryNav";
 
 export function CategoryMenu() {
+  const t = useTranslations("common");
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -40,24 +42,24 @@ export function CategoryMenu() {
         className="flex items-center gap-2 rounded-sm bg-white/10 px-3 py-2 text-sm font-semibold hover:bg-white/20"
       >
         {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        <span className="hidden sm:inline">Kategorien</span>
+        <span className="hidden sm:inline">{t("categories")}</span>
       </button>
 
       {open && (
         <div className="animate-in fade-in slide-in-from-top-2 absolute top-full left-0 z-50 mt-2 w-[calc(100vw-1.5rem)] max-w-xl rounded-sm border border-border bg-white p-4 text-foreground shadow-lg duration-200 sm:w-[480px]">
           <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
             {categoryGroups.map((group) => (
-              <div key={group.label}>
+              <div key={group.slug}>
                 <Link
                   href={group.href}
                   onClick={() => setOpen(false)}
                   className="mb-2 block text-sm font-black text-primary hover:underline"
                 >
-                  {group.label}
+                  {t(`groupNames.${group.slug}`)}
                 </Link>
                 <ul className="space-y-1">
                   {group.items.map((item) => (
-                    <li key={item.label}>
+                    <li key={item.slug}>
                       <Link
                         href={item.href}
                         onClick={() => setOpen(false)}
@@ -72,7 +74,7 @@ export function CategoryMenu() {
                             className="object-cover transition-transform duration-300 group-hover:scale-110"
                           />
                         </span>
-                        {item.label}
+                        {t(`categoryNames.${item.slug}`)}
                       </Link>
                     </li>
                   ))}

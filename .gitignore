@@ -1,34 +1,45 @@
-# dependencies
+# Dépendances
 /node_modules
 /.pnp
-.pnp.js
+.pnp.*
 
-# testing
-/coverage
-
-# next.js
+# Build Next.js
 /.next/
 /out/
+next-env.d.ts
+tsconfig.tsbuildinfo
 
-# production
-/build
+# Client Prisma généré (recréé par `prisma generate` au postinstall)
+/src/generated
 
-# misc
+# Secrets — ne JAMAIS versionner
+.env
+.env.local
+.env.*.local
+.env.production
+
+# Base SQLite de l'ancienne configuration (la prod tourne sur PostgreSQL/Neon)
+*.db
+*.db-journal
+*.sqlite
+
+# Dossiers de travail temporaires (scraping, captures Playwright)
+/.tmp-*
+/.playwright-mcp
+/prisma-migrations-mysql.bak
+/prisma-migrations-sqlite.bak
+
+# Envois d'images en local : en production tout passe par Cloudinary
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# Notes de travail personnelles
+/texte
+
+# Système
 .DS_Store
 *.pem
-
-# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# local env files
-.env*.local
-.env
-
-# vercel
 .vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts

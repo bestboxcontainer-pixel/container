@@ -10,7 +10,7 @@
       "5 Getränke auf Knopfdruck"
     ],
     "oldPrice": "449,00 €",
-    "price": "349,00 �",
+    "price": "349,00 €",
     "badge": "Bestseller",
     "rating": 4.7,
     "inStock": true
@@ -191,7 +191,8 @@
     "id": "eda7efec-f73d-4264-b51b-a7a02a4919b2",
     "categoryId": "haushalt/geschirrspueler",
     "brand": "Bosch",
-    "name": "Geschirrspüler vollintegrierbar",
+    "name": "Serie 4 Geschirrspüler vollintegrierbar",
+    "slug": "bosch-geschirrspueler-vollintegrierbar",
     "bullets": [
       "14 Maßgedecke",
       "Home Connect",
@@ -254,7 +255,8 @@
     "id": "1eb120b6-9f11-4c7d-9938-2ac3b107231f",
     "categoryId": "haushalt/geschirrspueler",
     "brand": "Beko",
-    "name": "Geschirrspüler teilintegrierbar",
+    "name": "b300 Geschirrspüler teilintegrierbar",
+    "slug": "beko-geschirrspueler-teilintegrierbar",
     "bullets": [
       "AquaIntense",
       "EcoNightWash",
@@ -379,7 +381,8 @@
     "id": "9db5ca7c-1178-4570-9c37-9f043fa05a20",
     "categoryId": "haushalt/backoefen-herde",
     "brand": "Miele",
-    "name": "Einbaubackofen mit Pyrolyse",
+    "name": "H 7000 Einbaubackofen mit Pyrolyse",
+    "slug": "miele-einbaubackofen-mit-pyrolyse",
     "bullets": [
       "73 L Garraum",
       "Umluft plus",
@@ -456,7 +459,8 @@
     "id": "93ae58e6-c4ce-41b9-9c93-c0e0d2fbd6f4",
     "categoryId": "haushalt/backoefen-herde",
     "brand": "Bauknecht",
-    "name": "Einbauherd-Set",
+    "name": "BAK5 Einbauherd-Set",
+    "slug": "bauknecht-einbauherd-set",
     "bullets": [
       "Autark-Kochfeld inklusive",
       "4 Kochzonen",
@@ -472,7 +476,8 @@
     "id": "1f8c5dfa-7ab4-4b40-b4da-a755929db8f6",
     "categoryId": "haushalt/kuechenmaschinen",
     "brand": "Philips",
-    "name": "Küchenmaschine 1200 W",
+    "name": "Viva Collection Küchenmaschine, 1200 W",
+    "slug": "philips-kuechenmaschine-1200-w",
     "bullets": [
       "ProBlend 6 Technologie",
       "2 L Glasbehälter",
@@ -566,7 +571,8 @@
     "id": "5e414a3a-e571-4819-b8c4-b00e37566565",
     "categoryId": "haushalt/klimageraete",
     "brand": "Daikin",
-    "name": "Split-Klimagerät 3,5 kW",
+    "name": "Sensira Split-Klimagerät, 3,5 kW",
+    "slug": "daikin-split-klimageraet-3-5-kw",
     "bullets": [
       "Kühlen & Heizen",
       "WLAN-fähig",
@@ -598,7 +604,8 @@
     "id": "48bf25f0-bdf5-4806-904b-a52ad2cddf71",
     "categoryId": "haushalt/klimageraete",
     "brand": "De'Longhi",
-    "name": "Mobiles Klimagerät",
+    "name": "Pinguino Mobiles Klimagerät",
+    "slug": "de-longhi-mobiles-klimageraet",
     "bullets": [
       "3-in-1-Funktion",
       "Real Feel Technologie",
@@ -613,7 +620,8 @@
     "id": "948dec6d-5609-4b83-8c9c-8ea92f2eea2d",
     "categoryId": "haushalt/klimageraete",
     "brand": "Comfee",
-    "name": "Mobiles Klimagerät 9000 BTU",
+    "name": "Eco Friendly Mobiles Klimagerät, 9000 BTU",
+    "slug": "comfee-mobiles-klimageraet-9000-btu",
     "bullets": [
       "App-Steuerung",
       "Entfeuchtungsfunktion",
@@ -629,7 +637,8 @@
     "id": "afad8075-cf60-40e2-abdb-633afeccaf64",
     "categoryId": "haushalt/klimageraete",
     "brand": "Klarstein",
-    "name": "Split-Klimagerät 2,6 kW",
+    "name": "Windwaker Split-Klimagerät, 2,6 kW",
+    "slug": "klarstein-split-klimageraet-2-6-kw",
     "bullets": [
       "Eco-Modus",
       "Timerfunktion",
@@ -911,7 +920,8 @@
     "id": "df56d9cc-9734-4556-8b97-d00e53a91ffa",
     "categoryId": "multimedia/fernseher",
     "brand": "Panasonic",
-    "name": "43\" 4K Fernseher",
+    "name": "MSW504 43\" 4K Fernseher",
+    "slug": "panasonic-43-4k-fernseher",
     "bullets": [
       "HDR10+",
       "Dolby Atmos",
@@ -1125,5 +1135,97 @@
     "badge": "-23%",
     "rating": 4.1,
     "inStock": true
+  },
+  {
+    "id": "fd2a22cb-6440-4443-88f0-7d7f087151a0",
+    "categoryId": "multimedia/drohnen",
+    "brand": "DJI",
+    "name": "Mini 4 Pro Fly More Combo",
+    "bullets": [
+      "Unter 249 g Startgewicht",
+      "4K/60fps HDR-Video",
+      "Rundum-Hinderniserkennung"
+    ],
+    "oldPrice": "1.199,00 €",
+    "price": "1.099,00 €",
+    "badge": "-8%",
+    "rating": 4.8,
+    "inStock": true
+  },
+  {
+    "id": "6811dbe3-eb1e-4569-a5a9-cdeb9d9477d6",
+    "categoryId": "multimedia/drohnen",
+    "brand": "DJI",
+    "name": "Air 3S",
+    "bullets": [
+      "Dual-Kamera mit 1-Zoll-Sensor",
+      "Bis 45 Minuten Flugzeit",
+      "LiDAR-Nachtlandung"
+    ],
+    "price": "1.049,00 €",
+    "badge": "Neu",
+    "rating": 4.7,
+    "inStock": true
+  },
+  {
+    "id": "ee8f21dc-99c8-42c1-a626-bfab0d8ec577",
+    "categoryId": "multimedia/drohnen",
+    "brand": "DJI",
+    "name": "Neo",
+    "bullets": [
+      "Handstart ohne Fernsteuerung",
+      "4K-Ultraweitwinkel",
+      "135 g Leichtgewicht"
+    ],
+    "price": "199,00 €",
+    "badge": "Bestseller",
+    "rating": 4.4,
+    "inStock": true
+  },
+  {
+    "id": "bc417b7c-9b93-4f00-82f4-811c5e52e44f",
+    "categoryId": "multimedia/drohnen",
+    "brand": "Autel Robotics",
+    "name": "EVO Lite+ Premium Bundle",
+    "bullets": [
+      "1-Zoll-CMOS-Sensor",
+      "6K-Videoaufnahme",
+      "Bis 40 Minuten Flugzeit"
+    ],
+    "oldPrice": "1.149,00 €",
+    "price": "949,00 €",
+    "badge": "-17%",
+    "rating": 4.3,
+    "inStock": true
+  },
+  {
+    "id": "7aec4f0f-8de0-426d-8ad1-bbda9ad352fc",
+    "categoryId": "multimedia/drohnen",
+    "brand": "HoverAir",
+    "name": "X1 Pro",
+    "bullets": [
+      "Selbstfliegende Kamera",
+      "8K-Video",
+      "Faltbar, passt in die Handfläche"
+    ],
+    "price": "549,00 €",
+    "rating": 4.2,
+    "inStock": true
+  },
+  {
+    "id": "047a651a-c428-4aa4-b103-fd2c1aa550f7",
+    "categoryId": "multimedia/drohnen",
+    "brand": "Potensic",
+    "name": "ATOM 2",
+    "bullets": [
+      "Unter 249 g Startgewicht",
+      "3-Achsen-Gimbal",
+      "Bis 32 Minuten Flugzeit"
+    ],
+    "oldPrice": "349,00 €",
+    "price": "279,00 €",
+    "badge": "-20%",
+    "rating": 4.1,
+    "inStock": false
   }
 ]

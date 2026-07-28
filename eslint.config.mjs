@@ -12,6 +12,13 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Dossiers de travail hors application : scripts de récupération d'assets
+    // et captures de navigateur. Ils ne partent pas en production et ne suivent
+    // pas les règles du projet.
+    ".tmp-*/**",
+    ".playwright-mcp/**",
+    // Client Prisma généré : code machine, jamais relu à la main.
+    "src/generated/**",
   ]),
 ]);
 

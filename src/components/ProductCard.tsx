@@ -1,11 +1,35 @@
 import Image from "next/image";
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 import { Star } from "lucide-react";
+import { Link } from "@/i18n/navigation";
+import { WishlistButton } from "@/components/wishlist/WishlistButton";
+import { formatRating } from "@/lib/formatRating";
 import type { Product } from "@/types/home";
 
+// Composant partagé : il est rendu côté serveur (grilles de la page d'accueil)
+// comme côté client (navigateur de catégorie filtrable). D'où les hooks
+// "useTranslations"/"useLocale", qui fonctionnent dans les deux contextes.
 export function ProductCard({ product }: { product: Product }) {
+  const t = useTranslations("product");
+  const locale = useLocale();
+
   return (
-    <Link
+    <div className="relative h-full">
+      {product.id && (
+        <WishlistButton
+          className="absolute top-4 right-4 z-20"
+          item={{
+            productId: product.id,
+            slug: product.slug ?? "",
+            brand: product.brand,
+            name: product.name,
+            image: product.image,
+            path: product.href,
+            priceCents: product.priceCents ?? 0,
+          }}
+        />
+      )}
+      <Link
       href={product.href}
       className="group flex h-full flex-col rounded-sm border border-border bg-white p-3 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
     >
@@ -30,7 +54,7 @@ export function ProductCard({ product }: { product: Product }) {
       {typeof product.rating === "number" && (
         <p className="mb-2 flex items-center gap-1 text-xs font-semibold text-foreground">
           <Star className="h-3.5 w-3.5 fill-accent text-accent" />
-          {product.rating.toFixed(1)}
+          {formatRating(product.rating, locale)}
         </p>
       )}
       <ul className="mb-3 space-y-0.5 text-xs text-muted-foreground">
@@ -46,9 +70,10 @@ export function ProductCard({ product }: { product: Product }) {
           <span className="text-lg font-black text-primary">{product.price}</span>
         </div>
         {product.inStock === false && (
-          <span className="text-[11px] font-semibold text-muted-foreground">Auf Anfrage</span>
+          <span className="text-[11px] font-semibold text-muted-foreground">{t("onRequest")}</span>
         )}
       </div>
     </Link>
+    </div>
   );
 }

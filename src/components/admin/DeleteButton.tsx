@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Loader2, Trash2 } from "lucide-react";
+import { IconActionButton } from "@/components/admin/IconAction";
 
 export function DeleteButton({ action, confirmLabel }: { action: string; confirmLabel: string }) {
   const router = useRouter();
@@ -15,18 +17,19 @@ export function DeleteButton({ action, confirmLabel }: { action: string; confirm
     if (response.ok) {
       router.refresh();
     } else {
-      window.alert("Löschen fehlgeschlagen.");
+      window.alert("Échec de la suppression.");
     }
   }
 
   return (
-    <button
-      type="button"
+    <IconActionButton
+      label="Supprimer"
+      icon={Trash2}
+      tone="danger"
       onClick={handleDelete}
       disabled={pending}
-      className="font-semibold text-destructive hover:underline disabled:opacity-50"
     >
-      Löschen
-    </button>
+      {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
+    </IconActionButton>
   );
 }

@@ -1,9 +1,16 @@
 import Image from "next/image";
-import Link from "next/link";
-import { Heart, Search, ShoppingCart, User } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { Search, User } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import { CategoryMenu } from "@/components/CategoryMenu";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { CartIndicator } from "@/components/cart/CartIndicator";
+import { WishlistIndicator } from "@/components/wishlist/WishlistIndicator";
 
-export function Header() {
+export async function Header() {
+  const t = await getTranslations("header");
+  const common = await getTranslations("common");
+
   return (
     <header className="sticky top-0 z-50 w-full">
       <div className="bg-secondary text-secondary-foreground">
@@ -12,12 +19,12 @@ export function Header() {
 
           <Link
             href="/"
-            aria-label="Hausgeräte Pfeffer – Startseite"
+            aria-label={t("homeAriaLabel")}
             className="flex items-center rounded-sm bg-white px-2 py-1.5"
           >
             <Image
               src="/images/logo-full.png"
-              alt="Hausgeräte Pfeffer"
+              alt={t("logoAlt")}
               width={1242}
               height={406}
               priority
@@ -29,13 +36,13 @@ export function Header() {
             <div className="flex h-10 items-stretch overflow-hidden rounded-sm">
               <input
                 type="search"
-                placeholder="Wonach suchen Sie?"
-                aria-label="Suchen"
+                placeholder={common("searchPlaceholder")}
+                aria-label={t("search")}
                 className="w-full flex-1 border-0 bg-white px-3 text-sm text-foreground outline-none placeholder:text-muted-foreground"
               />
               <button
                 type="button"
-                aria-label="Suchen"
+                aria-label={t("search")}
                 className="flex items-center justify-center bg-primary px-4 text-primary-foreground hover:brightness-110"
               >
                 <Search className="h-4 w-4" />
@@ -43,19 +50,27 @@ export function Header() {
             </div>
           </div>
 
-          <nav className="order-2 ml-auto flex items-center gap-4 text-xs sm:order-3 sm:ml-0">
-            <Link href="/konto" className="flex flex-col items-center gap-1 hover:text-primary">
+          <nav className="order-2 ml-auto flex items-center gap-3 text-xs sm:order-3 sm:ml-0 sm:gap-4">
+            {/* Espace client. La cible est toujours « /konto » : cette page rend
+                le tableau de bord au client connecté et renvoie les autres vers
+                « /konto/anmelden » (requireCustomer). Lire le cookie de session
+                ici forcerait le rendu dynamique de tout le catalogue, qui est
+                prérendu — le lien resterait juste, mais les fiches produits
+                perdraient leur rendu statique. */}
+            <Link
+              href="/konto"
+              prefetch={false}
+              className="flex flex-col items-center gap-1 hover:text-primary"
+            >
               <User className="h-5 w-5" />
-              <span className="hidden sm:inline">Konto</span>
+              <span className="hidden sm:inline">{common("account")}</span>
             </Link>
-            <Link href="/merkliste" className="flex flex-col items-center gap-1 hover:text-primary">
-              <Heart className="h-5 w-5" />
-              <span className="hidden sm:inline">Merkliste</span>
-            </Link>
-            <Link href="/warenkorb" className="flex flex-col items-center gap-1 hover:text-primary">
-              <ShoppingCart className="h-5 w-5" />
-              <span className="hidden sm:inline">Warenkorb</span>
-            </Link>
+            {/* Comme le panier, la liste de souhaits vit dans le navigateur */}
+            <WishlistIndicator />
+            {/* Le compteur d'articles vit côté client : le panier est en localStorage */}
+            <CartIndicator className="relative flex flex-col items-center gap-1 hover:text-primary" />
+            {/* Choix de la langue : reste visible et lisible dès le format mobile */}
+            <LanguageSwitcher className="shrink-0 border-l border-white/15 pl-3" />
           </nav>
         </div>
       </div>

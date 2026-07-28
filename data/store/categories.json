@@ -310,5 +310,31 @@
       ],
       "closing": "Fragen zur passenden Smartwatch für Ihr Betriebssystem? Unser Serviceteam berät Sie gerne."
     }
+  },
+  {
+    "id": "multimedia/drohnen",
+    "group": "multimedia",
+    "slug": "drohnen",
+    "label": "Drohnen",
+    "description": "Kameradrohnen mit 4K-Aufnahme, langer Flugzeit und Hinderniserkennung.",
+    "image": "/images/products/drone.jpg",
+    "guide": {
+      "intro": "Ob Luftaufnahmen im Urlaub, Immobilienfotografie oder der erste Flug im Park – bei Hausgeräte Pfeffer finden Sie Kameradrohnen für jedes Einsatzgebiet und jedes Budget.",
+      "sections": [
+        {
+          "heading": "Unter 250 g oder größere Klasse?",
+          "body": "Drohnen unter 250 g Startgewicht fallen in die EU-Klasse C0 und dürfen ohne Fernpiloten-Zeugnis geflogen werden – ideal für Einsteiger und Reisen. Schwerere Modelle bieten größere Sensoren, mehr Windstabilität und längere Reichweiten, erfordern aber eine Registrierung und den EU-Kompetenznachweis."
+        },
+        {
+          "heading": "Worauf Sie beim Kauf achten sollten",
+          "body": "Entscheidend sind die Sensorgröße für gute Aufnahmen bei wenig Licht, ein mechanischer 3-Achsen-Gimbal für ruckelfreie Videos, die reale Flugzeit pro Akku sowie eine Hinderniserkennung in mehrere Richtungen. Ein Fly-More-Set mit Ersatzakkus verlängert den Flugtag spürbar."
+        },
+        {
+          "heading": "Beliebte Marken im Bereich Drohnen",
+          "body": "DJI dominiert den Markt mit der Mini- und Air-Serie, Autel Robotics punktet mit großen Sensoren, HoverAir mit selbstfliegenden Kompaktkameras und Potensic mit günstigen Einsteigermodellen."
+        }
+      ],
+      "closing": "Unsicher, welche Drohne ohne Führerschein geflogen werden darf? Unser Serviceteam berät Sie gerne zu Klassen, Versicherung und Zubehör."
+    }
   }
 ]

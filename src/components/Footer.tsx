@@ -1,30 +1,18 @@
 import Image from "next/image";
-import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
 import { CreditCard, Mail, Phone, ShieldCheck, Truck } from "lucide-react";
-import type { NavLink } from "@/types/home";
+import { Link } from "@/i18n/navigation";
+import { PaymentMethodsBar } from "@/components/PaymentMethodsBar";
+import { isLegalLocale } from "@/content/legal";
+import { getLegalFooterGroups } from "@/server/legalPages";
 
-const serviceLinks: NavLink[] = [
-  { label: "Bestellstatus", href: "/bestellung" },
-  { label: "Retoure & Reklamation", href: "/ruecksendung" },
-  { label: "Widerrufsrecht", href: "/widerrufsrecht" },
-  { label: "Kontakt", href: "/kontakt" },
-];
+export async function Footer() {
+  const t = await getTranslations("footer");
+  const locale = await getLocale();
+  // Les libellés sont les titres des pages : renommer une page depuis
+  // l'administration renomme aussi son lien ici.
+  const footerGroups = await getLegalFooterGroups(isLegalLocale(locale) ? locale : "de");
 
-const aboutLinks: NavLink[] = [
-  { label: "Über uns", href: "/ueber-uns" },
-  { label: "Jobs & Karriere", href: "/jobs" },
-  { label: "Presse", href: "/presse" },
-  { label: "Partnerprogramm", href: "/partnerprogramm" },
-];
-
-const legalLinks: NavLink[] = [
-  { label: "Impressum", href: "/impressum" },
-  { label: "Datenschutz", href: "/datenschutz" },
-  { label: "AGB", href: "/agb" },
-  { label: "Cookie-Einstellungen", href: "#" },
-];
-
-export function Footer() {
   return (
     <footer className="bg-footer text-footer-foreground">
       <div className="mx-auto max-w-screen-xl px-3 py-8">
@@ -32,22 +20,22 @@ export function Footer() {
           <div className="flex items-center gap-3">
             <Truck className="h-6 w-6 text-primary" />
             <div>
-              <p className="text-sm font-bold">Schnelle Lieferung</p>
-              <p className="text-xs text-white/60">In 1-3 Werktagen bei Ihnen</p>
+              <p className="text-sm font-bold">{t("deliveryTitle")}</p>
+              <p className="text-xs text-white/60">{t("deliveryDetail")}</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
             <ShieldCheck className="h-6 w-6 text-primary" />
             <div>
-              <p className="text-sm font-bold">2 Jahre Garantie</p>
-              <p className="text-xs text-white/60">Auf alle Geräte</p>
+              <p className="text-sm font-bold">{t("warrantyTitle")}</p>
+              <p className="text-xs text-white/60">{t("warrantyDetail")}</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
             <CreditCard className="h-6 w-6 text-primary" />
             <div>
-              <p className="text-sm font-bold">Sichere Zahlung</p>
-              <p className="text-xs text-white/60">Rechnung, Kreditkarte, PayPal</p>
+              <p className="text-sm font-bold">{t("paymentTitle")}</p>
+              <p className="text-xs text-white/60">{t("paymentDetail")}</p>
             </div>
           </div>
         </div>
@@ -56,18 +44,18 @@ export function Footer() {
           <div>
             <Link
               href="/"
-              aria-label="Hausgeräte Pfeffer – Startseite"
+              aria-label={t("homeAriaLabel")}
               className="mb-4 inline-flex rounded-sm bg-white px-3 py-2"
             >
               <Image
                 src="/images/logo-full.png"
-                alt="Hausgeräte Pfeffer"
+                alt={t("logoAlt")}
                 width={1242}
                 height={406}
                 className="h-10 w-auto"
               />
             </Link>
-            <h3 className="mb-3 font-bold">Kontakt</h3>
+            <h3 className="mb-3 font-bold">{t("contact")}</h3>
             <p className="mb-2 flex items-center gap-2">
               <Mail className="h-4 w-4" />
               <Link href="/kontakt" className="hover:underline">
@@ -76,54 +64,40 @@ export function Footer() {
             </p>
             <p className="flex items-center gap-2">
               <Phone className="h-4 w-4" />
-              <Link href="tel:080012345" className="hover:underline">
+              {/* Lien téléphonique : hors routage multilingue */}
+              <a href="tel:080012345" className="hover:underline">
                 0800 123 45
-              </Link>
+              </a>
             </p>
           </div>
 
-          <div>
-            <h3 className="mb-3 font-bold">Service</h3>
-            <ul className="space-y-1">
-              {serviceLinks.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href} className="hover:underline">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="mb-3 font-bold">Über uns</h3>
-            <ul className="space-y-1">
-              {aboutLinks.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href} className="hover:underline">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="mb-3 font-bold">Rechtliches</h3>
-            <ul className="space-y-1">
-              {legalLinks.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href} className="hover:underline">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Colonnes issues du contenu légal : libellés et pages restent
+              toujours synchronisés, dans les deux langues. */}
+          {footerGroups.map((group) => (
+            <div key={group.id}>
+              <h3 className="mb-3 font-bold">{group.title}</h3>
+              <ul className="space-y-1">
+                {group.links.map((link) => (
+                  <li key={link.slug}>
+                    {/* href sans préfixe : Link ajoute lui-même la langue */}
+                    <Link href={`/${link.slug}`} className="hover:underline">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        <div className="mt-8 border-t border-white/10 pt-6 text-center text-xs text-white/60">
-          <p>© {new Date().getFullYear()} Hausgeräte Pfeffer. Alle Preise inkl. gesetzl. MwSt.</p>
+        {/* Liste pilotée depuis le back-office : /admin/payments */}
+        <div className="mt-8 border-t border-white/10 pt-6">
+          <PaymentMethodsBar />
+        </div>
+
+        <div className="mt-6 border-t border-white/10 pt-6 text-center text-xs text-white/60">
+          {/* Année passée en chaîne : sinon ICU l'afficherait comme « 2.026 » */}
+          <p>{t("copyright", { year: String(new Date().getFullYear()) })}</p>
         </div>
       </div>
     </footer>

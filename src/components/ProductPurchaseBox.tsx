@@ -1,11 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { Minus, Plus, ShieldCheck, Truck } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { ShieldCheck, Truck } from "lucide-react";
+import { AddToCartButton } from "@/components/cart/AddToCartButton";
+import { CampaignCountdown } from "@/components/CampaignCountdown";
+import { WishlistButton } from "@/components/wishlist/WishlistButton";
+import { FREE_SHIPPING_THRESHOLD_CENTS, SHIPPING_FLAT_CENTS, formatCents } from "@/lib/cart";
 import type { Product } from "@/types/home";
 
 export function ProductPurchaseBox({ product }: { product: Product }) {
-  const [quantity, setQuantity] = useState(1);
+  const t = useTranslations("product");
   const inStock = product.inStock !== false;
 
   return (
@@ -13,7 +17,7 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
       <div>
         {product.oldPrice && (
           <p className="text-sm text-muted-foreground">
-            Ursprünglicher Preis <span className="line-through">{product.oldPrice}</span>
+            {t("originalPrice")} <span className="line-through">{product.oldPrice}</span>
           </p>
         )}
         <div className="flex items-center gap-2">
@@ -24,50 +28,64 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
             </span>
           )}
         </div>
-        <p className="text-xs text-muted-foreground">inkl. MwSt., zzgl. Service &amp; Versandkosten</p>
+        {/* Vente flash : le décompte est l'argument principal, il vient juste
+            sous le prix. Les autres campagnes affichent leur pastille et rien
+            de plus — un compte à rebours sur une offre de deux semaines
+            fabrique une urgence qui n'existe pas. */}
+        {product.promoCountdown && product.promoEndsAt && (
+          <div className="mt-2">
+            <CampaignCountdown endsAt={product.promoEndsAt} />
+          </div>
+        )}
+
+        {/* La mention doit refléter le tarif réellement appliqué au panier :
+            une indication de frais de port inexacte est une information
+            trompeuse au sens de Google Merchant Center et de la PAngV. */}
+        <p className="text-xs text-muted-foreground">
+          {(product.priceCents ?? 0) >= FREE_SHIPPING_THRESHOLD_CENTS
+            ? t("vatNoteFreeShipping")
+            : t("vatNoteWithShipping", { amount: formatCents(SHIPPING_FLAT_CENTS) })}
+        </p>
       </div>
 
       <p className={`text-sm font-semibold ${inStock ? "text-foreground" : "text-muted-foreground"}`}>
-        {inStock ? "✓ Vorrätig – Lieferung in 1-3 Werktagen" : "Auf Anfrage – kommt in 2-4 Wochen"}
+        {inStock ? `✓ ${t("inStock")}` : t("outOfStock")}
       </p>
 
-      <div className="flex items-center gap-3">
-        <div className="flex items-center rounded-sm border border-border">
-          <button
-            type="button"
-            aria-label="Anzahl um 1 verringern"
-            onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-            className="flex h-10 w-10 items-center justify-center text-foreground hover:bg-muted"
-          >
-            <Minus className="h-4 w-4" />
-          </button>
-          <span className="w-10 text-center text-sm font-bold" aria-live="polite">
-            {quantity}
-          </span>
-          <button
-            type="button"
-            aria-label="Anzahl um 1 erhöhen"
-            onClick={() => setQuantity((q) => Math.min(10, q + 1))}
-            className="flex h-10 w-10 items-center justify-center text-foreground hover:bg-muted"
-          >
-            <Plus className="h-4 w-4" />
-          </button>
-        </div>
+      {/* Sélecteur de quantité et ajout au panier : le composant refuse de
+          dépasser le stock réel et désactive tout quand l'article est épuisé. */}
+      <AddToCartButton
+        productId={product.id ?? ""}
+        slug={product.slug ?? ""}
+        brand={product.brand}
+        name={product.name}
+        image={product.image}
+        path={product.href}
+        priceCents={product.priceCents ?? 0}
+        stock={product.stock ?? 0}
+      />
 
-        <button
-          type="button"
-          className="flex-1 rounded-sm bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground hover:brightness-110"
-        >
-          In den Warenkorb
-        </button>
-      </div>
+      {product.id && (
+        <WishlistButton
+          variant="full"
+          item={{
+            productId: product.id,
+            slug: product.slug ?? "",
+            brand: product.brand,
+            name: product.name,
+            image: product.image,
+            path: product.href,
+            priceCents: product.priceCents ?? 0,
+          }}
+        />
+      )}
 
       <div className="flex flex-col gap-2 border-t border-border pt-4 text-xs text-muted-foreground">
         <p className="flex items-center gap-2">
-          <Truck className="h-4 w-4 text-primary" /> Schnelle Lieferung in 1-3 Werktagen
+          <Truck className="h-4 w-4 text-primary" /> {t("fastDelivery")}
         </p>
         <p className="flex items-center gap-2">
-          <ShieldCheck className="h-4 w-4 text-primary" /> 2 Jahre Garantie auf alle Geräte
+          <ShieldCheck className="h-4 w-4 text-primary" /> {t("warranty")}
         </p>
       </div>
     </div>

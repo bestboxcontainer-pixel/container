@@ -49,6 +49,8 @@ const LOTS: Record<string, Lot> = {
   waschmaschinen: { categorie: "waschmaschinen", googleCategory: "2549", dossier: ".tmp-scrape" },
   // Maison et jardin > Cuisine et salle à manger > Appareils de cuisine > Machines à café
   kaffeemaschinen: { categorie: "kaffeemaschinen", googleCategory: "736", dossier: ".tmp-kaffee" },
+  // Électronique > Communications > Téléphonie > Téléphones mobiles
+  smartphones: { categorie: "smartphones", googleCategory: "267", dossier: ".tmp-cat/smartphones" },
 };
 
 const DOSSIER_CLOUDINARY = "hausgeraete-pfeffer/products";

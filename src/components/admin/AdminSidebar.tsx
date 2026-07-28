@@ -8,7 +8,6 @@ import {
   FileText,
   LayoutDashboard,
   Layers,
-  Megaphone,
   Menu,
   Package,
   Plug,
@@ -42,12 +41,9 @@ interface NavSection {
 export function AdminSidebar({
   email,
   pendingReviews,
-  runningCampaigns,
 }: {
   email: string;
   pendingReviews: number;
-  /** Campagnes dont l'envoi est en route : elles méritent un coup d'œil régulier. */
-  runningCampaigns: number;
 }) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -77,13 +73,9 @@ export function AdminSidebar({
           badge: pendingReviews,
           badgeTitle: "avis en attente de validation",
         },
-        {
-          label: "Campagnes",
-          href: "/admin/campaigns",
-          icon: Megaphone,
-          badge: runningCampaigns,
-          badgeTitle: "campagne(s) en cours d'envoi",
-        },
+        // « Campagnes » est retiré du menu : la partie e-mailing n'est pas
+        // ouverte. Les écrans existent toujours et restent joignables par leur
+        // adresse (/admin/campaigns) ; seule l'entrée du menu disparaît.
         { label: "Moyens de paiement", href: "/admin/payments", icon: CreditCard },
         { label: "Google Merchant", href: "/admin/merchant", icon: ShoppingBag },
         { label: "Intégrations", href: "/admin/integrations", icon: Plug },

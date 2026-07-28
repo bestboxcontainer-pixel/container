@@ -33,8 +33,8 @@ est limitée — voir « Build sur une machine limitée » plus bas.
 ## 2. Variables d'environnement
 
 La liste complète et commentée est dans [`.env.example`](../.env.example).
-Elles se saisissent dans le panneau de l'application (hPanel) ou dans un fichier
-`.env.local` déposé à la racine sur le serveur — jamais dans le dépôt Git.
+Elles vivent dans un fichier `.env.local` déposé à la racine sur le serveur —
+jamais dans le dépôt Git, qui est public.
 
 Générer chaque secret séparément :
 
@@ -71,7 +71,7 @@ curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
 sudo apt install -y nodejs
 sudo npm install -g pm2
 
-git clone https://github.com/mathieudrouvot444-beep/electro.git /var/www/hausgeraete
+git clone https://github.com/hausgeratepfeffer/electro.git /var/www/hausgeraete
 cd /var/www/hausgeraete
 ```
 
@@ -127,17 +127,28 @@ connexion au back-office tourne alors en boucle.
    - Version de Node : **20 ou plus**
    - Racine de l'application : le dossier du site
    - Fichier de démarrage : **`server.js`** (fourni à la racine du dépôt)
-2. Onglet **Variables d'environnement** : saisir celles de l'étape 2.
-3. Déposer le code (Git dans hPanel, ou SSH), puis dans le terminal de
-   l'application :
+2. Déposer le code : `git clone https://github.com/hausgeratepfeffer/electro.git`
+   depuis le terminal SSH, ou l'onglet Git de hPanel.
+3. **Créer `.env.local` à la racine de l'application**, avec les variables de
+   l'étape 2.
+
+   Les variables saisies dans l'onglet « Variables d'environnement » de hPanel
+   sont posées dans le processus démarré par Passenger — pas dans la session
+   SSH où l'on construit. Le build ne les verrait pas, échouerait faute de
+   `DATABASE_URL`, et figerait `NEXT_PUBLIC_SITE_URL` sur `localhost` dans tous
+   les liens des e-mails. Un `.env.local` sur le serveur couvre les deux : Next
+   le lit au build comme au démarrage. Les saisir en plus dans hPanel ne gêne
+   pas, mais ne remplace pas le fichier.
+
+4. Dans le terminal SSH, à la racine de l'application :
 
 ```bash
-npm ci
-npx prisma migrate deploy
-npm run build
+npm ci                        # installe et génère le client Prisma
+npx prisma migrate deploy     # applique les migrations à la base Neon
+npm run build                 # base réveillée au préalable — voir plus bas
 ```
 
-4. **Restart** de l'application depuis hPanel.
+5. **Restart** de l'application depuis hPanel.
 
 `server.js` ne choisit pas son port : il lit `PORT`, imposé par Passenger. Ne
 pas le modifier.

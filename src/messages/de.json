@@ -137,6 +137,12 @@
     "adviceTitle": "Beratung unter 0800 123 45",
     "adviceDetail": "Mo–Sa von 8 bis 20 Uhr"
   },
+  "group": {
+    "metaTitle": "{label} – Geräte und Zubehör | Hausgeräte Pfeffer",
+    "metaDescription": "Alle Kategorien aus dem Bereich {label} bei Hausgeräte Pfeffer: geprüfte Marken, faire Preise und schnelle Lieferung.",
+    "intro": "Alle Kategorien aus dem Bereich {label} auf einen Blick.",
+    "productCount": "{count, plural, =0 {Noch keine Artikel} one {# Artikel} other {# Artikel}}"
+  },
   "category": {
     "metaTitle": "{label} | Hausgeräte Pfeffer",
     "productsCount": "<b>{filtered}</b> von {total} Produkten",
@@ -354,6 +360,9 @@
     "country": "Land",
     "countryDE": "Deutschland",
     "countryHint": "Wir liefern derzeit ausschließlich innerhalb Deutschlands.",
+    "countryPlaceholder": "Land suchen",
+    "countryToggle": "Länderliste öffnen",
+    "countryEmpty": "Kein Land gefunden.",
     "noteTitle": "Anmerkung zur Bestellung (optional)",
     "notePlaceholder": "z. B. Wunschtermin für die Lieferung oder Hinweise zum Anschluss-Service.",
     "paymentTitle": "Zahlungsart wählen",

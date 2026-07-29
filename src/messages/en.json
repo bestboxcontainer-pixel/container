@@ -137,6 +137,12 @@
     "adviceTitle": "Advice on 0800 123 45",
     "adviceDetail": "Mon–Sat, 8 am to 8 pm"
   },
+  "group": {
+    "metaTitle": "{label} – appliances and accessories | Hausgeräte Pfeffer",
+    "metaDescription": "Every category in {label} at Hausgeräte Pfeffer: trusted brands, fair prices and fast delivery.",
+    "intro": "Every category in {label} at a glance.",
+    "productCount": "{count, plural, =0 {No items yet} one {# item} other {# items}}"
+  },
   "category": {
     "metaTitle": "{label} | Hausgeräte Pfeffer",
     "productsCount": "<b>{filtered}</b> of {total} products",
@@ -354,6 +360,9 @@
     "country": "Country",
     "countryDE": "Germany",
     "countryHint": "We currently deliver within Germany only.",
+    "countryPlaceholder": "Search country",
+    "countryToggle": "Open country list",
+    "countryEmpty": "No country found.",
     "noteTitle": "Note about your order (optional)",
     "notePlaceholder": "e.g. preferred delivery date or notes for the installation service.",
     "paymentTitle": "Choose a payment method",

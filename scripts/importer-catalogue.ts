@@ -51,6 +51,10 @@ const LOTS: Record<string, Lot> = {
   kaffeemaschinen: { categorie: "kaffeemaschinen", googleCategory: "736", dossier: ".tmp-kaffee" },
   // Électronique > Communications > Téléphonie > Téléphones mobiles
   smartphones: { categorie: "smartphones", googleCategory: "267", dossier: ".tmp-cat/smartphones" },
+  // Maison et jardin > Cuisine et salle à manger > Appareils de cuisine > Lave-vaisselle
+  geschirrspueler: { categorie: "geschirrspueler", googleCategory: "680", dossier: ".tmp-cat/geschirrspueler" },
+  // Électronique > Vidéo > Téléviseurs
+  fernseher: { categorie: "fernseher", googleCategory: "404", dossier: ".tmp-cat/fernseher" },
 };
 
 const DOSSIER_CLOUDINARY = "hausgeraete-pfeffer/products";

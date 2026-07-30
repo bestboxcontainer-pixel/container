@@ -217,8 +217,15 @@ export async function buildInvoicePdf(order: OrderRecord): Promise<Buffer> {
   };
 
   totalLigne("Zwischensumme (netto)", euros(order.subtotalCents - Math.round((order.subtotalCents * order.taxRatePercent) / (100 + order.taxRatePercent))));
+  // Le mode est nommé, pas seulement chiffré : § 14 al. 4 nº 5 UStG exige la
+  // désignation de la prestation, et « Versand 70,00 € » ne dit pas laquelle a
+  // été rendue depuis que l'express existe.
   totalLigne(
-    order.shippingCents === 0 ? "Versand (kostenlos)" : "Versand",
+    order.shippingMethodKey === "express"
+      ? "Expressversand (24-48 Stunden)"
+      : order.shippingCents === 0
+        ? "Standardversand (kostenlos, 3-5 Werktage)"
+        : "Standardversand",
     euros(order.shippingCents),
   );
   totalLigne(`zzgl. ${order.taxRatePercent} % USt.`, euros(tva));

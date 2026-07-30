@@ -52,8 +52,10 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
         {inStock ? `✓ ${t("inStock")}` : t("outOfStock")}
       </p>
 
-      {/* Sélecteur de quantité et ajout au panier : le composant refuse de
-          dépasser le stock réel et désactive tout quand l'article est épuisé. */}
+      {/* Achat direct, quantité et ajout au panier : le composant refuse de
+          dépasser le stock réel et désactive tout quand l'article est épuisé.
+          C'est ici, et seulement ici, que « acheter maintenant » a sa place :
+          la décision d'achat se prend sur la fiche, pas sur une vignette. */}
       <AddToCartButton
         productId={product.id ?? ""}
         slug={product.slug ?? ""}
@@ -63,6 +65,7 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
         path={product.href}
         priceCents={product.priceCents ?? 0}
         stock={product.stock ?? 0}
+        withBuyNow
       />
 
       {product.id && (

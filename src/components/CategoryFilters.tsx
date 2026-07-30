@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { SlidersHorizontal } from "lucide-react";
+import { SlidersHorizontal, X } from "lucide-react";
 
 // L'identifiant "id" est stable et sert d'état ; seul le libellé est traduit,
 // via "category.priceRanges.<id>".
@@ -38,6 +38,9 @@ export function CategoryFilters({
   onToggleInStockOnly,
   onReset,
   hasActiveFilters,
+  open,
+  onClose,
+  resultCount,
 }: {
   brandOptions: BrandOption[];
   selectedBrands: string[];
@@ -50,23 +53,62 @@ export function CategoryFilters({
   onToggleInStockOnly: () => void;
   onReset: () => void;
   hasActiveFilters: boolean;
+  /** Ouverture du panneau sur petit écran. Sans effet à partir de `lg`. */
+  open: boolean;
+  onClose: () => void;
+  /** Nombre de fiches retenues, rappelé sur le bouton de validation. */
+  resultCount: number;
 }) {
   const t = useTranslations("category");
   const locale = useLocale();
 
   return (
-    <aside className="w-full shrink-0 lg:w-56 lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:self-start lg:overflow-y-auto">
-      <div className="mb-3 flex items-center justify-between">
-        <div className="flex items-center gap-2 text-sm font-black text-foreground">
-          <SlidersHorizontal className="h-4 w-4" />
-          {t("filtersTitle")}
+    <>
+      {/* Voile derrière le panneau, sur petit écran uniquement. */}
+      {open && (
+        <button
+          type="button"
+          aria-label={t("filtersClose")}
+          onClick={onClose}
+          className="fixed inset-0 z-40 bg-black/40 lg:hidden"
+        />
+      )}
+
+      {/* Un seul balisage pour les deux affichages. À partir de `lg`, c'est la
+          colonne latérale d'origine ; en dessous, un panneau qui glisse depuis
+          la gauche, masqué tant qu'on ne le demande pas. Dupliquer le balisage
+          pour chaque taille d'écran ferait vivre deux fois les mêmes cases à
+          cocher, avec le risque qu'elles se désynchronisent. */}
+      <aside
+        className={`shrink-0 lg:sticky lg:top-20 lg:block lg:max-h-[calc(100vh-6rem)] lg:w-56 lg:translate-x-0 lg:self-start lg:overflow-y-auto lg:bg-transparent lg:p-0 lg:transition-none ${
+          open
+            ? "fixed inset-y-0 left-0 z-50 w-[85%] max-w-xs translate-x-0 overflow-y-auto bg-white p-4 shadow-xl transition-transform"
+            : "fixed inset-y-0 left-0 z-50 w-[85%] max-w-xs -translate-x-full overflow-y-auto bg-white p-4 transition-transform lg:static lg:w-56"
+        }`}
+      >
+        <div className="mb-3 flex items-center justify-between">
+          <div className="flex items-center gap-2 text-sm font-black text-foreground">
+            <SlidersHorizontal className="h-4 w-4" />
+            {t("filtersTitle")}
+          </div>
+          <div className="flex items-center gap-3">
+            {hasActiveFilters && (
+              <button type="button" onClick={onReset} className="text-xs font-semibold text-primary hover:underline">
+                {t("filtersReset")}
+              </button>
+            )}
+            {/* Fermeture réservée au panneau mobile : en colonne, il n'y a rien
+                à fermer. */}
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label={t("filtersClose")}
+              className="-mr-1 flex h-8 w-8 items-center justify-center rounded-sm text-muted-foreground hover:bg-muted lg:hidden"
+            >
+              <X className="h-4 w-4" aria-hidden />
+            </button>
+          </div>
         </div>
-        {hasActiveFilters && (
-          <button type="button" onClick={onReset} className="text-xs font-semibold text-primary hover:underline">
-            {t("filtersReset")}
-          </button>
-        )}
-      </div>
 
       <div className="space-y-6">
         <fieldset>
@@ -150,6 +192,18 @@ export function CategoryFilters({
           {t("filterInStockOnly")}
         </label>
       </div>
-    </aside>
+
+      {/* Retour aux produits, avec le nombre de fiches retenues : dans un
+          panneau qui couvre l'écran, on ne voit pas le résultat de ce qu'on
+          coche. Inutile en colonne, où la grille est juste à côté. */}
+      <button
+        type="button"
+        onClick={onClose}
+        className="mt-5 w-full rounded-sm bg-primary px-4 py-2.5 text-sm font-bold text-primary-foreground hover:brightness-110 lg:hidden"
+      >
+        {t("filtersApply", { count: resultCount })}
+      </button>
+      </aside>
+    </>
   );
 }

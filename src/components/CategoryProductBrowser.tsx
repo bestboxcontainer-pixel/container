@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
+import { SlidersHorizontal } from "lucide-react";
 import { CategoryFilters, PRICE_RANGES } from "@/components/CategoryFilters";
 import { ProductCard } from "@/components/ProductCard";
 import { Reveal } from "@/components/Reveal";
@@ -69,6 +70,13 @@ export function CategoryProductBrowser({ products }: { products: Product[] }) {
 
   const hasActiveFilters = selectedBrands.length > 0 || priceRange !== null || minRatings.length > 0 || inStockOnly;
 
+  // Repris sur le bouton d'ouverture : panneau fermé, rien n'indiquerait
+  // autrement que la grille est déjà filtrée.
+  const activeFilterCount =
+    selectedBrands.length + minRatings.length + (priceRange ? 1 : 0) + (inStockOnly ? 1 : 0);
+
+  const [filtersOpen, setFiltersOpen] = useState(false);
+
   function toggleBrand(brand: string) {
     setSelectedBrands((current) =>
       current.includes(brand) ? current.filter((item) => item !== brand) : [...current, brand],
@@ -102,17 +110,40 @@ export function CategoryProductBrowser({ products }: { products: Product[] }) {
         onToggleInStockOnly={() => setInStockOnly((current) => !current)}
         onReset={resetFilters}
         hasActiveFilters={hasActiveFilters}
+        open={filtersOpen}
+        onClose={() => setFiltersOpen(false)}
+        resultCount={filteredProducts.length}
       />
 
       <div className="flex-1">
         <div className="mb-4 flex items-center justify-between gap-3 border-b border-border pb-3">
-          <p className="text-sm text-muted-foreground">
+          {/* Sur petit écran, le décompte laisse sa place au bouton de filtres :
+              les deux ensemble ne tiennent pas sur une ligne, et c'est le
+              bouton qui sert. */}
+          <p className="hidden text-sm text-muted-foreground sm:block">
             {t.rich("productsCount", {
               filtered: filteredProducts.length,
               total: products.length,
               b: (chunks) => <span className="font-bold text-foreground">{chunks}</span>,
             })}
           </p>
+
+          {/* Ouverture des filtres, à hauteur des produits plutôt qu'au-dessus.
+              Empilée avant la grille, la colonne de filtres imposait de faire
+              défiler tout un écran de cases à cocher avant d'atteindre la
+              première fiche. */}
+          <button
+            type="button"
+            onClick={() => setFiltersOpen(true)}
+            aria-expanded={filtersOpen}
+            className="flex items-center gap-2 rounded-sm border border-border px-3 py-1.5 text-sm font-semibold text-foreground hover:bg-muted lg:hidden"
+          >
+            <SlidersHorizontal className="h-4 w-4" aria-hidden />
+            {activeFilterCount > 0
+              ? t("filtersOpenWithCount", { count: activeFilterCount })
+              : t("filtersOpen")}
+          </button>
+
           <label className="flex items-center gap-2 text-sm">
             <span className="hidden text-muted-foreground sm:inline">{t("sortBy")}</span>
             <select

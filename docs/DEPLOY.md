@@ -367,6 +367,21 @@ Puis, dans le navigateur :
 Repris de [`HANDOVER.md`](HANDOVER.md) — ces points ne bloquent pas le
 déploiement mais bloquent la vente réelle :
 
+0. **Supprimer les avis de démonstration.** La base en contient plusieurs
+   milliers, générés pour juger du rendu d'un catalogue fourni. Ce ne sont pas
+   des avis de clients : les laisser en ligne relèverait de l'annexe au
+   § 3 Abs. 3 UWG n° 23c, déloyale en toutes circonstances, et exposerait la
+   boutique à une mise en demeure autant qu'à une pénalité Google sur les
+   étoiles affichées en résultat de recherche.
+
+   ```bash
+   npx tsx --env-file=.env.local scripts/avis-demonstration.ts --purger
+   ```
+
+   La commande ne touche qu'aux avis portant la marque de démonstration : les
+   avis réellement déposés par des clients ne sont pas concernés. À lancer
+   **avant** d'ouvrir la boutique au public.
+
 1. Confirmation de commande par e-mail (§ 312i Abs. 1 Nr. 3 BGB) — obligatoire.
 2. Aucun paiement encaissé : virement et facture fonctionnent, les prestataires
    (PayPal, carte, SEPA) restent à brancher via Intégrations.

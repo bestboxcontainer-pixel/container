@@ -17,20 +17,30 @@ export async function CategoryRow() {
               {t("showAll")}
             </Link>
           </div>
-          <div className="flex flex-wrap justify-center gap-4">
+          {/* Les vignettes occupent toute la largeur disponible au lieu de se
+              tasser au centre. En grand écran, autant de colonnes que de
+              catégories dans le groupe : aucune ne se retrouve seule sur une
+              deuxième ligne, que le groupe en compte six ou sept. */}
+          <div
+            className="grid grid-cols-3 gap-4 sm:grid-cols-4 sm:gap-6 lg:grid-cols-[repeat(var(--colonnes),minmax(0,1fr))]"
+            style={{ "--colonnes": group.items.length } as React.CSSProperties}
+          >
             {group.items.map((item, index) => {
               const label = t(`categoryNames.${item.slug}`);
 
               return (
                 <Reveal key={item.slug} delay={Math.min(index * 60, 300)}>
-                  <Link href={item.href} className="group flex w-24 flex-col items-center gap-2 sm:w-28 lg:w-32">
-                    <span className="relative block aspect-square w-full overflow-hidden rounded-full border border-border transition-shadow duration-300 group-hover:border-primary/40 group-hover:shadow-lg">
+                  <Link href={item.href} className="group flex w-full flex-col items-center gap-2">
+                    {/* Les vignettes montrent désormais un vrai produit, photographié
+                        sur fond clair. On l'affiche en entier (`contain`) avec une marge
+                        intérieure : un cadrage plein l'amputerait de ses bords. */}
+                    <span className="relative block aspect-square w-full overflow-hidden rounded-full border border-border bg-white p-3 transition-shadow duration-300 group-hover:border-primary/40 group-hover:shadow-lg">
                       <Image
                         src={item.image}
                         alt={label}
                         fill
                         sizes="(min-width: 1024px) 8rem, (min-width: 640px) 7rem, 6rem"
-                        className="object-cover transition-transform duration-300 group-hover:scale-110"
+                        className="object-contain p-1 transition-transform duration-300 group-hover:scale-110"
                       />
                     </span>
                     <span className="text-center text-xs font-semibold text-foreground transition-colors group-hover:text-primary">

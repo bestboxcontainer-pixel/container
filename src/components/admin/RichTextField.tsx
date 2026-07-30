@@ -62,7 +62,7 @@ export function RichTextField({
 
     if (mark === "link") {
       const href = window.prompt(
-        "Adresse du lien\n\nExemples : /agb, https://example.de, mailto:service@hausgeratepfeffer.de",
+        "Adresse du lien\n\nExemples : /agb, https://example.de, mailto:kontakt@hausgeratepfeffer.de",
         "https://",
       );
       if (href === null) return;

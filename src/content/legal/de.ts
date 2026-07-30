@@ -21,7 +21,7 @@ const COMPANY = {
   street: "Musterstraße 12",
   city: "10115 Berlin",
   country: "Deutschland",
-  email: "service@hausgeratepfeffer.de",
+  email: "kontakt@hausgeratepfeffer.de",
   phone: "0800 123 45",
   managingDirector: "Martin Pfeffer",
   register: "Amtsgericht Berlin-Charlottenburg, HRB 000000",
@@ -874,7 +874,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Arbeiten bei Hausgeräte Pfeffer",
-        body: "Wir suchen regelmäßig Verstärkung in Beratung, Technik und Logistik. Wenn Sie Freude daran haben, Menschen wirklich weiterzuhelfen, statt nur Bestellungen abzuarbeiten, schreiben Sie uns an service@hausgeratepfeffer.de – auch Initiativbewerbungen sind willkommen.",
+        body: "Wir suchen regelmäßig Verstärkung in Beratung, Technik und Logistik. Wenn Sie Freude daran haben, Menschen wirklich weiterzuhelfen, statt nur Bestellungen abzuarbeiten, schreiben Sie uns an kontakt@hausgeratepfeffer.de – auch Initiativbewerbungen sind willkommen.",
       },
     ],
   },

@@ -59,7 +59,7 @@ export async function Footer() {
             <p className="mb-2 flex items-center gap-2">
               <Mail className="h-4 w-4" />
               <Link href="/kontakt" className="hover:underline">
-                service@hausgeratepfeffer.de
+                kontakt@hausgeratepfeffer.de
               </Link>
             </p>
             <p className="flex items-center gap-2">

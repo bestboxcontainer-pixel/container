@@ -17,6 +17,7 @@
 
 import { formatCents } from "@/lib/cart";
 import type { MailMessage } from "@/lib/mailer";
+import type { ShippingMethodKey } from "@/lib/cart";
 import type { OrderAddress, OrderRecord } from "@/server/orders";
 
 export type OrderEmailLocale = "de" | "en";
@@ -172,6 +173,8 @@ function itemsTable(
     total: string;
     subtotal: string;
     shipping: string;
+    /** Mode retenu, déjà traduit : « Expressversand (24–48 Stunden) ». */
+    shippingMethod: string;
     freeShipping: string;
     grandTotal: string;
     vat: string;
@@ -192,6 +195,9 @@ function itemsTable(
 
   const shippingValue =
     order.shippingCents === 0 ? labels.freeShipping : formatCents(order.shippingCents);
+  // Le mode de livraison est nommé sur la ligne des frais : « 70,00 € » seul
+  // laisserait le client chercher d'où vient la somme.
+  const shippingLabel = `${labels.shipping} — ${labels.shippingMethod}`;
 
   const summaryRow = (label: string, value: string, strong = false) =>
     `<tr>
@@ -210,12 +216,38 @@ function itemsTable(
 
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 16px 0;">
                   ${summaryRow(labels.subtotal, formatCents(order.subtotalCents))}
-                  ${summaryRow(labels.shipping, shippingValue)}
+                  ${summaryRow(shippingLabel, shippingValue)}
                   ${summaryRow(labels.grandTotal, formatCents(order.totalCents), true)}
                   <tr>
                     <td colspan="2" style="padding:2px 0 0 0; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:20px; color:#4b5563;">${escapeHtml(labels.vat)}</td>
                   </tr>
                 </table>`;
+}
+
+/**
+ * Mode de livraison rendu dans la langue du message.
+ *
+ * Les délais sont écrits en clair plutôt que dérivés de `minDays`/`maxDays` :
+ * l'express se dit « 24–48 heures », pas « 1–2 jours », et c'est bien cette
+ * promesse-là qui a été faite au client dans le tunnel.
+ */
+const SHIPPING_METHOD_TEXTS = {
+  de: {
+    standard: "Standardversand (3–5 Werktage)",
+    express: "Expressversand (24–48 Stunden)",
+  },
+  en: {
+    standard: "Standard delivery (3–5 working days)",
+    express: "Express delivery (24–48 hours)",
+  },
+  fr: {
+    standard: "Livraison standard (3 à 5 jours ouvrés)",
+    express: "Livraison express (24 à 48 heures)",
+  },
+} as const satisfies Record<string, Record<ShippingMethodKey, string>>;
+
+function shippingMethodText(order: OrderRecord, lang: "de" | "en" | "fr"): string {
+  return SHIPPING_METHOD_TEXTS[lang][order.shippingMethodKey];
 }
 
 /** Adresse postale sur plusieurs lignes, déjà échappée. */
@@ -290,12 +322,15 @@ export function buildOrderConfirmationEmail(order: OrderRecord): Omit<MailMessag
     ? `Alle Preise inklusive ${order.taxRatePercent} % MwSt. (enthaltene MwSt.: ${formatCents(order.taxCents)}).`
     : `All prices include ${order.taxRatePercent}% VAT (VAT included: ${formatCents(order.taxCents)}).`;
 
+  const shippingMethod = shippingMethodText(order, de ? "de" : "en");
+
   const table = itemsTable(order, {
     article: de ? "Artikel" : "Item",
     quantity: de ? "Menge" : "Qty",
     total: de ? "Summe" : "Total",
     subtotal: de ? "Zwischensumme" : "Subtotal",
     shipping: de ? "Versand" : "Shipping",
+    shippingMethod,
     freeShipping: de ? "kostenlos" : "free",
     grandTotal: de ? "Gesamtsumme" : "Total",
     vat: vatLabel,
@@ -345,7 +380,7 @@ export function buildOrderConfirmationEmail(order: OrderRecord): Omit<MailMessag
     itemsText(order),
     "",
     `${de ? "Zwischensumme" : "Subtotal"}: ${formatCents(order.subtotalCents)}`,
-    `${de ? "Versand" : "Shipping"}: ${order.shippingCents === 0 ? (de ? "kostenlos" : "free") : formatCents(order.shippingCents)}`,
+    `${de ? "Versand" : "Shipping"} — ${shippingMethod}: ${order.shippingCents === 0 ? (de ? "kostenlos" : "free") : formatCents(order.shippingCents)}`,
     `${de ? "Gesamtsumme" : "Total"}: ${formatCents(order.totalCents)}`,
     vatLabel,
     "",
@@ -378,9 +413,17 @@ export function buildOrderNotificationEmail(order: OrderRecord): Omit<MailMessag
   const placed = formatDate(order.createdAt, "fr-FR");
   const heading = "Nouvelle commande";
 
+  const shippingMethod = shippingMethodText(order, "fr");
+  // L'express est signalé dès l'introduction : c'est une contrainte de
+  // préparation, pas un simple détail de facturation.
+  const express = order.shippingMethodKey === "express";
+
   const intro = [
     `Commande <strong>${escapeHtml(order.orderNumber)}</strong> reçue le ${escapeHtml(placed)}.`,
     `Montant : <strong>${escapeHtml(formatCents(order.totalCents))}</strong> — paiement : ${escapeHtml(order.paymentMethodLabel)}${order.paymentMethodFee ? ` (${escapeHtml(order.paymentMethodFee)})` : ""}.`,
+    express
+      ? `<strong>${escapeHtml(shippingMethod)}</strong> — à préparer en priorité.`
+      : `Livraison : ${escapeHtml(shippingMethod)}.`,
   ];
 
   const table = itemsTable(order, {
@@ -389,6 +432,7 @@ export function buildOrderNotificationEmail(order: OrderRecord): Omit<MailMessag
     total: "Total",
     subtotal: "Sous-total",
     shipping: "Livraison",
+    shippingMethod,
     freeShipping: "offerte",
     grandTotal: "Total TTC",
     vat: `Dont TVA ${order.taxRatePercent} % : ${formatCents(order.taxCents)}.`,
@@ -429,6 +473,7 @@ export function buildOrderNotificationEmail(order: OrderRecord): Omit<MailMessag
     `Reçue le ${placed}`,
     `Montant : ${formatCents(order.totalCents)} (dont TVA ${order.taxRatePercent} % : ${formatCents(order.taxCents)})`,
     `Paiement : ${order.paymentMethodLabel}`,
+    `Livraison : ${shippingMethod}`,
     "",
     itemsText(order),
     "",

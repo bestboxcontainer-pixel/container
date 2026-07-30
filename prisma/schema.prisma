@@ -233,6 +233,19 @@ model Order {
   paymentMethodLabel String
   paymentMethodFee   String @default("")
 
+  // Mode de livraison choisi par le client : standard (gratuit, 3–5 jours) ou
+  // express (70 €, 24–48 h). La clé sert à réafficher le mode dans la langue du
+  // lecteur, le libellé garde une trace lisible même si les modes évoluent.
+  // Les commandes antérieures au choix du mode reçoivent le standard, qui était
+  // alors le seul existant.
+  shippingMethodKey   String @default("standard")
+  shippingMethodLabel String @default("Standardversand")
+
+  // Référence du PaymentIntent Stripe, quand l'encaissement est configuré.
+  // Reste vide sur les commandes réglées hors ligne (virement) et sur celles
+  // passées avant l'activation du paiement.
+  stripePaymentIntentId String?
+
   // eingegangen | in_bearbeitung | versandt | zugestellt | storniert
   status        String @default("eingegangen")
   // offen | bezahlt | erstattet | fehlgeschlagen
@@ -264,8 +277,9 @@ model Order {
   // le chiffre exploitable.
   campaignId           String?
   campaignRecipientId  String?
-  // Livraison offerte accordée par une campagne. Tracé à part du montant à
-  // zéro, qui peut aussi venir du franco de port habituel (50 €).
+  // Livraison offerte accordée par une campagne. Conservé pour les commandes
+  // antérieures : depuis que le standard est gratuit sans minimum d'achat, la
+  // mention n'accorde plus d'avantage, et elle ne couvre pas l'express.
   campaignFreeShipping Boolean @default(false)
 
   createdAt DateTime  @default(now())

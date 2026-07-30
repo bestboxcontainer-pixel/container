@@ -62,6 +62,10 @@ const MESSAGES: Record<CheckoutErrorCode, { de: string; en: string }> = {
     de: "Bitte wählen Sie eine verfügbare Zahlungsart.",
     en: "Please choose an available payment method.",
   },
+  invalid_shipping_method: {
+    de: "Bitte wählen Sie eine verfügbare Versandart.",
+    en: "Please choose an available shipping method.",
+  },
   terms_required: { de: "Bitte akzeptieren Sie die AGB.", en: "Please accept the terms." },
   withdrawal_required: {
     de: "Bitte bestätigen Sie die Widerrufsbelehrung.",

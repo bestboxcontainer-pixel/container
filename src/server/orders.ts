@@ -3,8 +3,16 @@ import { prisma } from "@/server/prisma";
 import { adjustStock } from "@/server/stock";
 import { listEnabledPaymentMethods } from "@/server/payments";
 import { campaignGrantsFreeShipping, priceForOrder } from "@/server/promotions";
-import { computeTotals, MAX_CART_LINES, MAX_QUANTITY_PER_LINE, VAT_RATE_PERCENT } from "@/lib/cart";
-import type { CartLine } from "@/lib/cart";
+import {
+  computeTotals,
+  DEFAULT_SHIPPING_METHOD_KEY,
+  isShippingMethodKey,
+  MAX_CART_LINES,
+  MAX_QUANTITY_PER_LINE,
+  shippingMethodFor,
+  VAT_RATE_PERCENT,
+} from "@/lib/cart";
+import type { CartLine, ShippingMethodKey } from "@/lib/cart";
 import { isOrderStatus, isPaymentStatus } from "@/lib/orderStatus";
 import type { OrderStatus, PaymentStatus } from "@/lib/orderStatus";
 
@@ -33,18 +41,16 @@ export {
 } from "@/lib/orderStatus";
 export type { OrderStatus, PaymentStatus } from "@/lib/orderStatus";
 
-// ---- Types publics ----
+// Contrôle de la charge utile du tunnel : défini dans un module sans Prisma
+// (@/server/checkoutInput) pour rester testable sans base, et réexporté ici pour
+// que les appelants n'aient qu'un seul point d'entrée « commandes ».
+export { parseCheckoutPayload, SUPPORTED_COUNTRIES } from "@/server/checkoutInput";
+export type { CheckoutErrorCode, CheckoutInput, OrderAddress } from "@/server/checkoutInput";
+// Une réexportation ne met pas les noms dans la portée locale : ce module en a
+// besoin pour ses propres signatures.
+import type { CheckoutErrorCode, CheckoutInput, OrderAddress } from "@/server/checkoutInput";
 
-export interface OrderAddress {
-  salutation: string;
-  firstName: string;
-  lastName: string;
-  company: string;
-  street: string;
-  postalCode: string;
-  city: string;
-  country: string;
-}
+// ---- Types publics ----
 
 export interface OrderItemRecord {
   id: string;
@@ -83,6 +89,8 @@ export interface OrderRecord {
   paymentMethodKey: string;
   paymentMethodLabel: string;
   paymentMethodFee: string;
+  shippingMethodKey: ShippingMethodKey;
+  shippingMethodLabel: string;
   status: OrderStatus;
   paymentStatus: PaymentStatus;
   subtotalCents: number;
@@ -103,26 +111,6 @@ export interface OrderRecord {
   events: OrderEventRecord[];
 }
 
-/** Codes d'erreur : la couche HTTP les traduit dans la langue du client. */
-export type CheckoutErrorCode =
-  | "invalid_payload"
-  | "cart_empty"
-  | "cart_too_large"
-  | "invalid_quantity"
-  | "invalid_email"
-  | "invalid_name"
-  | "invalid_street"
-  | "invalid_postal_code"
-  | "invalid_city"
-  | "unsupported_country"
-  | "invalid_phone"
-  | "invalid_payment_method"
-  | "terms_required"
-  | "withdrawal_required"
-  | "product_unavailable"
-  | "insufficient_stock"
-  | "order_failed";
-
 export class OrderError extends Error {
   readonly code: CheckoutErrorCode;
   /** Produit concerné, quand l'erreur porte sur une ligne précise. */
@@ -135,23 +123,6 @@ export class OrderError extends Error {
     this.detail = detail;
   }
 }
-
-export interface CheckoutInput {
-  locale: string;
-  email: string;
-  phone: string;
-  billing: OrderAddress;
-  shippingSameAsBilling: boolean;
-  shipping: OrderAddress;
-  paymentMethodKey: string;
-  customerNote: string;
-  termsAccepted: boolean;
-  withdrawalAcknowledged: boolean;
-  items: { productId: string; quantity: number }[];
-}
-
-/** Seule zone de livraison desservie pour l'instant. */
-export const SUPPORTED_COUNTRIES = ["DE"] as const;
 
 // ---- Lecture / conversion ----
 
@@ -194,6 +165,12 @@ function toRecord(row: NonNullable<OrderRow>): OrderRecord {
     paymentMethodKey: row.paymentMethodKey,
     paymentMethodLabel: row.paymentMethodLabel,
     paymentMethodFee: row.paymentMethodFee,
+    // Une clé inconnue en base — mode retiré du catalogue plus tard — retombe
+    // sur le standard plutôt que de casser l'affichage de la commande.
+    shippingMethodKey: isShippingMethodKey(row.shippingMethodKey)
+      ? row.shippingMethodKey
+      : DEFAULT_SHIPPING_METHOD_KEY,
+    shippingMethodLabel: row.shippingMethodLabel,
     status: isOrderStatus(row.status) ? row.status : "eingegangen",
     paymentStatus: isPaymentStatus(row.paymentStatus) ? row.paymentStatus : "offen",
     subtotalCents: row.subtotalCents,
@@ -329,123 +306,6 @@ export async function countOrdersByStatus(): Promise<Record<OrderStatus | "total
 /** Commandes qui demandent encore une action : ni livrées ni annulées. */
 export async function countOpenOrders(): Promise<number> {
   return prisma.order.count({ where: { status: { in: ["eingegangen", "in_bearbeitung"] } } });
-}
-
-// ---- Validation de la commande ----
-
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const POSTAL_CODE_PATTERNS: Record<string, RegExp> = { DE: /^\d{5}$/ };
-
-function text(value: unknown, max: number): string {
-  return typeof value === "string" ? value.trim().slice(0, max) : "";
-}
-
-function readAddress(value: unknown): OrderAddress {
-  const raw = (value && typeof value === "object" ? value : {}) as Record<string, unknown>;
-  return {
-    salutation: text(raw.salutation, 20),
-    firstName: text(raw.firstName, 80),
-    lastName: text(raw.lastName, 80),
-    company: text(raw.company, 120),
-    street: text(raw.street, 160),
-    postalCode: text(raw.postalCode, 12).toUpperCase(),
-    city: text(raw.city, 80),
-    country: (text(raw.country, 2) || "DE").toUpperCase(),
-  };
-}
-
-function validateAddress(address: OrderAddress): CheckoutErrorCode | undefined {
-  if (address.firstName.length < 2 || address.lastName.length < 2) return "invalid_name";
-  if (address.street.length < 4) return "invalid_street";
-  if (!(SUPPORTED_COUNTRIES as readonly string[]).includes(address.country)) {
-    return "unsupported_country";
-  }
-  const pattern = POSTAL_CODE_PATTERNS[address.country];
-  if (pattern && !pattern.test(address.postalCode)) return "invalid_postal_code";
-  if (address.city.length < 2) return "invalid_city";
-  return undefined;
-}
-
-/**
- * Analyse la charge utile publique du tunnel de commande.
- * Ne touche pas à la base : uniquement forme et cohérence des champs.
- */
-export function parseCheckoutPayload(payload: unknown): {
-  input?: CheckoutInput;
-  errors: CheckoutErrorCode[];
-} {
-  if (!payload || typeof payload !== "object") return { errors: ["invalid_payload"] };
-  const raw = payload as Record<string, unknown>;
-  const errors: CheckoutErrorCode[] = [];
-
-  const email = text(raw.email, 160).toLowerCase();
-  if (!EMAIL_PATTERN.test(email)) errors.push("invalid_email");
-
-  // Le téléphone est exigé : le transporteur en a besoin pour les livraisons
-  // de gros électroménager, qui se prennent sur rendez-vous.
-  const phone = text(raw.phone, 40);
-  if (!phone || !/^[+0-9\s()/.-]{6,40}$/.test(phone)) errors.push("invalid_phone");
-
-  const billing = readAddress(raw.billing);
-  const billingError = validateAddress(billing);
-  if (billingError) errors.push(billingError);
-
-  const shippingSameAsBilling = raw.shippingSameAsBilling !== false;
-  const shipping = shippingSameAsBilling ? { ...billing } : readAddress(raw.shipping);
-  if (!shippingSameAsBilling) {
-    const shippingError = validateAddress(shipping);
-    if (shippingError) errors.push(shippingError);
-  }
-
-  const paymentMethodKey = text(raw.paymentMethodKey, 60);
-  if (!paymentMethodKey) errors.push("invalid_payment_method");
-
-  // Button-Lösung (§ 312j BGB) : le client doit avoir accepté les CGV et pris
-  // connaissance du droit de rétractation avant que le bouton ne l'engage.
-  if (raw.termsAccepted !== true) errors.push("terms_required");
-  if (raw.withdrawalAcknowledged !== true) errors.push("withdrawal_required");
-
-  const rawItems = Array.isArray(raw.items) ? raw.items : [];
-  const seen = new Set<string>();
-  const items: { productId: string; quantity: number }[] = [];
-  let badQuantity = false;
-  for (const entry of rawItems) {
-    if (!entry || typeof entry !== "object") continue;
-    const line = entry as Record<string, unknown>;
-    const productId = text(line.productId, 60);
-    const quantity = typeof line.quantity === "number" ? Math.floor(line.quantity) : 0;
-    if (!productId || seen.has(productId)) continue;
-    // Une quantité hors bornes est signalée, jamais corrigée en silence :
-    // livrer 20 pièces là où le client en a demandé 50 modifierait sa commande.
-    if (quantity < 1 || quantity > MAX_QUANTITY_PER_LINE) {
-      badQuantity = true;
-      continue;
-    }
-    seen.add(productId);
-    items.push({ productId, quantity });
-  }
-  if (badQuantity) errors.push("invalid_quantity");
-  else if (items.length === 0) errors.push("cart_empty");
-  if (items.length > MAX_CART_LINES) errors.push("cart_too_large");
-
-  if (errors.length > 0) return { errors };
-
-  return {
-    input: {
-      locale: text(raw.locale, 5) === "en" ? "en" : "de",
-      email,
-      phone,
-      billing,
-      shippingSameAsBilling,
-      shipping,
-      paymentMethodKey,
-      customerNote: text(raw.customerNote, 1000),
-      termsAccepted: true,
-      withdrawalAcknowledged: true,
-      items,
-    },
-    errors: [],
-  };
 }
 
 // ---- Numéro de commande ----
@@ -625,8 +485,14 @@ export async function createOrder(
     : undefined;
   const freeShipping = attribution ? await campaignGrantsFreeShipping(attribution.campaignId) : false;
 
-  // 5. Montants recalculés à partir de la base, jamais depuis le client.
-  const totals = computeTotals(billed, { freeShipping });
+  // 5. Montants recalculés à partir de la base, jamais depuis le client. Le
+  // supplément express vient de la table des modes de livraison, pas de la
+  // charge utile : le navigateur choisit un mode, il n'en fixe pas le prix.
+  const shippingMethod = shippingMethodFor(input.shippingMethodKey);
+  const totals = computeTotals(billed, {
+    shippingMethodKey: shippingMethod.key,
+    freeShipping,
+  });
   const now = new Date();
 
   // 6. Réservation du stock.
@@ -688,6 +554,8 @@ export async function createOrder(
             paymentMethodKey: method.key,
             paymentMethodLabel: method.label,
             paymentMethodFee: method.feeLabel,
+            shippingMethodKey: shippingMethod.key,
+            shippingMethodLabel: shippingMethod.label,
             status: "eingegangen",
             paymentStatus: "offen",
             subtotalCents: totals.subtotalCents,
@@ -722,7 +590,7 @@ export async function createOrder(
               create: {
                 kind: "status",
                 toValue: "eingegangen",
-                note: `Bestellung im Shop eingegangen (${method.label})`,
+                note: `Bestellung im Shop eingegangen (${method.label}, ${shippingMethod.label})`,
                 createdBy: "shop",
               },
             },

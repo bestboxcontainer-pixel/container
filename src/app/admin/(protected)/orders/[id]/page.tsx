@@ -134,7 +134,16 @@ export default async function AdminOrderDetailPage({
                 <dd className="font-semibold text-foreground">{formatPrice(order.subtotalCents)}</dd>
               </div>
               <div className="flex justify-between">
-                <dt className="text-muted-foreground">Frais de livraison</dt>
+                <dt className="text-muted-foreground">
+                  Frais de livraison
+                  {/* Le mode retenu, pour ne pas avoir à deviner d'où viennent
+                      70 € de port sur une commande. */}
+                  <span className="mt-0.5 block text-xs">
+                    {order.shippingMethodKey === "express"
+                      ? "Express — 24 à 48 h"
+                      : "Standard — 3 à 5 jours"}
+                  </span>
+                </dt>
                 <dd className="font-semibold text-foreground">
                   {order.shippingCents === 0 ? "offerts" : formatPrice(order.shippingCents)}
                 </dd>

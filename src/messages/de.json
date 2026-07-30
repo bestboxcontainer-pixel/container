@@ -191,7 +191,6 @@
     "fastDelivery": "Standardversand kostenlos (3–5 Tage) · Express 70 € (24–48 Std.)",
     "warranty": "14 Tage Rückgaberecht ohne Angabe von Gründen",
     "vatNoteFreeShipping": "inkl. MwSt., versandkostenfrei innerhalb Deutschlands",
-    "vatNoteWithShipping": "inkl. MwSt., zzgl. {amount} Versand — ab 50 € versandkostenfrei",
     "galleryLabel": "Weitere Produktansichten",
     "galleryView": "Ansicht {index} von {total} anzeigen"
   },
@@ -305,10 +304,9 @@
     "total": "Gesamtsumme",
     "vatIncluded": "inkl. {rate} % MwSt. ({amount})",
     "vatNote": "Alle Preise inkl. gesetzlicher MwSt.",
-    "freeShippingHint": "Noch {amount} bis zum kostenlosen Versand.",
-    "freeShippingReached": "Ihre Bestellung wird versandkostenfrei geliefert.",
-    "shippingRule": "Versandkostenfrei ab {threshold}, sonst {flat} innerhalb Deutschlands.",
-    "deliveryTime": "Lieferzeit 1–3 Werktage nach Zahlungseingang.",
+    "shippingStandardHint": "Der Standardversand ist kostenlos – ohne Mindestbestellwert.",
+    "shippingRule": "Standardversand kostenlos (3–5 Werktage), Expressversand 70,00 € (24–48 Stunden). Die Versandart wählen Sie an der Kasse.",
+    "deliveryTime": "Der Versand erfolgt nach Zahlungseingang.",
     "withdrawalHint": "Als Verbraucher haben Sie ein 14-tägiges Widerrufsrecht (§ 355 BGB). Einzelheiten in der Widerrufsbelehrung.",
     "toCheckout": "Zur Kasse",
     "onlyLeft": "Nur noch {count} auf Lager",
@@ -372,13 +370,25 @@
     "reviewContact": "Kontakt",
     "reviewBilling": "Rechnungsadresse",
     "reviewShipping": "Lieferadresse",
+    "reviewShippingMethod": "Versandart",
     "reviewPayment": "Zahlungsart",
     "reviewItems": "Ihre Artikel",
     "reviewNote": "Ihre Anmerkung",
     "quantityShort": "{count} ×",
     "essentialProperties": "Wesentliche Eigenschaften",
+    "shippingMethodTitle": "Versandart",
+    "shippingMethods": {
+      "standard": {
+        "label": "Standardversand",
+        "delay": "Lieferung in 3–5 Werktagen"
+      },
+      "express": {
+        "label": "Expressversand",
+        "delay": "Lieferung in 24–48 Stunden"
+      }
+    },
     "deliveryTitle": "Lieferung",
-    "deliveryTime": "Voraussichtliche Lieferzeit: 1–3 Werktage nach Zahlungseingang.",
+    "deliveryTime": "Der Versand erfolgt nach Zahlungseingang.",
     "deliveryCountry": "Versand innerhalb Deutschlands.",
     "summaryTitle": "Gesamtbetrag",
     "subtotal": "Zwischensumme",

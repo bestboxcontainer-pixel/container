@@ -5,7 +5,6 @@ import { ShieldCheck, Truck } from "lucide-react";
 import { AddToCartButton } from "@/components/cart/AddToCartButton";
 import { CampaignCountdown } from "@/components/CampaignCountdown";
 import { WishlistButton } from "@/components/wishlist/WishlistButton";
-import { FREE_SHIPPING_THRESHOLD_CENTS, SHIPPING_FLAT_CENTS, formatCents } from "@/lib/cart";
 import type { Product } from "@/types/home";
 
 export function ProductPurchaseBox({ product }: { product: Product }) {
@@ -40,12 +39,10 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
 
         {/* La mention doit refléter le tarif réellement appliqué au panier :
             une indication de frais de port inexacte est une information
-            trompeuse au sens de Google Merchant Center et de la PAngV. */}
-        <p className="text-xs text-muted-foreground">
-          {(product.priceCents ?? 0) >= FREE_SHIPPING_THRESHOLD_CENTS
-            ? t("vatNoteFreeShipping")
-            : t("vatNoteWithShipping", { amount: formatCents(SHIPPING_FLAT_CENTS) })}
-        </p>
+            trompeuse au sens de Google Merchant Center et de la PAngV. Le
+            standard étant gratuit sans minimum d'achat, elle ne dépend plus du
+            prix de l'article ; l'express reste annoncé par `fastDelivery`. */}
+        <p className="text-xs text-muted-foreground">{t("vatNoteFreeShipping")}</p>
       </div>
 
       <p className={`text-sm font-semibold ${inStock ? "text-foreground" : "text-muted-foreground"}`}>

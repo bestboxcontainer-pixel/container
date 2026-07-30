@@ -26,7 +26,7 @@ import {
   savingCents,
   statusAppliesDiscount,
 } from "./campaigns";
-import { computeTotals, FREE_SHIPPING_THRESHOLD_CENTS, SHIPPING_FLAT_CENTS } from "./cart";
+import { computeTotals, shippingCostFor } from "./cart";
 import type { CartLine } from "./cart";
 
 function line(priceCents: number, quantity = 1): CartLine {
@@ -80,31 +80,54 @@ describe("remise appliquée", () => {
 });
 
 describe("totaux du panier", () => {
-  it("applique le forfait de port sous le franco", () => {
-    const totals = computeTotals([line(2_999)]);
-    assert.equal(totals.shippingCents, SHIPPING_FLAT_CENTS);
-    assert.equal(totals.totalCents, 2_999 + SHIPPING_FLAT_CENTS);
+  it("livre en standard gratuitement, sans montant minimum", () => {
+    // Le franco de port à 50 € a disparu : même un panier à 1,00 € part sans
+    // frais. C'est ce que la boutique annonce, c'est donc ce qu'elle facture.
+    for (const price of [100, 2_999, 120_000]) {
+      const totals = computeTotals([line(price)]);
+      assert.equal(totals.shippingMethodKey, "standard");
+      assert.equal(totals.shippingCents, 0);
+      assert.equal(totals.totalCents, price);
+    }
   });
 
-  it("offre le port au-delà du seuil", () => {
-    const totals = computeTotals([line(FREE_SHIPPING_THRESHOLD_CENTS)]);
-    assert.equal(totals.shippingCents, 0);
+  it("facture 70 € pour l'express", () => {
+    const totals = computeTotals([line(2_999)], { shippingMethodKey: "express" });
+    assert.equal(totals.shippingCents, 7_000);
+    assert.equal(totals.totalCents, 2_999 + 7_000);
   });
 
-  it("offre le port quand la campagne l'accorde, quel que soit le montant", () => {
-    const totals = computeTotals([line(2_999)], { freeShipping: true });
+  it("retombe sur le standard quand aucun mode n'est indiqué", () => {
+    assert.equal(computeTotals([line(2_999)]).shippingMethodKey, "standard");
+    assert.equal(shippingCostFor(undefined), 0);
+    assert.equal(shippingCostFor("mode-inexistant"), 0);
+  });
+
+  it("ne facture pas l'express sur un panier vide", () => {
+    // Sinon la page panier vide afficherait « Total : 70,00 € ».
+    const totals = computeTotals([], { shippingMethodKey: "express" });
     assert.equal(totals.shippingCents, 0);
-    assert.equal(totals.totalCents, 2_999);
-    // Le rappel « encore X € pour la livraison offerte » n'a plus lieu d'être.
-    assert.equal(totals.freeShippingMissingCents, 0);
+    assert.equal(totals.totalCents, 0);
+  });
+
+  it("n'offre pas l'express à une campagne qui annonce le port gratuit", () => {
+    // Le standard est déjà gratuit : la campagne n'a rien à offrir de plus, et
+    // elle ne doit surtout pas faire cadeau des 70 € du service express.
+    const totals = computeTotals([line(2_999)], {
+      shippingMethodKey: "express",
+      freeShipping: true,
+    });
+    assert.equal(totals.shippingCents, 7_000);
   });
 
   it("garde une TVA cohérente avec le total réellement facturé", () => {
-    const withShipping = computeTotals([line(2_999)]);
-    const free = computeTotals([line(2_999)], { freeShipping: true });
-    // La TVA est comprise dans le total, elle doit donc baisser avec lui.
-    assert.ok(free.taxCents < withShipping.taxCents);
-    assert.equal(free.taxCents, Math.round((2_999 * 19) / 119));
+    const standard = computeTotals([line(2_999)]);
+    const express = computeTotals([line(2_999)], { shippingMethodKey: "express" });
+    // La TVA est comprise dans le total, elle doit donc monter avec lui : le
+    // supplément express est un service taxé au même taux que la marchandise.
+    assert.ok(express.taxCents > standard.taxCents);
+    assert.equal(standard.taxCents, Math.round((2_999 * 19) / 119));
+    assert.equal(express.taxCents, Math.round(((2_999 + 7_000) * 19) / 119));
   });
 });
 

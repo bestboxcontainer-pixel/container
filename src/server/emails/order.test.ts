@@ -51,6 +51,8 @@ function order(overrides: Partial<OrderRecord> = {}): OrderRecord {
     paymentMethodKey: "vorkasse",
     paymentMethodLabel: "Vorkasse per Überweisung",
     paymentMethodFee: "",
+    shippingMethodKey: "standard",
+    shippingMethodLabel: "Standardversand",
     status: "eingegangen",
     paymentStatus: "offen",
     subtotalCents: 89900,
@@ -146,6 +148,25 @@ describe("Confirmation à l'acheteur", () => {
     assert.match(mail.html, /Hauptstraße 12a/);
   });
 
+  it("nomme le mode de livraison retenu, dans la langue du message", () => {
+    const de = buildOrderConfirmationEmail(order());
+    assert.match(de.html, /Standardversand \(3–5 Werktage\)/);
+    assert.match(de.text, /Standardversand \(3–5 Werktage\)/);
+
+    const express = order({
+      shippingMethodKey: "express",
+      shippingMethodLabel: "Expressversand",
+      shippingCents: 7_000,
+      totalCents: 96_900,
+      locale: "en",
+    });
+    const en = buildOrderConfirmationEmail(express);
+    assert.match(en.html, /Express delivery \(24–48 hours\)/);
+    // Le supplément doit apparaître comme un montant, jamais comme « free ».
+    assert.match(en.html, /70,00 €/);
+    assert.doesNotMatch(en.text, /Shipping — Express delivery \(24–48 hours\): free/);
+  });
+
   it("échappe la remarque saisie par le client", () => {
     const mail = buildOrderConfirmationEmail(
       order({ customerNote: '<img src=x onerror="alert(1)">' }),
@@ -183,6 +204,19 @@ describe("Notification au vendeur", () => {
     assert.match(mail.html, /lang="fr"/);
     assert.match(mail.html, /Nouvelle commande/);
     assert.match(mail.html, /Langue de la commande : anglais/);
+  });
+
+  it("signale l'express en priorité de préparation", () => {
+    const standard = buildOrderNotificationEmail(order());
+    assert.match(standard.html, /Livraison standard \(3 à 5 jours ouvrés\)/);
+    assert.doesNotMatch(standard.html, /priorité/);
+
+    const express = buildOrderNotificationEmail(
+      order({ shippingMethodKey: "express", shippingCents: 7_000 }),
+    );
+    assert.match(express.html, /Livraison express \(24 à 48 heures\)/);
+    assert.match(express.html, /à préparer en priorité/);
+    assert.match(express.text, /Livraison : Livraison express/);
   });
 
   it("remonte la remarque du client quand il en a laissé une", () => {

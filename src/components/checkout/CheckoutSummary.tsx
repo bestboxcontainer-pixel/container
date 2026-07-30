@@ -67,8 +67,16 @@ export function CheckoutSummary({
           <dt className="text-muted-foreground">{t("subtotal")}</dt>
           <dd className="font-semibold text-foreground">{formatCents(totals.subtotalCents)}</dd>
         </div>
+        {/* Le mode retenu est nommé sous le montant : « 70,00 € » sans mention
+            de l'express laisserait le client deviner d'où vient la somme. */}
         <div className="flex justify-between">
-          <dt className="text-muted-foreground">{t("shipping")}</dt>
+          <dt className="text-muted-foreground">
+            {t("shipping")}
+            <span className="mt-0.5 block text-xs">
+              {t(`shippingMethods.${totals.shippingMethodKey}.label`)} ·{" "}
+              {t(`shippingMethods.${totals.shippingMethodKey}.delay`)}
+            </span>
+          </dt>
           <dd className="font-semibold text-foreground">
             {totals.shippingCents === 0 ? t("shippingFree") : formatCents(totals.shippingCents)}
           </dd>

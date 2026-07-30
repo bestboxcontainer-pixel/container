@@ -11,14 +11,66 @@
 /** Clé localStorage, versionnée pour pouvoir invalider un ancien format. */
 export const CART_STORAGE_KEY = "hgp.cart.v1";
 
-/** Franco de port à partir de 50,00 € de marchandise. */
-export const FREE_SHIPPING_THRESHOLD_CENTS = 5_000;
-
-/** Forfait de livraison en dessous du franco : 4,95 €. */
-export const SHIPPING_FLAT_CENTS = 495;
-
 /** TVA allemande standard, en points de pourcentage. */
 export const VAT_RATE_PERCENT = 19;
+
+// ---- Modes de livraison ----
+//
+// Deux modes, et deux seulement. Le standard est gratuit sans montant minimum
+// d'achat : il n'y a donc plus de franco de port à atteindre, et plus aucune
+// mention « encore X € pour la livraison gratuite » à afficher.
+//
+// Les tarifs et les délais vivent ici, en un seul endroit : le serveur les relit
+// pour facturer (src/server/orders.ts), la boutique les affiche, et le flux
+// Google Merchant les déclare (src/server/merchant.ts). Un écart entre ces trois
+// endroits est une information trompeuse au sens de la PAngV.
+
+export const SHIPPING_METHODS = [
+  {
+    key: "standard",
+    /** Gratuit, sans minimum d'achat. */
+    cents: 0,
+    minDays: 3,
+    maxDays: 5,
+    /** Libellé archivé sur la commande, en allemand comme le moyen de paiement. */
+    label: "Standardversand",
+  },
+  {
+    key: "express",
+    /** 70,00 € — supplément de service, soumis à la TVA comme la marchandise. */
+    cents: 7_000,
+    minDays: 1,
+    maxDays: 2,
+    label: "Expressversand",
+  },
+] as const;
+
+export type ShippingMethod = (typeof SHIPPING_METHODS)[number];
+export type ShippingMethodKey = ShippingMethod["key"];
+
+/** Mode retenu quand le client n'a rien choisi, et pour toute valeur inconnue. */
+export const DEFAULT_SHIPPING_METHOD_KEY: ShippingMethodKey = "standard";
+
+export function isShippingMethodKey(value: unknown): value is ShippingMethodKey {
+  return typeof value === "string" && SHIPPING_METHODS.some((method) => method.key === value);
+}
+
+/**
+ * Mode de livraison correspondant à la clé. Une clé inconnue rend le standard
+ * plutôt que de lever : le serveur revalide de toute façon la valeur reçue, et
+ * une commande ne doit pas échouer sur un champ que le client peut omettre.
+ */
+export function shippingMethodFor(key: unknown): ShippingMethod {
+  return (
+    SHIPPING_METHODS.find((method) => method.key === key) ??
+    SHIPPING_METHODS.find((method) => method.key === DEFAULT_SHIPPING_METHOD_KEY)!
+  );
+}
+
+/** Frais réellement dus pour un mode de livraison, en centimes. */
+export function shippingCostFor(key: unknown): number {
+  return shippingMethodFor(key).cents;
+}
 
 /** Garde-fou : au-delà, il s'agit d'une commande professionnelle à traiter à part. */
 export const MAX_QUANTITY_PER_LINE = 20;
@@ -47,12 +99,12 @@ export interface CartTotals {
   itemCount: number;
   /** Marchandise TTC. */
   subtotalCents: number;
+  /** Mode de livraison retenu pour ce calcul. */
+  shippingMethodKey: ShippingMethodKey;
   shippingCents: number;
   /** TVA *contenue* dans le total, jamais un supplément. */
   taxCents: number;
   totalCents: number;
-  /** Reste à atteindre pour la livraison gratuite ; 0 si déjà atteint. */
-  freeShippingMissingCents: number;
 }
 
 // ---- Calculs ----
@@ -70,11 +122,6 @@ export function formatCents(cents: number): string {
   })} €`;
 }
 
-export function shippingCostFor(subtotalCents: number): number {
-  if (subtotalCents <= 0) return 0;
-  return subtotalCents >= FREE_SHIPPING_THRESHOLD_CENTS ? 0 : SHIPPING_FLAT_CENTS;
-}
-
 /**
  * Part de TVA comprise dans un montant TTC.
  * Les prix affichés sont bruts (Preisangabenverordnung § 3), la TVA se déduit
@@ -87,16 +134,26 @@ export function includedVatCents(grossCents: number, ratePercent = VAT_RATE_PERC
 
 export interface TotalsOptions {
   /**
-   * Livraison offerte accordée par une campagne marketing, indépendamment du
-   * franco de port habituel. L'autorité reste au serveur : le panier peut
-   * l'annoncer, seule la commande la valide (src/server/orders.ts).
+   * Mode de livraison choisi par le client. Absent, c'est le standard —
+   * gratuit — qui s'applique : le panier et le tiroir latéral affichent donc le
+   * montant le plus bas tant que le client n'a rien choisi dans le tunnel.
+   */
+  shippingMethodKey?: ShippingMethodKey;
+  /**
+   * Livraison offerte accordée par une campagne marketing.
+   *
+   * N'a plus d'effet sur le montant depuis que le standard est gratuit sans
+   * minimum d'achat, et ne couvre volontairement pas le supplément express :
+   * l'express est un service facturé 70 €, qu'une campagne promotionnelle
+   * n'offre pas. Le paramètre reste accepté pour que les campagnes en cours
+   * continuent de fonctionner et de s'afficher.
    */
   freeShipping?: boolean;
 }
 
 /**
- * Le paramètre `options` est facultatif : tous les appels antérieurs à la
- * livraison offerte des campagnes continuent de fonctionner sans changement.
+ * Le paramètre `options` est facultatif : tous les appels qui ne connaissent pas
+ * le mode de livraison continuent de fonctionner et obtiennent le standard.
  */
 export function computeTotals(
   lines: readonly CartLine[],
@@ -105,21 +162,19 @@ export function computeTotals(
   const itemCount = lines.reduce((sum, line) => sum + line.quantity, 0);
   const subtotalCents = lines.reduce((sum, line) => sum + line.priceCents * line.quantity, 0);
 
-  const grantedFreeShipping = options?.freeShipping === true;
-  const shippingCents = grantedFreeShipping ? 0 : shippingCostFor(subtotalCents);
+  const method = shippingMethodFor(options?.shippingMethodKey ?? DEFAULT_SHIPPING_METHOD_KEY);
+  // Un panier vide ne facture rien, pas même l'express : le client n'a encore
+  // rien commandé.
+  const shippingCents = subtotalCents > 0 ? method.cents : 0;
   const totalCents = subtotalCents + shippingCents;
 
   return {
     itemCount,
     subtotalCents,
+    shippingMethodKey: method.key,
     shippingCents,
     taxCents: includedVatCents(totalCents),
     totalCents,
-    // Le port est déjà offert : réclamer « encore 12,40 € pour la livraison
-    // gratuite » n'aurait plus aucun sens dans le récapitulatif.
-    freeShippingMissingCents: grantedFreeShipping
-      ? 0
-      : Math.max(0, FREE_SHIPPING_THRESHOLD_CENTS - subtotalCents),
   };
 }
 

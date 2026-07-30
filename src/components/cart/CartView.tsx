@@ -7,12 +7,10 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useCart } from "@/components/cart/CartProvider";
 import {
-  FREE_SHIPPING_THRESHOLD_CENTS,
   formatCents,
   getCartSnapshot,
   MAX_QUANTITY_PER_LINE,
   replaceCart,
-  SHIPPING_FLAT_CENTS,
 } from "@/lib/cart";
 import type { CartLine } from "@/lib/cart";
 
@@ -258,16 +256,10 @@ export function CartView() {
           <p className="mt-3 flex items-start gap-2 rounded-sm bg-muted px-3 py-2 text-xs text-muted-foreground">
             <Truck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />
             <span>
-              {/* La gratuité accordée par une campagne prime sur le franco de
-                  port habituel : annoncer « encore 12 € pour la livraison
-                  offerte » alors qu'elle est déjà acquise serait absurde. */}
-              {campaign.freeShipping
-                ? t("campaignFreeShipping")
-                : totals.freeShippingMissingCents > 0
-                  ? t("freeShippingHint", {
-                      amount: formatCents(totals.freeShippingMissingCents),
-                    })
-                  : t("freeShippingReached")}
+              {/* Plus aucun montant à atteindre : le standard est gratuit dès le
+                  premier euro. La mention de campagne reste affichée pour les
+                  actions en cours, même si elle n'accorde plus de remise. */}
+              {campaign.freeShipping ? t("campaignFreeShipping") : t("shippingStandardHint")}
             </span>
           </p>
 
@@ -279,12 +271,7 @@ export function CartView() {
           </Link>
 
           <p className="mt-3 text-xs text-muted-foreground">{t("deliveryTime")}</p>
-          <p className="mt-1 text-xs text-muted-foreground">
-            {t("shippingRule", {
-              threshold: formatCents(FREE_SHIPPING_THRESHOLD_CENTS),
-              flat: formatCents(SHIPPING_FLAT_CENTS),
-            })}
-          </p>
+          <p className="mt-1 text-xs text-muted-foreground">{t("shippingRule")}</p>
           <p className="mt-1 text-xs text-muted-foreground">{t("withdrawalHint")}</p>
         </div>
       </aside>

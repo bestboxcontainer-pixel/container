@@ -23,7 +23,9 @@ import { useCart } from "@/components/cart/CartProvider";
 import { AddressFieldset, EMPTY_ADDRESS } from "@/components/checkout/AddressFieldset";
 import type { AddressValue } from "@/components/checkout/AddressFieldset";
 import { CheckoutSummary } from "@/components/checkout/CheckoutSummary";
-import { formatCents } from "@/lib/cart";
+import { ShippingMethodFieldset } from "@/components/checkout/ShippingMethodFieldset";
+import { computeTotals, DEFAULT_SHIPPING_METHOD_KEY, formatCents } from "@/lib/cart";
+import type { ShippingMethodKey } from "@/lib/cart";
 import { brandMarksFor } from "@/components/PaymentIcons";
 import type { PaymentMethodRecord } from "@/server/types";
 
@@ -96,9 +98,12 @@ export function CheckoutFlow({
   const t = useTranslations("checkout");
   const locale = useLocale();
   const router = useRouter();
-  const { lines, totals, ready, clear } = useCart();
+  const { lines, campaign, ready, clear } = useCart();
 
   const [step, setStep] = useState<Step>("contact");
+  const [shippingMethodKey, setShippingMethodKey] = useState<ShippingMethodKey>(
+    DEFAULT_SHIPPING_METHOD_KEY,
+  );
   const [email, setEmail] = useState(customer?.email ?? "");
   const [phone, setPhone] = useState(customer?.phone ?? "");
   const [billing, setBilling] = useState<AddressValue>(customer?.billing ?? EMPTY_ADDRESS);
@@ -113,6 +118,15 @@ export function CheckoutFlow({
   const [done, setDone] = useState(false);
 
   const selectedMethod = methods.find((method) => method.key === paymentKey);
+
+  // Totaux recalculés ici plutôt que repris du panier : seul le tunnel connaît
+  // le mode de livraison retenu. Le récapitulatif de droite suit donc le clic du
+  // client immédiatement, sans aller-retour serveur. Le serveur refera le même
+  // calcul à la commande — c'est lui qui facture.
+  const totals = computeTotals(lines, {
+    shippingMethodKey,
+    freeShipping: campaign.freeShipping,
+  });
 
   function errorMessage(current: CheckoutError): string {
     // Les codes viennent aussi bien de la validation locale que du serveur ;
@@ -182,6 +196,7 @@ export function CheckoutFlow({
           shippingSameAsBilling: sameAsBilling,
           shipping: sameAsBilling ? billing : shipping,
           paymentMethodKey: paymentKey,
+          shippingMethodKey,
           customerNote: note.trim(),
           termsAccepted: true,
           withdrawalAcknowledged: true,
@@ -362,6 +377,13 @@ export function CheckoutFlow({
               </section>
             )}
 
+            {/* Mode de livraison choisi avant le paiement : le récapitulatif de
+                droite, et donc le total, se mettent à jour immédiatement. */}
+            <section className="rounded-sm border border-border bg-white p-5">
+              <h2 className="mb-4 text-lg font-black text-foreground">{t("shippingMethodTitle")}</h2>
+              <ShippingMethodFieldset value={shippingMethodKey} onChange={setShippingMethodKey} />
+            </section>
+
             <section className="rounded-sm border border-border bg-white p-5">
               <label className={LABEL} htmlFor="checkout-note">
                 {t("noteTitle")}
@@ -497,6 +519,22 @@ export function CheckoutFlow({
 
               <ReviewCard title={t("reviewShipping")} onEdit={() => setStep("contact")} editLabel={t("edit")}>
                 <AddressLines address={sameAsBilling ? billing : shipping} />
+              </ReviewCard>
+
+              <ReviewCard
+                title={t("reviewShippingMethod")}
+                onEdit={() => setStep("contact")}
+                editLabel={t("edit")}
+              >
+                <p className="font-semibold text-foreground">
+                  {t(`shippingMethods.${shippingMethodKey}.label`)}
+                </p>
+                <p>{t(`shippingMethods.${shippingMethodKey}.delay`)}</p>
+                <p>
+                  {totals.shippingCents === 0
+                    ? t("shippingFree")
+                    : formatCents(totals.shippingCents)}
+                </p>
               </ReviewCard>
             </div>
 

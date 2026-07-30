@@ -206,13 +206,10 @@ export function CartDrawer({ paymentSlot }: { paymentSlot?: ReactNode }) {
             <footer className="border-t border-border bg-muted/40 px-5 py-4">
               <p className="mb-3 flex items-start gap-2 text-xs text-muted-foreground">
                 <Truck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />
-                <span>
-                  {totals.freeShippingMissingCents > 0
-                    ? t("freeShippingHint", {
-                        amount: formatCents(totals.freeShippingMissingCents),
-                      })
-                    : t("freeShippingReached")}
-                </span>
+                {/* Le franco de port n'a plus de seuil : le standard est gratuit
+                    quel que soit le montant. Le tiroir rappelle donc la règle,
+                    au lieu du montant qui manquait autrefois pour l'atteindre. */}
+                <span>{t("shippingStandardHint")}</span>
               </p>
 
               <dl className="mb-3 space-y-1.5 text-sm">

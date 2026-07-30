@@ -191,7 +191,6 @@
     "fastDelivery": "Free standard delivery (3–5 days) · Express €70 (24–48 h)",
     "warranty": "14-day return policy, no reason required",
     "vatNoteFreeShipping": "incl. VAT, free shipping within Germany",
-    "vatNoteWithShipping": "incl. VAT, plus {amount} shipping — free from €50",
     "galleryLabel": "More product views",
     "galleryView": "Show view {index} of {total}"
   },
@@ -305,10 +304,9 @@
     "total": "Total",
     "vatIncluded": "incl. {rate} % VAT ({amount})",
     "vatNote": "All prices include statutory VAT.",
-    "freeShippingHint": "Add {amount} more for free shipping.",
-    "freeShippingReached": "Your order ships free of charge.",
-    "shippingRule": "Free shipping from {threshold}, otherwise {flat} within Germany.",
-    "deliveryTime": "Delivery time 1–3 working days after receipt of payment.",
+    "shippingStandardHint": "Standard delivery is free — with no minimum order value.",
+    "shippingRule": "Standard delivery free (3–5 working days), express delivery 70.00 € (24–48 hours). You choose the shipping method at checkout.",
+    "deliveryTime": "Dispatch takes place after receipt of payment.",
     "withdrawalHint": "As a consumer you have a 14-day right of withdrawal (§ 355 BGB). See the withdrawal policy for details.",
     "toCheckout": "Proceed to checkout",
     "onlyLeft": "Only {count} left in stock",
@@ -372,13 +370,25 @@
     "reviewContact": "Contact",
     "reviewBilling": "Billing address",
     "reviewShipping": "Delivery address",
+    "reviewShippingMethod": "Shipping method",
     "reviewPayment": "Payment method",
     "reviewItems": "Your items",
     "reviewNote": "Your note",
     "quantityShort": "{count} ×",
     "essentialProperties": "Main characteristics",
+    "shippingMethodTitle": "Shipping method",
+    "shippingMethods": {
+      "standard": {
+        "label": "Standard delivery",
+        "delay": "Delivered in 3–5 working days"
+      },
+      "express": {
+        "label": "Express delivery",
+        "delay": "Delivered within 24–48 hours"
+      }
+    },
     "deliveryTitle": "Delivery",
-    "deliveryTime": "Estimated delivery time: 1–3 working days after receipt of payment.",
+    "deliveryTime": "Dispatch takes place after receipt of payment.",
     "deliveryCountry": "Shipping within Germany.",
     "summaryTitle": "Amount due",
     "subtotal": "Subtotal",

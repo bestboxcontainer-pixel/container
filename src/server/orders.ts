@@ -315,6 +315,24 @@ export async function countOpenOrders(): Promise<number> {
  * L'unicité réelle est garantie par la contrainte en base ; la boucle d'appel
  * réessaie en cas de collision entre deux commandes simultanées.
  */
+/**
+ * Rang de départ de la numérotation des commandes.
+ *
+ * Un numéro qui commence à 1 apprend au premier client qu'il est le premier, et
+ * à tous les suivants combien peu l'ont précédé — sur un bon de commande, une
+ * facture et chaque e-mail de suivi. La numérotation part donc d'un rang déjà
+ * avancé, comme le fait n'importe quelle boutique qui ne veut pas publier son
+ * volume d'affaires.
+ *
+ * Ce n'est pas une allégation commerciale : le numéro identifie une commande,
+ * il n'affirme rien sur les ventes. Il ne se prête donc pas à la lecture qui
+ * vaut aux faux avis d'être interdits.
+ *
+ * Ajustable par `ORDER_NUMBER_OFFSET`. Le changer ne réécrit aucune commande
+ * déjà passée : le compteur ne fait que ne jamais descendre en dessous.
+ */
+const ORDER_NUMBER_OFFSET = Number.parseInt(process.env.ORDER_NUMBER_OFFSET ?? "537", 10);
+
 async function nextOrderNumber(): Promise<string> {
   const year = new Date().getFullYear();
   const prefix = `HP-${year}-`;
@@ -325,7 +343,12 @@ async function nextOrderNumber(): Promise<string> {
   });
 
   const previous = last ? Number.parseInt(last.orderNumber.slice(prefix.length), 10) : 0;
-  const next = Number.isFinite(previous) ? previous + 1 : 1;
+  const suivant = Number.isFinite(previous) ? previous + 1 : 1;
+
+  // Le plancher ne s'applique qu'aux premières commandes de l'année : une fois
+  // le rang dépassé, c'est la suite naturelle qui reprend la main, sans trou.
+  const plancher = Number.isFinite(ORDER_NUMBER_OFFSET) ? ORDER_NUMBER_OFFSET : 1;
+  const next = Math.max(suivant, plancher);
   return `${prefix}${String(next).padStart(6, "0")}`;
 }
 

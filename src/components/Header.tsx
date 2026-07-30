@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { Search, User } from "lucide-react";
+import { User } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { CategoryMenu } from "@/components/CategoryMenu";
+import { SearchBar } from "@/components/SearchBar";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { CartIndicator } from "@/components/cart/CartIndicator";
 import { WishlistIndicator } from "@/components/wishlist/WishlistIndicator";
@@ -33,21 +34,7 @@ export async function Header() {
           </Link>
 
           <div className="order-3 w-full sm:order-2 sm:flex-1">
-            <div className="flex h-10 items-stretch overflow-hidden rounded-sm">
-              <input
-                type="search"
-                placeholder={common("searchPlaceholder")}
-                aria-label={t("search")}
-                className="w-full flex-1 border-0 bg-white px-3 text-sm text-foreground outline-none placeholder:text-muted-foreground"
-              />
-              <button
-                type="button"
-                aria-label={t("search")}
-                className="flex items-center justify-center bg-primary px-4 text-primary-foreground hover:brightness-110"
-              >
-                <Search className="h-4 w-4" />
-              </button>
-            </div>
+            <SearchBar placeholder={common("searchPlaceholder")} label={t("search")} />
           </div>
 
           <nav className="order-2 ml-auto flex items-center gap-3 text-xs sm:order-3 sm:ml-0 sm:gap-4">

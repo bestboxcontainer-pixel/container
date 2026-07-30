@@ -13,7 +13,6 @@ import {
   MAX_QUANTITY_PER_LINE,
   replaceCart,
   SHIPPING_FLAT_CENTS,
-  VAT_RATE_PERCENT,
 } from "@/lib/cart";
 import type { CartLine } from "@/lib/cart";
 
@@ -250,12 +249,11 @@ export function CartView() {
             </div>
           </dl>
 
-          <p className="mt-1 text-xs text-muted-foreground">
-            {t("vatIncluded", {
-              rate: VAT_RATE_PERCENT,
-              amount: formatCents(totals.taxCents),
-            })}
-          </p>
+          {/* Le détail du taux et du montant de TVA a été retiré à la demande
+              du commerçant, au profit de la mention simple : § 1 PAngV impose
+              d'indiquer que le prix comprend la taxe, pas d'en publier le
+              calcul. Le détail reste sur la facture, où il est obligatoire. */}
+          <p className="mt-1 text-xs text-muted-foreground">{t("vatNote")}</p>
 
           <p className="mt-3 flex items-start gap-2 rounded-sm bg-muted px-3 py-2 text-xs text-muted-foreground">
             <Truck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />

@@ -125,7 +125,10 @@ export function CheckoutFlow({
       setError({ code: "invalid_email" });
       return;
     }
-    if (phone.trim() && !/^[+0-9\s()/.-]{6,40}$/.test(phone.trim())) {
+    // Le téléphone est exigé, comme côté serveur. Sans ce test, un champ laissé
+    // vide passait l'étape et n'était refusé qu'à l'envoi de la commande, deux
+    // écrans plus loin.
+    if (!/^[+0-9\s()/.-]{6,40}$/.test(phone.trim())) {
       setError({ code: "invalid_phone" });
       return;
     }
@@ -317,7 +320,7 @@ export function CheckoutFlow({
                 </div>
                 <div>
                   <label className={LABEL} htmlFor="checkout-phone">
-                    {t("phone")}
+                    {t("phone")} <span aria-hidden>*</span>
                   </label>
                   <input
                     id="checkout-phone"

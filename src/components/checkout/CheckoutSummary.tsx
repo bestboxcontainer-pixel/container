@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Truck } from "lucide-react";
-import { formatCents, VAT_RATE_PERCENT } from "@/lib/cart";
+import { formatCents } from "@/lib/cart";
 import type { CartLine, CartTotals } from "@/lib/cart";
 
 // Bloc récapitulatif du tunnel de commande.
@@ -79,9 +79,10 @@ export function CheckoutSummary({
         </div>
       </dl>
 
-      <p className="mt-1 text-xs text-muted-foreground">
-        {t("vatIncluded", { rate: VAT_RATE_PERCENT, amount: formatCents(totals.taxCents) })}
-      </p>
+      {/* Le détail du taux et du montant de TVA a été retiré à la demande du
+          commerçant. La mention ci-dessous reste : la loi allemande sur
+          l'affichage des prix (§ 1 PAngV) impose d'indiquer au consommateur que
+          le prix affiché comprend la taxe, même sans en détailler le calcul. */}
       <p className="mt-1 text-xs text-muted-foreground">{t("priceNote")}</p>
 
       <p className="mt-3 flex items-start gap-2 rounded-sm bg-muted px-3 py-2 text-xs text-muted-foreground">

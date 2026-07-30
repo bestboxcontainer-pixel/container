@@ -30,7 +30,13 @@ export function ProductGallery({
 
   return (
     <div>
-      <div className="relative aspect-square w-full overflow-hidden rounded-sm border border-border bg-white">
+      {/* Zoom au survol, comme sur les cartes produit. Le grossissement est plus
+          léger ici (105 % contre 110 %) : sur une image de cette taille, le même
+          rapport déplacerait beaucoup plus de pixels et le geste deviendrait
+          brusque. Le cadre garde `overflow-hidden`, l'image ne dépasse jamais.
+          Sous `motion-safe`, comme les autres mouvements de la boutique : un
+          visiteur qui a demandé moins d'animations n'en reçoit aucune. */}
+      <div className="group relative aspect-square w-full overflow-hidden rounded-sm border border-border bg-white">
         <Image
           key={current}
           src={current}
@@ -38,7 +44,7 @@ export function ProductGallery({
           fill
           priority
           sizes="(min-width: 1024px) 40vw, 100vw"
-          className="object-contain p-6"
+          className="object-contain p-6 transition-transform duration-500 ease-out motion-safe:group-hover:scale-105"
         />
       </div>
 

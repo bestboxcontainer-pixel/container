@@ -55,6 +55,22 @@ const LOTS: Record<string, Lot> = {
   geschirrspueler: { categorie: "geschirrspueler", googleCategory: "680", dossier: ".tmp-cat/geschirrspueler" },
   // Électronique > Vidéo > Téléviseurs
   fernseher: { categorie: "fernseher", googleCategory: "404", dossier: ".tmp-cat/fernseher" },
+  // Maison et jardin > Cuisine et salle à manger > Appareils de cuisine > Fours
+  "backoefen-herde": { categorie: "backoefen-herde", googleCategory: "683", dossier: ".tmp-cat/backoefen" },
+  // Maison et jardin > Cuisine et salle à manger > Appareils de cuisine > Robots de cuisine
+  kuechenmaschinen: { categorie: "kuechenmaschinen", googleCategory: "505666", dossier: ".tmp-cat/kuechenmaschinen" },
+  // Maison et jardin > Électroménager > Aspirateurs
+  staubsauger: { categorie: "staubsauger", googleCategory: "619", dossier: ".tmp-cat/staubsauger" },
+  // Vêtements et accessoires > Bijoux > Montres
+  smartwatches: { categorie: "smartwatches", googleCategory: "201", dossier: ".tmp-cat/smartwatches" },
+  // Électronique > Ordinateurs > Ordinateurs portables
+  computer: { categorie: "computer", googleCategory: "328", dossier: ".tmp-cat/computer" },
+  // Médias > Jeux vidéo / consoles
+  videospiele: { categorie: "videospiele", googleCategory: "1279", dossier: ".tmp-cat/videospiele" },
+  // Loisirs > Modélisme et radiocommande > Drones
+  drohnen: { categorie: "drohnen", googleCategory: "5825", dossier: ".tmp-cat/drohnen" },
+  // Maison et jardin > Chauffage, ventilation et climatisation > Climatiseurs
+  klimageraete: { categorie: "klimageraete", googleCategory: "605", dossier: ".tmp-cat/klimageraete" },
 };
 
 const DOSSIER_CLOUDINARY = "hausgeraete-pfeffer/products";

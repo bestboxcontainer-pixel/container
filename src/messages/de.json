@@ -199,6 +199,8 @@
     "count": "{count, plural, one {# Bewertung} other {# Bewertungen}}",
     "starsLabel": "{star} Sterne",
     "starsAria": "{rating} von 5 Sternen",
+    "listAria": "Kundenbewertungen, {count, plural, one {# Bewertung} other {# Bewertungen}} — zum Blättern scrollen",
+    "scrollHint": "{count, plural, one {# Bewertung} other {Alle # Bewertungen}} — im Feld scrollen",
     "emptyTitle": "Für dieses Produkt gibt es noch keine Kundenbewertungen.",
     "emptyHint": "Teilen Sie Ihre Erfahrung und schreiben Sie die erste Bewertung — sie hilft anderen bei der Entscheidung.",
     "editorial": "Redaktionelle Einschätzung: {rating} von 5",

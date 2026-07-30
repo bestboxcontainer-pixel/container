@@ -199,6 +199,8 @@
     "count": "{count, plural, one {# review} other {# reviews}}",
     "starsLabel": "{star} stars",
     "starsAria": "{rating} out of 5 stars",
+    "listAria": "Customer reviews, {count, plural, one {# review} other {# reviews}} — scroll to browse",
+    "scrollHint": "{count, plural, one {# review} other {All # reviews}} — scroll inside the box",
     "emptyTitle": "There are no customer reviews for this product yet.",
     "emptyHint": "Share your experience and write the first review — it helps others decide.",
     "editorial": "Editorial assessment: {rating} out of 5",

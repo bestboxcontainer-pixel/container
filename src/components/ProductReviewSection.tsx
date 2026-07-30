@@ -78,23 +78,29 @@ export async function ProductReviewSection({
       <h2 className="mb-4 text-xl font-black text-foreground">{t("title")}</h2>
 
       {total > 0 ? (
-        <div className="mb-6 flex flex-col gap-6 rounded-sm border border-border p-5 sm:flex-row sm:items-center">
-          <div className="flex flex-col items-center gap-1 sm:border-r sm:border-border sm:pr-8">
-            <p className="text-4xl font-black text-foreground">{formatRating(average, locale)}</p>
-            <StarRating
-              value={average}
-              size="lg"
-              label={t("starsAria", { rating: formatRating(average, locale) })}
-            />
-            <p className="text-xs text-muted-foreground">{t("count", { count: total })}</p>
+        // Résumé resserré : la note, les étoiles et le nombre d'avis tiennent
+        // sur une ligne, et les barres de répartition se réduisent à une demi-
+        // largeur. Empilé et à pleine hauteur, ce seul bloc occupait un tiers
+        // d'écran avant que le premier avis n'apparaisse.
+        <div className="mb-4 flex flex-col gap-4 rounded-sm border border-border px-4 py-3 sm:flex-row sm:items-center sm:gap-8">
+          <div className="flex items-center gap-3 sm:border-r sm:border-border sm:pr-8">
+            <p className="text-3xl font-black text-foreground">{formatRating(average, locale)}</p>
+            <div>
+              <StarRating
+                value={average}
+                size="sm"
+                label={t("starsAria", { rating: formatRating(average, locale) })}
+              />
+              <p className="mt-0.5 text-xs text-muted-foreground">{t("count", { count: total })}</p>
+            </div>
           </div>
 
-          <div className="flex-1 space-y-1.5">
+          <div className="flex-1 space-y-1 sm:max-w-sm">
             {distribution.map((entry) => (
-              <div key={entry.star} className="flex items-center gap-3 text-xs text-muted-foreground">
-                <span className="w-14 shrink-0">{t("starsLabel", { star: entry.star })}</span>
-                <span className="h-2 flex-1 rounded-sm bg-muted">
-                  <span className={`block h-2 rounded-sm bg-accent ${barWidthClass(entry.share)}`} />
+              <div key={entry.star} className="flex items-center gap-2 text-xs text-muted-foreground">
+                <span className="w-12 shrink-0">{t("starsLabel", { star: entry.star })}</span>
+                <span className="h-1.5 flex-1 rounded-sm bg-muted">
+                  <span className={`block h-1.5 rounded-sm bg-accent ${barWidthClass(entry.share)}`} />
                 </span>
                 <span className="w-6 shrink-0 text-right">{entry.count}</span>
               </div>
@@ -114,30 +120,59 @@ export async function ProductReviewSection({
       )}
 
       {total > 0 && (
-        <ul className="mb-8 space-y-4">
-          {reviews.map((review) => (
-            <li key={review.id} className="rounded-sm border border-border p-5">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <StarRating
-                  value={review.rating}
-                  size="sm"
-                  label={t("starsAria", { rating: formatRating(review.rating, locale) })}
-                />
-                <p className="text-xs text-muted-foreground">
-                  {dateFormatter.format(new Date(review.createdAt))}
-                </p>
-              </div>
-              {review.title && (
-                <h3 className="mt-2 text-sm font-black text-foreground">{review.title}</h3>
-              )}
-              <p className="mt-1 text-sm text-muted-foreground">{review.body}</p>
-              <p className="mt-3 text-xs font-semibold text-foreground">
-                {review.authorName}
-                {review.city ? `, ${review.city}` : ""}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <div className="mb-8">
+          {/* Trois avis visibles, le reste au défilement.
+              Une fiche à soixante avis poussait le formulaire de dépôt et le
+              reste de la page hors de portée : il fallait faire défiler
+              longtemps pour retrouver quoi que ce soit.
+
+              `tabIndex` n'est pas décoratif : sans lui, une zone à défilement
+              ne reçoit pas le focus et son contenu devient inatteignable au
+              clavier. La hauteur est en `rem` pour suivre la taille de police
+              choisie par la personne, plutôt que de couper le texte quand elle
+              l'agrandit. */}
+          <div
+            tabIndex={0}
+            role="region"
+            aria-label={t("listAria", { count: total })}
+            className="max-h-[22rem] overflow-y-auto overscroll-contain rounded-sm border border-border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            <ul className="divide-y divide-border">
+              {reviews.map((review) => (
+                <li key={review.id} className="px-4 py-3">
+                  {/* Note, intitulé et date sur une seule ligne. Empilés, ils
+                      faisaient à eux seuls la moitié de la hauteur d'un avis. */}
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <StarRating
+                      value={review.rating}
+                      size="sm"
+                      label={t("starsAria", { rating: formatRating(review.rating, locale) })}
+                    />
+                    {review.title && (
+                      <h3 className="text-sm font-black text-foreground">{review.title}</h3>
+                    )}
+                    <p className="ml-auto text-xs text-muted-foreground">
+                      {dateFormatter.format(new Date(review.createdAt))}
+                    </p>
+                  </div>
+                  {/* Une ligne de texte tirée sur toute la largeur de l'écran se
+                      lit mal : on la borne à une longueur de lecture usuelle. */}
+                  <p className="mt-1 max-w-prose text-sm text-muted-foreground">{review.body}</p>
+                  <p className="mt-1.5 text-xs text-muted-foreground">
+                    {review.authorName}
+                    {review.city ? `, ${review.city}` : ""}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Sans cette mention, rien ne dit qu'il reste des avis en dessous :
+              une zone à défilement interne ne s'annonce pas d'elle-même. */}
+          {total > 3 && (
+            <p className="mt-2 text-xs text-muted-foreground">{t("scrollHint", { count: total })}</p>
+          )}
+        </div>
       )}
 
       <h3 className="mb-3 text-lg font-black text-foreground">{t("writeTitle")}</h3>

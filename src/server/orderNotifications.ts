@@ -20,12 +20,14 @@
  */
 
 import { isMailConfigured, sendMail } from "@/lib/mailer";
+import type { MailAttachment } from "@/lib/mailer";
 import { prisma } from "@/server/prisma";
 import { SUPERADMIN_ROLE } from "@/server/admins";
 import {
   buildOrderConfirmationEmail,
   buildOrderNotificationEmail,
 } from "@/server/emails/order";
+import { buildInvoicePdf, invoiceFilename } from "@/server/invoice";
 import type { OrderRecord } from "@/server/orders";
 
 /** Vrai uniquement en développement sans SMTP configuré. */
@@ -84,7 +86,7 @@ async function sellerRecipients(): Promise<string[]> {
 /** Envoi unitaire tolérant aux pannes. Renvoie l'adresse si le serveur l'a acceptée. */
 async function deliver(
   to: string,
-  message: { subject: string; html: string; text: string },
+  message: { subject: string; html: string; text: string; attachments?: MailAttachment[] },
   context: string,
 ): Promise<string | null> {
   try {
@@ -132,11 +134,30 @@ export async function sendOrderEmails(order: OrderRecord): Promise<void> {
   const buyerMessage = buildOrderConfirmationEmail(order);
   const sellerMessage = buildOrderNotificationEmail(order);
 
+  // Facture PDF jointe à la confirmation du client, et à la notification du
+  // vendeur qui en garde ainsi un exemplaire identique. Sa génération ne doit
+  // pas empêcher l'envoi : mieux vaut une confirmation sans pièce jointe que
+  // pas de confirmation du tout.
+  let facture: MailAttachment[] | undefined;
+  try {
+    facture = [
+      {
+        filename: invoiceFilename(order),
+        content: await buildInvoicePdf(order),
+        contentType: "application/pdf",
+      },
+    ];
+  } catch (error) {
+    console.error(`[bestellung] ${order.orderNumber} : facture PDF non générée :`, error);
+  }
+
   // Les deux envois partent ensemble : la confirmation du client ne doit pas
   // attendre que la notification interne soit acceptée, ni l'inverse.
   const [buyer, ...delivered] = await Promise.all([
-    deliver(order.email, buyerMessage, "confirmation client"),
-    ...sellers.map((address) => deliver(address, sellerMessage, "notification vendeur")),
+    deliver(order.email, { ...buyerMessage, attachments: facture }, "confirmation client"),
+    ...sellers.map((address) =>
+      deliver(address, { ...sellerMessage, attachments: facture }, "notification vendeur"),
+    ),
   ]);
 
   const sellersDelivered = delivered.filter((address): address is string => address !== null);
@@ -148,6 +169,7 @@ export async function sendOrderEmails(order: OrderRecord): Promise<void> {
     sellersDelivered.length > 0
       ? `Notification vendeur envoyée à ${sellersDelivered.join(", ")}.`
       : "Notification vendeur non envoyée.",
+    facture ? "Facture PDF jointe." : "Facture PDF absente.",
   ].join(" ");
 
   await logToOrder(order.id, note);

@@ -15,6 +15,13 @@ import { deLegalPages } from "./de";
 import { enLegalPages } from "./en";
 import type { LegalFooterGroup, LegalLocale, LegalPageMap, LegalSlug } from "./types";
 
+/**
+ * Identité de l'entreprise, source unique pour l'Impressum comme pour la
+ * facture PDF. Elle ne dépend pas de la base : ces mentions engagent la société
+ * et ne sont pas modifiables depuis le back-office.
+ */
+export { COMPANY } from "./de";
+
 export type {
   LegalFooterGroup,
   LegalFooterLink,

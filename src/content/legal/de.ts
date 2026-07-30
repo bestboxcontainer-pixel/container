@@ -15,8 +15,12 @@ import type { LegalPageMap } from "./types";
 /** Date de dernière révision rédactionnelle du corpus allemand. */
 const UPDATED_AT = "2026-07-26";
 
-/** Coordonnées de l'entreprise — À REMPLACER par les données réelles. */
-const COMPANY = {
+/**
+ * Coordonnées de l'entreprise — À REMPLACER par les données réelles.
+ * Exportées : la facture PDF y puise les mentions exigées par le § 14 UStG,
+ * et deux jeux de coordonnées qui divergeraient seraient pires qu'un seul faux.
+ */
+export const COMPANY = {
   name: "Hausgeräte Pfeffer GmbH",
   street: "Musterstraße 12",
   city: "10115 Berlin",

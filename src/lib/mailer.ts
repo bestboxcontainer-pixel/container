@@ -21,11 +21,20 @@ import nodemailer, { type Transporter } from "nodemailer";
 
 const DEFAULT_FROM_NAME = "Hausgeräte Pfeffer";
 
+/** Fichier joint au message, transmis tel quel à nodemailer. */
+export interface MailAttachment {
+  filename: string;
+  content: Buffer;
+  contentType: string;
+}
+
 export interface MailMessage {
   to: string;
   subject: string;
   html: string;
   text: string;
+  /** Facture PDF de la confirmation de commande, le cas échéant. */
+  attachments?: MailAttachment[];
 }
 
 interface SmtpSettings {
@@ -105,6 +114,7 @@ export async function sendMail(message: MailMessage): Promise<void> {
     subject: message.subject,
     text: message.text,
     html: message.html,
+    ...(message.attachments?.length ? { attachments: message.attachments } : {}),
     // Les réponses arrivent dans la boîte de la boutique, pas dans le vide.
     replyTo: settings.from,
   });

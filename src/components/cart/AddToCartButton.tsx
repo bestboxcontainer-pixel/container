@@ -46,7 +46,7 @@ export function AddToCartButton({
 }: AddToCartButtonProps) {
   const t = useTranslations("cart");
   const router = useRouter();
-  const { add, ready } = useCart();
+  const { add, ready, openDrawer } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -69,6 +69,11 @@ export function AddToCartButton({
     setAdded(true);
     if (timer.current) clearTimeout(timer.current);
     timer.current = setTimeout(() => setAdded(false), 2500);
+
+    // Le panier latéral se déroule aussitôt : le compteur qui s'incrémente à
+    // l'autre bout de l'écran passe inaperçu, et l'on reclique en croyant que
+    // rien ne s'est produit — l'article part alors en double.
+    openDrawer();
   }
 
   /**

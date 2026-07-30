@@ -44,6 +44,16 @@ interface CartContextValue {
   setQuantity: (productId: string, quantity: number) => void;
   remove: (productId: string) => void;
   clear: () => void;
+  /**
+   * État du panier latéral.
+   *
+   * Il vit ici plutôt que dans le tiroir lui-même : c'est le bouton d'ajout qui
+   * décide de l'ouvrir, et les deux composants sont à des endroits opposés de
+   * l'arbre — le tiroir dans la mise en page, le bouton dans la fiche produit.
+   */
+  drawerOpen: boolean;
+  openDrawer: () => void;
+  closeDrawer: () => void;
 }
 
 const NO_BENEFIT: CampaignBenefit = { freeShipping: false, campaignName: null };
@@ -125,6 +135,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const remove = useCallback((productId: string) => removeFromCart(productId), []);
   const clear = useCallback(() => clearCart(), []);
 
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const openDrawer = useCallback(() => setDrawerOpen(true), []);
+  const closeDrawer = useCallback(() => setDrawerOpen(false), []);
+
   const value = useMemo<CartContextValue>(
     () => ({
       lines,
@@ -135,8 +149,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setQuantity,
       remove,
       clear,
+      drawerOpen,
+      openDrawer,
+      closeDrawer,
     }),
-    [lines, ready, campaign, add, setQuantity, remove, clear],
+    [lines, ready, campaign, add, setQuantity, remove, clear, drawerOpen, openDrawer, closeDrawer],
   );
 
   return <CartContext value={value}>{children}</CartContext>;

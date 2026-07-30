@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef } from "react";
 import type { ReactNode } from "react";
 import { Minus, Plus, ShoppingCart, Trash2, Truck, X } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -39,13 +39,23 @@ function useDismissable(open: boolean, onClose: () => void) {
 
 export function CartDrawer({ paymentSlot }: { paymentSlot?: ReactNode }) {
   const t = useTranslations("cart");
-  const { lines, totals, ready, setQuantity, remove } = useCart();
-  const [open, setOpen] = useState(false);
+  // L'ouverture vit dans le contexte du panier : ajouter un article doit
+  // dérouler le tiroir, et le bouton d'ajout est ailleurs dans l'arbre.
+  const {
+    lines,
+    totals,
+    ready,
+    setQuantity,
+    remove,
+    drawerOpen: open,
+    openDrawer,
+    closeDrawer,
+  } = useCart();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const titleId = useId();
 
-  const close = useCallback(() => setOpen(false), []);
+  const close = closeDrawer;
   useDismissable(open, close);
 
   // Le focus entre dans le panneau à l'ouverture et revient sur le bouton à la
@@ -68,7 +78,7 @@ export function CartDrawer({ paymentSlot }: { paymentSlot?: ReactNode }) {
   // zéro, `open` resterait vrai : le défilement de la page resterait bloqué et
   // le tiroir se rouvrirait seul au prochain ajout. L'ajustement se fait pendant
   // le rendu — React relance aussitôt, avant tout affichage et tout effet.
-  if (open && count === 0) setOpen(false);
+  if (open && count === 0) closeDrawer();
 
   // Rien à montrer tant que le panier est vide : ni bouton, ni panneau.
   if (!ready || count === 0) return null;
@@ -78,7 +88,7 @@ export function CartDrawer({ paymentSlot }: { paymentSlot?: ReactNode }) {
       <button
         ref={triggerRef}
         type="button"
-        onClick={() => setOpen(true)}
+        onClick={openDrawer}
         aria-haspopup="dialog"
         aria-expanded={open}
         className="fixed top-1/2 right-0 z-40 flex -translate-y-1/2 items-center gap-2 rounded-l-sm bg-primary py-3 pr-3 pl-3.5 text-primary-foreground shadow-lg transition-all hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-safe:hover:pr-4"

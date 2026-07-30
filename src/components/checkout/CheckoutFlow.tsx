@@ -322,6 +322,7 @@ export function CheckoutFlow({
                   <input
                     id="checkout-phone"
                     type="tel"
+                    required
                     autoComplete="tel"
                     maxLength={40}
                     value={phone}

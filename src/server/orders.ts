@@ -381,8 +381,10 @@ export function parseCheckoutPayload(payload: unknown): {
   const email = text(raw.email, 160).toLowerCase();
   if (!EMAIL_PATTERN.test(email)) errors.push("invalid_email");
 
+  // Le téléphone est exigé : le transporteur en a besoin pour les livraisons
+  // de gros électroménager, qui se prennent sur rendez-vous.
   const phone = text(raw.phone, 40);
-  if (phone && !/^[+0-9\s()/.-]{6,40}$/.test(phone)) errors.push("invalid_phone");
+  if (!phone || !/^[+0-9\s()/.-]{6,40}$/.test(phone)) errors.push("invalid_phone");
 
   const billing = readAddress(raw.billing);
   const billingError = validateAddress(billing);

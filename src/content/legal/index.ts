@@ -96,10 +96,17 @@ export const FOOTER_GROUP_TITLES: Readonly<
 /** Ordre des colonnes du pied de page. */
 export const FOOTER_GROUP_IDS = ["service", "legal", "company"] as const;
 
-/** Répartition des slugs par colonne du pied de page. */
+/**
+ * Répartition des slugs par colonne du pied de page.
+ *
+ * « widerruf » et « elektroaltgeraete » n'y figurent pas : les pages existent
+ * toujours et restent servies à leur adresse, elles ne sont simplement plus
+ * listées ici. Les liens qui y mènent depuis le tunnel de commande et depuis le
+ * suivi de commande restent la voie d'accès.
+ */
 export const FOOTER_GROUP_SLUGS: Readonly<Record<LegalFooterGroup["id"], readonly LegalSlug[]>> = {
   service: ["versand", "zahlungsarten", "retoure", "faq"],
-  legal: ["impressum", "agb", "datenschutz", "widerruf", "elektroaltgeraete"],
+  legal: ["impressum", "agb", "datenschutz"],
   company: ["ueber-uns", "kontakt"],
 };
 

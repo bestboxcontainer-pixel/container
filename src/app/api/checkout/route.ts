@@ -1,9 +1,10 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { createOrder, OrderError, parseCheckoutPayload } from "@/server/orders";
 import type { CheckoutErrorCode } from "@/server/orders";
 import { getCurrentCustomer } from "@/server/customerSession";
 import { resolveCampaignContext } from "@/server/campaignContext";
+import { sendOrderEmails } from "@/server/orderNotifications";
 
 // Point d'entrée public du tunnel de commande.
 //
@@ -118,6 +119,18 @@ export async function POST(request: Request) {
       customer?.id,
       campaign ? { campaignId: campaign.campaignId, recipientId: campaign.recipientId } : undefined,
     );
+
+    // Confirmation au client, notification au vendeur.
+    //
+    // Différé avec `after` : la commande est déjà écrite et le stock déjà
+    // décompté, le client n'a aucune raison de patienter le temps d'une poignée
+    // de main SMTP. Next exécute le rappel une fois la réponse envoyée, et le
+    // fait même si la requête s'est mal terminée.
+    //
+    // `sendOrderEmails` ne lève jamais : une boîte injoignable laisse une trace
+    // dans les journaux et dans l'historique de la commande, jamais une erreur
+    // 500 sur une commande valable.
+    after(() => sendOrderEmails(order));
 
     // Les stocks affichés dans la boutique ont changé.
     revalidatePath("/", "layout");

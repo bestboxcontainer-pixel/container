@@ -315,7 +315,7 @@ model OrderItem {
 model OrderEvent {
   id        String @id @default(cuid())
   orderId   String
-  // status | payment | note
+  // status | payment | note | email
   kind      String @default("status")
   fromValue String @default("")
   toValue   String @default("")

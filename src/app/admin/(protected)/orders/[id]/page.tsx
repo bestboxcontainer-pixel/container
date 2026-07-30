@@ -192,7 +192,9 @@ export default async function AdminOrderDetailPage({
                         ? "Statut de paiement"
                         : event.kind === "note"
                           ? "Note"
-                          : "Statut de commande"}
+                          : event.kind === "email"
+                            ? "E-mail"
+                            : "Statut de commande"}
                       {event.toValue && ` : ${event.toValue}`}
                       {event.fromValue && ` (avant : ${event.fromValue})`}
                     </span>

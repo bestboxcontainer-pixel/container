@@ -53,30 +53,39 @@ export function absoluteUrl(pathOrUrl: string): string {
 }
 
 /**
- * Conditions de livraison annoncées sur la boutique (TrustBar : « Versandkostenfrei
- * ab 50 € », « Lieferung in 1-3 Werktagen »). Ces valeurs DOIVENT rester alignées
- * sur ce qui est écrit sur le site : Google compare le flux et la page.
- * À confirmer par le commerçant avant la mise en ligne du compte.
+ * Conditions de livraison annoncées sur la boutique (TrustBar :
+ * « Standardversand: kostenlos (3–5 Tage) »). Ces valeurs DOIVENT rester
+ * alignées sur ce qui est écrit sur le site : Google compare le flux et la page.
+ *
+ * Le mode express (70 €, 24–48 h) n'est volontairement pas déclaré ici : le flux
+ * ne porte qu'une offre de livraison par produit, et c'est le mode par défaut —
+ * donc le standard — qui doit y figurer. L'express reste proposé au panier.
  */
 export const MERCHANT_SHIPPING = {
   country: MERCHANT_COUNTRY,
   service: "Standardversand",
-  /** Au-dessus de ce montant, le port est offert. */
-  freeFromCents: 5_000,
+  /**
+   * Au-dessus de ce montant, le port est offert. À zéro depuis que la boutique
+   * annonce le standard gratuit sans montant minimum d'achat.
+   */
+  freeFromCents: 0,
+  /** Préparation en un jour ouvré, acheminement en deux à quatre : 3 à 5 jours. */
   minHandlingDays: 1,
   maxHandlingDays: 1,
-  minTransitDays: 1,
-  maxTransitDays: 3,
+  minTransitDays: 2,
+  maxTransitDays: 4,
 } as const;
 
 /**
- * Politique de retour annoncée (TrustBar : « 30 Tage Rückgaberecht »).
+ * Politique de retour annoncée (TrustBar : « 14 Tage Rückgaberecht »).
+ * Quatorze jours correspondent au droit de rétractation légal allemand
+ * (§ 355 BGB) : la boutique n'accorde plus de délai contractuel au-delà.
  * `returnFees` n'est volontairement pas renseigné : le site ne précise pas qui
  * supporte les frais de retour, et Google refuse les informations inexactes.
  */
 export const MERCHANT_RETURN_POLICY = {
   country: MERCHANT_COUNTRY,
-  days: 30,
+  days: 14,
   /** Valeur schema.org attendue par Google. */
   category: "https://schema.org/MerchantReturnFiniteReturnWindow",
   method: "https://schema.org/ReturnByMail",

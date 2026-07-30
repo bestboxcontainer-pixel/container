@@ -25,17 +25,22 @@ export async function BrandRow({ brands }: { brands: BrandTeaser[] }) {
                 {/* Le nom de marque ne se traduit jamais */}
                 {logo ? (
                   // Le logo est appliqué en masque plutôt qu'en <img> : la
-                  // couleur vient alors du fond, donc de la feuille de style.
-                  // Un SVG chargé dans une balise <img> est isolé du document
-                  // et son `currentColor` retombe au noir, ce qui interdirait
-                  // le gris au repos et la transition au survol.
+                  // couleur vient alors du fond, et chaque marque porte donc la
+                  // sienne. Un SVG chargé dans une balise <img> est isolé du
+                  // document, sa couleur y est figée à celle du fichier, et
+                  // teinter huit marques différemment imposerait huit fichiers.
                   <span
                     role="img"
                     aria-label={brand.name}
-                    className="h-8 w-full bg-muted-foreground transition-colors group-hover:bg-foreground"
+                    // Une zone plus haute que large : les logos en toutes
+                    // lettres y sont bornés par la largeur, les logos ronds par
+                    // la hauteur, et les deux familles pèsent alors le même
+                    // poids visuel dans la rangée.
+                    className="h-10 w-full transition-opacity group-hover:opacity-80"
                     style={{
-                      maskImage: `url(${logo})`,
-                      WebkitMaskImage: `url(${logo})`,
+                      backgroundColor: logo.color,
+                      maskImage: `url(${logo.src})`,
+                      WebkitMaskImage: `url(${logo.src})`,
                       maskRepeat: "no-repeat",
                       WebkitMaskRepeat: "no-repeat",
                       maskPosition: "center",

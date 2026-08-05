@@ -5,6 +5,7 @@ import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { CartProvider } from "@/components/cart/CartProvider";
 import { CartDrawer } from "@/components/cart/CartDrawer";
+import { CodeSnippets } from "@/components/CodeSnippets";
 import { PaymentMethodsBar } from "@/components/PaymentMethodsBar";
 
 export function generateStaticParams() {
@@ -33,12 +34,19 @@ export default async function LocaleLayout({
   // Le tiroir est monté ici pour être disponible sur toutes les pages. Les
   // moyens de paiement lui sont passés déjà rendus : la lecture en base reste
   // côté serveur, le tiroir n'embarque aucune requête.
+  // Les fragments posés depuis le back-office sont injectés ici, donc jamais
+  // dans /admin : celui-ci est hors du routage multilingue et ne traverse pas ce
+  // layout. Un fragment fautif ne peut pas fermer derrière lui la seule porte
+  // par laquelle on pourrait le désactiver.
   return (
     <NextIntlClientProvider>
+      <CodeSnippets placement="head" />
+      <CodeSnippets placement="bodyStart" />
       <CartProvider>
         {children}
         <CartDrawer paymentSlot={<PaymentMethodsBar variant="inline" />} />
       </CartProvider>
+      <CodeSnippets placement="bodyEnd" />
     </NextIntlClientProvider>
   );
 }

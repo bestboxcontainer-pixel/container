@@ -687,3 +687,33 @@ model CampaignEvent {
   @@index([campaignId, kind])
   @@index([campaignId, createdAt])
 }
+
+// ---- Scripts et balises ----
+
+// Fragments de code injectés dans les pages de la boutique sans redéploiement :
+// Google Tag Manager, pixel publicitaire, balise de vérification d'un moteur.
+//
+// Le contenu est inséré tel quel, sans échappement — c'est tout l'intérêt, et
+// c'est aussi pourquoi l'écran est réservé aux administrateurs : y coller un
+// fragment revient à exécuter du code sur chaque page vue.
+model CodeSnippet {
+  id String @id @default(cuid())
+  // Intitulé libre, pour s'y retrouver dans la liste : « Google Tag Manager »…
+  name String
+  // head | bodyStart | bodyEnd
+  placement String
+  content   String
+  // Un fragment naît désactivé : on le colle, on le relit, puis on l'allume.
+  enabled Boolean @default(false)
+  // Ordre d'insertion à emplacement égal. Il compte : un mode consentement doit
+  // s'exécuter avant les balises qu'il gouverne.
+  position  Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  // Qui a modifié en dernier : sur du code exécuté chez le visiteur, la
+  // question se pose tôt ou tard.
+  updatedBy String
+
+  // La boutique ne lit que les fragments actifs, emplacement par emplacement.
+  @@index([enabled, placement, position])
+}

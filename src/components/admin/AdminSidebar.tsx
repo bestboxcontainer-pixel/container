@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import {
+  Code2,
   CreditCard,
   FileText,
   LayoutDashboard,
@@ -87,6 +88,10 @@ export function AdminSidebar({
       title: "Système",
       entries: [
         { label: "Pages & mentions légales", href: "/admin/pages", icon: FileText },
+        // Y coller un fragment revient à exécuter du code sur chaque page vue :
+        // l'entrée reste sous « Système », à côté des accès, et non dans les
+        // écrans de contenu où l'on passe tous les jours.
+        { label: "Scripts & balises", href: "/admin/scripts", icon: Code2 },
         { label: "Accès", href: "/admin/users", icon: Users },
       ],
     },

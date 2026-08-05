@@ -23,10 +23,10 @@ export const dynamic = "force-dynamic";
 // remplacées par les vraies avant la mise en production — d'où l'avertissement
 // affiché en toutes lettres sur la page.
 const DEMO_BANK = {
-  holder: "Hausgeräte Pfeffer GmbH (Demo)",
+  holder: "Hausgeräte Pfeffer OHG (Demo)",
   iban: "DE02 1203 0000 0000 2020 51",
   bic: "BYLADEM1001",
-  bank: "Musterbank Berlin (Testdaten)",
+  bank: "Musterbank (Testdaten)",
 };
 
 /** Moyens de paiement encore branchés manuellement, faute de prestataire configuré. */

@@ -43,12 +43,12 @@ const LOGO_HEIGHT = Math.round((LOGO_WIDTH * 406) / 1242);
  * doivent être remplacées ici EN MÊME TEMPS que dans les pages légales.
  */
 const IMPRESSUM = {
-  name: "Hausgeräte Pfeffer GmbH",
-  street: "Musterstraße 12",
-  city: "10115 Berlin",
+  name: "Hausgeräte Pfeffer OHG",
+  street: "Matthiasstraße 15",
+  city: "54290 Trier",
   country: "Deutschland",
   managingDirector: "Martin Pfeffer",
-  register: "Amtsgericht Berlin-Charlottenburg, HRB 000000",
+  register: "Amtsgericht Wittlich, HRA 00000",
   vatId: "DE000000000",
 } as const;
 

@@ -1,4 +1,5 @@
 import { JsonLd, type JsonLdValue } from "@/components/seo/JsonLd";
+import { COMPANY } from "@/content/legal";
 import { MERCHANT_COUNTRY, MERCHANT_LANGUAGE, SHOP_NAME, SHOP_PHONE, siteUrl } from "@/server/merchant";
 
 // Balisage Organization + WebSite du site.
@@ -12,7 +13,12 @@ import { MERCHANT_COUNTRY, MERCHANT_LANGUAGE, SHOP_NAME, SHOP_PHONE, siteUrl } f
 interface OrganizationJsonLdProps {
   /** Profils officiels de la boutique — renforce l'identification de l'entité. */
   sameAs?: string[];
-  /** Adresse postale du siège, telle qu'elle figure dans l'Impressum. */
+  /**
+   * Adresse postale du siège. Par défaut celle de l'Impressum : Google compare
+   * le balisage et la page, et une entité sans adresse est plus difficile à
+   * rattacher — c'est l'un des signaux qui accélèrent la validation d'un compte
+   * Merchant Center. La renseigner à la main ne servirait qu'à la faire diverger.
+   */
   address?: {
     streetAddress: string;
     postalCode: string;
@@ -20,13 +26,23 @@ interface OrganizationJsonLdProps {
   };
 }
 
-export function OrganizationJsonLd({ sameAs, address }: OrganizationJsonLdProps) {
+const ADRESSE_SIEGE = {
+  streetAddress: COMPANY.street,
+  postalCode: COMPANY.postalCode,
+  addressLocality: COMPANY.locality,
+};
+
+export function OrganizationJsonLd({ sameAs, address = ADRESSE_SIEGE }: OrganizationJsonLdProps) {
   const base = siteUrl();
 
   const organization: Record<string, JsonLdValue | undefined> = {
     "@type": "OnlineStore",
     "@id": `${base}#organization`,
     name: SHOP_NAME,
+    // La raison sociale complète, distincte du nom commercial : c'est elle qui
+    // figure dans l'Impressum, et la faire correspondre aide Google à rattacher
+    // la boutique à une entité réelle.
+    legalName: COMPANY.name,
     url: base,
     logo: `${base}/images/logo-full.png`,
     image: `${base}/images/logo-full.png`,

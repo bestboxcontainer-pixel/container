@@ -21,14 +21,19 @@ const UPDATED_AT = "2026-07-26";
  * et deux jeux de coordonnées qui divergeraient seraient pires qu'un seul faux.
  */
 export const COMPANY = {
-  name: "Hausgeräte Pfeffer GmbH",
-  street: "Musterstraße 12",
-  city: "10115 Berlin",
+  name: "Hausgeräte Pfeffer OHG",
+  street: "Matthiasstraße 15",
+  city: "54290 Trier",
+  postalCode: "54290",
+  locality: "Trier",
   country: "Deutschland",
   email: "kontakt@hausgeratepfeffer.de",
   phone: "0800 123 45",
   managingDirector: "Martin Pfeffer",
-  register: "Amtsgericht Berlin-Charlottenburg, HRB 000000",
+  // Une OHG s'inscrit en section A (HRA), pas B, et le registre du ressort de
+  // Trier est tenu par l'Amtsgericht Wittlich. Le NUMÉRO reste à remplacer par
+  // celui de l'extrait Handelsregister réel.
+  register: "Amtsgericht Wittlich, HRA 00000",
   vatId: "DE000000000",
   weee: "WEEE-Reg.-Nr. DE00000000",
   domain: "www.hausgeratepfeffer.de",
@@ -70,7 +75,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Vertreten durch",
-        body: `Geschäftsführer: ${COMPANY.managingDirector}\n\nDer Geschäftsführer ist einzelvertretungsberechtigt.`,
+        body: `Vertretungsberechtigter Gesellschafter: ${COMPANY.managingDirector}\n\nDer Gesellschafter ist einzelvertretungsberechtigt.`,
       },
       {
         heading: "Kontakt",
@@ -247,7 +252,7 @@ export const deLegalPages: LegalPageMap = {
         heading: "§ 16 Anwendbares Recht, Gerichtsstand und Schlussbestimmungen",
         body:
           "Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts. Gegenüber Verbrauchern gilt diese Rechtswahl nur insoweit, als dadurch der Schutz nicht entzogen wird, der durch zwingende Bestimmungen des Rechts des Staates gewährt wird, in dem der Verbraucher seinen gewöhnlichen Aufenthalt hat.\n\n" +
-          "Ist der Kunde Kaufmann, juristische Person des öffentlichen Rechts oder öffentlich-rechtliches Sondervermögen, ist ausschließlicher Gerichtsstand für alle Streitigkeiten aus diesem Vertrag unser Geschäftssitz in Berlin.\n\n" +
+          "Ist der Kunde Kaufmann, juristische Person des öffentlichen Rechts oder öffentlich-rechtliches Sondervermögen, ist ausschließlicher Gerichtsstand für alle Streitigkeiten aus diesem Vertrag unser Geschäftssitz in Trier.\n\n" +
           "Sollte eine Bestimmung dieser AGB unwirksam sein oder werden, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.",
       },
     ],
@@ -371,7 +376,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "18. Zuständige Aufsichtsbehörde",
-        body: "Für uns zuständig ist die Berliner Beauftragte für Datenschutz und Informationsfreiheit, Alt-Moabit 59–61, 10555 Berlin. Die Angabe ist an den tatsächlichen Unternehmenssitz anzupassen.",
+        body: "Für uns zuständig ist der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Rheinland-Pfalz, Hintere Bleiche 34, 55116 Mainz.",
       },
       {
         heading: "19. Datensicherheit und automatisierte Entscheidungen",
@@ -849,7 +854,7 @@ export const deLegalPages: LegalPageMap = {
     slug: "ueber-uns",
     title: "Über uns",
     intro:
-      "Hausgeräte Pfeffer ist ein Fachhändler für Haushaltsgeräte und Multimedia mit Sitz in Berlin. Wir verkaufen keine Geräte von der Stange, sondern beraten dazu – vom passenden Nischenmaß bis zur richtigen Bildwiederholrate.",
+      "Hausgeräte Pfeffer ist ein Fachhändler für Haushaltsgeräte und Multimedia mit Sitz in Trier. Wir verkaufen keine Geräte von der Stange, sondern beraten dazu – vom passenden Nischenmaß bis zur richtigen Bildwiederholrate.",
     updatedAt: UPDATED_AT,
     sections: [
       {
@@ -874,7 +879,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Standort und Logistik",
-        body: "Unser Sitz ist Berlin, von dort steuern wir Einkauf, Kundenservice und Retourenabwicklung. Der Versand erfolgt über Paketdienste und spezialisierte Zwei-Mann-Speditionen für Großgeräte, damit auch ein 90 Kilogramm schwerer Kühlschrank sicher an seinem Platz ankommt.",
+        body: "Unser Sitz ist Trier, von dort steuern wir Einkauf, Kundenservice und Retourenabwicklung. Der Versand erfolgt über Paketdienste und spezialisierte Zwei-Mann-Speditionen für Großgeräte, damit auch ein 90 Kilogramm schwerer Kühlschrank sicher an seinem Platz ankommt.",
       },
       {
         heading: "Arbeiten bei Hausgeräte Pfeffer",

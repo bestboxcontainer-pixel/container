@@ -298,7 +298,7 @@ export function CampaignStepMessage({ draft, products, onChange }: CampaignStepM
               </div>
 
               <p className="mt-3 text-center text-[10px] leading-4 text-muted-foreground">
-                Hausgeräte Pfeffer GmbH · Musterstraße 12 · 10115 Berlin
+                Hausgeräte Pfeffer OHG · Matthiasstraße 15 · 54290 Trier
                 <br />
                 Impressum · Datenschutz · lien de désinscription
               </p>

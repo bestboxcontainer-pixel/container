@@ -16,14 +16,14 @@ const UPDATED_AT = "2026-07-26";
 
 /** Coordonnées de l'entreprise — À REMPLACER par les données réelles. */
 const COMPANY = {
-  name: "Hausgeräte Pfeffer GmbH",
-  street: "Musterstraße 12",
-  city: "10115 Berlin",
+  name: "Hausgeräte Pfeffer OHG",
+  street: "Matthiasstraße 15",
+  city: "54290 Trier",
   country: "Germany",
   email: "kontakt@hausgeratepfeffer.de",
   phone: "0800 123 45",
   managingDirector: "Martin Pfeffer",
-  register: "Amtsgericht Berlin-Charlottenburg (Local Court of Berlin-Charlottenburg), HRB 000000",
+  register: "Amtsgericht Wittlich (Local Court of Wittlich), HRA 00000",
   vatId: "DE000000000",
   weee: "WEEE reg. no. DE00000000",
   domain: "www.hausgeratepfeffer.de",
@@ -64,7 +64,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Represented by",
-        body: `Managing Director: ${COMPANY.managingDirector}\n\nThe Managing Director has sole power of representation.`,
+        body: `Authorised partner: ${COMPANY.managingDirector}\n\nThe partner has sole power of representation.`,
       },
       {
         heading: "Contact",
@@ -241,7 +241,7 @@ export const enLegalPages: LegalPageMap = {
         heading: "Section 16 Applicable law, place of jurisdiction and final provisions",
         body:
           "German law applies, excluding the UN Convention on Contracts for the International Sale of Goods. In relation to consumers, this choice of law applies only insofar as it does not deprive the consumer of the protection afforded by mandatory provisions of the law of the country in which the consumer has their habitual residence.\n\n" +
-          "If the customer is a merchant, a legal entity under public law or a special fund under public law, the exclusive place of jurisdiction for all disputes arising from this contract is our registered office in Berlin.\n\n" +
+          "If the customer is a merchant, a legal entity under public law or a special fund under public law, the exclusive place of jurisdiction for all disputes arising from this contract is our registered office in Trier.\n\n" +
           "Should any provision of these GTC be or become invalid, the validity of the remaining provisions shall remain unaffected.",
       },
     ],
@@ -365,7 +365,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "18. Competent supervisory authority",
-        body: "The authority responsible for us is the Berlin Commissioner for Data Protection and Freedom of Information (Berliner Beauftragte für Datenschutz und Informationsfreiheit), Alt-Moabit 59–61, 10555 Berlin, Germany. This entry must be adjusted to the company's actual registered office.",
+        body: "The authority responsible for us is the State Commissioner for Data Protection and Freedom of Information of Rhineland-Palatinate (Landesbeauftragter für den Datenschutz und die Informationsfreiheit Rheinland-Pfalz), Hintere Bleiche 34, 55116 Mainz, Germany.",
       },
       {
         heading: "19. Data security and automated decision-making",
@@ -843,7 +843,7 @@ export const enLegalPages: LegalPageMap = {
     slug: "ueber-uns",
     title: "About Us",
     intro:
-      "Hausgeräte Pfeffer is a specialist retailer for household appliances and consumer electronics based in Berlin. We don't just sell appliances off the shelf — we advise on them, from the right recess dimensions to the right refresh rate.",
+      "Hausgeräte Pfeffer is a specialist retailer for household appliances and consumer electronics based in Trier. We don't just sell appliances off the shelf — we advise on them, from the right recess dimensions to the right refresh rate.",
     updatedAt: UPDATED_AT,
     sections: [
       {
@@ -868,7 +868,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Location and logistics",
-        body: "We are based in Berlin, from where we manage purchasing, customer service and returns. Shipping is handled by parcel services and specialist two-person freight carriers for large appliances, so that even a 90-kilogram refrigerator arrives safely in its place.",
+        body: "We are based in Trier, from where we manage purchasing, customer service and returns. Shipping is handled by parcel services and specialist two-person freight carriers for large appliances, so that even a 90-kilogram refrigerator arrives safely in its place.",
       },
       {
         heading: "Working at Hausgeräte Pfeffer",

@@ -28,7 +28,7 @@ export const COMPANY = {
   locality: "Trier",
   country: "Deutschland",
   email: "kontakt@hausgeratepfeffer.de",
-  phone: "0800 123 45",
+  phone: "+49 176 14111374",
   managingDirector: "Martin Pfeffer",
   // Une OHG s'inscrit en section A (HRA), pas B, et le registre du ressort de
   // Trier est tenu par l'Amtsgericht Wittlich. Le NUMÉRO reste à remplacer par
@@ -81,7 +81,7 @@ export const deLegalPages: LegalPageMap = {
         heading: "Kontakt",
         body: "Sie erreichen uns schnell und unmittelbar über die folgenden Wege. Unser Kundenservice ist montags bis samstags von 8 bis 20 Uhr besetzt.",
         list: [
-          `Telefon: ${COMPANY.phone} (kostenfrei aus dem deutschen Fest- und Mobilfunknetz)`,
+          `Telefon: ${COMPANY.phone}`,
           `E-Mail: ${COMPANY.email}`,
           `Kontaktformular: ${COMPANY.domain}/kontakt`,
         ],
@@ -902,7 +902,7 @@ export const deLegalPages: LegalPageMap = {
         heading: "Kundenservice",
         body: "Unser Team beantwortet Fragen zu Produkten, Verfügbarkeit, Lieferterminen und Zahlungen.",
         list: [
-          `Telefon: ${COMPANY.phone} (kostenfrei aus dem deutschen Fest- und Mobilfunknetz)`,
+          `Telefon: ${COMPANY.phone}`,
           "Erreichbarkeit: Montag bis Samstag, 8 bis 20 Uhr",
           `E-Mail: ${COMPANY.email}`,
           "Antwortzeit per E-Mail: in der Regel innerhalb eines Werktages",

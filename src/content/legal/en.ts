@@ -70,7 +70,7 @@ export const enLegalPages: LegalPageMap = {
         heading: "Contact",
         body: "You can reach us quickly and directly through the following channels. Our customer service team is available Monday to Saturday, 8 a.m. to 8 p.m. (CET).",
         list: [
-          `Phone: ${COMPANY.phone} (free of charge from German landlines and mobile networks)`,
+          `Phone: ${COMPANY.phone}`,
           `Email: ${COMPANY.email}`,
           `Contact form: ${COMPANY.domain}/kontakt`,
         ],
@@ -891,7 +891,7 @@ export const enLegalPages: LegalPageMap = {
         heading: "Customer service",
         body: "Our team answers questions about products, availability, delivery dates and payments.",
         list: [
-          `Phone: ${COMPANY.phone} (free of charge from German landlines and mobile networks)`,
+          `Phone: ${COMPANY.phone}`,
           "Availability: Monday to Saturday, 8 a.m. to 8 p.m.",
           `Email: ${COMPANY.email}`,
           "Email response time: usually within one working day",

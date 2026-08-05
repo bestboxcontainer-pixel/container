@@ -29,12 +29,16 @@ export const COMPANY = {
   country: "Deutschland",
   email: "kontakt@hausgeratepfeffer.de",
   phone: "+49 176 14111374",
-  managingDirector: "Martin Pfeffer",
+  managingDirector: "Klaus-Walter Pfeffer",
   // Une OHG s'inscrit en section A (HRA), pas B, et le registre du ressort de
-  // Trier est tenu par l'Amtsgericht Wittlich. Le NUMÉRO reste à remplacer par
-  // celui de l'extrait Handelsregister réel.
-  register: "Amtsgericht Wittlich, HRA 00000",
+  // Trier est tenu par l'Amtsgericht Wittlich.
+  register: "Amtsgericht Wittlich, HRA 40155",
+  // À RENSEIGNER : la facture doit porter le numéro de TVA (§ 14 Abs. 4 Nr. 2
+  // UStG). Tant que cette valeur reste un gabarit, chaque facture émise est
+  // incomplète.
   vatId: "DE000000000",
+  // À RENSEIGNER : numéro d'enregistrement auprès de la fondation EAR, exigé
+  // de tout distributeur d'équipements électriques (§ 6 ElektroG).
   weee: "WEEE-Reg.-Nr. DE00000000",
   domain: "www.hausgeratepfeffer.de",
 } as const;

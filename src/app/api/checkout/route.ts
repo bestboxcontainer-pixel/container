@@ -1,10 +1,16 @@
 import { after, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
-import { createOrder, OrderError, parseCheckoutPayload } from "@/server/orders";
-import type { CheckoutErrorCode } from "@/server/orders";
+import {
+  createOrder,
+  OrderError,
+  parseCheckoutPayload,
+  setOrderGatewayReference,
+} from "@/server/orders";
+import type { CheckoutErrorCode, OrderRecord } from "@/server/orders";
 import { getCurrentCustomer } from "@/server/customerSession";
 import { resolveCampaignContext } from "@/server/campaignContext";
 import { sendOrderEmails } from "@/server/orderNotifications";
+import { resolveGatewayForMethod } from "@/server/gateways";
 
 // Point d'entrée public du tunnel de commande.
 //
@@ -17,6 +23,56 @@ import { sendOrderEmails } from "@/server/orderNotifications";
 // qu'invité est la règle, pas une tolérance. Si un cookie de session client
 // valide accompagne la requête, la commande est simplement rattachée au compte
 // correspondant.
+
+/** Adresse publique du site, sans barre finale. */
+function siteUrl(): string {
+  return (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/+$/, "");
+}
+
+/** Page de confirmation d'une commande, jeton compris. */
+function confirmationUrl(order: OrderRecord): string {
+  const prefixe = order.locale === "en" ? "/en" : "";
+  return `${siteUrl()}${prefixe}/bestellung/${order.orderNumber}?token=${order.accessToken}`;
+}
+
+/**
+ * Ouvre une session de paiement si le moyen choisi est encaissé en ligne, et
+ * rend l'adresse vers laquelle envoyer le navigateur.
+ *
+ * Ne lève jamais : la commande est déjà écrite et en attente de règlement. Un
+ * prestataire injoignable doit la laisser payable autrement — virement,
+ * facture — plutôt que de faire échouer une commande valable sous les yeux du
+ * client.
+ */
+async function startOnlinePayment(order: OrderRecord): Promise<string | undefined> {
+  const gateway = await resolveGatewayForMethod(order.paymentMethodKey);
+  if (!gateway) return undefined;
+
+  try {
+    const confirmation = confirmationUrl(order);
+    const session = await gateway.createCheckoutSession({
+      orderNumber: order.orderNumber,
+      accessToken: order.accessToken,
+      amountCents: order.totalCents,
+      currency: order.currency,
+      email: order.email,
+      locale: order.locale === "en" ? "en" : "de",
+      description: `Bestellung ${order.orderNumber}`,
+      successUrl: confirmation,
+      // Retour d'abandon distinct du retour de succès : sans ce marqueur, un
+      // client qui renonce chez le prestataire reviendrait sur un écran de
+      // remerciement alors que rien n'a été encaissé. La page de confirmation
+      // s'appuie d'abord sur le statut réel de la commande ; ce paramètre ne
+      // fait qu'affiner le message.
+      cancelUrl: `${confirmation}&zahlung=abgebrochen`,
+    });
+    await setOrderGatewayReference(order.id, session.reference);
+    return session.redirectUrl;
+  } catch (error) {
+    console.error("[checkout] ouverture du paiement en ligne impossible :", error);
+    return undefined;
+  }
+}
 
 /** Messages neutres, doublés en allemand et en anglais : le client affiche sa propre traduction à partir du code. */
 const MESSAGES: Record<CheckoutErrorCode, { de: string; en: string }> = {
@@ -139,6 +195,12 @@ export async function POST(request: Request) {
     // Les stocks affichés dans la boutique ont changé.
     revalidatePath("/", "layout");
 
+    // Paiement en ligne, si le moyen retenu est encaissé par un prestataire.
+    // Après l'écriture de la commande et jamais avant : une session de paiement
+    // ouverte sur une commande qui échouerait ensuite laisserait un règlement
+    // sans contrepartie.
+    const redirectUrl = await startOnlinePayment(order);
+
     return NextResponse.json(
       {
         orderNumber: order.orderNumber,
@@ -146,6 +208,9 @@ export async function POST(request: Request) {
         // Chemin à suivre après la commande ; le jeton évite qu'un numéro
         // deviné donne accès à l'adresse du client.
         confirmationPath: `/bestellung/${order.orderNumber}?token=${order.accessToken}`,
+        // Présente seulement quand un prestataire prend la main : le client est
+        // alors envoyé chez lui plutôt que sur la page de confirmation.
+        redirectUrl,
         status: order.status,
         paymentStatus: order.paymentStatus,
         totalCents: order.totalCents,

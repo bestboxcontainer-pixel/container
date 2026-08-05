@@ -734,6 +734,41 @@ export async function updatePaymentStatus(
   return getOrder(id);
 }
 
+/**
+ * Consigne un événement sur une commande sans toucher à son état.
+ *
+ * Sert au webhook de paiement : quand le montant encaissé ne correspond pas au
+ * total, la commande doit rester où elle est, mais l'anomalie doit se lire dans
+ * le back-office. Un écart passé sous silence se solderait par une expédition.
+ */
+export async function recordOrderEvent(
+  orderId: string,
+  kind: string,
+  note: string,
+  actor?: string,
+): Promise<void> {
+  await prisma.orderEvent.create({
+    data: { orderId, kind, note: note.trim(), createdBy: actor ?? null },
+  });
+}
+
+/**
+ * Rattache la commande à la transaction du prestataire.
+ *
+ * Écrit sans condition : le webhook peut arriver plusieurs fois pour la même
+ * commande, et la dernière référence connue est la bonne. Aucun événement n'est
+ * consigné — ce n'est pas un changement d'état, seulement un numéro de dossier.
+ */
+export async function setOrderGatewayReference(
+  orderId: string,
+  reference: string,
+): Promise<void> {
+  await prisma.order.update({
+    where: { id: orderId },
+    data: { stripePaymentIntentId: reference },
+  });
+}
+
 export async function updateAdminNote(
   id: string,
   adminNote: string,

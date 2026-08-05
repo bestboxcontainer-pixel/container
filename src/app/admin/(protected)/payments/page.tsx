@@ -2,10 +2,13 @@ import { requireAdminSession } from "@/lib/dal";
 import { listPaymentMethods } from "@/server/payments";
 import { PaymentMethodForm } from "@/components/admin/PaymentMethodForm";
 import { PaymentMethodTable } from "@/components/admin/PaymentMethodTable";
+import { GatewaySettingsForm } from "@/components/admin/GatewaySettingsForm";
+import { getGatewayAdminState } from "@/server/gateways/admin";
 
 export default async function AdminPaymentsPage() {
   await requireAdminSession();
   const methods = await listPaymentMethods();
+  const gatewayState = await getGatewayAdminState();
   const activeCount = methods.filter((method) => method.enabled).length;
 
   return (
@@ -21,7 +24,24 @@ export default async function AdminPaymentsPage() {
 
       <PaymentMethodTable methods={methods} />
 
-      <div className="mt-8">
+      {/* Deux couches à ne pas confondre : la table ci-dessus décide de ce que
+          le client VOIT au moment de payer ; le bloc ci-dessous décide de qui
+          ENCAISSE. Un moyen de paiement peut très bien être affiché sans être
+          rattaché à un prestataire — c'est le cas du virement. */}
+      <div className="mt-10">
+        <h2 className="mb-1 text-lg font-black text-foreground">
+          Paiement en ligne (carte bancaire)
+        </h2>
+        <p className="mb-3 text-sm text-muted-foreground">
+          Activez un prestataire pour encaisser les cartes automatiquement, saisissez ses clés
+          secrètes, puis indiquez quels moyens de paiement passent par lui. Le webhook du
+          prestataire doit pointer vers{" "}
+          <span className="font-mono">/api/payments/webhook/&lt;prestataire&gt;</span>.
+        </p>
+        <GatewaySettingsForm state={gatewayState} methods={methods} />
+      </div>
+
+      <div className="mt-10">
         <h2 className="mb-3 text-lg font-black text-foreground">Nouveau moyen de paiement</h2>
         <PaymentMethodForm mode="new" />
       </div>

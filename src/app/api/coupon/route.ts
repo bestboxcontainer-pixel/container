@@ -75,7 +75,7 @@ async function relireLePanier(items: unknown): Promise<CartLine[]> {
 export async function POST(request: Request) {
   // Un code se devine par essais successifs : dix par minute suffisent
   // largement à qui tape le sien, et rendent l'exploration inopérante.
-  const cadence = checkCouponRate(identifiantAppelant(request.headers), "verification");
+  const cadence = checkCouponRate(identifiantAppelant(request.headers), "verification", "refuser");
   if (!cadence.allowed) {
     return NextResponse.json(
       { ok: false, reason: "rate_limited" },

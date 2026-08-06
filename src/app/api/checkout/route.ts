@@ -165,7 +165,14 @@ export async function POST(request: Request) {
   // cadence est comptée à part de la vérification, pour qu'un client ayant
   // épuisé ses essais puisse encore acheter.
   if (input?.couponCode) {
-    const cadence = checkCouponRate(identifiantAppelant(request.headers), "commande");
+    const cadence = checkCouponRate(
+      identifiantAppelant(request.headers),
+      "commande",
+      // Une identité manquante ne doit pas bloquer une vente : le coupon est
+      // de toute façon validé en base, et un essai de plus coûte moins cher
+      // qu'une commande perdue.
+      "laisser-passer",
+    );
     if (!cadence.allowed) {
       return NextResponse.json(
         { code: "invalid_payload", error: "Zu viele Versuche. / Too many attempts." },

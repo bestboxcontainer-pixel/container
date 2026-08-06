@@ -16,15 +16,29 @@ const ESSAIS_PAR_FENETRE = 10;
 /**
  * Nombre maximal d'appelants suivis simultanément.
  *
- * Sans plafond, il suffirait de faire varier son identité à chaque requête pour
- * faire grossir la carte sans fin — la protection contre la devinette
- * deviendrait un moyen d'épuiser la mémoire du serveur. Au-delà, les entrées
- * les plus anciennes cèdent la place.
+ * Sert de garde-fou mémoire, pas de politique : au-delà, on refuse d'ouvrir un
+ * nouveau compteur plutôt que d'en effacer un qui court encore.
  */
 const APPELANTS_MAX = 10_000;
 
 /** Intervalle minimal entre deux purges complètes. */
 const PURGE_MS = 30_000;
+
+/**
+ * Nombre de relais de confiance placés devant l'application.
+ *
+ * Un derrière Nginx ou Passenger, ce qui est le cas en production. Zéro si
+ * l'application est jointe en direct — l'en-tête n'est alors plus qu'une
+ * déclaration du client, et cette valeur le dit.
+ *
+ * Ce réglage n'est pas une commodité : sans lui, il suffirait d'envoyer un
+ * `x-forwarded-for` de son cru pour se donner l'identité que l'on veut, autant
+ * de fois qu'on le souhaite.
+ */
+const SAUTS_DE_CONFIANCE = (() => {
+  const brut = Number.parseInt(process.env.TRUSTED_PROXY_HOPS ?? "1", 10);
+  return Number.isFinite(brut) && brut >= 0 ? brut : 1;
+})();
 
 interface Compteur {
   essais: number;
@@ -34,15 +48,9 @@ interface Compteur {
 const compteurs = new Map<string, Compteur>();
 let dernierePurge = 0;
 
-/**
- * Purge les compteurs échus.
- *
- * Balayer toute la carte à chaque requête ferait payer à chaque visiteur le
- * coût des dizaines de milliers d'entrées laissées par un autre : on ne le fait
- * qu'à intervalle, et la carte reste bornée par ailleurs.
- */
-function purger(maintenant: number): void {
-  if (maintenant - dernierePurge < PURGE_MS) return;
+/** Retire les compteurs échus. Appelée à intervalle, et avant tout refus. */
+function purger(maintenant: number, forcer = false): void {
+  if (!forcer && maintenant - dernierePurge < PURGE_MS) return;
   dernierePurge = maintenant;
 
   for (const [cle, compteur] of compteurs) {
@@ -51,68 +59,91 @@ function purger(maintenant: number): void {
 }
 
 /**
- * Identifiant de l'appelant, tiré de ce que le client ne peut pas forger.
+ * Adresse de l'appelant, ou null si aucune ne peut être tenue pour fiable.
  *
  * `x-forwarded-for` est une liste que chaque relais complète en ajoutant à
- * droite l'adresse dont il a reçu la requête. La valeur la plus à gauche vient
- * donc du client lui-même : la prendre reviendrait à laisser chacun choisir son
- * identité, et donc contourner la limitation en changeant un en-tête à chaque
- * essai. C'est la valeur la plus à droite qui a été posée par notre propre
- * relais, et elle seule est digne de foi.
+ * droite l'adresse dont il a reçu la requête. Les entrées de gauche viennent du
+ * client et valent ce qu'il a bien voulu écrire ; seules les dernières ont été
+ * posées par nos propres relais. On saute donc exactement le nombre de relais
+ * connus — ni plus, ce qui reviendrait à croire le client, ni moins, ce qui
+ * confondrait tous les visiteurs derrière l'adresse du relais.
  *
- * Sans en-tête exploitable, tous les appels partagent une même clé : la
- * limitation devient collective plutôt que nulle. C'est volontaire — mieux vaut
- * gêner tout le monde qu'ouvrir la porte à qui n'envoie aucun en-tête.
+ * Une liste trop courte pour ce compte signale une requête qui n'a pas traversé
+ * les relais attendus : on préfère alors n'avoir aucune identité qu'une
+ * mauvaise.
  */
-export function identifiantAppelant(headers: Headers): string {
-  const chaine = headers.get("x-forwarded-for");
-  if (chaine) {
-    const relais = chaine
-      .split(",")
-      .map((entree) => entree.trim())
-      .filter(Boolean);
-    const dernier = relais.at(-1);
-    if (dernier) return dernier;
+export function identifiantAppelant(headers: Headers): string | null {
+  if (SAUTS_DE_CONFIANCE === 0) {
+    // Aucun relais devant nous : l'en-tête ne prouve rien, et l'exécution de
+    // Next ne donne pas accès à l'adresse de la connexion depuis une route.
+    return null;
   }
 
-  const direct = headers.get("x-real-ip")?.trim();
-  if (direct) return direct;
+  const chaine = headers.get("x-forwarded-for");
+  if (!chaine) return null;
 
-  return "sans-identifiant";
+  const relais = chaine
+    .split(",")
+    .map((entree) => entree.trim())
+    .filter(Boolean);
+
+  const index = relais.length - SAUTS_DE_CONFIANCE;
+  if (index < 0) return null;
+
+  return relais[index] ?? null;
 }
 
 /**
  * Enregistre un essai et dit s'il est permis.
  *
- * `portee` sépare les compteurs de deux chemins différents : un client qui
- * atteint sa limite en vérifiant des codes doit encore pouvoir passer commande.
+ * `portee` sépare les compteurs de deux chemins : un client qui a épuisé ses
+ * essais de vérification doit encore pouvoir passer commande.
+ *
+ * `siInconnu` décide du sort d'un appelant sans identité fiable. Sur la
+ * vérification, on refuse : cette route n'existe que pour essayer des codes, et
+ * la fermer ne coûte rien d'autre. Sur la commande, on laisse passer : bloquer
+ * une vente pour une identité manquante coûterait bien plus qu'un essai de
+ * coupon supplémentaire.
  */
 export function checkCouponRate(
-  cle: string,
-  portee: "verification" | "commande" = "verification",
+  cle: string | null,
+  portee: "verification" | "commande",
+  siInconnu: "refuser" | "laisser-passer",
 ): { allowed: boolean; retryAfterSeconds: number } {
+  if (cle === null) {
+    return siInconnu === "refuser"
+      ? { allowed: false, retryAfterSeconds: 60 }
+      : { allowed: true, retryAfterSeconds: 0 };
+  }
+
   const maintenant = Date.now();
   purger(maintenant);
 
   const identite = `${portee}:${cle}`;
   const compteur = compteurs.get(identite);
 
-  if (!compteur || maintenant - compteur.depuis > FENETRE_MS) {
-    // Plafond atteint : on libère la place la plus ancienne. Une carte pleine
-    // ne doit jamais empêcher de suivre un nouvel appelant.
-    if (compteurs.size >= APPELANTS_MAX) {
-      const plusAncienne = compteurs.keys().next();
-      if (!plusAncienne.done) compteurs.delete(plusAncienne.value);
+  if (compteur && maintenant - compteur.depuis <= FENETRE_MS) {
+    compteur.essais += 1;
+    if (compteur.essais > ESSAIS_PAR_FENETRE) {
+      const reste = Math.ceil((FENETRE_MS - (maintenant - compteur.depuis)) / 1000);
+      return { allowed: false, retryAfterSeconds: Math.max(1, reste) };
     }
-    compteurs.set(identite, { essais: 1, depuis: maintenant });
     return { allowed: true, retryAfterSeconds: 0 };
   }
 
-  compteur.essais += 1;
-  if (compteur.essais > ESSAIS_PAR_FENETRE) {
-    const reste = Math.ceil((FENETRE_MS - (maintenant - compteur.depuis)) / 1000);
-    return { allowed: false, retryAfterSeconds: Math.max(1, reste) };
+  // Nouveau compteur. Si la carte est pleine, on purge d'abord ce qui est échu.
+  //
+  // Ce qui reste court encore : effacer un compteur vivant pour faire de la
+  // place offrirait un contournement — il suffirait de saturer la carte pour
+  // effacer le sien et repartir de zéro. On refuse donc le nouvel appelant
+  // jusqu'à ce qu'une fenêtre se libère d'elle-même.
+  if (compteurs.size >= APPELANTS_MAX) {
+    purger(maintenant, true);
+    if (compteurs.size >= APPELANTS_MAX) {
+      return { allowed: false, retryAfterSeconds: 60 };
+    }
   }
 
+  compteurs.set(identite, { essais: 1, depuis: maintenant });
   return { allowed: true, retryAfterSeconds: 0 };
 }

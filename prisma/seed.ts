@@ -173,16 +173,29 @@ async function seedCatalog(): Promise<void> {
 }
 
 // L'achat sur facture (« Kauf auf Rechnung ») n'est plus proposé : la
-// Sofortüberweisung occupe désormais la première place partout où la liste
-// s'affiche (pied de page, fiche produit, panier, caisse).
+// La Vorkasse vient en tête : c'est le seul moyen qui aboutit à un
+// encaissement sans prestataire configuré. Les quatre suivants attendent
+// leurs clés d'accès et restent des libellés tant qu'elles manquent.
+//
+// Aucun n'annonce de remise : le tunnel de commande ne sait pas en appliquer,
+// et un escompte affiché mais jamais déduit se retournerait contre nous — le
+// client qui retire 2 % de son virement paierait moins que sa facture.
 const PAYMENT_METHODS = [
+  {
+    key: "vorkasse",
+    label: "Vorkasse per Überweisung",
+    description: "Versand nach Zahlungseingang.",
+    icon: "landmark",
+    feeLabel: "kostenlos",
+    position: 0,
+  },
   {
     key: "sofort",
     label: "Sofortüberweisung",
     description: "Direkte Überweisung über das Online-Banking.",
     icon: "zap",
     feeLabel: "kostenlos",
-    position: 0,
+    position: 1,
   },
   {
     key: "paypal",
@@ -190,7 +203,7 @@ const PAYMENT_METHODS = [
     description: "Bezahlen mit PayPal-Konto oder als Gast.",
     icon: "wallet",
     feeLabel: "kostenlos",
-    position: 1,
+    position: 2,
   },
   {
     key: "kreditkarte",
@@ -198,7 +211,7 @@ const PAYMENT_METHODS = [
     description: "Visa, Mastercard und American Express.",
     icon: "credit-card",
     feeLabel: "kostenlos",
-    position: 2,
+    position: 3,
   },
   {
     key: "lastschrift",
@@ -206,14 +219,6 @@ const PAYMENT_METHODS = [
     description: "Abbuchung nach Versand der Bestellung.",
     icon: "banknote",
     feeLabel: "kostenlos",
-    position: 3,
-  },
-  {
-    key: "vorkasse",
-    label: "Vorkasse",
-    description: "Versand nach Zahlungseingang, 2 % Skonto.",
-    icon: "landmark",
-    feeLabel: "2 % Skonto",
     position: 4,
   },
 ];

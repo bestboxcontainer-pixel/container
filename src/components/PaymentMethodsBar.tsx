@@ -12,8 +12,70 @@ import {
   Zap,
   type LucideIcon,
 } from "lucide-react";
-import { listEnabledPaymentMethods } from "@/server/payments";
 import { brandMarksFor } from "@/components/PaymentIcons";
+
+/**
+ * Moyens de paiement affichés en vitrine — fiche produit, pied de page, panier.
+ *
+ * Cette liste est volontairement figée dans le code et ne dépend pas de ce qui
+ * est activé en base. Un bandeau qui change de contenu selon l'état du
+ * back-office donne une boutique tantôt riche, tantôt réduite à un seul logo,
+ * là où le visiteur attend une rangée stable qui inspire confiance.
+ *
+ * Le tunnel de commande, lui, continue de ne proposer que les moyens réellement
+ * activés (`listEnabledPaymentMethods`) : c'est là que l'écart compterait.
+ */
+interface DisplayMethod {
+  id: string;
+  key: string;
+  label: string;
+  description: string;
+  icon: string;
+  feeLabel: string;
+}
+
+const DISPLAY_METHODS: DisplayMethod[] = [
+  {
+    id: "vorkasse",
+    key: "vorkasse",
+    label: "Vorkasse per Überweisung",
+    description: "Versand nach Zahlungseingang.",
+    icon: "landmark",
+    feeLabel: "kostenlos",
+  },
+  {
+    id: "sofort",
+    key: "sofort",
+    label: "Sofortüberweisung",
+    description: "Direkte Überweisung über das Online-Banking.",
+    icon: "zap",
+    feeLabel: "kostenlos",
+  },
+  {
+    id: "paypal",
+    key: "paypal",
+    label: "PayPal",
+    description: "Bezahlen mit PayPal-Konto oder als Gast.",
+    icon: "wallet",
+    feeLabel: "kostenlos",
+  },
+  {
+    id: "kreditkarte",
+    key: "kreditkarte",
+    label: "Kreditkarte",
+    description: "Visa, Mastercard und American Express.",
+    icon: "credit-card",
+    feeLabel: "kostenlos",
+  },
+  {
+    id: "lastschrift",
+    key: "lastschrift",
+    label: "SEPA-Lastschrift",
+    description: "Abbuchung nach Versand der Bestellung.",
+    icon: "banknote",
+    feeLabel: "kostenlos",
+  },
+];
 
 // Correspondance explicite entre les noms lucide stockés en base et les
 // composants importés : pas d'import dynamique, tout est dans le bundle serveur.
@@ -54,8 +116,7 @@ export async function PaymentMethodsBar({
   className,
 }: PaymentMethodsBarProps = {}) {
   const t = await getTranslations("payment");
-  const methods = await listEnabledPaymentMethods();
-  if (methods.length === 0) return null;
+  const methods = DISPLAY_METHODS;
 
   const freeLabel = t("free");
 

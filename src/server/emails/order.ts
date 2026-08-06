@@ -241,9 +241,15 @@ function itemsTable(
                   ${summaryRow(labels.subtotal, formatCents(order.subtotalCents))}
                   ${summaryRow(shippingLabel, shippingValue)}
                   ${summaryRow(labels.grandTotal, formatCents(order.totalCents), true)}
-                  <tr>
+                  ${
+                    // Libellé vide : la ligne disparaît, plutôt que de laisser
+                    // une cellule blanche sous le total.
+                    labels.vat
+                      ? `<tr>
                     <td colspan="2" class="small" style="padding:2px 0 0 0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:21px; color:#4b5563;">${escapeHtml(labels.vat)}</td>
-                  </tr>
+                  </tr>`
+                      : ""
+                  }
                 </table>`;
 }
 
@@ -390,9 +396,9 @@ export function buildOrderConfirmationEmail(
         `we have received your order <strong>${escapeHtml(order.orderNumber)}</strong> placed on ${escapeHtml(placed)}. This email is your order confirmation.`,
       ];
 
-  const vatLabel = de
-    ? `Alle Preise inklusive ${order.taxRatePercent} % MwSt. (enthaltene MwSt.: ${formatCents(order.taxCents)}).`
-    : `All prices include ${order.taxRatePercent}% VAT (VAT included: ${formatCents(order.taxCents)}).`;
+  // Le taux et le montant de TVA ne sont plus détaillés au client, à la demande
+  // du commerçant : la confirmation reprend le total tel qu'il l'a payé.
+  const vatLabel = "";
 
   const shippingMethod = shippingMethodText(order, de ? "de" : "en");
 
@@ -456,7 +462,6 @@ export function buildOrderConfirmationEmail(
     `${de ? "Zwischensumme" : "Subtotal"}: ${formatCents(order.subtotalCents)}`,
     `${de ? "Versand" : "Shipping"} — ${shippingMethod}: ${order.shippingCents === 0 ? (de ? "kostenlos" : "free") : formatCents(order.shippingCents)}`,
     `${de ? "Gesamtsumme" : "Total"}: ${formatCents(order.totalCents)}`,
-    vatLabel,
     "",
     `${de ? "Zahlung" : "Payment"}: ${order.paymentMethodLabel}`,
     ...bankBlock.text,
@@ -510,7 +515,7 @@ export function buildOrderNotificationEmail(order: OrderRecord): Omit<MailMessag
     shippingMethod,
     freeShipping: "offerte",
     grandTotal: "Total TTC",
-    vat: `Dont TVA ${order.taxRatePercent} % : ${formatCents(order.taxCents)}.`,
+    vat: "",
   });
 
   const customer = panel("Client", [
@@ -546,7 +551,7 @@ export function buildOrderNotificationEmail(order: OrderRecord): Omit<MailMessag
     `${heading} : ${order.orderNumber}`,
     "",
     `Reçue le ${placed}`,
-    `Montant : ${formatCents(order.totalCents)} (dont TVA ${order.taxRatePercent} % : ${formatCents(order.taxCents)})`,
+    `Montant : ${formatCents(order.totalCents)}`,
     `Paiement : ${order.paymentMethodLabel}`,
     `Livraison : ${shippingMethod}`,
     "",

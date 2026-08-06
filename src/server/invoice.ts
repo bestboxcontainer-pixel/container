@@ -450,7 +450,6 @@ export async function buildInvoicePdf(
   ligneTotal("LIEFERUNG", order.shippingCents === 0 ? "KOSTENLOS" : euros(order.shippingCents));
   texte(delaiLivraison(order), { taille: 8, couleur: GRIS, finX: DROITE });
   plume.y -= 16;
-  ligneTotal(`enthaltene ${order.taxRatePercent} % USt.`, euros(order.taxCents));
 
   plume.y -= 2;
   filet(plume.y, COL_PREIS - 120, DROITE);
@@ -479,7 +478,7 @@ export async function buildInvoicePdf(
     }
   }
 
-  // ---- Mentions de bas de page et encadré de TVA ----
+  // ---- Mentions de bas de page ----
   // Toujours sur la dernière page, à hauteur fixe : ce sont les mentions que le
   // lecteur cherche en bas, pas au fil du décompte.
   const derniere = doc.getPages()[doc.getPageCount() - 1];
@@ -498,18 +497,6 @@ export async function buildInvoicePdf(
     yMention -= 11;
   }
 
-  const libelleTva = `USt-IdNr. : ${COMPANY.vatId}`;
-  const largeurTva = grasse.widthOfTextAtSize(winAnsi(libelleTva), 11) + 56;
-  const xCadre = (LARGEUR - largeurTva) / 2;
-  derniere.drawRectangle({
-    x: xCadre,
-    y: 46,
-    width: largeurTva,
-    height: 30,
-    borderColor: NOIR,
-    borderWidth: 1,
-  });
-  texte(libelleTva, { police: grasse, taille: 11, centreX: LARGEUR / 2, y: 57 });
 
   const octets = await doc.save();
   return Buffer.from(octets);

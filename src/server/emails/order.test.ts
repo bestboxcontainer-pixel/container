@@ -105,14 +105,17 @@ describe("Confirmation à l'acheteur", () => {
     for (const part of [mail.html, mail.text]) {
       assert.match(part, /HP-2026-000042/);
       assert.match(part, /Serie 6 Waschmaschine WAU28T00/);
-      // Total, sous-total, port et TVA incluse : le décompte complet exigé par
-      // le § 312i BGB, et les prix au format allemand.
+      // Total, sous-total et port : le récapitulatif exigé par le § 312i BGB,
+      // aux prix au format allemand.
       assert.match(part, /903,95 €/);
       assert.match(part, /899,00 €/);
       assert.match(part, /4,95 €/);
-      assert.match(part, /144,28 €/);
       assert.match(part, /Hauptstraße 12a/);
       assert.match(part, /Vorkasse per Überweisung/);
+      // Le détail de la TVA a été retiré à la demande du commerçant : ni le
+      // taux, ni le montant contenu ne doivent reparaître dans la confirmation.
+      assert.doesNotMatch(part, /144,28 €/);
+      assert.doesNotMatch(part, /19 ?% ?(MwSt|VAT|USt)/);
     }
   });
 

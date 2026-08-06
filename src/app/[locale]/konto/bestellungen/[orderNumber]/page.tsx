@@ -173,12 +173,6 @@ export default async function AccountOrderDetailPage({ params }: { params: PageP
                 <dd className="font-black text-primary">{formatPrice(order.totalCents)}</dd>
               </div>
             </dl>
-            <p className="mt-1 text-xs text-muted-foreground">
-              {checkout("vatIncluded", {
-                rate: order.taxRatePercent,
-                amount: formatPrice(order.taxCents),
-              })}
-            </p>
           </section>
         </div>
 

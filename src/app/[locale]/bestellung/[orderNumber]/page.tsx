@@ -206,12 +206,6 @@ export default async function OrderConfirmationPage({
                     <dd className="font-black text-primary">{formatPrice(order.totalCents)}</dd>
                   </div>
                 </dl>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  {t("vatIncluded", {
-                    rate: order.taxRatePercent,
-                    amount: formatPrice(order.taxCents),
-                  })}
-                </p>
               </section>
 
               {/* Instructions de paiement selon le mode choisi */}

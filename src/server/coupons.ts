@@ -116,30 +116,135 @@ export async function checkCoupon(
 }
 
 /**
- * Enregistre l'utilisation d'un coupon par une commande.
+ * Réserve une utilisation du coupon, avant que la commande n'existe.
  *
- * Le compteur global et la ligne de rachat sont écrits dans la même
- * transaction : un coupon limité à cent usages ne doit pas pouvoir être
- * consommé cent-une fois parce que deux commandes sont parties ensemble.
+ * POURQUOI RÉSERVER PLUTÔT QUE DÉCOMPTER APRÈS COUP.
  *
- * `orderId` porte une contrainte d'unicité : rejouer la même commande ne
- * décompte pas deux fois.
+ * `checkCoupon` lit le compteur, la commande s'écrit, puis le compteur
+ * s'incrémente : entre la lecture et l'écriture, une seconde commande peut
+ * lire la même valeur et passer elle aussi. Un coupon limité à cent usages
+ * part alors cent-une fois — autant de remises accordées hors quota, et le
+ * défaut ne se voit qu'à la lecture des comptes.
+ *
+ * La réservation ferme cette fenêtre : le quota est vérifié par la base
+ * elle-même, dans la clause WHERE de l'incrément. Si la condition n'est plus
+ * vraie au moment d'écrire, aucune ligne n'est touchée et la fonction rend
+ * false. Deux commandes simultanées ne peuvent donc pas obtenir la même
+ * dernière utilisation.
+ *
+ * Le quota par client se vérifie dans la même transaction, sérialisable :
+ * compter puis insérer sans isolation laisserait passer deux commandes lancées
+ * ensemble par la même personne.
+ *
+ * Rend true si l'utilisation est acquise. Le compteur est alors déjà
+ * incrémenté : `releaseCouponUse` doit être appelée si la commande échoue.
  */
-export async function redeemCoupon(
+export async function reserveCouponUse(coupon: CouponRecord, email: string): Promise<boolean> {
+  const adresse = email.trim().toLowerCase();
+
+  // Sans quota par client, un incrément conditionnel suffit : la clause WHERE
+  // est évaluée par la base au moment d'écrire, ce qui est déjà atomique. Une
+  // transaction sérialisable ne protégerait rien de plus et sérialiserait
+  // inutilement toutes les commandes portant le même code — sous quelques
+  // requêtes simultanées, certaines n'obtiennent même plus de transaction.
+  if (coupon.maxPerCustomer === 0) {
+    try {
+      if (coupon.maxRedemptions > 0) {
+        const { count } = await prisma.coupon.updateMany({
+          where: { id: coupon.id, redemptionCount: { lt: coupon.maxRedemptions } },
+          data: { redemptionCount: { increment: 1 } },
+        });
+        return count === 1;
+      }
+      await prisma.coupon.update({
+        where: { id: coupon.id },
+        data: { redemptionCount: { increment: 1 } },
+      });
+      return true;
+    } catch (erreur) {
+      console.error("[coupon] réservation impossible :", erreur);
+      return false;
+    }
+  }
+
+  try {
+    return await prisma.$transaction(
+      async (tx) => {
+        // Quota global : la condition vit dans le WHERE, donc la base tranche.
+        if (coupon.maxRedemptions > 0) {
+          const { count } = await tx.coupon.updateMany({
+            where: { id: coupon.id, redemptionCount: { lt: coupon.maxRedemptions } },
+            data: { redemptionCount: { increment: 1 } },
+          });
+          if (count === 0) return false;
+        } else {
+          await tx.coupon.update({
+            where: { id: coupon.id },
+            data: { redemptionCount: { increment: 1 } },
+          });
+        }
+
+        // Quota par client. Lever ici annule l'incrément ci-dessus : c'est tout
+        // l'intérêt de les tenir dans la même transaction.
+        if (coupon.maxPerCustomer > 0) {
+          const dejaUtilise = await tx.couponRedemption.count({
+            where: { couponId: coupon.id, email: adresse },
+          });
+          if (dejaUtilise >= coupon.maxPerCustomer) {
+            throw new QuotaClientAtteint();
+          }
+        }
+
+        return true;
+      },
+      { isolationLevel: "Serializable", timeout: 10_000, maxWait: 10_000 },
+    );
+  } catch (erreur) {
+    if (erreur instanceof QuotaClientAtteint) return false;
+    // Conflit de sérialisation : deux commandes se sont croisées. La base a
+    // annulé l'une des deux — refuser la remise vaut mieux que l'accorder deux
+    // fois. Le client paie plein tarif, la commande passe.
+    console.error("[coupon] réservation impossible :", erreur);
+    return false;
+  }
+}
+
+/** Quota par client atteint, détecté à l'intérieur de la transaction. */
+class QuotaClientAtteint extends Error {}
+
+/**
+ * Rend l'utilisation réservée, quand la commande n'a finalement pas abouti.
+ * Le compteur ne descend jamais sous zéro.
+ */
+export async function releaseCouponUse(couponId: string): Promise<void> {
+  try {
+    await prisma.coupon.updateMany({
+      where: { id: couponId, redemptionCount: { gt: 0 } },
+      data: { redemptionCount: { decrement: 1 } },
+    });
+  } catch (erreur) {
+    console.error("[coupon] libération impossible :", erreur);
+  }
+}
+
+/**
+ * Écrit la ligne de rachat, une fois la commande créée.
+ *
+ * Le compteur a déjà été incrémenté par `reserveCouponUse` : cette écriture ne
+ * fait qu'attacher l'utilisation à une commande et à une adresse, pour que la
+ * limite par client reste opposable même après anonymisation.
+ *
+ * `orderId` est unique : rejouer la même commande n'écrit pas deux lignes.
+ */
+export async function recordCouponRedemption(
   couponId: string,
   orderId: string,
   email: string,
   discountCents: number,
 ): Promise<void> {
-  await prisma.$transaction([
-    prisma.couponRedemption.create({
-      data: { couponId, orderId, email: email.trim().toLowerCase(), discountCents },
-    }),
-    prisma.coupon.update({
-      where: { id: couponId },
-      data: { redemptionCount: { increment: 1 } },
-    }),
-  ]);
+  await prisma.couponRedemption.create({
+    data: { couponId, orderId, email: email.trim().toLowerCase(), discountCents },
+  });
 }
 
 // ---- Administration ----

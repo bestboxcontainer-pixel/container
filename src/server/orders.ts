@@ -1,6 +1,11 @@
 import { randomUUID } from "node:crypto";
 import { prisma } from "@/server/prisma";
-import { checkCoupon, redeemCoupon } from "@/server/coupons";
+import {
+  checkCoupon,
+  recordCouponRedemption,
+  releaseCouponUse,
+  reserveCouponUse,
+} from "@/server/coupons";
 import { adjustStock } from "@/server/stock";
 import { listEnabledPaymentMethods } from "@/server/payments";
 import { campaignGrantsFreeShipping, priceForOrder } from "@/server/promotions";
@@ -562,7 +567,15 @@ export async function createOrder(
         input.email,
       )
     : null;
-  const couponAccepte = verdictCoupon?.ok ? verdictCoupon : null;
+  // Le quota est pris ici, avant la commande. Vérifier puis décompter après
+  // coup laisserait deux commandes simultanées obtenir la même dernière
+  // utilisation d'un coupon limité. Si la réservation échoue, le code est
+  // simplement ignoré et le client paie plein tarif.
+  const couponVerifie = verdictCoupon?.ok ? verdictCoupon : null;
+  const couponAccepte =
+    couponVerifie && (await reserveCouponUse(couponVerifie.coupon, input.email))
+      ? couponVerifie
+      : null;
 
   const totals = computeTotals(billed, {
     shippingMethodKey: shippingMethod.key,
@@ -689,15 +702,19 @@ export async function createOrder(
         // raison n'aurait aucun sens.
         if (couponAccepte) {
           try {
-            await redeemCoupon(
+            await recordCouponRedemption(
               couponAccepte.coupon.id,
               row.id,
               input.email,
               totals.discountCents,
             );
           } catch (erreur) {
+            // Le quota est déjà pris : l'utilisation ne sera pas accordée deux
+            // fois. Seul le rattachement à cette commande manque, ce qui rend la
+            // limite par client inopérante pour cette adresse — un incident à
+            // corriger à la main, pas une raison d'annuler une commande payée.
             console.error(
-              `[commande ${row.orderNumber}] coupon ${couponAccepte.coupon.code} non décompté :`,
+              `[commande ${row.orderNumber}] rachat du coupon ${couponAccepte.coupon.code} non enregistré :`,
               erreur,
             );
           }
@@ -715,6 +732,12 @@ export async function createOrder(
     throw new OrderError("order_failed");
   } catch (error) {
     await releaseReservations(reserved, orderNumber);
+    // Le stock rendu, l'utilisation du coupon l'est aussi : une commande qui
+    // n'a pas abouti ne doit pas consommer un quota. Sans cela, un coupon
+    // limité s'épuiserait sur des paniers tombés en rupture.
+    if (couponAccepte) {
+      await releaseCouponUse(couponAccepte.coupon.id);
+    }
     if (error instanceof OrderError) throw error;
     throw new OrderError("order_failed");
   }

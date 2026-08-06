@@ -99,7 +99,8 @@ export type CouponRejection =
   | "exhausted"
   | "already_used"
   | "min_subtotal"
-  | "no_effect";
+  | "no_effect"
+  | "rate_limited";
 
 /** Libellé lisible d'une remise, pour le récapitulatif. */
 export function describeCoupon(rules: CouponRules, locale: "de" | "en"): string {

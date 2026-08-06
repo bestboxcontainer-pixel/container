@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { checkCoupon } from "@/server/coupons";
+import { checkCouponRate } from "@/server/couponRate";
 import { describeCoupon } from "@/lib/coupon";
 import { computeTotals, DEFAULT_SHIPPING_METHOD_KEY, type CartLine } from "@/lib/cart";
 import { prisma } from "@/server/prisma";
@@ -72,6 +73,20 @@ async function relireLePanier(items: unknown): Promise<CartLine[]> {
 }
 
 export async function POST(request: Request) {
+  // Un code se devine par essais successifs : dix par minute suffisent
+  // largement à qui tape le sien, et rendent l'exploration inopérante.
+  const appelant =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip") ||
+    "inconnu";
+  const cadence = checkCouponRate(appelant);
+  if (!cadence.allowed) {
+    return NextResponse.json(
+      { ok: false, reason: "rate_limited" },
+      { status: 429, headers: { "Retry-After": String(cadence.retryAfterSeconds) } },
+    );
+  }
+
   const corps = (await request.json().catch(() => null)) as Corps | null;
   if (!corps) {
     return NextResponse.json({ ok: false, reason: "unknown" }, { status: 400 });

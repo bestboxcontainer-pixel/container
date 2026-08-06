@@ -759,7 +759,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "How much does shipping cost?",
-        body: "Orders of 50 euros or more ship free within Germany. Below that we charge 4.95 euros for parcel delivery. Large appliances delivered by freight forwarder cost a flat 39.90 euros; surcharges apply for island deliveries and bulky goods. The costs for your order are always shown in the shopping basket before you buy.",
+        body: "Orders of 50 euros or more ship free within Germany. Below that we charge 4.95 euros for parcel delivery. Large appliances delivered by freight forwarder cost a flat 39.90 euros. Deliveries to the German islands carry a 29.00 euro surcharge, and particularly long or heavy items a 19.00 euro bulky goods surcharge. The costs for your order are always shown in the shopping basket before you buy.",
       },
       {
         heading: "Do you ship outside Germany?",
@@ -767,7 +767,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Will the appliance be carried into my home?",
-        body: "Freight delivery ends at the kerbside by default. For 29 euros our carriers will bring the appliance to the desired installation location, including upper floors. Please measure your stairwell, doorways and lift beforehand and tell us about anything unusual when you order.",
+        body: "Freight delivery ends at the kerbside by default. For 29.00 euros our carriers will bring the appliance to the desired installation location, including upper floors. Unpacking and disposal of the transport packaging costs a further 9.00 euros. Please measure your stairwell, doorways and lift beforehand and tell us about anything unusual when you order.",
       },
       {
         heading: "Do you offer connection and installation?",
@@ -775,11 +775,11 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Will you take my old appliance away?",
-        body: "Yes, free of charge. When you buy a new appliance we collect one equivalent old appliance on delivery. Please tell us when ordering — we ask you explicitly during the order process. The old appliance should be disconnected, emptied and freely accessible. Small waste appliances up to 25 centimetres are taken back even without a new purchase, up to three per equipment type.",
+        body: "Yes, free of charge. When you buy a new appliance we collect one equivalent old appliance on delivery. Please tell us when ordering — we ask you explicitly during the order process. The old appliance should be disconnected, emptied, cleaned and freely accessible. Small waste appliances with no external dimension exceeding 25 centimetres are taken back even without a new purchase — up to three per equipment type. All other take-back options are set out on the \"Waste Electrical Equipment and Batteries\" page.",
       },
       {
         heading: "Which payment methods can I use?",
-        body: "You can buy on account or pay with PayPal, credit card (Visa, Mastercard, American Express), SEPA direct debit or advance bank transfer. We do not charge extra fees for any of these methods.",
+        body: "You can buy on account or pay with PayPal, credit card (Visa, Mastercard, American Express), SEPA direct debit or advance bank transfer. We do not charge extra fees for any of these methods (section 270a of the German Civil Code). With advance transfer we reserve the goods for seven calendar days; if payment has not arrived by then, we cancel the order. Which methods are available in your case is shown during checkout.",
       },
       {
         heading: "Can I buy on account?",
@@ -794,8 +794,12 @@ export const enLegalPages: LegalPageMap = {
         body: "Statutory warranty rights are your legal rights against us and last two years. A guarantee is a voluntary manufacturer promise that may go further — ten years on a washing machine motor, for instance. A guarantee does not replace your statutory rights; it comes on top of them, and you decide which route to use.",
       },
       {
+        heading: "How long do I have to return an item?",
+        body: "There are two routes back. Your statutory right of withdrawal runs for 14 days from receipt of the goods and requires no reason; the binding text is the withdrawal policy. On top of that we voluntarily grant a contractual return right of 30 days from receipt, provided the item is unused, complete and fit for resale. This additional right does not restrict your statutory rights.",
+      },
+      {
         heading: "How do I send something back?",
-        body: "Register the return in advance: via the \"Withdraw from contract\" button in your customer account, through our returns portal, by email or by phone. For parcels you receive a free shipping label. Large appliances are collected from you by appointment. Please enclose all accessories and use the original box if you can.",
+        body: `Register the return in advance — via the "Withdraw from contract" button in your customer account or at ${COMPANY.domain}/widerruf/online, through our returns portal, by email to ${COMPANY.email} or by phone on ${COMPANY.phone}. For parcels you receive a free return label. Large appliances are collected from you by appointment; please disconnect and empty the appliance beforehand. Enclose all accessories and use the original box with its transport locks if you can.`,
       },
       {
         heading: "What does a return cost?",
@@ -803,7 +807,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "When will I get my money back?",
-        body: "We refund no later than 14 days after receiving your withdrawal, once the goods have arrived with us or you have provided proof of dispatch. The refund is made using your original payment method and no fees apply.",
+        body: "We refund the purchase price including the standard outbound shipping costs no later than 14 days after receiving your withdrawal, once the goods have arrived with us or you have provided proof of dispatch. The refund is made using your original payment method and no fees apply. Any voucher you redeemed is credited back as a voucher.",
       },
       {
         heading: "An item is marked \"On request\" — what does that mean?",
@@ -827,7 +831,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Can I order as a business and receive a VAT invoice?",
-        body: "Yes. Enter your company name and, if required, your VAT identification number during the order process. You will receive a proper invoice showing VAT. Please note that businesses have no statutory right of withdrawal; our voluntary return policy does, however, apply to you as well.",
+        body: "Yes. Enter your company name and, if required, your VAT identification number during the order process. You will receive a proper invoice showing VAT. Please note two differences from consumer purchases: businesses have no statutory right of withdrawal, and the limitation period for defect claims on new goods is one year from the passing of risk rather than two. Our voluntary 30-day return right does apply to you as well.",
       },
       {
         heading: "What if an appliance fails after the two years are up?",

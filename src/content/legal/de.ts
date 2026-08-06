@@ -774,7 +774,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Was kostet der Versand?",
-        body: "Ab einem Bestellwert von 50 Euro liefern wir innerhalb Deutschlands versandkostenfrei. Darunter berechnen wir 4,95 Euro für den Paketversand. Großgeräte, die per Spedition kommen, kosten pauschal 39,90 Euro Versand; für Inselzustellungen und Sperrgut fallen Zuschläge an. Die für Ihre Bestellung geltenden Kosten sehen Sie immer im Warenkorb, bevor Sie bestellen.",
+        body: "Ab einem Bestellwert von 50 Euro liefern wir innerhalb Deutschlands versandkostenfrei. Darunter berechnen wir 4,95 Euro für den Paketversand. Großgeräte, die per Spedition kommen, kosten pauschal 39,90 Euro Versand. Für Zustellungen auf die deutschen Inseln kommen 29,00 Euro hinzu, für besonders lange oder schwere Artikel ein Sperrgutzuschlag von 19,00 Euro. Die für Ihre Bestellung geltenden Kosten sehen Sie immer im Warenkorb, bevor Sie bestellen.",
       },
       {
         heading: "Liefern Sie auch ins Ausland?",
@@ -782,7 +782,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Wird das Gerät bis in die Wohnung gebracht?",
-        body: "Der Speditionsversand endet standardmäßig an der Bordsteinkante. Für 29 Euro bringen unsere Speditionspartner das Gerät bis an den gewünschten Aufstellort, auch in obere Etagen. Bitte messen Sie vorher Treppenhaus, Türen und Aufzug aus und teilen Sie uns Besonderheiten bei der Bestellung mit.",
+        body: "Der Speditionsversand endet standardmäßig an der Bordsteinkante. Für 29,00 Euro bringen unsere Speditionspartner das Gerät bis an den gewünschten Aufstellort, auch in obere Etagen. Das Auspacken und die Entsorgung der Transportverpackung kosten zusätzlich 9,00 Euro. Bitte messen Sie vorher Treppenhaus, Türen und Aufzug aus und teilen Sie uns Besonderheiten bei der Bestellung mit.",
       },
       {
         heading: "Bieten Sie Anschluss und Montage an?",
@@ -790,11 +790,11 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Nehmen Sie mein altes Gerät mit?",
-        body: "Ja, und zwar kostenlos. Beim Kauf eines neuen Geräts nehmen wir ein gleichartiges Altgerät bei der Anlieferung mit. Geben Sie den Wunsch bitte schon bei der Bestellung an – wir fragen Sie im Bestellprozess ausdrücklich danach. Das Altgerät sollte abgeklemmt, entleert und frei zugänglich bereitstehen. Kleine Altgeräte bis 25 Zentimeter Kantenlänge nehmen wir sogar ohne Neukauf zurück, bis zu drei Stück je Geräteart.",
+        body: "Ja, und zwar kostenlos. Beim Kauf eines neuen Geräts nehmen wir ein gleichartiges Altgerät bei der Anlieferung mit. Geben Sie den Wunsch bitte schon bei der Bestellung an – wir fragen Sie im Bestellprozess ausdrücklich danach. Das Altgerät sollte abgeklemmt, entleert, gereinigt und frei zugänglich bereitstehen. Kleine Altgeräte, bei denen keine äußere Abmessung 25 Zentimeter überschreitet, nehmen wir sogar ohne Neukauf zurück – bis zu drei Stück je Geräteart. Alle weiteren Rücknahmewege stehen auf der Seite „Elektroaltgeräte & Batterien“.",
       },
       {
         heading: "Welche Zahlungsarten kann ich nutzen?",
-        body: "Sie können auf Rechnung kaufen oder mit PayPal, Kreditkarte (Visa, Mastercard, American Express), SEPA-Lastschrift oder Vorkasse per Überweisung bezahlen. Zusatzgebühren berechnen wir für keine dieser Zahlungsarten.",
+        body: "Sie können auf Rechnung kaufen oder mit PayPal, Kreditkarte (Visa, Mastercard, American Express), SEPA-Lastschrift oder Vorkasse per Überweisung bezahlen. Zusatzgebühren berechnen wir für keine dieser Zahlungsarten (§ 270a BGB). Bei Vorkasse reservieren wir die Ware sieben Kalendertage; geht die Zahlung bis dahin nicht ein, stornieren wir die Bestellung. Welche Zahlungsarten im Einzelfall zur Verfügung stehen, sehen Sie im Bestellprozess.",
       },
       {
         heading: "Kann ich auf Rechnung kaufen?",
@@ -809,8 +809,12 @@ export const deLegalPages: LegalPageMap = {
         body: "Die Gewährleistung ist Ihr gesetzliches Recht uns gegenüber und dauert zwei Jahre. Eine Garantie ist eine freiwillige Zusage des Herstellers, die darüber hinausgehen kann – etwa zehn Jahre auf den Motor einer Waschmaschine. Die Garantie ersetzt die Gewährleistung nicht, sondern kommt zusätzlich hinzu. Sie entscheiden, welchen Weg Sie nutzen.",
       },
       {
+        heading: "Wie lange kann ich einen Artikel zurückgeben?",
+        body: "Es gibt zwei Wege zurück. Ihr gesetzliches Widerrufsrecht läuft 14 Tage ab Erhalt der Ware und verlangt keine Begründung; maßgeblich ist die Widerrufsbelehrung. Darüber hinaus räumen wir Ihnen freiwillig ein vertragliches Rückgaberecht von 30 Tagen ab Erhalt der Ware ein – vorausgesetzt, der Artikel ist unbenutzt, vollständig und wiederverkaufsfähig. Dieses zusätzliche Recht schränkt Ihre gesetzlichen Rechte nicht ein.",
+      },
+      {
         heading: "Wie schicke ich etwas zurück?",
-        body: "Melden Sie die Rücksendung vorab an: über die Schaltfläche „Vertrag widerrufen“ in Ihrem Kundenkonto, über unser Retourenportal, per E-Mail oder telefonisch. Für Pakete erhalten Sie ein kostenloses Versandlabel. Großgeräte holen wir nach Terminabsprache bei Ihnen ab. Bitte legen Sie sämtliches Zubehör bei und verwenden Sie möglichst den Originalkarton.",
+        body: `Melden Sie die Rücksendung vorab an – über die Schaltfläche „Vertrag widerrufen“ in Ihrem Kundenkonto oder unter ${COMPANY.domain}/widerruf/online, über unser Retourenportal, per E-Mail an ${COMPANY.email} oder telefonisch unter ${COMPANY.phone}. Für Pakete erhalten Sie ein kostenloses Rücksendeetikett. Großgeräte holen wir nach Terminabsprache bei Ihnen ab; bitte klemmen Sie das Gerät vorher ab und entleeren Sie es. Legen Sie sämtliches Zubehör bei und verwenden Sie möglichst den Originalkarton mit den Transportsicherungen.`,
       },
       {
         heading: "Was kostet die Rücksendung?",
@@ -818,7 +822,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Wann bekomme ich mein Geld zurück?",
-        body: "Wir erstatten spätestens 14 Tage nach Eingang Ihres Widerrufs, sobald die Ware bei uns eingetroffen ist oder Sie den Absendenachweis vorgelegt haben. Die Rückzahlung erfolgt über das ursprüngliche Zahlungsmittel; Gebühren entstehen Ihnen dabei nicht.",
+        body: "Wir erstatten den Kaufpreis einschließlich der Standard-Hinsendekosten spätestens 14 Tage nach Eingang Ihres Widerrufs, sobald die Ware bei uns eingetroffen ist oder Sie den Absendenachweis vorgelegt haben. Die Rückzahlung erfolgt über das ursprüngliche Zahlungsmittel; Gebühren entstehen Ihnen dabei nicht. Ein eingelöster Gutschein wird wieder als Gutschein gutgeschrieben.",
       },
       {
         heading: "Ein Artikel ist „Auf Anfrage“ – was bedeutet das?",
@@ -842,7 +846,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Kann ich als Firma bestellen und eine Rechnung mit Umsatzsteuerausweis erhalten?",
-        body: "Ja. Geben Sie im Bestellprozess Ihren Firmennamen und – bei Bedarf – Ihre Umsatzsteuer-Identifikationsnummer an. Sie erhalten eine ordnungsgemäße Rechnung mit ausgewiesener Umsatzsteuer. Bitte beachten Sie, dass Unternehmen kein gesetzliches Widerrufsrecht haben; unser freiwilliges Rückgaberecht gilt jedoch auch für Sie.",
+        body: "Ja. Geben Sie im Bestellprozess Ihren Firmennamen und – bei Bedarf – Ihre Umsatzsteuer-Identifikationsnummer an. Sie erhalten eine ordnungsgemäße Rechnung mit ausgewiesener Umsatzsteuer. Bitte beachten Sie zwei Unterschiede zum Verbraucherkauf: Unternehmen haben kein gesetzliches Widerrufsrecht, und die Verjährungsfrist für Mängelansprüche beträgt bei neuen Waren ein Jahr ab Gefahrübergang statt zwei Jahre. Unser freiwilliges 30-tägiges Rückgaberecht gilt auch für Sie.",
       },
       {
         heading: "Was mache ich, wenn ein Gerät nach Ablauf der zwei Jahre defekt ist?",

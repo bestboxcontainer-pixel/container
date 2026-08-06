@@ -11,6 +11,7 @@ import { getCurrentCustomer } from "@/server/customerSession";
 import { resolveCampaignContext } from "@/server/campaignContext";
 import { sendOrderEmails } from "@/server/orderNotifications";
 import { resolveGatewayForMethod } from "@/server/gateways";
+import { checkCouponRate, identifiantAppelant } from "@/server/couponRate";
 
 // Point d'entrée public du tunnel de commande.
 //
@@ -158,6 +159,20 @@ function errorResponse(code: CheckoutErrorCode, status: number, detail?: unknown
 export async function POST(request: Request) {
   const payload = await request.json().catch(() => null);
   const { input, errors } = parseCheckoutPayload(payload);
+
+  // Ce chemin valide lui aussi un code de réduction : sans limitation, il
+  // suffirait de commander pour deviner un code, une commande à la fois. La
+  // cadence est comptée à part de la vérification, pour qu'un client ayant
+  // épuisé ses essais puisse encore acheter.
+  if (input?.couponCode) {
+    const cadence = checkCouponRate(identifiantAppelant(request.headers), "commande");
+    if (!cadence.allowed) {
+      return NextResponse.json(
+        { code: "invalid_payload", error: "Zu viele Versuche. / Too many attempts." },
+        { status: 429, headers: { "Retry-After": String(cadence.retryAfterSeconds) } },
+      );
+    }
+  }
 
   if (!input) {
     return errorResponse(errors[0] ?? "invalid_payload", 400);

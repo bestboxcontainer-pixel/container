@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { requireAdminApi } from "@/lib/adminApi";
 import {
   createPaymentMethod,
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
   // Le même endpoint accepte un réordonnancement complet : { ids: [...] }.
   if (Array.isArray(body.ids)) {
     const methods = await reorderPaymentMethods(body.ids.map(String));
-    revalidatePath("/", "layout");
+    invaliderCatalogue();
     return NextResponse.json(methods);
   }
 
@@ -44,7 +44,7 @@ export async function POST(request: Request) {
       feeLabel: typeof body.feeLabel === "string" ? body.feeLabel : undefined,
       enabled: typeof body.enabled === "boolean" ? body.enabled : undefined,
     });
-    revalidatePath("/", "layout");
+    invaliderCatalogue();
     return NextResponse.json(method, { status: 201 });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Échec de la création.";

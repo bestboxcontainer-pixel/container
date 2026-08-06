@@ -1,4 +1,4 @@
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { NextResponse } from "next/server";
 import { requireAdminApi } from "@/lib/adminApi";
 import { parseProductInput, toCreateInput, type ProductInput } from "@/server/productInput";
@@ -211,7 +211,7 @@ export async function POST(request: Request) {
         result.errors.push(error instanceof Error ? error.message : "Échec de la création.");
       }
     }
-    if (created > 0) revalidatePath("/", "layout");
+    if (created > 0) invaliderCatalogue();
   }
 
   const report: ImportReport = {

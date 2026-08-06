@@ -1,4 +1,4 @@
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { NextResponse } from "next/server";
 import { requireAdminApi } from "@/lib/adminApi";
 import { parseProductInput, toCreateInput } from "@/server/productInput";
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
   try {
     const product = await createProduct(input);
     // Shop-Seiten neu aufbauen, damit das neue Produkt sofort sichtbar ist
-    revalidatePath("/", "layout");
+    invaliderCatalogue();
     return NextResponse.json(product, { status: 201 });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Échec de la création.";

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { requireAdminApi } from "@/lib/adminApi";
 import { isLegalLocale, isLegalSlug, LEGAL_SLUG_LABELS } from "@/content/legal";
 import type { LegalLocale, LegalSlug } from "@/content/legal/types";
@@ -58,7 +58,7 @@ function resolveTarget(
  * reprend les titres des pages légales et apparaît sur toutes les pages du site.
  */
 function refreshShop() {
-  revalidatePath("/", "layout");
+  invaliderCatalogue();
 }
 
 export async function GET(request: Request, { params }: { params: Params }) {

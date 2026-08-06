@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { requireAdminApi } from "@/lib/adminApi";
 import { normalizeCodeSnippet } from "@/server/codeSnippetInput";
 import { createSnippet, listSnippets } from "@/server/codeSnippets";
@@ -20,7 +20,7 @@ import { createSnippet, listSnippets } from "@/server/codeSnippets";
  * layout, donc présents sur toutes les pages.
  */
 function refreshShop() {
-  revalidatePath("/", "layout");
+  invaliderCatalogue();
 }
 
 export async function GET() {

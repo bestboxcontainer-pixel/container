@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { requireAdminApi } from "@/lib/adminApi";
 import { prisma } from "@/server/prisma";
 import { slugify } from "@/lib/slugify";
@@ -79,7 +79,7 @@ export async function PUT(request: Request, { params }: { params: Params }) {
     data: { label, slug, position },
     include: { _count: { select: { categories: true } } },
   });
-  revalidatePath("/", "layout");
+  invaliderCatalogue();
 
   return NextResponse.json({
     id: group.id,
@@ -118,7 +118,7 @@ export async function DELETE(_request: Request, { params }: { params: Params }) 
   }
 
   await prisma.group.delete({ where: { id } });
-  revalidatePath("/", "layout");
+  invaliderCatalogue();
 
   return NextResponse.json({ success: true });
 }

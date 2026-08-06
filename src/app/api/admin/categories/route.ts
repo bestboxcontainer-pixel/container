@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { requireAdminApi } from "@/lib/adminApi";
 import { prisma } from "@/server/prisma";
 import { slugify } from "@/lib/slugify";
@@ -93,7 +93,7 @@ export async function POST(request: Request) {
       image: typeof body?.image === "string" ? body.image : "",
       guide: parseGuide(body?.guide),
     });
-    revalidatePath("/", "layout");
+    invaliderCatalogue();
     return NextResponse.json(category, { status: 201 });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Échec de l'enregistrement.";

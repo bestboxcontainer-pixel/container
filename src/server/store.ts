@@ -1,5 +1,7 @@
+import { unstable_cache } from "next/cache";
 import { prisma } from "@/server/prisma";
 import { slugify } from "@/lib/slugify";
+import { TAG_CATALOGUE } from "@/server/cacheCatalogue";
 import { getActivePromotions, type ProductPromotion } from "@/server/promotions";
 import type { CategoryGuide, CategoryRecord, ProductGroup, ProductRecord } from "@/server/types";
 import type { Product } from "@/types/home";
@@ -530,29 +532,48 @@ function toViewCategory(
   };
 }
 
-export async function getCategoryPages(): Promise<CategoryPageView[]> {
-  // Les promotions sont chargées en parallèle plutôt qu'après coup à partir des
-  // identifiants trouvés : les campagnes actives se comptent sur les doigts
-  // d'une main, alors qu'attendre la liste des produits ajouterait un
-  // aller-retour à chaque page de la boutique.
-  const [rows, ratings, promotions] = await Promise.all([
-    prisma.category.findMany({
-      include: {
-        ...categoryInclude,
-        products: {
-          where: { active: true },
-          include: productInclude,
-          orderBy: { createdAt: "asc" },
+/**
+ * Catalogue complet, mis en cache sous le tag du catalogue.
+ *
+ * C'est la lecture la plus lourde du projet — toutes les catégories, tous leurs
+ * produits actifs — et presque chaque page de la boutique s'en sert. Sans
+ * cache, le build la rejouait pour chacune des 919 pages, à quinze secondes
+ * l'appel contre Neon. Le tag est purgé par `invaliderCatalogue()` à chaque
+ * écriture du back-office ; `revalidate` n'est qu'un garde-fou si une écriture
+ * oubliait de le faire.
+ *
+ * La valeur renvoyée est intégralement sérialisable — que des chaînes, nombres
+ * et booléens, les dates de promotion étant déjà converties en ISO par
+ * `toViewProduct`. C'est la condition pour passer par `unstable_cache` : une
+ * `Map` ou un `Date` en ressortirait dénaturé.
+ */
+export const getCategoryPages = unstable_cache(
+  async (): Promise<CategoryPageView[]> => {
+    // Les promotions sont chargées en parallèle plutôt qu'après coup à partir des
+    // identifiants trouvés : les campagnes actives se comptent sur les doigts
+    // d'une main, alors qu'attendre la liste des produits ajouterait un
+    // aller-retour à chaque page de la boutique.
+    const [rows, ratings, promotions] = await Promise.all([
+      prisma.category.findMany({
+        include: {
+          ...categoryInclude,
+          products: {
+            where: { active: true },
+            include: productInclude,
+            orderBy: { createdAt: "asc" },
+          },
         },
-      },
-      orderBy: [{ group: { position: "asc" } }, { position: "asc" }],
-    }),
-    approvedRatings(),
-    getActivePromotions(),
-  ]);
+        orderBy: [{ group: { position: "asc" } }, { position: "asc" }],
+      }),
+      approvedRatings(),
+      getActivePromotions(),
+    ]);
 
-  return rows.map((row) => toViewCategory(row, ratings, promotions));
-}
+    return rows.map((row) => toViewCategory(row, ratings, promotions));
+  },
+  ["catalogue-pages"],
+  { tags: [TAG_CATALOGUE], revalidate: 3600 },
+);
 
 export async function getCategoryPage(
   group: string,

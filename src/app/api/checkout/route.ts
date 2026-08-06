@@ -1,5 +1,5 @@
 import { after, NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import {
   createOrder,
   OrderError,
@@ -193,7 +193,7 @@ export async function POST(request: Request) {
     after(() => sendOrderEmails(order));
 
     // Les stocks affichés dans la boutique ont changé.
-    revalidatePath("/", "layout");
+    invaliderCatalogue();
 
     // Paiement en ligne, si le moyen retenu est encaissé par un prestataire.
     // Après l'écriture de la commande et jamais avant : une session de paiement

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { requireAdminApi } from "@/lib/adminApi";
 import { normalizeCodeSnippet } from "@/server/codeSnippetInput";
 import { deleteSnippet, updateSnippet } from "@/server/codeSnippets";
@@ -14,7 +14,7 @@ import { deleteSnippet, updateSnippet } from "@/server/codeSnippets";
 type Params = Promise<{ id: string }>;
 
 function refreshShop() {
-  revalidatePath("/", "layout");
+  invaliderCatalogue();
 }
 
 export async function PUT(request: Request, { params }: { params: Params }) {

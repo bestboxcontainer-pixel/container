@@ -1,4 +1,4 @@
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { NextResponse } from "next/server";
 import { requireAdminApi } from "@/lib/adminApi";
 import { parseProductInput } from "@/server/productInput";
@@ -32,7 +32,7 @@ export async function PUT(request: Request, { params }: { params: Params }) {
   try {
     const updated = await updateProduct(id, values);
     if (!updated) return NextResponse.json({ error: "Introuvable." }, { status: 404 });
-    revalidatePath("/", "layout");
+    invaliderCatalogue();
     return NextResponse.json(updated);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Échec de l'enregistrement.";
@@ -47,6 +47,6 @@ export async function DELETE(_request: Request, { params }: { params: Params }) 
   const { id } = await params;
   const deleted = await deleteProduct(id);
   if (!deleted) return NextResponse.json({ error: "Introuvable." }, { status: 404 });
-  revalidatePath("/", "layout");
+  invaliderCatalogue();
   return NextResponse.json({ success: true });
 }

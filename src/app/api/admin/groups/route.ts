@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { requireAdminApi } from "@/lib/adminApi";
 import { prisma } from "@/server/prisma";
 import { slugify } from "@/lib/slugify";
@@ -61,7 +61,7 @@ export async function POST(request: Request) {
       : await prisma.group.count();
 
   const group = await prisma.group.create({ data: { slug, label, position } });
-  revalidatePath("/", "layout");
+  invaliderCatalogue();
 
   return NextResponse.json(
     {

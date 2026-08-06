@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { requireAdminApi } from "@/lib/adminApi";
 import { launchCampaign } from "@/server/campaigns";
 import {
@@ -42,7 +42,7 @@ export async function POST(request: Request, { params }: { params: Params }) {
     const result = await launchCampaign(id, emails);
     // La campagne passe en « en_cours » : sa remise s'applique désormais sur la
     // boutique, les pages produit doivent être reconstruites.
-    revalidatePath("/", "layout");
+    invaliderCatalogue();
     return NextResponse.json(result);
   } catch (caught) {
     if (isCampaignError(caught)) {

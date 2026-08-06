@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { requireAdminApi } from "@/lib/adminApi";
 import { deleteReview, moderateReview } from "@/server/reviews";
 import { adminActorLabel } from "@/server/admins";
@@ -40,7 +40,7 @@ export async function PATCH(request: Request, { params }: { params: Params }) {
   const review = await moderateReview(id, status, await adminActorLabel(session), note || undefined);
   if (!review) return NextResponse.json({ error: "Introuvable." }, { status: 404 });
 
-  revalidatePath("/", "layout");
+  invaliderCatalogue();
   return NextResponse.json(review);
 }
 
@@ -52,6 +52,6 @@ export async function DELETE(_request: Request, { params }: { params: Params }) 
   const deleted = await deleteReview(id);
   if (!deleted) return NextResponse.json({ error: "Introuvable." }, { status: 404 });
 
-  revalidatePath("/", "layout");
+  invaliderCatalogue();
   return NextResponse.json({ success: true });
 }

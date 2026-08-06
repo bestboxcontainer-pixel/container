@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { requireAdminApi } from "@/lib/adminApi";
 import { deleteCampaign, getCampaign, updateCampaign } from "@/server/campaigns";
 import {
@@ -35,7 +35,7 @@ export async function PATCH(request: Request, { params }: { params: Params }) {
   try {
     const campaign = await updateCampaign(id, values);
     if (!campaign) return NextResponse.json({ error: "Campagne introuvable." }, { status: 404 });
-    revalidatePath("/", "layout");
+    invaliderCatalogue();
     return NextResponse.json(campaign);
   } catch (caught) {
     if (isCampaignError(caught)) {
@@ -57,7 +57,7 @@ export async function DELETE(_request: Request, { params }: { params: Params }) 
   try {
     const deleted = await deleteCampaign(id);
     if (!deleted) return NextResponse.json({ error: "Campagne introuvable." }, { status: 404 });
-    revalidatePath("/", "layout");
+    invaliderCatalogue();
     return NextResponse.json({ success: true });
   } catch (caught) {
     if (isCampaignError(caught)) {

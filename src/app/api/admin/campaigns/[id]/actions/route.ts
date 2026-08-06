@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { requireAdminApi } from "@/lib/adminApi";
 import {
   cancelCampaign,
@@ -59,12 +59,12 @@ export async function POST(request: Request, { params }: { params: Params }) {
         break;
       case "retry": {
         const requeued = await retryFailedRecipients(id);
-        revalidatePath("/", "layout");
+        invaliderCatalogue();
         return NextResponse.json({ success: true, action, requeued });
       }
       case "dispatch": {
         const report = await dispatchCampaign(id);
-        revalidatePath("/", "layout");
+        invaliderCatalogue();
         // Un rapport absent n'est pas une erreur : la campagne n'était
         // simplement pas éligible, ou un autre passage tenait déjà le verrou.
         return NextResponse.json({ success: true, action, report: report ?? null });
@@ -73,7 +73,7 @@ export async function POST(request: Request, { params }: { params: Params }) {
 
     // Pause, reprise et annulation changent l'application de la remise sur la
     // boutique : les pages produit doivent être reconstruites.
-    revalidatePath("/", "layout");
+    invaliderCatalogue();
     return NextResponse.json({ success: true, action });
   } catch (caught) {
     if (isCampaignError(caught)) {

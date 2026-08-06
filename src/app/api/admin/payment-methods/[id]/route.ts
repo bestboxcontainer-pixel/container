@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { requireAdminApi } from "@/lib/adminApi";
 import {
   deletePaymentMethod,
@@ -27,7 +27,7 @@ export async function PATCH(request: Request, { params }: { params: Params }) {
       if (!methods) {
         return NextResponse.json({ error: "Introuvable." }, { status: 404 });
       }
-      revalidatePath("/", "layout");
+      invaliderCatalogue();
       return NextResponse.json(methods);
     }
 
@@ -43,7 +43,7 @@ export async function PATCH(request: Request, { params }: { params: Params }) {
     if (!updated) {
       return NextResponse.json({ error: "Introuvable." }, { status: 404 });
     }
-    revalidatePath("/", "layout");
+    invaliderCatalogue();
     return NextResponse.json(updated);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Échec de l'enregistrement.";
@@ -62,6 +62,6 @@ export async function DELETE(_request: Request, { params }: { params: Params }) 
   }
 
   await deletePaymentMethod(id);
-  revalidatePath("/", "layout");
+  invaliderCatalogue();
   return NextResponse.json({ success: true });
 }

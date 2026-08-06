@@ -1,4 +1,6 @@
+import { unstable_cache } from "next/cache";
 import { prisma } from "@/server/prisma";
+import { TAG_CATALOGUE } from "@/server/cacheCatalogue";
 import { routing, type Locale } from "@/i18n/routing";
 import type { CategoryPageView } from "@/server/store";
 import type { CategoryGuide } from "@/server/types";
@@ -144,38 +146,60 @@ export function localizeCategoryPages(
 // ---- Chargement ----
 
 /**
+ * Lecture brute des colonnes anglaises, mise en cache sous le tag du catalogue.
+ *
+ * C'est la seconde lecture intégrale du projet : elle ramène *tous* les
+ * produits, et chacune des quelque 460 pages anglaises la refaisait à zéro.
+ *
+ * Le cache s'arrête volontairement aux lignes brutes. `CatalogTranslations`
+ * porte des `Map`, or `unstable_cache` sérialise ce qu'il stocke : une `Map`
+ * en ressortirait en objet vide, tous les `.get()` renverraient `undefined` et
+ * la boutique anglaise retomberait silencieusement en allemand — une panne sans
+ * message d'erreur. Les `Map` sont donc assemblées après coup, hors du cache.
+ */
+const chargerLignesTraduction = unstable_cache(
+  async () => {
+    const [groups, categories, products] = await Promise.all([
+      prisma.group.findMany({ select: { slug: true, labelEn: true } }),
+      prisma.category.findMany({
+        select: {
+          slug: true,
+          labelEn: true,
+          descriptionEn: true,
+          guideIntroEn: true,
+          guideClosingEn: true,
+          group: { select: { slug: true } },
+          guideSections: {
+            select: { headingEn: true, bodyEn: true },
+            orderBy: { position: "asc" },
+          },
+        },
+      }),
+      prisma.product.findMany({
+        select: {
+          id: true,
+          nameEn: true,
+          shortDescriptionEn: true,
+          descriptionEn: true,
+          bulletsEn: true,
+        },
+      }),
+    ]);
+
+    return { groups, categories, products };
+  },
+  ["catalogue-traductions"],
+  { tags: [TAG_CATALOGUE], revalidate: 3600 },
+);
+
+/**
  * Charge en une passe les traductions du catalogue.
  * Pour la langue par défaut (allemand), aucune requête n'est émise.
  */
 export async function loadCatalogTranslations(locale: string): Promise<CatalogTranslations> {
   if (!needsTranslation(locale)) return EMPTY;
 
-  const [groups, categories, products] = await Promise.all([
-    prisma.group.findMany({ select: { slug: true, labelEn: true } }),
-    prisma.category.findMany({
-      select: {
-        slug: true,
-        labelEn: true,
-        descriptionEn: true,
-        guideIntroEn: true,
-        guideClosingEn: true,
-        group: { select: { slug: true } },
-        guideSections: {
-          select: { headingEn: true, bodyEn: true },
-          orderBy: { position: "asc" },
-        },
-      },
-    }),
-    prisma.product.findMany({
-      select: {
-        id: true,
-        nameEn: true,
-        shortDescriptionEn: true,
-        descriptionEn: true,
-        bulletsEn: true,
-      },
-    }),
-  ]);
+  const { groups, categories, products } = await chargerLignesTraduction();
 
   return {
     groups: new Map(groups.map((group) => [group.slug, group.labelEn])),

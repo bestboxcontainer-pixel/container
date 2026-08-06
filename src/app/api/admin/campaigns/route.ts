@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { requireAdminApi } from "@/lib/adminApi";
 import { createCampaign, listCampaigns } from "@/server/campaigns";
 import { adminActorLabel } from "@/server/admins";
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     // La campagne naît en brouillon et ne remise donc encore rien, mais la
     // boutique lit les promotions à chaque rendu : on rafraîchit tout de suite
     // pour que rien ne dépende de la date d'expiration d'un cache.
-    revalidatePath("/", "layout");
+    invaliderCatalogue();
     return NextResponse.json(campaign, { status: 201 });
   } catch (caught) {
     if (isCampaignError(caught)) {

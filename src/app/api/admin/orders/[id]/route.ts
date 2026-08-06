@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { requireAdminApi } from "@/lib/adminApi";
 import {
   deleteOrder,
@@ -77,7 +77,7 @@ export async function PATCH(request: Request, { params }: { params: Params }) {
   if (!order) return NextResponse.json({ error: "Introuvable." }, { status: 404 });
 
   // Une annulation remet la marchandise en stock : les pages boutique changent.
-  revalidatePath("/", "layout");
+  invaliderCatalogue();
   return NextResponse.json(order);
 }
 
@@ -100,6 +100,6 @@ export async function DELETE(_request: Request, { params }: { params: Params }) 
   const deleted = await deleteOrder(id);
   if (!deleted) return NextResponse.json({ error: "Introuvable." }, { status: 404 });
 
-  revalidatePath("/", "layout");
+  invaliderCatalogue();
   return NextResponse.json({ success: true });
 }

@@ -1,4 +1,4 @@
-import { revalidatePath } from "next/cache";
+import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { NextResponse } from "next/server";
 import { requireAdminApi } from "@/lib/adminApi";
 import { adjustStock, isStockReason, listStockMovements, setStock } from "@/server/stock";
@@ -62,7 +62,7 @@ export async function POST(request: Request) {
     }
 
     // Shop-Seiten zeigen Verfügbarkeit an, deshalb nach jeder Buchung neu bauen
-    revalidatePath("/", "layout");
+    invaliderCatalogue();
     return NextResponse.json(result, { status: 201 });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Échec de l'enregistrement du mouvement.";

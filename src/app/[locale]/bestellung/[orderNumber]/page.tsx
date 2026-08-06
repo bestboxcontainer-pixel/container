@@ -308,40 +308,48 @@ async function PaymentInstructions({ order }: { order: OrderRecord }) {
             })}
           </p>
 
-          <dl className="mt-4 grid grid-cols-1 gap-x-6 gap-y-2 rounded-sm bg-muted p-4 text-sm sm:grid-cols-2">
-            <div className="flex justify-between gap-3 sm:block">
+          {/* Étiquette au-dessus de la valeur, à toutes les tailles d'écran.
+              L'IBAN fait vingt-deux caractères en Allemagne et jusqu'à
+              trente-et-un ailleurs : mis en regard de son intitulé sur un
+              téléphone, il n'a pas la place et se coupe en deux lignes
+              décalées. Empilé, il tient sur une ligne pleine largeur, et les
+              valeurs restent alignées entre elles. */}
+          <dl className="mt-4 grid grid-cols-1 gap-x-6 gap-y-3 rounded-sm bg-muted p-4 text-sm sm:grid-cols-2">
+            <div>
               <dt className="text-xs font-bold text-muted-foreground uppercase">
                 {t("confirmation.bankHolder")}
               </dt>
-              <dd className="font-semibold text-foreground">{bank.holder}</dd>
+              <dd className="font-semibold break-words text-foreground">{bank.holder}</dd>
             </div>
-            <div className="flex justify-between gap-3 sm:block">
+            <div>
               <dt className="text-xs font-bold text-muted-foreground uppercase">
                 {t("confirmation.bankIban")}
               </dt>
-              <dd className="font-mono font-semibold text-foreground">{bank.iban}</dd>
+              <dd className="font-mono font-semibold break-words text-foreground">{bank.iban}</dd>
             </div>
-            <div className="flex justify-between gap-3 sm:block">
+            <div>
               <dt className="text-xs font-bold text-muted-foreground uppercase">
                 {t("confirmation.bankBic")}
               </dt>
-              <dd className="font-mono font-semibold text-foreground">{bank.bic}</dd>
+              <dd className="font-mono font-semibold break-words text-foreground">{bank.bic}</dd>
             </div>
             {/* Le nom de l'établissement est facultatif : rien ne s'affiche
                 plutôt qu'un intitulé suivi du vide. */}
             {bank.bank && (
-              <div className="flex justify-between gap-3 sm:block">
+              <div>
                 <dt className="text-xs font-bold text-muted-foreground uppercase">
                   {t("confirmation.bankBank")}
                 </dt>
-                <dd className="font-semibold text-foreground">{bank.bank}</dd>
+                <dd className="font-semibold break-words text-foreground">{bank.bank}</dd>
               </div>
             )}
-            <div className="flex justify-between gap-3 sm:col-span-2 sm:block">
+            <div className="sm:col-span-2">
               <dt className="text-xs font-bold text-muted-foreground uppercase">
                 {t("confirmation.bankReference")}
               </dt>
-              <dd className="font-semibold text-foreground">{order.orderNumber}</dd>
+              <dd className="font-mono font-semibold break-words text-foreground">
+                {order.orderNumber}
+              </dd>
             </div>
           </dl>
 

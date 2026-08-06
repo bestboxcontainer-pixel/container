@@ -341,7 +341,7 @@ const LEGACY_ORDER_PREFIXES = ["HP"] as const;
  * Ajustable par `ORDER_NUMBER_OFFSET`. Le changer ne réécrit aucune commande
  * déjà passée : le compteur ne fait que ne jamais descendre en dessous.
  */
-const ORDER_NUMBER_OFFSET = Number.parseInt(process.env.ORDER_NUMBER_OFFSET ?? "537", 10);
+const ORDER_NUMBER_OFFSET = Number.parseInt(process.env.ORDER_NUMBER_OFFSET ?? "16100", 10);
 
 async function nextOrderNumber(): Promise<string> {
   const year = new Date().getFullYear();

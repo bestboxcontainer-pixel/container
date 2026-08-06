@@ -87,10 +87,6 @@
     "brands": "Top-Marken",
     "brandsNote": "Über 40 Hersteller im Sortiment",
     "brandItems": "{count} Artikel",
-    "reviews": "Das sagen unsere Kunden",
-    "reviewsAverage": "{rating} von 5",
-    "reviewsBasis": "Ø aus {count} bewerteten Artikeln",
-    "purchased": "Gekauft: {product}",
     "metaTitle": "Hausgeräte Pfeffer | Elektrogeräte & Multimedia online kaufen",
     "metaDescription": "Große Auswahl an Haushaltsgeräten, Küchengeräten, TV & Audio und Smart Home Produkten zu günstigen Preisen. Standardversand kostenlos, 14 Tage Rückgaberecht.",
     "promoTitle": "Topaktuell",
@@ -221,26 +217,6 @@
     "emptyHint": "Teilen Sie Ihre Erfahrung und schreiben Sie die erste Bewertung — sie hilft anderen bei der Entscheidung.",
     "editorial": "Redaktionelle Einschätzung: {rating} von 5",
     "writeTitle": "Bewertung schreiben",
-    "customers": {
-      "sandra": {
-        "author": "Sandra M.",
-        "city": "Kassel",
-        "purchase": "Bosch Serie 6 Waschmaschine, 8 kg",
-        "text": "Dienstag bestellt, Donnerstag stand die Maschine angeschlossen in der Waschküche. Das alte Gerät wurde direkt mitgenommen — genau so war es angekündigt."
-      },
-      "tobias": {
-        "author": "Tobias R.",
-        "city": "Leipzig",
-        "purchase": "Siemens EQ.6 plus s700 Kaffeevollautomat",
-        "text": "Ich war unsicher zwischen zwei Vollautomaten. Die Beratung am Telefon hat zehn Minuten gedauert und war ehrlich: das teurere Modell hätte für mich keinen Vorteil gebracht."
-      },
-      "kerstin": {
-        "author": "Kerstin B.",
-        "city": "Bremen",
-        "purchase": "Philips Ambilight 50\" 4K Fernseher",
-        "text": "Der Fernseher kam mit einem Kratzer am Rahmen an. Das Ersatzgerät war zwei Tage später da, die Rücksendung war kostenlos. Ein Punkt Abzug für den ersten Versuch."
-      }
-    },
     "formRatingLabel": "Ihre Bewertung",
     "formRatingAria": "{value} von 5 Sternen",
     "formRatingRequired": "Bitte wählen Sie eine Bewertung von 1 bis 5 Sternen.",

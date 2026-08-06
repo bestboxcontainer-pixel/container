@@ -51,10 +51,16 @@ export function ProductCard({ product }: { product: Product }) {
       </div>
       <p className="truncate text-xs font-bold text-muted-foreground uppercase">{product.brand}</p>
       <p className="mb-1 line-clamp-2 text-sm font-semibold text-foreground transition-colors group-hover:text-primary">{product.name}</p>
-      {typeof product.rating === "number" && (
+      {/* L'étoile n'apparaît que si elle repose sur des avis de clients réels.
+          Sans cette condition, la vignette affichait la note rédactionnelle sous
+          la même étoile qu'une moyenne d'avis : rien ne les distinguait pour
+          l'acheteur. La note maison reste lisible sur la fiche produit, où elle
+          est nommée « Redaktionelle Einschätzung ». */}
+      {typeof product.rating === "number" && (product.reviewCount ?? 0) > 0 && (
         <p className="mb-2 flex items-center gap-1 text-xs font-semibold text-foreground">
           <Star className="h-3.5 w-3.5 fill-accent text-accent" />
           {formatRating(product.rating, locale)}
+          <span className="font-normal text-muted-foreground">({product.reviewCount})</span>
         </p>
       )}
       <ul className="mb-3 space-y-0.5 text-xs text-muted-foreground">

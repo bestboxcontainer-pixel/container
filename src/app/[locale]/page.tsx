@@ -7,7 +7,6 @@ import { TrustBar } from "@/components/TrustBar";
 import { CategoryRow } from "@/components/CategoryRow";
 import { DealOfTheDay } from "@/components/DealOfTheDay";
 import { BrandRow } from "@/components/BrandRow";
-import { CustomerReviews } from "@/components/CustomerReviews";
 import { ProductGrid } from "@/components/ProductGrid";
 import { PromoGrid } from "@/components/PromoGrid";
 import { parsePrice } from "@/lib/price";
@@ -130,11 +129,6 @@ export default async function Home({ params }: { params: HomeParams }) {
 
   const deal = pickDeal(categories);
   const brands = topBrands(categories, 8);
-  const ratedProducts = categories
-    .flatMap((category) => category.products)
-    .filter((product) => typeof product.rating === "number");
-  const averageRating =
-    ratedProducts.reduce((sum, product) => sum + (product.rating ?? 0), 0) / ratedProducts.length;
 
   return (
     <>
@@ -158,7 +152,10 @@ export default async function Home({ params }: { params: HomeParams }) {
           products={deals.filter((product) => product !== undefined)}
         />
         <BrandRow brands={brands} />
-        <CustomerReviews average={averageRating} productCount={ratedProducts.length} />
+        {/* La section « Das sagen unsere Kunden » a été retirée : ses trois
+            témoignages étaient inventés, et la moyenne affichée sous ce titre
+            portait sur les notes rédactionnelles, non sur des avis de clients.
+            À rétablir le jour où de vrais avis existent. */}
       </main>
       <Footer />
 

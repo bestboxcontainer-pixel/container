@@ -92,6 +92,9 @@ export default async function ProductPage({ params }: { params: ProductPageParam
   const shortText = productShortText(productData, categoryData.label, locale);
   const description = productLongText(productData, categoryData.label, locale);
 
+  // Nombre d'avis publiés : il commande l'affichage de l'étoile en tête de fiche.
+  const avisPublies = productData.reviewCount ?? 0;
+
   return (
     <>
       <Header />
@@ -123,15 +126,20 @@ export default async function ProductPage({ params }: { params: ProductPageParam
                   {productData.brand}
                 </p>
                 <h1 className="text-2xl font-black text-foreground sm:text-3xl">{productData.name}</h1>
-                {typeof productData.rating === "number" && (
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    ⭐ {t("ratingOf", { rating: formatRating(productData.rating, locale) })}
-                    {productData.reviewCount
-                      ? ` · ${t("reviewCount", { count: productData.reviewCount })}`
-                      : ""}{" "}
-                    · {t("sku")}: {productData.sku}
-                  </p>
-                )}
+                {/* L'étoile suppose des avis : sans eux, elle affichait la note
+                    rédactionnelle comme une moyenne de clients. Celle-ci reste
+                    plus bas, sous son nom, dans la section des avis.
+                    La référence article, elle, s'affiche toujours — elle était
+                    jusqu'ici emportée avec la note sur les fiches non notées. */}
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {typeof productData.rating === "number" && avisPublies > 0 && (
+                    <>
+                      ⭐ {t("ratingOf", { rating: formatRating(productData.rating, locale) })} ·{" "}
+                      {t("reviewCount", { count: avisPublies })} ·{" "}
+                    </>
+                  )}
+                  {t("sku")}: {productData.sku}
+                </p>
                 <p className="mt-3 text-sm leading-relaxed text-foreground/80">{shortText}</p>
               </div>
 

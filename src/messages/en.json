@@ -87,10 +87,6 @@
     "brands": "Top brands",
     "brandsNote": "More than 40 manufacturers in stock",
     "brandItems": "{count} items",
-    "reviews": "What our customers say",
-    "reviewsAverage": "{rating} out of 5",
-    "reviewsBasis": "Average across {count} rated items",
-    "purchased": "Purchased: {product}",
     "metaTitle": "Hausgeräte Pfeffer | Home appliances & multimedia online",
     "metaDescription": "A wide range of home appliances, kitchen appliances, TV & audio and smart home products at fair prices. Free standard delivery, 14-day returns.",
     "promoTitle": "Trending now",
@@ -221,26 +217,6 @@
     "emptyHint": "Share your experience and write the first review — it helps others decide.",
     "editorial": "Editorial assessment: {rating} out of 5",
     "writeTitle": "Write a review",
-    "customers": {
-      "sandra": {
-        "author": "Sandra M.",
-        "city": "Kassel",
-        "purchase": "Bosch Serie 6 washing machine, 8 kg",
-        "text": "Ordered on Tuesday, and by Thursday the machine was installed and running in the laundry room. The old appliance was taken away straight away — exactly as promised."
-      },
-      "tobias": {
-        "author": "Tobias R.",
-        "city": "Leipzig",
-        "purchase": "Siemens EQ.6 plus s700 bean-to-cup coffee machine",
-        "text": "I was torn between two bean-to-cup machines. The phone consultation took ten minutes and was refreshingly honest: the more expensive model would not have given me any real benefit."
-      },
-      "kerstin": {
-        "author": "Kerstin B.",
-        "city": "Bremen",
-        "purchase": "Philips Ambilight 50\" 4K TV",
-        "text": "The TV arrived with a scratch on the frame. The replacement was here two days later and the return was free of charge. One star off for the first attempt."
-      }
-    },
     "formRatingLabel": "Your rating",
     "formRatingAria": "{value} out of 5 stars",
     "formRatingRequired": "Please choose a rating from 1 to 5 stars.",

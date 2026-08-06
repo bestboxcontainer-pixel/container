@@ -60,8 +60,8 @@ const MESSAGES: Record<AccountErrorCode, { de: string; en: string }> = {
   },
   invalid_city: { de: "Bitte geben Sie einen Ort an.", en: "Please enter a city." },
   unsupported_country: {
-    de: "Wir liefern derzeit ausschließlich innerhalb Deutschlands.",
-    en: "We currently deliver within Germany only.",
+    de: "Dieses Land können wir nicht zuordnen. Bitte wählen Sie es erneut aus der Liste.",
+    en: "We could not recognise this country. Please pick it again from the list.",
   },
   invalid_token: {
     de: "Dieser Link ist abgelaufen oder wurde bereits verwendet. Bitte fordern Sie einen neuen an.",

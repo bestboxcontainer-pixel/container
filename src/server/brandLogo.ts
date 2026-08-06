@@ -9,17 +9,35 @@
  * les octets supprime la question — et un logo manquant à cause d'un chemin se
  * verrait immédiatement.
  *
- * Pourquoi les e-mails ne pointent pas non plus sur une URL : l'adresse
- * publique du site n'est pas toujours renseignée, et la plupart des messageries
- * bloquent par défaut les images chargées depuis un serveur distant. Une image
- * jointe au message et référencée par `cid:` s'affiche dans les deux cas.
+ * Les e-mails, eux, pointent sur l'image hébergée par le site dès que son
+ * adresse publique est connue. Jointe au message, elle s'affichait certes sans
+ * dépendre du réseau, mais plusieurs messageries la listaient en bas du message
+ * comme un « logo.png » téléchargeable : le client recevait sa confirmation de
+ * commande accompagnée d'une pièce jointe qui n'en était pas une. Le repli
+ * `cid:` reste en place tant que NEXT_PUBLIC_SITE_URL n'est pas renseignée —
+ * en développement, typiquement.
  *
  * Source : public/images/logo-full.png (1242 x 406), réduit à 400 px de large,
- * ce qui donne environ 170 dpi à la taille d'impression de la facture.
+ * ce qui donne environ 170 dpi à la taille d'impression de la facture. Le même
+ * fichier réduit est copié dans public/images/logo-email.png (46 Ko) pour être
+ * servi aux messageries.
  */
 
 /** Identifiant de la pièce jointe référencée par `src="cid:…"` dans les e-mails. */
 export const LOGO_CID = "logo-hausgeraete-pfeffer";
+
+/** Copie du logo réduit servie par le site, à l'attention des messageries. */
+const LOGO_EMAIL_PATH = "/images/logo-email.png";
+
+/**
+ * Adresse du logo pour l'en-tête d'un e-mail : l'URL publique quand on la
+ * connaît, sinon l'image jointe. Le mailer n'attache le fichier que si le
+ * gabarit a réellement demandé `cid:`, il n'y a donc rien d'autre à synchroniser.
+ */
+export function emailLogoSrc(): string {
+  const site = (process.env.NEXT_PUBLIC_SITE_URL ?? "").trim().replace(/\/+$/, "");
+  return site ? `${site}${LOGO_EMAIL_PATH}` : `cid:${LOGO_CID}`;
+}
 
 /** PNG encodé en base64, transparence conservée. */
 const LOGO_BASE64 =

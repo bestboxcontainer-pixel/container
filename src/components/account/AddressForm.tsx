@@ -9,11 +9,11 @@ import {
   ALERT_INFO,
   ALERT_SUCCESS,
   CARD,
-  HINT,
   INPUT,
   LABEL,
   PRIMARY_BUTTON,
 } from "@/components/account/formStyles";
+import { CountryCombobox } from "@/components/ui/CountryCombobox";
 
 export interface AddressValues {
   salutation: string;
@@ -159,6 +159,7 @@ function AddressFields({
   withName: boolean;
 }) {
   const t = useTranslations("account");
+  const isGermany = value.country === "DE";
 
   function update<K extends keyof AddressValues>(key: K, next: AddressValues[K]) {
     onChange({ ...value, [key]: next });
@@ -248,14 +249,23 @@ function AddressFields({
         <label className={LABEL} htmlFor={`${idPrefix}-postal-code`}>
           {t("fields.postalCode")}
         </label>
+        {/* Cinq chiffres en Allemagne, « SW1A 1AA » ou « 1000 » ailleurs : la
+            saisie n'est bridée que pour le pays dont on connaît la règle. */}
         <input
           id={`${idPrefix}-postal-code`}
-          inputMode="numeric"
-          pattern="\d{5}"
+          inputMode={isGermany ? "numeric" : "text"}
+          pattern={isGermany ? "\\d{5}" : undefined}
           autoComplete={idPrefix === "billing" ? "billing postal-code" : "shipping postal-code"}
-          maxLength={5}
+          maxLength={isGermany ? 5 : 12}
           value={value.postalCode}
-          onChange={(event) => update("postalCode", event.target.value.replace(/\D/g, ""))}
+          onChange={(event) =>
+            update(
+              "postalCode",
+              isGermany
+                ? event.target.value.replace(/\D/g, "")
+                : event.target.value.replace(/[^A-Za-z0-9\s-]/g, ""),
+            )
+          }
           className={INPUT}
         />
       </div>
@@ -274,21 +284,19 @@ function AddressFields({
         />
       </div>
 
-      {/* Un seul pays desservi : le champ reste visible pour information. */}
+      {/* Le pays était figé sur l'Allemagne, en lecture seule. La boutique
+          expédie au-delà : le client choisit désormais le sien, comme dans le
+          tunnel de commande. */}
       <div className="sm:col-span-2">
         <label className={LABEL} htmlFor={`${idPrefix}-country`}>
           {t("fields.country")}
         </label>
-        <input
+        <CountryCombobox
           id={`${idPrefix}-country`}
-          readOnly
-          value={t("fields.countryDE")}
-          aria-describedby={`${idPrefix}-country-hint`}
-          className={`${INPUT} bg-muted text-muted-foreground`}
+          value={value.country || "DE"}
+          onChange={(next) => update("country", next)}
+          autoComplete={idPrefix === "billing" ? "billing country" : "shipping country"}
         />
-        <p id={`${idPrefix}-country-hint`} className={HINT}>
-          {t("fields.countryHint")}
-        </p>
       </div>
     </div>
   );

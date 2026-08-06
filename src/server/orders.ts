@@ -311,10 +311,20 @@ export async function countOpenOrders(): Promise<number> {
 // ---- Numéro de commande ----
 
 /**
- * Numéro lisible « HP-AAAA-NNNNNN », séquentiel par année civile.
+ * Numéro lisible « PFF-AAAA-NNNNNN », séquentiel par année civile.
  * L'unicité réelle est garantie par la contrainte en base ; la boucle d'appel
  * réessaie en cas de collision entre deux commandes simultanées.
  */
+/** Préfixe en vigueur. Les commandes déjà passées gardent le leur. */
+const ORDER_PREFIX = "PFF";
+
+/**
+ * Préfixes utilisés avant celui d'aujourd'hui. Le compteur les relit pour
+ * repartir du dernier numéro réellement attribué : sans eux, un changement de
+ * préfixe ferait recommencer la numérotation à zéro le jour du déploiement, et
+ * la commande suivante porterait un rang inférieur à celui de la veille.
+ */
+const LEGACY_ORDER_PREFIXES = ["HP"] as const;
 /**
  * Rang de départ de la numérotation des commandes.
  *
@@ -335,15 +345,25 @@ const ORDER_NUMBER_OFFSET = Number.parseInt(process.env.ORDER_NUMBER_OFFSET ?? "
 
 async function nextOrderNumber(): Promise<string> {
   const year = new Date().getFullYear();
-  const prefix = `HP-${year}-`;
-  const last = await prisma.order.findFirst({
-    where: { orderNumber: { startsWith: prefix } },
-    orderBy: { orderNumber: "desc" },
-    select: { orderNumber: true },
-  });
+  const prefix = `${ORDER_PREFIX}-${year}-`;
 
-  const previous = last ? Number.parseInt(last.orderNumber.slice(prefix.length), 10) : 0;
-  const suivant = Number.isFinite(previous) ? previous + 1 : 1;
+  // Le rang le plus élevé de l'année, tous préfixes confondus : le compteur
+  // suit les commandes, pas l'étiquette qu'elles portent.
+  const rangs = await Promise.all(
+    [ORDER_PREFIX, ...LEGACY_ORDER_PREFIXES].map(async (candidat) => {
+      const debut = `${candidat}-${year}-`;
+      const last = await prisma.order.findFirst({
+        where: { orderNumber: { startsWith: debut } },
+        orderBy: { orderNumber: "desc" },
+        select: { orderNumber: true },
+      });
+      const rang = last ? Number.parseInt(last.orderNumber.slice(debut.length), 10) : 0;
+      return Number.isFinite(rang) ? rang : 0;
+    }),
+  );
+
+  const previous = Math.max(...rangs);
+  const suivant = previous + 1;
 
   // Le plancher ne s'applique qu'aux premières commandes de l'année : une fois
   // le rang dépassé, c'est la suite naturelle qui reprend la main, sans trou.

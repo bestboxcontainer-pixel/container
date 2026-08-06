@@ -43,6 +43,29 @@ export const BANK_TRANSFER_DEFAULTS: BankTransferSettings = {
   },
 };
 
+/**
+ * Moyens de paiement qui n'appellent aucun virement : la facture se règle à
+ * réception, le contre-remboursement se règle au livreur. Tous les autres —
+ * Vorkasse, Sofortüberweisung, et tout moyen créé depuis le back-office —
+ * aboutissent à un virement sur le compte de la boutique, puisque aucun
+ * prestataire n'encaisse à sa place.
+ */
+const KEYS_SANS_VIREMENT = new Set(["rechnung", "nachnahme"]);
+
+/**
+ * Vrai lorsque le client doit voir les coordonnées bancaires : sur la page de
+ * confirmation, dans son e-mail et sur la facture.
+ *
+ * Le test portait auparavant sur la seule clé « vorkasse ». Un commerçant qui
+ * nomme son unique moyen « Sofortüberweisung » se retrouvait alors avec un
+ * client sans IBAN — donc sans moyen de payer — et une commande qui n'arrivait
+ * jamais. La règle est inversée : on affiche l'IBAN sauf là où il n'a
+ * manifestement rien à faire.
+ */
+export function needsBankDetails(paymentMethodKey: string): boolean {
+  return !KEYS_SANS_VIREMENT.has(paymentMethodKey);
+}
+
 // ---- Contrôle de l'IBAN et du BIC ----
 
 /** Retire espaces et ponctuation, passe en majuscules. */

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { CheckCircle2, Info, Landmark, ShieldCheck } from "lucide-react";
+import { CheckCircle2, Landmark, ShieldCheck } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Link } from "@/i18n/navigation";
@@ -11,7 +11,7 @@ import { routing } from "@/i18n/routing";
 import { formatPrice } from "@/server/store";
 import { getOrderByNumber, type OrderAddress, type OrderRecord } from "@/server/orders";
 import { getBankTransferSettings } from "@/server/bankTransfer";
-import { bankInstructionsFor, renderBankInstructions } from "@/lib/bankTransfer";
+import { bankInstructionsFor, needsBankDetails, renderBankInstructions } from "@/lib/bankTransfer";
 import { ORDER_STATUS_LABELS, PAYMENT_STATUS_LABELS } from "@/lib/orderStatus";
 
 type ConfirmationParams = Promise<{ locale: string; orderNumber: string }>;
@@ -25,9 +25,11 @@ export const dynamic = "force-dynamic";
 // (/admin/payments) et sont relues ici. Tant qu'elles n'ont pas été
 // renseignées, ce sont celles de la démonstration qui s'affichent — avec
 // l'avertissement qui va avec.
-
-/** Moyens de paiement encore branchés manuellement, faute de prestataire configuré. */
-const PROVIDER_KEYS = new Set(["paypal", "kreditkarte", "lastschrift", "sofort", "klarna", "applepay"]);
+//
+// Elles accompagnent désormais tout moyen de paiement qui aboutit à un virement
+// — c'est-à-dire tous sauf la facture et le contre-remboursement. Aucun
+// prestataire n'encaisse à la place de la boutique : renvoyer le client vers un
+// « paiement en ligne » qui n'existe pas le laissait sans moyen de payer.
 
 export async function generateMetadata({
   params,
@@ -303,7 +305,7 @@ async function PaymentInstructions({ order }: { order: OrderRecord }) {
         {t("confirmation.instructionsTitle")}
       </h2>
 
-      {key === "vorkasse" && (
+      {needsBankDetails(key) && (
         <>
           <p className="text-sm leading-relaxed text-foreground">
             {renderBankInstructions(bankInstructionsFor(bank, order.locale), {
@@ -372,23 +374,6 @@ async function PaymentInstructions({ order }: { order: OrderRecord }) {
         </p>
       )}
 
-      {PROVIDER_KEYS.has(key) && (
-        <>
-          <p className="text-sm leading-relaxed text-foreground">
-            {t("confirmation.instructions.provider", { label: order.paymentMethodLabel })}
-          </p>
-          <p className="mt-3 flex items-start gap-2 rounded-sm bg-muted px-4 py-3 text-xs text-muted-foreground">
-            <Info className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />
-            <span>{t("confirmation.providerNotice", { label: order.paymentMethodLabel })}</span>
-          </p>
-        </>
-      )}
-
-      {!PROVIDER_KEYS.has(key) && !["vorkasse", "rechnung", "nachnahme"].includes(key) && (
-        <p className="text-sm leading-relaxed text-foreground">
-          {t("confirmation.instructions.generic")}
-        </p>
-      )}
     </section>
   );
 }

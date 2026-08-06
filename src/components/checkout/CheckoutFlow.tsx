@@ -25,6 +25,7 @@ import type { AddressValue } from "@/components/checkout/AddressFieldset";
 import { CheckoutSummary } from "@/components/checkout/CheckoutSummary";
 import { ShippingMethodFieldset } from "@/components/checkout/ShippingMethodFieldset";
 import { computeTotals, DEFAULT_SHIPPING_METHOD_KEY, formatCents } from "@/lib/cart";
+import { isCountryCode, isValidPostalCode } from "@/lib/countries";
 import type { ShippingMethodKey } from "@/lib/cart";
 import { brandMarksFor } from "@/components/PaymentIcons";
 import type { PaymentMethodRecord } from "@/server/types";
@@ -53,6 +54,19 @@ const ICONS: Record<string, LucideIcon> = {
 const STEPS = ["contact", "payment", "review"] as const;
 type Step = (typeof STEPS)[number];
 
+/**
+ * Étapes réellement affichées. Avec un seul moyen de paiement actif, l'écran de
+ * choix ne propose rien à choisir : il est retiré du fil et le moyen unique est
+ * retenu d'office. Le récapitulatif final continue de le nommer — § 312j Abs. 2
+ * BGB veut que le client voie ce qu'il valide, pas qu'il l'ait cliqué.
+ */
+function visibleSteps(methodCount: number): readonly Step[] {
+  // Aucun moyen actif : l'étape reste, c'est elle qui explique au client que la
+  // boutique n'encaisse rien pour l'instant. La sauter l'enverrait au bouton de
+  // commande pour un refus du serveur.
+  return methodCount === 1 ? (["contact", "review"] as const) : STEPS;
+}
+
 const INPUT =
   "w-full rounded-sm border border-border bg-white px-3 py-2 text-sm outline-none focus:border-primary";
 const LABEL = "mb-1 block text-sm font-semibold text-foreground";
@@ -69,7 +83,12 @@ function validateAddress(address: AddressValue): CheckoutError | undefined {
     return { code: "invalid_name" };
   }
   if (address.street.trim().length < 4) return { code: "invalid_street" };
-  if (!/^\d{5}$/.test(address.postalCode.trim())) return { code: "invalid_postal_code" };
+  // Même règle que le serveur : le format dépend du pays choisi. Exiger cinq
+  // chiffres ici bloquait toute adresse étrangère dès la première étape.
+  if (!isCountryCode(address.country)) return { code: "unsupported_country" };
+  if (!isValidPostalCode(address.country, address.postalCode.trim())) {
+    return { code: "invalid_postal_code" };
+  }
   if (address.city.trim().length < 2) return { code: "invalid_city" };
   return undefined;
 }
@@ -118,6 +137,8 @@ export function CheckoutFlow({
   const [done, setDone] = useState(false);
 
   const selectedMethod = methods.find((method) => method.key === paymentKey);
+  const steps = visibleSteps(methods.length);
+  const showPaymentStep = steps.includes("payment");
 
   // Totaux recalculés ici plutôt que repris du panier : seul le tunnel connaît
   // le mode de livraison retenu. Le récapitulatif de droite suit donc le clic du
@@ -159,7 +180,9 @@ export function CheckoutFlow({
       }
     }
     setError(null);
-    setStep("payment");
+    // Sans écran de paiement, le moyen unique est déjà retenu : on enchaîne
+    // directement sur la vérification.
+    setStep(showPaymentStep ? "payment" : "review");
   }
 
   function goToReview() {
@@ -264,14 +287,14 @@ export function CheckoutFlow({
     );
   }
 
-  const stepIndex = STEPS.indexOf(step);
+  const stepIndex = steps.indexOf(step);
 
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
       <div className="lg:col-span-2">
         {/* Fil des étapes : le client voit où il en est et peut revenir en arrière. */}
         <ol className="mb-6 flex flex-wrap gap-2">
-          {STEPS.map((entry, index) => {
+          {steps.map((entry, index) => {
             const reached = index <= stepIndex;
             return (
               <li key={entry}>
@@ -508,7 +531,13 @@ export function CheckoutFlow({
                 {phone && <p>{phone}</p>}
               </ReviewCard>
 
-              <ReviewCard title={t("reviewPayment")} onEdit={() => setStep("payment")} editLabel={t("edit")}>
+              {/* Sans écran de paiement, il n'y a rien à modifier : le bouton
+                  ramènerait sur une étape qui n'existe plus. */}
+              <ReviewCard
+                title={t("reviewPayment")}
+                onEdit={showPaymentStep ? () => setStep("payment") : undefined}
+                editLabel={t("edit")}
+              >
                 <p className="font-semibold text-foreground">{selectedMethod?.label}</p>
                 {selectedMethod?.description && <p>{selectedMethod.description}</p>}
               </ReviewCard>
@@ -641,7 +670,7 @@ export function CheckoutFlow({
 
             <button
               type="button"
-              onClick={() => setStep("payment")}
+              onClick={() => setStep(showPaymentStep ? "payment" : "contact")}
               className="text-sm font-semibold text-primary hover:underline"
             >
               {t("back")}
@@ -665,20 +694,23 @@ function ReviewCard({
 }: {
   title: string;
   editLabel: string;
-  onEdit: () => void;
+  /** Omis, la carte s'affiche sans bouton de modification. */
+  onEdit?: () => void;
   children: React.ReactNode;
 }) {
   return (
     <section className="rounded-sm border border-border bg-white p-5">
       <div className="mb-2 flex items-start justify-between gap-2">
         <h3 className="text-sm font-black text-foreground">{title}</h3>
-        <button
-          type="button"
-          onClick={onEdit}
-          className="text-xs font-semibold text-primary hover:underline"
-        >
-          {editLabel}
-        </button>
+        {onEdit && (
+          <button
+            type="button"
+            onClick={onEdit}
+            className="text-xs font-semibold text-primary hover:underline"
+          >
+            {editLabel}
+          </button>
+        )}
       </div>
       <div className="space-y-0.5 text-sm text-muted-foreground">{children}</div>
     </section>

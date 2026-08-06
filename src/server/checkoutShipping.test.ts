@@ -102,3 +102,32 @@ describe("mode de livraison soumis par le tunnel", () => {
     assert.ok(!("totalCents" in input!), "totalCents ne doit pas traverser le contrôle");
   });
 });
+
+describe("pays de livraison", () => {
+  it("accepte une adresse étrangère avec son format postal", () => {
+    // Le sélecteur du formulaire propose la liste complète des pays : le
+    // serveur ne doit pas refuser ce que le client vient d'y choisir.
+    const france = { ...ADDRESS, postalCode: "75008", city: "Paris", country: "FR" };
+    const { input, errors } = parseCheckoutPayload(payload({ billing: france }));
+    assert.deepEqual(errors, []);
+    assert.equal(input?.billing.country, "FR");
+  });
+
+  it("accepte un code postal alphanumérique britannique", () => {
+    const londres = { ...ADDRESS, postalCode: "SW1A 1AA", city: "London", country: "GB" };
+    const { errors } = parseCheckoutPayload(payload({ billing: londres }));
+    assert.deepEqual(errors, []);
+  });
+
+  it("refuse un code postal qui ne colle pas au pays", () => {
+    const faux = { ...ADDRESS, postalCode: "123", country: "FR" };
+    const { errors } = parseCheckoutPayload(payload({ billing: faux }));
+    assert.deepEqual(errors, ["invalid_postal_code"]);
+  });
+
+  it("refuse un code pays inconnu", () => {
+    const inconnu = { ...ADDRESS, country: "XX" };
+    const { errors } = parseCheckoutPayload(payload({ billing: inconnu }));
+    assert.deepEqual(errors, ["unsupported_country"]);
+  });
+});

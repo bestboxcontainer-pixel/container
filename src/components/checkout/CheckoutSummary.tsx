@@ -93,11 +93,12 @@ export function CheckoutSummary({
           le prix affiché comprend la taxe, même sans en détailler le calcul. */}
       <p className="mt-1 text-xs text-muted-foreground">{t("priceNote")}</p>
 
+      {/* La zone de livraison n'est plus annoncée ici : la boutique expédie
+          au-delà de l'Allemagne, et une mention figée contredirait le pays que
+          le client vient de choisir dans son adresse. */}
       <p className="mt-3 flex items-start gap-2 rounded-sm bg-muted px-3 py-2 text-xs text-muted-foreground">
         <Truck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />
-        <span>
-          {t("deliveryTime")} {t("deliveryCountry")}
-        </span>
+        <span>{t("deliveryTime")}</span>
       </p>
     </div>
   );

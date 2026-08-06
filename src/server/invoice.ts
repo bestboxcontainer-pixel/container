@@ -20,6 +20,7 @@
  */
 import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFImage, type PDFPage } from "pdf-lib";
 import { COMPANY } from "@/content/legal";
+import { needsBankDetails } from "@/lib/bankTransfer";
 import type { BankTransferSettings } from "@/lib/bankTransfer";
 import { LOGO_RATIO, logoPngBytes } from "@/server/brandLogo";
 import type { OrderAddress, OrderItemRecord, OrderRecord } from "@/server/orders";
@@ -193,10 +194,11 @@ async function chargerVignette(source: string): Promise<Uint8Array | null> {
  * Coordonnées du virement à porter sur la facture, sous forme de paires
  * étiquette / valeur.
  *
- * Uniquement pour une commande en virement dont le paiement n'est pas encore
- * arrivé : le client règle sur pièce, il ne doit pas avoir à rouvrir son
- * e-mail pour retrouver l'IBAN. Une commande déjà payée, ou réglée autrement,
- * n'a rien à faire d'un appel à virer — la liste rendue est alors vide.
+ * Uniquement pour une commande dont le paiement n'est pas encore arrivé : le
+ * client règle sur pièce, il ne doit pas avoir à rouvrir son e-mail pour
+ * retrouver l'IBAN. Une commande déjà payée, ou réglée à réception (facture,
+ * contre-remboursement), n'a rien à faire d'un appel à virer — la liste rendue
+ * est alors vide.
  *
  * Le texte d'instruction, lui, reste sur la page de confirmation et dans
  * l'e-mail : la facture s'en tient aux mentions factuelles.
@@ -205,7 +207,7 @@ export function lignesVirement(
   order: Pick<OrderRecord, "paymentMethodKey" | "paidAt" | "orderNumber">,
   bank?: BankTransferSettings,
 ): Array<[string, string]> {
-  if (order.paymentMethodKey !== "vorkasse" || order.paidAt || !bank) return [];
+  if (!needsBankDetails(order.paymentMethodKey) || order.paidAt || !bank) return [];
 
   return [
     ["Kontoinhaber", bank.holder],

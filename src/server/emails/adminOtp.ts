@@ -13,7 +13,7 @@
  *   pied de page #4b5563 sur #f1f2f4 (≈ 6,6:1). Tous au-dessus du seuil AA.
  */
 
-import { LOGO_CID } from "@/server/brandLogo";
+import { emailLogoSrc } from "@/server/brandLogo";
 import type { MailMessage } from "@/lib/mailer";
 
 const LOGO_WIDTH = 220;
@@ -44,7 +44,7 @@ export function buildAdminOtpEmail(input: AdminOtpEmailInput): Omit<MailMessage,
   // Image jointe au message plutôt que chargée depuis le site : elle s'affiche
   // même sans adresse publique renseignée, et sans être bloquée par la
   // messagerie. La pièce jointe est ajoutée par sendMail.
-  const logo = `cid:${LOGO_CID}`;
+  const logo = emailLogoSrc();
   const safeName = escapeHtml(name);
 
   const html = `<!doctype html>

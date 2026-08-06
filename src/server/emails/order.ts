@@ -15,10 +15,11 @@
  * automatique des couleurs, fond déclaré sur chaque cellule.
  */
 
-import { LOGO_CID } from "@/server/brandLogo";
+import { emailLogoSrc } from "@/server/brandLogo";
 import { formatCents } from "@/lib/cart";
 import {
   bankInstructionsFor,
+  needsBankDetails,
   renderBankInstructions,
   type BankTransferSettings,
 } from "@/lib/bankTransfer";
@@ -69,15 +70,14 @@ interface LayoutInput {
 }
 
 function layout(input: LayoutInput): string {
-  // Image jointe au message plutôt que chargée depuis le site : elle s'affiche
-  // même sans adresse publique renseignée, et sans être bloquée par la
-  // messagerie. La pièce jointe est ajoutée par sendMail.
-  const logo = `cid:${LOGO_CID}`;
+  // Logo servi par le site quand son adresse est connue : joint au message, il
+  // apparaissait comme une pièce jointe « logo.png » dans plusieurs messageries.
+  const logo = emailLogoSrc();
 
   const intro = input.intro
     .map(
       (paragraph) =>
-        `<p style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:24px; color:#3f4854;">${paragraph}</p>`,
+        `<p class="txt" style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:16px; line-height:26px; color:#3f4854;">${paragraph}</p>`,
     )
     .join("\n");
 
@@ -85,15 +85,15 @@ function layout(input: LayoutInput): string {
     ? `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 20px 0;">
                   <tr>
                     <td align="center" bgcolor="#e3000e" style="background-color:#e3000e; border-radius:4px;">
-                      <a href="${escapeHtml(input.action.url)}" style="display:inline-block; padding:14px 28px; font-family:Arial,Helvetica,sans-serif; font-size:15px; font-weight:bold; color:#ffffff; text-decoration:none;">${escapeHtml(input.action.label)}</a>
+                      <a href="${escapeHtml(input.action.url)}" style="display:inline-block; padding:15px 30px; font-family:Arial,Helvetica,sans-serif; font-size:16px; font-weight:bold; color:#ffffff; text-decoration:none;">${escapeHtml(input.action.label)}</a>
                     </td>
                   </tr>
                 </table>
-                <p style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:20px; color:#4b5563; word-break:break-all;">${escapeHtml(input.action.url)}</p>`
+                <p class="small" style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:21px; color:#4b5563; word-break:break-all;">${escapeHtml(input.action.url)}</p>`
     : "";
 
   const footnote = input.footnote
-    ? `<p style="margin:0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:21px; color:#4b5563;">${input.footnote}</p>`
+    ? `<p class="small" style="margin:0; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:23px; color:#4b5563;">${input.footnote}</p>`
     : "";
 
   return `<!doctype html>
@@ -104,13 +104,27 @@ function layout(input: LayoutInput): string {
     <meta name="color-scheme" content="light" />
     <meta name="supported-color-schemes" content="light" />
     <title>${escapeHtml(input.heading)}</title>
+    <style>
+      /* Sur un téléphone, la marge de 32 px de chaque côté ne laissait plus
+         qu'une colonne étroite : la messagerie réduisait alors le message
+         entier pour le faire tenir, et le texte devenait illisible. On rend
+         les marges à l'écran et on remonte les corps d'un cran. */
+      @media only screen and (max-width: 620px) {
+        .wrap { padding: 16px 8px !important; }
+        .pad { padding-left: 18px !important; padding-right: 18px !important; }
+        .h1 { font-size: 23px !important; line-height: 31px !important; }
+        .txt { font-size: 17px !important; line-height: 27px !important; }
+        .cell { font-size: 16px !important; line-height: 25px !important; }
+        .small { font-size: 15px !important; line-height: 24px !important; }
+      }
+    </style>
   </head>
-  <body style="margin:0; padding:0; background-color:#f1f2f4; color-scheme:light;">
+  <body style="margin:0; padding:0; background-color:#f1f2f4; color-scheme:light; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;">
     <div style="display:none; max-height:0; overflow:hidden; opacity:0;">${escapeHtml(input.preheader)}</div>
 
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f1f2f4;">
       <tr>
-        <td align="center" style="padding:32px 16px;">
+        <td align="center" class="wrap" style="padding:32px 16px;">
           <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%; background-color:#ffffff; border:1px solid #e0e2e6; border-radius:6px;">
             <tr>
               <td align="center" style="background-color:#ffffff; padding:32px 24px 24px 24px; border-radius:6px 6px 0 0;">
@@ -121,18 +135,18 @@ function layout(input: LayoutInput): string {
               <td style="background-color:#e3000e; font-size:0; line-height:0; height:4px;">&nbsp;</td>
             </tr>
             <tr>
-              <td style="background-color:#ffffff; padding:32px 32px 8px 32px;">
-                <h1 style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:20px; line-height:28px; font-weight:bold; color:#001424;">${escapeHtml(input.heading)}</h1>
+              <td class="pad" style="background-color:#ffffff; padding:32px 32px 8px 32px;">
+                <h1 class="h1" style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:22px; line-height:30px; font-weight:bold; color:#001424;">${escapeHtml(input.heading)}</h1>
                 ${intro}
               </td>
             </tr>
             <tr>
-              <td style="background-color:#ffffff; padding:0 32px;">
+              <td class="pad" style="background-color:#ffffff; padding:0 32px;">
                 ${input.blocks.join("\n")}
               </td>
             </tr>
             <tr>
-              <td style="background-color:#ffffff; padding:24px 32px 32px 32px; border-radius:0 0 6px 6px;">
+              <td class="pad" style="background-color:#ffffff; padding:24px 32px 32px 32px; border-radius:0 0 6px 6px;">
                 ${action}
                 ${footnote}
               </td>
@@ -141,7 +155,7 @@ function layout(input: LayoutInput): string {
 
           <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%;">
             <tr>
-              <td align="center" style="padding:20px 16px 0 16px; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:20px; color:#4b5563;">
+              <td align="center" class="small" style="padding:20px 16px 0 16px; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:21px; color:#4b5563;">
                 ${escapeHtml(input.footer)}
               </td>
             </tr>
@@ -159,14 +173,14 @@ function panel(title: string, rows: string[]): string {
     .filter((row) => row.length > 0)
     .map(
       (row) =>
-        `<div style="font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:22px; color:#3f4854;">${row}</div>`,
+        `<div class="cell" style="font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:24px; color:#3f4854;">${row}</div>`,
     )
     .join("\n");
 
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 16px 0; background-color:#f7f8f9; border:1px solid #d6d9de; border-radius:6px;">
                   <tr>
                     <td style="padding:16px 18px;">
-                      <div style="margin:0 0 6px 0; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:18px; font-weight:bold; text-transform:uppercase; letter-spacing:0.6px; color:#001424;">${escapeHtml(title)}</div>
+                      <div class="small" style="margin:0 0 6px 0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:19px; font-weight:bold; text-transform:uppercase; letter-spacing:0.6px; color:#001424;">${escapeHtml(title)}</div>
                       ${body}
                     </td>
                   </tr>
@@ -192,12 +206,12 @@ function itemsTable(
   const rows = order.items
     .map((item) => {
       const title = escapeHtml(`${item.brand} ${item.name}`.trim());
-      const sku = item.sku ? `<br /><span style="font-size:12px; color:#4b5563;">Art. ${escapeHtml(item.sku)}</span>` : "";
-      const unit = item.quantity > 1 ? `<br /><span style="font-size:12px; color:#4b5563;">${escapeHtml(formatCents(item.unitPriceCents))} / St.</span>` : "";
+      const sku = item.sku ? `<br /><span style="font-size:13px; color:#4b5563;">Art. ${escapeHtml(item.sku)}</span>` : "";
+      const unit = item.quantity > 1 ? `<br /><span style="font-size:13px; color:#4b5563;">${escapeHtml(formatCents(item.unitPriceCents))} / St.</span>` : "";
       return `<tr>
-                    <td style="padding:12px 8px 12px 0; border-bottom:1px solid #e0e2e6; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:21px; color:#001424;">${title}${sku}${unit}</td>
-                    <td align="center" style="padding:12px 8px; border-bottom:1px solid #e0e2e6; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:21px; color:#3f4854; white-space:nowrap;">${item.quantity}&nbsp;×</td>
-                    <td align="right" style="padding:12px 0 12px 8px; border-bottom:1px solid #e0e2e6; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:21px; color:#001424; white-space:nowrap;">${escapeHtml(formatCents(item.lineTotalCents))}</td>
+                    <td class="cell" style="padding:12px 8px 12px 0; border-bottom:1px solid #e0e2e6; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:23px; color:#001424;">${title}${sku}${unit}</td>
+                    <td align="center" class="cell" style="padding:12px 8px; border-bottom:1px solid #e0e2e6; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:23px; color:#3f4854; white-space:nowrap;">${item.quantity}&nbsp;×</td>
+                    <td align="right" class="cell" style="padding:12px 0 12px 8px; border-bottom:1px solid #e0e2e6; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:23px; color:#001424; white-space:nowrap;">${escapeHtml(formatCents(item.lineTotalCents))}</td>
                   </tr>`;
     })
     .join("\n");
@@ -210,15 +224,15 @@ function itemsTable(
 
   const summaryRow = (label: string, value: string, strong = false) =>
     `<tr>
-                    <td style="padding:${strong ? "12px" : "4px"} 0 4px 0; font-family:Arial,Helvetica,sans-serif; font-size:${strong ? "16px" : "14px"}; line-height:24px; color:#001424; ${strong ? "font-weight:bold;" : ""}">${escapeHtml(label)}</td>
-                    <td align="right" style="padding:${strong ? "12px" : "4px"} 0 4px 0; font-family:Arial,Helvetica,sans-serif; font-size:${strong ? "16px" : "14px"}; line-height:24px; color:#001424; white-space:nowrap; ${strong ? "font-weight:bold;" : ""}">${escapeHtml(value)}</td>
+                    <td class="cell" style="padding:${strong ? "12px" : "4px"} 0 4px 0; font-family:Arial,Helvetica,sans-serif; font-size:${strong ? "17px" : "15px"}; line-height:25px; color:#001424; ${strong ? "font-weight:bold;" : ""}">${escapeHtml(label)}</td>
+                    <td align="right" class="cell" style="padding:${strong ? "12px" : "4px"} 0 4px 0; font-family:Arial,Helvetica,sans-serif; font-size:${strong ? "17px" : "15px"}; line-height:25px; color:#001424; white-space:nowrap; ${strong ? "font-weight:bold;" : ""}">${escapeHtml(value)}</td>
                   </tr>`;
 
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 8px 0;">
                   <tr>
-                    <th align="left" style="padding:0 8px 8px 0; border-bottom:2px solid #001424; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:18px; text-transform:uppercase; letter-spacing:0.6px; color:#001424;">${escapeHtml(labels.article)}</th>
-                    <th align="center" style="padding:0 8px 8px 8px; border-bottom:2px solid #001424; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:18px; text-transform:uppercase; letter-spacing:0.6px; color:#001424;">${escapeHtml(labels.quantity)}</th>
-                    <th align="right" style="padding:0 0 8px 8px; border-bottom:2px solid #001424; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:18px; text-transform:uppercase; letter-spacing:0.6px; color:#001424;">${escapeHtml(labels.total)}</th>
+                    <th align="left" class="small" style="padding:0 8px 8px 0; border-bottom:2px solid #001424; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:19px; text-transform:uppercase; letter-spacing:0.6px; color:#001424;">${escapeHtml(labels.article)}</th>
+                    <th align="center" class="small" style="padding:0 8px 8px 8px; border-bottom:2px solid #001424; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:19px; text-transform:uppercase; letter-spacing:0.6px; color:#001424;">${escapeHtml(labels.quantity)}</th>
+                    <th align="right" class="small" style="padding:0 0 8px 8px; border-bottom:2px solid #001424; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:19px; text-transform:uppercase; letter-spacing:0.6px; color:#001424;">${escapeHtml(labels.total)}</th>
                   </tr>
                   ${rows}
                 </table>
@@ -228,7 +242,7 @@ function itemsTable(
                   ${summaryRow(shippingLabel, shippingValue)}
                   ${summaryRow(labels.grandTotal, formatCents(order.totalCents), true)}
                   <tr>
-                    <td colspan="2" style="padding:2px 0 0 0; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:20px; color:#4b5563;">${escapeHtml(labels.vat)}</td>
+                    <td colspan="2" class="small" style="padding:2px 0 0 0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:21px; color:#4b5563;">${escapeHtml(labels.vat)}</td>
                   </tr>
                 </table>`;
 }
@@ -311,7 +325,8 @@ function greeting(address: OrderAddress, de: boolean): string {
 /**
  * Bloc « Bankverbindung » joint aux commandes réglées par virement : le client
  * doit pouvoir payer depuis sa messagerie, sans rouvrir la page de
- * confirmation. Rendu vide pour tout autre moyen de paiement.
+ * confirmation. Rendu vide pour la facture et le contre-remboursement, qui se
+ * règlent à réception.
  *
  * Les coordonnées sont passées par l'appelant plutôt que relues ici : la
  * composition des e-mails reste une fonction pure, donc testable sans base.
@@ -321,7 +336,7 @@ function bankTransferBlock(
   bank: BankTransferSettings | undefined,
   de: boolean,
 ): { html: string; text: string[] } {
-  if (order.paymentMethodKey !== "vorkasse" || !bank) return { html: "", text: [] };
+  if (!needsBankDetails(order.paymentMethodKey) || !bank) return { html: "", text: [] };
 
   const instruction = renderBankInstructions(bankInstructionsFor(bank, order.locale), {
     total: formatCents(order.totalCents),

@@ -12,6 +12,7 @@
  */
 
 import { DEFAULT_SHIPPING_METHOD_KEY, isShippingMethodKey, MAX_CART_LINES, MAX_QUANTITY_PER_LINE } from "@/lib/cart";
+import { COUNTRY_CODES, isValidPostalCode } from "@/lib/countries";
 import type { ShippingMethodKey } from "@/lib/cart";
 
 export interface OrderAddress {
@@ -61,11 +62,18 @@ export interface CheckoutInput {
   items: { productId: string; quantity: number }[];
 }
 
-/** Seule zone de livraison desservie pour l'instant. */
-export const SUPPORTED_COUNTRIES = ["DE"] as const;
+/**
+ * Pays de livraison acceptés : la liste complète proposée par le sélecteur
+ * d'adresse. Restreindre ici à l'Allemagne pendant que le formulaire offrait
+ * deux cent cinquante pays donnait un tunnel qui refusait sa propre saisie —
+ * le client remplissait tout, puis se voyait opposer un refus à l'envoi.
+ *
+ * Même liste que l'espace client (`src/server/customers.ts`) : une adresse
+ * enregistrable dans le compte doit être commandable.
+ */
+export const SUPPORTED_COUNTRIES = COUNTRY_CODES;
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const POSTAL_CODE_PATTERNS: Record<string, RegExp> = { DE: /^\d{5}$/ };
 
 function text(value: unknown, max: number): string {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
@@ -91,8 +99,10 @@ function validateAddress(address: OrderAddress): CheckoutErrorCode | undefined {
   if (!(SUPPORTED_COUNTRIES as readonly string[]).includes(address.country)) {
     return "unsupported_country";
   }
-  const pattern = POSTAL_CODE_PATTERNS[address.country];
-  if (pattern && !pattern.test(address.postalCode)) return "invalid_postal_code";
+  // Le format du code postal est vérifié selon le pays quand il est connu ;
+  // ailleurs, seul le champ vide est refusé. Mieux vaut accepter une adresse
+  // dont on ignore la règle postale que perdre la commande.
+  if (!isValidPostalCode(address.country, address.postalCode)) return "invalid_postal_code";
   if (address.city.length < 2) return "invalid_city";
   return undefined;
 }

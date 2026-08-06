@@ -18,6 +18,7 @@ import {
   formatIban,
   isValidBic,
   isValidIban,
+  needsBankDetails,
   parseBankTransferInput,
   renderBankInstructions,
 } from "./bankTransfer";
@@ -154,5 +155,23 @@ describe("Rendu de l'instruction", () => {
       instructions: { de: "Deutscher Text", en: "" },
     };
     assert.equal(bankInstructionsFor(settings, "en"), "Deutscher Text");
+  });
+});
+
+describe("Moyens de paiement qui appellent un virement", () => {
+  it("affiche l'IBAN pour la Vorkasse", () => {
+    assert.equal(needsBankDetails("vorkasse"), true);
+  });
+
+  it("affiche l'IBAN pour un moyen nommé autrement par le commerçant", () => {
+    // Cas réel : la boutique n'a activé que « Sofortüberweisung ». Aucun
+    // prestataire n'encaisse à sa place, le client doit donc virer.
+    assert.equal(needsBankDetails("sofort"), true);
+    assert.equal(needsBankDetails("ueberweisung"), true);
+  });
+
+  it("n'affiche rien pour un paiement réglé à réception", () => {
+    assert.equal(needsBankDetails("rechnung"), false);
+    assert.equal(needsBankDetails("nachnahme"), false);
   });
 });

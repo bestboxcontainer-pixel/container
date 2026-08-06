@@ -18,6 +18,7 @@
  * en indésirable — quand le serveur ne le refuse pas d'emblée.
  */
 import nodemailer, { type Transporter } from "nodemailer";
+import { LOGO_CID, logoPngBytes } from "@/server/brandLogo";
 
 const DEFAULT_FROM_NAME = "Hausgeräte Pfeffer";
 
@@ -26,6 +27,11 @@ export interface MailAttachment {
   filename: string;
   content: Buffer;
   contentType: string;
+  /**
+   * Identifiant d'image incorporée. Renseigné, la pièce jointe n'apparaît pas
+   * en bas du message : elle sert à alimenter un `<img src="cid:…">`.
+   */
+  cid?: string;
 }
 
 export interface MailMessage {
@@ -99,6 +105,30 @@ function getTransporter(settings: SmtpSettings): Transporter {
 }
 
 /**
+ * Joint le logo au message dès qu'un gabarit le réclame par `cid:`.
+ *
+ * Le faire ici plutôt que dans chaque gabarit évite d'avoir à y penser à
+ * l'écriture du message suivant : un en-tête sans logo passerait inaperçu à la
+ * relecture du code, mais pas dans la boîte du client.
+ */
+function withEmbeddedLogo(message: MailMessage): MailAttachment[] | undefined {
+  const jointes = message.attachments ?? [];
+  if (!message.html.includes(`cid:${LOGO_CID}`)) {
+    return jointes.length ? jointes : undefined;
+  }
+
+  return [
+    ...jointes,
+    {
+      filename: "logo.png",
+      content: Buffer.from(logoPngBytes()),
+      contentType: "image/png",
+      cid: LOGO_CID,
+    },
+  ];
+}
+
+/**
  * Envoie un message. Lève une erreur si le serveur refuse, pour que l'appelant
  * puisse répondre autre chose qu'un faux « code envoyé ».
  */
@@ -108,13 +138,15 @@ export async function sendMail(message: MailMessage): Promise<void> {
     throw new Error("SMTP_HOST, SMTP_USER ou SMTP_PASSWORD n'est pas configuré.");
   }
 
+  const attachments = withEmbeddedLogo(message);
+
   await getTransporter(settings).sendMail({
     from: formatSender(settings),
     to: message.to,
     subject: message.subject,
     text: message.text,
     html: message.html,
-    ...(message.attachments?.length ? { attachments: message.attachments } : {}),
+    ...(attachments?.length ? { attachments } : {}),
     // Les réponses arrivent dans la boîte de la boutique, pas dans le vide.
     replyTo: settings.from,
   });

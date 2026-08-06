@@ -15,7 +15,13 @@
  * automatique des couleurs, fond déclaré sur chaque cellule.
  */
 
+import { LOGO_CID } from "@/server/brandLogo";
 import { formatCents } from "@/lib/cart";
+import {
+  bankInstructionsFor,
+  renderBankInstructions,
+  type BankTransferSettings,
+} from "@/lib/bankTransfer";
 import type { MailMessage } from "@/lib/mailer";
 import type { ShippingMethodKey } from "@/lib/cart";
 import type { OrderAddress, OrderRecord } from "@/server/orders";
@@ -63,7 +69,10 @@ interface LayoutInput {
 }
 
 function layout(input: LayoutInput): string {
-  const logo = `${siteUrl()}/images/logo-full.png`;
+  // Image jointe au message plutôt que chargée depuis le site : elle s'affiche
+  // même sans adresse publique renseignée, et sans être bloquée par la
+  // messagerie. La pièce jointe est ajoutée par sendMail.
+  const logo = `cid:${LOGO_CID}`;
 
   const intro = input.intro
     .map(
@@ -299,7 +308,55 @@ function greeting(address: OrderAddress, de: boolean): string {
   return de ? `Guten Tag ${full}` : `Hello ${full}`;
 }
 
-export function buildOrderConfirmationEmail(order: OrderRecord): Omit<MailMessage, "to"> {
+/**
+ * Bloc « Bankverbindung » joint aux commandes réglées par virement : le client
+ * doit pouvoir payer depuis sa messagerie, sans rouvrir la page de
+ * confirmation. Rendu vide pour tout autre moyen de paiement.
+ *
+ * Les coordonnées sont passées par l'appelant plutôt que relues ici : la
+ * composition des e-mails reste une fonction pure, donc testable sans base.
+ */
+function bankTransferBlock(
+  order: OrderRecord,
+  bank: BankTransferSettings | undefined,
+  de: boolean,
+): { html: string; text: string[] } {
+  if (order.paymentMethodKey !== "vorkasse" || !bank) return { html: "", text: [] };
+
+  const instruction = renderBankInstructions(bankInstructionsFor(bank, order.locale), {
+    total: formatCents(order.totalCents),
+    orderNumber: order.orderNumber,
+  });
+
+  const labels = de
+    ? { title: "Bankverbindung", holder: "Kontoinhaber", bank: "Bank", reference: "Verwendungszweck" }
+    : { title: "Bank details", holder: "Account holder", bank: "Bank", reference: "Payment reference" };
+
+  const entries: Array<[string, string]> = [
+    [labels.holder, bank.holder],
+    ["IBAN", bank.iban],
+    ["BIC", bank.bic],
+    ...(bank.bank ? ([[labels.bank, bank.bank]] as Array<[string, string]>) : []),
+    [labels.reference, order.orderNumber],
+  ];
+
+  return {
+    html: panel(labels.title, [
+      escapeHtml(instruction),
+      '<div style="height:10px; line-height:10px;">&nbsp;</div>',
+      ...entries.map(
+        ([label, value]) => `${escapeHtml(label)}: <strong>${escapeHtml(value)}</strong>`,
+      ),
+    ]),
+    text: ["", `${labels.title}:`, instruction, ...entries.map(([label, value]) => `${label}: ${value}`)],
+  };
+}
+
+export function buildOrderConfirmationEmail(
+  order: OrderRecord,
+  /** Coordonnées du virement ; omises, le bloc bancaire n'est pas joint. */
+  bank?: BankTransferSettings,
+): Omit<MailMessage, "to"> {
   const de = order.locale !== "en";
   const lang: OrderEmailLocale = de ? "de" : "en";
   const dateLocale = de ? "de-DE" : "en-GB";
@@ -341,6 +398,8 @@ export function buildOrderConfirmationEmail(order: OrderRecord): Omit<MailMessag
     order.paymentMethodFee ? escapeHtml(order.paymentMethodFee) : "",
   ]);
 
+  const bankBlock = bankTransferBlock(order, bank, de);
+
   const shippingPanel = panel(de ? "Lieferadresse" : "Delivery address", addressLines(order.shipping));
   const billingPanel = order.shippingSameAsBilling
     ? ""
@@ -361,7 +420,7 @@ export function buildOrderConfirmationEmail(order: OrderRecord): Omit<MailMessag
       : `Order ${order.orderNumber} — ${formatCents(order.totalCents)}`,
     heading,
     intro,
-    blocks: [table, payment, shippingPanel, billingPanel, notePanel].filter(Boolean),
+    blocks: [table, payment, bankBlock.html, shippingPanel, billingPanel, notePanel].filter(Boolean),
     action: { label: de ? "Bestellung ansehen" : "View order", url: orderUrl },
     footnote: escapeHtml(footnote),
     footer: de
@@ -385,6 +444,7 @@ export function buildOrderConfirmationEmail(order: OrderRecord): Omit<MailMessag
     vatLabel,
     "",
     `${de ? "Zahlung" : "Payment"}: ${order.paymentMethodLabel}`,
+    ...bankBlock.text,
     "",
     `${de ? "Lieferadresse" : "Delivery address"}:`,
     addressText(order.shipping),

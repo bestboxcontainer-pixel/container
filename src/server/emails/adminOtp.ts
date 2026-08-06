@@ -13,15 +13,12 @@
  *   pied de page #4b5563 sur #f1f2f4 (≈ 6,6:1). Tous au-dessus du seuil AA.
  */
 
+import { LOGO_CID } from "@/server/brandLogo";
 import type { MailMessage } from "@/lib/mailer";
 
 const LOGO_WIDTH = 220;
 // Rapport d'origine du fichier : 1242 × 406
 const LOGO_HEIGHT = Math.round((LOGO_WIDTH * 406) / 1242);
-
-function siteUrl(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/+$/, "");
-}
 
 function escapeHtml(value: string): string {
   return value
@@ -44,7 +41,10 @@ export interface AdminOtpEmailInput {
 
 export function buildAdminOtpEmail(input: AdminOtpEmailInput): Omit<MailMessage, "to"> {
   const { code, name, expiresInMinutes } = input;
-  const logo = `${siteUrl()}/images/logo-full.png`;
+  // Image jointe au message plutôt que chargée depuis le site : elle s'affiche
+  // même sans adresse publique renseignée, et sans être bloquée par la
+  // messagerie. La pièce jointe est ajoutée par sendMail.
+  const logo = `cid:${LOGO_CID}`;
   const safeName = escapeHtml(name);
 
   const html = `<!doctype html>

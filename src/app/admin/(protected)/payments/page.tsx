@@ -3,12 +3,15 @@ import { listPaymentMethods } from "@/server/payments";
 import { PaymentMethodForm } from "@/components/admin/PaymentMethodForm";
 import { PaymentMethodTable } from "@/components/admin/PaymentMethodTable";
 import { GatewaySettingsForm } from "@/components/admin/GatewaySettingsForm";
+import { BankTransferForm } from "@/components/admin/BankTransferForm";
 import { getGatewayAdminState } from "@/server/gateways/admin";
+import { getBankTransferSettings } from "@/server/bankTransfer";
 
 export default async function AdminPaymentsPage() {
   await requireAdminSession();
   const methods = await listPaymentMethods();
   const gatewayState = await getGatewayAdminState();
+  const bankTransfer = await getBankTransferSettings();
   const activeCount = methods.filter((method) => method.enabled).length;
 
   return (
@@ -39,6 +42,18 @@ export default async function AdminPaymentsPage() {
           <span className="font-mono">/api/payments/webhook/&lt;prestataire&gt;</span>.
         </p>
         <GatewaySettingsForm state={gatewayState} methods={methods} />
+      </div>
+
+      {/* Le pendant hors ligne du bloc précédent : ce que le client doit faire,
+          et sur quel compte, quand aucun prestataire n'encaisse pour lui. */}
+      <div className="mt-10">
+        <h2 className="mb-1 text-lg font-black text-foreground">Coordonnées du virement bancaire</h2>
+        <p className="mb-3 text-sm text-muted-foreground">
+          Ces coordonnées et ce texte s&apos;affichent sur la page de confirmation et dans
+          l&apos;e-mail envoyé au client, pour les commandes réglées par virement. Le numéro de
+          commande est ajouté automatiquement comme référence du virement.
+        </p>
+        <BankTransferForm state={bankTransfer} />
       </div>
 
       <div className="mt-10">

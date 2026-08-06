@@ -27,6 +27,7 @@ import {
   buildOrderConfirmationEmail,
   buildOrderNotificationEmail,
 } from "@/server/emails/order";
+import { getBankTransferSettings } from "@/server/bankTransfer";
 import { buildInvoicePdf, invoiceFilename } from "@/server/invoice";
 import type { OrderRecord } from "@/server/orders";
 
@@ -131,7 +132,12 @@ export async function sendOrderEmails(order: OrderRecord): Promise<void> {
     );
   }
 
-  const buyerMessage = buildOrderConfirmationEmail(order);
+  // Coordonnées du virement : jointes à la confirmation et à la facture pour
+  // que le client puisse payer depuis sa messagerie. Les gabarits les ignorent
+  // pour les autres moyens de paiement.
+  const bank = await getBankTransferSettings();
+
+  const buyerMessage = buildOrderConfirmationEmail(order, bank);
   const sellerMessage = buildOrderNotificationEmail(order);
 
   // Facture PDF jointe à la confirmation du client, et à la notification du
@@ -143,7 +149,7 @@ export async function sendOrderEmails(order: OrderRecord): Promise<void> {
     facture = [
       {
         filename: invoiceFilename(order),
-        content: await buildInvoicePdf(order),
+        content: await buildInvoicePdf(order, bank),
         contentType: "application/pdf",
       },
     ];

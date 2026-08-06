@@ -14,6 +14,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import type { OrderRecord } from "@/server/orders";
+import type { BankTransferSettings } from "@/lib/bankTransfer";
 import { buildOrderConfirmationEmail, buildOrderNotificationEmail } from "./order";
 
 const SITE = "https://hausgeratepfeffer.de";
@@ -83,6 +84,18 @@ function order(overrides: Partial<OrderRecord> = {}): OrderRecord {
     ...overrides,
   };
 }
+
+/** Coordonnées telles qu'elles sortent du back-office, IBAN déjà normalisé. */
+const BANK: BankTransferSettings = {
+  holder: "Hausgeräte Pfeffer OHG",
+  iban: "DE89 3704 0044 0532 0130 00",
+  bic: "COBADEFFXXX",
+  bank: "Commerzbank",
+  instructions: {
+    de: "Bitte überweisen Sie {total} unter Angabe von {orderNumber}.",
+    en: "Please transfer {total} quoting {orderNumber}.",
+  },
+};
 
 describe("Confirmation à l'acheteur", () => {
   it("récapitule le numéro, les articles et les montants", () => {
@@ -165,6 +178,42 @@ describe("Confirmation à l'acheteur", () => {
     // Le supplément doit apparaître comme un montant, jamais comme « free ».
     assert.match(en.html, /70,00 €/);
     assert.doesNotMatch(en.text, /Shipping — Express delivery \(24–48 hours\): free/);
+  });
+
+  it("joint les coordonnées du virement à une commande en Vorkasse", () => {
+    const mail = buildOrderConfirmationEmail(order(), BANK);
+
+    for (const part of [mail.html, mail.text]) {
+      assert.match(part, /Hausgeräte Pfeffer OHG/);
+      assert.match(part, /DE89 3704 0044 0532 0130 00/);
+      assert.match(part, /COBADEFFXXX/);
+      assert.match(part, /Commerzbank/);
+      // Instruction du vendeur, montant et numéro de commande substitués.
+      assert.match(part, /Bitte überweisen Sie 903,95 €/);
+      assert.match(part, /HP-2026-000042/);
+      assert.doesNotMatch(part, /\{total\}|\{orderNumber\}/);
+    }
+  });
+
+  it("sert l'instruction anglaise à une commande passée sur /en", () => {
+    const mail = buildOrderConfirmationEmail(order({ locale: "en" }), BANK);
+    assert.match(mail.html, /Please transfer 903,95 €/);
+    assert.doesNotMatch(mail.html, /Bitte überweisen/);
+  });
+
+  it("ne joint aucune coordonnée pour un autre moyen de paiement", () => {
+    const mail = buildOrderConfirmationEmail(
+      order({ paymentMethodKey: "rechnung", paymentMethodLabel: "Kauf auf Rechnung" }),
+      BANK,
+    );
+    assert.doesNotMatch(mail.html, /DE89 3704/);
+    assert.doesNotMatch(mail.text, /IBAN/);
+  });
+
+  it("omet le nom de la banque quand il n'est pas renseigné", () => {
+    const mail = buildOrderConfirmationEmail(order(), { ...BANK, bank: "" });
+    assert.match(mail.html, /DE89 3704 0044 0532 0130 00/);
+    assert.doesNotMatch(mail.html, /Commerzbank/);
   });
 
   it("échappe la remarque saisie par le client", () => {

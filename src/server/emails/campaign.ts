@@ -18,6 +18,7 @@
  *     attaquable en Allemagne, indépendamment du consentement recueilli.
  */
 
+import { LOGO_CID } from "@/server/brandLogo";
 import type { MailMessage } from "@/lib/mailer";
 import { formatCents } from "@/lib/cart";
 import {
@@ -342,7 +343,10 @@ interface RenderInput {
 
 function renderHtml(input: RenderInput & { paragraphs: string[]; token: string }): string {
   const isEnglish = input.locale === "en";
-  const logo = `${siteUrl()}/images/logo-full.png`;
+  // Image jointe au message plutôt que chargée depuis le site : elle s'affiche
+  // même sans adresse publique renseignée, et sans être bloquée par la
+  // messagerie. La pièce jointe est ajoutée par sendMail.
+  const logo = `cid:${LOGO_CID}`;
 
   const body = input.paragraphs
     .map(

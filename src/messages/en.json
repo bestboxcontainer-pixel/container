@@ -435,7 +435,6 @@
       "statusPayment": "Payment status",
       "instructionsTitle": "What happens next",
       "instructions": {
-        "vorkasse": "Please transfer the total of {total} quoting the order number {orderNumber}. Your goods will be dispatched once the payment has arrived.",
         "rechnung": "You will receive the invoice together with the goods. The amount of {total} is due within 14 days of receipt without deduction.",
         "nachnahme": "The amount of {total} will be collected by the courier on delivery. Please have the exact amount ready.",
         "provider": "Payments via {label} are not processed automatically yet. We will contact you by email as soon as the payment provider is connected.",

@@ -10,6 +10,8 @@ import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { formatPrice } from "@/server/store";
 import { getOrderByNumber, type OrderAddress, type OrderRecord } from "@/server/orders";
+import { getBankTransferSettings } from "@/server/bankTransfer";
+import { bankInstructionsFor, renderBankInstructions } from "@/lib/bankTransfer";
 import { ORDER_STATUS_LABELS, PAYMENT_STATUS_LABELS } from "@/lib/orderStatus";
 
 type ConfirmationParams = Promise<{ locale: string; orderNumber: string }>;
@@ -19,15 +21,10 @@ type ConfirmationSearch = Promise<{ token?: string }>;
 // qu'avec le jeton remis à la fin du tunnel, jamais avec le seul numéro.
 export const dynamic = "force-dynamic";
 
-// Coordonnées bancaires de démonstration. Elles doivent impérativement être
-// remplacées par les vraies avant la mise en production — d'où l'avertissement
-// affiché en toutes lettres sur la page.
-const DEMO_BANK = {
-  holder: "Hausgeräte Pfeffer OHG (Demo)",
-  iban: "DE02 1203 0000 0000 2020 51",
-  bic: "BYLADEM1001",
-  bank: "Musterbank (Testdaten)",
-};
+// Les coordonnées bancaires du virement se saisissent dans le back-office
+// (/admin/payments) et sont relues ici. Tant qu'elles n'ont pas été
+// renseignées, ce sont celles de la démonstration qui s'affichent — avec
+// l'avertissement qui va avec.
 
 /** Moyens de paiement encore branchés manuellement, faute de prestataire configuré. */
 const PROVIDER_KEYS = new Set(["paypal", "kreditkarte", "lastschrift", "sofort", "klarna", "applepay"]);
@@ -298,6 +295,7 @@ async function PaymentInstructions({ order }: { order: OrderRecord }) {
 
   const total = formatPrice(order.totalCents);
   const key = order.paymentMethodKey;
+  const bank = await getBankTransferSettings();
 
   return (
     <section className="rounded-sm border border-border bg-white p-5">
@@ -308,7 +306,10 @@ async function PaymentInstructions({ order }: { order: OrderRecord }) {
       {key === "vorkasse" && (
         <>
           <p className="text-sm leading-relaxed text-foreground">
-            {t("confirmation.instructions.vorkasse", { total, orderNumber: order.orderNumber })}
+            {renderBankInstructions(bankInstructionsFor(bank, order.locale), {
+              total,
+              orderNumber: order.orderNumber,
+            })}
           </p>
 
           <dl className="mt-4 grid grid-cols-1 gap-x-6 gap-y-2 rounded-sm bg-muted p-4 text-sm sm:grid-cols-2">
@@ -316,26 +317,30 @@ async function PaymentInstructions({ order }: { order: OrderRecord }) {
               <dt className="text-xs font-bold text-muted-foreground uppercase">
                 {t("confirmation.bankHolder")}
               </dt>
-              <dd className="font-semibold text-foreground">{DEMO_BANK.holder}</dd>
-            </div>
-            <div className="flex justify-between gap-3 sm:block">
-              <dt className="text-xs font-bold text-muted-foreground uppercase">
-                {t("confirmation.bankBank")}
-              </dt>
-              <dd className="font-semibold text-foreground">{DEMO_BANK.bank}</dd>
+              <dd className="font-semibold text-foreground">{bank.holder}</dd>
             </div>
             <div className="flex justify-between gap-3 sm:block">
               <dt className="text-xs font-bold text-muted-foreground uppercase">
                 {t("confirmation.bankIban")}
               </dt>
-              <dd className="font-mono font-semibold text-foreground">{DEMO_BANK.iban}</dd>
+              <dd className="font-mono font-semibold text-foreground">{bank.iban}</dd>
             </div>
             <div className="flex justify-between gap-3 sm:block">
               <dt className="text-xs font-bold text-muted-foreground uppercase">
                 {t("confirmation.bankBic")}
               </dt>
-              <dd className="font-mono font-semibold text-foreground">{DEMO_BANK.bic}</dd>
+              <dd className="font-mono font-semibold text-foreground">{bank.bic}</dd>
             </div>
+            {/* Le nom de l'établissement est facultatif : rien ne s'affiche
+                plutôt qu'un intitulé suivi du vide. */}
+            {bank.bank && (
+              <div className="flex justify-between gap-3 sm:block">
+                <dt className="text-xs font-bold text-muted-foreground uppercase">
+                  {t("confirmation.bankBank")}
+                </dt>
+                <dd className="font-semibold text-foreground">{bank.bank}</dd>
+              </div>
+            )}
             <div className="flex justify-between gap-3 sm:col-span-2 sm:block">
               <dt className="text-xs font-bold text-muted-foreground uppercase">
                 {t("confirmation.bankReference")}
@@ -344,10 +349,14 @@ async function PaymentInstructions({ order }: { order: OrderRecord }) {
             </div>
           </dl>
 
-          <p className="mt-3 flex items-start gap-2 rounded-sm border border-accent bg-accent/15 px-4 py-3 text-xs font-semibold text-foreground">
-            <Landmark className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
-            <span>{t("confirmation.bankDemoNotice")}</span>
-          </p>
+          {/* L'avertissement disparaît dès que de vraies coordonnées ont été
+              enregistrées dans le back-office. */}
+          {!bank.configured && (
+            <p className="mt-3 flex items-start gap-2 rounded-sm border border-accent bg-accent/15 px-4 py-3 text-xs font-semibold text-foreground">
+              <Landmark className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
+              <span>{t("confirmation.bankDemoNotice")}</span>
+            </p>
+          )}
         </>
       )}
 

@@ -9,6 +9,7 @@
  * une version anglaise complète choisie d'après la langue du compte.
  */
 
+import { LOGO_CID } from "@/server/brandLogo";
 import type { MailMessage } from "@/lib/mailer";
 
 export type EmailLocale = "de" | "en";
@@ -41,7 +42,10 @@ interface LayoutInput {
 
 /** Ossature commune : logo, filet rouge, contenu, pied de page. */
 function layout(input: LayoutInput): string {
-  const logo = `${siteUrl()}/images/logo-full.png`;
+  // Image jointe au message plutôt que chargée depuis le site : elle s'affiche
+  // même sans adresse publique renseignée, et sans être bloquée par la
+  // messagerie. La pièce jointe est ajoutée par sendMail.
+  const logo = `cid:${LOGO_CID}`;
   const lang = input.locale;
   const footer =
     lang === "en"

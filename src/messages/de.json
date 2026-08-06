@@ -435,7 +435,6 @@
       "statusPayment": "Zahlungsstatus",
       "instructionsTitle": "So geht es weiter",
       "instructions": {
-        "vorkasse": "Bitte überweisen Sie den Gesamtbetrag von {total} unter Angabe der Bestellnummer {orderNumber}. Ihre Ware wird nach Zahlungseingang versandt.",
         "rechnung": "Sie erhalten die Rechnung mit der Ware. Der Betrag von {total} ist innerhalb von 14 Tagen nach Erhalt ohne Abzug fällig.",
         "nachnahme": "Der Betrag von {total} wird bei der Übergabe durch den Zusteller kassiert. Bitte halten Sie das Geld passend bereit.",
         "provider": "Die Zahlung über {label} wird derzeit noch nicht automatisch verarbeitet. Wir melden uns per E-Mail, sobald der Zahlungsdienstleister im Shop freigeschaltet ist.",

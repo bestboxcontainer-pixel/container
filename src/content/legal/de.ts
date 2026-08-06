@@ -183,7 +183,7 @@ export const deLegalPages: LegalPageMap = {
         heading: "§ 4 Preise und Versandkosten",
         body:
           "Alle angegebenen Preise sind Endpreise in Euro und enthalten die gesetzliche Umsatzsteuer. Sie verstehen sich zuzüglich Versandkosten, sofern auf der Produktseite nichts anderes angegeben ist.\n\n" +
-          "Innerhalb Deutschlands liefern wir ab einem Bestellwert von 50 Euro versandkostenfrei. Unterhalb dieser Grenze berechnen wir eine Versandkostenpauschale; für Großgeräte, die per Spedition zugestellt werden, sowie für optionale Zusatzleistungen wie Anschluss und Montage gelten gesonderte Entgelte. Alle Beträge werden vor Abschluss der Bestellung im Warenkorb ausgewiesen. Einzelheiten finden Sie auf der Seite „Versand & Lieferung“.\n\n" +
+          "Der Standardversand innerhalb Deutschlands ist kostenlos, ohne Mindestbestellwert. Wünschen Sie eine schnellere Zustellung, kostet der Expressversand pauschal 70,00 Euro. Für optionale Zusatzleistungen wie Anschluss, Montage oder die Lieferung bis zum Aufstellort gelten gesonderte Entgelte; diese Leistungen vereinbaren Sie vor oder nach der Bestellung mit unserem Kundenservice. Die Versandkosten werden vor Abschluss der Bestellung im Warenkorb ausgewiesen. Einzelheiten finden Sie auf der Seite „Versand & Lieferung“.\n\n" +
           "Bei Waren, die nach Gewicht, Volumen, Länge oder Fläche angeboten werden, weisen wir zusätzlich den Grundpreis gemäß Preisangabenverordnung aus. Bei Preisermäßigungen nennen wir den niedrigsten Gesamtpreis, den wir in den letzten 30 Tagen vor der Ermäßigung angewendet haben.",
       },
       {
@@ -197,8 +197,8 @@ export const deLegalPages: LegalPageMap = {
       {
         heading: "§ 6 Zahlungsbedingungen",
         body:
-          "Wir bieten Kauf auf Rechnung, PayPal, Kreditkarte, SEPA-Lastschrift und Vorkasse per Überweisung an. Welche Zahlungsarten im Einzelfall zur Verfügung stehen, wird Ihnen im Bestellprozess angezeigt; wir behalten uns vor, einzelne Zahlungsarten auszuschließen.\n\n" +
-          "Beim Kauf auf Rechnung ist der Rechnungsbetrag innerhalb von 14 Tagen ab Rechnungsdatum ohne Abzug zur Zahlung fällig. Diese Zahlungsart setzt eine erfolgreiche Bonitätsprüfung voraus und steht nur Verbraucherinnen und Verbrauchern mit Liefer- und Rechnungsanschrift in Deutschland zur Verfügung.\n\n" +
+          "Wir bieten Vorkasse per Überweisung, Sofortüberweisung, PayPal, Kreditkarte und SEPA-Lastschrift an. Welche Zahlungsarten im Einzelfall zur Verfügung stehen, wird Ihnen im Bestellprozess angezeigt; wir behalten uns vor, einzelne Zahlungsarten auszuschließen.\n\n" +
+          "Bei Vorkasse erhalten Sie unsere Bankdaten mit der Bestellbestätigung; die Bestellnummer dient als Verwendungszweck. Wir reservieren die Ware sieben Kalendertage und versenden nach Eingang der Zahlung. Geht die Zahlung innerhalb der Reservierungsfrist nicht ein, stornieren wir die Bestellung.\n\n" +
           "Bei SEPA-Lastschrift erteilen Sie uns ein SEPA-Lastschriftmandat. Über den Einzug informieren wir Sie mindestens einen Bankarbeitstag im Voraus (verkürzte Vorabankündigung). Für Rücklastschriften, die Sie zu vertreten haben, können wir die tatsächlich angefallenen Bankentgelte in Rechnung stellen.\n\n" +
           "Für die Nutzung gängiger SEPA-Zahlungsarten und Zahlungskarten berechnen wir kein zusätzliches Entgelt (§ 270a BGB). Kommen Sie in Zahlungsverzug, gelten die gesetzlichen Regelungen; als Verbraucher schulden Sie Verzugszinsen in Höhe von fünf Prozentpunkten über dem Basiszinssatz.",
       },
@@ -317,8 +317,8 @@ export const deLegalPages: LegalPageMap = {
           "Die Zahlungsdienstleister verarbeiten die Daten in eigener Verantwortung. Rechtsgrundlage der Übermittlung ist Artikel 6 Absatz 1 Buchstabe b DSGVO. Kreditkarten- und Bankdaten werden ausschließlich beim jeweiligen Dienstleister erhoben; wir speichern keine vollständigen Zahlungsdaten.",
       },
       {
-        heading: "7. Bonitätsprüfung beim Kauf auf Rechnung",
-        body: "Bieten wir Ihnen den Kauf auf Rechnung oder eine Ratenzahlung an, holen wir vorab eine Bonitätsauskunft bei einer Wirtschaftsauskunftei ein (Name und Anschrift vor der Veröffentlichung ergänzen). Die Auskunftei erhält hierfür Ihre Identitäts- und Anschriftsdaten. Rechtsgrundlage ist Artikel 6 Absatz 1 Buchstabe f DSGVO; unser berechtigtes Interesse liegt im Schutz vor Zahlungsausfällen. Sie können der Verarbeitung nach Artikel 21 DSGVO widersprechen, dann steht diese Zahlungsart jedoch nicht zur Verfügung.",
+        heading: "7. Keine Bonitätsprüfung",
+        body: "Wir bieten weder Kauf auf Rechnung noch Ratenzahlung an. Eine Bonitätsauskunft bei einer Wirtschaftsauskunftei holen wir deshalb nicht ein, und wir übermitteln Ihre Daten zu diesem Zweck an niemanden. Sollten wir eine solche Zahlungsart künftig anbieten, ergänzen wir diese Erklärung vorher um die Auskunftei, die Rechtsgrundlage und Ihr Widerspruchsrecht.",
       },
       {
         heading: "8. Versand und Montageservice",
@@ -412,7 +412,7 @@ export const deLegalPages: LegalPageMap = {
           "Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen.\n\n" +
           "Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die Waren in Besitz genommen haben bzw. hat.\n\n" +
           `Um Ihr Widerrufsrecht auszuüben, müssen Sie uns (${COMPANY.name}, ${COMPANY.street}, ${COMPANY.city}, ${COMPANY.country}, Telefon ${COMPANY.phone}, E-Mail ${COMPANY.email}) mittels einer eindeutigen Erklärung (z. B. ein mit der Post versandter Brief oder eine E-Mail) über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren. Sie können dafür das beigefügte Muster-Widerrufsformular verwenden, das jedoch nicht vorgeschrieben ist.\n\n` +
-          `Sie können Ihr Widerrufsrecht auch online unter ${COMPANY.domain}/widerruf/online ausüben. Bei Nutzung der Online-Funktion übermitteln wir Ihnen auf einem dauerhaften Datenträger unverzüglich eine Eingangsbestätigung mit Informationen zum Inhalt der Widerrufserklärung sowie Datum und Uhrzeit ihres Eingangs.\n\n` +
+          "Über den Eingang Ihrer Widerrufserklärung senden wir Ihnen unverzüglich eine Bestätigung per E-Mail, mit Datum und Uhrzeit des Eingangs.\n\n" +
           "Zur Wahrung der Widerrufsfrist reicht es aus, dass Sie die Mitteilung über die Ausübung des Widerrufsrechts vor Ablauf der Widerrufsfrist absenden.",
       },
       {
@@ -432,11 +432,12 @@ export const deLegalPages: LegalPageMap = {
           "Wird eine Ware in mehreren Teilsendungen oder Stücken geliefert – etwa eine Einbauküche oder ein Gerät mit separatem Zubehör –, beginnt die Frist an dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die letzte Teilsendung oder das letzte Stück in Besitz genommen haben bzw. hat.",
       },
       {
-        heading: "Online-Widerrufsfunktion nach § 356a BGB",
+        heading: "Widerruf in Textform",
         body:
-          "Seit dem 19. Juni 2026 stellen wir Ihnen zusätzlich eine elektronische Widerrufsfunktion zur Verfügung. Sie finden die Schaltfläche „Vertrag widerrufen“ während der gesamten Widerrufsfrist gut sichtbar in Ihrem Kundenkonto und auf dieser Seite.\n\n" +
-          "Der Widerruf erfolgt in zwei Schritten: Zuerst öffnen Sie über die Schaltfläche das Widerrufsformular, in dem Sie Ihren Namen, die Angaben zur Identifizierung des Vertrags oder Vertragsteils sowie eine elektronische Kontaktmöglichkeit für die Eingangsbestätigung angeben. Anschließend bestätigen Sie Ihre Erklärung über die gesonderte Schaltfläche „Widerruf bestätigen“.\n\n" +
-          "Unmittelbar danach erhalten Sie von uns auf einem dauerhaften Datenträger – in der Regel per E-Mail – eine Bestätigung mit dem Inhalt Ihrer Widerrufserklärung sowie Datum und Uhrzeit des Eingangs.",
+          "Für den Widerruf genügt eine eindeutige Erklärung in Textform. Am schnellsten geht es per E-Mail an " +
+          `${COMPANY.email} – nennen Sie darin Ihren Namen, Ihre Bestellnummer und den Artikel, den Sie zurückgeben möchten. Ebenso möglich sind ein Brief an die im Impressum genannte Anschrift oder ein Anruf unter ${COMPANY.phone}.\n\n` +
+          "Sie können dafür das unten abgedruckte Muster-Widerrufsformular verwenden; vorgeschrieben ist es nicht.\n\n" +
+          "Über den Eingang Ihrer Erklärung erhalten Sie unverzüglich eine Bestätigung per E-Mail, mit Datum und Uhrzeit des Eingangs.",
       },
       {
         heading: "Muster-Widerrufsformular",
@@ -481,7 +482,7 @@ export const deLegalPages: LegalPageMap = {
     slug: "versand",
     title: "Versand und Lieferung",
     intro: intro(
-      "Hier finden Sie alle Informationen zu Versandkosten, Lieferzeiten, Speditionslieferung, Anschluss- und Montageservice sowie zur Mitnahme Ihres Altgeräts. Die genannten Entgelte und Fristen sind Beispielwerte und müssen mit den tatsächlichen Logistikverträgen abgeglichen werden.",
+      "Hier finden Sie alle Informationen zu Versandkosten, Lieferzeiten, Speditionslieferung, Anschluss- und Montageservice sowie zur Mitnahme Ihres Altgeräts.",
     ),
     updatedAt: UPDATED_AT,
     sections: [
@@ -489,17 +490,15 @@ export const deLegalPages: LegalPageMap = {
         heading: "Versandkosten auf einen Blick",
         body: "Alle Preise verstehen sich inklusive der gesetzlichen Umsatzsteuer. Die für Ihre Bestellung geltenden Versandkosten werden Ihnen im Warenkorb ausgewiesen, bevor Sie die Bestellung abschließen.",
         list: [
-          "Paketversand innerhalb Deutschlands: 4,95 Euro",
-          "Versandkostenfrei ab einem Bestellwert von 50 Euro",
-          "Speditionsversand für Großgeräte (Waschmaschinen, Kühlgeräte, Herde, Großbildfernseher): 39,90 Euro",
-          "Lieferung auf die deutschen Inseln: Aufschlag von 29,00 Euro",
-          "Sperrgutzuschlag bei besonders langen oder schweren Artikeln: 19,00 Euro",
+          "Standardversand innerhalb Deutschlands: kostenlos, ohne Mindestbestellwert",
+          "Expressversand innerhalb Deutschlands: 70,00 Euro",
+          "Zusatzleistungen wie Lieferung bis zum Aufstellort, Anschluss oder Montage: nach Vereinbarung, siehe unten",
         ],
       },
       {
         heading: "Lieferzeiten",
         body:
-          "Vorrätige Artikel versenden wir innerhalb von einem bis drei Werktagen. Werktage sind Montag bis Samstag, ausgenommen gesetzliche Feiertage am Sitz unseres Lagers.\n\n" +
+          "Vorrätige Artikel erreichen Sie im Standardversand innerhalb von drei bis fünf Werktagen, im Expressversand innerhalb von 24 bis 48 Stunden. Werktage sind Montag bis Samstag, ausgenommen gesetzliche Feiertage am Sitz unseres Lagers.\n\n" +
           "Bei Vorkasse beginnt die Lieferzeit am Tag nach Erteilung des Zahlungsauftrags, bei allen anderen Zahlungsarten am Tag nach Vertragsschluss.\n\n" +
           "Artikel mit dem Hinweis „Auf Anfrage“ bestellen wir für Sie beim Hersteller. Die Lieferzeit beträgt in diesen Fällen üblicherweise zwei bis vier Wochen; die konkrete Angabe finden Sie auf der Produktseite.",
       },
@@ -511,17 +510,17 @@ export const deLegalPages: LegalPageMap = {
         heading: "Speditionslieferung von Großgeräten",
         body:
           "Großgeräte liefern wir mit einer Zwei-Mann-Spedition. Die Spedition meldet sich vorab telefonisch oder per SMS und vereinbart mit Ihnen ein Zeitfenster.\n\n" +
-          "Standardmäßig erfolgt die Lieferung frei Bordsteinkante. Gegen Aufpreis bringen wir das Gerät bis an den Aufstellort in Ihrer Wohnung, auch in obere Etagen. Bitte prüfen Sie vor der Bestellung, ob Treppenhaus, Türen und Aufzug ausreichend dimensioniert sind, und geben Sie Besonderheiten bei der Bestellung an.",
+          "Standardmäßig erfolgt die Lieferung frei Bordsteinkante. Gegen Aufpreis bringen wir das Gerät bis an den Aufstellort in Ihrer Wohnung, auch in obere Etagen. Diese Zusatzleistungen sind nicht Teil des Warenkorbs: Sprechen Sie uns vor oder unmittelbar nach der Bestellung an, dann stimmen wir sie mit der Spedition ab. Bitte prüfen Sie vorher, ob Treppenhaus, Türen und Aufzug ausreichend dimensioniert sind.",
         list: [
           "Lieferung frei Bordsteinkante: im Speditionsversand enthalten",
-          "Lieferung bis zum Aufstellort (inklusive Etagen): 29,00 Euro",
-          "Auspacken und Entsorgung der Transportverpackung: 9,00 Euro",
+          "Lieferung bis zum Aufstellort (inklusive Etagen): 29,00 Euro, auf Anfrage",
+          "Auspacken und Entsorgung der Transportverpackung: 9,00 Euro, auf Anfrage",
         ],
       },
       {
         heading: "Anschluss- und Montageservice",
         body:
-          "Auf Wunsch schließen unsere Servicepartner Ihr neues Gerät fachgerecht an und nehmen es in Betrieb. Sie buchen die Leistung im Bestellprozess hinzu.\n\n" +
+          "Auf Wunsch schließen unsere Servicepartner Ihr neues Gerät fachgerecht an und nehmen es in Betrieb. Die Leistung buchen Sie nicht im Warenkorb, sondern telefonisch oder per E-Mail – am besten vor der Bestellung, damit wir sie mit der Lieferung zusammen einplanen können.\n\n" +
           "Voraussetzung ist, dass alle bauseitigen Anschlüsse (Strom, Wasser, Abwasser, Abluft, Antennen- oder Netzwerkanschluss) vorhanden, frei zugänglich und normgerecht sind. Elektroarbeiten an der Hausinstallation dürfen wir nicht ausführen.",
         list: [
           "Anschluss einer Waschmaschine, eines Trockners oder eines Geschirrspülers: 49,00 Euro",
@@ -534,7 +533,7 @@ export const deLegalPages: LegalPageMap = {
       {
         heading: "Mitnahme des Altgeräts",
         body:
-          "Bei der Lieferung eines neuen Elektrogeräts nehmen wir Ihr gleichartiges Altgerät auf Wunsch unentgeltlich mit (1:1-Rücknahme). Bitte geben Sie diesen Wunsch bereits bei der Bestellung an – wir fragen Sie im Bestellprozess ausdrücklich danach, damit die Spedition die Rücknahme einplanen kann.\n\n" +
+          "Bei der Lieferung eines neuen Elektrogeräts nehmen wir Ihr gleichartiges Altgerät auf Wunsch unentgeltlich mit (1:1-Rücknahme). Melden Sie den Wunsch bitte telefonisch oder per E-Mail an, sobald Sie bestellt haben – gern auch schon davor –, damit die Spedition die Rücknahme einplanen kann. Sie können den Hinweis auch im Anmerkungsfeld der Bestellung hinterlassen.\n\n" +
           "Das Altgerät muss abgeklemmt, entleert, gereinigt und frei zugänglich am Ort der Anlieferung bereitstehen. Die Demontage eines fest eingebauten Altgeräts ist nicht Bestandteil der kostenlosen Mitnahme, kann aber als kostenpflichtige Zusatzleistung gebucht werden.\n\n" +
           "Alle weiteren Rücknahmemöglichkeiten – insbesondere für kleine Altgeräte ohne Neukauf – beschreiben wir auf der Seite „Elektroaltgeräte & Batterien“.",
       },
@@ -543,8 +542,8 @@ export const deLegalPages: LegalPageMap = {
         body: "Bestellen Sie mehrere Artikel mit unterschiedlicher Verfügbarkeit, versenden wir vorrätige Positionen in der Regel sofort und liefern den Rest nach. Zusätzliche Versandkosten entstehen Ihnen dadurch nicht. Für den Beginn der Widerrufsfrist ist der Erhalt der letzten Ware maßgeblich.",
       },
       {
-        heading: "Sendungsverfolgung",
-        body: "Sobald Ihre Bestellung unser Lager verlässt, erhalten Sie eine Versandbestätigung per E-Mail mit einem Link zur Sendungsverfolgung. Bei Speditionslieferungen enthält die E-Mail zusätzlich die Kontaktdaten der Spedition für die Terminabstimmung.",
+        heading: "Wo bleibt meine Bestellung?",
+        body: "Den Stand Ihrer Bestellung sehen Sie jederzeit über den Link in Ihrer Bestellbestätigung, und in Ihrem Kundenkonto unter „Meine Bestellungen“. Sobald die Ware unser Lager verlässt, setzen wir den Status auf „versandt“. Die Sendungsnummer und – bei Speditionslieferungen – die Kontaktdaten für die Terminabstimmung teilen wir Ihnen per E-Mail mit, sobald sie uns vorliegen.",
       },
       {
         heading: "Transportschäden",
@@ -560,15 +559,19 @@ export const deLegalPages: LegalPageMap = {
     slug: "zahlungsarten",
     title: "Zahlungsarten",
     intro: intro(
-      "Sie zahlen bei uns bequem und sicher: auf Rechnung, mit PayPal, per Kreditkarte, per SEPA-Lastschrift oder per Vorkasse-Überweisung. Welche Zahlungsarten im Einzelfall verfügbar sind, sehen Sie im Bestellprozess. Die eingesetzten Zahlungsdienstleister sind vor der Veröffentlichung konkret zu benennen.",
+      "Sie zahlen bei uns per Vorkasse-Überweisung, per Sofortüberweisung, mit PayPal, per Kreditkarte oder per SEPA-Lastschrift. Welche Zahlungsarten im Einzelfall verfügbar sind, sehen Sie im Bestellprozess.",
     ),
     updatedAt: UPDATED_AT,
     sections: [
       {
-        heading: "Kauf auf Rechnung",
+        heading: "Vorkasse per Überweisung",
         body:
-          "Sie erhalten die Ware zuerst und zahlen anschließend innerhalb von 14 Tagen ab Rechnungsdatum ohne Abzug. Die Rechnung liegt der Sendung bei und wird zusätzlich per E-Mail versendet.\n\n" +
-          "Der Kauf auf Rechnung setzt eine erfolgreiche Bonitätsprüfung voraus und steht Verbraucherinnen und Verbrauchern ab 18 Jahren mit identischer Rechnungs- und Lieferanschrift in Deutschland zur Verfügung. Bei Erstbestellungen kann der Höchstbetrag begrenzt sein.",
+          "Mit der Bestellbestätigung erhalten Sie unsere Bankverbindung und die Bestellnummer, die Sie bitte als Verwendungszweck angeben. Dieselben Angaben stehen auf der Rechnung, die der Bestätigung als PDF beiliegt.\n\n" +
+          "Wir reservieren die Ware sieben Kalendertage. Nach Eingang der Zahlung versenden wir die Bestellung innerhalb von einem bis drei Werktagen. Geht die Zahlung nicht innerhalb der Reservierungsfrist ein, stornieren wir die Bestellung und Sie erhalten eine Nachricht von uns.",
+      },
+      {
+        heading: "Sofortüberweisung",
+        body: "Sie werden am Ende des Bestellvorgangs zum Online-Banking Ihrer Bank weitergeleitet und geben die Überweisung dort direkt frei. Wir erhalten die Zahlungsbestätigung unmittelbar und können sofort mit dem Versand beginnen – ein eigenes Konto bei einem Zahlungsdienst brauchen Sie dafür nicht.",
       },
       {
         heading: "PayPal",
@@ -585,10 +588,6 @@ export const deLegalPages: LegalPageMap = {
           "Über den Einzug informieren wir Sie mindestens einen Bankarbeitstag vorher (verkürzte Vorabankündigung). Bitte sorgen Sie für ausreichende Kontodeckung: Für Rücklastschriften, die Sie zu vertreten haben, stellen wir die tatsächlich angefallenen Bankentgelte in Rechnung.",
       },
       {
-        heading: "Vorkasse per Überweisung",
-        body: "Nach der Bestellung erhalten Sie eine E-Mail mit unseren Bankdaten und der Bestellnummer als Verwendungszweck. Wir reservieren die Ware sieben Kalendertage. Nach Eingang der Zahlung versenden wir die Bestellung innerhalb von einem bis drei Werktagen. Geht die Zahlung nicht innerhalb der Reservierungsfrist ein, stornieren wir die Bestellung.",
-      },
-      {
         heading: "Keine Zusatzentgelte",
         body: "Für die Nutzung gängiger SEPA-Zahlungsarten und gängiger Zahlungskarten berechnen wir kein zusätzliches Entgelt (§ 270a BGB). Der im Warenkorb angezeigte Gesamtbetrag ist der Betrag, den Sie tatsächlich zahlen.",
       },
@@ -601,8 +600,8 @@ export const deLegalPages: LegalPageMap = {
         body: "Kommen Sie mit einer Zahlung in Verzug, gelten die gesetzlichen Regelungen. Verbraucherinnen und Verbraucher schulden Verzugszinsen in Höhe von fünf Prozentpunkten über dem Basiszinssatz. Wir melden uns vor jeder weiteren Maßnahme zunächst mit einer Zahlungserinnerung.",
       },
       {
-        heading: "Rückerstattungen und Gutscheine",
-        body: "Erstattungen erfolgen grundsätzlich über das ursprünglich verwendete Zahlungsmittel. Bei Vorkasse und SEPA-Lastschrift überweisen wir auf das Konto, von dem die Zahlung erfolgt ist. Wurde ein Gutschein eingelöst, schreiben wir dessen Wert bei einer Rückabwicklung wieder als Gutschein gut. Gutscheine sind nicht bar auszahlbar.",
+        heading: "Rückerstattungen",
+        body: "Erstattungen erfolgen grundsätzlich über das ursprünglich verwendete Zahlungsmittel. Bei Vorkasse, Sofortüberweisung und SEPA-Lastschrift überweisen wir auf das Konto, von dem die Zahlung erfolgt ist. Kosten entstehen Ihnen dabei nicht.",
       },
     ],
   },
@@ -628,9 +627,8 @@ export const deLegalPages: LegalPageMap = {
         heading: "So melden Sie eine Rücksendung an",
         body: "Bitte melden Sie die Rücksendung vorab an – so ordnen wir Ihr Paket sofort zu und erstatten schneller.",
         list: [
-          `Online-Widerrufsfunktion: Schaltfläche „Vertrag widerrufen“ in Ihrem Kundenkonto oder unter ${COMPANY.domain}/widerruf/online`,
-          "Retourenportal: Bestellnummer und E-Mail-Adresse eingeben, Artikel auswählen, Versandlabel herunterladen",
           `E-Mail an ${COMPANY.email} mit Bestellnummer und Artikelbezeichnung`,
+          "Muster-Widerrufsformular von der Seite „Widerrufsrecht“, ausgefüllt per E-Mail oder Post – vorgeschrieben ist es nicht",
           `Telefon: ${COMPANY.phone}, montags bis samstags von 8 bis 20 Uhr`,
         ],
       },
@@ -770,11 +768,11 @@ export const deLegalPages: LegalPageMap = {
     sections: [
       {
         heading: "Wie lange dauert die Lieferung?",
-        body: "Vorrätige Artikel sind in der Regel innerhalb von einem bis drei Werktagen bei Ihnen. Bei Speditionsware für Großgeräte meldet sich die Spedition vorab telefonisch und vereinbart ein Zeitfenster mit Ihnen. Artikel mit dem Hinweis „Auf Anfrage“ bestellen wir beim Hersteller; hier dauert es meist zwei bis vier Wochen.",
+        body: "Vorrätige Artikel sind im Standardversand innerhalb von drei bis fünf Werktagen bei Ihnen, im Expressversand innerhalb von 24 bis 48 Stunden. Bei Speditionsware für Großgeräte meldet sich die Spedition vorab telefonisch und vereinbart ein Zeitfenster mit Ihnen. Artikel mit dem Hinweis „Auf Anfrage“ bestellen wir beim Hersteller; hier dauert es meist zwei bis vier Wochen.",
       },
       {
         heading: "Was kostet der Versand?",
-        body: "Ab einem Bestellwert von 50 Euro liefern wir innerhalb Deutschlands versandkostenfrei. Darunter berechnen wir 4,95 Euro für den Paketversand. Großgeräte, die per Spedition kommen, kosten pauschal 39,90 Euro Versand. Für Zustellungen auf die deutschen Inseln kommen 29,00 Euro hinzu, für besonders lange oder schwere Artikel ein Sperrgutzuschlag von 19,00 Euro. Die für Ihre Bestellung geltenden Kosten sehen Sie immer im Warenkorb, bevor Sie bestellen.",
+        body: "Der Standardversand innerhalb Deutschlands ist kostenlos – ohne Mindestbestellwert, unabhängig von Größe und Gewicht der Ware. Wünschen Sie die Lieferung innerhalb von 24 bis 48 Stunden, kostet der Expressversand pauschal 70,00 Euro. Andere Zuschläge gibt es nicht. Die für Ihre Bestellung geltenden Kosten sehen Sie immer im Warenkorb, bevor Sie bestellen.",
       },
       {
         heading: "Liefern Sie auch ins Ausland?",
@@ -782,23 +780,23 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Wird das Gerät bis in die Wohnung gebracht?",
-        body: "Der Speditionsversand endet standardmäßig an der Bordsteinkante. Für 29,00 Euro bringen unsere Speditionspartner das Gerät bis an den gewünschten Aufstellort, auch in obere Etagen. Das Auspacken und die Entsorgung der Transportverpackung kosten zusätzlich 9,00 Euro. Bitte messen Sie vorher Treppenhaus, Türen und Aufzug aus und teilen Sie uns Besonderheiten bei der Bestellung mit.",
+        body: "Der Speditionsversand endet standardmäßig an der Bordsteinkante. Für 29,00 Euro bringen unsere Speditionspartner das Gerät bis an den gewünschten Aufstellort, auch in obere Etagen; das Auspacken und die Entsorgung der Transportverpackung kosten zusätzlich 9,00 Euro. Diese beiden Leistungen buchen Sie nicht im Warenkorb – rufen Sie uns an oder schreiben Sie uns, dann stimmen wir sie mit der Spedition ab. Bitte messen Sie vorher Treppenhaus, Türen und Aufzug aus.",
       },
       {
         heading: "Bieten Sie Anschluss und Montage an?",
-        body: "Ja. Beim Bestellabschluss können Sie den Anschlussservice hinzubuchen: 49 Euro für Waschmaschine, Trockner oder Geschirrspüler, 39 Euro für freistehende Kühlgeräte, 89 Euro für den Einbau in eine vorbereitete Nische und 99 Euro für die Wandmontage eines Fernsehers. Voraussetzung sind vorhandene, frei zugängliche und normgerechte Anschlüsse. Arbeiten an der Hauselektrik dürfen wir nicht ausführen.",
+        body: "Ja: 49 Euro für Waschmaschine, Trockner oder Geschirrspüler, 39 Euro für freistehende Kühlgeräte, 89 Euro für den Einbau in eine vorbereitete Nische und 99 Euro für die Wandmontage eines Fernsehers. Den Service vereinbaren Sie telefonisch oder per E-Mail, am besten vor der Bestellung – im Warenkorb lässt er sich nicht mitbestellen. Voraussetzung sind vorhandene, frei zugängliche und normgerechte Anschlüsse. Arbeiten an der Hauselektrik dürfen wir nicht ausführen.",
       },
       {
         heading: "Nehmen Sie mein altes Gerät mit?",
-        body: "Ja, und zwar kostenlos. Beim Kauf eines neuen Geräts nehmen wir ein gleichartiges Altgerät bei der Anlieferung mit. Geben Sie den Wunsch bitte schon bei der Bestellung an – wir fragen Sie im Bestellprozess ausdrücklich danach. Das Altgerät sollte abgeklemmt, entleert, gereinigt und frei zugänglich bereitstehen. Kleine Altgeräte, bei denen keine äußere Abmessung 25 Zentimeter überschreitet, nehmen wir sogar ohne Neukauf zurück – bis zu drei Stück je Geräteart. Alle weiteren Rücknahmewege stehen auf der Seite „Elektroaltgeräte & Batterien“.",
+        body: "Ja, und zwar kostenlos. Beim Kauf eines neuen Geräts nehmen wir ein gleichartiges Altgerät bei der Anlieferung mit. Sagen Sie uns rechtzeitig Bescheid – telefonisch, per E-Mail oder über das Anmerkungsfeld der Bestellung –, damit die Spedition die Rücknahme einplanen kann. Das Altgerät sollte abgeklemmt, entleert, gereinigt und frei zugänglich bereitstehen. Kleine Altgeräte, bei denen keine äußere Abmessung 25 Zentimeter überschreitet, nehmen wir sogar ohne Neukauf zurück – bis zu drei Stück je Geräteart. Alle weiteren Rücknahmewege stehen auf der Seite „Elektroaltgeräte & Batterien“.",
       },
       {
         heading: "Welche Zahlungsarten kann ich nutzen?",
-        body: "Sie können auf Rechnung kaufen oder mit PayPal, Kreditkarte (Visa, Mastercard, American Express), SEPA-Lastschrift oder Vorkasse per Überweisung bezahlen. Zusatzgebühren berechnen wir für keine dieser Zahlungsarten (§ 270a BGB). Bei Vorkasse reservieren wir die Ware sieben Kalendertage; geht die Zahlung bis dahin nicht ein, stornieren wir die Bestellung. Welche Zahlungsarten im Einzelfall zur Verfügung stehen, sehen Sie im Bestellprozess.",
+        body: "Sie können per Vorkasse-Überweisung, per Sofortüberweisung, mit PayPal, mit Kreditkarte (Visa, Mastercard, American Express) oder per SEPA-Lastschrift bezahlen. Zusatzgebühren berechnen wir für keine dieser Zahlungsarten (§ 270a BGB). Bei Vorkasse reservieren wir die Ware sieben Kalendertage; geht die Zahlung bis dahin nicht ein, stornieren wir die Bestellung. Welche Zahlungsarten im Einzelfall zur Verfügung stehen, sehen Sie im Bestellprozess.",
       },
       {
-        heading: "Kann ich auf Rechnung kaufen?",
-        body: "Ja, bei einer erfolgreichen Bonitätsprüfung. Der Kauf auf Rechnung steht Privatkundinnen und -kunden ab 18 Jahren mit identischer Rechnungs- und Lieferanschrift in Deutschland offen. Sie zahlen dann innerhalb von 14 Tagen nach Rechnungsdatum. Bei Erstbestellungen kann der Betrag begrenzt sein.",
+        heading: "Wie läuft die Zahlung per Vorkasse ab?",
+        body: "Mit der Bestellbestätigung erhalten Sie unsere Bankverbindung und die Bestellnummer, die als Verwendungszweck dient; beides steht auch auf der Rechnung, die der Bestätigung als PDF beiliegt. Wir reservieren die Ware sieben Kalendertage und versenden sie innerhalb von einem bis drei Werktagen nach Zahlungseingang. Kommt die Zahlung nicht rechtzeitig an, stornieren wir die Bestellung und melden uns bei Ihnen.",
       },
       {
         heading: "Wie lange habe ich Garantie?",
@@ -814,7 +812,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Wie schicke ich etwas zurück?",
-        body: `Melden Sie die Rücksendung vorab an – über die Schaltfläche „Vertrag widerrufen“ in Ihrem Kundenkonto oder unter ${COMPANY.domain}/widerruf/online, über unser Retourenportal, per E-Mail an ${COMPANY.email} oder telefonisch unter ${COMPANY.phone}. Für Pakete erhalten Sie ein kostenloses Rücksendeetikett. Großgeräte holen wir nach Terminabsprache bei Ihnen ab; bitte klemmen Sie das Gerät vorher ab und entleeren Sie es. Legen Sie sämtliches Zubehör bei und verwenden Sie möglichst den Originalkarton mit den Transportsicherungen.`,
+        body: `Melden Sie die Rücksendung vorab an – per E-Mail an ${COMPANY.email} oder telefonisch unter ${COMPANY.phone}. Das Muster-Widerrufsformular finden Sie auf der Seite „Widerrufsrecht“; Sie müssen es aber nicht verwenden, eine formlose eindeutige Erklärung genügt. Für Pakete erhalten Sie ein kostenloses Rücksendeetikett. Großgeräte holen wir nach Terminabsprache bei Ihnen ab; bitte klemmen Sie das Gerät vorher ab und entleeren Sie es. Legen Sie sämtliches Zubehör bei und verwenden Sie möglichst den Originalkarton mit den Transportsicherungen.`,
       },
       {
         heading: "Was kostet die Rücksendung?",
@@ -822,7 +820,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Wann bekomme ich mein Geld zurück?",
-        body: "Wir erstatten den Kaufpreis einschließlich der Standard-Hinsendekosten spätestens 14 Tage nach Eingang Ihres Widerrufs, sobald die Ware bei uns eingetroffen ist oder Sie den Absendenachweis vorgelegt haben. Die Rückzahlung erfolgt über das ursprüngliche Zahlungsmittel; Gebühren entstehen Ihnen dabei nicht. Ein eingelöster Gutschein wird wieder als Gutschein gutgeschrieben.",
+        body: "Wir erstatten den Kaufpreis spätestens 14 Tage nach Eingang Ihres Widerrufs, sobald die Ware bei uns eingetroffen ist oder Sie den Absendenachweis vorgelegt haben. Die Rückzahlung erfolgt über das ursprüngliche Zahlungsmittel; Gebühren entstehen Ihnen dabei nicht. Hinsendekosten fallen beim Standardversand nicht an. Haben Sie den Expressversand gewählt, bleibt dessen Aufpreis nach § 357 Absatz 2 BGB bei Ihnen: Erstattet wird nur, was die günstigste Standardlieferung gekostet hätte – und die ist bei uns kostenlos.",
       },
       {
         heading: "Ein Artikel ist „Auf Anfrage“ – was bedeutet das?",
@@ -846,7 +844,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Kann ich als Firma bestellen und eine Rechnung mit Umsatzsteuerausweis erhalten?",
-        body: "Ja. Geben Sie im Bestellprozess Ihren Firmennamen und – bei Bedarf – Ihre Umsatzsteuer-Identifikationsnummer an. Sie erhalten eine ordnungsgemäße Rechnung mit ausgewiesener Umsatzsteuer. Bitte beachten Sie zwei Unterschiede zum Verbraucherkauf: Unternehmen haben kein gesetzliches Widerrufsrecht, und die Verjährungsfrist für Mängelansprüche beträgt bei neuen Waren ein Jahr ab Gefahrübergang statt zwei Jahre. Unser freiwilliges 30-tägiges Rückgaberecht gilt auch für Sie.",
+        body: "Ja. Tragen Sie im Bestellprozess Ihren Firmennamen in das Feld „Firma“ ein. Die Rechnung liegt der Bestellbestätigung als PDF bei und weist die enthaltene Umsatzsteuer aus. Benötigen Sie Ihre Umsatzsteuer-Identifikationsnummer auf der Rechnung, schreiben Sie sie bitte in das Anmerkungsfeld der Bestellung oder senden Sie sie uns nach; ein eigenes Feld dafür gibt es im Bestellprozess noch nicht. Bitte beachten Sie zwei Unterschiede zum Verbraucherkauf: Unternehmen haben kein gesetzliches Widerrufsrecht, und die Verjährungsfrist für Mängelansprüche beträgt bei neuen Waren ein Jahr ab Gefahrübergang statt zwei Jahre. Unser freiwilliges 30-tägiges Rückgaberecht gilt auch für Sie.",
       },
       {
         heading: "Was mache ich, wenn ein Gerät nach Ablauf der zwei Jahre defekt ist?",

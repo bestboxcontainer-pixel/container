@@ -168,7 +168,7 @@ export const enLegalPages: LegalPageMap = {
         heading: "Section 4 Prices and shipping costs",
         body:
           "All prices stated are final prices in euros and include statutory VAT. They are exclusive of shipping costs unless stated otherwise on the product page.\n\n" +
-          "Within Germany we ship free of charge from an order value of 50 euros. Below this threshold a flat shipping fee applies; separate charges apply to large appliances delivered by freight forwarder and to optional additional services such as connection and installation. All amounts are shown in the shopping basket before you complete your order. Full details can be found on our \"Shipping & delivery\" page.\n\n" +
+          "Standard delivery within Germany is free of charge, with no minimum order value. If you would like faster delivery, express shipping costs a flat 70.00 euros. Separate charges apply to optional additional services such as connection, installation or delivery to the installation location; you arrange these with our customer service team before or after placing your order. Shipping costs are shown in the shopping basket before you complete your order. Full details can be found on our \"Shipping & delivery\" page.\n\n" +
           "For goods sold by weight, volume, length or area we also state the unit price in accordance with the German Price Indication Ordinance (Preisangabenverordnung). Where prices are reduced, we state the lowest total price we applied during the 30 days preceding the reduction.",
       },
       {
@@ -182,8 +182,8 @@ export const enLegalPages: LegalPageMap = {
       {
         heading: "Section 6 Payment terms",
         body:
-          "We offer purchase on account (invoice), PayPal, credit card, SEPA direct debit and advance payment by bank transfer. The payment methods available in each individual case are shown during the order process; we reserve the right to exclude individual payment methods.\n\n" +
-          "For purchases on account, the invoice amount is due for payment in full within 14 days of the invoice date. This payment method requires a successful credit check and is available only to consumers whose billing and delivery addresses are in Germany.\n\n" +
+          "We offer advance payment by bank transfer, Sofortüberweisung, PayPal, credit card and SEPA direct debit. The payment methods available in each individual case are shown during the order process; we reserve the right to exclude individual payment methods.\n\n" +
+          "For advance payment you receive our bank details with the order confirmation; the order number serves as the payment reference. We reserve the goods for seven calendar days and dispatch them once payment has arrived. If payment does not reach us within that period, we cancel the order.\n\n" +
           "For SEPA direct debit you grant us a SEPA direct debit mandate. We will notify you of the debit at least one banking day in advance (shortened pre-notification period). Where you are responsible for a returned direct debit, we may charge you the bank fees actually incurred.\n\n" +
           "We do not charge any additional fee for the use of common SEPA payment methods or payment cards (section 270a BGB). If you default on payment, the statutory provisions apply; consumers owe default interest of five percentage points above the base rate.",
       },
@@ -302,8 +302,8 @@ export const enLegalPages: LegalPageMap = {
           "The payment service providers process this data under their own responsibility. The legal basis for the transfer is Article 6(1)(b) GDPR. Credit card and bank details are collected exclusively by the respective provider; we do not store complete payment data.",
       },
       {
-        heading: "7. Credit checks for purchase on account",
-        body: "Where we offer purchase on account or payment in instalments, we obtain a credit report from a credit reference agency in advance (name and address to be added before publication). For this purpose the agency receives your identity and address data. The legal basis is Article 6(1)(f) GDPR; our legitimate interest lies in protection against payment defaults. You may object to this processing under Article 21 GDPR, in which case this payment method will not be available.",
+        heading: "7. No credit checks",
+        body: "We offer neither purchase on account nor payment in instalments. We therefore do not obtain credit reports from credit reference agencies, and we pass your data to no one for that purpose. Should we offer such a payment method in future, we will first extend this notice to name the agency, the legal basis and your right to object.",
       },
       {
         heading: "8. Shipping and installation services",
@@ -397,7 +397,7 @@ export const enLegalPages: LegalPageMap = {
           "You have the right to withdraw from this contract within fourteen days without giving any reason.\n\n" +
           "The withdrawal period will expire after fourteen days from the day on which you acquire, or a third party other than the carrier and indicated by you acquires, physical possession of the goods.\n\n" +
           `To exercise the right of withdrawal, you must inform us (${COMPANY.name}, ${COMPANY.street}, ${COMPANY.city}, ${COMPANY.country}, phone ${COMPANY.phone}, email ${COMPANY.email}) of your decision to withdraw from this contract by an unequivocal statement (for example a letter sent by post or an email). You may use the attached model withdrawal form, but it is not obligatory.\n\n` +
-          `You may also exercise your right of withdrawal online at ${COMPANY.domain}/widerruf/online. If you use the online function, we will send you an acknowledgement of receipt on a durable medium without undue delay, stating the content of your withdrawal declaration together with the date and time of its receipt.\n\n` +
+          "We will send you an acknowledgement of receipt of your withdrawal declaration by email without undue delay, stating the date and time of its receipt.\n\n" +
           "To meet the withdrawal deadline, it is sufficient for you to send your communication concerning your exercise of the right of withdrawal before the withdrawal period has expired.",
       },
       {
@@ -417,11 +417,12 @@ export const enLegalPages: LegalPageMap = {
           "If goods are delivered in several lots or pieces — for example a fitted kitchen or an appliance with separate accessories — the period runs from the day on which you acquire, or a third party other than the carrier and indicated by you acquires, physical possession of the last lot or piece.",
       },
       {
-        heading: "Online withdrawal function under section 356a BGB",
+        heading: "Withdrawal in text form",
         body:
-          "Since 19 June 2026 we additionally provide an electronic withdrawal function. You will find the \"Withdraw from contract\" button clearly visible in your customer account and on this page throughout the withdrawal period.\n\n" +
-          "Withdrawal takes place in two steps: first you open the withdrawal form via the button and enter your name, the information needed to identify the contract or the part of the contract concerned, and an electronic contact address for the acknowledgement of receipt. You then confirm your declaration using the separate \"Confirm withdrawal\" button.\n\n" +
-          "Immediately afterwards you will receive confirmation from us on a durable medium — usually by email — stating the content of your withdrawal declaration together with the date and time of receipt.",
+          "An unequivocal statement in text form is all that is needed. The quickest route is an email to " +
+          `${COMPANY.email} — state your name, your order number and the item you wish to return. A letter to the address given in our legal notice, or a call to ${COMPANY.phone}, works just as well.\n\n` +
+          "You may use the model withdrawal form reproduced below, but it is not obligatory.\n\n" +
+          "We will send you an acknowledgement of receipt by email without undue delay, stating the date and time of receipt.",
       },
       {
         heading: "Model withdrawal form",
@@ -466,7 +467,7 @@ export const enLegalPages: LegalPageMap = {
     slug: "versand",
     title: "Shipping and Delivery",
     intro: intro(
-      "Here you will find everything about shipping costs, delivery times, freight forwarder delivery, connection and installation services and the collection of your old appliance. The charges and lead times stated are example values and must be reconciled with the actual logistics contracts.",
+      "Here you will find everything about shipping costs, delivery times, freight forwarder delivery, connection and installation services and the collection of your old appliance.",
     ),
     updatedAt: UPDATED_AT,
     sections: [
@@ -474,17 +475,15 @@ export const enLegalPages: LegalPageMap = {
         heading: "Shipping costs at a glance",
         body: "All prices include statutory VAT. The shipping costs applicable to your order are shown in the shopping basket before you complete your purchase.",
         list: [
-          "Parcel delivery within Germany: 4.95 euros",
-          "Free shipping from an order value of 50 euros",
-          "Freight forwarder delivery for large appliances (washing machines, refrigeration units, cookers, large-screen televisions): 39.90 euros",
-          "Delivery to German islands: surcharge of 29.00 euros",
-          "Bulky goods surcharge for particularly long or heavy items: 19.00 euros",
+          "Standard delivery within Germany: free of charge, with no minimum order value",
+          "Express delivery within Germany: 70.00 euros",
+          "Additional services such as delivery to the installation location, connection or installation: by arrangement, see below",
         ],
       },
       {
         heading: "Delivery times",
         body:
-          "Items in stock are dispatched within one to three working days. Working days are Monday to Saturday, excluding public holidays at the location of our warehouse.\n\n" +
+          "Items in stock reach you within three to five working days with standard delivery, or within 24 to 48 hours with express delivery. Working days are Monday to Saturday, excluding public holidays at the location of our warehouse.\n\n" +
           "For advance payment, the delivery period begins on the day after the payment order is issued; for all other payment methods, on the day after the contract is concluded.\n\n" +
           "Items marked \"On request\" are ordered from the manufacturer for you. Delivery in these cases usually takes two to four weeks; the specific lead time is stated on the product page.",
       },
@@ -496,17 +495,17 @@ export const enLegalPages: LegalPageMap = {
         heading: "Freight forwarder delivery of large appliances",
         body:
           "Large appliances are delivered by a two-person freight service. The carrier contacts you in advance by telephone or SMS to agree a delivery window.\n\n" +
-          "By default, delivery is to the kerbside. For an additional charge we will bring the appliance to the installation location inside your home, including upper floors. Before ordering, please check that the stairwell, doorways and lift are large enough, and tell us about any particular circumstances when you place your order.",
+          "By default, delivery is to the kerbside. For an additional charge we will bring the appliance to the installation location inside your home, including upper floors. These extras are not part of the shopping basket: call or email us before or just after ordering and we will arrange them with the carrier. Please check beforehand that the stairwell, doorways and lift are large enough.",
         list: [
           "Kerbside delivery: included in the freight delivery charge",
-          "Delivery to the installation location (including upper floors): 29.00 euros",
-          "Unpacking and disposal of transport packaging: 9.00 euros",
+          "Delivery to the installation location (including upper floors): 29.00 euros, on request",
+          "Unpacking and disposal of transport packaging: 9.00 euros, on request",
         ],
       },
       {
         heading: "Connection and installation service",
         body:
-          "On request, our service partners will connect your new appliance professionally and put it into operation. You add this service during the order process.\n\n" +
+          "On request, our service partners will connect your new appliance professionally and put it into operation. You do not book this service in the basket but by telephone or email — ideally before ordering, so that we can schedule it together with the delivery.\n\n" +
           "This requires all on-site connections (electricity, water, waste water, exhaust air, aerial or network connection) to be present, freely accessible and compliant with applicable standards. We are not permitted to carry out electrical work on your building installation.",
         list: [
           "Connecting a washing machine, tumble dryer or dishwasher: 49.00 euros",
@@ -519,7 +518,7 @@ export const enLegalPages: LegalPageMap = {
       {
         heading: "Collection of your old appliance",
         body:
-          "When we deliver a new electrical appliance, we will collect your equivalent old appliance free of charge on request (1:1 take-back). Please tell us when you place your order — we ask you explicitly during the order process so that the carrier can plan the collection.\n\n" +
+          "When we deliver a new electrical appliance, we will collect your equivalent old appliance free of charge on request (1:1 take-back). Please tell us in good time — by telephone, by email, or in the comments field of your order — so that the carrier can plan the collection.\n\n" +
           "The old appliance must be disconnected, emptied, cleaned and freely accessible at the place of delivery. Dismantling a built-in old appliance is not part of the free collection service but can be booked as a chargeable extra.\n\n" +
           "All other take-back options — in particular for small waste appliances without a new purchase — are described on our \"Waste electrical equipment & batteries\" page.",
       },
@@ -528,8 +527,8 @@ export const enLegalPages: LegalPageMap = {
         body: "If you order several items with different availability, we normally dispatch items in stock immediately and deliver the rest later. You will not incur any additional shipping costs. For the start of the withdrawal period, receipt of the last item is decisive.",
       },
       {
-        heading: "Tracking",
-        body: "As soon as your order leaves our warehouse, you will receive a dispatch confirmation by email containing a tracking link. For freight forwarder deliveries the email also contains the carrier's contact details for scheduling.",
+        heading: "Where is my order?",
+        body: "You can check the status of your order at any time using the link in your order confirmation, and in your customer account under \"My orders\". As soon as the goods leave our warehouse we set the status to \"dispatched\". We send you the consignment number — and, for freight forwarder deliveries, the contact details for scheduling — by email as soon as we have them.",
       },
       {
         heading: "Transport damage",
@@ -545,15 +544,19 @@ export const enLegalPages: LegalPageMap = {
     slug: "zahlungsarten",
     title: "Payment Methods",
     intro: intro(
-      "Pay conveniently and securely: on account, with PayPal, by credit card, by SEPA direct debit or by advance bank transfer. The methods available in each case are shown during the order process. The payment service providers used must be named specifically before publication.",
+      "Pay by advance bank transfer, by Sofortüberweisung, with PayPal, by credit card or by SEPA direct debit. The methods available in each case are shown during the order process.",
     ),
     updatedAt: UPDATED_AT,
     sections: [
       {
-        heading: "Purchase on account",
+        heading: "Advance payment by bank transfer",
         body:
-          "You receive the goods first and pay within 14 days of the invoice date without deduction. The invoice is enclosed with the shipment and also sent by email.\n\n" +
-          "Purchase on account requires a successful credit check and is available to consumers aged 18 and over whose billing and delivery addresses in Germany are identical. For first-time orders the maximum amount may be limited.",
+          "With the order confirmation you receive our bank details and the order number, which serves as the payment reference. The same details appear on the invoice attached to the confirmation as a PDF.\n\n" +
+          "We reserve the goods for seven calendar days. Once payment has arrived we dispatch the order within one to three working days. If payment does not reach us within the reservation period, we cancel the order and let you know.",
+      },
+      {
+        heading: "Sofortüberweisung",
+        body: "At the end of the order process you are redirected to your bank's online banking, where you authorise the transfer directly. We receive confirmation immediately and can start dispatch straight away — you do not need an account with a separate payment service.",
       },
       {
         heading: "PayPal",
@@ -570,10 +573,6 @@ export const enLegalPages: LegalPageMap = {
           "We notify you of the debit at least one banking day in advance (shortened pre-notification period). Please ensure your account has sufficient funds: where you are responsible for a returned direct debit, we will invoice the bank charges actually incurred.",
       },
       {
-        heading: "Advance payment by bank transfer",
-        body: "After placing your order you will receive an email with our bank details and your order number as the payment reference. We reserve the goods for seven calendar days. Once payment has been received we dispatch your order within one to three working days. If payment is not received within the reservation period, the order is cancelled.",
-      },
-      {
         heading: "No additional charges",
         body: "We do not charge any additional fee for the use of common SEPA payment methods or common payment cards (section 270a BGB). The total shown in your shopping basket is the amount you actually pay.",
       },
@@ -586,8 +585,8 @@ export const enLegalPages: LegalPageMap = {
         body: "If you default on a payment, the statutory provisions apply. Consumers owe default interest of five percentage points above the base rate. Before taking any further steps we will always send you a payment reminder first.",
       },
       {
-        heading: "Refunds and vouchers",
-        body: "Refunds are generally made using the original payment method. For advance payment and SEPA direct debit we transfer the amount to the account from which payment was made. If a voucher was redeemed, its value is credited back as a voucher when a transaction is reversed. Vouchers cannot be paid out in cash.",
+        heading: "Refunds",
+        body: "Refunds are generally made using the original payment method. For advance payment, Sofortüberweisung and SEPA direct debit we transfer the amount to the account from which payment was made. You incur no costs in doing so.",
       },
     ],
   },
@@ -613,9 +612,8 @@ export const enLegalPages: LegalPageMap = {
         heading: "How to register a return",
         body: "Please register your return in advance — that way we can allocate your parcel immediately and refund you faster.",
         list: [
-          `Online withdrawal function: the "Withdraw from contract" button in your customer account or at ${COMPANY.domain}/widerruf/online`,
-          "Returns portal: enter your order number and email address, select the items, download the shipping label",
           `Email to ${COMPANY.email} stating your order number and the item description`,
+          "The model withdrawal form from our \"Right of withdrawal\" page, completed and sent by email or post — it is not obligatory",
           `Phone: ${COMPANY.phone}, Monday to Saturday, 8 a.m. to 8 p.m.`,
         ],
       },
@@ -755,11 +753,11 @@ export const enLegalPages: LegalPageMap = {
     sections: [
       {
         heading: "How long does delivery take?",
-        body: "Items in stock usually reach you within one to three working days. For large appliances shipped by freight forwarder, the carrier contacts you in advance by phone to agree a delivery window. Items marked \"On request\" are ordered from the manufacturer and normally take two to four weeks.",
+        body: "Items in stock reach you within three to five working days with standard delivery, or within 24 to 48 hours with express delivery. For large appliances shipped by freight forwarder, the carrier contacts you in advance by phone to agree a delivery window. Items marked \"On request\" are ordered from the manufacturer and normally take two to four weeks.",
       },
       {
         heading: "How much does shipping cost?",
-        body: "Orders of 50 euros or more ship free within Germany. Below that we charge 4.95 euros for parcel delivery. Large appliances delivered by freight forwarder cost a flat 39.90 euros. Deliveries to the German islands carry a 29.00 euro surcharge, and particularly long or heavy items a 19.00 euro bulky goods surcharge. The costs for your order are always shown in the shopping basket before you buy.",
+        body: "Standard delivery within Germany is free — with no minimum order value, whatever the size or weight of the goods. If you want delivery within 24 to 48 hours, express shipping costs a flat 70.00 euros. There are no other surcharges. The costs for your order are always shown in the shopping basket before you buy.",
       },
       {
         heading: "Do you ship outside Germany?",
@@ -767,23 +765,23 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Will the appliance be carried into my home?",
-        body: "Freight delivery ends at the kerbside by default. For 29.00 euros our carriers will bring the appliance to the desired installation location, including upper floors. Unpacking and disposal of the transport packaging costs a further 9.00 euros. Please measure your stairwell, doorways and lift beforehand and tell us about anything unusual when you order.",
+        body: "Freight delivery ends at the kerbside by default. For 29.00 euros our carriers will bring the appliance to the desired installation location, including upper floors; unpacking and disposal of the transport packaging costs a further 9.00 euros. You cannot add these two services in the basket — call or email us and we will arrange them with the carrier. Please measure your stairwell, doorways and lift beforehand.",
       },
       {
         heading: "Do you offer connection and installation?",
-        body: "Yes. You can add the service at checkout: 49 euros for a washing machine, tumble dryer or dishwasher, 39 euros for a free-standing refrigerator, 89 euros for installation in a prepared recess and 99 euros for wall-mounting a television. All connections must be present, freely accessible and compliant with standards. We are not permitted to work on your building's electrical installation.",
+        body: "Yes: 49 euros for a washing machine, tumble dryer or dishwasher, 39 euros for a free-standing refrigerator, 89 euros for installation in a prepared recess and 99 euros for wall-mounting a television. You arrange the service by telephone or email, ideally before ordering — it cannot be added in the basket. All connections must be present, freely accessible and compliant with standards. We are not permitted to work on your building's electrical installation.",
       },
       {
         heading: "Will you take my old appliance away?",
-        body: "Yes, free of charge. When you buy a new appliance we collect one equivalent old appliance on delivery. Please tell us when ordering — we ask you explicitly during the order process. The old appliance should be disconnected, emptied, cleaned and freely accessible. Small waste appliances with no external dimension exceeding 25 centimetres are taken back even without a new purchase — up to three per equipment type. All other take-back options are set out on the \"Waste Electrical Equipment and Batteries\" page.",
+        body: "Yes, free of charge. When you buy a new appliance we collect one equivalent old appliance on delivery. Let us know in good time — by phone, by email or in the comments field of your order — so that the carrier can plan the collection. The old appliance should be disconnected, emptied, cleaned and freely accessible. Small waste appliances with no external dimension exceeding 25 centimetres are taken back even without a new purchase — up to three per equipment type. All other take-back options are set out on the \"Waste Electrical Equipment and Batteries\" page.",
       },
       {
         heading: "Which payment methods can I use?",
-        body: "You can buy on account or pay with PayPal, credit card (Visa, Mastercard, American Express), SEPA direct debit or advance bank transfer. We do not charge extra fees for any of these methods (section 270a of the German Civil Code). With advance transfer we reserve the goods for seven calendar days; if payment has not arrived by then, we cancel the order. Which methods are available in your case is shown during checkout.",
+        body: "You can pay by advance bank transfer, by Sofortüberweisung, with PayPal, by credit card (Visa, Mastercard, American Express) or by SEPA direct debit. We do not charge extra fees for any of these methods (section 270a of the German Civil Code). With advance transfer we reserve the goods for seven calendar days; if payment has not arrived by then, we cancel the order. Which methods are available in your case is shown during checkout.",
       },
       {
-        heading: "Can I buy on account?",
-        body: "Yes, subject to a successful credit check. Purchase on account is available to private customers aged 18 and over with identical billing and delivery addresses in Germany. You then pay within 14 days of the invoice date. For first orders the amount may be capped.",
+        heading: "How does advance payment work?",
+        body: "With the order confirmation you receive our bank details and the order number to quote as the payment reference; both also appear on the invoice attached to the confirmation as a PDF. We reserve the goods for seven calendar days and dispatch them within one to three working days of payment arriving. If payment does not reach us in time, we cancel the order and contact you.",
       },
       {
         heading: "How long is the warranty?",
@@ -799,7 +797,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "How do I send something back?",
-        body: `Register the return in advance — via the "Withdraw from contract" button in your customer account or at ${COMPANY.domain}/widerruf/online, through our returns portal, by email to ${COMPANY.email} or by phone on ${COMPANY.phone}. For parcels you receive a free return label. Large appliances are collected from you by appointment; please disconnect and empty the appliance beforehand. Enclose all accessories and use the original box with its transport locks if you can.`,
+        body: `Register the return in advance — by email to ${COMPANY.email} or by phone on ${COMPANY.phone}. The model withdrawal form is on our "Right of withdrawal" page, though you need not use it: an unequivocal statement is enough. For parcels you receive a free return label. Large appliances are collected from you by appointment; please disconnect and empty the appliance beforehand. Enclose all accessories and use the original box with its transport locks if you can.`,
       },
       {
         heading: "What does a return cost?",
@@ -807,7 +805,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "When will I get my money back?",
-        body: "We refund the purchase price including the standard outbound shipping costs no later than 14 days after receiving your withdrawal, once the goods have arrived with us or you have provided proof of dispatch. The refund is made using your original payment method and no fees apply. Any voucher you redeemed is credited back as a voucher.",
+        body: "We refund the purchase price no later than 14 days after receiving your withdrawal, once the goods have arrived with us or you have provided proof of dispatch. The refund is made using your original payment method and no fees apply. There are no outbound shipping costs to refund with standard delivery. If you chose express delivery, its surcharge stays with you under section 357(2) BGB: we refund only what the cheapest standard delivery would have cost — and that is free.",
       },
       {
         heading: "An item is marked \"On request\" — what does that mean?",
@@ -831,7 +829,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Can I order as a business and receive a VAT invoice?",
-        body: "Yes. Enter your company name and, if required, your VAT identification number during the order process. You will receive a proper invoice showing VAT. Please note two differences from consumer purchases: businesses have no statutory right of withdrawal, and the limitation period for defect claims on new goods is one year from the passing of risk rather than two. Our voluntary 30-day return right does apply to you as well.",
+        body: "Yes. Enter your company name in the \"Company\" field during the order process. The invoice is attached to your order confirmation as a PDF and shows the VAT included. If you need your VAT identification number on the invoice, please add it to the comments field of your order or send it to us afterwards — there is no dedicated field for it in the order process yet. Please note two differences from consumer purchases: businesses have no statutory right of withdrawal, and the limitation period for defect claims on new goods is one year from the passing of risk rather than two. Our voluntary 30-day return right does apply to you as well.",
       },
       {
         heading: "What if an appliance fails after the two years are up?",

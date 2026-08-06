@@ -58,6 +58,8 @@ function order(overrides: Partial<OrderRecord> = {}): OrderRecord {
     paymentStatus: "offen",
     subtotalCents: 89900,
     shippingCents: 495,
+    couponCode: "",
+    discountCents: 0,
     taxCents: 14428,
     totalCents: 90395,
     taxRatePercent: 19,

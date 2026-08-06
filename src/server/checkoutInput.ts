@@ -57,6 +57,14 @@ export interface CheckoutInput {
   paymentMethodKey: string;
   shippingMethodKey: ShippingMethodKey;
   customerNote: string;
+  /**
+   * Code de réduction saisi par le client, brut.
+   *
+   * Transmis tel quel : sa validité, son montant et ses limites sont décidés
+   * côté serveur au moment de créer la commande. Le navigateur n'annonce
+   * jamais de remise, seulement un code.
+   */
+  couponCode: string;
   termsAccepted: boolean;
   withdrawalAcknowledged: boolean;
   items: { productId: string; quantity: number }[];
@@ -193,6 +201,7 @@ export function parseCheckoutPayload(payload: unknown): {
         ? shippingMethodRaw
         : DEFAULT_SHIPPING_METHOD_KEY,
       customerNote: text(raw.customerNote, 1000),
+      couponCode: text(raw.couponCode, 40).toUpperCase(),
       termsAccepted: true,
       withdrawalAcknowledged: true,
       items,

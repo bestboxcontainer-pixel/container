@@ -102,6 +102,8 @@ export interface CartTotals {
   /** Mode de livraison retenu pour ce calcul. */
   shippingMethodKey: ShippingMethodKey;
   shippingCents: number;
+  /** Remise accordée par un code de réduction, en centimes. Zéro sans coupon. */
+  discountCents: number;
   /** TVA *contenue* dans le total, jamais un supplément. */
   taxCents: number;
   totalCents: number;
@@ -140,6 +142,17 @@ export interface TotalsOptions {
    */
   shippingMethodKey?: ShippingMethodKey;
   /**
+   * Remise d'un code de réduction, en centimes.
+   *
+   * Calculée ailleurs — `computeCouponDiscount` — et transmise ici : ce module
+   * ne connaît pas les règles des coupons, il ne fait qu'appliquer un montant
+   * déjà arrêté. C'est ce qui permet à l'aperçu du panier et à la facture de
+   * partager le même calcul sans partager les règles.
+   */
+  discountCents?: number;
+  /** Livraison offerte par un coupon, indépendamment du mode retenu. */
+  couponFreeShipping?: boolean;
+  /**
    * Livraison offerte accordée par une campagne marketing.
    *
    * N'a plus d'effet sur le montant depuis que le standard est gratuit sans
@@ -165,14 +178,24 @@ export function computeTotals(
   const method = shippingMethodFor(options?.shippingMethodKey ?? DEFAULT_SHIPPING_METHOD_KEY);
   // Un panier vide ne facture rien, pas même l'express : le client n'a encore
   // rien commandé.
-  const shippingCents = subtotalCents > 0 ? method.cents : 0;
-  const totalCents = subtotalCents + shippingCents;
+  const portDu = subtotalCents > 0 ? method.cents : 0;
+  const shippingCents = options?.couponFreeShipping ? 0 : portDu;
+
+  // La remise ne mord jamais sur le port ni ne descend sous zéro : un total
+  // négatif serait un remboursement, et le transporteur reste dû quoi qu'il
+  // arrive.
+  const discountCents = Math.min(Math.max(0, Math.round(options?.discountCents ?? 0)), subtotalCents);
+
+  const totalCents = subtotalCents - discountCents + shippingCents;
 
   return {
     itemCount,
     subtotalCents,
     shippingMethodKey: method.key,
     shippingCents,
+    discountCents,
+    // La TVA suit le montant réellement encaissé : elle se calcule après la
+    // remise, jamais sur le prix affiché avant réduction.
     taxCents: includedVatCents(totalCents),
     totalCents,
   };

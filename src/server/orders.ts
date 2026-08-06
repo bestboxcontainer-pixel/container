@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { prisma } from "@/server/prisma";
+import { checkCoupon, redeemCoupon } from "@/server/coupons";
 import { adjustStock } from "@/server/stock";
 import { listEnabledPaymentMethods } from "@/server/payments";
 import { campaignGrantsFreeShipping, priceForOrder } from "@/server/promotions";
@@ -95,6 +96,10 @@ export interface OrderRecord {
   paymentStatus: PaymentStatus;
   subtotalCents: number;
   shippingCents: number;
+  /** Code appliqué, tel qu'accepté. Vide sans coupon. */
+  couponCode: string;
+  /** Remise accordée, archivée avec la commande. */
+  discountCents: number;
   taxCents: number;
   totalCents: number;
   taxRatePercent: number;
@@ -175,6 +180,8 @@ function toRecord(row: NonNullable<OrderRow>): OrderRecord {
     paymentStatus: isPaymentStatus(row.paymentStatus) ? row.paymentStatus : "offen",
     subtotalCents: row.subtotalCents,
     shippingCents: row.shippingCents,
+    couponCode: row.couponCode,
+    discountCents: row.discountCents,
     taxCents: row.taxCents,
     totalCents: row.totalCents,
     taxRatePercent: row.taxRatePercent,
@@ -532,9 +539,36 @@ export async function createOrder(
   // supplément express vient de la table des modes de livraison, pas de la
   // charge utile : le navigateur choisit un mode, il n'en fixe pas le prix.
   const shippingMethod = shippingMethodFor(input.shippingMethodKey);
+  // 5 bis. Code de réduction.
+  //
+  // Vérifié ici et nulle part ailleurs : sur le sous-total réel, calculé à
+  // partir des prix relus en base. Un panier annoncé plus gros par le
+  // navigateur ne peut donc pas franchir le minimum d'un coupon.
+  //
+  // Un code refusé n'arrête pas la commande : il est simplement ignoré, et le
+  // client paie le prix plein. Faire échouer une commande valable pour un code
+  // périmé coûterait la vente.
+  const sousTotalBrut = computeTotals(billed, {
+    shippingMethodKey: shippingMethod.key,
+    freeShipping,
+  });
+  const verdictCoupon = input.couponCode
+    ? await checkCoupon(
+        input.couponCode,
+        {
+          subtotalCents: sousTotalBrut.subtotalCents,
+          shippingCents: sousTotalBrut.shippingCents,
+        },
+        input.email,
+      )
+    : null;
+  const couponAccepte = verdictCoupon?.ok ? verdictCoupon : null;
+
   const totals = computeTotals(billed, {
     shippingMethodKey: shippingMethod.key,
     freeShipping,
+    discountCents: couponAccepte?.outcome.discountCents ?? 0,
+    couponFreeShipping: couponAccepte?.outcome.freeShipping ?? false,
   });
   const now = new Date();
 
@@ -608,6 +642,8 @@ export async function createOrder(
             taxRatePercent: VAT_RATE_PERCENT,
             currency: "EUR",
             customerNote: input.customerNote,
+            couponCode: couponAccepte?.coupon.code ?? "",
+            discountCents: totals.discountCents,
             termsAcceptedAt: now,
             withdrawalAcknowledgedAt: now,
             campaignId: attribution?.campaignId ?? null,
@@ -640,6 +676,33 @@ export async function createOrder(
           },
           include: orderInclude,
         });
+
+        // Consommation du coupon, une fois la commande écrite et elle seule.
+        //
+        // Décompter avant l'écriture rendrait un coupon inutilisable dès qu'une
+        // commande échoue sur un stock manquant. Après, le compteur ne bouge que
+        // pour des commandes qui existent vraiment.
+        //
+        // L'échec est avalé volontairement : la commande est passée, le stock
+        // réservé, le client débité le cas échéant. Perdre une décrémentation de
+        // compteur est un incident mineur ; annuler la commande pour cette
+        // raison n'aurait aucun sens.
+        if (couponAccepte) {
+          try {
+            await redeemCoupon(
+              couponAccepte.coupon.id,
+              row.id,
+              input.email,
+              totals.discountCents,
+            );
+          } catch (erreur) {
+            console.error(
+              `[commande ${row.orderNumber}] coupon ${couponAccepte.coupon.code} non décompté :`,
+              erreur,
+            );
+          }
+        }
+
         return toRecord(row);
       } catch (error) {
         // Collision sur le numéro : on en reprend un et on réessaie.

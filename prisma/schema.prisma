@@ -256,6 +256,12 @@ model Order {
   shippingCents  Int
   taxCents       Int
   totalCents     Int
+
+  // Code de réduction appliqué, recopié tel qu'il a été accepté. Vide sans
+  // coupon. Le montant est archivé à côté : un coupon modifié ou supprimé plus
+  // tard ne doit pas changer ce qui a été facturé.
+  couponCode    String @default("")
+  discountCents Int    @default(0)
   // Taux de TVA appliqué, en points de pourcentage (19 en Allemagne)
   taxRatePercent Int    @default(19)
   currency       String @default("EUR")
@@ -716,4 +722,118 @@ model CodeSnippet {
 
   // La boutique ne lit que les fragments actifs, emplacement par emplacement.
   @@index([enabled, placement, position])
+}
+
+// ---- Codes de réduction ----
+
+// Un coupon saisi par le client au moment de payer.
+//
+// Le montant remisé n'est jamais celui que le navigateur annonce : le serveur
+// relit le coupon en base et refait le calcul avant de facturer. Le champ du
+// tunnel ne sert qu'à transmettre un code.
+model Coupon {
+  id String @id @default(cuid())
+  // Saisi sans distinction de casse, stocké en majuscules.
+  code String @unique
+  // Intitulé interne, pour s'y retrouver dans la liste.
+  label String @default("")
+
+  // percent | fixed | freeShipping
+  kind String @default("percent")
+  // Pourcentage (1–100) ou montant en centimes selon `kind`. Ignoré pour la
+  // livraison offerte.
+  value Int @default(0)
+
+  // Panier minimum exigé, en centimes. 0 = aucune condition.
+  minSubtotalCents Int @default(0)
+  // Plafond de remise pour un pourcentage, en centimes. 0 = aucun plafond.
+  maxDiscountCents Int @default(0)
+
+  // Fenêtre de validité. Absentes = sans limite de date.
+  startsAt DateTime?
+  endsAt   DateTime?
+
+  // Nombre total d'utilisations autorisées, toutes commandes confondues.
+  // 0 = illimité.
+  maxRedemptions Int @default(0)
+  // Utilisations autorisées par adresse e-mail. 0 = illimité.
+  maxPerCustomer Int @default(0)
+  // Compteur tenu à jour à chaque commande : évite de compter les lignes de
+  // rachat à chaque vérification.
+  redemptionCount Int @default(0)
+
+  // Un coupon naît désactivé : on le crée, on le relit, puis on l'ouvre.
+  enabled Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  updatedBy String   @default("")
+
+  redemptions CouponRedemption[]
+
+  @@index([enabled, code])
+}
+
+// Une utilisation effective, écrite en même temps que la commande.
+//
+// Sans cette table, la limite « une fois par client » ne serait pas
+// vérifiable : le compteur global ne dit pas qui a consommé le coupon.
+model CouponRedemption {
+  id       String @id @default(cuid())
+  couponId String
+  orderId  String @unique
+  // Recopiée plutôt que jointe : une commande anonymisée perd son adresse,
+  // mais la limite par client doit rester opposable.
+  email String
+  // Remise réellement accordée, en centimes.
+  discountCents Int @default(0)
+
+  createdAt DateTime @default(now())
+
+  coupon Coupon @relation(fields: [couponId], references: [id], onDelete: Cascade)
+
+  @@index([couponId, email])
+}
+
+// ---- Bandeau d'annonce ----
+
+// Message affiché en haut de la boutique : une promotion en cours, un délai de
+// livraison exceptionnel, une fermeture. Séparé des coupons : celui-ci annonce,
+// l'autre remise.
+model AnnouncementBar {
+  id String @id @default(cuid())
+  // Texte affiché, par langue. Vide dans une langue = le bandeau n'y paraît pas.
+  messageDe String @default("")
+  messageEn String @default("")
+
+  // Adresse ouverte au clic. Vide = bandeau non cliquable.
+  linkUrl   String @default("")
+  linkLabel String @default("")
+
+  // Couleurs libres, en notation CSS : le commerçant doit pouvoir coller celle
+  // de sa campagne sans passer par un développeur.
+  backgroundColor String @default("#e3000e")
+  textColor       String @default("#ffffff")
+
+  // Défilement horizontal du message. Faux = texte centré, immobile.
+  scrolling Boolean @default(false)
+  // Durée d'un passage complet, en secondes. Plus grand = plus lent.
+  scrollSeconds Int @default(20)
+  // Bandeau sur toute la largeur, ou borné à la largeur du contenu.
+  fullWidth Boolean @default(true)
+  // Le visiteur peut le fermer ; le choix tient dans son navigateur.
+  dismissible Boolean @default(true)
+
+  // Fenêtre d'affichage. Absentes = affiché tant qu'il est actif.
+  startsAt DateTime?
+  endsAt   DateTime?
+
+  enabled  Boolean @default(false)
+  position Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  updatedBy String   @default("")
+
+  @@index([enabled, position])
 }

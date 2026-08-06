@@ -1,0 +1,368 @@
+{
+  "kontakt": {
+    "title": "Contact",
+    "sections": [
+      {
+        "heading": "1. Customer service",
+        "body": "Our team answers questions about products, availability, delivery dates and payments."
+      },
+      {
+        "heading": "2. Postal address",
+        "body": "Please send written enquiries to:"
+      },
+      {
+        "heading": "3. Returns and waste appliances",
+        "body": "Please do not send returns or small waste appliances back unannounced — register them with us beforehand, so that we can match your parcel to your order straight away."
+      },
+      {
+        "heading": "4. Technical service and installation",
+        "body": "If you would like to arrange an appointment for connection, installation or a service technician's visit, please contact us. Have the model designation and the serial number of the appliance to hand. You will find both on the appliance's rating plate."
+      }
+    ]
+  },
+  "impressum": {
+    "title": "Legal notice",
+    "sections": [
+      {
+        "heading": "Hausgeräte Pfeffer OHG",
+        "body": "Matthiasstraße 15\n54290 Trier\nGermany"
+      },
+      {
+        "heading": "Represented by",
+        "body": "Klaus-Walter Pfeffer\nTrier, Germany"
+      },
+      {
+        "heading": "Contact",
+        "body": "You can reach us quickly and directly by the following means:"
+      },
+      {
+        "heading": "Register entry",
+        "body": "Entered in the commercial register.\nRegistering court: Amtsgericht Wittlich\nRegistration number: HRA 40155"
+      },
+      {
+        "heading": "Data protection",
+        "body": "Protecting your personal data matters to us. Personal data collected through this website — by email or through a contact form, for instance — is processed in accordance with the General Data Protection Regulation (GDPR). You will find further information in our privacy policy."
+      },
+      {
+        "heading": "Liability for links",
+        "body": "Our website contains links to external third-party websites over whose content we have no influence. We therefore cannot accept any responsibility for this external content. The respective provider or operator of the linked pages is always responsible for their content. The linked pages were checked for possible legal infringements at the time of linking. No unlawful content was apparent at that time. Permanent monitoring of the content of linked pages is, however, unreasonable without specific evidence of an infringement. Should we become aware of any legal infringements, we will remove such links without delay."
+      },
+      {
+        "heading": "Copyright",
+        "body": "The content and works created by the site operators on these pages are subject to German copyright law. Reproduction, adaptation, distribution and any kind of exploitation beyond the limits of copyright require the written consent of the respective author or creator. Downloads and copies of this page are permitted for private, non-commercial use only."
+      }
+    ]
+  },
+  "zahlungsarten": {
+    "title": "Payment methods",
+    "sections": [
+      {
+        "heading": "1. Bank transfer",
+        "body": "Once you have completed your order, you will automatically receive an email containing our bank details for payment. You may quote your order number as the payment reference.\n\nAs soon as your payment reaches us, we dispatch your order according to the shipping method you chose. If payment does not arrive within the reservation period provided for, the order is cancelled."
+      },
+      {
+        "heading": "2. Credit card",
+        "body": "We accept Visa, Mastercard and American Express. Your card is charged when the goods are dispatched, proportionally in the case of part deliveries. For security we use your bank's 3-D Secure procedure; your card details are transmitted to our payment service provider in encrypted form only and are not stored by us."
+      },
+      {
+        "heading": "3. PayPal",
+        "body": "At the end of the ordering process you are redirected to PayPal, where you confirm the payment with your access details. The amount is debited immediately after the contract is concluded. You need a PayPal account to use this method; PayPal's terms of use apply in addition."
+      },
+      {
+        "heading": "4. SEPA direct debit",
+        "body": "During the ordering process you grant us a SEPA direct debit mandate. We debit the invoice amount from your account at the earliest when the goods are dispatched.\n\nWe notify you of the debit at least one banking day in advance (shortened prior notification). Please ensure sufficient funds are available: for returned direct debits for which you are responsible, we will charge the bank fees actually incurred."
+      },
+      {
+        "heading": "5. No surcharges",
+        "body": "We charge no additional fee for the use of common SEPA payment methods and common payment cards (section 270a of the German Civil Code). The total shown in your basket is the amount you actually pay."
+      },
+      {
+        "heading": "6. Security of your payment data",
+        "body": "All payment transactions run over a TLS-encrypted connection. Card and account details are processed exclusively by the respective payment service providers, which comply with the PCI DSS security standard. Details of the data processing can be found in our privacy policy."
+      },
+      {
+        "heading": "7. Late payment",
+        "body": "If you fall behind with a payment, the statutory provisions apply. Consumers owe default interest of five percentage points above the base rate. Before taking any further step, we first send you a payment reminder."
+      },
+      {
+        "heading": "8. Refunds and vouchers",
+        "body": "Refunds are generally made using the means of payment originally used. For advance payment and SEPA direct debit we transfer the amount to the account from which the payment was made. If a voucher was redeemed, we credit its value again as a voucher when an order is reversed. Vouchers cannot be paid out in cash."
+      }
+    ]
+  },
+  "versand": {
+    "title": "Shipping and delivery",
+    "sections": [
+      {
+        "heading": "1. Delivery area",
+        "body": "We deliver to Germany and Belgium. Deliveries to other European countries are currently possible only after prior enquiry with our customer service. On request, parcels can be delivered to a parcel shop or a parcel station. For deliveries by freight forwarder, a postal address and a telephone number are required"
+      },
+      {
+        "heading": "2. Shipping costs at a glance",
+        "body": "All prices include statutory VAT. The shipping costs applicable to your order are shown in your basket before you complete the order.\n\na) Germany\n**- Standard delivery within Germany: free of charge\n- Express delivery within Germany: €70.00**\n\nb) Belgium\n**Shipping costs: €100**"
+      },
+      {
+        "heading": "3. Delivery times",
+        "body": "Items in stock are delivered to your home address from Monday to Saturday, except on public holidays.\n\n**a) Germany\n**\n**Standard shipping within Germany: 3 to 5 working days\nExpress shipping within Germany: 24 to 48 hours\n**\n**b) Belgium\n**\nDelivery to Belgium usually takes between 5 and 10 working days.\n\nItems marked “**On request**” are ordered from the manufacturer specially for you. In that case the delivery time is usually **two to four weeks**. You will find the exact delivery time on the relevant product page."
+      },
+      {
+        "heading": "4. Connection and installation service",
+        "body": "On request, our service partners will connect your new appliance properly and put it into operation. You add this service during the ordering process.\n\nThis requires that all on-site connections (electricity, water, waste water, exhaust air, aerial or network connection) are present, freely accessible and compliant with standards. We are not permitted to carry out electrical work on the building's installation."
+      },
+      {
+        "heading": "5. Collection of your old appliance",
+        "body": "When we deliver a new electrical appliance, we will collect your equivalent old appliance free of charge on request (1:1 take-back). Please tell us when you place your order — we ask you explicitly during the ordering process so that the carrier can plan the collection.\n\nThe old appliance must be disconnected, emptied, cleaned and freely accessible at the place of delivery. Dismantling a built-in old appliance is not part of the free collection, but can be booked as a chargeable additional service."
+      },
+      {
+        "heading": "6. Part deliveries",
+        "body": "If you order several items with differing availability, we generally dispatch the items in stock immediately and deliver the rest afterwards. This does not incur any additional shipping costs for you. For the start of the withdrawal period, receipt of the last item is decisive."
+      },
+      {
+        "heading": "7. Tracking",
+        "body": "As soon as your order leaves our warehouse, you receive a dispatch confirmation by email with a tracking link. For freight forwarder deliveries, the email additionally contains the carrier's contact details for arranging an appointment."
+      },
+      {
+        "heading": "8. Transport damage",
+        "body": "Please check the consignment on delivery if at all possible. Report visible damage to the delivery driver and, for freight forwarder deliveries, have it noted on the delivery receipt. Then inform our customer service — we will arrange a replacement or a repair. Your statutory warranty rights remain unaffected in any case."
+      }
+    ]
+  },
+  "ueber-uns": {
+    "title": "About us",
+    "sections": [
+      {
+        "heading": "1. Our range",
+        "body": "We concentrate on two worlds: household and multimedia. In the household section you will find washing machines, dishwashers, fridges and freezers, ovens and cookers, vacuum cleaners, food processors, bean-to-cup coffee machines and air conditioners. In the multimedia section, televisions, smartphones, computers, smartwatches, video games and drones. Rather than an endless catalogue, we carry a curated selection of brands that we know ourselves and whose after-sales service actually works."
+      },
+      {
+        "heading": "2. Who we are",
+        "body": "What began as a small business selling household appliances and repairing electronic devices is today a specialist online shop with its own warehouse and its own customer service.\nOur name stands for our values: competent advice, fair prices and a personal contact who is still there for you after the purchase.\nThe company is run by Klaus-Walter Pfeffer."
+      },
+      {
+        "heading": "3. Advice rather than an order form",
+        "body": "A fridge that does not fit the intended recess, or a television whose brightness is not enough for a light-filled living room, can be a lasting source of frustration. That is why our advisory service is available Monday to Friday from **8:00 to 19:00** and on Saturdays from **9:00 to 16:00**.\nWe ask you about the installation dimensions, the connections available, the water hardness and the size of the room, and then recommend the model that best suits your requirements."
+      },
+      {
+        "heading": "4. Service and installation",
+        "body": "Our service partners connect washing machines, fit appliances into prepared recesses and mount televisions on the wall. In the event of a fault, we prefer to send a technician to you rather than transport a large appliance across Germany. That is faster for you and gentler on the appliance."
+      },
+      {
+        "heading": "5. Sustainability and old appliances",
+        "body": "We collect your old appliance free of charge on delivery and pass it on for proper recycling. We also take back small waste appliances and waste batteries without a new purchase. When selecting our range we pay attention to repairability, spare-part availability and long update commitments for connected devices — criteria that rarely appear on a data sheet, but that make the difference in everyday use."
+      },
+      {
+        "heading": "6. Location and logistics",
+        "body": "Our registered office is at **Matthiasstraße 15, 54290 Trier, Germany**, where our purchasing, our customer service and the processing of returns are centrally organised.\nWe dispatch your orders ourselves, working with parcel carriers and — for large household appliances — with specialised freight forwarders that have a two-person delivery team. This arrangement ensures careful handling and safe delivery, even for particularly heavy appliances such as a 90 kg fridge."
+      }
+    ]
+  },
+  "retoure": {
+    "title": "Returns and complaints",
+    "sections": [
+      {
+        "heading": "Two ways back",
+        "body": "Statutory right of withdrawal: 14 days from receipt of the goods, without giving reasons. The authoritative instructions can be found on the “Right of withdrawal” page."
+      },
+      {
+        "heading": "How to register a return",
+        "body": "Please register the return in advance — that way we can match your parcel straight away and refund you sooner."
+      },
+      {
+        "heading": "Return costs",
+        "body": "We bear the cost of returning the goods. For parcel shipments we provide you with a free return label.\n\nLarge appliances delivered by freight forwarder are collected from you. Please arrange an appointment with our customer service; disconnect and empty the appliance beforehand."
+      },
+      {
+        "heading": "Packaging and accessories",
+        "body": "Where possible, use the original box with the transport locks — with washing machines and televisions in particular, this protects against damage. Enclose all accessories, remote controls, cables, manuals and any vouchers supplied. If parts are missing, we can only refund the compensation for loss of value proportionally."
+      },
+      {
+        "heading": "Inspecting the goods and compensation for loss of value",
+        "body": "You may examine the goods as you would be able to in a shop — that is, unpack them, look at them and test their functions. For a loss in value going beyond such examination (for example an extractor hood already fitted and showing drill marks, or an intensively used coffee machine with limescale residue), we may claim compensation."
+      },
+      {
+        "heading": "Refund",
+        "body": "We refund the purchase price including the standard outbound delivery costs without undue delay, and at the latest within 14 days of receiving your declaration of withdrawal. We may withhold the refund until we have received the goods back or you provide proof of dispatch. The refund is made using the original means of payment; you incur no charges as a result."
+      },
+      {
+        "heading": "Reporting a defect",
+        "body": "New appliances are covered by the statutory liability for defects for two years from delivery. If a defect appears within the first twelve months, it is presumed to have been present at handover — so you do not have to prove anything.\n\nPlease report the defect to our customer service first, and have your order number, the serial number and a brief description of the fault to hand. For large appliances we normally send a technician to you rather than transporting the appliance — that is faster and gentler on the appliance."
+      },
+      {
+        "heading": "Guarantee in addition to the statutory liability",
+        "body": "Many manufacturers grant voluntary guarantees, such as ten years on motors or five years on compressors. These guarantees exist alongside the statutory liability for defects and do not restrict it. We are happy to help you deal with the manufacturer."
+      },
+      {
+        "heading": "Transport damage",
+        "body": "If the goods arrived damaged, please contact us within a few days and, if possible, send photographs of the packaging and the appliance. We will then arrange a replacement or a collection. Reporting late does not harm your statutory rights, but it does make it easier for us to settle the matter with the carrier."
+      },
+      {
+        "heading": "Items not taken back",
+        "body": "Excluded from the right of withdrawal and return are, among others, made-to-measure items as well as unsealed hygiene articles, software and data media. The complete list can be found on the “Right of withdrawal” page."
+      }
+    ]
+  },
+  "agb": {
+    "title": "General Terms and Conditions",
+    "sections": [
+      {
+        "heading": "§ 1 Scope",
+        "body": "1.1 These General Terms and Conditions (hereinafter “GTC”) apply to all contracts concluded between Hausgeräte Pfeffer OHG, Matthiasstraße 15, 54290 Trier (hereinafter “Seller”) and the customer through the Seller's online shop.\n1.2 Deviating terms of the customer are not recognised unless the Seller expressly agrees to their application in writing.\n1.3 These GTC apply exclusively to consumers within the meaning of section 13 of the German Civil Code."
+      },
+      {
+        "heading": "§ 2 2. Contracting party",
+        "body": "The contracting party is:\nHausgeräte Pfeffer OHG\nMatthiasstraße 15\n54290 Trier\nGermany\nRepresented by: Klaus-Walter Pfeffer\nRegistering court: Amtsgericht Wittlich\nRegistration number: HRA 40155\nEmail: kontakt@hausgeratepfeffer.de\nPhone: +49 651 31795"
+      },
+      {
+        "heading": "§ 3  Conclusion of contract",
+        "body": "3.1 The presentation of products in the online shop does not constitute a legally binding offer, but an invitation to place an order.\n3.2 By clicking the “Order with obligation to pay” button, the customer makes a binding offer to purchase the goods in the basket.\n3.3 Immediately after submitting the order, the buyer receives an automatic email confirmation. The Seller confirms receipt of the order by email without delay. This confirmation does not yet constitute acceptance of the offer.\n3.4 The contract comes into effect only when the Seller accepts the order by a separate order confirmation or by delivering the goods."
+      },
+      {
+        "heading": "§ 4  Prices and payment terms",
+        "body": "4.1 All prices stated are final prices and include statutory VAT.\n4.2 Standard deliveries within Germany are free of charge. Express deliveries cost €70.00.\n4.3 Payment can be made by bank transfer, PayPal, credit card or Klarna."
+      },
+      {
+        "heading": "§ 5 Delivery and dispatch",
+        "body": "5.1 Deliveries are made within Germany and to Belgium.\n5.2 The delivery time is generally 3 to 5 working days for deliveries within Germany and 5 to 10 working days for deliveries abroad, from conclusion of the contract or from receipt of payment in the case of advance payment, unless stated otherwise.\n5.3 For large appliances (washing machines, refrigerators, etc.), delivery may be made to the kerbside or into the home.\n5.4 The Seller is entitled to make part deliveries, provided this is reasonable for the customer."
+      },
+      {
+        "heading": "§ 6  Retention of title",
+        "body": "The goods delivered remain the property of the Seller until payment has been made in full."
+      },
+      {
+        "heading": "§ 7  Right of withdrawal",
+        "body": "Consumers have a statutory right of withdrawal. The details are set out in the separate withdrawal policy."
+      },
+      {
+        "heading": "§ 8 Warranty and liability",
+        "body": "8.1 The statutory warranty rights apply.\n8.2 The statutory warranty period is 2 years from delivery.\n8.3 Claims for damages by the customer are excluded unless the damage is based on intent or gross negligence on the part of the Seller or its vicarious agents. This does not apply to injury to life, body or health, nor to the breach of essential contractual obligations."
+      },
+      {
+        "heading": "§ 9 Final provisions",
+        "body": "9.1 The law of the Federal Republic of Germany applies, to the exclusion of the UN Convention on Contracts for the International Sale of Goods.\n9.2 Should individual provisions of these GTC be or become invalid, the validity of the remaining provisions remains unaffected.\n9.3 The place of jurisdiction is Trier, to the extent permitted by law."
+      }
+    ]
+  },
+  "widerruf": {
+    "title": "Right of withdrawal and model withdrawal form",
+    "sections": [
+      {
+        "heading": "1. Withdrawal policy – right of withdrawal",
+        "body": "You have the right to withdraw from this contract within fourteen days without giving any reason.\nThe withdrawal period is fourteen days from the day on which you, or a third party named by you who is not the carrier, take possession of the goods.\nTo exercise your right of withdrawal, you must inform us of your decision at the following address:\n\n**Hausgeräte Pfeffer OHG\nMatthiasstraße 15\n54290 Trier\nGermany\nEmail: kontakt@hausgeratepfeffer.de\nPhone: +49 651 31795**\n\nYou may use the attached model withdrawal form, but it is not obligatory.\n\n**Model withdrawal form**\n\n******To\nHausgeräte Pfeffer OHG\nMatthiasstraße 15\n54290 Trier\nGermany\nEmail: kontakt@hausgeratepfeffer.de\nI/we () hereby withdraw from the contract concluded by me/us () for the purchase of the following goods (*):\nOrdered on ()/received on ():\nName of consumer(s):\nAddress of consumer(s):\nSignature of consumer(s) (only if this form is notified on paper):\nDate:\n(*) Delete as appropriate.******"
+      },
+      {
+        "heading": "2. Withdrawal policy – consequences of withdrawal",
+        "body": "If you withdraw from this contract, we shall reimburse to you all payments received from you, including the costs of delivery (with the exception of the supplementary costs resulting from your choice of a type of delivery other than the least expensive type of standard delivery offered by us), without undue delay and in any event not later than fourteen days from the day on which we are informed about your decision to withdraw from this contract.\n\nYou shall send back the goods or hand them over to us without undue delay and in any event not later than fourteen days from the day on which you communicate your withdrawal to us. The return is to be sent to the following address:\nHausgeräte Pfeffer OHG\nMatthiasstraße 15\n54290 Trier\nGermany\nEmail: kontakt@hausgeratepfeffer.de"
+      },
+      {
+        "heading": "3. Start of the period for several goods and part deliveries",
+        "body": "If your order comprises several goods ordered in a single order but delivered separately, the withdrawal period begins on the day on which you, or a third party named by you who is not the carrier, took possession of the last item.\n\nIf goods are delivered in several part consignments or pieces — a fitted kitchen, for example, or an appliance with separate accessories — the period begins on the day on which you, or a third party named by you who is not the carrier, took possession of the last part consignment or the last piece."
+      },
+      {
+        "heading": "4. Exclusion and early expiry of the right of withdrawal",
+        "body": "Under section 312g(2) of the German Civil Code, the right of withdrawal does not apply, among others, to the following contracts:"
+      },
+      {
+        "heading": "5. Refund",
+        "body": "The refund is made within 14 days of receipt of the returned goods or of proof of return being provided. Repayment is made to the means of payment originally used."
+      },
+      {
+        "heading": "6. Exchange",
+        "body": "An exchange is possible within 14 days of receiving the order. The items must be returned new, unused and in their original packaging. An exchange for the same new item is possible where the item received is defective, damaged or of the wrong size."
+      },
+      {
+        "heading": "7. Digital content",
+        "body": "In the case of contracts for the supply of digital content not supplied on a tangible medium — download codes for games or software, for example — your right of withdrawal expires under section 356(5) of the German Civil Code once we have begun performance of the contract after you have expressly consented to our beginning before the end of the withdrawal period and have confirmed your awareness that the right of withdrawal thereby expires. We additionally confirm this to you on a durable medium."
+      }
+    ]
+  },
+  "datenschutz": {
+    "title": "Privacy policy",
+    "sections": [
+      {
+        "heading": "1. Controller and contact",
+        "body": "The controller for the data processing on this website is:"
+      },
+      {
+        "heading": "2. Collection and storage of personal data, and the nature and purpose of its use",
+        "body": "**a) When visiting the website**\nWhen you call up our website, your browser sends information to our website's server. This information is stored temporarily in what is known as a log file. The following information is recorded without any action on your part and stored until it is automatically deleted:\n- IP address of the requesting computer\n- date and time of access\n- website from which access was made (referrer URL)\n- browser used and, where applicable, the operating system of your computer\nWe process the data listed for the following purposes:\n- ensuring the website connection is established smoothly\n- ensuring our website is comfortable to use\n- evaluating system security and stability\nThe legal basis for this processing is Article 6(1)(1)(f) GDPR. Our legitimate interest follows from the purposes for data collection listed above. The data is not passed on to third parties.\n\n**b) When using the contact form or contacting us by email**\nFor questions of any kind we offer you the option of contacting us using a form provided on the website or by email. A valid email address is required for this.\nData processing for the purpose of contacting us takes place under Article 6(1)(1)(a) GDPR on the basis of your freely given consent, or under Article 6(1)(1)(b) GDPR for the performance of pre-contractual measures.\nThe personal data collected in order to deal with the enquiry is deleted automatically once your request has been dealt with, unless statutory retention obligations prevent this.\n\n**c) For orders in the online shop**\nTo process orders we collect and process the data you provide (name, address, email address, telephone number, payment details). The processing is carried out to perform the contract in accordance with Article 6(1)(1)(b) GDPR.\nThe data is passed on to shipping service providers and payment service providers to the extent necessary to perform the contract."
+      },
+      {
+        "heading": "3. Disclosure of data",
+        "body": "Your personal data is not transferred to third parties for purposes other than those listed below.\nWe pass your personal data on to third parties only where:"
+      },
+      {
+        "heading": "4. Cookies",
+        "body": "We use cookies on our website. These are small files that your browser creates automatically and that are stored on your device.\nWe use cookies to make our website more user-friendly. Some cookies remain stored on your device until you delete them. They allow us to recognise your browser on your next visit.\nYou can set your browser so that you are informed when cookies are set and can decide individually whether to accept them, or exclude the acceptance of cookies in certain cases or generally.\nThe legal basis for the use of cookies is Article 6(1)(1)(f) GDPR, or, where consent is given, Article 6(1)(1)(a) GDPR."
+      },
+      {
+        "heading": "5. Data subject rights",
+        "body": "You have the right:"
+      },
+      {
+        "heading": "6. Right to object",
+        "body": "Where your personal data is processed on the basis of legitimate interests under Article 6(1)(1)(f) GDPR, you have the right under Article 21 GDPR to object to the processing."
+      },
+      {
+        "heading": "7. Data security",
+        "body": "Within your visit to the website we use the widespread SSL procedure (Secure Socket Layer) together with the highest level of encryption supported by your browser"
+      },
+      {
+        "heading": "8. Currency and amendment of this privacy policy",
+        "body": "As our website and our offering develop further, or because of changed legal or regulatory requirements, it may become necessary to amend this privacy policy."
+      }
+    ]
+  },
+  "elektroaltgeraete": {
+    "title": "Waste electrical equipment and batteries",
+    "sections": [
+      {
+        "heading": "Why waste appliances do not belong in household waste",
+        "body": "Waste electrical and electronic equipment contains valuable raw materials such as copper, aluminium and rare earths, but also harmful substances such as refrigerants, mercury or lithium batteries. Disposing of waste appliances separately ensures that these substances are treated properly and that raw materials are recovered. Disposal via household waste is prohibited by law and may be punished as a regulatory offence."
+      },
+      {
+        "heading": "The crossed-out wheelie bin symbol",
+        "body": "Appliances that must be collected separately from household waste at the end of their use bear the symbol of a crossed-out wheeled bin. The symbol appears on the appliance, the packaging or the instructions for use. Since 1 July 2026, distributors subject to take-back obligations have additionally displayed this symbol clearly on product pages in the online shop, or during the ordering process, under section 18a ElektroG, and provide information there on how collection and take-back work."
+      },
+      {
+        "heading": "Our take-back: 1:1 when you buy a new appliance",
+        "body": "If you buy a new electrical appliance from us, we take back one waste appliance of the same type that performs essentially the same functions, free of charge (section 17(1) sentence 1 no. 1 ElektroG).\n\nFor large appliances we ask you explicitly during the ordering process whether you want the take-back. The freight forwarder then collects the old appliance at the place of handover when the new appliance is delivered. Please disconnect, empty and clean the old appliance beforehand and make it freely accessible."
+      },
+      {
+        "heading": "Our take-back: 0:1 for small waste appliances",
+        "body": "We also take back small waste appliances whose external dimensions are all no greater than 25 centimetres, without a new purchase — limited to household quantities of up to three appliances per appliance type (section 17(1) sentence 1 no. 2 ElektroG).\n\nExamples are shavers, electric toothbrushes, kitchen scales, headphones, cables, power supply units, remote controls and small Bluetooth speakers."
+      },
+      {
+        "heading": "How to return waste appliances to us",
+        "body": "As a distance seller we offer you reasonable, free return options:"
+      },
+      {
+        "heading": "Before returning: delete your data",
+        "body": "Waste appliances such as smartphones, smartwatches, computers, televisions and modern household appliances may hold personal data. You are responsible for deleting this data yourself (section 10(1) ElektroG). Before returning an appliance, therefore, perform a factory reset, remove memory cards and SIM cards, and sign out of accounts."
+      },
+      {
+        "heading": "Remove batteries and lamps beforehand",
+        "body": "Waste batteries and rechargeable batteries, and lamps that can be removed from the waste appliance without destroying them, must be removed before return and disposed of separately. Where removal is only possible using tools or by destroying the item, please return the appliance complete."
+      },
+      {
+        "heading": "Take-back of waste batteries and rechargeable batteries",
+        "body": "Batteries and rechargeable batteries must not go into household waste. You are legally obliged to hand waste batteries over for separate collection.\n\nYou can return waste batteries and rechargeable batteries that we carry, or have carried, as new batteries in our range free of charge to our dispatch address. Alternatively, use the collection boxes in retail outlets or your municipal collection points. Returning them is free of charge for you.\n\nReturn address for waste batteries: Hausgeräte Pfeffer GmbH, Batterierücknahme, Musterstraße 12, 10115 Berlin."
+      },
+      {
+        "heading": "What the battery symbols mean",
+        "body": "Batteries and rechargeable batteries also bear the crossed-out wheelie bin symbol. If they contain certain harmful substances, a chemical abbreviation appears underneath:"
+      },
+      {
+        "heading": "Safety notice on lithium batteries",
+        "body": "Lithium-ion batteries can catch fire if damaged, short-circuited or stored improperly. Before returning them, therefore, tape over the terminals, and do not send damaged or swollen batteries by post — hand them in exclusively at a municipal collection point. Our customer service will help you with any questions."
+      },
+      {
+        "heading": "Municipal collection points",
+        "body": "Independently of our take-back scheme, you can hand in waste appliances and waste batteries free of charge at the collection points of the public waste management authorities — at recycling centres, for example, or via hazardous-waste collection vehicles. You will find the locations on the website of your town or district."
+      },
+      {
+        "heading": "Our registrations",
+        "body": "We are registered with the competent registers:"
+      }
+    ]
+  }
+}

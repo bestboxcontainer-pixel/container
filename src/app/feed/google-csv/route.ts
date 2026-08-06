@@ -117,7 +117,7 @@ function row(record: MerchantRecord): string {
 }
 
 export async function GET(): Promise<Response> {
-  const products = await loadMerchantProducts();
+  const products = await loadMerchantProducts({ respectSelection: true });
   const lines = [COLUMNS.join("\t"), ...products.map((product) => row(buildMerchantRecord(product)))];
 
   return new Response(`${lines.join("\n")}\n`, {

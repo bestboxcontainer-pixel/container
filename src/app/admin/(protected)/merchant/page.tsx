@@ -5,6 +5,8 @@ import { requireAdminSession } from "@/lib/dal";
 import { AdminPagination } from "@/components/admin/AdminPagination";
 import { paginate, parsePageParam } from "@/lib/pagination";
 import { auditCatalog, siteUrl, type MerchantAudit, type MerchantIssue } from "@/server/merchant";
+import { getMerchantSelection, loadSelectableCatalog } from "@/server/merchantSelection";
+import { MerchantFeedSelector } from "@/components/admin/MerchantFeedSelector";
 
 // Page de contrôle « Google Merchant » : elle donne au commerçant, produit par
 // produit, la liste exacte de ce qui manque avant de lancer une campagne Shopping.
@@ -124,7 +126,11 @@ export default async function MerchantPage({
   // Deux clés distinctes : « page » pour les produits refusés, « warnPage » pour
   // ceux qui ne portent que des avertissements.
   const params = await searchParams;
-  const overview = await auditCatalog();
+  const [overview, catalog, selection] = await Promise.all([
+    auditCatalog(),
+    loadSelectableCatalog(),
+    getMerchantSelection(),
+  ]);
   const base = siteUrl();
 
   // Les produits bloqués d'abord, puis ceux qui n'ont que des avertissements.
@@ -170,6 +176,12 @@ export default async function MerchantPage({
           hint="Diffusés, mais avec des restrictions"
           tone="neutral"
         />
+      </div>
+
+      {/* La sélection vient avant les adresses de flux : c'est elle qui décide
+          de leur contenu, autant la lire dans cet ordre. */}
+      <div className="mb-6">
+        <MerchantFeedSelector catalog={catalog} selection={selection} />
       </div>
 
       <div className="mb-6 grid grid-cols-1 gap-4 lg:grid-cols-2">

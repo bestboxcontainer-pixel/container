@@ -1,5 +1,10 @@
 import { prisma } from "@/server/prisma";
 import {
+  MERCHANT_SELECTION_DEFAULT,
+  filterForFeed,
+} from "@/lib/merchantSelection";
+import { getMerchantSelection } from "@/server/merchantSelection";
+import {
   getActivePromotionForProduct,
   getActivePromotions,
   type ProductPromotion,
@@ -95,6 +100,8 @@ export const MERCHANT_RETURN_POLICY = {
 
 export interface MerchantProduct {
   id: string;
+  /** Rattachement à la catégorie, pour le filtre de sélection du flux. */
+  categoryId: string;
   brand: string;
   name: string;
   slug: string;
@@ -133,6 +140,8 @@ export interface MerchantProduct {
 
 const merchantSelect = {
   id: true,
+  // Sert au filtre de sélection du flux, jamais transmis à Google.
+  categoryId: true,
   brand: true,
   name: true,
   slug: true,
@@ -167,20 +176,30 @@ const merchantSelect = {
  * Charge les produits destinés au flux. Par défaut, seuls les produits actifs.
  * Les promotions de campagne en cours sont jointes ici : Google compare le prix
  * du flux à celui de la page, et la page, elle, affiche déjà le prix remisé.
+ *
+ * `respectSelection` applique en plus le choix de catégories enregistré depuis
+ * le back-office. Les deux flux le posent ; l'écran de contrôle, non — il doit
+ * continuer d'auditer le catalogue entier, y compris ce qui n'est pas diffusé,
+ * sinon un produit écarté du flux disparaîtrait aussi du diagnostic.
  */
 export async function loadMerchantProducts(
-  options: { includeInactive?: boolean } = {},
+  options: { includeInactive?: boolean; respectSelection?: boolean } = {},
 ): Promise<MerchantProduct[]> {
-  const [rows, promotions] = await Promise.all([
+  const [rows, promotions, selection] = await Promise.all([
     prisma.product.findMany({
       where: options.includeInactive ? undefined : { active: true },
       select: merchantSelect,
       orderBy: [{ category: { position: "asc" } }, { createdAt: "asc" }],
     }),
     getActivePromotions(),
+    options.respectSelection
+      ? getMerchantSelection()
+      : Promise.resolve(MERCHANT_SELECTION_DEFAULT),
   ]);
 
-  return rows.map((row) => {
+  const retenus = filterForFeed(rows, selection);
+
+  return retenus.map((row) => {
     const promotion = promotions.get(row.id);
     return promotion ? { ...row, promotion } : row;
   });

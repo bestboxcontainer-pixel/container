@@ -104,7 +104,7 @@ function itemXml(record: MerchantRecord): string {
 }
 
 export async function GET(): Promise<Response> {
-  const products = await loadMerchantProducts();
+  const products = await loadMerchantProducts({ respectSelection: true });
   const items = products.map((product) => itemXml(buildMerchantRecord(product))).join("");
   const base = siteUrl();
 

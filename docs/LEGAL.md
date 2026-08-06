@@ -142,7 +142,7 @@ Les slugs de ce corpus sont `widerruf` et `retoure`. Il faut soit aligner le foo
 | Raison sociale | `Hausgeräte Pfeffer GmbH` | `COMPANY.name` dans `de.ts` et `en.ts` |
 | Adresse | `Musterstraße 12, 10115 Berlin` | idem |
 | E-mail | `service@hausgeratepfeffer.de` | idem |
-| Téléphone | `0800 123 45` | idem |
+| Téléphone | `+49 176 14111374` (réel) | idem |
 | Gérant | `Martin Pfeffer` | idem |
 | Registre du commerce | `Amtsgericht Berlin-Charlottenburg HRB 000000` | idem |
 | N° TVA intracommunautaire | `DE000000000` | idem |

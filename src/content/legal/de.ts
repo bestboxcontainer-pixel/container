@@ -875,7 +875,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Beratung statt Bestellformular",
-        body: "Ein Kühlschrank, der nicht in die Nische passt, oder ein Fernseher, der im hellen Wohnzimmer zu dunkel ist, ärgert lange. Deshalb ist unsere Beratung montags bis samstags von 8 bis 20 Uhr unter 0800 123 45 erreichbar. Wir fragen nach Nischenmaßen, Anschlüssen, Wasserhärte oder Raumgröße – und sagen auch, wenn das günstigere Modell für Ihren Fall das bessere ist.",
+        body: "Ein Kühlschrank, der nicht in die Nische passt, oder ein Fernseher, der im hellen Wohnzimmer zu dunkel ist, ärgert lange. Deshalb ist unsere Beratung montags bis samstags von 8 bis 20 Uhr unter +49 176 14111374 erreichbar. Wir fragen nach Nischenmaßen, Anschlüssen, Wasserhärte oder Raumgröße – und sagen auch, wenn das günstigere Modell für Ihren Fall das bessere ist.",
       },
       {
         heading: "Service und Montage",

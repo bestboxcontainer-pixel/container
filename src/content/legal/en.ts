@@ -21,7 +21,7 @@ const COMPANY = {
   city: "54290 Trier",
   country: "Germany",
   email: "kontakt@hausgeratepfeffer.de",
-  phone: "0800 123 45",
+  phone: "+49 176 14111374",
   managingDirector: "Martin Pfeffer",
   register: "Amtsgericht Wittlich (Local Court of Wittlich), HRA 00000",
   vatId: "DE000000000",
@@ -860,7 +860,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Advice rather than an order form",
-        body: "A fridge that doesn't fit the recess, or a television that looks too dark in a bright living room, is an annoyance that lasts. That is why our advisers are available Monday to Saturday, 8 a.m. to 8 p.m., on 0800 123 45. We ask about recess dimensions, connections, water hardness and room size — and we will say so when the cheaper model is the better choice for your situation.",
+        body: "A fridge that doesn't fit the recess, or a television that looks too dark in a bright living room, is an annoyance that lasts. That is why our advisers are available Monday to Saturday, 8 a.m. to 8 p.m., on +49 176 14111374. We ask about recess dimensions, connections, water hardness and room size — and we will say so when the cheaper model is the better choice for your situation.",
       },
       {
         heading: "Service and installation",

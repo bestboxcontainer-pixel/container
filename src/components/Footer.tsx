@@ -65,8 +65,8 @@ export async function Footer() {
             <p className="flex items-center gap-2">
               <Phone className="h-4 w-4" />
               {/* Lien téléphonique : hors routage multilingue */}
-              <a href="tel:080012345" className="hover:underline">
-                0800 123 45
+              <a href="tel:+4917614111374" className="hover:underline">
+                +49 176 14111374
               </a>
             </p>
           </div>

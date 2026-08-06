@@ -35,7 +35,7 @@ export const MERCHANT_LANGUAGE = "de";
 export const MERCHANT_VAT_RATE = 0.19;
 
 export const SHOP_NAME = "Hausgeräte Pfeffer";
-export const SHOP_PHONE = "+49 800 1234 5";
+export const SHOP_PHONE = "+49 176 14111374";
 
 /**
  * URL publique de la boutique. Toutes les URL du flux doivent être absolues et

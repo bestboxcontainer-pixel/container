@@ -25,8 +25,6 @@ type ProductPageParams = Promise<{
   product: string;
 }>;
 
-export const dynamicParams = true;
-
 /**
  * Aucune fiche produit n'est composée à la construction du site.
  *
@@ -36,19 +34,19 @@ export const dynamicParams = true;
  * les déploiements d'une journée, ont fini par épuiser le quota de transfert de
  * la base et mettre la boutique à l'arrêt.
  *
- * La liste vide fait composer chaque fiche à sa première visite, puis la garde
- * en cache — les visiteurs suivants lisent du statique. Le catalogue n'a donc
- * plus besoin d'être relu en entier à chaque mise en ligne, et une fiche que
- * personne ne consulte ne coûte rien.
+ * L'absence de `generateStaticParams` suffit à obtenir ce résultat : la route
+ * est servie à la demande, comme la page d'accueil, les groupes et les
+ * catégories, et le build ne touche plus au catalogue.
  *
- * Le cache reste purgé par `invaliderCatalogue()` dès qu'un prix ou un stock
- * change dans le back-office : un prix modifié s'affiche immédiatement, comme
- * avant. Les pages de groupe et de catégorie, elles, restent composées à
- * l'avance : elles ne sont qu'une trentaine et servent d'entrée au catalogue.
+ * ATTENTION — ne pas rétablir un `generateStaticParams` qui rendrait une liste
+ * vide. La mise en page racine lit `headers()` pour connaître la langue, ce qui
+ * rend toute la boutique dynamique. Avec une liste de paramètres, même vide,
+ * Next classe pourtant la route en pré-rendu : la première visite compose alors
+ * la fiche en mode statique, tombe sur cette lecture d'en-têtes et répond 500
+ * (`DYNAMIC_SERVER_USAGE`). C'est ce qui a mis toutes les fiches hors service.
+ * La lecture reste bon marché : elle passe par le catalogue mis en cache sous le
+ * tag « catalogue », purgé à chaque écriture du back-office.
  */
-export async function generateStaticParams() {
-  return [];
-}
 
 /** Charge la fiche produit et sa catégorie, traduites dans la langue demandée. */
 async function loadLocalizedProduct(

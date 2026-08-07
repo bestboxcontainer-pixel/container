@@ -599,15 +599,23 @@ export async function getCategoryPage(
 }
 
 /**
- * Fiche produit. Passe par `getCategoryPage`, donc hérite des promotions de
- * campagne sans avoir à les rappliquer : un seul endroit décide du prix affiché.
+ * Fiche produit. Passe par le catalogue, donc hérite des promotions de campagne
+ * sans avoir à les rappliquer : un seul endroit décide du prix affiché.
+ *
+ * C'est bien `getCategoryPages()` — la version mise en cache — et non
+ * `getCategoryPage()`. Les fiches sont composées à chaque visite depuis que le
+ * build ne les pré-rend plus ; une lecture directe en base ferait payer à Neon
+ * une requête par consultation, soit précisément le trafic que l'on cherchait à
+ * supprimer. Le cache porte le tag « catalogue », purgé dès qu'un prix, un stock
+ * ou une commande le modifie : la fiche reste juste au centime près.
  */
 export async function getProductBySlug(
   group: string,
   categorySlug: string,
   productSlug: string,
 ): Promise<{ category: CategoryPageView; product: Product } | undefined> {
-  const category = await getCategoryPage(group, categorySlug);
+  const pages = await getCategoryPages();
+  const category = pages.find((page) => page.group === group && page.slug === categorySlug);
   const product = category?.products.find((item) => item.slug === productSlug);
   if (!category || !product) return undefined;
   return { category, product };

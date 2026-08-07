@@ -11,7 +11,7 @@ import { ProductJsonLd } from "@/components/seo/ProductJsonLd";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { PaymentMethodsBar } from "@/components/PaymentMethodsBar";
 import { ProductGrid } from "@/components/ProductGrid";
-import { getCategoryPages, getProductBySlug, getRelatedProducts } from "@/server/store";
+import { getProductBySlug, getRelatedProducts } from "@/server/store";
 import { loadCatalogTranslations, localizeCategoryPage } from "@/server/localizedContent";
 import { productLongText, productShortText } from "@/lib/productText";
 import { formatRating } from "@/lib/formatRating";
@@ -27,15 +27,27 @@ type ProductPageParams = Promise<{
 
 export const dynamicParams = true;
 
+/**
+ * Aucune fiche produit n'est composée à la construction du site.
+ *
+ * Il y en a près de huit cents, deux langues comprises, et chacune lisait sa
+ * propre ligne en base pendant le build. Next répartit ce travail sur des
+ * dizaines de processus simultanés : autant de connexions qui, multipliées par
+ * les déploiements d'une journée, ont fini par épuiser le quota de transfert de
+ * la base et mettre la boutique à l'arrêt.
+ *
+ * La liste vide fait composer chaque fiche à sa première visite, puis la garde
+ * en cache — les visiteurs suivants lisent du statique. Le catalogue n'a donc
+ * plus besoin d'être relu en entier à chaque mise en ligne, et une fiche que
+ * personne ne consulte ne coûte rien.
+ *
+ * Le cache reste purgé par `invaliderCatalogue()` dès qu'un prix ou un stock
+ * change dans le back-office : un prix modifié s'affiche immédiatement, comme
+ * avant. Les pages de groupe et de catégorie, elles, restent composées à
+ * l'avance : elles ne sont qu'une trentaine et servent d'entrée au catalogue.
+ */
 export async function generateStaticParams() {
-  const categories = await getCategoryPages();
-  return categories.flatMap((category) =>
-    category.products.map((product) => ({
-      group: category.group,
-      category: category.slug,
-      product: product.slug ?? "",
-    })),
-  );
+  return [];
 }
 
 /** Charge la fiche produit et sa catégorie, traduites dans la langue demandée. */

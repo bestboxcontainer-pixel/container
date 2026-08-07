@@ -190,20 +190,12 @@ const PAYMENT_METHODS = [
     position: 0,
   },
   {
-    key: "sofort",
-    label: "Sofortüberweisung",
-    description: "Direkte Überweisung über das Online-Banking.",
-    icon: "zap",
-    feeLabel: "kostenlos",
-    position: 1,
-  },
-  {
     key: "paypal",
     label: "PayPal",
     description: "Bezahlen mit PayPal-Konto oder als Gast.",
     icon: "wallet",
     feeLabel: "kostenlos",
-    position: 2,
+    position: 1,
   },
   {
     key: "kreditkarte",
@@ -211,6 +203,19 @@ const PAYMENT_METHODS = [
     description: "Visa, Mastercard und American Express.",
     icon: "credit-card",
     feeLabel: "kostenlos",
+    position: 2,
+  },
+  // Sofortüberweisung et SEPA-Lastschrift ne correspondent à aucun contrat de
+  // la boutique. Ils restent décrits ici pour le jour où ils seront souscrits,
+  // mais naissent éteints : proposer à la caisse un moyen dont personne
+  // n'encaisse le produit enverrait le client dans une impasse.
+  {
+    key: "sofort",
+    label: "Sofortüberweisung",
+    description: "Direkte Überweisung über das Online-Banking.",
+    icon: "zap",
+    feeLabel: "kostenlos",
+    enabled: false,
     position: 3,
   },
   {
@@ -218,6 +223,7 @@ const PAYMENT_METHODS = [
     label: "SEPA-Lastschrift",
     description: "Abbuchung nach Versand der Bestellung.",
     icon: "banknote",
+    enabled: false,
     feeLabel: "kostenlos",
     position: 4,
   },

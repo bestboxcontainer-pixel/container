@@ -44,14 +44,6 @@ const DISPLAY_METHODS: DisplayMethod[] = [
     feeLabel: "kostenlos",
   },
   {
-    id: "sofort",
-    key: "sofort",
-    label: "Sofortüberweisung",
-    description: "Direkte Überweisung über das Online-Banking.",
-    icon: "zap",
-    feeLabel: "kostenlos",
-  },
-  {
     id: "paypal",
     key: "paypal",
     label: "PayPal",
@@ -65,14 +57,6 @@ const DISPLAY_METHODS: DisplayMethod[] = [
     label: "Kreditkarte",
     description: "Visa, Mastercard und American Express.",
     icon: "credit-card",
-    feeLabel: "kostenlos",
-  },
-  {
-    id: "lastschrift",
-    key: "lastschrift",
-    label: "SEPA-Lastschrift",
-    description: "Abbuchung nach Versand der Bestellung.",
-    icon: "banknote",
     feeLabel: "kostenlos",
   },
 ];

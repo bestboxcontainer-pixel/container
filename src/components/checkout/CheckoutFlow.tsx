@@ -23,6 +23,7 @@ import { useCart } from "@/components/cart/CartProvider";
 import { AddressFieldset, EMPTY_ADDRESS } from "@/components/checkout/AddressFieldset";
 import type { AddressValue } from "@/components/checkout/AddressFieldset";
 import { CheckoutSummary } from "@/components/checkout/CheckoutSummary";
+import { CouponField, type AppliedCoupon } from "@/components/checkout/CouponField";
 import { ShippingMethodFieldset } from "@/components/checkout/ShippingMethodFieldset";
 import { computeTotals, DEFAULT_SHIPPING_METHOD_KEY, formatCents } from "@/lib/cart";
 import { isCountryCode, isValidPostalCode } from "@/lib/countries";
@@ -129,6 +130,9 @@ export function CheckoutFlow({
   const [sameAsBilling, setSameAsBilling] = useState(customer?.shippingSameAsBilling ?? true);
   const [shipping, setShipping] = useState<AddressValue>(customer?.shipping ?? EMPTY_ADDRESS);
   const [note, setNote] = useState("");
+  // Coupon accepté par le serveur, ou rien. Le code seul ne suffirait pas : le
+  // récapitulatif doit montrer la remise avant que le client ne commande.
+  const [coupon, setCoupon] = useState<AppliedCoupon | null>(null);
   const [paymentKey, setPaymentKey] = useState(methods[0]?.key ?? "");
   const [terms, setTerms] = useState(false);
   const [withdrawal, setWithdrawal] = useState(false);
@@ -147,6 +151,10 @@ export function CheckoutFlow({
   const totals = computeTotals(lines, {
     shippingMethodKey,
     freeShipping: campaign.freeShipping,
+    // Remise et port offert viennent du serveur, jamais d'un calcul local :
+    // le tunnel se contente de reporter ce que la vérification a répondu.
+    discountCents: coupon?.discountCents ?? 0,
+    couponFreeShipping: coupon?.freeShipping ?? false,
   });
 
   function errorMessage(current: CheckoutError): string {
@@ -223,6 +231,9 @@ export function CheckoutFlow({
           customerNote: note.trim(),
           termsAccepted: true,
           withdrawalAcknowledged: true,
+          // Le code, et lui seul : le serveur relit le coupon en base et refait
+          // le calcul de la remise avant d'écrire la commande.
+          couponCode: coupon?.code ?? "",
           items: lines.map((line) => ({ productId: line.productId, quantity: line.quantity })),
         }),
       });
@@ -679,8 +690,17 @@ export function CheckoutFlow({
         )}
       </div>
 
-      <aside className="lg:sticky lg:top-4 lg:self-start">
-        <CheckoutSummary lines={lines} totals={totals} />
+      {/* Le code de réduction est proposé au-dessus du récapitulatif, et à
+          toutes les étapes : le chercher une fois arrivé au bouton de commande
+          est le moment où on le cherche le plus. */}
+      <aside className="space-y-4 lg:sticky lg:top-4 lg:self-start">
+        <CouponField
+          lines={lines}
+          shippingMethodKey={shippingMethodKey}
+          applied={coupon}
+          onChange={setCoupon}
+        />
+        <CheckoutSummary lines={lines} totals={totals} couponCode={coupon?.code} />
       </aside>
     </div>
   );

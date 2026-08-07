@@ -77,7 +77,7 @@ function layout(input: LayoutInput): string {
   const intro = input.intro
     .map(
       (paragraph) =>
-        `<p class="txt" style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:16px; line-height:26px; color:#3f4854;">${paragraph}</p>`,
+        `<p class="txt" style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:18px; line-height:29px; color:#3f4854;">${paragraph}</p>`,
     )
     .join("\n");
 
@@ -85,15 +85,15 @@ function layout(input: LayoutInput): string {
     ? `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 20px 0;">
                   <tr>
                     <td align="center" bgcolor="#e3000e" style="background-color:#e3000e; border-radius:4px;">
-                      <a href="${escapeHtml(input.action.url)}" style="display:inline-block; padding:15px 30px; font-family:Arial,Helvetica,sans-serif; font-size:16px; font-weight:bold; color:#ffffff; text-decoration:none;">${escapeHtml(input.action.label)}</a>
+                      <a href="${escapeHtml(input.action.url)}" style="display:inline-block; padding:16px 32px; font-family:Arial,Helvetica,sans-serif; font-size:18px; font-weight:bold; color:#ffffff; text-decoration:none;">${escapeHtml(input.action.label)}</a>
                     </td>
                   </tr>
                 </table>
-                <p class="small" style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:21px; color:#4b5563; word-break:break-all;">${escapeHtml(input.action.url)}</p>`
+                <p class="small" style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:24px; color:#4b5563; word-break:break-all;">${escapeHtml(input.action.url)}</p>`
     : "";
 
   const footnote = input.footnote
-    ? `<p class="small" style="margin:0; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:23px; color:#4b5563;">${input.footnote}</p>`
+    ? `<p class="small" style="margin:0; font-family:Arial,Helvetica,sans-serif; font-size:16px; line-height:26px; color:#4b5563;">${input.footnote}</p>`
     : "";
 
   return `<!doctype html>
@@ -111,11 +111,12 @@ function layout(input: LayoutInput): string {
          les marges à l'écran et on remonte les corps d'un cran. */
       @media only screen and (max-width: 620px) {
         .wrap { padding: 16px 8px !important; }
-        .pad { padding-left: 18px !important; padding-right: 18px !important; }
-        .h1 { font-size: 23px !important; line-height: 31px !important; }
-        .txt { font-size: 17px !important; line-height: 27px !important; }
-        .cell { font-size: 16px !important; line-height: 25px !important; }
-        .small { font-size: 15px !important; line-height: 24px !important; }
+        .pad { padding-left: 16px !important; padding-right: 16px !important; }
+        .h1 { font-size: 26px !important; line-height: 34px !important; }
+        .txt { font-size: 19px !important; line-height: 30px !important; }
+        .cell { font-size: 18px !important; line-height: 27px !important; }
+        .tot { font-size: 21px !important; line-height: 29px !important; }
+        .small { font-size: 16px !important; line-height: 25px !important; }
       }
     </style>
   </head>
@@ -136,7 +137,7 @@ function layout(input: LayoutInput): string {
             </tr>
             <tr>
               <td class="pad" style="background-color:#ffffff; padding:32px 32px 8px 32px;">
-                <h1 class="h1" style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:22px; line-height:30px; font-weight:bold; color:#001424;">${escapeHtml(input.heading)}</h1>
+                <h1 class="h1" style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:25px; line-height:33px; font-weight:bold; color:#001424;">${escapeHtml(input.heading)}</h1>
                 ${intro}
               </td>
             </tr>
@@ -155,7 +156,7 @@ function layout(input: LayoutInput): string {
 
           <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%;">
             <tr>
-              <td align="center" class="small" style="padding:20px 16px 0 16px; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:21px; color:#4b5563;">
+              <td align="center" class="small" style="padding:20px 16px 0 16px; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:24px; color:#4b5563;">
                 ${escapeHtml(input.footer)}
               </td>
             </tr>
@@ -173,14 +174,14 @@ function panel(title: string, rows: string[]): string {
     .filter((row) => row.length > 0)
     .map(
       (row) =>
-        `<div class="cell" style="font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:24px; color:#3f4854;">${row}</div>`,
+        `<div class="cell" style="font-family:Arial,Helvetica,sans-serif; font-size:17px; line-height:27px; color:#3f4854;">${row}</div>`,
     )
     .join("\n");
 
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 16px 0; background-color:#f7f8f9; border:1px solid #d6d9de; border-radius:6px;">
                   <tr>
                     <td style="padding:16px 18px;">
-                      <div class="small" style="margin:0 0 6px 0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:19px; font-weight:bold; text-transform:uppercase; letter-spacing:0.6px; color:#001424;">${escapeHtml(title)}</div>
+                      <div class="small" style="margin:0 0 8px 0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; font-weight:bold; text-transform:uppercase; letter-spacing:0.6px; color:#001424;">${escapeHtml(title)}</div>
                       ${body}
                     </td>
                   </tr>
@@ -199,6 +200,8 @@ function itemsTable(
     /** Mode retenu, déjà traduit : « Expressversand (24–48 Stunden) ». */
     shippingMethod: string;
     freeShipping: string;
+    /** Étiquette de la remise ; le code y est déjà accolé s'il y en a un. */
+    discount: string;
     grandTotal: string;
     vat: string;
   },
@@ -206,12 +209,12 @@ function itemsTable(
   const rows = order.items
     .map((item) => {
       const title = escapeHtml(`${item.brand} ${item.name}`.trim());
-      const sku = item.sku ? `<br /><span style="font-size:13px; color:#4b5563;">Art. ${escapeHtml(item.sku)}</span>` : "";
-      const unit = item.quantity > 1 ? `<br /><span style="font-size:13px; color:#4b5563;">${escapeHtml(formatCents(item.unitPriceCents))} / St.</span>` : "";
+      const sku = item.sku ? `<br /><span style="font-size:15px; color:#4b5563;">Art. ${escapeHtml(item.sku)}</span>` : "";
+      const unit = item.quantity > 1 ? `<br /><span style="font-size:15px; color:#4b5563;">${escapeHtml(formatCents(item.unitPriceCents))} / St.</span>` : "";
       return `<tr>
-                    <td class="cell" style="padding:12px 8px 12px 0; border-bottom:1px solid #e0e2e6; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:23px; color:#001424;">${title}${sku}${unit}</td>
-                    <td align="center" class="cell" style="padding:12px 8px; border-bottom:1px solid #e0e2e6; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:23px; color:#3f4854; white-space:nowrap;">${item.quantity}&nbsp;×</td>
-                    <td align="right" class="cell" style="padding:12px 0 12px 8px; border-bottom:1px solid #e0e2e6; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:23px; color:#001424; white-space:nowrap;">${escapeHtml(formatCents(item.lineTotalCents))}</td>
+                    <td class="cell" style="padding:12px 8px 12px 0; border-bottom:1px solid #e0e2e6; font-family:Arial,Helvetica,sans-serif; font-size:17px; line-height:26px; color:#001424;">${title}${sku}${unit}</td>
+                    <td align="center" class="cell" style="padding:12px 8px; border-bottom:1px solid #e0e2e6; font-family:Arial,Helvetica,sans-serif; font-size:17px; line-height:26px; color:#3f4854; white-space:nowrap;">${item.quantity}&nbsp;×</td>
+                    <td align="right" class="cell" style="padding:12px 0 12px 8px; border-bottom:1px solid #e0e2e6; font-family:Arial,Helvetica,sans-serif; font-size:17px; line-height:26px; color:#001424; white-space:nowrap;">${escapeHtml(formatCents(item.lineTotalCents))}</td>
                   </tr>`;
     })
     .join("\n");
@@ -224,21 +227,31 @@ function itemsTable(
 
   const summaryRow = (label: string, value: string, strong = false) =>
     `<tr>
-                    <td class="cell" style="padding:${strong ? "12px" : "4px"} 0 4px 0; font-family:Arial,Helvetica,sans-serif; font-size:${strong ? "17px" : "15px"}; line-height:25px; color:#001424; ${strong ? "font-weight:bold;" : ""}">${escapeHtml(label)}</td>
-                    <td align="right" class="cell" style="padding:${strong ? "12px" : "4px"} 0 4px 0; font-family:Arial,Helvetica,sans-serif; font-size:${strong ? "17px" : "15px"}; line-height:25px; color:#001424; white-space:nowrap; ${strong ? "font-weight:bold;" : ""}">${escapeHtml(value)}</td>
+                    <td class="${strong ? "tot" : "cell"}" style="padding:${strong ? "12px" : "4px"} 0 4px 0; font-family:Arial,Helvetica,sans-serif; font-size:${strong ? "20px" : "17px"}; line-height:28px; color:#001424; ${strong ? "font-weight:bold;" : ""}">${escapeHtml(label)}</td>
+                    <td align="right" class="${strong ? "tot" : "cell"}" style="padding:${strong ? "12px" : "4px"} 0 4px 0; font-family:Arial,Helvetica,sans-serif; font-size:${strong ? "20px" : "17px"}; line-height:28px; color:#001424; white-space:nowrap; ${strong ? "font-weight:bold;" : ""}">${escapeHtml(value)}</td>
                   </tr>`;
 
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 8px 0;">
                   <tr>
-                    <th align="left" class="small" style="padding:0 8px 8px 0; border-bottom:2px solid #001424; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:19px; text-transform:uppercase; letter-spacing:0.6px; color:#001424;">${escapeHtml(labels.article)}</th>
-                    <th align="center" class="small" style="padding:0 8px 8px 8px; border-bottom:2px solid #001424; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:19px; text-transform:uppercase; letter-spacing:0.6px; color:#001424;">${escapeHtml(labels.quantity)}</th>
-                    <th align="right" class="small" style="padding:0 0 8px 8px; border-bottom:2px solid #001424; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:19px; text-transform:uppercase; letter-spacing:0.6px; color:#001424;">${escapeHtml(labels.total)}</th>
+                    <th align="left" class="small" style="padding:0 8px 8px 0; border-bottom:2px solid #001424; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; text-transform:uppercase; letter-spacing:0.6px; color:#001424;">${escapeHtml(labels.article)}</th>
+                    <th align="center" class="small" style="padding:0 8px 8px 8px; border-bottom:2px solid #001424; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; text-transform:uppercase; letter-spacing:0.6px; color:#001424;">${escapeHtml(labels.quantity)}</th>
+                    <th align="right" class="small" style="padding:0 0 8px 8px; border-bottom:2px solid #001424; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; text-transform:uppercase; letter-spacing:0.6px; color:#001424;">${escapeHtml(labels.total)}</th>
                   </tr>
                   ${rows}
                 </table>
 
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 16px 0;">
                   ${summaryRow(labels.subtotal, formatCents(order.subtotalCents))}
+                  ${
+                    // La remise se déduit avant les frais de port, dans l'ordre
+                    // du calcul. Sans elle, le sous-total et la livraison
+                    // additionnés dépassaient le total annoncé : le client
+                    // écrivait pour demander laquelle des trois sommes était la
+                    // bonne.
+                    order.discountCents > 0
+                      ? summaryRow(labels.discount, `− ${formatCents(order.discountCents)}`)
+                      : ""
+                  }
                   ${summaryRow(shippingLabel, shippingValue)}
                   ${summaryRow(labels.grandTotal, formatCents(order.totalCents), true)}
                   ${
@@ -246,11 +259,23 @@ function itemsTable(
                     // une cellule blanche sous le total.
                     labels.vat
                       ? `<tr>
-                    <td colspan="2" class="small" style="padding:2px 0 0 0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:21px; color:#4b5563;">${escapeHtml(labels.vat)}</td>
+                    <td colspan="2" class="small" style="padding:2px 0 0 0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:24px; color:#4b5563;">${escapeHtml(labels.vat)}</td>
                   </tr>`
                       : ""
                   }
                 </table>`;
+}
+
+/**
+ * Étiquette de la ligne de remise, code compris.
+ *
+ * Le code est nommé plutôt que sous-entendu : c'est la réponse à la question
+ * que pose toute somme retirée d'une facture — au titre de quoi. Le vendeur y
+ * lit du même coup quel coupon a servi, sans ouvrir le back-office.
+ */
+function discountLabel(order: OrderRecord, de: boolean): string {
+  const titre = de ? "Rabatt" : "Discount";
+  return order.couponCode ? `${titre} (${order.couponCode})` : titre;
 }
 
 /**
@@ -426,6 +451,7 @@ export function buildOrderConfirmationEmail(
     shipping: de ? "Versand" : "Shipping",
     shippingMethod,
     freeShipping: de ? "kostenlos" : "free",
+    discount: discountLabel(order, de),
     grandTotal: de ? "Gesamtsumme" : "Total",
     vat: vatLabel,
   });
@@ -476,6 +502,12 @@ export function buildOrderConfirmationEmail(
     itemsText(order),
     "",
     `${de ? "Zwischensumme" : "Subtotal"}: ${formatCents(order.subtotalCents)}`,
+    // Même déduction que dans la version HTML : les deux copies du message
+    // doivent porter les mêmes montants, sans quoi le client qui lit la version
+    // texte tomberait sur un décompte qui ne tombe pas juste.
+    ...(order.discountCents > 0
+      ? [`${discountLabel(order, de)}: − ${formatCents(order.discountCents)}`]
+      : []),
     `${de ? "Versand" : "Shipping"} — ${shippingMethod}: ${order.shippingCents === 0 ? (de ? "kostenlos" : "free") : formatCents(order.shippingCents)}`,
     `${de ? "Gesamtsumme" : "Total"}: ${formatCents(order.totalCents)}`,
     "",
@@ -530,6 +562,9 @@ export function buildOrderNotificationEmail(order: OrderRecord): Omit<MailMessag
     shipping: "Livraison",
     shippingMethod,
     freeShipping: "offerte",
+    // Le code figure dans l'étiquette : le vendeur voit quel coupon a été
+    // utilisé sur la commande sans avoir à ouvrir le back-office.
+    discount: order.couponCode ? `Remise (${order.couponCode})` : "Remise",
     grandTotal: "Total TTC",
     vat: "",
   });
@@ -574,6 +609,11 @@ export function buildOrderNotificationEmail(order: OrderRecord): Omit<MailMessag
     itemsText(order),
     "",
     `Sous-total : ${formatCents(order.subtotalCents)}`,
+    ...(order.discountCents > 0
+      ? [
+          `Remise${order.couponCode ? ` (${order.couponCode})` : ""} : − ${formatCents(order.discountCents)}`,
+        ]
+      : []),
     `Livraison : ${order.shippingCents === 0 ? "offerte" : formatCents(order.shippingCents)}`,
     `Total TTC : ${formatCents(order.totalCents)}`,
     "",

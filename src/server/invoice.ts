@@ -39,15 +39,18 @@ const LIEN = rgb(0.1, 0.35, 0.75);
 const COL_NUM = MARGE;
 const COL_PHOTO = 72;
 const COL_ARTICLE = 132;
-const LARGEUR_ARTICLE = 175;
+// Élargie avec le corps de texte : à 11 pt, 175 points tronquaient la plupart
+// des désignations produits dès la deuxième ligne.
+const LARGEUR_ARTICLE = 190;
 const COL_MENGE = 355; // centre de la colonne
 const COL_PREIS = 462; // bord droit
 const COTE_VIGNETTE = 46;
 
 /**
- * Hauteur réservée au pied de page et à l'encadré de TVA.
- * Les mentions occupent de 85 à 126 points, l'encadré de 46 à 76 : au-dessous
- * de cette limite, tout nouveau contenu chevaucherait le pied.
+ * Hauteur réservée au pied de page.
+ * Les mentions se composent du bas vers le haut depuis 56 points et montent
+ * jusqu'à ~104 : au-dessous de cette limite, tout nouveau contenu
+ * chevaucherait le pied.
  */
 const HAUTEUR_PIED = 135;
 
@@ -277,7 +280,7 @@ export async function buildInvoicePdf(
       centreX?: number;
     } = {},
   ) => {
-    const taille = options.taille ?? 9;
+    const taille = options.taille ?? 10.5;
     const police = options.police ?? normale;
     const valeur = winAnsi(contenu);
     const largeur = police.widthOfTextAtSize(valeur, taille);
@@ -320,32 +323,32 @@ export async function buildInvoicePdf(
 
   // ---- Client à gauche, vendeur à droite ----
   const hautBloc = plume.y;
-  texte("Kunde", { police: grasse, taille: 15 });
-  texte(COMPANY.name.toUpperCase(), { police: grasse, taille: 11, finX: DROITE, y: hautBloc });
+  texte("Kunde", { police: grasse, taille: 17 });
+  texte(COMPANY.name.toUpperCase(), { police: grasse, taille: 12.5, finX: DROITE, y: hautBloc });
 
-  plume.y -= 20;
-  let yVendeur = hautBloc - 20;
+  plume.y -= 22;
+  let yVendeur = hautBloc - 22;
   for (const ligne of [COMPANY.street, COMPANY.city, COMPANY.phone, COMPANY.email]) {
-    texte(ligne, { taille: 8.5, couleur: GRIS, finX: DROITE, y: yVendeur });
-    yVendeur -= 13;
+    texte(ligne, { taille: 10, couleur: GRIS, finX: DROITE, y: yVendeur });
+    yVendeur -= 15;
   }
 
   for (const ligne of lignesAdresse(order.billing)) {
-    texte(ligne, { taille: 9.5 });
-    plume.y -= 13;
+    texte(ligne, { taille: 11 });
+    plume.y -= 15;
   }
 
   // Coordonnées de contact : le client doit pouvoir vérifier d'un coup d'œil
   // que la facture est bien la sienne.
   plume.y -= 4;
-  const largeurEtiquetteMail = grasse.widthOfTextAtSize("E-Mail : ", 9.5);
-  texte("E-Mail :", { police: grasse, taille: 9.5 });
-  texte(order.email, { x: MARGE + largeurEtiquetteMail, taille: 9.5, couleur: LIEN });
+  const largeurEtiquetteMail = grasse.widthOfTextAtSize("E-Mail : ", 11);
+  texte("E-Mail :", { police: grasse, taille: 11 });
+  texte(order.email, { x: MARGE + largeurEtiquetteMail, taille: 11, couleur: LIEN });
   if (order.phone) {
-    plume.y -= 14;
-    const largeurEtiquetteTel = grasse.widthOfTextAtSize("Telefon : ", 9.5);
-    texte("Telefon :", { police: grasse, taille: 9.5 });
-    texte(order.phone, { x: MARGE + largeurEtiquetteTel, taille: 9.5 });
+    plume.y -= 16;
+    const largeurEtiquetteTel = grasse.widthOfTextAtSize("Telefon : ", 11);
+    texte("Telefon :", { police: grasse, taille: 11 });
+    texte(order.phone, { x: MARGE + largeurEtiquetteTel, taille: 11 });
   }
 
   plume.y = Math.min(plume.y, yVendeur) - 26;
@@ -357,19 +360,19 @@ export async function buildInvoicePdf(
     ["Bestelldatum :", dateAllemande(order.createdAt)],
   ];
   for (const [etiquette, valeur] of references) {
-    texte(etiquette, { police: grasse, taille: 10, finX: 430 });
-    texte(valeur, { police: grasse, taille: 10, x: 450 });
-    plume.y -= 18;
+    texte(etiquette, { police: grasse, taille: 11.5, finX: 430 });
+    texte(valeur, { police: grasse, taille: 11.5, x: 450 });
+    plume.y -= 19;
   }
 
   // ---- Tableau des articles ----
   plume.y -= 14;
-  texte("Nr", { police: grasse, taille: 8.5, couleur: GRIS, x: COL_NUM });
-  texte("FOTO", { police: grasse, taille: 8.5, couleur: GRIS, x: COL_PHOTO });
-  texte("ARTIKEL", { police: grasse, taille: 8.5, couleur: GRIS, x: COL_ARTICLE });
-  texte("MENGE", { police: grasse, taille: 8.5, couleur: GRIS, centreX: COL_MENGE });
-  texte("PREIS", { police: grasse, taille: 8.5, couleur: GRIS, finX: COL_PREIS });
-  texte("GESAMTPREIS", { police: grasse, taille: 8.5, couleur: GRIS, finX: DROITE });
+  texte("Nr", { police: grasse, taille: 9.5, couleur: GRIS, x: COL_NUM });
+  texte("FOTO", { police: grasse, taille: 9.5, couleur: GRIS, x: COL_PHOTO });
+  texte("ARTIKEL", { police: grasse, taille: 9.5, couleur: GRIS, x: COL_ARTICLE });
+  texte("MENGE", { police: grasse, taille: 9.5, couleur: GRIS, centreX: COL_MENGE });
+  texte("PREIS", { police: grasse, taille: 9.5, couleur: GRIS, finX: COL_PREIS });
+  texte("GESAMTPREIS", { police: grasse, taille: 9.5, couleur: GRIS, finX: DROITE });
 
   plume.y -= 10;
   filet(plume.y);
@@ -379,21 +382,21 @@ export async function buildInvoicePdf(
     const designation = couperEnLignes(
       `${article.brand} ${article.name}`.trim(),
       normale,
-      9.5,
+      11,
       LARGEUR_ARTICLE,
       2,
     );
     const vignette = vignettes[index];
     // La ligne fait au moins la hauteur de la vignette, davantage si la
     // désignation tient sur deux lignes et porte une référence en dessous.
-    const hauteurTexte = designation.length * 13 + 12;
+    const hauteurTexte = designation.length * 15 + 14;
     const hauteurLigne = Math.max(vignette ? COTE_VIGNETTE : 0, hauteurTexte) + 14;
     assurerEspace(hauteurLigne);
 
     const haut = plume.y;
     const milieu = haut - hauteurLigne / 2 + 4;
 
-    texte(String(index + 1), { taille: 9, couleur: GRIS, x: COL_NUM, y: haut });
+    texte(String(index + 1), { taille: 10.5, couleur: GRIS, x: COL_NUM, y: haut });
 
     if (vignette) {
       // La vignette est contenue dans son carré sans être déformée.
@@ -410,16 +413,16 @@ export async function buildInvoicePdf(
 
     let yTexte = haut;
     for (const ligne of designation) {
-      texte(ligne, { taille: 9.5, x: COL_ARTICLE, y: yTexte });
-      yTexte -= 13;
+      texte(ligne, { taille: 11, x: COL_ARTICLE, y: yTexte });
+      yTexte -= 15;
     }
     if (article.sku) {
-      texte(`Art.-Nr. ${article.sku}`, { taille: 7.5, couleur: GRIS, x: COL_ARTICLE, y: yTexte });
+      texte(`Art.-Nr. ${article.sku}`, { taille: 9, couleur: GRIS, x: COL_ARTICLE, y: yTexte });
     }
 
-    texte(String(article.quantity), { taille: 9.5, centreX: COL_MENGE, y: milieu });
-    texte(euros(article.unitPriceCents), { taille: 9.5, finX: COL_PREIS, y: milieu });
-    texte(euros(article.lineTotalCents), { taille: 9.5, finX: DROITE, y: milieu });
+    texte(String(article.quantity), { taille: 11, centreX: COL_MENGE, y: milieu });
+    texte(euros(article.unitPriceCents), { taille: 11, finX: COL_PREIS, y: milieu });
+    texte(euros(article.lineTotalCents), { taille: 11, finX: DROITE, y: milieu });
 
     plume.y = haut - hauteurLigne;
   });
@@ -432,27 +435,42 @@ export async function buildInvoicePdf(
   // est signalée comme contenue, conformément au § 3 PAngV.
   assurerEspace(90);
   const ligneTotal = (etiquette: string, valeur: string, options: { fort?: boolean } = {}) => {
-    const taille = options.fort ? 13 : 9.5;
+    const taille = options.fort ? 15 : 11;
     // Le total est composé plus gros : son étiquette recule, sans quoi un
     // montant à cinq chiffres viendrait la toucher.
     texte(etiquette, {
       police: grasse,
       taille,
       couleur: options.fort ? NOIR : GRIS,
-      finX: options.fort ? COL_PREIS - 42 : COL_PREIS,
+      finX: options.fort ? COL_PREIS - 52 : COL_PREIS,
     });
     texte(valeur, {
       police: options.fort ? grasse : normale,
       taille,
       finX: DROITE,
     });
-    plume.y -= options.fort ? 24 : 18;
+    plume.y -= options.fort ? 26 : 19;
   };
 
   ligneTotal("ZWISCHENSUMME", euros(order.subtotalCents));
+
+  // Remise du coupon, déduite entre le sous-total et la livraison. Sans cette
+  // ligne, une facture remisée ne s'additionnait plus : le client lisait un
+  // sous-total et un port dont la somme dépassait le total facturé, ce qu'une
+  // facture ne peut pas se permettre. Le code est nommé à côté du montant —
+  // c'est la pièce qui justifie la déduction en cas de contrôle.
+  if (order.discountCents > 0) {
+    ligneTotal(
+      order.couponCode ? `RABATT (${order.couponCode})` : "RABATT",
+      // Tiret ASCII et non « − » : `winAnsi` efface tout signe hors du jeu des
+      // polices standard, et la remise se lirait alors comme une majoration.
+      `- ${euros(order.discountCents)}`,
+    );
+  }
+
   ligneTotal("LIEFERUNG", order.shippingCents === 0 ? "KOSTENLOS" : euros(order.shippingCents));
-  texte(delaiLivraison(order), { taille: 8, couleur: GRIS, finX: DROITE });
-  plume.y -= 16;
+  texte(delaiLivraison(order), { taille: 9.5, couleur: GRIS, finX: DROITE });
+  plume.y -= 17;
 
   plume.y -= 2;
   filet(plume.y, COL_PREIS - 120, DROITE);
@@ -462,22 +480,22 @@ export async function buildInvoicePdf(
   // ---- Coordonnées bancaires, pour le virement seul ----
   const virement = lignesVirement(order, bank);
   if (virement.length > 0) {
-    assurerEspace(virement.length * 16 + 52);
+    assurerEspace(virement.length * 18 + 56);
     plume.y -= 12;
     filet(plume.y);
-    plume.y -= 20;
+    plume.y -= 22;
 
     texte(`Zahlungsart : ${order.paymentMethodLabel}`, {
       police: grasse,
-      taille: 12,
+      taille: 13.5,
       centreX: LARGEUR / 2,
     });
-    plume.y -= 20;
+    plume.y -= 22;
 
     for (const [etiquette, valeur] of virement) {
-      texte(`${etiquette} :`, { police: grasse, taille: 9.5, finX: 275 });
-      texte(valeur, { taille: 9.5, x: 285 });
-      plume.y -= 16;
+      texte(`${etiquette} :`, { police: grasse, taille: 11, finX: 285 });
+      texte(valeur, { taille: 11, x: 295 });
+      plume.y -= 18;
     }
   }
 
@@ -494,10 +512,19 @@ export async function buildInvoicePdf(
     `${COMPANY.name} · ${COMPANY.street} · ${COMPANY.city} · Tel. ${COMPANY.phone} · ${COMPANY.email} · ${COMPANY.register}`,
   ];
 
-  let yMention = 118;
-  for (const mention of mentions) {
-    texte(mention, { taille: 7.5, couleur: GRIS, x: MARGE, y: yMention });
-    yMention -= 11;
+  // La ligne d'identification de la société dépasse la justification à ce
+  // corps : on la replie plutôt que de la rogner, les mentions du § 14 UStG
+  // devant rester lisibles en entier.
+  const TAILLE_MENTION = 9;
+  const INTERLIGNE_MENTION = 12;
+  const lignesMentions = mentions.flatMap((mention) =>
+    couperEnLignes(mention, normale, TAILLE_MENTION, DROITE - MARGE, 2),
+  );
+
+  let yMention = 56 + (lignesMentions.length - 1) * INTERLIGNE_MENTION;
+  for (const ligne of lignesMentions) {
+    texte(ligne, { taille: TAILLE_MENTION, couleur: GRIS, x: MARGE, y: yMention });
+    yMention -= INTERLIGNE_MENTION;
   }
 
 

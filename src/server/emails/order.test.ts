@@ -156,6 +156,33 @@ describe("Confirmation à l'acheteur", () => {
     assert.doesNotMatch(mail.text, /Versand: 0,00 €/);
   });
 
+  it("déduit la remise et nomme le code qui l'a ouverte", () => {
+    // 899,00 € − 179,80 € + 4,95 € = 724,15 € : les trois lignes du message
+    // doivent réellement s'additionner jusqu'au total facturé. Sans la ligne de
+    // remise, le client lisait un sous-total et un port dont la somme dépassait
+    // ce qu'on lui prélevait.
+    const mail = buildOrderConfirmationEmail(
+      order({ couponCode: "SOMMER10", discountCents: 17_980, totalCents: 72_415 }),
+    );
+    assert.match(mail.html, /Rabatt \(SOMMER10\)/);
+    assert.match(mail.html, /179,80/);
+    assert.match(mail.text, /Rabatt \(SOMMER10\): − 179,80/);
+    assert.match(mail.text, /Gesamtsumme: 724,15/);
+  });
+
+  it("passe la remise sous silence quand il n'y en a pas", () => {
+    const mail = buildOrderConfirmationEmail(order());
+    assert.doesNotMatch(mail.html, /Rabatt/);
+    assert.doesNotMatch(mail.text, /Rabatt/);
+  });
+
+  it("traduit la remise pour une commande passée en anglais", () => {
+    const mail = buildOrderConfirmationEmail(
+      order({ locale: "en", couponCode: "SUMMER10", discountCents: 17_980, totalCents: 72_415 }),
+    );
+    assert.match(mail.html, /Discount \(SUMMER10\)/);
+  });
+
   it("n'affiche l'adresse de facturation que si elle diffère", () => {
     assert.doesNotMatch(buildOrderConfirmationEmail(order()).html, /Rechnungsadresse/);
 
@@ -296,5 +323,13 @@ describe("Notification au vendeur", () => {
     const mail = buildOrderNotificationEmail(order({ customerNote: "Bitte vormittags liefern." }));
     assert.match(mail.html, /Remarque du client/);
     assert.match(mail.text, /Bitte vormittags liefern\./);
+  });
+
+  it("indique au vendeur quel coupon a été utilisé", () => {
+    const mail = buildOrderNotificationEmail(
+      order({ couponCode: "SOMMER10", discountCents: 17_980, totalCents: 72_415 }),
+    );
+    assert.match(mail.html, /Remise \(SOMMER10\)/);
+    assert.match(mail.text, /Remise \(SOMMER10\) : − 179,80/);
   });
 });

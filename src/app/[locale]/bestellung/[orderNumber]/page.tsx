@@ -193,6 +193,22 @@ export default async function OrderConfirmationPage({
                       {formatPrice(order.subtotalCents)}
                     </dd>
                   </div>
+                  {/* Remise accordée, avec le code qui l'a ouverte : le client
+                      doit retrouver sur sa confirmation la somme qu'il a vue
+                      au moment de commander. */}
+                  {order.discountCents > 0 && (
+                    <div className="flex justify-between">
+                      <dt className="text-muted-foreground">
+                        {t("discount")}
+                        {order.couponCode && (
+                          <span className="mt-0.5 block text-xs">{order.couponCode}</span>
+                        )}
+                      </dt>
+                      <dd className="font-semibold text-primary">
+                        −{formatPrice(order.discountCents)}
+                      </dd>
+                    </div>
+                  )}
                   <div className="flex justify-between">
                     <dt className="text-muted-foreground">{t("shipping")}</dt>
                     <dd className="font-semibold text-foreground">

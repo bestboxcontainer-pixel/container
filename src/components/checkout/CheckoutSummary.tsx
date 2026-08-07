@@ -17,10 +17,13 @@ export function CheckoutSummary({
   lines,
   totals,
   showItems = true,
+  couponCode,
 }: {
   lines: readonly CartLine[];
   totals: CartTotals;
   showItems?: boolean;
+  /** Code appliqué, nommé sous la remise. Absent, la ligne ne paraît pas. */
+  couponCode?: string;
 }) {
   const t = useTranslations("checkout");
 
@@ -67,6 +70,21 @@ export function CheckoutSummary({
           <dt className="text-muted-foreground">{t("subtotal")}</dt>
           <dd className="font-semibold text-foreground">{formatCents(totals.subtotalCents)}</dd>
         </div>
+        {/* Remise, entre le sous-total et la livraison — l'ordre dans lequel
+            elle se calcule. Le code est rappelé dessous : une somme retirée
+            sans justification est la première chose qu'un client conteste. */}
+        {totals.discountCents > 0 && (
+          <div className="flex justify-between">
+            <dt className="text-muted-foreground">
+              {t("discount")}
+              {couponCode && <span className="mt-0.5 block text-xs">{couponCode}</span>}
+            </dt>
+            <dd className="font-semibold text-primary">
+              −{formatCents(totals.discountCents)}
+            </dd>
+          </div>
+        )}
+
         {/* Le mode retenu est nommé sous le montant : « 70,00 € » sans mention
             de l'express laisserait le client deviner d'où vient la somme. */}
         <div className="flex justify-between">

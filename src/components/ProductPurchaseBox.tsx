@@ -37,12 +37,12 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
           </div>
         )}
 
-        {/* La mention doit refléter le tarif réellement appliqué au panier :
-            une indication de frais de port inexacte est une information
-            trompeuse au sens de Google Merchant Center et de la PAngV. Le
-            standard étant gratuit sans minimum d'achat, elle ne dépend plus du
-            prix de l'article ; l'express reste annoncé par `fastDelivery`. */}
-        <p className="text-xs text-muted-foreground">{t("vatNoteFreeShipping")}</p>
+        {/* Réduite à la seule mention de TVA. La gratuité du port y figurait
+            aussi, mais la ligne de disponibilité juste en dessous l'annonce
+            déjà — l'information paraissait deux fois à deux lignes d'écart.
+            La TVA, elle, reste : § 1 PAngV impose d'indiquer au consommateur
+            que le prix affiché la comprend. */}
+        <p className="text-xs text-muted-foreground">{t("vatOnly")}</p>
       </div>
 
       <p className={`text-sm font-semibold ${inStock ? "text-foreground" : "text-muted-foreground"}`}>

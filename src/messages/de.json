@@ -192,7 +192,7 @@
     "addToCart": "In den Warenkorb",
     "fastDelivery": "Standardversand kostenlos (3–5 Tage) · Express 70 € (24–48 Std.)",
     "warranty": "14 Tage Rückgaberecht ohne Angabe von Gründen",
-    "vatNoteFreeShipping": "inkl. MwSt., versandkostenfrei innerhalb Deutschlands",
+    "vatOnly": "inkl. MwSt.",
     "galleryLabel": "Weitere Produktansichten",
     "galleryView": "Ansicht {index} von {total} anzeigen"
   },

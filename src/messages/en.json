@@ -192,7 +192,7 @@
     "addToCart": "Add to cart",
     "fastDelivery": "Free standard delivery (3–5 days) · Express €70 (24–48 h)",
     "warranty": "14-day return policy, no reason required",
-    "vatNoteFreeShipping": "incl. VAT, free shipping within Germany",
+    "vatOnly": "incl. VAT",
     "galleryLabel": "More product views",
     "galleryView": "Show view {index} of {total}"
   },

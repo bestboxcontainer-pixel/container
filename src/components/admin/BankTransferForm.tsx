@@ -18,6 +18,7 @@ export function BankTransferForm({ state }: BankTransferFormProps) {
   const [iban, setIban] = useState(state.iban);
   const [bic, setBic] = useState(state.bic);
   const [bank, setBank] = useState(state.bank);
+  const [transferType, setTransferType] = useState(state.transferType);
   const [instructionsDe, setInstructionsDe] = useState(state.instructions.de);
   const [instructionsEn, setInstructionsEn] = useState(state.instructions.en);
   const [pending, setPending] = useState(false);
@@ -33,7 +34,15 @@ export function BankTransferForm({ state }: BankTransferFormProps) {
     const response = await fetch("/api/admin/bank-transfer", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ holder, iban, bic, bank, instructionsDe, instructionsEn }),
+      body: JSON.stringify({
+        holder,
+        iban,
+        bic,
+        bank,
+        transferType,
+        instructionsDe,
+        instructionsEn,
+      }),
     });
     setPending(false);
 
@@ -51,6 +60,7 @@ export function BankTransferForm({ state }: BankTransferFormProps) {
     if (data?.settings) {
       setIban(data.settings.iban);
       setBic(data.settings.bic);
+      setTransferType(data.settings.transferType);
       setInstructionsDe(data.settings.instructions.de);
       setInstructionsEn(data.settings.instructions.en);
     }
@@ -116,6 +126,28 @@ export function BankTransferForm({ state }: BankTransferFormProps) {
             autoComplete="off"
             spellCheck={false}
           />
+        </label>
+
+        {/* Saisie libre plutôt qu'une liste : le libellé doit être celui que le
+            client retrouvera dans son application bancaire, et il change d'une
+            banque à l'autre. Affiché tel quel aux clients allemands comme
+            anglophones — écrivez-le dans la langue de la boutique. */}
+        <label className="block">
+          <span className={LABEL}>
+            Type de virement{" "}
+            <span className="font-semibold text-muted-foreground">(facultatif)</span>
+          </span>
+          <input
+            value={transferType}
+            onChange={(event) => setTransferType(event.target.value)}
+            className={FIELD}
+            placeholder="SEPA-Echtzeitüberweisung"
+            autoComplete="off"
+          />
+          <span className="mt-1 block text-xs text-muted-foreground">
+            Repris tel quel sur la page de confirmation, dans l&apos;e-mail et sur la facture. Laissé
+            vide, aucune ligne n&apos;apparaît.
+          </span>
         </label>
       </div>
 

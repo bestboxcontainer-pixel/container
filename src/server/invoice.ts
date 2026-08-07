@@ -214,6 +214,9 @@ export function lignesVirement(
     ["IBAN", bank.iban],
     ["BIC", bank.bic],
     ...(bank.bank ? ([["Bank", bank.bank]] as Array<[string, string]>) : []),
+    ...(bank.transferType
+      ? ([["Überweisungsart", bank.transferType]] as Array<[string, string]>)
+      : []),
     ["Verwendungszweck", order.orderNumber],
   ];
 }

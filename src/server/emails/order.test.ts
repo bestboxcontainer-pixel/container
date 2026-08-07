@@ -93,6 +93,7 @@ const BANK: BankTransferSettings = {
   iban: "DE89 3704 0044 0532 0130 00",
   bic: "COBADEFFXXX",
   bank: "Commerzbank",
+  transferType: "SEPA-Echtzeitüberweisung",
   instructions: {
     de: "Bitte überweisen Sie {total} unter Angabe von {orderNumber}.",
     en: "Please transfer {total} quoting {orderNumber}.",
@@ -219,6 +220,24 @@ describe("Confirmation à l'acheteur", () => {
     const mail = buildOrderConfirmationEmail(order(), { ...BANK, bank: "" });
     assert.match(mail.html, /DE89 3704 0044 0532 0130 00/);
     assert.doesNotMatch(mail.html, /Commerzbank/);
+  });
+
+  /**
+   * L'intitulé suit la langue de la commande, la valeur non : le client doit
+   * retrouver dans son application bancaire le mot exact saisi par le vendeur.
+   */
+  it("traduit l'intitulé du type de virement mais reprend la valeur telle quelle", () => {
+    const de = buildOrderConfirmationEmail(order(), BANK);
+    assert.match(de.text, /Überweisungsart: SEPA-Echtzeitüberweisung/);
+
+    const en = buildOrderConfirmationEmail(order({ locale: "en" }), BANK);
+    assert.match(en.text, /Transfer type: SEPA-Echtzeitüberweisung/);
+  });
+
+  it("omet le type de virement quand il n'est pas renseigné", () => {
+    const mail = buildOrderConfirmationEmail(order(), { ...BANK, transferType: "" });
+    assert.match(mail.html, /DE89 3704 0044 0532 0130 00/);
+    assert.doesNotMatch(mail.html, /Überweisungsart/);
   });
 
   it("échappe la remarque saisie par le client", () => {

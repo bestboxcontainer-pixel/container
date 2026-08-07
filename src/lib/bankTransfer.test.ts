@@ -15,6 +15,7 @@ import { describe, it } from "node:test";
 import {
   BANK_TRANSFER_DEFAULTS,
   bankInstructionsFor,
+  coerceBankTransfer,
   formatIban,
   isValidBic,
   isValidIban,
@@ -96,6 +97,16 @@ describe("Saisie du back-office", () => {
     assert.equal(result.value.bank, "");
   });
 
+  it("laisse le type de virement facultatif et conserve la saisie", () => {
+    const vide = parseBankTransferInput({ ...VALID, transferType: "   " });
+    assert.ok(vide.ok);
+    assert.equal(vide.value.transferType, "");
+
+    const saisi = parseBankTransferInput({ ...VALID, transferType: " SEPA-Echtzeitüberweisung " });
+    assert.ok(saisi.ok);
+    assert.equal(saisi.value.transferType, "SEPA-Echtzeitüberweisung");
+  });
+
   it("refuse un IBAN dont la clé est fausse, avec un message explicite", () => {
     const result = parseBankTransferInput({ ...VALID, iban: "DE90 3704 0044 0532 0130 00" });
     assert.ok(!result.ok);
@@ -118,6 +129,33 @@ describe("Saisie du back-office", () => {
     assert.ok(result.ok);
     assert.match(result.value.instructions.de, /5 Tagen/);
     assert.match(result.value.instructions.en, /5 days/);
+  });
+});
+
+describe("Relecture des coordonnées enregistrées", () => {
+  /**
+   * Les coordonnées écrites en base avant l'ajout du type de virement n'ont pas
+   * ce champ. Elles doivent continuer de sortir intactes, sans que le champ
+   * manquant ne soit comblé par une valeur de démonstration — le client verrait
+   * alors une consigne que le vendeur n'a jamais donnée.
+   */
+  it("accepte une ligne écrite avant l'ajout du type de virement", () => {
+    const ancien = coerceBankTransfer({
+      holder: "Hausgeräte Pfeffer OHG",
+      iban: "DE89 3704 0044 0532 0130 00",
+      bic: "COBADEFFXXX",
+      bank: "Commerzbank",
+      instructions: { de: "Bitte überweisen Sie {total}.", en: "Please transfer {total}." },
+    });
+
+    assert.equal(ancien.transferType, "");
+    assert.equal(ancien.holder, "Hausgeräte Pfeffer OHG");
+    assert.equal(ancien.configured, true);
+  });
+
+  it("relit le type de virement enregistré", () => {
+    const state = coerceBankTransfer({ transferType: " Standard " });
+    assert.equal(state.transferType, "Standard");
   });
 });
 

@@ -350,14 +350,30 @@ function bankTransferBlock(
   });
 
   const labels = de
-    ? { title: "Bankverbindung", holder: "Kontoinhaber", bank: "Bank", reference: "Verwendungszweck" }
-    : { title: "Bank details", holder: "Account holder", bank: "Bank", reference: "Payment reference" };
+    ? {
+        title: "Bankverbindung",
+        holder: "Kontoinhaber",
+        bank: "Bank",
+        transferType: "Überweisungsart",
+        reference: "Verwendungszweck",
+      }
+    : {
+        title: "Bank details",
+        holder: "Account holder",
+        bank: "Bank",
+        transferType: "Transfer type",
+        reference: "Payment reference",
+      };
 
   const entries: Array<[string, string]> = [
     [labels.holder, bank.holder],
     ["IBAN", bank.iban],
     ["BIC", bank.bic],
     ...(bank.bank ? ([[labels.bank, bank.bank]] as Array<[string, string]>) : []),
+    // Seul l'intitulé est traduit : la valeur est reprise telle que saisie.
+    ...(bank.transferType
+      ? ([[labels.transferType, bank.transferType]] as Array<[string, string]>)
+      : []),
     [labels.reference, order.orderNumber],
   ];
 

@@ -15,6 +15,13 @@ export interface BankTransferSettings {
   bic: string;
   /** Nom de l'établissement. Facultatif : masqué s'il est vide. */
   bank: string;
+  /**
+   * Type de virement attendu — « SEPA-Echtzeitüberweisung », « Standard »…
+   * Saisie libre : la banque du vendeur impose sa propre terminologie, et une
+   * liste figée finirait par ne plus correspondre à aucune d'elles. Facultatif,
+   * donc masqué s'il est vide, au même titre que le nom de l'établissement.
+   */
+  transferType: string;
   /** Texte affiché au-dessus des coordonnées, une version par langue. */
   instructions: { de: string; en: string };
 }
@@ -37,6 +44,11 @@ export const BANK_TRANSFER_DEFAULTS: BankTransferSettings = {
   iban: "DE02 1203 0000 0000 2020 51",
   bic: "BYLADEM1001",
   bank: "Musterbank (Testdaten)",
+  // Vide par défaut : aucune banque n'impose le même libellé, et une valeur
+  // inventée serait lue par le client comme une consigne du vendeur. Les
+  // coordonnées enregistrées avant l'ajout de ce champ retombent ici, donc
+  // n'affichent simplement aucune ligne de plus.
+  transferType: "",
   instructions: {
     de: "Bitte überweisen Sie den Gesamtbetrag von {total} unter Angabe der Bestellnummer {orderNumber}. Ihre Ware wird nach Zahlungseingang versandt.",
     en: "Please transfer the total of {total} quoting the order number {orderNumber}. Your goods will be dispatched once the payment has arrived.",
@@ -134,6 +146,7 @@ export type BankTransferInput = Partial<{
   iban: string;
   bic: string;
   bank: string;
+  transferType: string;
   instructionsDe: string;
   instructionsEn: string;
 }>;
@@ -149,6 +162,7 @@ export function parseBankTransferInput(
   const iban = normalizeIban(input.iban ?? "");
   const bic = (input.bic ?? "").replace(/\s/g, "").toUpperCase();
   const bank = (input.bank ?? "").trim();
+  const transferType = (input.transferType ?? "").trim();
 
   if (!holder) {
     return { ok: false, error: "Le titulaire du compte est obligatoire." };
@@ -186,6 +200,7 @@ export function parseBankTransferInput(
       iban: formatIban(iban),
       bic,
       bank,
+      transferType,
       instructions: { de: instructionsDe, en: instructionsEn },
     },
   };
@@ -213,9 +228,14 @@ export function coerceBankTransfer(value: unknown): BankTransferState {
     holder: text(raw.holder, BANK_TRANSFER_DEFAULTS.holder),
     iban: text(raw.iban, BANK_TRANSFER_DEFAULTS.iban),
     bic: text(raw.bic, BANK_TRANSFER_DEFAULTS.bic),
-    // Seul champ qui accepte le vide : toutes les banques ne tiennent pas à
-    // voir leur nom affiché, et le virement part sans lui.
+    // Les deux seuls champs qui acceptent le vide : toutes les banques ne
+    // tiennent pas à voir leur nom affiché, et le virement part sans lui comme
+    // sans mention de son type.
     bank: typeof raw.bank === "string" ? raw.bank.trim() : BANK_TRANSFER_DEFAULTS.bank,
+    transferType:
+      typeof raw.transferType === "string"
+        ? raw.transferType.trim()
+        : BANK_TRANSFER_DEFAULTS.transferType,
     instructions: {
       de: text(instructions.de, BANK_TRANSFER_DEFAULTS.instructions.de),
       en: text(instructions.en, BANK_TRANSFER_DEFAULTS.instructions.en),

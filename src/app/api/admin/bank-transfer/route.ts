@@ -27,6 +27,7 @@ export async function PUT(request: Request) {
     iban: text(body.iban),
     bic: text(body.bic),
     bank: text(body.bank),
+    transferType: text(body.transferType),
     instructionsDe: text(body.instructionsDe),
     instructionsEn: text(body.instructionsEn),
   });

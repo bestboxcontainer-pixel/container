@@ -22,6 +22,7 @@ const BANK: BankTransferSettings = {
   iban: "DE89 3704 0044 0532 0130 00",
   bic: "COBADEFFXXX",
   bank: "Commerzbank",
+  transferType: "SEPA-Echtzeitüberweisung",
   instructions: { de: "Bitte überweisen Sie {total}.", en: "Please transfer {total}." },
 };
 
@@ -44,6 +45,14 @@ describe("Bloc bancaire de la facture", () => {
     assert.match(lignes, /IBAN: DE89 3704 0044 0532 0130 00/);
     assert.match(lignes, /BIC: COBADEFFXXX/);
     assert.match(lignes, /Bank: Commerzbank/);
+    assert.match(lignes, /Überweisungsart: SEPA-Echtzeitüberweisung/);
+    assert.match(lignes, /Verwendungszweck: HP-2026-000042/);
+  });
+
+  it("passe le type de virement sous silence quand il n'est pas renseigné", () => {
+    const lignes = aplati(lignesVirement(COMMANDE, { ...BANK, transferType: "" }));
+
+    assert.doesNotMatch(lignes, /Überweisungsart/);
     assert.match(lignes, /Verwendungszweck: HP-2026-000042/);
   });
 

@@ -343,6 +343,17 @@ async function PaymentInstructions({ order }: { order: OrderRecord }) {
                 <dd className="font-semibold break-words text-foreground">{bank.bank}</dd>
               </div>
             )}
+            {/* Même règle que la banque : le type de virement ne s'affiche que
+                si le vendeur l'a renseigné. Le libellé saisi n'est pas traduit,
+                il doit correspondre au mot à mot de l'application bancaire. */}
+            {bank.transferType && (
+              <div>
+                <dt className="text-xs font-bold text-muted-foreground uppercase">
+                  {t("confirmation.bankTransferType")}
+                </dt>
+                <dd className="font-semibold break-words text-foreground">{bank.transferType}</dd>
+              </div>
+            )}
             <div className="sm:col-span-2">
               <dt className="text-xs font-bold text-muted-foreground uppercase">
                 {t("confirmation.bankReference")}

@@ -107,19 +107,35 @@ export function AnnouncementBarClient({
       <div className={fullWidth ? "px-3 py-2" : "mx-auto max-w-screen-xl px-3 py-2"}>
         {scrolling ? (
           <div className="flex overflow-hidden">
-            {/* `w-max` laisse la piste prendre la largeur de son contenu :
-                sans quoi elle se limiterait à l'écran et le texte long serait
-                coupé au lieu de défiler. */}
+            {/* Deux groupes identiques qui glissent ensemble de la moitié de la
+                piste : quand le premier sort à gauche, le second occupe déjà sa
+                place, et la boucle se referme sans que rien ne saute.
+
+                Chaque groupe ne descend jamais sous la largeur de l'écran
+                (`min-w-full`) et répète le message. Sans cette précaution, un
+                message court laisserait passer une bande vide : la piste
+                mesurerait moins que l'écran, et la moitié dont on la décale ne
+                suffirait pas à le couvrir. C'est ce qui fait la différence
+                entre un défilement continu et un défilement à trous. */}
             <div
-              className="flex w-max shrink-0 gap-12 whitespace-nowrap motion-safe:animate-[defilement_linear_infinite] motion-reduce:animate-none"
+              className="flex w-max shrink-0 whitespace-nowrap motion-safe:animate-[defilement_linear_infinite] motion-reduce:animate-none"
               style={{ animationDuration: `${scrollSeconds}s` }}
             >
-              <span className="flex items-center">{contenu}</span>
-              {/* Deuxième exemplaire, masqué aux lecteurs d'écran : il ne sert
-                  qu'à ce que la boucle se referme sans blanc. */}
-              <span className="flex items-center" aria-hidden>
-                {contenu}
-              </span>
+              {[0, 1].map((groupe) => (
+                <div
+                  key={groupe}
+                  className="flex min-w-full shrink-0 items-center justify-around gap-12"
+                  // Seul le premier groupe est lu : le second n'existe que pour
+                  // que la boucle soit invisible.
+                  aria-hidden={groupe === 1 || undefined}
+                >
+                  {[0, 1, 2, 3].map((copie) => (
+                    <span key={copie} className="flex items-center" aria-hidden={copie > 0 || undefined}>
+                      {contenu}
+                    </span>
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
         ) : (

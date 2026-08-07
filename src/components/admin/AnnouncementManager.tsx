@@ -139,14 +139,26 @@ export function AnnouncementManager({ announcements }: { announcements: Announce
             >
               {edite.scrolling ? (
                 <div className="flex overflow-hidden">
+                  {/* Même construction que la boutique — deux groupes larges
+                      d'au moins un écran — pour que l'aperçu montre le
+                      défilement réel et non une version approchée. */}
                   <div
-                    className="flex w-max shrink-0 gap-12 whitespace-nowrap motion-safe:animate-[defilement_linear_infinite]"
+                    className="flex w-max shrink-0 whitespace-nowrap motion-safe:animate-[defilement_linear_infinite]"
                     style={{ animationDuration: `${edite.scrollSeconds}s` }}
                   >
-                    <span className="px-3">{edite.messageDe || "Ihr Hinweis erscheint hier"}</span>
-                    <span className="px-3" aria-hidden>
-                      {edite.messageDe || "Ihr Hinweis erscheint hier"}
-                    </span>
+                    {[0, 1].map((groupe) => (
+                      <div
+                        key={groupe}
+                        className="flex min-w-full shrink-0 items-center justify-around gap-12"
+                        aria-hidden={groupe === 1 || undefined}
+                      >
+                        {[0, 1, 2, 3].map((copie) => (
+                          <span key={copie} className="px-3">
+                            {edite.messageDe || "Ihr Hinweis erscheint hier"}
+                          </span>
+                        ))}
+                      </div>
+                    ))}
                   </div>
                 </div>
               ) : (

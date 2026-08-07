@@ -8,6 +8,7 @@ import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CodeSnippets } from "@/components/CodeSnippets";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { SmartsuppChat } from "@/components/SmartsuppChat";
+import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { PaymentMethodsBar } from "@/components/PaymentMethodsBar";
 
 export function generateStaticParams() {
@@ -44,6 +45,9 @@ export default async function LocaleLayout({
     <NextIntlClientProvider>
       <CodeSnippets placement="head" />
       <CodeSnippets placement="bodyStart" />
+      {/* Tout en haut, avant l'en-tête : une annonce placée plus bas
+          passerait sous le logo et manquerait sa cible. */}
+      <AnnouncementBar />
       <CartProvider>
         {children}
         <CartDrawer paymentSlot={<PaymentMethodsBar variant="inline" />} />

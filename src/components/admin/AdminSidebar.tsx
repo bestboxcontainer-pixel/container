@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import {
   Code2,
+  Megaphone,
   CreditCard,
   FileText,
   LayoutDashboard,
@@ -17,6 +18,7 @@ import {
   Star,
   Store,
   Tags,
+  TicketPercent,
   Users,
   Warehouse,
   X,
@@ -79,6 +81,8 @@ export function AdminSidebar({
         // « Campagnes » est retiré du menu : la partie e-mailing n'est pas
         // ouverte. Les écrans existent toujours et restent joignables par leur
         // adresse (/admin/campaigns) ; seule l'entrée du menu disparaît.
+        { label: "Codes de réduction", href: "/admin/coupons", icon: TicketPercent },
+        { label: "Bandeau d'annonce", href: "/admin/annonce", icon: Megaphone },
         { label: "Moyens de paiement", href: "/admin/payments", icon: CreditCard },
         { label: "Google Merchant", href: "/admin/merchant", icon: ShoppingBag },
         { label: "Intégrations", href: "/admin/integrations", icon: Plug },

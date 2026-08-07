@@ -140,3 +140,15 @@
     @apply font-sans;
   }
 }
+/* Défilement du bandeau d'annonce.
+   Le contenu est écrit deux fois à la suite ; glisser d'exactement la moitié
+   ramène le second exemplaire là où était le premier, et la boucle se referme
+   sans saut. La durée vient du réglage saisi en administration. */
+@keyframes defilement {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

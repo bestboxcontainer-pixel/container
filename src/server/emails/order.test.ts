@@ -122,11 +122,15 @@ describe("Confirmation à l'acheteur", () => {
     }
   });
 
-  it("porte le lien de suivi avec son jeton", () => {
+  it("ne porte plus de lien de suivi ni de bouton", () => {
+    // Le message se terminait sur un bouton rouge, l'adresse complète avec son
+    // jeton, puis une phrase renvoyant à ce même lien : trois façons de dire la
+    // même chose, à l'endroit où le client cherchait l'IBAN. La commande reste
+    // consultable depuis la page de confirmation ouverte après l'achat.
     const mail = buildOrderConfirmationEmail(order());
-    const expected = `${SITE}/bestellung/HP-2026-000042?token=9f2c1ab34de5`;
-    assert.ok(mail.html.includes(expected), "lien de suivi absent du HTML");
-    assert.ok(mail.text.includes(expected), "lien de suivi absent du texte");
+    assert.doesNotMatch(mail.html, /bestellung\/HP-2026-000042/);
+    assert.doesNotMatch(mail.html, /Bestellung ansehen/);
+    assert.doesNotMatch(mail.text, /bestellung\/HP-2026-000042/);
   });
 
   it("écrit en allemand par défaut et en anglais sous /en", () => {
@@ -139,7 +143,6 @@ describe("Confirmation à l'acheteur", () => {
     assert.match(en.subject, /Order confirmation/);
     assert.match(en.html, /lang="en"/);
     assert.match(en.html, /Dear Ms Beispiel/);
-    assert.ok(en.html.includes(`${SITE}/en/bestellung/HP-2026-000042`));
   });
 
   it("ne présume rien du prénom sans civilité renseignée", () => {

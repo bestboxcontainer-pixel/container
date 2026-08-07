@@ -362,17 +362,28 @@ function greeting(address: OrderAddress, de: boolean): string {
  * Les coordonnées sont passées par l'appelant plutôt que relues ici : la
  * composition des e-mails reste une fonction pure, donc testable sans base.
  */
+/**
+ * Consigne de virement, rendue à part du bloc bancaire.
+ *
+ * Elle se lit désormais dans l'introduction, en une phrase, plutôt qu'en tête
+ * de l'encadré : c'est la seule action attendue du client, elle n'a pas à
+ * attendre qu'il arrive à l'encadré pour être lue. Vide pour tout autre moyen
+ * de paiement.
+ */
+function bankInstruction(order: OrderRecord, bank: BankTransferSettings | undefined): string {
+  if (!needsBankDetails(order.paymentMethodKey) || !bank) return "";
+  return renderBankInstructions(bankInstructionsFor(bank, order.locale), {
+    total: formatCents(order.totalCents),
+    orderNumber: order.orderNumber,
+  });
+}
+
 function bankTransferBlock(
   order: OrderRecord,
   bank: BankTransferSettings | undefined,
   de: boolean,
 ): { html: string; text: string[] } {
   if (!needsBankDetails(order.paymentMethodKey) || !bank) return { html: "", text: [] };
-
-  const instruction = renderBankInstructions(bankInstructionsFor(bank, order.locale), {
-    total: formatCents(order.totalCents),
-    orderNumber: order.orderNumber,
-  });
 
   const labels = de
     ? {
@@ -402,15 +413,15 @@ function bankTransferBlock(
     [labels.reference, order.orderNumber],
   ];
 
+  // L'encadré ne porte plus que les coordonnées : la consigne de virement est
+  // remontée dans l'introduction, et la répéter ici allongeait le message de
+  // deux lignes pour redire la même chose.
   return {
-    html: panel(labels.title, [
-      escapeHtml(instruction),
-      '<div style="height:10px; line-height:10px;">&nbsp;</div>',
-      ...entries.map(
-        ([label, value]) => `${escapeHtml(label)}: <strong>${escapeHtml(value)}</strong>`,
-      ),
-    ]),
-    text: ["", `${labels.title}:`, instruction, ...entries.map(([label, value]) => `${label}: ${value}`)],
+    html: panel(
+      labels.title,
+      entries.map(([label, value]) => `${escapeHtml(label)}: <strong>${escapeHtml(value)}</strong>`),
+    ),
+    text: ["", `${labels.title}:`, ...entries.map(([label, value]) => `${label}: ${value}`)],
   };
 }
 
@@ -422,10 +433,13 @@ export function buildOrderConfirmationEmail(
   const de = order.locale !== "en";
   const lang: OrderEmailLocale = de ? "de" : "en";
   const dateLocale = de ? "de-DE" : "en-GB";
-  const orderUrl = `${siteUrl()}${de ? "" : "/en"}/bestellung/${order.orderNumber}?token=${order.accessToken}`;
 
   const heading = de ? "Vielen Dank für Ihre Bestellung" : "Thank you for your order";
   const placed = formatDate(order.createdAt, dateLocale);
+
+  // Consigne de virement, en troisième phrase : ce qu'on attend du client est
+  // dit une fois, tout en haut, et ne se répète plus nulle part ensuite.
+  const instruction = bankInstruction(order, bank);
 
   const intro = de
     ? [
@@ -436,6 +450,8 @@ export function buildOrderConfirmationEmail(
         `${escapeHtml(greeting(order.billing, false))},`,
         `we have received your order <strong>${escapeHtml(order.orderNumber)}</strong> placed on ${escapeHtml(placed)}. This email is your order confirmation.`,
       ];
+
+  if (instruction) intro.push(escapeHtml(instruction));
 
   // Le taux et le montant de TVA ne sont plus détaillés au client, à la demande
   // du commerçant : la confirmation reprend le total tel qu'il l'a payé.
@@ -456,12 +472,22 @@ export function buildOrderConfirmationEmail(
     vat: vatLabel,
   });
 
-  const payment = panel(de ? "Zahlung" : "Payment", [
-    escapeHtml(order.paymentMethodLabel),
-    order.paymentMethodFee ? escapeHtml(order.paymentMethodFee) : "",
-  ]);
-
   const bankBlock = bankTransferBlock(order, bank, de);
+
+  // Moyen de paiement : retiré quand il fait doublon.
+  //
+  // Sur un virement, le bloc ne faisait que redire l'encadré bancaire juste
+  // au-dessus — « Zahlung : Sofortüberweisung » sous « Bankverbindung ». Il
+  // reste pour les autres moyens, où il porte une information que rien ne
+  // donne ailleurs, ainsi que dès qu'il y a des frais à annoncer : une somme
+  // facturée ne peut pas disparaître d'une confirmation.
+  const payment =
+    bankBlock.html && !order.paymentMethodFee
+      ? ""
+      : panel(de ? "Zahlung" : "Payment", [
+          escapeHtml(order.paymentMethodLabel),
+          order.paymentMethodFee ? escapeHtml(order.paymentMethodFee) : "",
+        ]);
 
   const shippingPanel = panel(de ? "Lieferadresse" : "Delivery address", addressLines(order.shipping));
   const billingPanel = order.shippingSameAsBilling
@@ -472,9 +498,13 @@ export function buildOrderConfirmationEmail(
     ? panel(de ? "Ihre Anmerkung" : "Your note", [escapeHtml(order.customerNote)])
     : "";
 
+  // Réduite à la mention légale. La première phrase renvoyait au bouton de
+  // suivi, qui n'existe plus — elle désignait un lien absent. Ce qui reste est
+  // ce que § 312f BGB attend d'une confirmation : que le client sache où
+  // trouver son droit de rétractation.
   const footnote = de
-    ? "Den aktuellen Stand Ihrer Bestellung sehen Sie jederzeit über den Link oben. Ihr Widerrufsrecht und die Rücksendebedingungen finden Sie auf unserer Website."
-    : "You can check the current status of your order at any time using the link above. Your right of withdrawal and our return conditions are available on our website.";
+    ? "Ihr Widerrufsrecht und die Rücksendebedingungen finden Sie auf unserer Website."
+    : "Your right of withdrawal and our return conditions are available on our website.";
 
   const html = layout({
     lang,
@@ -494,7 +524,11 @@ export function buildOrderConfirmationEmail(
     //
     // Sans virement, le bloc est vide et l'ordre reste celui d'avant.
     blocks: [bankBlock.html, table, payment, shippingPanel, billingPanel, notePanel].filter(Boolean),
-    action: { label: de ? "Bestellung ansehen" : "View order", url: orderUrl },
+    // Ni bouton de suivi ni adresse en clair : le message se terminait sur un
+    // pavé rouge, l'URL complète avec son jeton, puis une phrase qui renvoyait
+    // à ce même lien. Trois façons de dire la même chose, à l'endroit exact où
+    // le client cherchait l'IBAN. La commande reste consultable par le lien de
+    // la page de confirmation, ouverte juste après l'achat.
     footnote: escapeHtml(footnote),
     footer: de
       ? "Hausgeräte Pfeffer — automatische Nachricht zu Ihrer Bestellung."
@@ -508,8 +542,9 @@ export function buildOrderConfirmationEmail(
     de
       ? `wir haben Ihre Bestellung ${order.orderNumber} vom ${placed} erhalten. Diese E-Mail ist Ihre Bestellbestätigung.`
       : `we have received your order ${order.orderNumber} placed on ${placed}. This email is your order confirmation.`,
-    // Version texte remontée elle aussi : les deux copies du message doivent
-    // conduire le lecteur dans le même ordre.
+    // Version texte conduite dans le même ordre que la version HTML :
+    // la consigne de virement, puis les coordonnées, puis les articles.
+    ...(instruction ? ["", instruction] : []),
     ...bankBlock.text,
     "",
     itemsText(order),
@@ -524,15 +559,17 @@ export function buildOrderConfirmationEmail(
     `${de ? "Versand" : "Shipping"} — ${shippingMethod}: ${order.shippingCents === 0 ? (de ? "kostenlos" : "free") : formatCents(order.shippingCents)}`,
     `${de ? "Gesamtsumme" : "Total"}: ${formatCents(order.totalCents)}`,
     "",
-    `${de ? "Zahlung" : "Payment"}: ${order.paymentMethodLabel}`,
+    // Même règle que la version HTML : sur un virement sans frais, le moyen de
+    // paiement ne fait que répéter l'encadré bancaire.
+    ...(bankBlock.html && !order.paymentMethodFee
+      ? []
+      : ["", `${de ? "Zahlung" : "Payment"}: ${order.paymentMethodLabel}`]),
     "",
     `${de ? "Lieferadresse" : "Delivery address"}:`,
     addressText(order.shipping),
     ...(order.shippingSameAsBilling
       ? []
       : ["", `${de ? "Rechnungsadresse" : "Billing address"}:`, addressText(order.billing)]),
-    "",
-    orderUrl,
     "",
     footnote,
   ].join("\n");

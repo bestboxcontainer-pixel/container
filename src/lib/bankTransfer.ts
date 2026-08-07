@@ -49,9 +49,12 @@ export const BANK_TRANSFER_DEFAULTS: BankTransferSettings = {
   // coordonnées enregistrées avant l'ajout de ce champ retombent ici, donc
   // n'affichent simplement aucune ligne de plus.
   transferType: "",
+  // Une phrase, pas deux. La seconde annonçait l'expédition après réception du
+  // paiement — une évidence pour qui vient de lire qu'il doit virer, et une
+  // ligne de plus dans un message que le commerçant trouvait déjà trop chargé.
   instructions: {
-    de: "Bitte überweisen Sie den Gesamtbetrag von {total} unter Angabe der Bestellnummer {orderNumber}. Ihre Ware wird nach Zahlungseingang versandt.",
-    en: "Please transfer the total of {total} quoting the order number {orderNumber}. Your goods will be dispatched once the payment has arrived.",
+    de: "Bitte überweisen Sie den Gesamtbetrag von {total} auf unser Konto unter Angabe der Bestellnummer {orderNumber}.",
+    en: "Please transfer the total amount of {total} to our account, quoting order number {orderNumber}.",
   },
 };
 

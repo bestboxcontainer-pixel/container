@@ -6,6 +6,8 @@ import { routing } from "@/i18n/routing";
 import { CartProvider } from "@/components/cart/CartProvider";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CodeSnippets } from "@/components/CodeSnippets";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { SmartsuppChat } from "@/components/SmartsuppChat";
 import { PaymentMethodsBar } from "@/components/PaymentMethodsBar";
 
 export function generateStaticParams() {
@@ -45,6 +47,11 @@ export default async function LocaleLayout({
       <CartProvider>
         {children}
         <CartDrawer paymentSlot={<PaymentMethodsBar variant="inline" />} />
+        {/* Contacts flottants, dans des coins opposés : WhatsApp à gauche,
+            Smartsupp à droite — ce dernier ne sait pas se déplacer. Le chat
+            ne paraît que si sa clé d'environnement est renseignée. */}
+        <WhatsAppButton />
+        <SmartsuppChat />
       </CartProvider>
       <CodeSnippets placement="bodyEnd" />
     </NextIntlClientProvider>

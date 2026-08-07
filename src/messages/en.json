@@ -29,7 +29,9 @@
       "computer": "Computers",
       "smartwatches": "Smartwatches",
       "drohnen": "Drones"
-    }
+    },
+    "whatsappAria": "Message us on WhatsApp",
+    "whatsappTitle": "Questions? Message us on WhatsApp"
   },
   "header": {
     "homeAriaLabel": "Hausgeräte Pfeffer – home page",
@@ -444,6 +446,7 @@
       "bankIban": "IBAN",
       "bankBic": "BIC",
       "bankBank": "Bank",
+      "bankTransferType": "Transfer type",
       "bankReference": "Payment reference",
       "bankDemoNotice": "Note: these bank details are a placeholder for the test environment and belong to no real account. They must be replaced with the real details before going live.",
       "providerNotice": "The payment provider for {label} is configured in the back office under “Integrations”. Until then we confirm incoming payments manually.",

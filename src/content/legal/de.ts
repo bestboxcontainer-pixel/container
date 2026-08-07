@@ -341,8 +341,10 @@ export const deLegalPages: LegalPageMap = {
       {
         heading: "12. Cookies und Einwilligungsverwaltung",
         body:
-          "Wir verwenden Cookies und vergleichbare Technologien. Technisch notwendige Cookies – etwa für den Warenkorb, die Sitzungsverwaltung und die Sicherheit – setzen wir auf Grundlage von § 25 Absatz 2 TDDDG ohne Einwilligung ein; die damit verbundene Datenverarbeitung stützt sich auf Artikel 6 Absatz 1 Buchstabe f DSGVO.\n\n" +
-          "Alle übrigen Cookies, insbesondere für Statistik und Marketing, setzen wir nur nach Ihrer ausdrücklichen Einwilligung nach § 25 Absatz 1 TDDDG in Verbindung mit Artikel 6 Absatz 1 Buchstabe a DSGVO ein. Sie erteilen diese Einwilligung über unser Consent-Banner und können sie jederzeit über den Link „Cookie-Einstellungen“ im Fußbereich mit Wirkung für die Zukunft ändern oder widerrufen. Sofern anerkannte Einwilligungsverwaltungsdienste eingesetzt werden, berücksichtigen wir deren Signale.\n\n" +
+          "Der Betrieb dieses Shops beruht auf technisch notwendigen Cookies: Warenkorb, Sitzungsverwaltung, Sprachwahl und Sicherheit. Sie sind nach § 25 Absatz 2 Nummer 2 TDDDG einwilligungsfrei; die damit verbundene Datenverarbeitung stützt sich auf Artikel 6 Absatz 1 Buchstabe f DSGVO.\n\n" +
+          "Einen Live-Chat der Smartsupp s.r.o. (Tschechische Republik) bieten wir über eine Schaltfläche unten rechts an. Er wird erst nach Ihrem Klick geladen: solange Sie ihn nicht öffnen, wird kein Smartsupp-Skript ausgeführt, kein Cookie dieses Anbieters gesetzt und es gelangen keine Daten an ihn.\n\n" +
+          "Mit dem Öffnen des Chats fordern Sie diesen Dienst ausdrücklich an (§ 25 Absatz 2 Nummer 2 TDDDG). Die dabei gesetzte Besucherkennung ordnet die Nachrichten eines Gesprächs einander zu; ihre Speicherdauer richtet sich nach den Angaben von Smartsupp in dessen eigener Dokumentation.\n\n" +
+          "Cookies zur Reichweitenmessung, zu Werbezwecken oder von sozialen Netzwerken setzen wir nicht. Ein Einwilligungsbanner ist daher nicht erforderlich.\n\n" +
           "Zusätzlich können Sie Cookies in Ihrem Browser löschen oder blockieren. Einige Funktionen des Shops stehen dann möglicherweise nicht mehr vollständig zur Verfügung.",
       },
       {
@@ -351,7 +353,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "14. Empfänger und Übermittlung in Drittländer",
-        body: "Empfänger Ihrer Daten sind ausschließlich Dienstleister, die wir sorgfältig ausgewählt haben und die als Auftragsverarbeiter nach Artikel 28 DSGVO für uns tätig werden, sowie Stellen, an die wir aufgrund gesetzlicher Pflichten übermitteln müssen (etwa Finanzbehörden). Eine Übermittlung in Länder außerhalb der EU und des EWR findet nur statt, wenn ein Angemessenheitsbeschluss der Europäischen Kommission vorliegt oder geeignete Garantien im Sinne der Artikel 44 ff. DSGVO – insbesondere Standardvertragsklauseln – vereinbart sind.",
+        body: "Empfänger Ihrer Daten sind ausschließlich Dienstleister, die wir sorgfältig ausgewählt haben und die als Auftragsverarbeiter nach Artikel 28 DSGVO für uns tätig werden, sowie Stellen, an die wir aufgrund gesetzlicher Pflichten übermitteln müssen (etwa Finanzbehörden). Dazu zählt die Smartsupp s.r.o. (Tschechische Republik) als Anbieter des Live-Chats – ausschließlich für Gespräche, die Sie selbst eröffnen. Eine Übermittlung in Länder außerhalb der EU und des EWR findet nur statt, wenn ein Angemessenheitsbeschluss der Europäischen Kommission vorliegt oder geeignete Garantien im Sinne der Artikel 44 ff. DSGVO – insbesondere Standardvertragsklauseln – vereinbart sind.",
       },
       {
         heading: "15. Speicherdauer",

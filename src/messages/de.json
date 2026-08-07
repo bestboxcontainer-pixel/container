@@ -29,7 +29,9 @@
       "computer": "Computer",
       "smartwatches": "Smartwatches",
       "drohnen": "Drohnen"
-    }
+    },
+    "whatsappAria": "Über WhatsApp schreiben",
+    "whatsappTitle": "Fragen? Schreiben Sie uns über WhatsApp"
   },
   "header": {
     "homeAriaLabel": "Hausgeräte Pfeffer – Startseite",
@@ -444,6 +446,7 @@
       "bankIban": "IBAN",
       "bankBic": "BIC",
       "bankBank": "Bank",
+      "bankTransferType": "Überweisungsart",
       "bankReference": "Verwendungszweck",
       "bankDemoNotice": "Hinweis: Diese Bankverbindung ist ein Platzhalter für die Testumgebung und gehört zu keinem echten Konto. Vor dem Live-Betrieb muss sie durch die echten Kontodaten ersetzt werden.",
       "providerNotice": "Der Zahlungsdienstleister für {label} wird im Backoffice unter „Integrationen“ hinterlegt. Bis dahin bestätigen wir den Zahlungseingang manuell.",

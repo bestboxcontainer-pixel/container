@@ -6,6 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { CheckCircle2, Landmark, ShieldCheck } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { PurchaseDataLayer } from "@/components/PurchaseDataLayer";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { formatPrice } from "@/server/store";
@@ -95,6 +96,26 @@ export default async function OrderConfirmationPage({
 
   return (
     <>
+      {/* Annonce de la conversion à Google Tag Manager. Placé ici et non dans le
+          tunnel : c'est l'affichage de cette page qui atteste que la commande a
+          bien été créée et lue en base. */}
+      <PurchaseDataLayer
+        data={{
+          orderNumber: order.orderNumber,
+          totalCents: order.totalCents,
+          taxCents: order.taxCents,
+          shippingCents: order.shippingCents,
+          couponCode: order.couponCode,
+          currency: order.currency,
+          items: order.items.map((article) => ({
+            sku: article.sku,
+            name: article.name,
+            brand: article.brand,
+            quantity: article.quantity,
+            unitPriceCents: article.unitPriceCents,
+          })),
+        }}
+      />
       <Header />
       <main className="flex-1 bg-muted/40">
         <div className="mx-auto max-w-screen-lg px-3 py-8">

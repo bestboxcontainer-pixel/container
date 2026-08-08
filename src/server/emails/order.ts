@@ -118,6 +118,31 @@ function layout(input: LayoutInput): string {
         .tot { font-size: 24px !important; line-height: 33px !important; }
         .small { font-size: 18px !important; line-height: 27px !important; }
       }
+
+      /* À l'impression, la confirmation doit tenir sur une feuille comme la
+         facture qui l'accompagne. Les corps sont dimensionnés pour être lus à
+         l'écran, souvent sur un téléphone : sur papier ils occupent une page et
+         demie dès qu'une ligne de remise s'ajoute au décompte. On les ramène à
+         une échelle d'imprimé et on retire les fonds, qui ne servent qu'à
+         l'écran et coûtent de l'encre.
+
+         La propriété print-color-adjust reste volontairement absente : le filet
+         rouge de l'en-tête n'a pas à être forcé sur une imprimante noir et
+         blanc. */
+      @media print {
+        body { background-color: #ffffff !important; }
+        .wrap { padding: 0 !important; }
+        .pad { padding-top: 12px !important; padding-bottom: 12px !important; }
+        .h1 { font-size: 18px !important; line-height: 24px !important; }
+        .txt { font-size: 11px !important; line-height: 16px !important; margin-bottom: 8px !important; }
+        .cell { font-size: 11px !important; line-height: 15px !important; }
+        .tot { font-size: 14px !important; line-height: 19px !important; }
+        .small { font-size: 10px !important; line-height: 14px !important; }
+        /* Une ligne du décompte ne doit jamais être coupée en deux par un saut
+           de page : le montant se retrouverait seul en tête de la feuille
+           suivante, séparé de son libellé. */
+        tr { page-break-inside: avoid; }
+      }
     </style>
   </head>
   <body style="margin:0; padding:0; background-color:#f1f2f4; color-scheme:light; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;">

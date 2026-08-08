@@ -14,8 +14,10 @@
 
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
+import { PDFDocument } from "pdf-lib";
 import type { BankTransferSettings } from "@/lib/bankTransfer";
-import { lignesVirement, urlVignette } from "./invoice";
+import type { OrderRecord } from "@/server/orders";
+import { buildInvoicePdf, lignesVirement, urlVignette } from "./invoice";
 
 const BANK: BankTransferSettings = {
   holder: "Hausgeräte Pfeffer OHG",
@@ -74,6 +76,92 @@ describe("Bloc bancaire de la facture", () => {
     const lignes = aplati(lignesVirement(COMMANDE, { ...BANK, bank: "" }));
     assert.doesNotMatch(lignes, /Bank:/);
     assert.match(lignes, /Verwendungszweck: HP-2026-000042/);
+  });
+});
+
+/**
+ * Commande d'essai. Les désignations sont volontairement longues — elles tiennent
+ * sur deux lignes — et l'adresse complète : c'est le cas défavorable, celui qui
+ * décide de la pagination.
+ */
+function commandeEssai(nbArticles: number, remiseCents: number): OrderRecord {
+  const adresse = {
+    firstName: "Maximilian",
+    lastName: "Wagenknecht-Hofmann",
+    company: "",
+    street: "Friedrichstraße 128a",
+    postalCode: "10117",
+    city: "Berlin",
+    country: "DE",
+  };
+  const items = Array.from({ length: nbArticles }, (_, i) => ({
+    id: `it${i}`,
+    productId: `p${i}`,
+    sku: `SKU-00${i}`,
+    brand: "Siemens",
+    name: "EQ.6 plus s700 Kaffeevollautomat mit Milchaufschäumer und Keramikmahlwerk",
+    image: "",
+    unitPriceCents: 64900,
+    quantity: 1,
+    lineTotalCents: 64900,
+  }));
+  const subtotal = items.reduce((somme, article) => somme + article.lineTotalCents, 0);
+
+  return {
+    orderNumber: "HP-2026-000042",
+    locale: "de",
+    email: "maximilian.wagenknecht@example.de",
+    phone: "+49 30 12345678",
+    billing: adresse,
+    shipping: adresse,
+    shippingSameAsBilling: true,
+    paymentMethodKey: "vorkasse",
+    paymentMethodLabel: "Vorkasse per Überweisung",
+    shippingMethodKey: "standard",
+    subtotalCents: subtotal,
+    shippingCents: 0,
+    couponCode: remiseCents > 0 ? "SOMMER10" : "",
+    discountCents: remiseCents,
+    totalCents: subtotal - remiseCents,
+    taxRatePercent: 19,
+    createdAt: "2026-08-06T10:00:00.000Z",
+    items,
+    events: [],
+  } as unknown as OrderRecord;
+}
+
+async function nombreDePages(order: OrderRecord): Promise<number> {
+  const pdf = await buildInvoicePdf(order, BANK);
+  return (await PDFDocument.load(pdf)).getPageCount();
+}
+
+describe("Pagination de la facture", () => {
+  // La facture est une pièce qu'on imprime et qu'on classe : une deuxième page
+  // pour une seule ligne de remise est une régression visible par le client.
+  it("tient sur une page qu'un coupon s'applique ou non", async () => {
+    for (const nbArticles of [1, 3, 8]) {
+      assert.equal(
+        await nombreDePages(commandeEssai(nbArticles, 0)),
+        1,
+        `${nbArticles} article(s) sans coupon`,
+      );
+      assert.equal(
+        await nombreDePages(commandeEssai(nbArticles, 6490)),
+        1,
+        `${nbArticles} article(s) avec coupon`,
+      );
+    }
+  });
+
+  it("ne bascule pas d'une page à l'autre à cause de la seule ligne de remise", async () => {
+    // Le défaut d'origine : le tableau était composé à hauteur fixe, et les
+    // dix-neuf points de la ligne « RABATT » suffisaient à pousser le bloc
+    // bancaire sur une deuxième page.
+    for (let nbArticles = 1; nbArticles <= 14; nbArticles += 1) {
+      const sans = await nombreDePages(commandeEssai(nbArticles, 0));
+      const avec = await nombreDePages(commandeEssai(nbArticles, 6490));
+      assert.equal(avec, sans, `${nbArticles} article(s) : le coupon change la pagination`);
+    }
   });
 });
 

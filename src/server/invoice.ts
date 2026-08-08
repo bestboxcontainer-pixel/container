@@ -44,7 +44,51 @@ const COL_ARTICLE = 132;
 const LARGEUR_ARTICLE = 190;
 const COL_MENGE = 355; // centre de la colonne
 const COL_PREIS = 462; // bord droit
-const COTE_VIGNETTE = 46;
+
+/**
+ * Densité du tableau des articles.
+ *
+ * La facture tient sur une page ou elle n'y tient pas : il n'y a pas de demi-
+ * mesure pour une pièce qu'on imprime et qu'on classe. Le seul bloc dont la
+ * hauteur dépend de la commande est le tableau des articles ; c'est donc lui qui
+ * s'adapte, du confortable au serré, pendant que le reste garde ses proportions.
+ *
+ * Les paliers sont rangés du plus lisible au plus compact. On retient le premier
+ * qui entre dans la place disponible — jamais un cran plus serré que nécessaire.
+ */
+interface Densite {
+  /** Côté de la vignette produit, en points. Zéro la supprime. */
+  vignette: number;
+  /** Nombre de lignes accordées à la désignation. */
+  lignes: number;
+  corps: number;
+  interligne: number;
+  /** Blanc sous chaque ligne d'article. */
+  respiration: number;
+}
+
+const DENSITES: readonly Densite[] = [
+  { vignette: 46, lignes: 2, corps: 11, interligne: 15, respiration: 14 },
+  { vignette: 40, lignes: 2, corps: 10.5, interligne: 13.5, respiration: 10 },
+  { vignette: 32, lignes: 2, corps: 10, interligne: 12.5, respiration: 8 },
+  { vignette: 26, lignes: 1, corps: 10, interligne: 12, respiration: 7 },
+  { vignette: 0, lignes: 1, corps: 9.5, interligne: 11, respiration: 6 },
+];
+
+// Interlignes du décompte. Partagés entre le calcul de hauteur et la
+// composition : mesurer avec d'autres valeurs que celles qu'on dessine ferait
+// mentir la prévision, et la facture déborderait malgré le calcul.
+const DECOMPTE_LIGNE = 17;
+const DECOMPTE_TOTAL = 22;
+const DECOMPTE_DELAI = 15;
+/** Blanc + filet séparant les lignes courantes du total. */
+const DECOMPTE_FILET = 20;
+/** Blanc entre le dernier article et la première ligne du décompte. */
+const DECOMPTE_ENTETE = 18;
+
+// Bloc bancaire : filet, titre, puis une ligne par coordonnée.
+const BANQUE_ENTETE = 44;
+const BANQUE_LIGNE = 16;
 
 /**
  * Hauteur réservée au pied de page.
@@ -312,46 +356,46 @@ export async function buildInvoicePdf(
 
   // ---- Logo ----
   const logo = await doc.embedPng(logoPngBytes());
-  const hauteurLogo = 46;
+  const hauteurLogo = 40;
   plume.page.drawImage(logo, {
     x: MARGE,
     y: plume.y - hauteurLogo,
     width: hauteurLogo * LOGO_RATIO,
     height: hauteurLogo,
   });
-  plume.y -= hauteurLogo + 30;
+  plume.y -= hauteurLogo + 20;
 
   // ---- Client à gauche, vendeur à droite ----
   const hautBloc = plume.y;
-  texte("Kunde", { police: grasse, taille: 17 });
-  texte(COMPANY.name.toUpperCase(), { police: grasse, taille: 12.5, finX: DROITE, y: hautBloc });
+  texte("Kunde", { police: grasse, taille: 15 });
+  texte(COMPANY.name.toUpperCase(), { police: grasse, taille: 12, finX: DROITE, y: hautBloc });
 
-  plume.y -= 22;
-  let yVendeur = hautBloc - 22;
+  plume.y -= 19;
+  let yVendeur = hautBloc - 19;
   for (const ligne of [COMPANY.street, COMPANY.city, COMPANY.phone, COMPANY.email]) {
-    texte(ligne, { taille: 10, couleur: GRIS, finX: DROITE, y: yVendeur });
-    yVendeur -= 15;
+    texte(ligne, { taille: 9.5, couleur: GRIS, finX: DROITE, y: yVendeur });
+    yVendeur -= 13;
   }
 
   for (const ligne of lignesAdresse(order.billing)) {
-    texte(ligne, { taille: 11 });
-    plume.y -= 15;
+    texte(ligne, { taille: 10.5 });
+    plume.y -= 13;
   }
 
   // Coordonnées de contact : le client doit pouvoir vérifier d'un coup d'œil
   // que la facture est bien la sienne.
-  plume.y -= 4;
-  const largeurEtiquetteMail = grasse.widthOfTextAtSize("E-Mail : ", 11);
-  texte("E-Mail :", { police: grasse, taille: 11 });
-  texte(order.email, { x: MARGE + largeurEtiquetteMail, taille: 11, couleur: LIEN });
+  plume.y -= 2;
+  const largeurEtiquetteMail = grasse.widthOfTextAtSize("E-Mail : ", 10.5);
+  texte("E-Mail :", { police: grasse, taille: 10.5 });
+  texte(order.email, { x: MARGE + largeurEtiquetteMail, taille: 10.5, couleur: LIEN });
   if (order.phone) {
-    plume.y -= 16;
-    const largeurEtiquetteTel = grasse.widthOfTextAtSize("Telefon : ", 11);
-    texte("Telefon :", { police: grasse, taille: 11 });
-    texte(order.phone, { x: MARGE + largeurEtiquetteTel, taille: 11 });
+    plume.y -= 14;
+    const largeurEtiquetteTel = grasse.widthOfTextAtSize("Telefon : ", 10.5);
+    texte("Telefon :", { police: grasse, taille: 10.5 });
+    texte(order.phone, { x: MARGE + largeurEtiquetteTel, taille: 10.5 });
   }
 
-  plume.y = Math.min(plume.y, yVendeur) - 26;
+  plume.y = Math.min(plume.y, yVendeur) - 18;
 
   // ---- Références de la facture ----
   const references: Array<[string, string]> = [
@@ -360,51 +404,90 @@ export async function buildInvoicePdf(
     ["Bestelldatum :", dateAllemande(order.createdAt)],
   ];
   for (const [etiquette, valeur] of references) {
-    texte(etiquette, { police: grasse, taille: 11.5, finX: 430 });
-    texte(valeur, { police: grasse, taille: 11.5, x: 450 });
-    plume.y -= 19;
+    texte(etiquette, { police: grasse, taille: 11, finX: 430 });
+    texte(valeur, { police: grasse, taille: 11, x: 450 });
+    plume.y -= 16;
   }
 
   // ---- Tableau des articles ----
-  plume.y -= 14;
-  texte("Nr", { police: grasse, taille: 9.5, couleur: GRIS, x: COL_NUM });
-  texte("FOTO", { police: grasse, taille: 9.5, couleur: GRIS, x: COL_PHOTO });
-  texte("ARTIKEL", { police: grasse, taille: 9.5, couleur: GRIS, x: COL_ARTICLE });
-  texte("MENGE", { police: grasse, taille: 9.5, couleur: GRIS, centreX: COL_MENGE });
-  texte("PREIS", { police: grasse, taille: 9.5, couleur: GRIS, finX: COL_PREIS });
-  texte("GESAMTPREIS", { police: grasse, taille: 9.5, couleur: GRIS, finX: DROITE });
-
   plume.y -= 10;
+  texte("Nr", { police: grasse, taille: 9, couleur: GRIS, x: COL_NUM });
+  texte("FOTO", { police: grasse, taille: 9, couleur: GRIS, x: COL_PHOTO });
+  texte("ARTIKEL", { police: grasse, taille: 9, couleur: GRIS, x: COL_ARTICLE });
+  texte("MENGE", { police: grasse, taille: 9, couleur: GRIS, centreX: COL_MENGE });
+  texte("PREIS", { police: grasse, taille: 9, couleur: GRIS, finX: COL_PREIS });
+  texte("GESAMTPREIS", { police: grasse, taille: 9, couleur: GRIS, finX: DROITE });
+
+  plume.y -= 8;
   filet(plume.y);
-  plume.y -= 18;
+  plume.y -= 16;
+
+  // ---- Choix de la densité ----
+  //
+  // Tout ce qui suit les articles a une hauteur connue d'avance : le décompte
+  // varie d'une ligne selon qu'un coupon s'applique, le bloc bancaire d'une
+  // ligne par coordonnée, et le pied est à hauteur fixe. On en déduit la place
+  // laissée aux articles, puis la densité qui la respecte.
+  const virement = lignesVirement(order, bank);
+  const lignesDecompte = 2 + (order.discountCents > 0 ? 1 : 0); // sous-total, [remise], livraison
+  const hauteurDecompte =
+    DECOMPTE_ENTETE +
+    lignesDecompte * DECOMPTE_LIGNE +
+    DECOMPTE_DELAI +
+    DECOMPTE_FILET +
+    DECOMPTE_TOTAL;
+  const hauteurBanque = virement.length > 0 ? BANQUE_ENTETE + virement.length * BANQUE_LIGNE : 0;
+  const placeArticles = plume.y - HAUTEUR_PIED - hauteurDecompte - hauteurBanque;
+
+  /** Hauteur qu'occuperait le tableau à cette densité. */
+  const mesurer = (densite: Densite): number =>
+    order.items.reduce((somme, article, index) => {
+      const designation = couperEnLignes(
+        `${article.brand} ${article.name}`.trim(),
+        normale,
+        densite.corps,
+        LARGEUR_ARTICLE,
+        densite.lignes,
+      );
+      // La référence article prend une ligne de plus sous la désignation.
+      const hauteurTexte = designation.length * densite.interligne + (article.sku ? 12 : 0);
+      const hauteurVignette = densite.vignette > 0 && vignettes[index] ? densite.vignette : 0;
+      return somme + Math.max(hauteurVignette, hauteurTexte) + densite.respiration;
+    }, 0);
+
+  const densite =
+    DENSITES.find((candidate) => mesurer(candidate) <= placeArticles) ??
+    DENSITES[DENSITES.length - 1];
 
   order.items.forEach((article: OrderItemRecord, index: number) => {
     const designation = couperEnLignes(
       `${article.brand} ${article.name}`.trim(),
       normale,
-      11,
+      densite.corps,
       LARGEUR_ARTICLE,
-      2,
+      densite.lignes,
     );
-    const vignette = vignettes[index];
+    const vignette = densite.vignette > 0 ? vignettes[index] : null;
     // La ligne fait au moins la hauteur de la vignette, davantage si la
-    // désignation tient sur deux lignes et porte une référence en dessous.
-    const hauteurTexte = designation.length * 15 + 14;
-    const hauteurLigne = Math.max(vignette ? COTE_VIGNETTE : 0, hauteurTexte) + 14;
+    // désignation tient sur plusieurs lignes et porte une référence en dessous.
+    const hauteurTexte = designation.length * densite.interligne + (article.sku ? 12 : 0);
+    const hauteurLigne =
+      Math.max(vignette ? densite.vignette : 0, hauteurTexte) + densite.respiration;
     assurerEspace(hauteurLigne);
 
     const haut = plume.y;
     const milieu = haut - hauteurLigne / 2 + 4;
 
-    texte(String(index + 1), { taille: 10.5, couleur: GRIS, x: COL_NUM, y: haut });
+    texte(String(index + 1), { taille: densite.corps, couleur: GRIS, x: COL_NUM, y: haut });
 
     if (vignette) {
       // La vignette est contenue dans son carré sans être déformée.
-      const echelle = Math.min(COTE_VIGNETTE / vignette.width, COTE_VIGNETTE / vignette.height);
+      const cote = densite.vignette;
+      const echelle = Math.min(cote / vignette.width, cote / vignette.height);
       const largeurImage = vignette.width * echelle;
       const hauteurImage = vignette.height * echelle;
       plume.page.drawImage(vignette as PDFImage, {
-        x: COL_PHOTO + (COTE_VIGNETTE - largeurImage) / 2,
+        x: COL_PHOTO + (cote - largeurImage) / 2,
         y: haut + 8 - hauteurImage,
         width: largeurImage,
         height: hauteurImage,
@@ -413,29 +496,28 @@ export async function buildInvoicePdf(
 
     let yTexte = haut;
     for (const ligne of designation) {
-      texte(ligne, { taille: 11, x: COL_ARTICLE, y: yTexte });
-      yTexte -= 15;
+      texte(ligne, { taille: densite.corps, x: COL_ARTICLE, y: yTexte });
+      yTexte -= densite.interligne;
     }
     if (article.sku) {
-      texte(`Art.-Nr. ${article.sku}`, { taille: 9, couleur: GRIS, x: COL_ARTICLE, y: yTexte });
+      texte(`Art.-Nr. ${article.sku}`, { taille: 8.5, couleur: GRIS, x: COL_ARTICLE, y: yTexte });
     }
 
-    texte(String(article.quantity), { taille: 11, centreX: COL_MENGE, y: milieu });
-    texte(euros(article.unitPriceCents), { taille: 11, finX: COL_PREIS, y: milieu });
-    texte(euros(article.lineTotalCents), { taille: 11, finX: DROITE, y: milieu });
+    texte(String(article.quantity), { taille: densite.corps, centreX: COL_MENGE, y: milieu });
+    texte(euros(article.unitPriceCents), { taille: densite.corps, finX: COL_PREIS, y: milieu });
+    texte(euros(article.lineTotalCents), { taille: densite.corps, finX: DROITE, y: milieu });
 
     plume.y = haut - hauteurLigne;
   });
 
   filet(plume.y);
-  plume.y -= 24;
+  plume.y -= DECOMPTE_ENTETE;
 
   // ---- Décompte ----
   // Les lignes sont TTC et s'additionnent réellement jusqu'au total ; la TVA
   // est signalée comme contenue, conformément au § 3 PAngV.
-  assurerEspace(90);
   const ligneTotal = (etiquette: string, valeur: string, options: { fort?: boolean } = {}) => {
-    const taille = options.fort ? 15 : 11;
+    const taille = options.fort ? 14 : 10.5;
     // Le total est composé plus gros : son étiquette recule, sans quoi un
     // montant à cinq chiffres viendrait la toucher.
     texte(etiquette, {
@@ -449,7 +531,7 @@ export async function buildInvoicePdf(
       taille,
       finX: DROITE,
     });
-    plume.y -= options.fort ? 26 : 19;
+    plume.y -= options.fort ? DECOMPTE_TOTAL : DECOMPTE_LIGNE;
   };
 
   ligneTotal("ZWISCHENSUMME", euros(order.subtotalCents));
@@ -469,33 +551,30 @@ export async function buildInvoicePdf(
   }
 
   ligneTotal("LIEFERUNG", order.shippingCents === 0 ? "KOSTENLOS" : euros(order.shippingCents));
-  texte(delaiLivraison(order), { taille: 9.5, couleur: GRIS, finX: DROITE });
-  plume.y -= 17;
+  texte(delaiLivraison(order), { taille: 9, couleur: GRIS, finX: DROITE });
+  plume.y -= DECOMPTE_DELAI;
 
-  plume.y -= 2;
   filet(plume.y, COL_PREIS - 120, DROITE);
-  plume.y -= 22;
+  plume.y -= DECOMPTE_FILET;
   ligneTotal("GESAMTBETRAG", euros(order.totalCents), { fort: true });
 
   // ---- Coordonnées bancaires, pour le virement seul ----
-  const virement = lignesVirement(order, bank);
   if (virement.length > 0) {
-    assurerEspace(virement.length * 18 + 56);
-    plume.y -= 12;
+    plume.y -= 8;
     filet(plume.y);
-    plume.y -= 22;
+    plume.y -= 18;
 
     texte(`Zahlungsart : ${order.paymentMethodLabel}`, {
       police: grasse,
-      taille: 13.5,
+      taille: 12.5,
       centreX: LARGEUR / 2,
     });
-    plume.y -= 22;
+    plume.y -= 18;
 
     for (const [etiquette, valeur] of virement) {
-      texte(`${etiquette} :`, { police: grasse, taille: 11, finX: 285 });
-      texte(valeur, { taille: 11, x: 295 });
-      plume.y -= 18;
+      texte(`${etiquette} :`, { police: grasse, taille: 10.5, finX: 285 });
+      texte(valeur, { taille: 10.5, x: 295 });
+      plume.y -= BANQUE_LIGNE;
     }
   }
 

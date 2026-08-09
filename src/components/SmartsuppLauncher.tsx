@@ -19,12 +19,18 @@ declare global {
 const LOADER = "https://www.smartsuppchat.com/loader.js?";
 
 /**
- * Conteneur que le chargeur Smartsupp ajoute au corps de page une fois le widget
- * prêt. C'est le seul signal fiable que quelque chose de visible a remplacé
- * notre bouton — `window.smartsupp`, lui, existe dès qu'on crée la file
+ * Éléments que le chargeur Smartsupp ajoute au corps de page une fois le widget
+ * prêt. Leur présence est le seul signal fiable que quelque chose de visible a
+ * remplacé notre bouton — `window.smartsupp`, lui, existe dès qu'on crée la file
  * d'attente, donc avant même que le script soit parti.
+ *
+ * Le sélecteur ratisse large volontairement. Smartsupp ne s'engage sur aucun nom
+ * d'élément et l'a déjà changé ; viser un identifiant précis, c'est accepter que
+ * le bouton tourne indéfiniment le jour où ils le renomment, alors même que le
+ * chat s'est ouvert. Tout ce qu'on demande ici, c'est « quelque chose leur
+ * appartenant est-il apparu ».
  */
-const CONTENEUR_WIDGET = "smartsupp-widget-container";
+const SELECTEUR_WIDGET = '[id^="smartsupp"], [class^="smartsupp"], iframe[src*="smartsupp"]';
 
 /**
  * Délai au-delà duquel on considère que le widget ne viendra pas.
@@ -80,11 +86,13 @@ export function SmartsuppLauncher({
   // de React : elle rend `false` au rendu serveur, où `document` n'existe pas.
   const widgetPose = useSyncExternalStore(
     (prevenir) => {
+      // `subtree` est nécessaire : le widget n'est pas toujours greffé
+      // directement sur le corps de page, il arrive qu'il soit enveloppé.
       const observateur = new MutationObserver(prevenir);
-      observateur.observe(document.body, { childList: true });
+      observateur.observe(document.body, { childList: true, subtree: true });
       return () => observateur.disconnect();
     },
-    () => document.getElementById(CONTENEUR_WIDGET) != null,
+    () => document.querySelector(SELECTEUR_WIDGET) != null,
     () => false,
   );
 
@@ -123,7 +131,7 @@ export function SmartsuppLauncher({
     // Filet : script chargé mais widget jamais posé — clé invalide, compte
     // suspendu, connexion temps réel coupée. Le visiteur récupère son bouton.
     window.setTimeout(() => {
-      if (!document.getElementById(CONTENEUR_WIDGET)) setEtat("echec");
+      if (!document.querySelector(SELECTEUR_WIDGET)) setEtat("echec");
     }, DELAI_WIDGET);
 
     // Mis en file : le chargeur l'exécutera, le chat s'ouvrira sans second clic.

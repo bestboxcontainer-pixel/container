@@ -18,7 +18,25 @@ declare global {
 
 const LOADER = "https://www.smartsuppchat.com/loader.js?";
 
-type Etat = "repos" | "chargement" | "ouvert" | "echec";
+/**
+ * Conteneur que le chargeur Smartsupp ajoute au corps de page une fois le widget
+ * prêt. C'est le seul signal fiable que quelque chose de visible a remplacé
+ * notre bouton — `window.smartsupp`, lui, existe dès qu'on crée la file
+ * d'attente, donc avant même que le script soit parti.
+ */
+const CONTENEUR_WIDGET = "smartsupp-widget-container";
+
+/**
+ * Délai au-delà duquel on considère que le widget ne viendra pas.
+ *
+ * Le script peut se charger sans que rien n'apparaisse : clé invalide, compte
+ * suspendu, ou bloqueur qui laisse passer le fichier mais coupe la connexion
+ * temps réel. Sans cette limite, le visiteur resterait devant une roue qui
+ * tourne indéfiniment.
+ */
+const DELAI_WIDGET = 8000;
+
+type Etat = "repos" | "chargement" | "echec";
 
 /**
  * Bouton de chat, en bas à droite de la boutique.
@@ -48,14 +66,25 @@ export function SmartsuppLauncher({
 }) {
   const [etat, setEtat] = useState<Etat>("repos");
 
-  // Le chat, une fois chargé, survit au démontage du composant — un changement
-  // de langue remonte cette partie de l'arbre alors que le widget, lui, reste
-  // dans la page. Sans cette lecture, le bouton reviendrait se poser par-dessus.
+  // Le widget, une fois posé, survit au démontage du composant — un changement
+  // de langue remonte cette partie de l'arbre alors que le chat, lui, reste dans
+  // la page. Sans cette lecture, le bouton reviendrait se poser par-dessus.
+  //
+  // On observe la présence du conteneur, et non `window.smartsupp` : cette
+  // variable est créée par `ouvrir()` pour la file d'attente, donc dès le clic.
+  // S'y fier faisait disparaître le bouton immédiatement, avant que le chargeur
+  // ait rendu quoi que ce soit — le visiteur cliquait, tout s'effaçait, et
+  // aucun chat ne s'ouvrait.
+  //
   // `useSyncExternalStore` est la façon prévue de lire une valeur qui vit hors
-  // de React : elle rend `false` au rendu serveur, où `window` n'existe pas.
-  const dejaCharge = useSyncExternalStore(
-    () => () => {},
-    () => window.smartsupp != null,
+  // de React : elle rend `false` au rendu serveur, où `document` n'existe pas.
+  const widgetPose = useSyncExternalStore(
+    (prevenir) => {
+      const observateur = new MutationObserver(prevenir);
+      observateur.observe(document.body, { childList: true });
+      return () => observateur.disconnect();
+    },
+    () => document.getElementById(CONTENEUR_WIDGET) != null,
     () => false,
   );
 
@@ -82,19 +111,28 @@ export function SmartsuppLauncher({
     script.async = true;
     script.charset = "utf-8";
     script.src = LOADER;
-    script.addEventListener("load", () => setEtat("ouvert"));
-    // Un bloqueur de publicité filtre couramment ce domaine : mieux vaut
-    // rendre la main au visiteur que laisser un bouton qui tourne dans le vide.
+    // Le chargement du fichier ne prouve rien : c'est l'apparition du conteneur
+    // qui fait foi, et elle est observée plus haut. On ne touche donc pas à
+    // l'état ici — le bouton garde sa roue jusqu'à ce que le widget soit là.
+    //
+    // Un bloqueur de publicité filtre couramment ce domaine : mieux vaut rendre
+    // la main au visiteur que laisser un bouton qui tourne dans le vide.
     script.addEventListener("error", () => setEtat("echec"));
     document.head.appendChild(script);
+
+    // Filet : script chargé mais widget jamais posé — clé invalide, compte
+    // suspendu, connexion temps réel coupée. Le visiteur récupère son bouton.
+    window.setTimeout(() => {
+      if (!document.getElementById(CONTENEUR_WIDGET)) setEtat("echec");
+    }, DELAI_WIDGET);
 
     // Mis en file : le chargeur l'exécutera, le chat s'ouvrira sans second clic.
     window.smartsupp("chat:open");
   }, [chatKey, etat, language]);
 
-  // Une fois le chat chargé, c'est le widget Smartsupp qui occupe le coin :
-  // notre bouton doit disparaître pour ne pas le recouvrir.
-  if (etat === "ouvert" || dejaCharge) return null;
+  // Une fois le widget posé, c'est lui qui occupe le coin : notre bouton doit
+  // disparaître pour ne pas le recouvrir.
+  if (widgetPose) return null;
 
   return (
     <button

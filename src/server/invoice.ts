@@ -67,10 +67,18 @@ interface Densite {
   respiration: number;
 }
 
+/**
+ * Le premier palier est le cas courant — une commande d'un à trois articles — et
+ * c'est celui qu'on lit sur un téléphone, où la facture s'ouvre en pleine
+ * largeur d'écran. Il est donc composé large. Les paliers suivants ne servent
+ * qu'aux commandes fournies, où la lisibilité cède le pas au fait de tenir sur
+ * une feuille.
+ */
 const DENSITES: readonly Densite[] = [
-  { vignette: 46, lignes: 2, corps: 11, interligne: 15, respiration: 14 },
-  { vignette: 40, lignes: 2, corps: 10.5, interligne: 13.5, respiration: 10 },
-  { vignette: 32, lignes: 2, corps: 10, interligne: 12.5, respiration: 8 },
+  { vignette: 52, lignes: 2, corps: 12.5, interligne: 16, respiration: 16 },
+  { vignette: 46, lignes: 2, corps: 12, interligne: 15, respiration: 13 },
+  { vignette: 40, lignes: 2, corps: 11, interligne: 14, respiration: 10 },
+  { vignette: 32, lignes: 2, corps: 10.5, interligne: 13, respiration: 8 },
   { vignette: 26, lignes: 1, corps: 10, interligne: 12, respiration: 7 },
   { vignette: 0, lignes: 1, corps: 9.5, interligne: 11, respiration: 6 },
 ];
@@ -78,17 +86,22 @@ const DENSITES: readonly Densite[] = [
 // Interlignes du décompte. Partagés entre le calcul de hauteur et la
 // composition : mesurer avec d'autres valeurs que celles qu'on dessine ferait
 // mentir la prévision, et la facture déborderait malgré le calcul.
-const DECOMPTE_LIGNE = 17;
-const DECOMPTE_TOTAL = 22;
-const DECOMPTE_DELAI = 15;
+const DECOMPTE_LIGNE = 21;
+const DECOMPTE_TOTAL = 28;
+const DECOMPTE_DELAI = 18;
 /** Blanc + filet séparant les lignes courantes du total. */
-const DECOMPTE_FILET = 20;
+const DECOMPTE_FILET = 24;
 /** Blanc entre le dernier article et la première ligne du décompte. */
-const DECOMPTE_ENTETE = 18;
+const DECOMPTE_ENTETE = 24;
 
 // Bloc bancaire : filet, titre, puis une ligne par coordonnée.
-const BANQUE_ENTETE = 44;
-const BANQUE_LIGNE = 16;
+//
+// L'interligne y est plus large qu'ailleurs, et volontairement : ce sont des
+// suites de chiffres qu'on recopie dans une application bancaire, souvent
+// depuis un téléphone, en gardant sa place des yeux. Serrées, deux lignes d'IBAN
+// se confondent.
+const BANQUE_ENTETE = 56;
+const BANQUE_LIGNE = 22;
 
 /**
  * Hauteur réservée au pied de page.
@@ -356,46 +369,46 @@ export async function buildInvoicePdf(
 
   // ---- Logo ----
   const logo = await doc.embedPng(logoPngBytes());
-  const hauteurLogo = 40;
+  const hauteurLogo = 48;
   plume.page.drawImage(logo, {
     x: MARGE,
     y: plume.y - hauteurLogo,
     width: hauteurLogo * LOGO_RATIO,
     height: hauteurLogo,
   });
-  plume.y -= hauteurLogo + 20;
+  plume.y -= hauteurLogo + 26;
 
   // ---- Client à gauche, vendeur à droite ----
   const hautBloc = plume.y;
-  texte("Kunde", { police: grasse, taille: 15 });
-  texte(COMPANY.name.toUpperCase(), { police: grasse, taille: 12, finX: DROITE, y: hautBloc });
+  texte("Kunde", { police: grasse, taille: 18 });
+  texte(COMPANY.name.toUpperCase(), { police: grasse, taille: 13.5, finX: DROITE, y: hautBloc });
 
-  plume.y -= 19;
-  let yVendeur = hautBloc - 19;
+  plume.y -= 24;
+  let yVendeur = hautBloc - 24;
   for (const ligne of [COMPANY.street, COMPANY.city, COMPANY.phone, COMPANY.email]) {
-    texte(ligne, { taille: 9.5, couleur: GRIS, finX: DROITE, y: yVendeur });
-    yVendeur -= 13;
+    texte(ligne, { taille: 11, couleur: GRIS, finX: DROITE, y: yVendeur });
+    yVendeur -= 16;
   }
 
   for (const ligne of lignesAdresse(order.billing)) {
-    texte(ligne, { taille: 10.5 });
-    plume.y -= 13;
+    texte(ligne, { taille: 12.5 });
+    plume.y -= 16;
   }
 
   // Coordonnées de contact : le client doit pouvoir vérifier d'un coup d'œil
   // que la facture est bien la sienne.
-  plume.y -= 2;
-  const largeurEtiquetteMail = grasse.widthOfTextAtSize("E-Mail : ", 10.5);
-  texte("E-Mail :", { police: grasse, taille: 10.5 });
-  texte(order.email, { x: MARGE + largeurEtiquetteMail, taille: 10.5, couleur: LIEN });
+  plume.y -= 4;
+  const largeurEtiquetteMail = grasse.widthOfTextAtSize("E-Mail : ", 12.5);
+  texte("E-Mail :", { police: grasse, taille: 12.5 });
+  texte(order.email, { x: MARGE + largeurEtiquetteMail, taille: 12.5, couleur: LIEN });
   if (order.phone) {
-    plume.y -= 14;
-    const largeurEtiquetteTel = grasse.widthOfTextAtSize("Telefon : ", 10.5);
-    texte("Telefon :", { police: grasse, taille: 10.5 });
-    texte(order.phone, { x: MARGE + largeurEtiquetteTel, taille: 10.5 });
+    plume.y -= 18;
+    const largeurEtiquetteTel = grasse.widthOfTextAtSize("Telefon : ", 12.5);
+    texte("Telefon :", { police: grasse, taille: 12.5 });
+    texte(order.phone, { x: MARGE + largeurEtiquetteTel, taille: 12.5 });
   }
 
-  plume.y = Math.min(plume.y, yVendeur) - 18;
+  plume.y = Math.min(plume.y, yVendeur) - 24;
 
   // ---- Références de la facture ----
   const references: Array<[string, string]> = [
@@ -404,23 +417,23 @@ export async function buildInvoicePdf(
     ["Bestelldatum :", dateAllemande(order.createdAt)],
   ];
   for (const [etiquette, valeur] of references) {
-    texte(etiquette, { police: grasse, taille: 11, finX: 430 });
-    texte(valeur, { police: grasse, taille: 11, x: 450 });
-    plume.y -= 16;
+    texte(etiquette, { police: grasse, taille: 12.5, finX: 430 });
+    texte(valeur, { police: grasse, taille: 12.5, x: 450 });
+    plume.y -= 19;
   }
 
   // ---- Tableau des articles ----
-  plume.y -= 10;
-  texte("Nr", { police: grasse, taille: 9, couleur: GRIS, x: COL_NUM });
-  texte("FOTO", { police: grasse, taille: 9, couleur: GRIS, x: COL_PHOTO });
-  texte("ARTIKEL", { police: grasse, taille: 9, couleur: GRIS, x: COL_ARTICLE });
-  texte("MENGE", { police: grasse, taille: 9, couleur: GRIS, centreX: COL_MENGE });
-  texte("PREIS", { police: grasse, taille: 9, couleur: GRIS, finX: COL_PREIS });
-  texte("GESAMTPREIS", { police: grasse, taille: 9, couleur: GRIS, finX: DROITE });
+  plume.y -= 14;
+  texte("Nr", { police: grasse, taille: 10, couleur: GRIS, x: COL_NUM });
+  texte("FOTO", { police: grasse, taille: 10, couleur: GRIS, x: COL_PHOTO });
+  texte("ARTIKEL", { police: grasse, taille: 10, couleur: GRIS, x: COL_ARTICLE });
+  texte("MENGE", { police: grasse, taille: 10, couleur: GRIS, centreX: COL_MENGE });
+  texte("PREIS", { police: grasse, taille: 10, couleur: GRIS, finX: COL_PREIS });
+  texte("GESAMTPREIS", { police: grasse, taille: 10, couleur: GRIS, finX: DROITE });
 
-  plume.y -= 8;
+  plume.y -= 10;
   filet(plume.y);
-  plume.y -= 16;
+  plume.y -= 20;
 
   // ---- Choix de la densité ----
   //
@@ -517,7 +530,7 @@ export async function buildInvoicePdf(
   // Les lignes sont TTC et s'additionnent réellement jusqu'au total ; la TVA
   // est signalée comme contenue, conformément au § 3 PAngV.
   const ligneTotal = (etiquette: string, valeur: string, options: { fort?: boolean } = {}) => {
-    const taille = options.fort ? 14 : 10.5;
+    const taille = options.fort ? 17 : 12.5;
     // Le total est composé plus gros : son étiquette recule, sans quoi un
     // montant à cinq chiffres viendrait la toucher.
     texte(etiquette, {
@@ -551,7 +564,7 @@ export async function buildInvoicePdf(
   }
 
   ligneTotal("LIEFERUNG", order.shippingCents === 0 ? "KOSTENLOS" : euros(order.shippingCents));
-  texte(delaiLivraison(order), { taille: 9, couleur: GRIS, finX: DROITE });
+  texte(delaiLivraison(order), { taille: 10.5, couleur: GRIS, finX: DROITE });
   plume.y -= DECOMPTE_DELAI;
 
   filet(plume.y, COL_PREIS - 120, DROITE);
@@ -560,20 +573,20 @@ export async function buildInvoicePdf(
 
   // ---- Coordonnées bancaires, pour le virement seul ----
   if (virement.length > 0) {
-    plume.y -= 8;
+    plume.y -= 12;
     filet(plume.y);
-    plume.y -= 18;
+    plume.y -= 24;
 
     texte(`Zahlungsart : ${order.paymentMethodLabel}`, {
       police: grasse,
-      taille: 12.5,
+      taille: 14.5,
       centreX: LARGEUR / 2,
     });
-    plume.y -= 18;
+    plume.y -= 26;
 
     for (const [etiquette, valeur] of virement) {
-      texte(`${etiquette} :`, { police: grasse, taille: 10.5, finX: 285 });
-      texte(valeur, { taille: 10.5, x: 295 });
+      texte(`${etiquette} :`, { police: grasse, taille: 12, finX: 285 });
+      texte(valeur, { taille: 12, x: 295 });
       plume.y -= BANQUE_LIGNE;
     }
   }
@@ -594,8 +607,8 @@ export async function buildInvoicePdf(
   // La ligne d'identification de la société dépasse la justification à ce
   // corps : on la replie plutôt que de la rogner, les mentions du § 14 UStG
   // devant rester lisibles en entier.
-  const TAILLE_MENTION = 9;
-  const INTERLIGNE_MENTION = 12;
+  const TAILLE_MENTION = 9.5;
+  const INTERLIGNE_MENTION = 13;
   const lignesMentions = mentions.flatMap((mention) =>
     couperEnLignes(mention, normale, TAILLE_MENTION, DROITE - MARGE, 2),
   );

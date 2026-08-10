@@ -5,27 +5,18 @@ import { CLE_SMARTSUPP } from "@/lib/smartsupp";
 /**
  * Chat en direct Smartsupp, en bas à droite de la boutique.
  *
- * Rien n'est rendu tant que la clé n'est pas fournie via
- * NEXT_PUBLIC_SMARTSUPP_KEY : pas de bouton mort en développement, activation
- * par simple variable d'environnement en production. Attention, c'est une
- * variable `NEXT_PUBLIC_` : elle est figée dans le bundle à la compilation, un
- * redémarrage sans reconstruction ne la prend pas en compte.
- *
- * La clé se trouve dans le tableau de bord Smartsupp, rubrique « Paramètres →
- * Chat box → Code d'installation » (valeur après `_smartsupp.key`). Ce n'est
- * pas le jeton de l'API REST, qui donne accès aux conversations et ne doit
- * jamais atteindre le navigateur.
+ * La clé vit dans `@/lib/smartsupp`, qui dit pourquoi elle est écrite dans le
+ * code et comment la vérifier avant d'en changer. Le bandeau de consentement et
+ * le pied de page la lisent au même endroit.
  *
  * Ce composant ne fait que résoudre la langue et le libellé côté serveur ; le
- * chargement effectif, déclenché par le visiteur, est dans `SmartsuppLauncher`.
+ * chargement effectif est dans `SmartsuppLauncher` — automatique après accord au
+ * bandeau, au clic sinon.
  *
  * Les libellés sont passés en propriété plutôt que lus dans les fichiers de
  * messages : deux chaînes ne justifient pas d'élargir le dictionnaire.
  */
 export async function SmartsuppChat() {
-  // La clé vit dans `@/lib/smartsupp` : le bandeau de consentement et le pied de
-  // page en dépendent aussi, et un composant serveur ne s'importe pas depuis le
-  // navigateur.
   const key = CLE_SMARTSUPP;
   if (!key) return null;
 

@@ -243,6 +243,14 @@
     "free": "free of charge",
     "acceptedTitle": "Accepted payment methods"
   },
+  "consent": {
+    "title": "Enable live chat?",
+    "body": "We use strictly necessary cookies for your basket, session and language – those need no consent. Our live chat (Smartsupp s.r.o., Czech Republic) additionally stores a visitor ID on your device. It is the only way for us to see that you are here and to reach out to you first.",
+    "note": "Without consent you can still reach us any time via the chat button in the bottom right. You can change your choice at any time in the site footer.",
+    "privacyLink": "Privacy policy",
+    "accept": "Accept",
+    "decline": "Decline"
+  },
   "footer": {
     "logoAlt": "Hausgeräte Pfeffer",
     "homeAriaLabel": "Hausgeräte Pfeffer – home page",

@@ -243,6 +243,14 @@
     "free": "kostenlos",
     "acceptedTitle": "Akzeptierte Zahlungsarten"
   },
+  "consent": {
+    "title": "Live-Chat aktivieren?",
+    "body": "Für Warenkorb, Sitzung und Sprachwahl setzen wir technisch notwendige Cookies – dafür brauchen wir keine Einwilligung. Unser Live-Chat (Smartsupp s.r.o., Tschechische Republik) speichert zusätzlich eine Besucherkennung auf Ihrem Gerät. Nur so sehen wir, dass Sie da sind, und können Sie von uns aus ansprechen.",
+    "note": "Auch ohne Einwilligung erreichen Sie uns jederzeit über die Chat-Schaltfläche unten rechts. Ihre Wahl ändern Sie jederzeit im Fußbereich der Seite.",
+    "privacyLink": "Datenschutzerklärung",
+    "accept": "Akzeptieren",
+    "decline": "Ablehnen"
+  },
   "footer": {
     "logoAlt": "Hausgeräte Pfeffer",
     "homeAriaLabel": "Hausgeräte Pfeffer – Startseite",

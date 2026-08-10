@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
+import { useConsentement } from "@/lib/consent";
 
 /**
  * File d'attente de l'API Smartsupp.
@@ -44,22 +45,94 @@ const DELAI_WIDGET = 8000;
 
 type Etat = "repos" | "chargement" | "echec";
 
+/** Le script ne s'injecte qu'une fois, quelle que soit l'entrée qui le demande. */
+let injecte = false;
+
 /**
- * Bouton de chat, en bas à droite de la boutique.
+ * Injecte le chargeur Smartsupp.
  *
- * POURQUOI UN BOUTON PLUTÔT QUE LE WIDGET DIRECT. Le code d'installation
- * Smartsupp charge le chat sur toutes les pages, pour tous les visiteurs, et
- * dépose un identifiant de visiteur avant que quiconque ait demandé quoi que ce
- * soit. Cet identifiant n'est pas nécessaire au fonctionnement de la boutique :
- * il relève alors du consentement — § 25 Abs. 1 TDDDG en Allemagne, transposant
- * l'article 5(3) de la directive ePrivacy — donc d'un bandeau sur tout le site.
+ * `ouvrirLeChat` distingue les deux entrées : le visiteur qui clique veut voir
+ * la fenêtre s'ouvrir, celui qui a simplement accepté le chat ne veut pas
+ * qu'elle lui saute au visage — Smartsupp décidera lui-même, à sa cadence, de
+ * lui adresser le message de bienvenue.
  *
- * Ici, rien ne part tant que le visiteur n'a pas cliqué. Le clic EST la demande
- * expresse du service, cas que le § 25 Abs. 2 Nr. 2 TDDDG dispense justement de
- * recueil préalable, au même titre que le cookie de panier ou de session. Cela
- * évite d'imposer un bandeau à tout le monde pour une fonction que peu de gens
- * utilisent. La page « Datenschutzerklärung » décrit ce fonctionnement ; les
- * deux doivent rester d'accord.
+ * `enEchec` n'est utile qu'à celui qui attend devant son bouton ; le chargement
+ * silencieux, lui, n'a rien à rattraper puisque rien n'a bougé à l'écran.
+ */
+function injecterSmartsupp(
+  chatKey: string,
+  language: string,
+  ouvrirLeChat: boolean,
+  enEchec: () => void,
+): void {
+  window._smartsupp = window._smartsupp ?? {};
+  window._smartsupp.key = chatKey;
+  window._smartsupp.language = language;
+
+  if (!window.smartsupp) {
+    const file: SmartsuppQueue = Object.assign(
+      (...args: unknown[]) => {
+        file._.push(args);
+      },
+      { _: [] as unknown[][] },
+    );
+    window.smartsupp = file;
+  }
+
+  // Mis en file avant tout le reste : le chargeur l'exécutera, le chat s'ouvrira
+  // sans second clic — y compris si le script est déjà parti tout seul après
+  // l'accord au bandeau.
+  if (ouvrirLeChat) window.smartsupp("chat:open");
+
+  // Un second script dédoublerait le widget : l'appel mis en file suffit.
+  if (injecte) return;
+  injecte = true;
+
+  const script = document.createElement("script");
+  script.async = true;
+  script.charset = "utf-8";
+  script.src = LOADER;
+  // Le chargement du fichier ne prouve rien : c'est l'apparition du widget qui
+  // fait foi, et elle est observée dans le composant. On ne signale donc rien
+  // ici — le bouton garde sa roue jusqu'à ce que le widget soit là.
+  //
+  // Un bloqueur de publicité filtre couramment ce domaine : mieux vaut rendre
+  // la main au visiteur que laisser un bouton qui tourne dans le vide.
+  script.addEventListener("error", () => {
+    injecte = false;
+    enEchec();
+  });
+  document.head.appendChild(script);
+
+  // Filet : script chargé mais widget jamais posé — clé invalide, compte
+  // suspendu, connexion temps réel coupée. Le visiteur récupère son bouton.
+  window.setTimeout(() => {
+    if (!document.querySelector(SELECTEUR_WIDGET)) enEchec();
+  }, DELAI_WIDGET);
+}
+
+/**
+ * Chat en direct, en bas à droite de la boutique.
+ *
+ * DEUX FAÇONS D'ARRIVER LÀ, ET C'EST VOULU.
+ *
+ * 1. Le visiteur a accepté au bandeau : le chat se charge tout seul dès
+ *    l'ouverture de la page. C'est la seule manière d'obtenir ce que Smartsupp
+ *    sait faire — voir le visiteur arriver, le compter parmi les connectés,
+ *    lui adresser un message de bienvenue au bout de quelques secondes et
+ *    prévenir l'application du commerçant. Le script pose une identification
+ *    de visiteur : elle n'est pas nécessaire à la boutique, elle relève donc
+ *    du consentement (§ 25 Abs. 1 TDDDG, article 5(3) de la directive
+ *    ePrivacy), et c'est exactement ce que le bandeau a demandé.
+ *
+ * 2. Le visiteur a refusé, ou n'a pas encore répondu : le bouton ci-dessous
+ *    reste, et rien ne part tant qu'il ne clique pas. Le clic EST la demande
+ *    expresse du service, cas que le § 25 Abs. 2 Nr. 2 TDDDG dispense de
+ *    recueil préalable. Refuser le bandeau ne prive donc personne du chat —
+ *    cela prive seulement le commerçant de l'aborder le premier.
+ *
+ * La page « Datenschutzerklärung » décrit ce fonctionnement ; les deux doivent
+ * rester d'accord.
  */
 export function SmartsuppLauncher({
   chatKey,
@@ -71,16 +144,17 @@ export function SmartsuppLauncher({
   label: string;
 }) {
   const [etat, setEtat] = useState<Etat>("repos");
+  const { consentement } = useConsentement();
 
   // Le widget, une fois posé, survit au démontage du composant — un changement
   // de langue remonte cette partie de l'arbre alors que le chat, lui, reste dans
   // la page. Sans cette lecture, le bouton reviendrait se poser par-dessus.
   //
   // On observe la présence du conteneur, et non `window.smartsupp` : cette
-  // variable est créée par `ouvrir()` pour la file d'attente, donc dès le clic.
-  // S'y fier faisait disparaître le bouton immédiatement, avant que le chargeur
-  // ait rendu quoi que ce soit — le visiteur cliquait, tout s'effaçait, et
-  // aucun chat ne s'ouvrait.
+  // variable est créée pour la file d'attente, donc dès le clic. S'y fier
+  // faisait disparaître le bouton immédiatement, avant que le chargeur ait rendu
+  // quoi que ce soit — le visiteur cliquait, tout s'effaçait, et aucun chat ne
+  // s'ouvrait.
   //
   // `useSyncExternalStore` est la façon prévue de lire une valeur qui vit hors
   // de React : elle rend `false` au rendu serveur, où `document` n'existe pas.
@@ -96,46 +170,25 @@ export function SmartsuppLauncher({
     () => false,
   );
 
+  // Chargement automatique après accord.
+  //
+  // Le bouton reste affiché et cliquable pendant ce temps, sans roue : rien n'a
+  // été demandé à l'écran, et le visiteur qui veut écrire tout de suite ne doit
+  // pas tomber sur un bouton grisé. Son clic sera mis en file de toute façon, et
+  // le widget effacera le bouton en arrivant.
+  useEffect(() => {
+    if (consentement !== "accepte") return;
+    if (injecte) return;
+
+    injecterSmartsupp(chatKey, language, false, () => {});
+  }, [chatKey, consentement, language]);
+
   const ouvrir = useCallback(() => {
     // Garde contre le double-clic : sans elle, le script partirait deux fois.
     if (etat !== "repos" && etat !== "echec") return;
     setEtat("chargement");
 
-    window._smartsupp = window._smartsupp ?? {};
-    window._smartsupp.key = chatKey;
-    window._smartsupp.language = language;
-
-    if (!window.smartsupp) {
-      const file: SmartsuppQueue = Object.assign(
-        (...args: unknown[]) => {
-          file._.push(args);
-        },
-        { _: [] as unknown[][] },
-      );
-      window.smartsupp = file;
-    }
-
-    const script = document.createElement("script");
-    script.async = true;
-    script.charset = "utf-8";
-    script.src = LOADER;
-    // Le chargement du fichier ne prouve rien : c'est l'apparition du conteneur
-    // qui fait foi, et elle est observée plus haut. On ne touche donc pas à
-    // l'état ici — le bouton garde sa roue jusqu'à ce que le widget soit là.
-    //
-    // Un bloqueur de publicité filtre couramment ce domaine : mieux vaut rendre
-    // la main au visiteur que laisser un bouton qui tourne dans le vide.
-    script.addEventListener("error", () => setEtat("echec"));
-    document.head.appendChild(script);
-
-    // Filet : script chargé mais widget jamais posé — clé invalide, compte
-    // suspendu, connexion temps réel coupée. Le visiteur récupère son bouton.
-    window.setTimeout(() => {
-      if (!document.querySelector(SELECTEUR_WIDGET)) setEtat("echec");
-    }, DELAI_WIDGET);
-
-    // Mis en file : le chargeur l'exécutera, le chat s'ouvrira sans second clic.
-    window.smartsupp("chat:open");
+    injecterSmartsupp(chatKey, language, true, () => setEtat("echec"));
   }, [chatKey, etat, language]);
 
   // Une fois le widget posé, c'est lui qui occupe le coin : notre bouton doit

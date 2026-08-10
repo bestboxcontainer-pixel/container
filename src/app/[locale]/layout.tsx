@@ -8,6 +8,7 @@ import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CodeSnippets } from "@/components/CodeSnippets";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { SmartsuppChat } from "@/components/SmartsuppChat";
+import { ConsentBanner } from "@/components/ConsentBanner";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { PaymentMethodsBar } from "@/components/PaymentMethodsBar";
 
@@ -56,6 +57,9 @@ export default async function LocaleLayout({
             ne paraît que si sa clé d'environnement est renseignée. */}
         <WhatsAppButton />
         <SmartsuppChat />
+        {/* En dernier et par-dessus tout le reste : c'est sa réponse qui décide
+            si le chat se charge de lui-même. */}
+        <ConsentBanner />
       </CartProvider>
       <CodeSnippets placement="bodyEnd" />
     </NextIntlClientProvider>

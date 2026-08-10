@@ -79,10 +79,23 @@ function injecterSmartsupp(
     window.smartsupp = file;
   }
 
-  // Mis en file avant tout le reste : le chargeur l'exécutera, le chat s'ouvrira
-  // sans second clic — y compris si le script est déjà parti tout seul après
-  // l'accord au bandeau.
-  if (ouvrirLeChat) window.smartsupp("chat:open");
+  if (ouvrirLeChat) {
+    // Mis en file avant tout le reste : le chargeur l'exécutera, le chat
+    // s'ouvrira sans second clic — y compris si le script est déjà parti tout
+    // seul après l'accord au bandeau.
+    window.smartsupp("chat:open");
+
+    // Filet : script chargé mais widget jamais posé — clé refusée, compte
+    // suspendu, connexion temps réel coupée. Le visiteur récupère son bouton.
+    //
+    // Posé à chaque demande, et non à la seule injection : le script ne part
+    // qu'une fois, mais la roue, elle, repart à chaque clic. Le laisser avec
+    // l'injection, c'est promettre au visiteur qu'on lui rendra la main, puis
+    // ne plus rien faire dès le deuxième essai.
+    window.setTimeout(() => {
+      if (!document.querySelector(SELECTEUR_WIDGET)) enEchec();
+    }, DELAI_WIDGET);
+  }
 
   // Un second script dédoublerait le widget : l'appel mis en file suffit.
   if (injecte) return;
@@ -103,12 +116,6 @@ function injecterSmartsupp(
     enEchec();
   });
   document.head.appendChild(script);
-
-  // Filet : script chargé mais widget jamais posé — clé invalide, compte
-  // suspendu, connexion temps réel coupée. Le visiteur récupère son bouton.
-  window.setTimeout(() => {
-    if (!document.querySelector(SELECTEUR_WIDGET)) enEchec();
-  }, DELAI_WIDGET);
 }
 
 /**

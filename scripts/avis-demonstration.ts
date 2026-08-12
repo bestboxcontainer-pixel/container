@@ -93,9 +93,17 @@ const VILLES = [
 // ---------------------------------------------------------------------------
 // Textes
 //
-// Assemblés par morceaux plutôt qu'écrits un par un : quelques milliers d'avis
-// tirés d'une liste figée se répéteraient d'une fiche à l'autre, et rien ne
-// trahit un catalogue artificiel comme deux fiches au même commentaire.
+// Un vrai avis d'acheteur est court. Très court, le plus souvent : « Alles
+// gut », « Passt », « Läuft leise, bin zufrieden ». Il est écrit vite, depuis
+// un téléphone, sans relecture — d'où les points finaux absents, les phrases
+// sans verbe et les minuscules.
+//
+// La version précédente composait des paragraphes bien bâtis : ouverture,
+// développement, réserve nuancée, formule de conclusion. Personne n'écrit
+// comme ça pour un lave-linge, et c'est exactement ce qui la trahissait.
+//
+// Les morceaux ci-dessous sont donc courts et se combinent peu : la longueur
+// est tirée d'abord, et la plupart des avis n'ont qu'un seul fragment.
 // ---------------------------------------------------------------------------
 
 /** Familles de produits, reconnues au slug de la catégorie. */
@@ -117,242 +125,283 @@ const FAMILLES: Record<string, Famille> = {
   drohnen: "allgemein",
 };
 
-const OUVERTURES = [
-  "Nach {dauer} kann ich nur Gutes berichten.",
-  "Seit {dauer} im Einsatz und bisher keinerlei Probleme.",
-  "Genau das, was ich gesucht habe.",
-  "Preis-Leistung stimmt hier wirklich.",
-  "Bin nach {dauer} immer noch sehr zufrieden.",
-  "Hat meine Erwartungen übertroffen.",
-  "Zweites Gerät dieser Marke, wieder eine gute Wahl.",
-  "Lieferung war schnell, Aufbau problemlos.",
-  "Für den Preis absolut in Ordnung.",
-  "Ich würde es jederzeit wieder kaufen.",
-  "Die Beratung im Vorfeld hat gepasst, das Gerät auch.",
-  "Nach {dauer} täglichem Gebrauch bereue ich den Kauf keine Sekunde.",
+/**
+ * Appréciations passe-partout, celles qu'on lit sur n'importe quelle fiche.
+ * Elles font à elles seules la moitié des avis d'une boutique réelle.
+ */
+const BREFS = [
+  "Alles gut",
+  "Alles bestens",
+  "Top",
+  "Passt",
+  "Passt so",
+  "Einwandfrei",
+  "Bin zufrieden",
+  "Sehr zufrieden",
+  "Wie beschrieben",
+  "Kann ich empfehlen",
+  "Gerne wieder",
+  "Preis Leistung stimmt",
+  "Super",
+  "Alles super",
+  "Macht was es soll",
+  "Keine Probleme",
+  "Keine Probleme bisher",
+  "Bis jetzt alles gut",
+  "Genau wie erwartet",
+  "Guter Kauf",
+  "Läuft",
+  "Erfüllt seinen Zweck",
+  "Empfehlenswert",
+  "Bin froh damit",
+  "Nichts zu meckern",
+  "Voll zufrieden",
+];
+
+/** Mentions de livraison ou d'installation, fréquentes et courtes. */
+const LOGISTIQUE = [
+  "schnelle Lieferung",
+  "kam pünktlich",
+  "Lieferung war schnell",
+  "gut verpackt angekommen",
+  "Aufbau ging schnell",
+  "war schnell angeschlossen",
 ];
 
 /**
- * Corps de l'avis. `bon` porte l'éloge, `reserve` la petite réserve qui
- * distingue une note de quatre d'une note de cinq : un catalogue où chaque
- * commentaire est un éloge sans nuance se lit comme un faux.
+ * Détails propres au produit. Sans majuscule initiale : ils s'accrochent
+ * derrière une virgule le plus souvent, et prennent la majuscule au besoin.
  */
-const CORPS: Record<Famille, { bon: string[]; reserve: string[] }> = {
-  bild: {
-    bon: [
-      "Das Bild ist auch bei Tageslicht kräftig, Farben wirken natürlich.",
-      "Schwarzwerte sind für diese Preisklasse erstaunlich gut.",
-      "Die Streaming-Apps laufen flüssig, kein Ruckeln beim Umschalten.",
-      "Fußball in Zeitlupe bleibt scharf, nichts zieht nach.",
-      "Der Ton ist besser als erwartet, eine Soundbar braucht es nicht zwingend.",
-      "Die Einrichtung war in zehn Minuten erledigt.",
-      "Auch aus größerem Abstand bleibt die Schrift gut lesbar.",
-    ],
-    reserve: [
-      "Die Fernbedienung wirkt dagegen etwas billig.",
-      "Mit einer Soundbar wird es klanglich deutlich runder.",
-      "Das Menü könnte übersichtlicher sein, man findet sich aber zurecht.",
-      "Der Standfuß braucht mehr Platz, als ich gedacht hatte.",
-    ],
-  },
-  mobil: {
-    bon: [
-      "Der Akku hält bei mir gut zwei Tage bei normaler Nutzung.",
-      "Die Kamera macht auch bei wenig Licht brauchbare Bilder.",
-      "Alles läuft flüssig, selbst mit vielen offenen Apps.",
-      "Die Verarbeitung fühlt sich hochwertig an, nichts knarzt.",
-      "Die Übernahme der Daten vom alten Gerät ging reibungslos.",
-      "Das Display ist hell genug, um draußen ohne Mühe abzulesen.",
-    ],
-    reserve: [
-      "Beim Laden wird es allerdings spürbar warm.",
-      "Die vorinstallierte Software hätte ich nicht gebraucht.",
-      "Ein Netzteil liegt leider nicht bei.",
-      "Bei intensiver Nutzung reicht der Akku knapp einen Tag.",
-    ],
-  },
-  waschen: {
-    bon: [
-      "Läuft leise, man hört das Gerät im Nebenraum kaum.",
-      "Die Wäsche kommt sauber heraus, auch bei kurzen Programmen.",
-      "Der Verbrauch ist merklich niedriger als beim Vorgängergerät.",
-      "Die Programme sind selbsterklärend, die Anleitung brauchte ich kaum.",
-      "Der Anschluss war in einer halben Stunde erledigt.",
-      "Auch stark verschmutzte Arbeitskleidung wird zuverlässig sauber.",
-    ],
-    reserve: [
-      "Das Schleudern ist allerdings recht laut.",
-      "Die Programmdauer finde ich lang.",
-      "Die Bedienung am Display ist anfangs etwas fummelig.",
-      "Die Tür könnte einen Tick weiter aufgehen.",
-    ],
-  },
-  kaffee: {
-    bon: [
-      "Der Kaffee ist heiß und aromatisch, genau richtig für den Morgen.",
-      "Die Reinigung geht schnell, das nimmt man gern in Kauf.",
-      "Kompakt genug, um dauerhaft auf der Arbeitsplatte zu stehen.",
-      "Die Bedienung versteht auch Besuch auf Anhieb.",
-      "Der Milchschaum gelingt gleichmäßig, ohne großes Üben.",
-    ],
-    reserve: [
-      "Das Mahlwerk ist lauter als gedacht.",
-      "Die Entkalkung könnte einfacher sein.",
-      "Der Wassertank ist mir etwas zu klein.",
-      "Für die Reinigung muss man sich anfangs Zeit nehmen.",
-    ],
-  },
-  kueche: {
-    bon: [
-      "Kräftig genug für schweren Teig, nichts bleibt stehen.",
-      "Die Reinigung ist unkompliziert, das meiste darf in die Spülmaschine.",
-      "Steht sicher auf der Arbeitsplatte, auch bei hoher Stufe.",
-      "Das Zubehör ist gut verarbeitet und sitzt fest.",
-      "Die Verarbeitung wirkt durchweg wertig.",
-    ],
-    reserve: [
-      "Das Gerät ist schwer zu verstauen.",
-      "Bei hoher Stufe wird es laut.",
-      "Das Kabel könnte etwas länger sein.",
-      "Zusätzliches Zubehör ist recht teuer.",
-    ],
-  },
-  saugen: {
-    bon: [
-      "Die Saugleistung reicht auf Teppich wie auf Fliesen völlig aus.",
-      "Der Akku hält für die ganze Wohnung durch.",
-      "Leicht genug, um ihn ohne Mühe die Treppe hochzutragen.",
-      "Der Staubbehälter lässt sich ohne Staubwolke entleeren.",
-      "Die Aufsätze wechselt man mit einem Handgriff.",
-    ],
-    reserve: [
-      "An Kanten muss man etwas nachhelfen.",
-      "Der Akku könnte noch etwas länger halten.",
-      "Bei langen Haaren muss die Bürste öfter gereinigt werden.",
-      "Auf höchster Stufe ist er deutlich hörbar.",
-    ],
-  },
-  allgemein: {
-    bon: [
-      "Aufbau und Einrichtung waren schnell erledigt.",
-      "Macht genau das, wofür ich es gekauft habe.",
-      "Wirkt solide verarbeitet und läuft zuverlässig.",
-      "Die Anleitung ist verständlich, auch ohne Vorkenntnisse.",
-      "Im Betrieb angenehm leise, das war mir wichtig.",
-    ],
-    reserve: [
-      "Ein paar Details könnten besser gelöst sein.",
-      "Die Anleitung ist knapp gehalten.",
-      "Das Zubehör wirkt etwas einfach.",
-      "Im Dauerbetrieb hört man es deutlicher.",
-    ],
-  },
+const DETAILS: Record<Famille, string[]> = {
+  bild: [
+    "Bild ist top",
+    "super Bild",
+    "Farben sind klasse",
+    "schnell eingerichtet",
+    "gutes Bild fürs Geld",
+    "Apps laufen flüssig",
+    "scharfes Bild",
+  ],
+  mobil: [
+    "Akku hält lange",
+    "läuft flüssig",
+    "Kamera ist gut",
+    "wertig verarbeitet",
+    "Einrichtung war einfach",
+    "schnell und zuverlässig",
+  ],
+  waschen: [
+    "läuft leise",
+    "Wäsche wird sauber",
+    "leise und sparsam",
+    "einfach zu bedienen",
+    "verbraucht wenig",
+    "gute Programme",
+    "schleudert gut",
+  ],
+  kaffee: [
+    "Kaffee schmeckt top",
+    "einfach zu reinigen",
+    "Milchschaum wird gut",
+    "schnell einsatzbereit",
+    "kompakt und leise",
+  ],
+  kueche: [
+    "kräftig genug",
+    "steht stabil",
+    "leicht zu reinigen",
+    "gutes Zubehör dabei",
+    "schafft auch schweren Teig",
+  ],
+  saugen: [
+    "saugt gut",
+    "Akku reicht für die ganze Wohnung",
+    "leicht zu tragen",
+    "einfach zu leeren",
+    "kommt gut unter die Möbel",
+  ],
+  allgemein: [
+    "schnell aufgebaut",
+    "läuft zuverlässig",
+    "leise im Betrieb",
+    "einfach anzuschließen",
+    "tut was es soll",
+  ],
 };
 
-const CLOTURES = [
-  "Klare Empfehlung.",
-  "Würde ich wieder bestellen.",
-  "Von mir volle Punktzahl.",
-  "Gerne wieder.",
-  "Kann ich weiterempfehlen.",
-  "",
-  "",
+/**
+ * Petites réserves des quatre étoiles. Une seule, jamais développée : celui
+ * qui met quatre étoiles au lieu de cinq lâche un mot au passage, il n'écrit
+ * pas un rapport.
+ */
+const RESERVES: Record<Famille, string[]> = {
+  bild: ["Ton ist etwas dünn", "Fernbedienung wirkt billig", "Menü etwas unübersichtlich"],
+  mobil: ["wird beim Laden warm", "kein Netzteil dabei", "Akku könnte länger halten"],
+  waschen: ["Schleudern ist laut", "Programme dauern lang", "Display etwas fummelig"],
+  kaffee: ["Mahlwerk ist laut", "Tank etwas klein", "Entkalken nervt"],
+  kueche: ["schwer zu verstauen", "auf hoher Stufe laut", "Kabel etwas kurz"],
+  saugen: ["Bürste verstopft schnell", "an Kanten muss man nachhelfen", "Akku könnte länger"],
+  allgemein: ["Anleitung ist dürftig", "Verpackung war lädiert", "etwas laut"],
+};
+
+/** Titres, quand il y en a un. Deux mots au plus. */
+const TITRES = [
+  "Top", "Alles gut", "Empfehlung", "Sehr zufrieden", "Passt", "Klasse",
+  "Guter Kauf", "Einwandfrei", "Super", "Zufrieden", "Gutes Gerät",
 ];
 
-/** Clôtures des quatre étoiles : positives, mais sans superlatif. */
-const CLOTURES_RESERVE = [
-  "Für den Preis geht das völlig in Ordnung.",
-  "Kaufen würde ich es wieder.",
-  "Unterm Strich zufrieden.",
-  "",
-];
+/**
+ * Écrit le texte comme on l'écrit sur un téléphone : point final le plus
+ * souvent oublié, parfois un point d'exclamation, parfois tout en minuscules.
+ * C'est ce désordre-là qui distingue un avis d'un communiqué.
+ */
+function humaniser(texte: string, enthousiaste: boolean): string {
+  let sortie = texte.trim();
 
-const TITRES_CINQ = [
-  "Sehr zufrieden", "Klare Empfehlung", "Hält, was es verspricht", "Guter Kauf",
-  "Top Preis-Leistung", "Genau richtig", "Alles bestens", "Würde ich wieder kaufen",
-  "Läuft einwandfrei", "Bin begeistert",
-];
+  const ponctuation = alea();
+  if (ponctuation < 0.5) sortie = sortie.replace(/[.!]+$/, "");
+  // Le point d'exclamation est réservé à l'avis sans réserve : « nur etwas
+  // laut!! » ne se lit pas comme un contentement, mais comme une machine qui
+  // a collé deux morceaux sans les entendre.
+  else if (enthousiaste && ponctuation < 0.68) sortie = `${sortie.replace(/[.!]+$/, "")}!`;
+  else if (enthousiaste && ponctuation < 0.72) sortie = `${sortie.replace(/[.!]+$/, "")}!!`;
+  else if (!/[.!?]$/.test(sortie)) sortie = `${sortie}.`;
 
-const TITRES_QUATRE = [
-  "Sehr zufrieden, kleine Abstriche", "Guter Kauf", "Fast perfekt",
-  "Erfüllt seinen Zweck voll und ganz", "Gutes Gerät", "Empfehlenswert",
-];
+  // Écrit d'une traite, sans reprendre les majuscules.
+  if (alea() < 0.1) sortie = sortie.toLowerCase();
 
-const DUREES = [
-  "zwei Wochen", "einem Monat", "sechs Wochen", "zwei Monaten", "drei Monaten",
-  "einem halben Jahr", "acht Monaten", "einem Jahr",
-];
-
-/** Mots vides allemands : ils ne disent rien du sujet d'une phrase. */
-const MOTS_VIDES = new Set([
-  "auch", "aber", "eine", "einen", "einer", "eines", "sich", "nicht", "mehr", "sehr",
-  "etwas", "wird", "wurde", "haben", "hatte", "dass", "diese", "dieser", "dieses",
-  "über", "unter", "nach", "beim", "vom", "zum", "zur", "man", "ist", "sind", "das",
-  "der", "die", "und", "für", "mit", "ohne", "gut", "gute", "guten", "könnte",
-  "kann", "muss", "wie", "was", "war", "als", "bei", "ich", "hat", "den", "dem",
-]);
-
-/** Substantifs porteurs de sens dans une phrase, pour repérer son sujet. */
-function sujets(phrase: string): Set<string> {
-  return new Set(
-    phrase
-      .toLowerCase()
-      .split(/[^a-zäöüß]+/)
-      .filter((mot) => mot.length > 3 && !MOTS_VIDES.has(mot)),
-  );
+  return sortie;
 }
 
-/** Vrai si les deux phrases parlent de la même chose — donc se contrediraient. */
+/** Première lettre en capitale, pour un fragment placé en tête de phrase. */
+function capitaliser(texte: string): string {
+  return texte.charAt(0).toUpperCase() + texte.slice(1);
+}
+
+/**
+ * Vrai si les deux fragments parlent visiblement de la même chose. « Scharfes
+ * Bild. Super Bild. » est grammaticalement correct et humainement impossible :
+ * on ne loue pas deux fois l'image en deux phrases sans rien en dire de plus.
+ */
 function memeSujet(a: string, b: string): boolean {
-  const motsB = sujets(b);
-  for (const mot of sujets(a)) if (motsB.has(mot)) return true;
+  const motsDe = (phrase: string) =>
+    new Set(phrase.toLowerCase().split(/[^a-zäöüß]+/).filter((mot) => mot.length > 3));
+  const motsB = motsDe(b);
+  for (const mot of motsDe(a)) if (motsB.has(mot)) return true;
   return false;
 }
 
 /**
- * Rédige un avis. Cinq étoiles : un ou deux points positifs. Quatre étoiles :
- * les mêmes, plus une réserve — c'est elle qui rend la note crédible.
+ * Rédige un avis.
  *
- * La réserve ne doit jamais porter sur ce que l'éloge vient de louer : « Die
- * Anleitung ist verständlich. Die Anleitung ist knapp gehalten. » se lit comme
- * une machine, et c'en serait une.
+ * La longueur est tirée en premier : quatre avis sur dix tiennent en trois
+ * mots, quatre sur dix en une demi-ligne, deux sur dix vont jusqu'à deux
+ * phrases courtes. Aucun ne dépasse la vingtaine de mots.
  */
-function redigerTexte(famille: Famille, note: number): { titre: string; corps: string } {
-  const ouverture = piocher(OUVERTURES).replace("{dauer}", piocher(DUREES));
+function redigerTexte(
+  famille: Famille,
+  note: number,
+  reservesDeLaFiche: Set<string>,
+  detailsDeLaFiche: Set<string>,
+): { titre: string; corps: string; reserve?: string; detail?: string } {
+  const longueur = alea();
 
-  const positifs = CORPS[famille].bon;
-  const details = [piocher(positifs)];
-  if (alea() < 0.55) {
-    const autre = piocher(positifs);
-    if (autre !== details[0] && !memeSujet(autre, details[0])) details.push(autre);
-  }
+  /**
+   * Détail encore inemployé sur cette fiche. Que deux clients louent la même
+   * qualité est vraisemblable ; que cinq la louent dans les mêmes termes ne
+   * l'est plus.
+   */
+  const choisirDetail = (): string => {
+    const toutes = DETAILS[famille];
+    const inedits = toutes.filter((d) => !detailsDeLaFiche.has(d));
+    return inedits.length > 0 ? piocher(inedits) : piocher(toutes);
+  };
 
-  if (note === 4) {
-    const compatibles = CORPS[famille].reserve.filter(
-      (reserve) => !details.some((detail) => memeSujet(reserve, detail)),
-    );
-    // Aucune réserve compatible : on retire le second éloge plutôt que
-    // d'écrire une contradiction.
-    if (compatibles.length > 0) {
-      details.push(piocher(compatibles));
+  /**
+   * Réserve compatible avec ce qui vient d'être loué, et pas déjà servie sur
+   * cette fiche. « Akku hält lange, nur Akku könnte länger halten » se
+   * contredit en six mots ; et trois fiches d'affilée qui regrettent le même
+   * bloc secteur ne trompent personne.
+   */
+  const choisirReserve = (louange?: string): string => {
+    const toutes = RESERVES[famille];
+    const compatibles = toutes.filter((r) => !louange || !memeSujet(r, louange));
+    const inedites = compatibles.filter((r) => !reservesDeLaFiche.has(r));
+    if (inedites.length > 0) return piocher(inedites);
+    return compatibles.length > 0 ? piocher(compatibles) : piocher(toutes);
+  };
+
+  let corps: string;
+  let reserve: string | undefined;
+  // Détail effectivement employé : l'appelant le mémorise pour que la fiche
+  // n'y revienne pas au bout de trois avis.
+  let detailRetenu: string | undefined;
+
+  if (longueur < 0.4) {
+    // Éclair : une appréciation, rien d'autre. Sur quatre étoiles, la réserve
+    // tient lieu d'avis — « Gut, nur etwas laut » est un avis entier.
+    if (note === 5) {
+      corps = piocher(BREFS);
     } else {
-      details.splice(1);
-      details.push(
-        piocher(CORPS[famille].reserve.filter((reserve) => !memeSujet(reserve, details[0]))) ??
-          piocher(CORPS[famille].reserve),
-      );
+      reserve = choisirReserve();
+      corps = `${piocher(BREFS)}, nur ${reserve}`;
     }
+  } else if (longueur < 0.8) {
+    // Court : un détail, accolé à une appréciation ou à la livraison.
+    const detail = choisirDetail();
+    detailRetenu = detail;
+    const compagnon = alea() < 0.3 ? piocher(LOGISTIQUE) : piocher(BREFS);
+    const ordre = alea();
+
+    if (note === 4) {
+      // « nur » porte toute la nuance : sans lui, « Alles super, schwer zu
+      // verstauen » énumère deux faits sans dire lequel gêne.
+      if (ordre < 0.5) {
+        reserve = choisirReserve(detail);
+        corps = `${capitaliser(detail)}, nur ${reserve}`;
+      } else {
+        reserve = choisirReserve();
+        corps = `${piocher(BREFS)}, nur ${reserve}`;
+      }
+    } else if (ordre < 0.45) {
+      corps = `${capitaliser(detail)}, ${compagnon.toLowerCase()}`;
+    } else if (ordre < 0.9) {
+      corps = `${capitaliser(compagnon)}, ${detail}`;
+    } else {
+      corps = capitaliser(detail);
+    }
+  } else {
+    // Deux phrases courtes, le maximum. Un second détail parfois, jamais plus.
+    const premier = choisirDetail();
+    detailRetenu = premier;
+    const autres = DETAILS[famille].filter(
+      (autre) => autre !== premier && !memeSujet(autre, premier) && !detailsDeLaFiche.has(autre),
+    );
+    const second = autres.length > 0 ? piocher(autres) : piocher(BREFS);
+    const ouvreSurLaLivraison = alea() < 0.35;
+    const loue = ouvreSurLaLivraison ? piocher(LOGISTIQUE) : premier;
+    const ouverture = `${capitaliser(loue)}.`;
+
+    let suite: string;
+    if (note === 4) {
+      reserve = choisirReserve(loue);
+      suite = `Nur ${reserve}.`;
+    } else {
+      suite = alea() < 0.5 ? `${capitaliser(second)}.` : `${piocher(BREFS)}.`;
+    }
+    corps = `${ouverture} ${suite}`;
   }
 
-  // La clôture ne doit pas redire l'ouverture : « Für den Preis in Ordnung […]
-  // Für den Preis geht das in Ordnung » ne trompe personne.
-  const clotures = (note === 5 ? CLOTURES : CLOTURES_RESERVE).filter(
-    (cloture) => cloture === "" || !memeSujet(cloture, ouverture),
-  );
-  const cloture = piocher(clotures.length > 0 ? clotures : [""]);
-  const titre = piocher(note === 5 ? TITRES_CINQ : TITRES_QUATRE);
+  // Un titre sur deux seulement : le champ est facultatif, et beaucoup passent
+  // outre pour déposer leur avis plus vite.
+  let titre = alea() < 0.5 ? "" : piocher(TITRES);
 
-  return { titre, corps: [ouverture, ...details, cloture].filter(Boolean).join(" ") };
+  // Un titre que le texte répète mot pour mot — « Sehr zufrieden » au-dessus
+  // de « … Sehr zufrieden » — ne s'écrit pas tout seul. On l'efface plutôt
+  // que d'en tirer un autre : le champ vide est le cas le plus courant.
+  if (titre && corps.toLowerCase().includes(titre.toLowerCase())) titre = "";
+
+  return { titre, corps: humaniser(corps, note === 5), reserve, detail: detailRetenu };
 }
 
 // ---------------------------------------------------------------------------
@@ -427,8 +476,24 @@ async function composer(): Promise<LigneAvis[]> {
     const notes = tirerNotes(total);
     const dates = dater(total);
 
+    // Des textes aussi courts se répètent vite. Deux « Alles gut » à la suite
+    // sur la même fiche se voient immédiatement — on repioche tant que le
+    // texte est déjà pris, puis on laisse passer : mieux vaut une répétition
+    // qu'une boucle sans fin sur une fiche à neuf avis.
+    const dejaDits = new Set<string>();
+    const reservesDeLaFiche = new Set<string>();
+    const detailsDeLaFiche = new Set<string>();
+
     for (let i = 0; i < total; i += 1) {
-      const { titre, corps } = redigerTexte(famille, notes[i]);
+      const ecrire = () => redigerTexte(famille, notes[i], reservesDeLaFiche, detailsDeLaFiche);
+      let { titre, corps, reserve, detail } = ecrire();
+      for (let essai = 0; essai < 12 && dejaDits.has(corps.toLowerCase()); essai += 1) {
+        ({ titre, corps, reserve, detail } = ecrire());
+      }
+      dejaDits.add(corps.toLowerCase());
+      if (reserve) reservesDeLaFiche.add(reserve);
+      if (detail) detailsDeLaFiche.add(detail);
+
       lignes.push({
         productId: produit.id,
         authorName: `${piocher(PRENOMS)} ${piocher(INITIALES)}.`,

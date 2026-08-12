@@ -22,13 +22,14 @@
 /** Réglage tel qu'il est enregistré. */
 export interface MerchantSelection {
   /**
-   * Faux : tout le catalogue part, les listes ci-dessous sont ignorées.
-   * Vrai : seules les catégories retenues partent, moins les exclusions.
+   * Faux : toutes les catégories partent, `categoryIds` est ignoré.
+   * Vrai : seules les catégories retenues partent.
+   * Dans les deux cas les exclusions produit s'appliquent.
    */
   restricted: boolean;
   /** Identifiants des catégories retenues. */
   categoryIds: string[];
-  /** Identifiants des produits écartés à l'intérieur d'une catégorie retenue. */
+  /** Identifiants des produits écartés, quelles que soient les catégories. */
   excludedProductIds: string[];
 }
 
@@ -73,11 +74,19 @@ export function parseMerchantSelection(value: unknown): MerchantSelection {
   };
 }
 
-/** Vrai si ce produit doit figurer dans le flux. */
+/**
+ * Vrai si ce produit doit figurer dans le flux.
+ *
+ * Les deux réglages sont indépendants : `restricted` limite aux catégories
+ * retenues, la liste d'exclusions écarte des articles précis. Un article
+ * décoché sort du flux même quand tout le catalogue part — c'est le geste le
+ * plus courant du back-office, et le compteur affiché à l'écran l'a toujours
+ * compté ainsi.
+ */
 export function isInFeed(product: SelectableProduct, selection: MerchantSelection): boolean {
+  if (selection.excludedProductIds.includes(product.id)) return false;
   if (!selection.restricted) return true;
-  if (!selection.categoryIds.includes(product.categoryId)) return false;
-  return !selection.excludedProductIds.includes(product.id);
+  return selection.categoryIds.includes(product.categoryId);
 }
 
 /** Applique la sélection à une liste de produits. */
@@ -85,7 +94,7 @@ export function filterForFeed<T extends SelectableProduct>(
   products: T[],
   selection: MerchantSelection,
 ): T[] {
-  if (!selection.restricted) return products;
+  if (!selection.restricted && selection.excludedProductIds.length === 0) return products;
   return products.filter((product) => isInFeed(product, selection));
 }
 

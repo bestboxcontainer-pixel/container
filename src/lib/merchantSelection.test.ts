@@ -60,6 +60,21 @@ describe("Filtre du flux Merchant", () => {
     );
   });
 
+  it("écarte un produit exclu même quand toutes les catégories partent", () => {
+    // Cas d'usage le plus courant du back-office : on laisse tout le catalogue
+    // coché et on décoche un seul article. L'écran annonce alors un produit de
+    // moins ; le flux doit dire la même chose.
+    const retenus = filterForFeed(PRODUITS, {
+      restricted: false,
+      categoryIds: [],
+      excludedProductIds: ["p2"],
+    });
+    assert.deepEqual(
+      retenus.map((p) => p.id),
+      ["p1", "p3", "p4"],
+    );
+  });
+
   it("inclut d'office un produit ajouté plus tard dans une catégorie retenue", () => {
     // C'est la promesse faite au commerçant : cocher une catégorie vaut pour
     // ses articles futurs, sans avoir à repasser par cet écran.

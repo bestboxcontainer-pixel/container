@@ -80,6 +80,34 @@ function demonstrationVisible(): boolean {
 }
 
 /**
+ * Fragment de condition qui écarte les avis de démonstration.
+ *
+ * Le `NOT … contains` employé seul ne suffit pas : en SQL, une comparaison
+ * portant sur une colonne à NULL ne vaut ni vrai ni faux, et la ligne tombe.
+ * Un avis authentique dont la note de modération est vide — le cas ordinaire,
+ * un modérateur n'écrit une note que s'il a quelque chose à dire — disparaîtra
+ * donc avec les faux. Les deux cas sont énoncés séparément pour cette raison.
+ *
+ * Exporté parce que la fiche produit et le comptage des cartes de liste
+ * doivent trancher pareil : c'est leur désaccord qui a fait afficher « 6 avis »
+ * sur une vignette et « aucun avis » sur la fiche correspondante.
+ */
+export function sansAvisDemonstration(): ReviewWhereFragment {
+  if (demonstrationVisible()) return {};
+  return {
+    OR: [
+      { moderatorNote: null },
+      { NOT: { moderatorNote: { contains: MARQUE_DEMONSTRATION } } },
+    ],
+  };
+}
+
+/** Forme minimale du fragment, pour ne pas dépendre des types générés. */
+type ReviewWhereFragment = {
+  OR?: Array<{ moderatorNote: null } | { NOT: { moderatorNote: { contains: string } } }>;
+};
+
+/**
  * Avis tels que la boutique a le droit de les montrer : validés par la
  * modération, et débarrassés des avis de démonstration.
  *
@@ -92,9 +120,7 @@ export async function listPublicReviews(productId: string): Promise<ReviewRecord
     where: {
       productId,
       status: "approved",
-      ...(demonstrationVisible()
-        ? {}
-        : { NOT: { moderatorNote: { contains: MARQUE_DEMONSTRATION } } }),
+      ...sansAvisDemonstration(),
     },
     include: reviewInclude,
     orderBy: { createdAt: "desc" },

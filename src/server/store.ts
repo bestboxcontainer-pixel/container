@@ -3,6 +3,7 @@ import { prisma } from "@/server/prisma";
 import { slugify } from "@/lib/slugify";
 import { TAG_CATALOGUE } from "@/server/cacheCatalogue";
 import { getActivePromotions, type ProductPromotion } from "@/server/promotions";
+import { sansAvisDemonstration } from "@/server/reviews";
 import type { CategoryGuide, CategoryRecord, ProductGroup, ProductRecord } from "@/server/types";
 import type { Product } from "@/types/home";
 
@@ -440,11 +441,18 @@ export interface CategoryPageView {
   guide: CategoryGuide;
 }
 
-/** Note moyenne par produit, calculée sur les seuls avis validés. */
+/**
+ * Note moyenne par produit, calculée sur les seuls avis validés.
+ *
+ * Le même filtre que la fiche produit s'applique, avis de démonstration
+ * compris : la vignette annonçait « 6 avis » là où la fiche n'en montrait
+ * aucun, et un compteur qui ment sur ce qu'on trouvera en cliquant est pire
+ * que pas de compteur du tout.
+ */
 async function approvedRatings(): Promise<Map<string, { average: number; count: number }>> {
   const grouped = await prisma.review.groupBy({
     by: ["productId"],
-    where: { status: "approved" },
+    where: { status: "approved", ...sansAvisDemonstration() },
     _avg: { rating: true },
     _count: { _all: true },
   });

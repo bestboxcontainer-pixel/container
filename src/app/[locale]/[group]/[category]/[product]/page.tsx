@@ -12,6 +12,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { PaymentMethodsBar } from "@/components/PaymentMethodsBar";
 import { ProductGrid } from "@/components/ProductGrid";
 import { getProductBySlug, getRelatedProducts } from "@/server/store";
+import { listReviews } from "@/server/reviews";
 import { loadCatalogTranslations, localizeCategoryPage } from "@/server/localizedContent";
 import { productLongText, productShortText } from "@/lib/productText";
 import { formatRating } from "@/lib/formatRating";
@@ -102,8 +103,20 @@ export default async function ProductPage({ params }: { params: ProductPageParam
   const shortText = productShortText(productData, categoryData.label, locale);
   const description = productLongText(productData, categoryData.label, locale);
 
-  // Nombre d'avis publiés : il commande l'affichage de l'étoile en tête de fiche.
-  const avisPublies = productData.reviewCount ?? 0;
+  // Seuls les avis validés par la modération quittent la base pour la boutique.
+  // Chargés ici, une fois, puis partagés entre l'affichage et le balisage JSON-LD :
+  // les deux doivent montrer exactement la même chose à Google.
+  const avis = productData.id
+    ? await listReviews({ productId: productData.id, status: "approved" })
+    : [];
+
+  // Note et nombre d'avis en tête de fiche, tirés de ces mêmes avis plutôt que du
+  // catalogue mis en cache : Google contrôle que la note balisée est bien celle
+  // que la page montre, et les deux ne doivent pas pouvoir diverger, fût-ce le
+  // temps d'une purge de cache.
+  const avisPublies = avis.length;
+  const noteMoyenne =
+    avisPublies > 0 ? avis.reduce((somme, item) => somme + item.rating, 0) / avisPublies : undefined;
 
   return (
     <>
@@ -142,9 +155,9 @@ export default async function ProductPage({ params }: { params: ProductPageParam
                     La référence article, elle, s'affiche toujours — elle était
                     jusqu'ici emportée avec la note sur les fiches non notées. */}
                 <p className="mt-1 text-sm text-muted-foreground">
-                  {typeof productData.rating === "number" && avisPublies > 0 && (
+                  {typeof noteMoyenne === "number" && avisPublies > 0 && (
                     <>
-                      ⭐ {t("ratingOf", { rating: formatRating(productData.rating, locale) })} ·{" "}
+                      ⭐ {t("ratingOf", { rating: formatRating(noteMoyenne, locale) })} ·{" "}
                       {t("reviewCount", { count: avisPublies })} ·{" "}
                     </>
                   )}
@@ -181,7 +194,11 @@ export default async function ProductPage({ params }: { params: ProductPageParam
 
         {productData.id && (
           <div className="border-t border-border">
-            <ProductReviewSection productId={productData.id} editorialRating={productData.rating} />
+            <ProductReviewSection
+              productId={productData.id}
+              reviews={avis}
+              editorialRating={productData.rating}
+            />
           </div>
         )}
 
@@ -199,7 +216,7 @@ export default async function ProductPage({ params }: { params: ProductPageParam
       <Footer />
 
       {/* Données structurées : cohérentes avec le prix et la disponibilité affichés */}
-      <ProductJsonLd product={productData} />
+      <ProductJsonLd product={productData} reviews={avis} />
       <BreadcrumbJsonLd
         items={[
           { label: common("home"), href: "/" },

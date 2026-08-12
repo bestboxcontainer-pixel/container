@@ -10,6 +10,7 @@ import {
   merchantProductType,
   merchantReferencePriceCents,
 } from "@/server/merchant";
+import type { ReviewRecord } from "@/server/types";
 import type { Product } from "@/types/home";
 
 // Balisage JSON-LD Product + Offer de la page produit.
@@ -22,9 +23,27 @@ import type { Product } from "@/types/home";
 // Composant serveur : à placer dans la page produit, sans autre prop que le produit.
 
 interface ProductJsonLdProps {
-  /** Le produit tel que la page le rend déjà (note et nombre d'avis compris). */
-  product: Pick<Product, "slug" | "rating" | "reviewCount">;
+  /** Le produit tel que la page le rend déjà. */
+  product: Pick<Product, "slug">;
+  /**
+   * Avis validés, ceux-là mêmes que la page affiche.
+   *
+   * La note agrégée en est déduite plutôt que reprise du catalogue : Google
+   * interdit d'annoncer une note qui ne repose pas sur des avis visibles, et le
+   * champ `rating` du catalogue retombe sur la note éditoriale quand aucun avis
+   * client n'a encore été validé.
+   */
+  reviews: ReviewRecord[];
 }
+
+/**
+ * Nombre d'avis portés dans le balisage.
+ *
+ * Tous sont dans le DOM, donc tous seraient légitimes ; au-delà d'une vingtaine,
+ * le JSON-LD pèserait plus lourd que la fiche elle-même sans rien apporter à
+ * l'extrait enrichi. La note agrégée, elle, reste calculée sur la totalité.
+ */
+const MAX_REVIEWS_BALISES = 20;
 
 /** Valeur schema.org correspondant à la disponibilité du flux. */
 const AVAILABILITY_URL: Record<string, string> = {
@@ -63,7 +82,7 @@ function gtinProperties(gtin: string | undefined): Record<string, JsonLdValue | 
   return { [key]: gtin, gtin };
 }
 
-export async function ProductJsonLd({ product }: ProductJsonLdProps) {
+export async function ProductJsonLd({ product, reviews }: ProductJsonLdProps) {
   if (!product.slug) return null;
 
   const row = await getMerchantProductBySlug(product.slug);
@@ -79,11 +98,17 @@ export async function ProductJsonLd({ product }: ProductJsonLdProps) {
   // L'ancien prix devient un StrikethroughPrice, comme le demande Google.
   const currentPrice = (currentPriceCents / 100).toFixed(2);
 
+  // Date à partir de laquelle l'offre vaut. Sous campagne, c'est le début de la
+  // remise ; sinon la mise en ligne du produit. Jamais `updatedAt` : corriger une
+  // description ne redémarre pas la validité d'un prix.
+  const validFrom = (row.promotion?.startsAt ?? row.createdAt).toISOString().slice(0, 10);
+
   const offer: Record<string, JsonLdValue | undefined> = {
     "@type": "Offer",
     url: record.link,
     priceCurrency: MERCHANT_CURRENCY,
     price: currentPrice,
+    validFrom,
     priceValidUntil: record.priceValidUntil,
     availability: AVAILABILITY_URL[record.availability],
     itemCondition: CONDITION_URL[record.condition],
@@ -155,14 +180,33 @@ export async function ProductJsonLd({ product }: ProductJsonLdProps) {
 
   // La note n'est publiée que lorsqu'elle repose sur de vrais avis affichés sur la
   // page : Google interdit les notes agrégées sans avis correspondants.
-  if (typeof product.rating === "number" && (product.reviewCount ?? 0) > 0) {
+  if (reviews.length > 0) {
+    const moyenne = reviews.reduce((somme, avis) => somme + avis.rating, 0) / reviews.length;
+
     data.aggregateRating = {
       "@type": "AggregateRating",
-      ratingValue: product.rating.toFixed(1),
-      reviewCount: product.reviewCount ?? 0,
+      ratingValue: moyenne.toFixed(1),
+      reviewCount: reviews.length,
       bestRating: 5,
       worstRating: 1,
     };
+
+    // Les avis eux-mêmes : sans eux, Google ne dispose que d'une note nue et ne
+    // peut pas en tirer d'extrait. `author` et `reviewRating` sont les deux seuls
+    // champs qu'il exige, les autres nourrissent l'extrait.
+    data.review = reviews.slice(0, MAX_REVIEWS_BALISES).map((avis) => ({
+      "@type": "Review",
+      author: { "@type": "Person", name: avis.authorName },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: avis.rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      datePublished: avis.createdAt.slice(0, 10),
+      name: avis.title || undefined,
+      reviewBody: avis.body,
+    }));
   }
 
   if (record.productHighlights.length > 0) {

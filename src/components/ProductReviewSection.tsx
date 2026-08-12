@@ -1,6 +1,6 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Star } from "lucide-react";
-import { listReviews } from "@/server/reviews";
+import type { ReviewRecord } from "@/server/types";
 import { ReviewForm } from "@/components/ReviewForm";
 import { formatRating } from "@/lib/formatRating";
 
@@ -54,17 +54,22 @@ function StarRating({ value, size, label }: { value: number; size: "sm" | "lg"; 
 
 export async function ProductReviewSection({
   productId,
+  reviews,
   editorialRating,
 }: {
   productId: string;
+  /**
+   * Avis validés, chargés une seule fois par la page produit et partagés avec
+   * le balisage JSON-LD. Les lire ici séparément ferait deux requêtes pour la
+   * même liste, et surtout laisserait le balisage diverger de l'affichage —
+   * exactement ce que Google refuse.
+   */
+  reviews: ReviewRecord[];
   editorialRating?: number;
 }) {
   const t = await getTranslations("reviews");
   const locale = await getLocale();
   const dateFormatter = dateFormatterFor(locale);
-
-  // Seuls les avis validés par la modération quittent la base pour la boutique.
-  const reviews = await listReviews({ productId, status: "approved" });
 
   const total = reviews.length;
   const average = total > 0 ? reviews.reduce((sum, review) => sum + review.rating, 0) / total : 0;

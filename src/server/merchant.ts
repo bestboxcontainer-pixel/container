@@ -121,6 +121,8 @@ export interface MerchantProduct {
   oldPriceCents: number | null;
   stock: number;
   active: boolean;
+  /** Mise en ligne du produit ; sert de `validFrom` à l'offre balisée. */
+  createdAt: Date;
   category: {
     slug: string;
     label: string;
@@ -161,6 +163,8 @@ const merchantSelect = {
   oldPriceCents: true,
   stock: true,
   active: true,
+  // Sert de `validFrom` au balisage JSON-LD de l'offre, hors campagne.
+  createdAt: true,
   category: {
     select: {
       slug: true,

@@ -185,6 +185,57 @@ const CORRECTIONS: Correction[] = [
 // Exécution
 // ---------------------------------------------------------------------------
 
+/**
+ * Aligne les deux versions du bandeau d'annonce.
+ *
+ * La barre haute proposait « SOMMER10, 10 % dès 300 € » en allemand et
+ * « SOMMER20, 20 % off » en anglais, sans seuil : deux offres différentes pour
+ * le même produit au même instant, dont aucune ne se retrouve dans le prix du
+ * flux. La version anglaise reprend donc l'offre allemande, seule réellement
+ * accordée. Le message allemand fait foi et n'est pas touché.
+ */
+async function alignerBandeau(): Promise<number> {
+  const barres = await prisma.announcementBar.findMany({
+    select: { id: true, messageDe: true, messageEn: true, enabled: true },
+  });
+
+  let modifiees = 0;
+
+  for (const barre of barres) {
+    const attendu = traduireOffre(barre.messageDe);
+    if (barre.messageEn === attendu) {
+      console.log(`  bandeau ${barre.id} — déjà aligné`);
+      continue;
+    }
+
+    modifiees += 1;
+    console.log(`  bandeau ${barre.id} — offre anglaise différente de l'allemande`);
+    console.log(`      avant : ${barre.messageEn}`);
+    console.log(`      après : ${attendu}`);
+
+    if (APPLIQUER) {
+      await prisma.announcementBar.update({ where: { id: barre.id }, data: { messageEn: attendu } });
+    }
+  }
+
+  return modifiees;
+}
+
+/**
+ * Rend en anglais l'offre annoncée en allemand.
+ *
+ * Le code et le seuil sont repris tels quels : ce sont eux qui engagent la
+ * boutique, et les traduire reviendrait à en inventer d'autres. Un message qui
+ * ne suit pas la forme attendue est laissé au traducteur humain.
+ */
+function traduireOffre(messageDe: string): string {
+  const lu = /Gutscheincode\s+([A-Z0-9]+).*?(\d+)\s*%.*?ab\s+([\d.,]+)\s*€/u.exec(messageDe);
+  if (!lu) return messageDe;
+
+  const [, code, remise, seuil] = lu;
+  return `🎉 Use voucher code ${code} and get ${remise} % off all purchases from €${seuil}.`;
+}
+
 async function main(): Promise<void> {
   console.log(APPLIQUER ? "Application des corrections.\n" : "Simulation — aucune écriture. Ajoutez --appliquer pour écrire.\n");
 
@@ -227,8 +278,10 @@ async function main(): Promise<void> {
     }
   }
 
+  modifiees += await alignerBandeau();
+
   console.log(
-    `\n${modifiees} page(s) ${APPLIQUER ? "corrigée(s)" : "à corriger"}.` +
+    `\n${modifiees} élément(s) ${APPLIQUER ? "corrigé(s)" : "à corriger"}.` +
       (APPLIQUER ? "" : "\nRelancez avec --appliquer pour écrire en base."),
   );
 

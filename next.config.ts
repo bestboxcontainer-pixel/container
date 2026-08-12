@@ -34,6 +34,25 @@ const nextConfig: NextConfig = {
   },
 
   async redirects() {
+    /**
+     * Le site n'a qu'un hôte : hausgeratepfeffer.de.
+     *
+     * Sans cette règle, « www » répond lui aussi en 200 et sert le catalogue
+     * entier une seconde fois. Les balises canoniques limitent la casse pour
+     * l'indexation, mais Merchant Center rattache un compte à un domaine
+     * vérifié, et le flux ne désigne que la forme sans « www » : deux hôtes qui
+     * répondent, c'est une revendication qui hésite et un budget d'exploration
+     * dépensé deux fois pour les mêmes pages.
+     */
+    const hostCanonique = [
+      {
+        source: "/:path*",
+        has: [{ type: "host" as const, value: "www.hausgeratepfeffer.de" }],
+        destination: "https://hausgeratepfeffer.de/:path*",
+        permanent: true,
+      },
+    ];
+
     // Anciennes adresses citées dans le pied de page et le tunnel d'achat :
     // on les conserve en redirection permanente vers les pages réelles.
     const pairs = [
@@ -44,10 +63,13 @@ const nextConfig: NextConfig = {
       ["/partnerprogramm", "/ueber-uns"],
     ];
 
-    return pairs.flatMap(([source, destination]) => [
-      { source, destination, permanent: true },
-      { source: `/en${source}`, destination: `/en${destination}`, permanent: true },
-    ]);
+    return [
+      ...hostCanonique,
+      ...pairs.flatMap(([source, destination]) => [
+        { source, destination, permanent: true },
+        { source: `/en${source}`, destination: `/en${destination}`, permanent: true },
+      ]),
+    ];
   },
 };
 

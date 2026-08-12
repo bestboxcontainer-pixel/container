@@ -157,9 +157,13 @@ export async function ProductJsonLd({ product, reviews }: ProductJsonLdProps) {
   offer.hasMerchantReturnPolicy = {
     "@type": "MerchantReturnPolicy",
     applicableCountry: MERCHANT_RETURN_POLICY.country,
+    // Le pays de la politique s'ajoute au pays d'application : Google les
+    // distingue, et une politique sans pays déclaré remonte en avertissement.
+    returnPolicyCountry: MERCHANT_RETURN_POLICY.country,
     returnPolicyCategory: MERCHANT_RETURN_POLICY.category,
     merchantReturnDays: MERCHANT_RETURN_POLICY.days,
     returnMethod: MERCHANT_RETURN_POLICY.method,
+    returnFees: MERCHANT_RETURN_POLICY.fees,
   };
 
   const data: Record<string, JsonLdValue | undefined> = {

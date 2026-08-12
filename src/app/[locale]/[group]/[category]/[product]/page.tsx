@@ -12,7 +12,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { PaymentMethodsBar } from "@/components/PaymentMethodsBar";
 import { ProductGrid } from "@/components/ProductGrid";
 import { getProductBySlug, getRelatedProducts } from "@/server/store";
-import { listReviews } from "@/server/reviews";
+import { listPublicReviews } from "@/server/reviews";
 import { loadCatalogTranslations, localizeCategoryPage } from "@/server/localizedContent";
 import { productLongText, productShortText } from "@/lib/productText";
 import { formatRating } from "@/lib/formatRating";
@@ -103,12 +103,11 @@ export default async function ProductPage({ params }: { params: ProductPageParam
   const shortText = productShortText(productData, categoryData.label, locale);
   const description = productLongText(productData, categoryData.label, locale);
 
-  // Seuls les avis validés par la modération quittent la base pour la boutique.
-  // Chargés ici, une fois, puis partagés entre l'affichage et le balisage JSON-LD :
-  // les deux doivent montrer exactement la même chose à Google.
-  const avis = productData.id
-    ? await listReviews({ productId: productData.id, status: "approved" })
-    : [];
+  // Seuls les avis validés par la modération quittent la base pour la boutique,
+  // et jamais les avis de démonstration. Chargés ici, une fois, puis partagés
+  // entre l'affichage et le balisage JSON-LD : les deux doivent montrer
+  // exactement la même chose à Google.
+  const avis = productData.id ? await listPublicReviews(productData.id) : [];
 
   // Note et nombre d'avis en tête de fiche, tirés de ces mêmes avis plutôt que du
   // catalogue mis en cache : Google contrôle que la note balisée est bien celle

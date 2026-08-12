@@ -46,6 +46,14 @@ export interface Product {
   reviewCount?: number;
   stock?: number;
   inStock?: boolean;
+  /**
+   * Classe d'efficacité énergétique telle qu'elle figure sur l'étiquette de
+   * l'appareil. Le vendeur à distance doit l'afficher près du prix, aussi
+   * accompagne-t-elle le produit jusqu'au bloc d'achat.
+   */
+  energyEfficiencyClass?: string;
+  /** Rubrique de vente : elle désigne l'échelle énergétique applicable. */
+  categorySlug?: string;
 }
 
 export interface BrandTeaser {

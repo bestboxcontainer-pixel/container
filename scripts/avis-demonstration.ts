@@ -23,9 +23,14 @@
  */
 
 import { prisma } from "../src/server/prisma";
+import { MARQUE_DEMONSTRATION } from "../src/server/reviews";
 
-/** Marque de reconnaissance. Ne jamais la changer sans adapter la purge. */
-const MARQUE = "[DEMO] Avis de démonstration — à supprimer avant l'ouverture";
+/**
+ * Marque de reconnaissance. Son préfixe vient de la boutique, qui s'en sert
+ * pour refuser d'afficher ces avis : le script et le site doivent reconnaître
+ * les mêmes lignes, sans quoi la purge et le filtrage porteraient à côté.
+ */
+const MARQUE = `${MARQUE_DEMONSTRATION} Avis de démonstration — à supprimer avant l'ouverture`;
 
 const AVIS_MIN = 5;
 const AVIS_MAX = 9;

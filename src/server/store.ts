@@ -488,6 +488,11 @@ function toViewProduct(
     stock: row.stock,
     inStock: row.stock > 0,
     href: `/${groupSlug}/${row.category.slug}/${row.slug}`,
+    // Classe énergétique et rubrique de vente voyagent ensemble : la classe ne
+    // se lit que rapportée à l'échelle de sa famille, et c'est la catégorie qui
+    // désigne l'échelle applicable.
+    energyEfficiencyClass: row.energyEfficiencyClass ?? undefined,
+    categorySlug: row.category.slug,
   };
 
   if (!promotion) return view;

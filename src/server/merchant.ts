@@ -3,6 +3,7 @@ import {
   MERCHANT_SELECTION_DEFAULT,
   filterForFeed,
 } from "@/lib/merchantSelection";
+import { prixDuFlux } from "@/lib/merchantPrice";
 import { getMerchantSelection } from "@/server/merchantSelection";
 import {
   getActivePromotionForProduct,
@@ -94,6 +95,14 @@ export const MERCHANT_RETURN_POLICY = {
   /** Valeur schema.org attendue par Google. */
   category: "https://schema.org/MerchantReturnFiniteReturnWindow",
   method: "https://schema.org/ReturnByMail",
+  /**
+   * La boutique supporte les frais de retour — c'est ce qu'annonce la page
+   * « Retoure et réclamation » : étiquette de renvoi fournie pour les colis,
+   * enlèvement organisé pour les appareils livrés par transporteur. Sans cette
+   * précision, Google applique son hypothèse par défaut, moins favorable, et
+   * affiche des conditions de retour plus dures que celles réellement offertes.
+   */
+  fees: "https://schema.org/FreeReturn",
 } as const;
 
 // ---- Forme des données lues en base ----
@@ -488,9 +497,16 @@ export function buildMerchantRecord(product: MerchantProduct): MerchantRecord {
   const mpn = product.mpn?.trim() || undefined;
   // Une campagne en cours l'emporte sur l'ancien prix éditorial : c'est elle que
   // la page produit affiche, et le flux doit dire la même chose.
-  const currentPriceCents = merchantEffectivePriceCents(product);
-  const referencePriceCents = merchantReferencePriceCents(product);
-  const onSale = referencePriceCents > currentPriceCents;
+  // Seule une campagne fait naître une promotion au sens de Google : elle a un
+  // début, une fin, et un prix de référence figé. L'ancien prix saisi à la main
+  // dans la fiche n'a rien de tout cela ; le détail de la décision est dans
+  // `lib/merchantPrice`, qui se teste sans ouvrir la base.
+  const promotion = priceCuttingPromotion(product);
+  const prix = prixDuFlux({
+    prixCourantCents: merchantEffectivePriceCents(product),
+    prixReferenceCents: merchantReferencePriceCents(product),
+    campagneDatee: promotion !== undefined,
+  });
   const googleCategory = merchantGoogleCategory(product);
   const isApparel = APPAREL_CATEGORY_IDS.has(googleCategory);
 
@@ -502,13 +518,12 @@ export function buildMerchantRecord(product: MerchantProduct): MerchantRecord {
     imageLink: merchantImageUrl(product),
     additionalImageLinks: merchantAdditionalImageUrls(product),
     availability: availabilityFor(product.stock),
-    // En promotion, price porte le prix barré et sale_price le prix affiché :
-    // c'est exactement ce que montre le bloc d'achat de la page produit.
-    price: formatFeedPrice(onSale ? referencePriceCents : currentPriceCents),
-    salePrice: onSale ? formatFeedPrice(currentPriceCents) : undefined,
-    salePriceEffectiveDate: onSale
-      ? salePriceWindow(priceCuttingPromotion(product))
-      : undefined,
+    // Sous campagne, price porte le prix de référence figé et sale_price le prix
+    // affiché, encadré par ses dates. Hors campagne, price est le prix pratiqué,
+    // sans plus : c'est exactement ce que montre le bloc d'achat de la page.
+    price: formatFeedPrice(prix.priceCents),
+    salePrice: prix.salePriceCents === undefined ? undefined : formatFeedPrice(prix.salePriceCents),
+    salePriceEffectiveDate: prix.remiseDeclaree ? salePriceWindow(promotion) : undefined,
     brand: product.brand.slice(0, 70),
     gtin,
     mpn: mpn?.slice(0, 70),
@@ -532,8 +547,10 @@ export function buildMerchantRecord(product: MerchantProduct): MerchantRecord {
     ageGroup: isApparel ? "adult" : undefined,
     gender: isApparel ? "unisex" : undefined,
     customLabel0: product.category.group.label,
-    customLabel1: onSale ? "Aktion" : undefined,
-    priceValidUntil: priceValidUntil(priceCuttingPromotion(product)),
+    // L'étiquette « Aktion » sert à segmenter les campagnes publicitaires : elle
+    // suit la remise réellement déclarée, pas le prix barré de la fiche.
+    customLabel1: prix.remiseDeclaree ? "Aktion" : undefined,
+    priceValidUntil: priceValidUntil(promotion),
   };
 }
 

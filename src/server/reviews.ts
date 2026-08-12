@@ -58,6 +58,51 @@ export interface ReviewFilter {
   productId?: string;
 }
 
+/**
+ * Marque portée par la note de modération des avis de démonstration.
+ *
+ * Elle vit ici, et non dans le script qui les crée, parce que la boutique doit
+ * pouvoir les reconnaître pour refuser de les montrer. Le script l'importe.
+ */
+export const MARQUE_DEMONSTRATION = "[DEMO]";
+
+/**
+ * Les avis de démonstration ne sortent que si on le demande explicitement.
+ *
+ * Le défaut est l'invisibilité : publier de faux avis est déloyal au sens de
+ * l'annexe au § 3 Abs. 3 UWG (n° 23b et 23c), et alimente en outre la note
+ * agrégée du balisage — donc les étoiles affichées par Google. Un oubli de
+ * purge avant mise en ligne ne doit pas suffire à les faire apparaître : il
+ * faut poser la variable, ce qu'on ne fait que sur un poste de travail.
+ */
+function demonstrationVisible(): boolean {
+  return process.env.AVIS_DEMONSTRATION_VISIBLES === "1";
+}
+
+/**
+ * Avis tels que la boutique a le droit de les montrer : validés par la
+ * modération, et débarrassés des avis de démonstration.
+ *
+ * C'est le seul point d'entrée de la partie publique du site. La fiche produit
+ * et son balisage JSON-LD lisent la même liste, si bien que la note annoncée à
+ * Google reste celle que le visiteur voit.
+ */
+export async function listPublicReviews(productId: string): Promise<ReviewRecord[]> {
+  const rows = await prisma.review.findMany({
+    where: {
+      productId,
+      status: "approved",
+      ...(demonstrationVisible()
+        ? {}
+        : { NOT: { moderatorNote: { contains: MARQUE_DEMONSTRATION } } }),
+    },
+    include: reviewInclude,
+    orderBy: { createdAt: "desc" },
+  });
+
+  return rows.map(toReviewRecord);
+}
+
 export async function listReviews(filter?: ReviewFilter): Promise<ReviewRecord[]> {
   const rows = await prisma.review.findMany({
     where: {

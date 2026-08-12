@@ -742,12 +742,27 @@ export function auditMerchantProduct(
   }
 
   // -- Energielabel (EU) --
-  if (EU_ENERGY_LABEL_SLUGS.has(product.category.slug)) {
+  //
+  // Google renseigne lui-même la certification EPREL à partir du GTIN ou du
+  // MPN de l'article : « Wenn Sie keine Zertifizierungsinformationen angeben,
+  // fügt Google diese unter Umständen automatisch anhand von GTIN- und/oder
+  // MPN-Daten hinzu » (aide Merchant Center, attribut certification).
+  //
+  // L'avertissement ne se justifie donc que pour un article qui ne porte ni
+  // l'un ni l'autre — là, l'étiquette énergie manquera réellement dans
+  // l'annonce. Le lever pour toute la catégorie marquait cent cinquante-trois
+  // fiches parfaitement diffusables et noyait les quarante-neuf qui, elles,
+  // demandaient une action.
+  if (
+    EU_ENERGY_LABEL_SLUGS.has(product.category.slug) &&
+    !record.gtin &&
+    !record.mpn
+  ) {
     issues.push({
       level: "warning",
       attribute: "certification",
       message:
-        "Appareil soumis à l'étiquetage énergétique : pour l'UE, Google attend le numéro d'enregistrement EPREL dans l'attribut certification (EC/EPREL/numéro). Sans GTIN, Google ne peut pas le compléter automatiquement.",
+        "Appareil soumis à l'étiquetage énergétique, sans GTIN ni MPN : Google ne peut pas retrouver la fiche EPREL tout seul. Renseignez le code-barres, ou le numéro d'enregistrement EPREL dans l'attribut certification (EC/EPREL/numéro).",
     });
   }
 

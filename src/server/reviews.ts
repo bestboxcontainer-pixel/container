@@ -1,4 +1,5 @@
 import { prisma } from "@/server/prisma";
+import type { ReviewEdit } from "@/lib/reviewEdit";
 import type { ReviewRecord, ReviewStatus } from "@/server/types";
 
 // Les avis en attente sont toujours remontés en premier dans les listes mixtes :
@@ -214,6 +215,40 @@ export async function moderateReview(
       moderatorNote: trimmedNote ? trimmedNote : null,
       moderatedAt: new Date(),
       moderatedBy: moderatorEmail,
+    },
+    include: reviewInclude,
+  });
+
+  return toReviewRecord(row);
+}
+
+/**
+ * Modifie le contenu d'un avis depuis le back-office.
+ *
+ * Distinct de `moderateReview`, qui ne touche qu'au statut : ici on retouche
+ * ce que le visiteur lit. Le statut, la note de modération et l'auteur de la
+ * décision ne bougent pas — corriger une faute d'orthographe n'est pas
+ * remodérer, et un avis publié le reste.
+ *
+ * La date de dépôt n'est écrite que si l'écran en a envoyé une : sans cela,
+ * une simple correction ferait remonter l'avis en tête de la fiche.
+ */
+export async function updateReview(
+  id: string,
+  edit: ReviewEdit,
+): Promise<ReviewRecord | undefined> {
+  const current = await prisma.review.findUnique({ where: { id } });
+  if (!current) return undefined;
+
+  const row = await prisma.review.update({
+    where: { id },
+    data: {
+      authorName: edit.authorName,
+      city: edit.city,
+      rating: edit.rating,
+      title: edit.title,
+      body: edit.body,
+      ...(edit.createdAt ? { createdAt: edit.createdAt } : {}),
     },
     include: reviewInclude,
   });

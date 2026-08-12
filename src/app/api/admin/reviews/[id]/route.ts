@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { invaliderCatalogue } from "@/server/cacheCatalogue";
 import { requireAdminApi } from "@/lib/adminApi";
-import { deleteReview, moderateReview } from "@/server/reviews";
+import { parseReviewEdit } from "@/lib/reviewEdit";
+import { deleteReview, moderateReview, updateReview } from "@/server/reviews";
 import { adminActorLabel } from "@/server/admins";
 
 type Params = Promise<{ id: string }>;
@@ -38,6 +39,35 @@ export async function PATCH(request: Request, { params }: { params: Params }) {
 
   // Un superadmin modère sous « System », pas sous son adresse.
   const review = await moderateReview(id, status, await adminActorLabel(session), note || undefined);
+  if (!review) return NextResponse.json({ error: "Introuvable." }, { status: 404 });
+
+  invaliderCatalogue();
+  return NextResponse.json(review);
+}
+
+/**
+ * Modification du contenu d'un avis.
+ *
+ * Séparée du PATCH de modération : celui-ci décide du sort de l'avis, celle-ci
+ * en retouche le texte. Les deux ne s'appellent pas dans les mêmes cas et ne
+ * doivent pas pouvoir s'exécuter l'une pour l'autre par accident.
+ *
+ * Le catalogue est invalidé après coup : la note moyenne des vignettes est
+ * mise en cache, et corriger une note de 5 en 3 sans l'invalider laisserait la
+ * liste afficher l'ancienne moyenne jusqu'à la prochaine revalidation.
+ */
+export async function PUT(request: Request, { params }: { params: Params }) {
+  const { unauthorized } = await requireAdminApi();
+  if (unauthorized) return unauthorized;
+
+  const { id } = await params;
+  const payload = (await request.json().catch(() => null)) as Record<string, unknown> | null;
+  if (!payload) return NextResponse.json({ error: "Requête invalide." }, { status: 400 });
+
+  const parsed = parseReviewEdit(payload);
+  if (!parsed.ok) return NextResponse.json({ error: parsed.error }, { status: 400 });
+
+  const review = await updateReview(id, parsed.value);
   if (!review) return NextResponse.json({ error: "Introuvable." }, { status: 404 });
 
   invaliderCatalogue();

@@ -74,6 +74,27 @@ Ne pas oublier non plus :
   Merchant et tous les liens contenus dans les e-mails.
 - `NODE_ENV=production`
 - `CRON_SECRET` — sinon la route d'envoi des campagnes reste fermée.
+- `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` — les
+  trois, sinon **l'envoi d'images depuis le back-office est refusé en
+  production**. Le message affiché est alors « Le stockage des images n'est pas
+  configuré ». Ce refus est délibéré : sans Cloudinary, le code se rabat sur
+  `public/uploads/`, un dossier que le prochain déploiement efface avec les
+  visuels du catalogue. En développement ce repli reste autorisé, ce qui fait
+  que l'envoi peut très bien fonctionner en local et échouer en ligne.
+
+  Les clés se relèvent sur le tableau de bord Cloudinary (Settings → API Keys).
+  Pour vérifier qu'elles passent, depuis le serveur :
+
+  ```bash
+  node -e "const c=require('cloudinary').v2;c.config({cloud_name:process.env.CLOUDINARY_CLOUD_NAME,api_key:process.env.CLOUDINARY_API_KEY,api_secret:process.env.CLOUDINARY_API_SECRET});c.api.ping().then(r=>console.log(r)).catch(e=>console.log('ÉCHEC',e.error?.message))"
+  ```
+
+Un envoi d'image traverse aussi le reverse proxy, qui a son propre plafond. La
+configuration Nginx plus bas porte `client_max_body_size 12M` pour cette raison
+— l'application, elle, refuse au-delà de 5 Mo. Sur l'hébergement mutualisé
+hPanel, ce plafond n'est pas réglable : un fichier trop lourd y est coupé par le
+proxy avant d'atteindre l'application, et le back-office n'affiche alors qu'un
+« L'envoi a échoué » sans détail, faute de réponse JSON.
 
 ## 3. Déploiement sur VPS Hostinger
 

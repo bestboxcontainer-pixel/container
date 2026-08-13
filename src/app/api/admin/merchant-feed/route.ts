@@ -6,9 +6,9 @@ import { loadSelectableCatalog, saveMerchantSelection } from "@/server/merchantS
 // Choix des produits transmis au flux Google Merchant, enregistré depuis
 // /admin/merchant.
 //
-// Les identifiants reçus sont confrontés au catalogue réel : une catégorie
-// supprimée entre l'affichage de l'écran et l'envoi est écartée sans faire
-// échouer l'enregistrement. En revanche, restreindre à zéro catégorie est
+// Les identifiants reçus sont confrontés au catalogue réel : un produit
+// supprimé entre l'affichage de l'écran et l'envoi est écarté sans faire
+// échouer l'enregistrement. En revanche, restreindre à zéro produit est
 // refusé — le flux se viderait, et la boutique disparaîtrait de Google sans
 // que personne ne l'ait voulu.
 
@@ -25,16 +25,11 @@ export async function PUT(request: Request) {
 
   const catalogue = await loadSelectableCatalog();
   const known = {
-    categoryIds: catalogue.map((category) => category.id),
     productIds: catalogue.flatMap((category) => category.products.map((product) => product.id)),
   };
 
   const parsed = parseMerchantSelectionInput(
-    {
-      restricted: body.restricted,
-      categoryIds: body.categoryIds,
-      excludedProductIds: body.excludedProductIds,
-    },
+    { restricted: body.restricted, includedProductIds: body.includedProductIds },
     known,
   );
 
@@ -47,9 +42,9 @@ export async function PUT(request: Request) {
   // Le nombre transmis est renvoyé pour que l'écran l'affiche sans recharger :
   // c'est le seul chiffre qui dit vraiment ce que Google va lire.
   const count = catalogue
-    .filter((category) => !saved.restricted || saved.categoryIds.includes(category.id))
     .flatMap((category) => category.products)
-    .filter((product) => product.active && !saved.excludedProductIds.includes(product.id)).length;
+    .filter((product) => product.active && (!saved.restricted || saved.includedProductIds.includes(product.id)))
+    .length;
 
   return NextResponse.json({ ok: true, selection: saved, count });
 }

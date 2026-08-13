@@ -6,11 +6,9 @@
  * dans l'écran : cocher des cases sans les conserver n'aurait aucun effet sur
  * ce que Google finit par lire.
  *
- * Elle s'exprime par catégorie, pas par produit. Cocher « Waschmaschinen »
- * vaut pour la catégorie entière, y compris les articles qui y entreront plus
- * tard — un produit ajouté au catalogue se diffuse alors sans qu'on ait à y
- * repenser. À l'intérieur d'une catégorie retenue, on peut écarter un article
- * précis : c'est la liste des exclusions.
+ * Elle s'exprime produit par produit : cocher un article l'ajoute au flux,
+ * indépendamment de sa catégorie. Contrepartie de ce choix : un produit ajouté
+ * plus tard au catalogue ne part pas tout seul, il faut revenir cocher la case.
  *
  * Tant que rien n'est enregistré, tout le catalogue part. La boutique qui n'a
  * jamais ouvert cet écran garde donc le comportement d'avant.
@@ -22,28 +20,23 @@
 /** Réglage tel qu'il est enregistré. */
 export interface MerchantSelection {
   /**
-   * Faux : toutes les catégories partent, `categoryIds` est ignoré.
-   * Vrai : seules les catégories retenues partent.
-   * Dans les deux cas les exclusions produit s'appliquent.
+   * Faux : tout le catalogue actif part, `includedProductIds` est ignoré.
+   * Vrai : seuls les produits retenus partent.
    */
   restricted: boolean;
-  /** Identifiants des catégories retenues. */
-  categoryIds: string[];
-  /** Identifiants des produits écartés, quelles que soient les catégories. */
-  excludedProductIds: string[];
+  /** Identifiants des produits retenus. */
+  includedProductIds: string[];
 }
 
 /** Aucun réglage enregistré : le catalogue entier alimente le flux. */
 export const MERCHANT_SELECTION_DEFAULT: MerchantSelection = {
   restricted: false,
-  categoryIds: [],
-  excludedProductIds: [],
+  includedProductIds: [],
 };
 
 /** Produit réduit à ce dont le filtre a besoin. */
 export interface SelectableProduct {
   id: string;
-  categoryId: string;
 }
 
 /**
@@ -60,33 +53,22 @@ export function parseMerchantSelection(value: unknown): MerchantSelection {
       ? [...new Set(entry.filter((item): item is string => typeof item === "string" && item.trim() !== ""))]
       : [];
 
-  const categoryIds = ids(raw.categoryIds);
+  const includedProductIds = ids(raw.includedProductIds);
 
-  // « restreint » sans aucune catégorie viderait le flux. Le cas vient d'un
+  // « restreint » sans aucun produit viderait le flux. Le cas vient d'un
   // enregistrement fait sans rien cocher : on retombe sur le catalogue entier
   // plutôt que de retirer silencieusement la boutique de Google.
-  const restricted = raw.restricted === true && categoryIds.length > 0;
+  const restricted = raw.restricted === true && includedProductIds.length > 0;
 
-  return {
-    restricted,
-    categoryIds,
-    excludedProductIds: ids(raw.excludedProductIds),
-  };
+  return { restricted, includedProductIds };
 }
 
 /**
  * Vrai si ce produit doit figurer dans le flux.
- *
- * Les deux réglages sont indépendants : `restricted` limite aux catégories
- * retenues, la liste d'exclusions écarte des articles précis. Un article
- * décoché sort du flux même quand tout le catalogue part — c'est le geste le
- * plus courant du back-office, et le compteur affiché à l'écran l'a toujours
- * compté ainsi.
  */
 export function isInFeed(product: SelectableProduct, selection: MerchantSelection): boolean {
-  if (selection.excludedProductIds.includes(product.id)) return false;
   if (!selection.restricted) return true;
-  return selection.categoryIds.includes(product.categoryId);
+  return selection.includedProductIds.includes(product.id);
 }
 
 /** Applique la sélection à une liste de produits. */
@@ -94,46 +76,44 @@ export function filterForFeed<T extends SelectableProduct>(
   products: T[],
   selection: MerchantSelection,
 ): T[] {
-  if (!selection.restricted && selection.excludedProductIds.length === 0) return products;
+  if (!selection.restricted) return products;
   return products.filter((product) => isInFeed(product, selection));
 }
 
 /** Saisie de l'écran d'administration, avant contrôle. */
 export interface MerchantSelectionInput {
   restricted?: unknown;
-  categoryIds?: unknown;
-  excludedProductIds?: unknown;
+  includedProductIds?: unknown;
 }
 
 /**
  * Contrôle la saisie du back-office. Les identifiants inconnus sont écartés
- * plutôt que refusés : une catégorie supprimée entre l'affichage de l'écran et
+ * plutôt que refusés : un produit supprimé entre l'affichage de l'écran et
  * l'enregistrement ne doit pas faire échouer la sauvegarde entière.
  */
 export function parseMerchantSelectionInput(
   input: MerchantSelectionInput,
-  known: { categoryIds: string[]; productIds: string[] },
+  known: { productIds: string[] },
 ): { ok: true; value: MerchantSelection } | { ok: false; error: string } {
   const brut = parseMerchantSelection({
     restricted: input.restricted,
-    categoryIds: input.categoryIds,
-    excludedProductIds: input.excludedProductIds,
+    includedProductIds: input.includedProductIds,
   });
 
-  const categoriesConnues = new Set(known.categoryIds);
   const produitsConnus = new Set(known.productIds);
+  const includedProductIds = brut.includedProductIds.filter((id) => produitsConnus.has(id));
 
-  const categoryIds = brut.categoryIds.filter((id) => categoriesConnues.has(id));
-  const excludedProductIds = brut.excludedProductIds.filter((id) => produitsConnus.has(id));
-
-  // Restreindre à zéro catégorie retirerait la boutique de Google d'un clic,
+  // Restreindre à zéro produit retirerait la boutique de Google d'un clic,
   // sans que l'écran l'ait annoncé. On refuse et on le dit.
-  if (input.restricted === true && categoryIds.length === 0) {
+  if (input.restricted === true && includedProductIds.length === 0) {
     return {
       ok: false,
-      error: "Aucune catégorie retenue : le flux serait vide. Cochez au moins une catégorie, ou laissez tout le catalogue.",
+      error: "Aucun produit retenu : le flux serait vide. Cochez au moins un produit, ou laissez tout le catalogue.",
     };
   }
 
-  return { ok: true, value: { restricted: categoryIds.length > 0 && brut.restricted, categoryIds, excludedProductIds } };
+  return {
+    ok: true,
+    value: { restricted: includedProductIds.length > 0 && brut.restricted, includedProductIds },
+  };
 }

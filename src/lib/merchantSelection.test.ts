@@ -19,40 +19,19 @@ import {
   parseMerchantSelectionInput,
 } from "./merchantSelection";
 
-const PRODUITS = [
-  { id: "p1", categoryId: "waschmaschinen" },
-  { id: "p2", categoryId: "waschmaschinen" },
-  { id: "p3", categoryId: "fernseher" },
-  { id: "p4", categoryId: "kuehlgeraete" },
-];
+const PRODUITS = [{ id: "p1" }, { id: "p2" }, { id: "p3" }, { id: "p4" }];
 
-const CONNUS = {
-  categoryIds: ["waschmaschinen", "fernseher", "kuehlgeraete"],
-  productIds: ["p1", "p2", "p3", "p4"],
-};
+const CONNUS = { productIds: ["p1", "p2", "p3", "p4"] };
 
 describe("Filtre du flux Merchant", () => {
   it("transmet tout le catalogue tant que rien n'est restreint", () => {
     assert.deepEqual(filterForFeed(PRODUITS, MERCHANT_SELECTION_DEFAULT), PRODUITS);
   });
 
-  it("ne garde que les catégories retenues", () => {
+  it("ne garde que les produits retenus", () => {
     const retenus = filterForFeed(PRODUITS, {
       restricted: true,
-      categoryIds: ["waschmaschinen"],
-      excludedProductIds: [],
-    });
-    assert.deepEqual(
-      retenus.map((p) => p.id),
-      ["p1", "p2"],
-    );
-  });
-
-  it("écarte un produit précis à l'intérieur d'une catégorie retenue", () => {
-    const retenus = filterForFeed(PRODUITS, {
-      restricted: true,
-      categoryIds: ["waschmaschinen", "fernseher"],
-      excludedProductIds: ["p2"],
+      includedProductIds: ["p1", "p3"],
     });
     assert.deepEqual(
       retenus.map((p) => p.id),
@@ -60,40 +39,15 @@ describe("Filtre du flux Merchant", () => {
     );
   });
 
-  it("écarte un produit exclu même quand toutes les catégories partent", () => {
-    // Cas d'usage le plus courant du back-office : on laisse tout le catalogue
-    // coché et on décoche un seul article. L'écran annonce alors un produit de
-    // moins ; le flux doit dire la même chose.
-    const retenus = filterForFeed(PRODUITS, {
-      restricted: false,
-      categoryIds: [],
-      excludedProductIds: ["p2"],
-    });
-    assert.deepEqual(
-      retenus.map((p) => p.id),
-      ["p1", "p3", "p4"],
-    );
+  it("laisse dehors un produit non retenu", () => {
+    const selection = { restricted: true, includedProductIds: ["p3"] };
+    assert.equal(isInFeed({ id: "p1" }, selection), false);
+    assert.equal(isInFeed({ id: "p3" }, selection), true);
   });
 
-  it("inclut d'office un produit ajouté plus tard dans une catégorie retenue", () => {
-    // C'est la promesse faite au commerçant : cocher une catégorie vaut pour
-    // ses articles futurs, sans avoir à repasser par cet écran.
-    const selection = {
-      restricted: true,
-      categoryIds: ["fernseher"],
-      excludedProductIds: [],
-    };
-    const nouveau = { id: "p99", categoryId: "fernseher" };
-    assert.equal(isInFeed(nouveau, selection), true);
-  });
-
-  it("laisse dehors un produit d'une catégorie non retenue, même non exclu", () => {
-    const selection = {
-      restricted: true,
-      categoryIds: ["fernseher"],
-      excludedProductIds: [],
-    };
-    assert.equal(isInFeed({ id: "p1", categoryId: "waschmaschinen" }, selection), false);
+  it("inclut tout produit tant que rien n'est restreint, y compris un ajouté plus tard", () => {
+    const nouveau = { id: "p99" };
+    assert.equal(isInFeed(nouveau, MERCHANT_SELECTION_DEFAULT), true);
   });
 });
 
@@ -104,61 +58,51 @@ describe("Relecture du réglage enregistré", () => {
     }
   });
 
-  it("refuse de restreindre à zéro catégorie", () => {
-    // Une restriction sans aucune catégorie viderait le flux : la boutique
+  it("refuse de restreindre à zéro produit", () => {
+    // Une restriction sans aucun produit viderait le flux : la boutique
     // disparaîtrait de Google. On préfère tout transmettre.
-    const relu = parseMerchantSelection({ restricted: true, categoryIds: [] });
+    const relu = parseMerchantSelection({ restricted: true, includedProductIds: [] });
     assert.equal(relu.restricted, false);
   });
 
   it("dédoublonne et ignore les entrées qui ne sont pas des textes", () => {
     const relu = parseMerchantSelection({
       restricted: true,
-      categoryIds: ["a", "a", "", 7, null, "b"],
-      excludedProductIds: ["x", "x"],
+      includedProductIds: ["a", "a", "", 7, null, "b"],
     });
-    assert.deepEqual(relu.categoryIds, ["a", "b"]);
-    assert.deepEqual(relu.excludedProductIds, ["x"]);
+    assert.deepEqual(relu.includedProductIds, ["a", "b"]);
   });
 });
 
 describe("Contrôle de la saisie du back-office", () => {
   it("accepte une sélection normale", () => {
     const resultat = parseMerchantSelectionInput(
-      { restricted: true, categoryIds: ["waschmaschinen"], excludedProductIds: ["p2"] },
+      { restricted: true, includedProductIds: ["p1", "p2"] },
       CONNUS,
     );
     assert.equal(resultat.ok, true);
     if (resultat.ok) {
-      assert.deepEqual(resultat.value.categoryIds, ["waschmaschinen"]);
-      assert.deepEqual(resultat.value.excludedProductIds, ["p2"]);
+      assert.deepEqual(resultat.value.includedProductIds, ["p1", "p2"]);
+      assert.equal(resultat.value.restricted, true);
     }
   });
 
   it("écarte les identifiants inconnus sans faire échouer l'enregistrement", () => {
-    // Cas réel : une catégorie supprimée entre l'affichage de l'écran et le clic.
+    // Cas réel : un produit supprimé entre l'affichage de l'écran et le clic.
     const resultat = parseMerchantSelectionInput(
-      {
-        restricted: true,
-        categoryIds: ["waschmaschinen", "categorie-supprimee"],
-        excludedProductIds: ["p1", "produit-supprime"],
-      },
+      { restricted: true, includedProductIds: ["p1", "produit-supprime"] },
       CONNUS,
     );
     assert.equal(resultat.ok, true);
     if (resultat.ok) {
-      assert.deepEqual(resultat.value.categoryIds, ["waschmaschinen"]);
-      assert.deepEqual(resultat.value.excludedProductIds, ["p1"]);
+      assert.deepEqual(resultat.value.includedProductIds, ["p1"]);
     }
   });
 
-  it("refuse explicitement une restriction sans aucune catégorie", () => {
-    const resultat = parseMerchantSelectionInput(
-      { restricted: true, categoryIds: [], excludedProductIds: [] },
-      CONNUS,
-    );
+  it("refuse explicitement une restriction sans aucun produit", () => {
+    const resultat = parseMerchantSelectionInput({ restricted: true, includedProductIds: [] }, CONNUS);
     assert.equal(resultat.ok, false);
-    if (!resultat.ok) assert.match(resultat.error, /vide|au moins une/i);
+    if (!resultat.ok) assert.match(resultat.error, /vide|au moins un/i);
   });
 
   it("accepte de ne pas restreindre du tout", () => {

@@ -14,25 +14,30 @@ interface MerchantFeedSelectorProps {
 const CARD = "rounded-sm border border-border bg-white p-5";
 
 /**
- * Choix des produits transmis au flux Google.
+ * Choix des produits transmis au flux Google, produit par produit.
  *
- * La sélection porte sur les catégories : cocher « Waschmaschinen » vaut pour
- * la catégorie entière, articles à venir compris. On ouvre une catégorie pour
- * en écarter un produit précis — c'est le cas rare, il est donc replié.
+ * Cocher un article l'ajoute au flux, indépendamment de sa catégorie. Un
+ * produit ajouté plus tard au catalogue ne part pas tout seul : il faut
+ * revenir cocher sa case ici — contrepartie du choix « par produit » plutôt
+ * que « par catégorie ».
  *
- * Les produits inactifs sont affichés mais grisés : ils ne partent jamais dans
- * le flux, et les masquer laisserait croire à un catalogue amputé.
+ * Les catégories ne servent qu'à regrouper l'affichage ; chacune propose un
+ * raccourci pour cocher ou décocher tous ses articles d'un coup.
  */
 export function MerchantFeedSelector({ catalog, selection }: MerchantFeedSelectorProps) {
   const router = useRouter();
 
+  const produitsActifs = useMemo(
+    () => catalog.flatMap((category) => category.products).filter((product) => product.active),
+    [catalog],
+  );
+
   const [restricted, setRestricted] = useState(selection.restricted);
-  const [categoryIds, setCategoryIds] = useState<string[]>(
+  const [included, setIncluded] = useState<string[]>(
     // Sans restriction enregistrée, tout est coché : l'écran montre l'état réel
     // du flux, qui transmet alors le catalogue entier.
-    selection.restricted ? selection.categoryIds : catalog.map((category) => category.id),
+    selection.restricted ? selection.includedProductIds : produitsActifs.map((product) => product.id),
   );
-  const [excluded, setExcluded] = useState<string[]>(selection.excludedProductIds);
   const [ouvertes, setOuvertes] = useState<string[]>([]);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -50,34 +55,38 @@ export function MerchantFeedSelector({ catalog, selection }: MerchantFeedSelecto
 
   /** Nombre d'articles réellement transmis, tel que Google le lira. */
   const transmis = useMemo(() => {
-    return catalog
-      .filter((category) => !restricted || categoryIds.includes(category.id))
-      .flatMap((category) => category.products)
-      .filter((product) => product.active && !excluded.includes(product.id)).length;
-  }, [catalog, restricted, categoryIds, excluded]);
+    if (!restricted) return produitsActifs.length;
+    const retenus = new Set(included);
+    return produitsActifs.filter((product) => retenus.has(product.id)).length;
+  }, [produitsActifs, restricted, included]);
 
-  const total = useMemo(
-    () => catalog.flatMap((category) => category.products).filter((product) => product.active).length,
-    [catalog],
-  );
-
-  function toggleCategorie(id: string) {
-    setRestricted(true);
-    setCategoryIds((actuelles) =>
-      actuelles.includes(id) ? actuelles.filter((x) => x !== id) : [...actuelles, id],
-    );
-  }
+  const total = produitsActifs.length;
 
   function toggleProduit(id: string) {
-    setExcluded((actuels) =>
+    setRestricted(true);
+    setIncluded((actuels) =>
       actuels.includes(id) ? actuels.filter((x) => x !== id) : [...actuels, id],
     );
   }
 
   function toutSelectionner() {
     setRestricted(false);
-    setCategoryIds(catalog.map((category) => category.id));
-    setExcluded([]);
+    setIncluded(produitsActifs.map((product) => product.id));
+  }
+
+  function toutDeselectionner() {
+    setRestricted(true);
+    setIncluded([]);
+  }
+
+  /** Coche ou décoche tous les articles actifs d'une catégorie. */
+  function basculerCategorie(category: SelectableCategory, cocher: boolean) {
+    const idsCategorie = category.products.filter((product) => product.active).map((product) => product.id);
+    setRestricted(true);
+    setIncluded((actuels) => {
+      const sansCategorie = actuels.filter((id) => !idsCategorie.includes(id));
+      return cocher ? [...sansCategorie, ...idsCategorie] : sansCategorie;
+    });
   }
 
   async function enregistrer() {
@@ -88,7 +97,7 @@ export function MerchantFeedSelector({ catalog, selection }: MerchantFeedSelecto
     const response = await fetch("/api/admin/merchant-feed", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ restricted, categoryIds, excludedProductIds: excluded }),
+      body: JSON.stringify({ restricted, includedProductIds: included }),
     });
     setPending(false);
 
@@ -113,15 +122,13 @@ export function MerchantFeedSelector({ catalog, selection }: MerchantFeedSelecto
         <div>
           <h2 className="text-lg font-black text-foreground">Produits transmis au flux</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Cocher une catégorie vaut pour tous ses produits, y compris ceux que vous ajouterez
-            plus tard. Ouvrez une catégorie pour en écarter un article précis.
+            Cochez les produits à transmettre à Google. Un produit ajouté plus tard au catalogue
+            ne part pas automatiquement : revenez cocher sa case ici.
           </p>
         </div>
         <div className="text-right">
           <p className="text-3xl font-black text-foreground">{transmis}</p>
-          <p className="text-xs text-muted-foreground">
-            sur {total} actifs
-          </p>
+          <p className="text-xs text-muted-foreground">sur {total} actifs</p>
         </div>
       </div>
 
@@ -135,10 +142,7 @@ export function MerchantFeedSelector({ catalog, selection }: MerchantFeedSelecto
         </button>
         <button
           type="button"
-          onClick={() => {
-            setRestricted(true);
-            setCategoryIds([]);
-          }}
+          onClick={toutDeselectionner}
           className="rounded-sm border border-border px-3 py-1.5 text-xs font-bold text-foreground hover:border-primary"
         >
           Ne rien cocher
@@ -153,33 +157,13 @@ export function MerchantFeedSelector({ catalog, selection }: MerchantFeedSelecto
             </p>
             <ul className="space-y-1">
               {categories.map((category) => {
-                const cochee = !restricted || categoryIds.includes(category.id);
                 const ouverte = ouvertes.includes(category.id);
-                const actifs = category.products.filter((product) => product.active).length;
-                const ecartes = category.products.filter((product) =>
-                  excluded.includes(product.id),
-                ).length;
+                const actifs = category.products.filter((product) => product.active);
+                const retenus = actifs.filter((product) => !restricted || included.includes(product.id));
 
                 return (
                   <li key={category.id} className="rounded-sm border border-border">
                     <div className="flex items-center gap-2 px-3 py-2">
-                      <input
-                        type="checkbox"
-                        id={`cat-${category.id}`}
-                        checked={cochee}
-                        onChange={() => toggleCategorie(category.id)}
-                        className="h-4 w-4 accent-primary"
-                      />
-                      <label
-                        htmlFor={`cat-${category.id}`}
-                        className="flex-1 cursor-pointer text-sm font-bold text-foreground"
-                      >
-                        {category.label}
-                      </label>
-                      <span className="text-xs text-muted-foreground">
-                        {actifs} produit{actifs > 1 ? "s" : ""}
-                        {ecartes > 0 && ` · ${ecartes} écarté${ecartes > 1 ? "s" : ""}`}
-                      </span>
                       <button
                         type="button"
                         onClick={() =>
@@ -189,28 +173,46 @@ export function MerchantFeedSelector({ catalog, selection }: MerchantFeedSelecto
                               : [...liste, category.id],
                           )
                         }
-                        className="text-muted-foreground hover:text-foreground"
-                        aria-label={ouverte ? "Replier" : "Voir les produits"}
+                        className="flex flex-1 items-center gap-2 text-left"
+                        aria-expanded={ouverte}
                       >
                         {ouverte ? (
-                          <ChevronDown className="h-4 w-4" />
+                          <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground" />
                         ) : (
-                          <ChevronRight className="h-4 w-4" />
+                          <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
                         )}
+                        <span className="text-sm font-bold text-foreground">{category.label}</span>
+                      </button>
+                      <span className="text-xs text-muted-foreground">
+                        {retenus.length}/{actifs.length} retenu{retenus.length > 1 ? "s" : ""}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => basculerCategorie(category, true)}
+                        className="text-xs font-bold text-primary hover:underline"
+                      >
+                        Tout
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => basculerCategorie(category, false)}
+                        className="text-xs font-bold text-muted-foreground hover:underline"
+                      >
+                        Aucun
                       </button>
                     </div>
 
                     {ouverte && (
                       <ul className="border-t border-border bg-muted/40 px-3 py-2">
                         {category.products.map((product) => {
-                          const retenu = cochee && !excluded.includes(product.id);
+                          const coche = product.active && (!restricted || included.includes(product.id));
                           return (
                             <li key={product.id} className="flex items-center gap-2 py-1">
                               <input
                                 type="checkbox"
                                 id={`prod-${product.id}`}
-                                checked={retenu && product.active}
-                                disabled={!cochee || !product.active}
+                                checked={coche}
+                                disabled={!product.active}
                                 onChange={() => toggleProduit(product.id)}
                                 className="h-3.5 w-3.5 accent-primary"
                               />

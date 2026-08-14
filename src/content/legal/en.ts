@@ -320,11 +320,18 @@ export const enLegalPages: LegalPageMap = {
           "The legal basis is your consent under Article 6(1)(a) GDPR. You may unsubscribe at any time using the link in every email or by contacting us. Where the statutory requirements of section 7(3) of the German Act Against Unfair Competition are met, we may also send existing customers advertising for similar goods without separate consent; you may object to this at any time as well.",
       },
       {
-        heading: "11. Contacting us and customer service",
+        heading: "11. Shopping cart reminders",
+        body:
+          "If you enter your email address during checkout but do not complete the order, we store your email address, the selected items, the amounts and the time you left.\n\n" +
+          "We use this data to send you up to three reminders about your shopping cart within about a day and a half, and to help you if something went wrong during checkout. The last reminder may include a discount code. The legal basis is our legitimate interest in recovering abandoned checkouts (Art. 6(1)(f) GDPR).\n\n" +
+          "You may object at any time. Every message contains an unsubscribe link at the bottom. Once you unsubscribe, you will receive neither further reminders nor offers from us. The stored data is deleted automatically no later than 30 days after the checkout was abandoned, unless an order is placed.",
+      },
+      {
+        heading: "12. Contacting us and customer service",
         body: "If you contact us by email, telephone or contact form, we process your details in order to handle your enquiry. The legal basis is Article 6(1)(b) GDPR where the enquiry relates to a contract, otherwise Article 6(1)(f) GDPR. We delete enquiries once they have been dealt with conclusively and no retention obligations apply.",
       },
       {
-        heading: "12. Cookies and consent management",
+        heading: "13. Cookies and consent management",
         body:
           "We use cookies and comparable technologies. Technically necessary cookies — for the shopping basket, session management and security, for example — are used on the basis of section 25(2) of the German Telecommunications Digital Services Data Protection Act (TDDDG) without consent; the associated data processing is based on Article 6(1)(f) GDPR.\n\n" +
           "All other cookies, in particular for statistics and marketing, are used only with your express consent under section 25(1) TDDDG in conjunction with Article 6(1)(a) GDPR. You give this consent via our consent banner and can change or withdraw it at any time with effect for the future using the \"Cookie settings\" link in the footer. Where recognised consent management services are used, we take their signals into account.\n\n" +
@@ -333,19 +340,19 @@ export const enLegalPages: LegalPageMap = {
           "You can also delete or block cookies in your browser. Some shop functions may then no longer be fully available.",
       },
       {
-        heading: "13. Web analytics and marketing",
+        heading: "14. Web analytics and marketing",
         body: "Where we use web analytics, retargeting or conversion tracking services, we do so exclusively on the basis of your consent. The specific services used, their providers, the data processed, the storage period and any third-country transfers must be listed in full at this point before publication.",
       },
       {
-        heading: "14. Recipients and transfers to third countries",
+        heading: "15. Recipients and transfers to third countries",
         body: "Recipients of your data are exclusively service providers we have selected with care and who act for us as processors under Article 28 GDPR, as well as bodies to which we are legally required to transfer data (such as tax authorities). Transfers to countries outside the EU and the EEA take place only where an adequacy decision of the European Commission exists or appropriate safeguards within the meaning of Articles 44 et seq. GDPR — in particular standard contractual clauses — have been agreed.",
       },
       {
-        heading: "15. Retention periods",
+        heading: "16. Retention periods",
         body: "We store personal data only for as long as is necessary for the relevant purposes. Contract and invoice data are subject to commercial and tax retention periods of six and ten years respectively (section 257 of the German Commercial Code, section 147 of the German Fiscal Code). We delete the data once these periods have expired.",
       },
       {
-        heading: "16. Your rights as a data subject",
+        heading: "17. Your rights as a data subject",
         body: "You have the following rights in relation to us:",
         list: [
           "Right of access to the data stored about you (Article 15 GDPR)",
@@ -358,7 +365,7 @@ export const enLegalPages: LegalPageMap = {
         ],
       },
       {
-        heading: "17. Right to object under Article 21 GDPR",
+        heading: "18. Right to object under Article 21 GDPR",
         body:
           "You have the right to object at any time, on grounds relating to your particular situation, to the processing of personal data concerning you which is carried out on the basis of Article 6(1)(f) GDPR. We will then no longer process the data unless we can demonstrate compelling legitimate grounds that override your interests, rights and freedoms, or unless the processing serves to establish, exercise or defend legal claims.\n\n" +
           "If you object to processing for direct marketing purposes, we will no longer process your data for those purposes. No particular form is required for the objection; it may be sent to " +
@@ -366,17 +373,17 @@ export const enLegalPages: LegalPageMap = {
           ".",
       },
       {
-        heading: "18. Competent supervisory authority",
+        heading: "19. Competent supervisory authority",
         body: "The authority responsible for us is the State Commissioner for Data Protection and Freedom of Information of Rhineland-Palatinate (Landesbeauftragter für den Datenschutz und die Informationsfreiheit Rheinland-Pfalz), Hintere Bleiche 34, 55116 Mainz, Germany.",
       },
       {
-        heading: "19. Data security and automated decision-making",
+        heading: "20. Data security and automated decision-making",
         body:
           "We secure the transmission of your data using TLS encryption (recognisable by the padlock symbol in your browser's address bar) and implement technical and organisational measures in accordance with Article 32 GDPR.\n\n" +
           "Automated decision-making including profiling within the meaning of Article 22 GDPR does not take place, with the exception of the credit check described above, which is subject to manual review.",
       },
       {
-        heading: "20. Changes to this privacy policy",
+        heading: "21. Changes to this privacy policy",
         body: "We update this privacy policy when the legal situation, our services or our data processing change. The version published on this page applies. Last updated: 26 July 2026.",
       },
     ],

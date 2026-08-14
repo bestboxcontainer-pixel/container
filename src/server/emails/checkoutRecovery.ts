@@ -1,5 +1,5 @@
 /**
- * Les quatre messages de relance des tunnels abandonnés.
+ * Les trois messages de relance des tunnels abandonnés.
  *
  * Mêmes contraintes de mise en page que les autres gabarits du dossier :
  * tableaux, styles en ligne, `color-scheme: light`. C'est la seule entorse
@@ -7,14 +7,15 @@
  * messagerie ne respecte une feuille de style externe.
  *
  * Le premier message est un message de support, pas une offre : c'est le seul
- * cadrage défendable pour un envoi sans consentement préalable. Les textes
- * allemands sont figés dans la spec, section « Les quatre e-mails ».
+ * cadrage défendable pour un envoi sans consentement préalable.
  */
 
 import {
   availabilityLabel,
-  categoryPathFromProductPath,
   conditionLabel,
+  RECOVERY_COUPON_CODE,
+  RECOVERY_COUPON_MIN_SUBTOTAL_CENTS,
+  RECOVERY_COUPON_PERCENT,
   RESUME_QUERY_PARAM,
   type RecoveryLine,
 } from "@/lib/checkoutRecovery";
@@ -75,7 +76,20 @@ function productBlocks(lines: RecoveryLine[]): string {
                 <p style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:19px; color:#4b5563;">${label} in Ihrem Warenkorb.</p>`;
 }
 
-// ---- Contenu des quatre messages ----
+/** Bloc du code promotionnel, réservé au troisième message. */
+function couponBlock(): string {
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 16px 0; background-color:#fff5f5; border:1px dashed #e3000e; border-radius:4px;">
+                  <tr>
+                    <td align="center" style="padding:16px;">
+                      <p style="margin:0 0 6px 0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:19px; color:#4b5563;">${RECOVERY_COUPON_PERCENT} % Rabatt mit dem Code</p>
+                      <p style="margin:0 0 6px 0; font-family:Arial,Helvetica,sans-serif; font-size:22px; line-height:28px; font-weight:bold; letter-spacing:1px; color:#e3000e;">${escapeHtml(RECOVERY_COUPON_CODE)}</p>
+                      <p style="margin:0; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:18px; color:#6b7280;">Ab ${escapeHtml(formatPrice(RECOVERY_COUPON_MIN_SUBTOTAL_CENTS))} Warenwert, im Warenkorb eingeben.</p>
+                    </td>
+                  </tr>
+                </table>`;
+}
+
+// ---- Contenu des trois messages ----
 
 interface MailContent {
   subject: string;
@@ -83,79 +97,60 @@ interface MailContent {
   heading: string;
   paragraphs: string[];
   actionLabel: string;
-  /** Cible du bouton : reprise du tunnel, ou catégorie pour le dernier message. */
-  actionTarget: "resume" | "category";
   contactLead: string;
   contactLabel: string;
+  /** Réservé au troisième message. */
+  showCoupon?: boolean;
 }
 
-function contentFor(rank: 1 | 2 | 3 | 4): MailContent {
+function contentFor(rank: 1 | 2 | 3): MailContent {
   if (rank === 1) {
     return {
-      subject: "Brauchen Sie Hilfe bei Ihrer Bestellung?",
-      preheader: "Ihr Warenkorb ist gespeichert – wir helfen gern weiter.",
-      heading: "Hat beim Abschluss etwas nicht funktioniert?",
+      subject: "Ihr Warenkorb wartet auf Sie",
+      preheader: "Wir haben Ihren Warenkorb gespeichert – wir helfen gern weiter.",
+      heading: "Ihr Warenkorb ist noch da",
       paragraphs: [
-        "Sie haben vor wenigen Minuten eine Bestellung bei Hausgeräte Pfeffer begonnen, sie aber nicht abgeschlossen. Ihr Warenkorb liegt weiterhin für Sie bereit.",
-        "Falls es an der Zahlung gelegen hat: Manchmal bricht eine Verbindung ab oder eine Eingabe wird nicht übernommen. Über den Button unten setzen Sie Ihre Bestellung genau dort fort, wo Sie aufgehört haben – Ihre Angaben sind noch gespeichert.",
+        "Sie haben vor Kurzem eine Bestellung bei Hausgeräte Pfeffer begonnen, sie aber nicht abgeschlossen. Falls etwas nicht geklappt hat oder Sie einfach unterbrochen wurden: Ihr Warenkorb ist weiterhin für Sie gespeichert.",
+        "Über den Button unten setzen Sie Ihre Bestellung genau dort fort, wo Sie aufgehört haben – Ihre Angaben sind noch da.",
       ],
       actionLabel: "Bestellung fortsetzen",
-      actionTarget: "resume",
-      contactLead: "Probleme bei der Zahlung? Schreiben Sie uns kurz – wir antworten am gleichen Werktag.",
+      contactLead: "Fragen zu Ihrer Bestellung? Schreiben Sie uns kurz – wir antworten am gleichen Werktag.",
       contactLabel: "Zum Kontaktformular",
     };
   }
   if (rank === 2) {
     return {
       subject: "Ihr Gerät ist noch für Sie verfügbar",
-      // Le standard est gratuit sans montant minimum d'achat (src/lib/cart.ts) :
-      // aucun seuil à annoncer, contrairement à une ancienne version de ce texte.
-      preheader: "Ihr Warenkorb wartet – der Standardversand ist bei uns immer kostenlos.",
+      preheader: "Kostenloser Standardversand, ohne Mindestbestellwert.",
       heading: "Ihr Warenkorb ist noch da",
       paragraphs: [
         "Ihre Auswahl liegt weiterhin in Ihrem Warenkorb. Sie können die Bestellung mit einem Klick abschließen, ohne Ihre Daten erneut eingeben zu müssen.",
-        "Gut zu wissen: Der Standardversand ist bei uns immer kostenlos, ohne Mindestbestellwert. Und Sie haben 14 Tage Widerrufsrecht – passt das Gerät nicht, nehmen wir es zurück.",
+        "Gut zu wissen: Der Standardversand ist bei uns immer kostenlos, ohne Mindestbestellwert. Wer es eilig hat, wählt den Expressversand für 70,00 €. Und Sie haben in jedem Fall 14 Tage Widerrufsrecht – passt das Gerät nicht, nehmen wir es zurück.",
       ],
       actionLabel: "Jetzt abschließen",
-      actionTarget: "resume",
       contactLead: "Unsicher bei der Auswahl? Wir beraten Sie gern.",
       contactLabel: "Kontakt aufnehmen",
     };
   }
-  if (rank === 3) {
-    return {
-      subject: "Noch Fragen zu Ihrem Gerät?",
-      preheader: "Maße, Anschluss, Lieferzeit – fragen Sie uns.",
-      heading: "Sprechen Sie mit uns, bevor Sie sich entscheiden",
-      paragraphs: [
-        "Ein Haushaltsgerät kauft man nicht jeden Tag. Wenn Sie noch etwas klären möchten – Maße, Anschluss, Lieferzeit oder Entsorgung des Altgeräts – beantworten wir Ihre Fragen gern persönlich.",
-        "Ihr Warenkorb bleibt gespeichert. Sie können ihn jederzeit über den Button unten öffnen.",
-      ],
-      actionLabel: "Warenkorb ansehen",
-      actionTarget: "resume",
-      contactLead: "Lieber direkt fragen? Wir sind für Sie erreichbar.",
-      contactLabel: "Frage stellen",
-    };
-  }
   return {
-    subject: "Wir sind weiterhin für Sie da",
-    preheader: "Weitere Modelle in derselben Kategorie.",
-    heading: "Falls Sie sich anders entschieden haben",
+    subject: "Ihr Warenkorb wird bald gelöscht – 10 % geschenkt",
+    preheader: `Nutzen Sie ${RECOVERY_COUPON_PERCENT} % Rabatt auf Ihre Bestellung ab ${RECOVERY_COUPON_MIN_SUBTOTAL_CENTS / 100} €.`,
+    heading: "Ihr Warenkorb wird in Kürze gelöscht",
     paragraphs: [
       "Ihr gespeicherter Warenkorb wird bald automatisch gelöscht. Das ist völlig in Ordnung – vielleicht war es nicht das passende Gerät.",
-      "In derselben Kategorie führen wir weitere Modelle, auch in anderen Preislagen. Und wenn Sie etwas Bestimmtes suchen, das Sie bei uns online nicht finden: fragen Sie uns, wir haben oft mehr auf Lager, als die Website zeigt.",
+      "Falls Sie sich noch entscheiden möchten, haben wir Ihnen einen Rabattcode mitgeschickt. Geben Sie ihn beim Bezahlen im Warenkorb ein.",
     ],
-    actionLabel: "Weitere Geräte ansehen",
-    actionTarget: "category",
+    actionLabel: "Bestellung fortsetzen",
     contactLead: "Eine konkrete Frage? Schreiben Sie uns.",
     contactLabel: "Kontakt aufnehmen",
+    showCoupon: true,
   };
 }
 
 // ---- Assemblage ----
 
 export interface RecoveryMailInput {
-  rank: 1 | 2 | 3 | 4;
+  rank: 1 | 2 | 3;
   lines: RecoveryLine[];
   totalCents: number;
   resumeToken: string;
@@ -172,14 +167,16 @@ export function recoveryMail(input: RecoveryMailInput): MailMessage {
   const resume = resumeUrl(input.resumeToken);
   const unsubscribe = unsubscribeUrl(input.resumeToken);
   const contact = contactUrl();
-  const category = `${siteUrl()}${categoryPathFromProductPath(input.lines[0].path)}`;
 
   // Le bloc produit est inséré avant le dernier paragraphe, pour que le client
-  // voie l'appareil avant l'argument, puis le bouton juste après.
+  // voie l'appareil avant l'argument, puis le bouton juste après. Le code
+  // promotionnel, lui, vient après le total : c'est la dernière chose lue
+  // avant le bouton.
   const paragraphs = [
     ...content.paragraphs.map(escapeHtml),
     productBlocks(input.lines),
     `<strong>Gesamtsumme: ${escapeHtml(formatPrice(input.totalCents))}</strong>`,
+    ...(content.showCoupon ? [couponBlock()] : []),
   ];
 
   const html = layout({
@@ -187,10 +184,7 @@ export function recoveryMail(input: RecoveryMailInput): MailMessage {
     preheader: content.preheader,
     heading: content.heading,
     paragraphs,
-    action: {
-      label: content.actionLabel,
-      url: content.actionTarget === "category" ? category : resume,
-    },
+    action: { label: content.actionLabel, url: resume },
     footnote: `${escapeHtml(content.contactLead)} <a href="${escapeHtml(contact)}" style="color:#e3000e; text-decoration:underline;">${escapeHtml(content.contactLabel)}</a>`,
     unsubscribe: { label: "Keine Erinnerungen mehr erhalten", url: unsubscribe },
   });
@@ -203,6 +197,10 @@ export function recoveryMail(input: RecoveryMailInput): MailMessage {
     )
     .join("\n");
 
+  const couponText = content.showCoupon
+    ? `\n${RECOVERY_COUPON_PERCENT} % Rabatt mit dem Code ${RECOVERY_COUPON_CODE}, ab ${formatPrice(RECOVERY_COUPON_MIN_SUBTOTAL_CENTS)} Warenwert.\n`
+    : "";
+
   const text = [
     content.heading,
     "",
@@ -210,8 +208,8 @@ export function recoveryMail(input: RecoveryMailInput): MailMessage {
     "",
     productText,
     `Gesamtsumme: ${formatPrice(input.totalCents)}`,
-    "",
-    `${content.actionLabel}: ${content.actionTarget === "category" ? category : resume}`,
+    couponText,
+    `${content.actionLabel}: ${resume}`,
     "",
     `${content.contactLead} ${contact}`,
     "",

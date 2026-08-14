@@ -158,7 +158,7 @@ export function RecoveryTable({
                 <td className="px-4 py-3 text-muted-foreground">
                   {STEP_LABELS[row.lastStep] ?? row.lastStep}
                 </td>
-                <td className="px-4 py-3 text-muted-foreground">{row.sentCount} / 4</td>
+                <td className="px-4 py-3 text-muted-foreground">{row.sentCount} / 3</td>
                 <td className="px-4 py-3">
                   <span className={`rounded-sm px-2 py-1 text-xs font-bold ${STATE_BADGES[row.state]}`}>
                     {STATE_LABELS[row.state]}

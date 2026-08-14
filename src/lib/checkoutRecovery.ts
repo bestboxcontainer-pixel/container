@@ -43,22 +43,22 @@ export interface RecoveryLine {
 
 // ---- Calendrier ----
 
-/** Quatre messages, pas plus : au-delà, une relance devient du harcèlement. */
-export const RECOVERY_MAIL_COUNT = 4;
+/** Trois messages, pas plus : au-delà, une relance devient du harcèlement. */
+export const RECOVERY_MAIL_COUNT = 3;
 
 const MINUTE = 60_000;
 const HOUR = 60 * MINUTE;
-const DAY = 24 * HOUR;
 
 /**
  * Délais **relatifs au message précédent**, indexés par le nombre de messages
  * déjà envoyés. Le premier compte depuis la capture.
  *
- * Dix minutes et non cinq : remplir une adresse de livraison à la main prend
- * facilement quatre à cinq minutes, et relancer un client encore en train
- * d'acheter est le meilleur moyen de le faire fuir.
+ * Vingt minutes pour le premier : assez pour laisser le visiteur revenir de
+ * lui-même, encore assez tôt pour un simple rappel. Huit heures avant le
+ * deuxième — le temps d'une nuit ou d'une journée de travail. Vingt-quatre
+ * heures avant le troisième, dernière relance avant suppression du panier.
  */
-export const RECOVERY_DELAYS_MS: readonly number[] = [10 * MINUTE, 24 * HOUR, 3 * DAY, 7 * DAY];
+export const RECOVERY_DELAYS_MS: readonly number[] = [20 * MINUTE, 8 * HOUR, 24 * HOUR];
 
 /** Date du prochain envoi, ou null quand la séquence est épuisée. */
 export function nextSendAtFor(sentCount: number, from: Date): Date | null {
@@ -95,6 +95,22 @@ export const RECOVERY_ENABLED_SETTING = "checkoutRecovery.enabled";
 
 /** Paramètre d'URL porteur du jeton de reprise sur la page caisse. */
 export const RESUME_QUERY_PARAM = "fortsetzen";
+
+// ---- Code promotionnel du troisième message ----
+//
+// Code fixe, à saisir manuellement au panier — pas de lien qui l'appliquerait
+// tout seul, pour rester sur le même mécanisme que n'importe quel coupon de la
+// boutique. La ligne Coupon correspondante vit en base (table Coupon, code
+// ci-dessous) : c'est elle qui fait foi pour le pourcentage et le seuil,
+// jamais recalculée ici. Ces deux constantes ne servent qu'à composer le texte
+// du message ; les changer ne change pas ce que Prisma applique réellement.
+
+/** Code annoncé dans le troisième message. */
+export const RECOVERY_COUPON_CODE = "WARENKORB10";
+/** Pourcentage de remise du coupon ci-dessus, pour le texte du message. */
+export const RECOVERY_COUPON_PERCENT = 10;
+/** Panier minimum exigé, en centimes, pour le texte du message. */
+export const RECOVERY_COUPON_MIN_SUBTOTAL_CENTS = 30_000;
 
 // ---- Libellés allemands ----
 
@@ -162,14 +178,3 @@ export function decodeCart(json: string): RecoveryLine[] {
   return parsed.filter(isRecoveryLine);
 }
 
-// ---- URL ----
-
-/**
- * Page de la catégorie d'un article, obtenue en retirant le dernier segment de
- * son chemin. Sert au quatrième message, qui propose d'autres modèles.
- */
-export function categoryPathFromProductPath(path: string): string {
-  const segments = path.split("/").filter(Boolean);
-  if (segments.length < 3) return "/";
-  return `/${segments.slice(0, -1).join("/")}`;
-}

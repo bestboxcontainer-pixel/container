@@ -44,9 +44,9 @@ async function main(): Promise<void> {
   assert.equal(created.sentCount, 0);
   assert.equal(created.lastStep, "contact");
   assert.ok(created.nextSendAt, "nextSendAt non programmé");
-  // Le premier message est dû dans dix minutes, à quelques secondes près.
+  // Le premier message est dû dans vingt minutes, à quelques secondes près.
   const delay = created.nextSendAt.getTime() - created.createdAt.getTime();
-  assert.ok(delay > 9 * 60_000 && delay < 11 * 60_000, `délai inattendu : ${delay} ms`);
+  assert.ok(delay > 19 * 60_000 && delay < 21 * 60_000, `délai inattendu : ${delay} ms`);
   // Le jeton circule en clair dans le message : 64 caractères hexadécimaux.
   assert.match(created.resumeToken, /^[0-9a-f]{64}$/);
 
@@ -139,8 +139,8 @@ async function main(): Promise<void> {
     });
   }
 
-  // Les quatre messages partent l'un après l'autre, jamais deux au même tick.
-  for (const expected of [1, 2, 3, 4]) {
+  // Les trois messages partent l'un après l'autre, jamais deux au même tick.
+  for (const expected of [1, 2, 3]) {
     await makeDue();
     const result = await runRecoveryTick({ dryRun: true });
     assert.equal(result.sent, 1, `le tick n'a pas envoyé le message ${expected}`);
@@ -153,18 +153,18 @@ async function main(): Promise<void> {
     assert.ok(row.lastSentAt, "lastSentAt non renseigné");
   }
 
-  // Après le quatrième, la séquence est terminée et ne repart pas.
+  // Après le troisième, la séquence est terminée et ne repart pas.
   const finished = await prisma.checkoutRecovery.findUnique({
     where: { emailNormalized: NORMALIZED },
   });
   assert.ok(finished);
-  assert.equal(finished.sentCount, 4);
+  assert.equal(finished.sentCount, 3);
   assert.equal(finished.stoppedReason, "completed");
   assert.equal(finished.nextSendAt, null);
 
   await makeDue();
   const afterEnd = await runRecoveryTick({ dryRun: true });
-  assert.equal(afterEnd.sent, 0, "un cinquième message est parti");
+  assert.equal(afterEnd.sent, 0, "un quatrième message est parti");
 
   // ---- Une commande arrête la séquence ----
 

@@ -469,7 +469,7 @@ export async function runRecoveryTick(
       continue;
     }
 
-    const rank = (row.sentCount + 1) as 1 | 2 | 3 | 4;
+    const rank = (row.sentCount + 1) as 1 | 2 | 3;
     const message = recoveryMail({
       rank,
       lines,

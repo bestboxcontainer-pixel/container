@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { recoveryMail, resumeUrl, unsubscribeUrl } from "../../src/server/emails/checkoutRecovery";
+import { RECOVERY_COUPON_CODE } from "../../src/lib/checkoutRecovery";
 import type { RecoveryLine } from "../../src/lib/checkoutRecovery";
 
 const TOKEN = "a1b2c3d4e5f60718293a4b5c6d7e8f90a1b2c3d4e5f60718293a4b5c6d7e8f90";
@@ -37,16 +38,15 @@ const OUT = join(process.cwd(), ".next", "cache", "recovery-preview");
 mkdirSync(OUT, { recursive: true });
 
 const SUBJECTS = [
-  "Brauchen Sie Hilfe bei Ihrer Bestellung?",
+  "Ihr Warenkorb wartet auf Sie",
   "Ihr Gerät ist noch für Sie verfügbar",
-  "Noch Fragen zu Ihrem Gerät?",
-  "Wir sind weiterhin für Sie da",
+  "Ihr Warenkorb wird bald gelöscht – 10 % geschenkt",
 ];
 
-for (const rank of [1, 2, 3, 4] as const) {
+for (const rank of [1, 2, 3] as const) {
   const mail = recoveryMail({ rank, lines: LINES, totalCents: 174_700, resumeToken: TOKEN });
 
-  // Objet exact, repris de la spec.
+  // Objet exact.
   assert.equal(mail.subject, SUBJECTS[rank - 1], `objet du message ${rank}`);
 
   // Le message porte le produit : image, marque, nom, prix.
@@ -58,14 +58,11 @@ for (const rank of [1, 2, 3, 4] as const) {
   assert.ok(mail.html.includes("Nur noch 3 verfügbar"), `disponibilité absente du message ${rank}`);
   assert.ok(mail.html.includes("Generalüberholt"), `état absent du message ${rank}`);
 
-  // Le bouton de reprise, sauf le quatrième message : son bouton pointe vers
-  // la catégorie (« weitere Geräte »), vérifié séparément plus bas.
-  if (rank !== 4) {
-    assert.ok(mail.html.includes(resumeUrl(TOKEN)), `lien de reprise absent du message ${rank}`);
-  }
+  // Le bouton de reprise, présent dans les trois messages.
+  assert.ok(mail.html.includes(resumeUrl(TOKEN)), `lien de reprise absent du message ${rank}`);
   assert.ok(mail.html.includes("/kontakt"), `lien contact absent du message ${rank}`);
 
-  // Le lien de désabonnement, dans les quatre messages sans exception.
+  // Le lien de désabonnement, dans les trois messages sans exception.
   assert.ok(
     mail.html.includes(unsubscribeUrl(TOKEN)),
     `lien de désabonnement absent du message ${rank}`,
@@ -80,8 +77,7 @@ for (const rank of [1, 2, 3, 4] as const) {
   assert.equal(mail.headers?.["List-Unsubscribe"], `<${unsubscribeUrl(TOKEN)}>`);
   assert.equal(mail.headers?.["List-Unsubscribe-Post"], "List-Unsubscribe=One-Click");
 
-  // Version texte non vide : un message sans partie texte est pénalisé par les
-  // filtres, et illisible pour qui coupe le HTML.
+  // Version texte non vide.
   assert.ok(mail.text.trim().length > 80, `version texte trop courte pour le message ${rank}`);
 
   // Aucun emoji, nulle part.
@@ -90,24 +86,26 @@ for (const rank of [1, 2, 3, 4] as const) {
     `emoji détecté dans le message ${rank}`,
   );
 
+  // Le code promotionnel n'apparaît que dans le troisième message.
+  if (rank === 3) {
+    assert.ok(mail.html.includes(RECOVERY_COUPON_CODE), "code promotionnel absent du 3e message");
+    assert.ok(mail.text.includes(RECOVERY_COUPON_CODE), "code promotionnel absent du texte du 3e message");
+  } else {
+    assert.ok(!mail.html.includes(RECOVERY_COUPON_CODE), `code promotionnel présent à tort au message ${rank}`);
+  }
+
   writeFileSync(join(OUT, `mail-${rank}.html`), mail.html, "utf8");
 }
 
-// Le deuxième message annonce le standard gratuit sans montant minimum, comme
-// src/lib/cart.ts (SHIPPING_METHODS[0].cents === 0, sans seuil) : aucun montant
-// à interpoler, mais la mention doit rester présente.
+// Le deuxième message annonce le standard gratuit sans condition et l'option
+// express, ainsi que les 14 jours de rétractation.
 const second = recoveryMail({ rank: 2, lines: LINES, totalCents: 174_700, resumeToken: TOKEN });
 assert.ok(
   second.html.includes("Standardversand ist bei uns immer kostenlos"),
   "mention du standard gratuit absente du deuxième message",
 );
-
-// Le quatrième message renvoie vers la catégorie du premier article.
-const fourth = recoveryMail({ rank: 4, lines: LINES, totalCents: 174_700, resumeToken: TOKEN });
-assert.ok(
-  fourth.html.includes("/haushalt/kaffeemaschinen"),
-  "lien catégorie absent du quatrième message",
-);
+assert.ok(second.html.includes("Expressversand"), "mention de l'express absente du deuxième message");
+assert.ok(second.html.includes("14 Tage"), "mention du délai de rétractation absente du deuxième message");
 
 // Panier de plus de trois lignes : les suivantes sont résumées.
 const many: RecoveryLine[] = [
@@ -127,4 +125,4 @@ assert.throws(
   /panier vide/,
 );
 
-console.log(`recovery-mails : quatre aperçus écrits dans ${OUT}`);
+console.log(`recovery-mails : trois aperçus écrits dans ${OUT}`);

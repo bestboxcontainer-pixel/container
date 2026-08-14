@@ -120,6 +120,31 @@ Deux commandes de test restent en base (`test.kunde@example.de` et
 `test.bestellung@example.de`) ainsi que trois avis d'exemple : supprimables
 depuis le back-office.
 
+## Relance des paniers abandonnés (Warenkorb-Erinnerungen)
+
+Trois e-mails automatiques vers les visiteurs qui saisissent leur adresse dans le tunnel
+sans terminer la commande : +20 min (rappel doux, cadré comme de l'aide), +8 h après le
+premier (options de livraison, 14 jours de rétractation), +24 h après le deuxième
+(dernière relance avant suppression, avec un code promo). Détails dans
+`docs/superpowers/specs/2026-07-26-warenkorb-erinnerungen-design.md`.
+
+- **Sans consentement préalable.** En droit allemand c'est de la publicité au sens du
+  § 7 UWG ; l'exception « clients existants » ne s'applique pas puisqu'aucune vente n'a
+  eu lieu. Le propriétaire de la boutique a accepté ce risque en connaissance de cause.
+  Garde-fous : premier message cadré comme du support, lien de désabonnement définitif
+  dans les trois messages, interrupteur `checkoutRecovery.enabled` dans le back-office
+  (`/admin/warenkorb-erinnerungen`) coupant l'envoi sans redéploiement.
+- **Planificateur interne**, pas de cron système : `src/instrumentation.ts` démarre un
+  `setInterval` de 60 s au lancement de chaque instance Next (`next dev` ou `next start`
+  uniquement — un hébergement serverless ne déclencherait rien). `POST
+  /api/cron/recovery`, protégé par `RECOVERY_CRON_SECRET`, reste le point d'entrée pour
+  un cron externe si l'hébergement change un jour.
+- **Coupon `WARENKORB10`** créé en base pour le troisième message : 10 %, dès 300 €
+  d'achat, sans limite de date ni de nombre d'utilisations, applicable à tout le
+  catalogue. À surveiller comme n'importe quel coupon actif (`/admin/coupons`).
+- Rétention de 30 jours sur les sessions captées ; `EmailSuppression` (partagée avec les
+  campagnes marketing) n'est jamais purgée.
+
 ## Limites connues, à traiter avant d'ouvrir la boutique
 
 1. **Aucun e-mail n'est envoyé** — la confirmation de commande par e-mail est

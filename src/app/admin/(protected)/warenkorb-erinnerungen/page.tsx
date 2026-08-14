@@ -62,7 +62,7 @@ export default async function RecoveryPage({
       </div>
 
       <p className="mb-6 text-sm text-muted-foreground">
-        Séquence automatique de quatre e-mails envoyés aux visiteurs qui ont saisi leur adresse
+        Séquence automatique de trois e-mails envoyés aux visiteurs qui ont saisi leur adresse
         dans le tunnel de commande sans le terminer.
       </p>
 

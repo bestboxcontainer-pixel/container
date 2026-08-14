@@ -335,11 +335,18 @@ export const deLegalPages: LegalPageMap = {
           "Rechtsgrundlage ist Ihre Einwilligung nach Artikel 6 Absatz 1 Buchstabe a DSGVO. Sie können den Newsletter jederzeit über den Abmeldelink in jeder E-Mail oder per Nachricht an uns abbestellen. Bestandskundinnen und -kunden können wir unter den Voraussetzungen des § 7 Absatz 3 UWG auch ohne gesonderte Einwilligung Werbung für ähnliche Waren senden; auch dagegen können Sie jederzeit widersprechen.",
       },
       {
-        heading: "11. Kontaktaufnahme und Kundenservice",
+        heading: "11. Warenkorb-Erinnerungen",
+        body:
+          "Wenn Sie im Bestellvorgang Ihre E-Mail-Adresse eingeben, die Bestellung aber nicht abschließen, speichern wir Ihre E-Mail-Adresse, die gewählten Artikel, die Beträge und den Zeitpunkt des Abbruchs.\n\n" +
+          "Wir verwenden diese Daten, um Ihnen innerhalb von rund anderthalb Tagen bis zu drei Erinnerungen an Ihren Warenkorb zu senden und Ihnen bei Problemen im Bestellvorgang zu helfen. Die letzte Erinnerung kann einen Rabattcode enthalten. Rechtsgrundlage ist unser berechtigtes Interesse an der Wiederaufnahme abgebrochener Bestellvorgänge (Art. 6 Abs. 1 lit. f DSGVO).\n\n" +
+          "Sie können dieser Verarbeitung jederzeit widersprechen. Jede Nachricht enthält am Ende einen Abmeldelink. Nach der Abmeldung erhalten Sie weder weitere Erinnerungen noch Angebote von uns. Die gespeicherten Daten werden spätestens 30 Tage nach dem Abbruch automatisch gelöscht, sofern keine Bestellung zustande kommt.",
+      },
+      {
+        heading: "12. Kontaktaufnahme und Kundenservice",
         body: "Wenn Sie uns per E-Mail, Telefon oder Kontaktformular kontaktieren, verarbeiten wir Ihre Angaben zur Bearbeitung der Anfrage. Rechtsgrundlage ist Artikel 6 Absatz 1 Buchstabe b DSGVO, sofern die Anfrage einen Vertrag betrifft, ansonsten Artikel 6 Absatz 1 Buchstabe f DSGVO. Anfragen löschen wir, sobald sie abschließend bearbeitet sind und keine Aufbewahrungspflichten entgegenstehen.",
       },
       {
-        heading: "12. Cookies und Einwilligungsverwaltung",
+        heading: "13. Cookies und Einwilligungsverwaltung",
         body:
           "Der Betrieb dieses Shops beruht auf technisch notwendigen Cookies: Warenkorb, Sitzungsverwaltung, Sprachwahl und Sicherheit. Sie sind nach § 25 Absatz 2 Nummer 2 TDDDG einwilligungsfrei; die damit verbundene Datenverarbeitung stützt sich auf Artikel 6 Absatz 1 Buchstabe f DSGVO. Einwilligungsfrei ist auch die Speicherung Ihrer Antwort auf das Einwilligungsbanner – ohne sie müssten wir Sie auf jeder Seite erneut fragen.\n\n" +
           "Einen Live-Chat der Smartsupp s.r.o. (Tschechische Republik) bieten wir über eine Schaltfläche unten rechts an. Beim Laden speichert dieser Dienst eine Besucherkennung auf Ihrem Gerät. Sie ist für den Betrieb des Shops nicht erforderlich und wird deshalb nur mit Ihrer Einwilligung gesetzt (§ 25 Absatz 1 TDDDG). Rechtsgrundlage der anschließenden Datenverarbeitung ist Artikel 6 Absatz 1 Buchstabe a DSGVO.\n\n" +
@@ -350,19 +357,19 @@ export const deLegalPages: LegalPageMap = {
           "Zusätzlich können Sie Cookies in Ihrem Browser löschen oder blockieren. Einige Funktionen des Shops stehen dann möglicherweise nicht mehr vollständig zur Verfügung.",
       },
       {
-        heading: "13. Reichweitenmessung und Marketing",
+        heading: "14. Reichweitenmessung und Marketing",
         body: "Soweit wir Web-Analyse-, Retargeting- oder Conversion-Tracking-Dienste einsetzen, geschieht dies ausschließlich auf Basis Ihrer Einwilligung. Die konkret eingesetzten Dienste, ihre Anbieter, die verarbeiteten Daten, die Speicherdauer und etwaige Drittlandübermittlungen sind vor der Veröffentlichung an dieser Stelle vollständig zu benennen.",
       },
       {
-        heading: "14. Empfänger und Übermittlung in Drittländer",
+        heading: "15. Empfänger und Übermittlung in Drittländer",
         body: "Empfänger Ihrer Daten sind ausschließlich Dienstleister, die wir sorgfältig ausgewählt haben und die als Auftragsverarbeiter nach Artikel 28 DSGVO für uns tätig werden, sowie Stellen, an die wir aufgrund gesetzlicher Pflichten übermitteln müssen (etwa Finanzbehörden). Dazu zählt die Smartsupp s.r.o. (Tschechische Republik) als Anbieter des Live-Chats – nach Ihrer Einwilligung ab dem Seitenaufruf, andernfalls ausschließlich für Gespräche, die Sie selbst eröffnen. Eine Übermittlung in Länder außerhalb der EU und des EWR findet nur statt, wenn ein Angemessenheitsbeschluss der Europäischen Kommission vorliegt oder geeignete Garantien im Sinne der Artikel 44 ff. DSGVO – insbesondere Standardvertragsklauseln – vereinbart sind.",
       },
       {
-        heading: "15. Speicherdauer",
+        heading: "16. Speicherdauer",
         body: "Wir speichern personenbezogene Daten nur so lange, wie es für die jeweiligen Zwecke erforderlich ist. Vertrags- und Rechnungsdaten unterliegen handels- und steuerrechtlichen Aufbewahrungsfristen von sechs beziehungsweise zehn Jahren (§ 257 HGB, § 147 AO). Nach Ablauf dieser Fristen löschen wir die Daten.",
       },
       {
-        heading: "16. Ihre Rechte als betroffene Person",
+        heading: "17. Ihre Rechte als betroffene Person",
         body: "Ihnen stehen gegenüber uns die folgenden Rechte zu:",
         list: [
           "Auskunft über die zu Ihrer Person gespeicherten Daten (Artikel 15 DSGVO)",
@@ -375,7 +382,7 @@ export const deLegalPages: LegalPageMap = {
         ],
       },
       {
-        heading: "17. Widerspruchsrecht nach Artikel 21 DSGVO",
+        heading: "18. Widerspruchsrecht nach Artikel 21 DSGVO",
         body:
           "Sie haben das Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung Sie betreffender personenbezogener Daten Widerspruch einzulegen, die auf Grundlage von Artikel 6 Absatz 1 Buchstabe f DSGVO erfolgt. Wir verarbeiten die Daten dann nicht mehr, es sei denn, wir können zwingende schutzwürdige Gründe nachweisen, die Ihre Interessen, Rechte und Freiheiten überwiegen, oder die Verarbeitung dient der Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen.\n\n" +
           "Widersprechen Sie der Verarbeitung zum Zweck der Direktwerbung, verarbeiten wir Ihre Daten für diesen Zweck nicht mehr. Der Widerspruch ist formfrei und kann an " +
@@ -383,17 +390,17 @@ export const deLegalPages: LegalPageMap = {
           " gerichtet werden.",
       },
       {
-        heading: "18. Zuständige Aufsichtsbehörde",
+        heading: "19. Zuständige Aufsichtsbehörde",
         body: "Für uns zuständig ist der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Rheinland-Pfalz, Hintere Bleiche 34, 55116 Mainz.",
       },
       {
-        heading: "19. Datensicherheit und automatisierte Entscheidungen",
+        heading: "20. Datensicherheit und automatisierte Entscheidungen",
         body:
           "Wir sichern die Übertragung Ihrer Daten durch eine TLS-Verschlüsselung (erkennbar am Schloss-Symbol in der Adresszeile Ihres Browsers) und setzen technische sowie organisatorische Maßnahmen nach Artikel 32 DSGVO ein.\n\n" +
           "Eine automatisierte Entscheidungsfindung einschließlich Profiling nach Artikel 22 DSGVO findet nicht statt, mit Ausnahme der im Abschnitt zur Bonitätsprüfung beschriebenen Prüfung, die einer manuellen Überprüfung zugänglich ist.",
       },
       {
-        heading: "20. Änderungen dieser Datenschutzerklärung",
+        heading: "21. Änderungen dieser Datenschutzerklärung",
         body: "Wir passen diese Datenschutzerklärung an, wenn sich die Rechtslage, unsere Dienste oder die Datenverarbeitung ändern. Es gilt jeweils die auf dieser Seite veröffentlichte Fassung. Stand: 26. Juli 2026.",
       },
     ],

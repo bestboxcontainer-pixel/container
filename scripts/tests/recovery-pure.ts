@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import {
   RECOVERY_MAIL_COUNT,
   availabilityLabel,
-  categoryPathFromProductPath,
   conditionLabel,
   decodeCart,
   encodeCart,
@@ -16,7 +15,6 @@ import {
 const T0 = new Date("2026-07-26T10:00:00.000Z");
 const MINUTE = 60_000;
 const HOUR = 60 * MINUTE;
-const DAY = 24 * HOUR;
 
 function line(overrides: Partial<RecoveryLine> = {}): RecoveryLine {
   return {
@@ -36,17 +34,17 @@ function line(overrides: Partial<RecoveryLine> = {}): RecoveryLine {
 
 // ---- Calendrier ----
 
-assert.equal(RECOVERY_MAIL_COUNT, 4);
+assert.equal(RECOVERY_MAIL_COUNT, 3);
 
 // Les délais sont relatifs au message précédent, pas cumulés depuis la capture :
-// 10 min après l'abandon, puis 24 h après le premier message, etc.
-assert.deepEqual(nextSendAtFor(0, T0), new Date(T0.getTime() + 10 * MINUTE));
-assert.deepEqual(nextSendAtFor(1, T0), new Date(T0.getTime() + 24 * HOUR));
-assert.deepEqual(nextSendAtFor(2, T0), new Date(T0.getTime() + 3 * DAY));
-assert.deepEqual(nextSendAtFor(3, T0), new Date(T0.getTime() + 7 * DAY));
+// 20 min après l'abandon, puis 8 h après le premier message, puis 24 h après
+// le deuxième.
+assert.deepEqual(nextSendAtFor(0, T0), new Date(T0.getTime() + 20 * MINUTE));
+assert.deepEqual(nextSendAtFor(1, T0), new Date(T0.getTime() + 8 * HOUR));
+assert.deepEqual(nextSendAtFor(2, T0), new Date(T0.getTime() + 24 * HOUR));
 
-// Après le quatrième message la séquence est terminée : plus aucune date.
-assert.equal(nextSendAtFor(4, T0), null);
+// Après le troisième message la séquence est terminée : plus aucune date.
+assert.equal(nextSendAtFor(3, T0), null);
 assert.equal(nextSendAtFor(9, T0), null);
 
 // ---- Disponibilité ----
@@ -85,16 +83,5 @@ assert.deepEqual(decodeCart("{ pas du json"), []);
 assert.deepEqual(decodeCart("[]"), []);
 // Un tableau d'objets incomplets est écarté ligne par ligne.
 assert.deepEqual(decodeCart('[{"brand":"Bosch"}]'), []);
-
-// ---- Chemin de la catégorie ----
-
-assert.equal(
-  categoryPathFromProductPath("haushalt/kaffeemaschinen/siemens-eq-500"),
-  "/haushalt/kaffeemaschinen",
-);
-assert.equal(categoryPathFromProductPath("/haushalt/kaffeemaschinen/x"), "/haushalt/kaffeemaschinen");
-// Chemin inutilisable : on renvoie l'accueil plutôt qu'une URL cassée.
-assert.equal(categoryPathFromProductPath("produkt"), "/");
-assert.equal(categoryPathFromProductPath(""), "/");
 
 console.log("recovery-pure : toutes les assertions passent");

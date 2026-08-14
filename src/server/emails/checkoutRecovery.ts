@@ -58,10 +58,10 @@ function productBlock(line: RecoveryLine): string {
                       <img src="${escapeHtml(line.image)}" width="80" height="80" alt="${escapeHtml(line.name)}" style="display:block; width:80px; height:80px; object-fit:contain; border:0; border-radius:4px; background-color:#ffffff;" />
                     </td>
                     <td valign="top" style="padding:12px 12px 12px 0; font-family:Arial,Helvetica,sans-serif;">
-                      <p style="margin:0 0 2px 0; font-size:12px; line-height:18px; color:#6b7280; text-transform:uppercase;">${escapeHtml(line.brand)}</p>
-                      <p style="margin:0 0 6px 0; font-size:15px; line-height:21px; font-weight:bold; color:#1f2430;">${escapeHtml(line.name)}</p>
-                      <p style="margin:0 0 4px 0; font-size:15px; line-height:21px; color:#1f2430;">${quantity}${escapeHtml(price)}</p>
-                      <p style="margin:0; font-size:13px; line-height:19px; color:#4b5563;">${escapeHtml(availabilityLabel(line))} — ${escapeHtml(conditionLabel(line.condition))}</p>
+                      <p style="margin:0 0 4px 0; font-size:15px; line-height:21px; color:#6b7280; text-transform:uppercase;">${escapeHtml(line.brand)}</p>
+                      <p style="margin:0 0 8px 0; font-size:19px; line-height:25px; font-weight:bold; color:#1f2430;">${escapeHtml(line.name)}</p>
+                      <p style="margin:0 0 6px 0; font-size:19px; line-height:25px; color:#1f2430;">${quantity}${escapeHtml(price)}</p>
+                      <p style="margin:0; font-size:16px; line-height:22px; color:#4b5563;">${escapeHtml(availabilityLabel(line))} — ${escapeHtml(conditionLabel(line.condition))}</p>
                     </td>
                   </tr>
                 </table>`;
@@ -73,7 +73,7 @@ function productBlocks(lines: RecoveryLine[]): string {
   if (hidden <= 0) return shown;
   const label = hidden === 1 ? "und 1 weiterer Artikel" : `und ${hidden} weitere Artikel`;
   return `${shown}
-                <p style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:19px; color:#4b5563;">${label} in Ihrem Warenkorb.</p>`;
+                <p style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:16px; line-height:22px; color:#4b5563;">${label} in Ihrem Warenkorb.</p>`;
 }
 
 /** Bloc du code promotionnel, réservé au troisième message. */
@@ -81,9 +81,9 @@ function couponBlock(): string {
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 16px 0; background-color:#fff5f5; border:1px dashed #e3000e; border-radius:4px;">
                   <tr>
                     <td align="center" style="padding:16px;">
-                      <p style="margin:0 0 6px 0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:19px; color:#4b5563;">${RECOVERY_COUPON_PERCENT} % Rabatt mit dem Code</p>
-                      <p style="margin:0 0 6px 0; font-family:Arial,Helvetica,sans-serif; font-size:22px; line-height:28px; font-weight:bold; letter-spacing:1px; color:#e3000e;">${escapeHtml(RECOVERY_COUPON_CODE)}</p>
-                      <p style="margin:0; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:18px; color:#6b7280;">Ab ${escapeHtml(formatPrice(RECOVERY_COUPON_MIN_SUBTOTAL_CENTS))} Warenwert, im Warenkorb eingeben.</p>
+                      <p style="margin:0 0 6px 0; font-family:Arial,Helvetica,sans-serif; font-size:16px; line-height:22px; color:#4b5563;">${RECOVERY_COUPON_PERCENT} % Rabatt mit dem Code</p>
+                      <p style="margin:0 0 6px 0; font-family:Arial,Helvetica,sans-serif; font-size:29px; line-height:35px; font-weight:bold; letter-spacing:1px; color:#e3000e;">${escapeHtml(RECOVERY_COUPON_CODE)}</p>
+                      <p style="margin:0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:21px; color:#6b7280;">Ab ${escapeHtml(formatPrice(RECOVERY_COUPON_MIN_SUBTOTAL_CENTS))} Warenwert, im Warenkorb eingeben.</p>
                     </td>
                   </tr>
                 </table>`;

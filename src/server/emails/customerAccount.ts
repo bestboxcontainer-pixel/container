@@ -57,7 +57,7 @@ export function layout(input: LayoutInput): string {
   const body = input.paragraphs
     .map(
       (paragraph) =>
-        `<p style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:24px; color:#3f4854;">${paragraph}</p>`,
+        `<p style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:19px; line-height:29px; color:#3f4854;">${paragraph}</p>`,
     )
     .join("\n");
 
@@ -65,19 +65,19 @@ export function layout(input: LayoutInput): string {
     ? `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 20px 0;">
                   <tr>
                     <td align="center" bgcolor="#e3000e" style="background-color:#e3000e; border-radius:4px;">
-                      <a href="${escapeHtml(input.action.url)}" style="display:inline-block; padding:14px 28px; font-family:Arial,Helvetica,sans-serif; font-size:15px; font-weight:bold; color:#ffffff; text-decoration:none;">${escapeHtml(input.action.label)}</a>
+                      <a href="${escapeHtml(input.action.url)}" style="display:inline-block; padding:14px 28px; font-family:Arial,Helvetica,sans-serif; font-size:19px; font-weight:bold; color:#ffffff; text-decoration:none;">${escapeHtml(input.action.label)}</a>
                     </td>
                   </tr>
                 </table>
-                <p style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:20px; color:#4b5563; word-break:break-all;">${escapeHtml(input.action.url)}</p>`
+                <p style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:23px; color:#4b5563; word-break:break-all;">${escapeHtml(input.action.url)}</p>`
     : "";
 
   const footnote = input.footnote
-    ? `<p style="margin:0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:21px; color:#4b5563;">${input.footnote}</p>`
+    ? `<p style="margin:0; font-family:Arial,Helvetica,sans-serif; font-size:17px; line-height:25px; color:#4b5563;">${input.footnote}</p>`
     : "";
 
   const unsubscribeLink = input.unsubscribe
-    ? `<p style="margin:8px 0 0 0; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:18px; color:#8a8f98;">
+    ? `<p style="margin:8px 0 0 0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; color:#8a8f98;">
                     <a href="${escapeHtml(input.unsubscribe.url)}" style="color:#8a8f98; text-decoration:underline;">${escapeHtml(input.unsubscribe.label)}</a>
                   </p>`
     : "";
@@ -108,7 +108,7 @@ export function layout(input: LayoutInput): string {
             </tr>
             <tr>
               <td style="background-color:#ffffff; padding:32px 32px 8px 32px;">
-                <h1 style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:20px; line-height:28px; font-weight:bold; color:#001424;">${escapeHtml(input.heading)}</h1>
+                <h1 style="margin:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:27px; line-height:35px; font-weight:bold; color:#001424;">${escapeHtml(input.heading)}</h1>
                 ${body}
                 ${action}
                 ${footnote}
@@ -121,7 +121,7 @@ export function layout(input: LayoutInput): string {
 
           <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%;">
             <tr>
-              <td align="center" style="padding:20px 16px 0 16px; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:20px; color:#4b5563;">
+              <td align="center" style="padding:20px 16px 0 16px; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:23px; color:#4b5563;">
                 ${escapeHtml(footer)}
                 ${unsubscribeLink}
               </td>

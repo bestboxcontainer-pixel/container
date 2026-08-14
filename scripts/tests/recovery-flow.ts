@@ -234,6 +234,36 @@ async function main(): Promise<void> {
   assert.equal(await unsubscribeByToken("pas-un-jeton"), false);
   assert.equal(await unsubscribeByToken("f".repeat(64)), false);
 
+  // ---- Une commande réelle arrête la séquence ----
+  //
+  // On n'appelle pas createOrder ici : il exige une adresse complète et
+  // décrémenterait le stock du catalogue de test. On vérifie le comportement
+  // que createOrder délègue, avec la casse d'adresse d'un vrai formulaire.
+
+  await cleanup();
+  await captureRecovery({
+    email: EMAIL,
+    locale: "de",
+    step: "review",
+    lines: [{ productId: product.id, quantity: 1 }],
+  });
+
+  // Le client a tapé son adresse avec des majuscules dans le tunnel : l'arrêt
+  // doit fonctionner quand même.
+  await stopRecoveryForEmail(EMAIL.toUpperCase(), "converted");
+
+  const afterOrder = await prisma.checkoutRecovery.findUnique({
+    where: { emailNormalized: NORMALIZED },
+  });
+  assert.ok(afterOrder);
+  assert.equal(afterOrder.stoppedReason, "converted", "la séquence n'a pas été arrêtée");
+  assert.equal(afterOrder.nextSendAt, null);
+
+  // Aucune session pour cette adresse : l'appel doit rester silencieux, sinon
+  // il ferait échouer une commande payante.
+  await prisma.checkoutRecovery.deleteMany({ where: { emailNormalized: NORMALIZED } });
+  await stopRecoveryForEmail(EMAIL, "converted");
+
   await cleanup();
   console.log("recovery-flow : capture conforme");
 }

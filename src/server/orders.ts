@@ -8,6 +8,7 @@ import {
 } from "@/server/coupons";
 import { adjustStock } from "@/server/stock";
 import { listEnabledPaymentMethods } from "@/server/payments";
+import { stopRecoveryForEmail } from "@/server/checkoutRecovery";
 import { campaignGrantsFreeShipping, priceForOrder } from "@/server/promotions";
 import {
   computeTotals,
@@ -718,6 +719,18 @@ export async function createOrder(
               erreur,
             );
           }
+        }
+
+        // La commande est passée : la séquence de relance n'a plus lieu d'être.
+        //
+        // Hors transaction et sous try : un échec de mise à jour de la relance
+        // ne doit jamais faire échouer une commande payante. Le répartiteur
+        // revérifie de toute façon l'absence de commande avant chaque envoi, ce
+        // qui rattrape le cas.
+        try {
+          await stopRecoveryForEmail(row.email, "converted");
+        } catch (error) {
+          console.error("[recovery] arrêt de la séquence impossible:", error);
         }
 
         return toRecord(row);

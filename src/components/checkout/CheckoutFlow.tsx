@@ -27,7 +27,7 @@ import { CouponField, type AppliedCoupon } from "@/components/checkout/CouponFie
 import { ShippingMethodFieldset } from "@/components/checkout/ShippingMethodFieldset";
 import { computeTotals, DEFAULT_SHIPPING_METHOD_KEY, formatCents } from "@/lib/cart";
 import { isCountryCode, isValidPostalCode } from "@/lib/countries";
-import type { ShippingMethodKey } from "@/lib/cart";
+import type { CartLine, ShippingMethodKey } from "@/lib/cart";
 import { brandMarksFor } from "@/components/PaymentIcons";
 import type { PaymentMethodRecord } from "@/server/types";
 
@@ -61,6 +61,26 @@ type Step = (typeof STEPS)[number];
  * retenu d'office. Le récapitulatif final continue de le nommer — § 312j Abs. 2
  * BGB veut que le client voie ce qu'il valide, pas qu'il l'ait cliqué.
  */
+/**
+ * Signale au serveur que le tunnel est en cours, pour la séquence de relance.
+ *
+ * Volontairement sans await et sans remontée d'erreur : une panne de cette
+ * route ne doit jamais empêcher une commande d'aboutir.
+ */
+function captureRecovery(email: string, step: string, lines: readonly CartLine[], locale: string): void {
+  void fetch("/api/checkout/recovery", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email,
+      step,
+      locale,
+      lines: lines.map((line) => ({ productId: line.productId, quantity: line.quantity })),
+    }),
+    keepalive: true,
+  }).catch(() => {});
+}
+
 function visibleSteps(methodCount: number): readonly Step[] {
   // Aucun moyen actif : l'étape reste, c'est elle qui explique au client que la
   // boutique n'encaisse rien pour l'instant. La sauter l'enverrait au bouton de
@@ -188,6 +208,7 @@ export function CheckoutFlow({
       }
     }
     setError(null);
+    captureRecovery(email.trim(), "contact", lines, locale);
     // Sans écran de paiement, le moyen unique est déjà retenu : on enchaîne
     // directement sur la vérification.
     setStep(showPaymentStep ? "payment" : "review");
@@ -199,6 +220,7 @@ export function CheckoutFlow({
       return;
     }
     setError(null);
+    captureRecovery(email.trim(), "payment", lines, locale);
     setStep("review");
   }
 

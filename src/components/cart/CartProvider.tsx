@@ -10,6 +10,7 @@ import {
   useSyncExternalStore,
 } from "react";
 import type { ReactNode } from "react";
+import { useLocale } from "next-intl";
 import {
   addToCart,
   clearCart,
@@ -22,6 +23,29 @@ import {
 } from "@/lib/cart";
 import type { CartLine, CartTotals } from "@/lib/cart";
 import { CAMPAIGN_COOKIE } from "@/lib/campaigns";
+
+/**
+ * Signale un ajout au panier au serveur, pour la relance de panier abandonné.
+ *
+ * Sans e-mail : contrairement à l'appel du tunnel de commande, celui-ci ne
+ * porte jamais d'adresse. Un visiteur anonyme reste anonyme — rien à capturer.
+ * Un client connecté, lui, est déjà identifié par sa session ; c'est la route
+ * qui relit son adresse côté serveur, jamais le navigateur qui la lui
+ * fournirait. Volontairement sans await : un ajout au panier ne doit jamais
+ * attendre une requête qui ne le concerne pas.
+ */
+function captureCartAddition(lines: readonly CartLine[], locale: string): void {
+  void fetch("/api/checkout/recovery", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      step: "contact",
+      locale,
+      lines: lines.map((line) => ({ productId: line.productId, quantity: line.quantity })),
+    }),
+    keepalive: true,
+  }).catch(() => {});
+}
 
 // Le panier vit dans localStorage, donc uniquement côté navigateur.
 // useSyncExternalStore résout proprement le décalage d'hydratation : React rend
@@ -123,10 +147,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const lines = useSyncExternalStore(subscribeCart, getCartSnapshot, getCartServerSnapshot);
   const ready = useHydrated();
   const campaign = useCampaignBenefit();
+  const locale = useLocale();
 
   const add = useCallback(
-    (line: Omit<CartLine, "quantity">, quantity = 1) => addToCart(line, quantity),
-    [],
+    (line: Omit<CartLine, "quantity">, quantity = 1) => {
+      addToCart(line, quantity);
+      // Le magasin vient de committer : on relit l'instantané à jour plutôt
+      // que de recomposer la ligne à la main, pour rester fidèle à ce que le
+      // panier contient réellement (fusion de quantité sur une ligne
+      // existante, plafond de quantité déjà appliqué…).
+      captureCartAddition(getCartSnapshot(), locale);
+    },
+    [locale],
   );
   const setQuantity = useCallback(
     (productId: string, quantity: number) => setCartQuantity(productId, quantity),

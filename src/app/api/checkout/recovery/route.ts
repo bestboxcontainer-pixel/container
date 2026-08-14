@@ -1,15 +1,23 @@
 import { NextResponse } from "next/server";
 import { captureRecovery } from "@/server/checkoutRecovery";
 import { recoveryLimiter } from "@/server/recoveryRate";
+import { getCurrentCustomer } from "@/server/customerSession";
 import type { RecoveryStep } from "@/lib/checkoutRecovery";
 
-// Capture de la session de paiement, appelée par le tunnel dès que l'adresse
-// e-mail est validée.
+// Capture de la session de paiement.
+//
+// Deux appelants :
+//   - le tunnel de commande, dès que l'adresse e-mail est validée à l'étape
+//     « contact » — l'e-mail arrive alors dans le corps de la requête ;
+//   - le panier, à chaque ajout d'article — sans e-mail dans le corps, mais
+//     pour un client connecté. Son adresse ne vient jamais du navigateur dans
+//     ce cas : elle est relue depuis sa session, la seule source qui fasse foi
+//     pour une adresse qu'il n'a pas retapée dans ce panier.
 //
 // La route répond toujours 204, même quand rien n'est écrit : elle sert un
 // appel « fire and forget » du navigateur, et le client n'a aucune décision à
 // prendre d'après la réponse. Elle ne révèle donc pas non plus si une adresse
-// est déjà connue ou désabonnée.
+// est déjà connue ou désabonnée, ni si un visiteur est connecté.
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const STEPS: RecoveryStep[] = ["contact", "payment", "review"];
@@ -28,7 +36,14 @@ export async function POST(request: Request) {
   }
 
   const body = payload as Record<string, unknown>;
-  const email = typeof body.email === "string" ? body.email.trim() : "";
+  const submitted = typeof body.email === "string" ? body.email.trim() : "";
+
+  // L'e-mail saisi dans le tunnel fait autorité s'il est valide ; sinon, pour
+  // un appel du panier, seule la session d'un compte connecté peut fournir une
+  // adresse — jamais le corps de la requête, qu'un visiteur pourrait forger.
+  const email = EMAIL_PATTERN.test(submitted)
+    ? submitted
+    : ((await getCurrentCustomer())?.email ?? "");
   if (!EMAIL_PATTERN.test(email)) {
     return new NextResponse(null, { status: 204 });
   }

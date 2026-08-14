@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
   Banknote,
@@ -25,9 +25,10 @@ import type { AddressValue } from "@/components/checkout/AddressFieldset";
 import { CheckoutSummary } from "@/components/checkout/CheckoutSummary";
 import { CouponField, type AppliedCoupon } from "@/components/checkout/CouponField";
 import { ShippingMethodFieldset } from "@/components/checkout/ShippingMethodFieldset";
-import { computeTotals, DEFAULT_SHIPPING_METHOD_KEY, formatCents } from "@/lib/cart";
+import { computeTotals, DEFAULT_SHIPPING_METHOD_KEY, formatCents, replaceCart } from "@/lib/cart";
 import { isCountryCode, isValidPostalCode } from "@/lib/countries";
 import type { CartLine, ShippingMethodKey } from "@/lib/cart";
+import type { RecoveryStep } from "@/lib/checkoutRecovery";
 import { brandMarksFor } from "@/components/PaymentIcons";
 import type { PaymentMethodRecord } from "@/server/types";
 
@@ -131,20 +132,27 @@ export interface CheckoutCustomer {
 export function CheckoutFlow({
   methods,
   customer,
+  resumed,
 }: {
   methods: PaymentMethodRecord[];
   customer?: CheckoutCustomer | null;
+  /** Session reprise depuis un message de relance, quand l'URL porte un jeton valide. */
+  resumed?: { email: string; step: RecoveryStep; lines: CartLine[] };
 }) {
   const t = useTranslations("checkout");
   const locale = useLocale();
   const router = useRouter();
   const { lines, campaign, ready, clear } = useCart();
 
-  const [step, setStep] = useState<Step>("contact");
+  // Une session reprise depuis un message de relance fixe l'étape et l'adresse
+  // dès le premier rendu : ce sont des valeurs initiales dérivées des props,
+  // pas un effet de bord — seule l'écriture dans le panier (système externe)
+  // a sa place dans un effet, plus bas.
+  const [step, setStep] = useState<Step>(() => resumed?.step ?? "contact");
   const [shippingMethodKey, setShippingMethodKey] = useState<ShippingMethodKey>(
     DEFAULT_SHIPPING_METHOD_KEY,
   );
-  const [email, setEmail] = useState(customer?.email ?? "");
+  const [email, setEmail] = useState(() => resumed?.email ?? customer?.email ?? "");
   const [phone, setPhone] = useState(customer?.phone ?? "");
   const [billing, setBilling] = useState<AddressValue>(customer?.billing ?? EMPTY_ADDRESS);
   const [sameAsBilling, setSameAsBilling] = useState(customer?.shippingSameAsBilling ?? true);
@@ -159,6 +167,16 @@ export function CheckoutFlow({
   const [error, setError] = useState<CheckoutError | null>(null);
   const [pending, setPending] = useState(false);
   const [done, setDone] = useState(false);
+
+  // Réécriture du panier (système externe, localStorage) pour une session
+  // reprise. Le message est le plus souvent ouvert sur un autre appareil que
+  // celui de l'abandon, où le panier local est vide ou différent. Les prix
+  // sont de toute façon recontrôlés en base par POST /api/checkout : un panier
+  // restauré ne peut pas faire passer un ancien tarif.
+  useEffect(() => {
+    if (!resumed) return;
+    replaceCart(resumed.lines);
+  }, [resumed]);
 
   const selectedMethod = methods.find((method) => method.key === paymentKey);
   const steps = visibleSteps(methods.length);

@@ -8,9 +8,12 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { CheckoutFlow } from "@/components/checkout/CheckoutFlow";
 import { listEnabledPaymentMethods } from "@/server/payments";
 import { getCurrentCustomer } from "@/server/customerSession";
+import { findRecoveryByToken } from "@/server/checkoutRecovery";
+import { decodeCart, RESUME_QUERY_PARAM, type RecoveryStep } from "@/lib/checkoutRecovery";
 import { routing } from "@/i18n/routing";
 
 type CheckoutPageParams = Promise<{ locale: string }>;
+type CheckoutSearchParams = Promise<Record<string, string | string[] | undefined>>;
 
 // Les moyens de paiement viennent du back-office : la page doit être rendue à
 // la demande, sinon une modification dans l'administration ne serait pas
@@ -30,12 +33,18 @@ export async function generateMetadata({
   };
 }
 
-export default async function CheckoutPage({ params }: { params: CheckoutPageParams }) {
+export default async function CheckoutPage({
+  params,
+  searchParams,
+}: {
+  params: CheckoutPageParams;
+  searchParams: CheckoutSearchParams;
+}) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
 
-  const [t, common, cart, methods, customer] = await Promise.all([
+  const [t, common, cart, methods, customer, query] = await Promise.all([
     getTranslations({ locale, namespace: "checkout" }),
     getTranslations({ locale, namespace: "common" }),
     getTranslations({ locale, namespace: "cart" }),
@@ -43,7 +52,32 @@ export default async function CheckoutPage({ params }: { params: CheckoutPagePar
     // Facultatif : sans compte connecté, le tunnel reste identique. La commande
     // en tant qu'invité n'est jamais conditionnée à une inscription.
     getCurrentCustomer(),
+    searchParams,
   ]);
+
+  // Reprise depuis un message de relance. Un jeton inconnu ou une session
+  // purgée n'affiche aucune erreur : un lien vieux de six semaines doit ouvrir
+  // la caisse normalement, pas une page cassée.
+  const rawToken = query[RESUME_QUERY_PARAM];
+  const token = typeof rawToken === "string" ? rawToken : "";
+  const recovery = token ? await findRecoveryByToken(token) : null;
+  const resumed = recovery
+    ? {
+        email: recovery.email,
+        step: recovery.lastStep as RecoveryStep,
+        lines: decodeCart(recovery.cartJson).map((line) => ({
+          productId: line.productId,
+          slug: line.path.split("/").pop() ?? "",
+          brand: line.brand,
+          name: line.name,
+          image: line.image,
+          path: `/${line.path}`,
+          priceCents: line.unitPriceCents,
+          quantity: line.quantity,
+          stock: line.stock,
+        })),
+      }
+    : undefined;
 
   return (
     <>
@@ -76,6 +110,7 @@ export default async function CheckoutPage({ params }: { params: CheckoutPagePar
                   }
                 : null
             }
+            resumed={resumed}
           />
         </div>
       </main>

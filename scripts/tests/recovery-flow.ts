@@ -4,6 +4,7 @@ import {
   captureRecovery,
   runRecoveryTick,
   stopRecoveryForEmail,
+  unsubscribeByToken,
 } from "../../src/server/checkoutRecovery";
 import { decodeCart, normalizeEmail } from "../../src/lib/checkoutRecovery";
 
@@ -199,6 +200,39 @@ async function main(): Promise<void> {
   });
   assert.ok(stoppedRow);
   assert.equal(stoppedRow.stoppedReason, "unsubscribed");
+
+  // ---- Désabonnement par jeton ----
+
+  await cleanup();
+  await captureRecovery({
+    email: EMAIL,
+    locale: "de",
+    step: "contact",
+    lines: [{ productId: product.id, quantity: 1 }],
+  });
+  const toUnsubscribe = await prisma.checkoutRecovery.findUnique({
+    where: { emailNormalized: NORMALIZED },
+  });
+  assert.ok(toUnsubscribe);
+
+  assert.equal(await unsubscribeByToken(toUnsubscribe.resumeToken), true);
+
+  const suppression = await prisma.emailSuppression.findUnique({ where: { email: NORMALIZED } });
+  assert.ok(suppression, "aucune suppression enregistrée");
+  assert.equal(suppression.reason, "desinscription");
+
+  const stoppedByOptOut = await prisma.checkoutRecovery.findUnique({
+    where: { emailNormalized: NORMALIZED },
+  });
+  assert.ok(stoppedByOptOut);
+  assert.equal(stoppedByOptOut.stoppedReason, "unsubscribed");
+
+  // Deuxième appel : sans erreur, et sans doublon de suppression.
+  assert.equal(await unsubscribeByToken(toUnsubscribe.resumeToken), true);
+
+  // Jeton inconnu ou mal formé : refus franc, sans écriture.
+  assert.equal(await unsubscribeByToken("pas-un-jeton"), false);
+  assert.equal(await unsubscribeByToken("f".repeat(64)), false);
 
   await cleanup();
   console.log("recovery-flow : capture conforme");

@@ -186,6 +186,34 @@ export async function findRecoveryByToken(token: string) {
   return prisma.checkoutRecovery.findUnique({ where: { resumeToken: token } });
 }
 
+/**
+ * Enregistre un refus définitif à partir du jeton porté par un message.
+ *
+ * La suppression est écrite dans EmailSuppression, la table que partagent les
+ * campagnes marketing : deux listes de refus concurrentes finiraient par se
+ * contredire, et un client désabonné d'un côté recevrait l'autre. Se désabonner
+ * depuis une relance de panier coupe donc aussi les campagnes — c'est bien ce
+ * qu'un lien « ne plus recevoir de messages » promet.
+ *
+ * Renvoie false si le jeton est inconnu, pour que l'appelant réponde 404 sans
+ * rien écrire.
+ */
+export async function unsubscribeByToken(token: string): Promise<boolean> {
+  const recovery = await findRecoveryByToken(token);
+  if (!recovery) return false;
+
+  await prisma.emailSuppression.upsert({
+    where: { email: recovery.emailNormalized },
+    create: { email: recovery.emailNormalized, reason: "desinscription" },
+    // Un second clic ne doit pas échouer, et ne doit pas écraser la date du
+    // premier refus : c'est elle qui fait preuve.
+    update: {},
+  });
+
+  await stopRecoveryForEmail(recovery.email, "unsubscribed");
+  return true;
+}
+
 // ---- Interrupteur global ----
 
 /**

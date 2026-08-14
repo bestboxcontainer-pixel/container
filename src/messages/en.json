@@ -703,5 +703,15 @@
     "dayShort": "d",
     "validUntil": "Valid until {date}",
     "legalNote": "The prices shown apply until {date} and are applied automatically in the basket. After that the regular price applies again. All prices include VAT, plus shipping costs."
+  },
+  "unsubscribe": {
+    "metaTitle": "Unsubscribe",
+    "heading": "Stop receiving reminders",
+    "intro": "If you confirm below, we will no longer send cart reminders or offers to this address.",
+    "confirm": "Confirm unsubscribe",
+    "sending": "Saving…",
+    "done": "You have been unsubscribed. We will not send any further messages to this address.",
+    "error": "This link is no longer valid. Please contact us using the contact form.",
+    "invalidToken": "This unsubscribe link is no longer valid."
   }
 }

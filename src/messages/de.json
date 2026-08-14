@@ -703,5 +703,15 @@
     "dayShort": "T",
     "validUntil": "Gültig bis {date}",
     "legalNote": "Die angegebenen Aktionspreise gelten bis zum {date} und werden im Warenkorb automatisch berücksichtigt. Danach gilt wieder der reguläre Preis. Alle Preise inklusive gesetzlicher Mehrwertsteuer, zuzüglich Versandkosten."
+  },
+  "unsubscribe": {
+    "metaTitle": "Abmeldung",
+    "heading": "Keine Erinnerungen mehr erhalten",
+    "intro": "Wenn Sie unten bestätigen, senden wir Ihnen keine Warenkorb-Erinnerungen und keine Angebote mehr an diese Adresse.",
+    "confirm": "Abmeldung bestätigen",
+    "sending": "Wird gespeichert…",
+    "done": "Sie sind abgemeldet. Wir senden keine weiteren Nachrichten an diese Adresse.",
+    "error": "Der Link ist nicht mehr gültig. Bitte schreiben Sie uns über das Kontaktformular.",
+    "invalidToken": "Dieser Abmeldelink ist nicht mehr gültig."
   }
 }

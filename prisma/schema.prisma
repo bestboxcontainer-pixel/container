@@ -837,3 +837,61 @@ model AnnouncementBar {
 
   @@index([enabled, position])
 }
+
+// ---- Relance des tunnels de commande abandonnés ----
+// Le tunnel n'écrit une Order qu'à la validation finale : un visiteur qui
+// saisit son adresse puis s'en va ne laisse aucune trace. Cette table retient
+// l'adresse et le panier dès l'étape « contact », le temps d'une séquence de
+// quatre messages.
+// Les désabonnements ne vivent PAS ici mais dans EmailSuppression, partagée
+// avec les campagnes marketing : deux listes de refus concurrentes finiraient
+// par se contredire, et un client désabonné d'un côté recevrait l'autre.
+
+model CheckoutRecovery {
+  id String @id @default(cuid())
+
+  // Adresse telle que saisie pour l'envoi et l'affichage ; forme normalisée
+  // (minuscules, sans espaces) pour tous les rapprochements.
+  email           String
+  emailNormalized String @unique
+  // de | en — langue du tunnel. Les gabarits sont allemands dans cette
+  // version ; le champ est en place pour la traduction à venir.
+  locale          String @default("de")
+
+  // Panier figé en JSON, comme Product.bullets : ni enum ni liste scalaire,
+  // pour rester cohérent avec le reste du schéma.
+  cartJson      String
+  subtotalCents Int
+  shippingCents Int
+  totalCents    Int
+
+  // Jeton aléatoire de 32 octets porté par le lien de reprise et par celui de
+  // désabonnement. Il circule en clair dans le message : jamais un cuid, qui
+  // serait partiellement devinable.
+  resumeToken String @unique
+
+  // Dernière étape atteinte : contact | payment | review
+  lastStep String @default("contact")
+
+  // Messages déjà envoyés, de 0 à 4.
+  sentCount  Int       @default(0)
+  lastSentAt DateTime?
+  // Prochain envoi dû ; null quand la séquence est terminée ou stoppée.
+  nextSendAt DateTime?
+  // Échecs consécutifs sur le message en cours, remis à zéro après un succès.
+  sendAttempts Int @default(0)
+  // Verrou posé le temps d'un envoi : sans lui, deux passages simultanés du
+  // répartiteur enverraient deux fois le même message.
+  claimedAt DateTime?
+
+  // converted | unsubscribed | completed | failed
+  stoppedReason String    @default("")
+  stoppedAt     DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Requête du tick : les lignes échues, puis la purge par ancienneté.
+  @@index([nextSendAt])
+  @@index([createdAt])
+}

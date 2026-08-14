@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import { prisma } from "../../src/server/prisma";
-import { captureRecovery, stopRecoveryForEmail } from "../../src/server/checkoutRecovery";
+import {
+  captureRecovery,
+  runRecoveryTick,
+  stopRecoveryForEmail,
+} from "../../src/server/checkoutRecovery";
 import { decodeCart, normalizeEmail } from "../../src/lib/checkoutRecovery";
 
 const EMAIL = "test-relance@example.invalid";
@@ -111,6 +115,90 @@ async function main(): Promise<void> {
     where: { emailNormalized: NORMALIZED },
   });
   assert.equal(suppressed, null, "une adresse désabonnée a été capturée");
+
+  // ---- Répartiteur ----
+
+  await cleanup();
+  await captureRecovery({
+    email: EMAIL,
+    locale: "de",
+    step: "contact",
+    lines: [{ productId: product.id, quantity: 1 }],
+  });
+
+  // Rien n'est dû dans l'immédiat : le premier message est à dix minutes.
+  const idle = await runRecoveryTick({ dryRun: true });
+  assert.equal(idle.sent, 0, "un message est parti avant l'heure");
+
+  // On avance l'échéance à la main, comme le fera le test manuel.
+  async function makeDue(): Promise<void> {
+    await prisma.checkoutRecovery.updateMany({
+      where: { emailNormalized: NORMALIZED },
+      data: { nextSendAt: new Date(Date.now() - 1_000), claimedAt: null },
+    });
+  }
+
+  // Les quatre messages partent l'un après l'autre, jamais deux au même tick.
+  for (const expected of [1, 2, 3, 4]) {
+    await makeDue();
+    const result = await runRecoveryTick({ dryRun: true });
+    assert.equal(result.sent, 1, `le tick n'a pas envoyé le message ${expected}`);
+    const row = await prisma.checkoutRecovery.findUnique({
+      where: { emailNormalized: NORMALIZED },
+    });
+    assert.ok(row);
+    assert.equal(row.sentCount, expected, `sentCount incorrect après le message ${expected}`);
+    assert.equal(row.claimedAt, null, "le verrou n'a pas été relâché");
+    assert.ok(row.lastSentAt, "lastSentAt non renseigné");
+  }
+
+  // Après le quatrième, la séquence est terminée et ne repart pas.
+  const finished = await prisma.checkoutRecovery.findUnique({
+    where: { emailNormalized: NORMALIZED },
+  });
+  assert.ok(finished);
+  assert.equal(finished.sentCount, 4);
+  assert.equal(finished.stoppedReason, "completed");
+  assert.equal(finished.nextSendAt, null);
+
+  await makeDue();
+  const afterEnd = await runRecoveryTick({ dryRun: true });
+  assert.equal(afterEnd.sent, 0, "un cinquième message est parti");
+
+  // ---- Une commande arrête la séquence ----
+
+  await cleanup();
+  await captureRecovery({
+    email: EMAIL,
+    locale: "de",
+    step: "review",
+    lines: [{ productId: product.id, quantity: 1 }],
+  });
+  await stopRecoveryForEmail(EMAIL, "converted");
+  await makeDue();
+  const converted = await runRecoveryTick({ dryRun: true });
+  assert.equal(converted.sent, 0, "un message est parti après la commande");
+
+  // ---- Un désabonnement arrête la séquence, même échéance atteinte ----
+
+  await cleanup();
+  await captureRecovery({
+    email: EMAIL,
+    locale: "de",
+    step: "contact",
+    lines: [{ productId: product.id, quantity: 1 }],
+  });
+  await prisma.emailSuppression.create({
+    data: { email: NORMALIZED, reason: "desinscription" },
+  });
+  await makeDue();
+  const unsubscribed = await runRecoveryTick({ dryRun: true });
+  assert.equal(unsubscribed.sent, 0, "un message est parti vers une adresse désabonnée");
+  const stoppedRow = await prisma.checkoutRecovery.findUnique({
+    where: { emailNormalized: NORMALIZED },
+  });
+  assert.ok(stoppedRow);
+  assert.equal(stoppedRow.stoppedReason, "unsubscribed");
 
   await cleanup();
   console.log("recovery-flow : capture conforme");

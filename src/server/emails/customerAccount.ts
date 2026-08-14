@@ -22,7 +22,7 @@ export function siteUrl(): string {
   return (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/+$/, "");
 }
 
-function escapeHtml(value: string): string {
+export function escapeHtml(value: string): string {
   return value
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -30,7 +30,7 @@ function escapeHtml(value: string): string {
     .replace(/"/g, "&quot;");
 }
 
-interface LayoutInput {
+export interface LayoutInput {
   locale: EmailLocale;
   preheader: string;
   heading: string;
@@ -38,10 +38,12 @@ interface LayoutInput {
   paragraphs: string[];
   action?: { label: string; url: string };
   footnote?: string;
+  /** Lien discret de désabonnement, ajouté sous la mention automatique. */
+  unsubscribe?: { label: string; url: string };
 }
 
 /** Ossature commune : logo, filet rouge, contenu, pied de page. */
-function layout(input: LayoutInput): string {
+export function layout(input: LayoutInput): string {
   // Image jointe au message plutôt que chargée depuis le site : elle s'affiche
   // même sans adresse publique renseignée, et sans être bloquée par la
   // messagerie. La pièce jointe est ajoutée par sendMail.
@@ -72,6 +74,12 @@ function layout(input: LayoutInput): string {
 
   const footnote = input.footnote
     ? `<p style="margin:0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:21px; color:#4b5563;">${input.footnote}</p>`
+    : "";
+
+  const unsubscribeLink = input.unsubscribe
+    ? `<p style="margin:8px 0 0 0; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:18px; color:#8a8f98;">
+                    <a href="${escapeHtml(input.unsubscribe.url)}" style="color:#8a8f98; text-decoration:underline;">${escapeHtml(input.unsubscribe.label)}</a>
+                  </p>`
     : "";
 
   return `<!doctype html>
@@ -115,6 +123,7 @@ function layout(input: LayoutInput): string {
             <tr>
               <td align="center" style="padding:20px 16px 0 16px; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:20px; color:#4b5563;">
                 ${escapeHtml(footer)}
+                ${unsubscribeLink}
               </td>
             </tr>
           </table>

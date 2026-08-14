@@ -41,6 +41,12 @@ export interface MailMessage {
   text: string;
   /** Facture PDF de la confirmation de commande, le cas échéant. */
   attachments?: MailAttachment[];
+  /**
+   * En-têtes supplémentaires transmis tels quels au serveur SMTP. Sert aux
+   * en-têtes List-Unsubscribe, que Gmail et Yahoo exigent depuis février 2024
+   * pour les envois automatisés : sans eux, la réputation du domaine chute.
+   */
+  headers?: Record<string, string>;
 }
 
 interface SmtpSettings {
@@ -147,6 +153,7 @@ export async function sendMail(message: MailMessage): Promise<void> {
     text: message.text,
     html: message.html,
     ...(attachments?.length ? { attachments } : {}),
+    ...(message.headers ? { headers: message.headers } : {}),
     // Les réponses arrivent dans la boîte de la boutique, pas dans le vide.
     replyTo: settings.from,
   });

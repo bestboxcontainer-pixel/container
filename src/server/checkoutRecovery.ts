@@ -214,6 +214,99 @@ export async function unsubscribeByToken(token: string): Promise<boolean> {
   return true;
 }
 
+// ---- Lectures du back-office ----
+
+/** État affiché dans le tableau, dérivé de stoppedReason. */
+export type RecoveryState = "active" | "converted" | "unsubscribed" | "completed" | "failed";
+
+export interface RecoveryRow {
+  id: string;
+  email: string;
+  totalCents: number;
+  lastStep: string;
+  sentCount: number;
+  state: RecoveryState;
+  itemCount: number;
+  createdAt: Date;
+  lastSentAt: Date | null;
+}
+
+function stateOf(stoppedReason: string): RecoveryState {
+  if (stoppedReason === "converted") return "converted";
+  if (stoppedReason === "unsubscribed") return "unsubscribed";
+  if (stoppedReason === "completed") return "completed";
+  if (stoppedReason === "failed") return "failed";
+  return "active";
+}
+
+export async function listRecoveries(options: {
+  state?: RecoveryState;
+  page: number;
+  perPage: number;
+}): Promise<{ rows: RecoveryRow[]; total: number }> {
+  // Le filtre porte sur stoppedReason, pas sur un champ « state » : l'état est
+  // dérivé, pas stocké — un champ de plus serait une source de contradiction.
+  const where =
+    options.state === undefined
+      ? {}
+      : options.state === "active"
+        ? { stoppedAt: null }
+        : { stoppedReason: options.state };
+
+  const [rows, total] = await Promise.all([
+    prisma.checkoutRecovery.findMany({
+      where,
+      orderBy: { createdAt: "desc" },
+      skip: (options.page - 1) * options.perPage,
+      take: options.perPage,
+    }),
+    prisma.checkoutRecovery.count({ where }),
+  ]);
+
+  return {
+    rows: rows.map((row) => ({
+      id: row.id,
+      email: row.email,
+      totalCents: row.totalCents,
+      lastStep: row.lastStep,
+      sentCount: row.sentCount,
+      state: stateOf(row.stoppedReason),
+      itemCount: decodeCart(row.cartJson).reduce((sum, line) => sum + line.quantity, 0),
+      createdAt: row.createdAt,
+      lastSentAt: row.lastSentAt,
+    })),
+    total,
+  };
+}
+
+/**
+ * Compteurs sur la fenêtre de conservation. Inutile de remonter plus loin : la
+ * purge efface au-delà, un taux calculé sur une période plus longue serait
+ * faux par construction.
+ */
+export async function recoveryStats(): Promise<{
+  captured: number;
+  sent: number;
+  converted: number;
+  ratePercent: number;
+}> {
+  const since = new Date(Date.now() - RECOVERY_RETENTION_DAYS * 24 * 60 * 60_000);
+  const where = { createdAt: { gte: since } };
+
+  const [captured, converted, sentAggregate] = await Promise.all([
+    prisma.checkoutRecovery.count({ where }),
+    prisma.checkoutRecovery.count({ where: { ...where, stoppedReason: "converted" } }),
+    prisma.checkoutRecovery.aggregate({ where, _sum: { sentCount: true } }),
+  ]);
+
+  return {
+    captured,
+    sent: sentAggregate._sum.sentCount ?? 0,
+    converted,
+    ratePercent: captured === 0 ? 0 : Math.round((converted / captured) * 100),
+  };
+}
+
 // ---- Interrupteur global ----
 
 /**

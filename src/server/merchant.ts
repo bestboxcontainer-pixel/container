@@ -395,29 +395,18 @@ export interface MerchantShippingEntry {
 }
 
 /**
- * Frais de port du produit. Au-dessus du seuil annoncé sur la boutique, le port
- * est offert et déclaré à 0,00 €. En dessous, aucun bloc n'est émis : ce sont les
- * règles de livraison du compte Merchant Center qui s'appliquent, plutôt qu'un
- * montant inventé.
+ * Frais de port du produit — volontairement jamais renseigné dans le flux.
  *
- * Le seuil se mesure sur le prix réellement demandé : une remise qui fait passer
- * l'article sous les 50 € lui fait aussi perdre le franco de port, comme dans le
- * panier. Une campagne « livraison offerte » l'accorde en revanche sans condition.
+ * Une balise `g:shipping` sur un produit prend le pas sur les règles définies au
+ * niveau du compte Merchant Center pour ce même produit. La boutique propose
+ * deux modes (Standardversand gratuit, Express à 70 €), tous deux configurés
+ * comme conditions de livraison du compte — un seul peut être porté par le
+ * flux (une seule balise par article), ce qui masquerait l'autre. Ne rien
+ * déclarer ici laisse Google appliquer les deux règles du compte pour chaque
+ * produit, plutôt qu'une seule imposée par le flux.
  */
-export function merchantShipping(product: MerchantProduct): MerchantShippingEntry | undefined {
-  const granted = product.promotion?.freeShipping === true;
-  if (!granted && merchantEffectivePriceCents(product) < MERCHANT_SHIPPING.freeFromCents) {
-    return undefined;
-  }
-  return {
-    country: MERCHANT_SHIPPING.country,
-    service: MERCHANT_SHIPPING.service,
-    price: formatFeedPrice(0),
-    minHandlingTime: MERCHANT_SHIPPING.minHandlingDays,
-    maxHandlingTime: MERCHANT_SHIPPING.maxHandlingDays,
-    minTransitTime: MERCHANT_SHIPPING.minTransitDays,
-    maxTransitTime: MERCHANT_SHIPPING.maxTransitDays,
-  };
+export function merchantShipping(): MerchantShippingEntry | undefined {
+  return undefined;
 }
 
 // ---- Enregistrement complet ----
@@ -537,7 +526,7 @@ export function buildMerchantRecord(product: MerchantProduct): MerchantRecord {
     productHighlights: parseBullets(product.bullets)
       .map((bullet) => bullet.slice(0, 150))
       .slice(0, 10),
-    shipping: merchantShipping(product),
+    shipping: merchantShipping(),
     shippingWeight:
       product.shippingWeightGrams && product.shippingWeightGrams > 0
         ? formatShippingWeight(product.shippingWeightGrams)
@@ -724,14 +713,9 @@ export function auditMerchantProduct(
   }
 
   // -- Versand --
-  if (!record.shipping) {
-    issues.push({
-      level: "warning",
-      attribute: "shipping",
-      message:
-        "Prix en dessous du seuil de livraison offerte : aucuns frais de port ne sont transmis dans le flux. Des règles de livraison pour l'Allemagne doivent alors être définies dans le Merchant Center.",
-    });
-  }
+  // Volontairement absent du flux pour chaque produit : voir merchantShipping().
+  // Les règles de livraison (Standard gratuit, Express 70 €) vivent au niveau du
+  // compte Merchant Center, pas ici — rien à signaler produit par produit.
 
   if (!record.shippingWeight) {
     issues.push({

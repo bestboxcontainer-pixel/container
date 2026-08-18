@@ -14,7 +14,7 @@ import { ProductGrid } from "@/components/ProductGrid";
 import { getProductBySlug, getRelatedProducts } from "@/server/store";
 import { listPublicReviews } from "@/server/reviews";
 import { loadCatalogTranslations, localizeCategoryPage } from "@/server/localizedContent";
-import { productLongText, productShortText } from "@/lib/productText";
+import { productLongText, productShortText, truncateAtWord } from "@/lib/productText";
 import { formatRating } from "@/lib/formatRating";
 import { alternatesFor } from "@/lib/hreflang";
 import type { Locale } from "@/i18n/routing";
@@ -77,9 +77,20 @@ export async function generateMetadata({ params }: { params: ProductPageParams }
 
   const t = await getTranslations({ locale, namespace: "product" });
 
+  // Le nom complet du produit (marque + modèle + caractéristiques) dépasse
+  // souvent 100 caractères une fois le suffixe de marque ajouté ; Google
+  // tronque autour de 60-70 et perd le suffixe. On coupe donc la partie
+  // variable pour garder un <title> qui s'affiche entièrement dans les
+  // résultats de recherche.
+  const productName = truncateAtWord(`${data.product.brand} ${data.product.name}`, 45);
+  const description = truncateAtWord(
+    productShortText(data.product, data.category.label, locale),
+    160,
+  );
+
   return {
-    title: t("metaTitle", { name: `${data.product.brand} ${data.product.name}` }),
-    description: data.product.bullets.join(" · "),
+    title: t("metaTitle", { name: productName }),
+    description,
     alternates: alternatesFor(`/${group}/${category}/${product}`, locale),
   };
 }

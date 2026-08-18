@@ -27,6 +27,16 @@ export function productShortText(
     : `${categoryLabel} von ${product.brand}.`;
 }
 
+// Coupe sur un espace plutôt qu'en plein mot ; utilisé pour les balises
+// <title> et meta description, que Google tronque brutalement au-delà d'une
+// certaine longueur (perte du suffixe de marque, phrase coupée en plein mot).
+export function truncateAtWord(text: string, maxLength: number): string {
+  if (text.length <= maxLength) return text;
+  const cut = text.slice(0, maxLength);
+  const lastSpace = cut.lastIndexOf(" ");
+  return (lastSpace > maxLength * 0.6 ? cut.slice(0, lastSpace) : cut).trimEnd() + "…";
+}
+
 export function productLongText(
   product: Product,
   categoryLabel: string,

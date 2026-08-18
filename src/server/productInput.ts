@@ -164,6 +164,40 @@ export function parseProductInput(raw: unknown, mode: "create" | "update"): Prod
     values.description = typeof body.description === "string" ? body.description : "";
   }
 
+  // ---- Traductions anglaises ----
+  // Mêmes règles que les champs allemands correspondants ; vides = repli sur
+  // l'allemand à l'affichage (src/server/localizedContent.ts), pas une erreur ici.
+  if (has("nameEn")) {
+    values.nameEn = asTrimmedString(body.nameEn) ?? "";
+  }
+
+  if (has("shortDescriptionEn")) {
+    const shortDescriptionEn = asTrimmedString(body.shortDescriptionEn) ?? "";
+    if (shortDescriptionEn.length > SHORT_DESCRIPTION_MAX) {
+      errors.push(`La description courte anglaise ne doit pas dépasser ${SHORT_DESCRIPTION_MAX} caractères.`);
+    } else {
+      values.shortDescriptionEn = shortDescriptionEn;
+    }
+  }
+
+  if (has("descriptionEn")) {
+    values.descriptionEn = typeof body.descriptionEn === "string" ? body.descriptionEn : "";
+  }
+
+  if (has("bulletsEn")) {
+    const rawBulletsEn = body.bulletsEn;
+    if (Array.isArray(rawBulletsEn)) {
+      values.bulletsEn = rawBulletsEn.map((item) => String(item).trim()).filter(Boolean);
+    } else if (typeof rawBulletsEn === "string") {
+      values.bulletsEn = rawBulletsEn
+        .split("|")
+        .map((item) => item.trim())
+        .filter(Boolean);
+    } else {
+      errors.push("Les caractéristiques anglaises (bulletsEn) doivent être une liste.");
+    }
+  }
+
   if (has("rating")) {
     if (body.rating === null || body.rating === "") {
       values.rating = undefined;

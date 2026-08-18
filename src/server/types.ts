@@ -33,6 +33,15 @@ export interface ProductRecord {
   shortDescription?: string;
   /** Description longue, affichée plus bas dans la fiche produit */
   description?: string;
+  /**
+   * Traductions anglaises. Vides = repli sur le champ allemand correspondant
+   * (voir src/server/localizedContent.ts) : une fiche jamais traduite reste
+   * donc utilisable sous /en, juste pas dans sa propre langue.
+   */
+  nameEn?: string;
+  shortDescriptionEn?: string;
+  descriptionEn?: string;
+  bulletsEn?: string[];
   image?: string;
   /** Vues complémentaires de la galerie, dans l'ordre d'affichage */
   images?: string[];

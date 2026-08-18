@@ -44,6 +44,10 @@ export function ProductForm({
   const [shortDescription, setShortDescription] = useState(initialData?.shortDescription ?? "");
   const [description, setDescription] = useState(initialData?.description ?? "");
   const [bulletsText, setBulletsText] = useState((initialData?.bullets ?? []).join("\n"));
+  const [nameEn, setNameEn] = useState(initialData?.nameEn ?? "");
+  const [shortDescriptionEn, setShortDescriptionEn] = useState(initialData?.shortDescriptionEn ?? "");
+  const [descriptionEn, setDescriptionEn] = useState(initialData?.descriptionEn ?? "");
+  const [bulletsTextEn, setBulletsTextEn] = useState((initialData?.bulletsEn ?? []).join("\n"));
   const [image, setImage] = useState(initialData?.image ?? "");
   const [images, setImages] = useState<string[]>(initialData?.images ?? []);
   const [oldPrice, setOldPrice] = useState(initialData?.oldPrice ?? "");
@@ -96,6 +100,10 @@ export function ProductForm({
       shortDescription,
       description,
       bullets: bulletsText.split("\n").map((line) => line.trim()).filter(Boolean),
+      nameEn,
+      shortDescriptionEn,
+      descriptionEn,
+      bulletsEn: bulletsTextEn.split("\n").map((line) => line.trim()).filter(Boolean),
       image,
       images,
       oldPrice,
@@ -248,6 +256,75 @@ export function ProductForm({
             className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
           />
         </label>
+
+        <div className="mb-6 rounded-sm border border-border bg-muted/40 p-4">
+          <p className="mb-3 text-sm font-black text-foreground">
+            Traduction anglaise <span className="font-normal text-muted-foreground">(/en)</span>
+          </p>
+          <p className="mb-4 text-xs text-muted-foreground">
+            Laissé vide, chaque champ reprend automatiquement la version allemande sur la fiche
+            anglaise — ce n&apos;est jamais une erreur, juste une traduction pas encore faite.
+          </p>
+
+          <label className="mb-4 block text-sm">
+            <span className="mb-1 block font-semibold text-foreground">Nom (anglais)</span>
+            <input
+              value={nameEn}
+              onChange={(event) => setNameEn(event.target.value)}
+              placeholder={name || "Repli sur le nom allemand"}
+              className="w-full rounded-sm border border-border bg-white px-3 py-2 outline-none focus:border-primary"
+            />
+          </label>
+
+          <label className="mb-4 block text-sm">
+            <span className="mb-1 flex items-center justify-between gap-2">
+              <span className="font-semibold text-foreground">Description courte (anglais)</span>
+              <span
+                className={
+                  shortDescriptionEn.length >= SHORT_DESCRIPTION_MAX
+                    ? "text-xs font-bold text-destructive"
+                    : "text-xs text-muted-foreground"
+                }
+              >
+                {shortDescriptionEn.length}/{SHORT_DESCRIPTION_MAX}
+              </span>
+            </span>
+            <textarea
+              value={shortDescriptionEn}
+              onChange={(event) =>
+                setShortDescriptionEn(event.target.value.slice(0, SHORT_DESCRIPTION_MAX))
+              }
+              maxLength={SHORT_DESCRIPTION_MAX}
+              rows={2}
+              placeholder={shortDescription || "Repli sur la description courte allemande"}
+              className="w-full rounded-sm border border-border bg-white px-3 py-2 outline-none focus:border-primary"
+            />
+          </label>
+
+          <label className="mb-4 block text-sm">
+            <span className="mb-1 block font-semibold text-foreground">Description (anglais)</span>
+            <textarea
+              value={descriptionEn}
+              onChange={(event) => setDescriptionEn(event.target.value)}
+              rows={7}
+              placeholder={description || "Repli sur la description allemande"}
+              className="w-full rounded-sm border border-border bg-white px-3 py-2 outline-none focus:border-primary"
+            />
+          </label>
+
+          <label className="block text-sm">
+            <span className="mb-1 block font-semibold text-foreground">
+              Caractéristiques (anglais, une ligne par point)
+            </span>
+            <textarea
+              value={bulletsTextEn}
+              onChange={(event) => setBulletsTextEn(event.target.value)}
+              rows={4}
+              placeholder={bulletsText || "Repli sur les caractéristiques allemandes"}
+              className="w-full rounded-sm border border-border bg-white px-3 py-2 outline-none focus:border-primary"
+            />
+          </label>
+        </div>
 
         <ImageUploadField
           value={image}

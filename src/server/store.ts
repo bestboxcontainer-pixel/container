@@ -85,6 +85,10 @@ interface ProductRow {
   shortDescription: string;
   description: string;
   bullets: string;
+  nameEn: string;
+  shortDescriptionEn: string;
+  descriptionEn: string;
+  bulletsEn: string;
   image: string | null;
   images: string;
   priceCents: number;
@@ -144,6 +148,10 @@ function toProductRecord(row: ProductRow): ProductRecord {
     bullets: parseBullets(row.bullets),
     shortDescription: row.shortDescription,
     description: row.description,
+    nameEn: row.nameEn,
+    shortDescriptionEn: row.shortDescriptionEn,
+    descriptionEn: row.descriptionEn,
+    bulletsEn: parseBullets(row.bulletsEn),
     image: row.image ?? undefined,
     images: parseImages(row.images),
     oldPrice: row.oldPriceCents === null ? undefined : formatPrice(row.oldPriceCents),
@@ -326,6 +334,10 @@ export async function createProduct(input: Omit<ProductRecord, "id">): Promise<P
       shortDescription: input.shortDescription ?? "",
       description: input.description ?? "",
       bullets: JSON.stringify(input.bullets ?? []),
+      nameEn: input.nameEn ?? "",
+      shortDescriptionEn: input.shortDescriptionEn ?? "",
+      descriptionEn: input.descriptionEn ?? "",
+      bulletsEn: JSON.stringify(input.bulletsEn ?? []),
       image: input.image ?? null,
       images: JSON.stringify(input.images ?? []),
       priceCents: toCents(input.price),
@@ -394,6 +406,10 @@ export async function updateProduct(
       shortDescription: patch.shortDescription ?? undefined,
       description: patch.description ?? undefined,
       bullets: patch.bullets ? JSON.stringify(patch.bullets) : undefined,
+      nameEn: patch.nameEn ?? undefined,
+      shortDescriptionEn: patch.shortDescriptionEn ?? undefined,
+      descriptionEn: patch.descriptionEn ?? undefined,
+      bulletsEn: patch.bulletsEn ? JSON.stringify(patch.bulletsEn) : undefined,
       image: patch.image === undefined ? undefined : (patch.image || null),
       // Un tableau vide vide bien la galerie : seul `undefined` laisse la valeur en place
       images: patch.images === undefined ? undefined : JSON.stringify(patch.images),

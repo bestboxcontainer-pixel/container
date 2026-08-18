@@ -8,6 +8,8 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { CategoryProductBrowser } from "@/components/CategoryProductBrowser";
 import { CategoryGuide } from "@/components/CategoryGuide";
 import { PaymentMethodsBar } from "@/components/PaymentMethodsBar";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { ItemListJsonLd } from "@/components/seo/ItemListJsonLd";
 import { alternatesFor, localizedUrl } from "@/lib/hreflang";
 import { buildSocialMetadata } from "@/lib/opengraph";
 import { getCategoryPage, listCategories } from "@/server/store";
@@ -107,6 +109,22 @@ export default async function CategoryPage({ params }: { params: CategoryPagePar
         <CategoryGuide label={data.label} guide={data.guide} />
       </main>
       <Footer />
+
+      {/* Fil d'Ariane et liste des produits : absents jusqu'ici sur les pages
+          catégorie, alors que chaque fiche produit en a déjà beaucoup. */}
+      <BreadcrumbJsonLd
+        items={[
+          { label: t("home"), href: "/" },
+          { label: data.groupLabel, href: `/${data.group}` },
+          { label: data.label },
+        ]}
+      />
+      <ItemListJsonLd
+        items={data.products.map((product) => ({
+          name: `${product.brand} ${product.name}`,
+          url: localizedUrl(product.href, locale),
+        }))}
+      />
     </>
   );
 }

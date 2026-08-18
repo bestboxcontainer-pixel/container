@@ -4,11 +4,13 @@ import {
   MERCHANT_RETURN_POLICY,
   MERCHANT_SHIPPING,
   SHOP_NAME,
+  absoluteUrl,
   buildMerchantRecord,
   getMerchantProductBySlug,
   merchantEffectivePriceCents,
   merchantProductType,
   merchantReferencePriceCents,
+  siteUrl,
 } from "@/server/merchant";
 import type { ReviewRecord } from "@/server/types";
 import type { Product } from "@/types/home";
@@ -112,7 +114,15 @@ export async function ProductJsonLd({ product, reviews }: ProductJsonLdProps) {
     priceValidUntil: record.priceValidUntil,
     availability: AVAILABILITY_URL[record.availability],
     itemCondition: CONDITION_URL[record.condition],
-    seller: { "@type": "Organization", name: SHOP_NAME },
+    // url/logo repris tels quels du bloc Organization de la page d'accueil
+    // (OrganizationJsonLd) : même entité, mêmes valeurs, pour que Google la
+    // rattache sans ambiguïté d'une page à l'autre.
+    seller: {
+      "@type": "Organization",
+      name: SHOP_NAME,
+      url: siteUrl(),
+      logo: absoluteUrl("/images/logo-full.png"),
+    },
   };
 
   if (onSale) {

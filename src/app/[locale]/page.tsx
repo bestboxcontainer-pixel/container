@@ -10,7 +10,8 @@ import { BrandRow } from "@/components/BrandRow";
 import { ProductGrid } from "@/components/ProductGrid";
 import { PromoGrid } from "@/components/PromoGrid";
 import { parsePrice } from "@/lib/price";
-import { alternatesFor } from "@/lib/hreflang";
+import { alternatesFor, localizedUrl } from "@/lib/hreflang";
+import { buildSocialMetadata } from "@/lib/opengraph";
 import { getCategoryPages, type CategoryPageView } from "@/server/store";
 import { loadCatalogTranslations, localizeCategoryPages } from "@/server/localizedContent";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
@@ -89,11 +90,14 @@ function topBrands(categories: CategoryPageView[], limit: number): BrandTeaser[]
 export async function generateMetadata({ params }: { params: HomeParams }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "home" });
+  const title = t("metaTitle");
+  const description = t("metaDescription");
 
   return {
-    title: t("metaTitle"),
-    description: t("metaDescription"),
+    title,
+    description,
     alternates: alternatesFor("/", locale),
+    ...buildSocialMetadata({ title, description, url: localizedUrl("/", locale), locale }),
   };
 }
 

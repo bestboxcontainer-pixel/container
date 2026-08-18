@@ -16,7 +16,8 @@ import { listPublicReviews } from "@/server/reviews";
 import { loadCatalogTranslations, localizeCategoryPage } from "@/server/localizedContent";
 import { productLongText, productShortText, truncateAtWord } from "@/lib/productText";
 import { formatRating } from "@/lib/formatRating";
-import { alternatesFor } from "@/lib/hreflang";
+import { alternatesFor, localizedUrl } from "@/lib/hreflang";
+import { buildSocialMetadata } from "@/lib/opengraph";
 import type { Locale } from "@/i18n/routing";
 
 type ProductPageParams = Promise<{
@@ -88,10 +89,20 @@ export async function generateMetadata({ params }: { params: ProductPageParams }
     160,
   );
 
+  const title = t("metaTitle", { name: productName });
+
   return {
-    title: t("metaTitle", { name: productName }),
+    title,
     description,
     alternates: alternatesFor(`/${group}/${category}/${product}`, locale),
+    ...buildSocialMetadata({
+      title,
+      description,
+      url: localizedUrl(`/${group}/${category}/${product}`, locale),
+      locale,
+      image: data.product.image,
+      imageAlt: `${data.product.brand} ${data.product.name}`,
+    }),
   };
 }
 

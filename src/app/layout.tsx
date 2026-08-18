@@ -9,10 +9,38 @@ const lato = Lato({
   variable: "--font-lato",
 });
 
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://hausgeratepfeffer.de").replace(
+  /\/+$/,
+  "",
+);
+
+const TITLE = "Hausgeräte Pfeffer | Elektrogeräte & Multimedia online kaufen";
+const DESCRIPTION =
+  "Große Auswahl an Haushaltsgeräten, Küchengeräten, TV & Audio und Smart Home Produkten zu günstigen Preisen. Schnelle Lieferung, faire Garantie.";
+
 export const metadata: Metadata = {
-  title: "Hausgeräte Pfeffer | Elektrogeräte & Multimedia online kaufen",
-  description:
-    "Große Auswahl an Haushaltsgeräten, Küchengeräten, TV & Audio und Smart Home Produkten zu günstigen Preisen. Schnelle Lieferung, faire Garantie.",
+  // Nécessaire pour que les images Open Graph données en chemin relatif
+  // (ex. "/images/logo-full.png") se résolvent en URL absolue : Facebook,
+  // WhatsApp et consorts n'acceptent que des URL complètes.
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  // Filet de sécurité si une page ne définit pas son propre bloc social ;
+  // chaque page publique le fait déjà via generateMetadata.
+  openGraph: {
+    type: "website",
+    siteName: "Hausgeräte Pfeffer",
+    title: TITLE,
+    description: DESCRIPTION,
+    locale: "de_DE",
+    images: [{ url: "/images/logo-full.png", alt: TITLE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/images/logo-full.png"],
+  },
 };
 
 export default async function RootLayout({

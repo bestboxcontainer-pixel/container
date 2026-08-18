@@ -7,7 +7,8 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PaymentMethodsBar } from "@/components/PaymentMethodsBar";
-import { alternatesFor } from "@/lib/hreflang";
+import { alternatesFor, localizedUrl } from "@/lib/hreflang";
+import { buildSocialMetadata } from "@/lib/opengraph";
 import { getCategoryPages } from "@/server/store";
 import { loadCatalogTranslations, localizeCategoryPages } from "@/server/localizedContent";
 import type { Locale } from "@/i18n/routing";
@@ -45,11 +46,14 @@ export async function generateMetadata({ params }: { params: GroupPageParams }):
 
   const t = await getTranslations({ locale, namespace: "group" });
   const label = categories[0].groupLabel;
+  const title = t("metaTitle", { label });
+  const description = t("metaDescription", { label });
 
   return {
-    title: t("metaTitle", { label }),
-    description: t("metaDescription", { label }),
+    title,
+    description,
     alternates: alternatesFor(`/${group}`, locale),
+    ...buildSocialMetadata({ title, description, url: localizedUrl(`/${group}`, locale), locale }),
   };
 }
 

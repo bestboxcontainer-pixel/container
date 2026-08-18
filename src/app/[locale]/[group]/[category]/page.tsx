@@ -8,7 +8,8 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { CategoryProductBrowser } from "@/components/CategoryProductBrowser";
 import { CategoryGuide } from "@/components/CategoryGuide";
 import { PaymentMethodsBar } from "@/components/PaymentMethodsBar";
-import { alternatesFor } from "@/lib/hreflang";
+import { alternatesFor, localizedUrl } from "@/lib/hreflang";
+import { buildSocialMetadata } from "@/lib/opengraph";
 import { getCategoryPage, listCategories } from "@/server/store";
 import { loadCatalogTranslations, localizeCategoryPage } from "@/server/localizedContent";
 import type { Locale } from "@/i18n/routing";
@@ -37,11 +38,22 @@ export async function generateMetadata({ params }: { params: CategoryPageParams 
   if (!data) return {};
 
   const t = await getTranslations({ locale, namespace: "category" });
+  const title = t("metaTitle", { label: data.label });
+  const description = data.description;
+  // Une vraie photo de produit vend mieux la catégorie qu'un logo générique.
+  const image = data.products[0]?.image;
 
   return {
-    title: t("metaTitle", { label: data.label }),
-    description: data.description,
+    title,
+    description,
     alternates: alternatesFor(`/${group}/${category}`, locale),
+    ...buildSocialMetadata({
+      title,
+      description,
+      url: localizedUrl(`/${group}/${category}`, locale),
+      locale,
+      image,
+    }),
   };
 }
 

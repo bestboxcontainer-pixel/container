@@ -1,10 +1,11 @@
-# Hausgeräte Pfeffer
+# BBC Best Box Containerhandel e.K.
 
-Boutique en ligne d'électroménager et de multimédia, en allemand et en anglais.
-Catalogue, tunnel d'achat conforme au droit allemand de la vente à distance,
-espace client, back-office complet et flux Google Merchant.
+Back-office (admin) d'origine e-commerce — la vitrine publique bilingue a été
+retirée à la demande du client et remplacée par une page blanche. Seul
+`/admin` reste en service : produits, commandes, back-office complet et flux
+Google Merchant.
 
-Domaine : **hausgeratepfeffer.de**
+Domaine : **bestbox-containerhandel.de** (placeholder)
 
 ## Stack
 
@@ -58,11 +59,12 @@ npm run db:studio  # explorateur de base Prisma
 
 ```
 src/
-  app/[locale]/     # boutique bilingue (allemand à la racine, anglais sous /en)
-  app/admin/        # back-office, hors routage multilingue
-  app/api/          # routes serveur (compte, commande, administration, cron)
+  app/[locale]/     # vitrine désactivée — une seule page vierge (voir docs/HANDOVER.md)
+  app/admin/        # back-office, hors routage multilingue — seule partie active
+  app/api/admin/    # routes serveur du back-office
+  app/api/cron/     # tâches planifiées
   app/feed/         # flux Google Merchant (XML et CSV)
-  components/       # composants de la boutique et du back-office
+  components/       # composants du back-office (et vestiges de la vitrine)
   server/           # accès base et logique métier
   messages/         # traductions de.json / en.json
 prisma/             # schéma, migrations, peuplement

@@ -738,7 +738,7 @@ export async function exportCustomerData(customerId: string): Promise<Record<str
   return {
     hinweis:
       "Datenauskunft nach Art. 15 und Datenübertragbarkeit nach Art. 20 DSGVO. " +
-      "Diese Datei enthält alle personenbezogenen Daten, die Hausgeräte Pfeffer zu Ihrem " +
+      "Diese Datei enthält alle personenbezogenen Daten, die BBC Best Box Containerhandel e.K. zu Ihrem " +
       "Kundenkonto gespeichert hat. Ihr Passwort ist nicht enthalten: es wird ausschließlich " +
       "als nicht umkehrbarer Hashwert gespeichert.",
     erstelltAm: new Date().toISOString(),

@@ -40,7 +40,7 @@ export const MERCHANT_LANGUAGE = "de";
 /** Taux de TVA appliqué en Allemagne — déjà compris dans priceCents. */
 export const MERCHANT_VAT_RATE = 0.19;
 
-export const SHOP_NAME = "Hausgeräte Pfeffer";
+export const SHOP_NAME = "BBC Best Box Containerhandel e.K.";
 export const SHOP_PHONE = "+49 176 14111374";
 
 /**
@@ -48,7 +48,7 @@ export const SHOP_PHONE = "+49 176 14111374";
  * pointer vers le domaine vérifié dans Merchant Center.
  */
 export function siteUrl(): string {
-  const raw = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hausgeratepfeffer.de";
+  const raw = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestbox-containerhandel.de";
   return raw.replace(/\/+$/, "");
 }
 

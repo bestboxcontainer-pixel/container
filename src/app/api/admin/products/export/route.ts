@@ -194,7 +194,7 @@ async function buildPdf(rows: ExportRow[], subtitle: string): Promise<Uint8Array
     doc,
     font: await doc.embedFont(StandardFonts.Helvetica),
     bold: await doc.embedFont(StandardFonts.HelveticaBold),
-    title: "Hausgeräte Pfeffer — Catalogue produits",
+    title: "BBC Best Box Containerhandel e.K. — Catalogue produits",
     subtitle,
   };
 

@@ -24,7 +24,7 @@
  */
 
 /** Identifiant de la pièce jointe référencée par `src="cid:…"` dans les e-mails. */
-export const LOGO_CID = "logo-hausgeraete-pfeffer";
+export const LOGO_CID = "logo-bbc-best-box-containerhandel";
 
 /** Copie du logo réduit servie par le site, à l'attention des messageries. */
 const LOGO_EMAIL_PATH = "/images/logo-email.png";

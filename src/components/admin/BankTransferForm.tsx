@@ -86,7 +86,7 @@ export function BankTransferForm({ state }: BankTransferFormProps) {
             value={holder}
             onChange={(event) => setHolder(event.target.value)}
             className={FIELD}
-            placeholder="Hausgeräte Pfeffer OHG"
+            placeholder="BBC Best Box Containerhandel e.K."
             autoComplete="off"
           />
         </label>

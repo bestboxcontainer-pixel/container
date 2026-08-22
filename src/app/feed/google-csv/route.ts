@@ -9,7 +9,7 @@ import {
 // les valeurs répétées (product_highlight) contiennent souvent des virgules.
 //
 // À déclarer dans Merchant Center comme source de données planifiée :
-//   https://hausgeratepfeffer.de/feed/google-csv
+//   https://bestbox-containerhandel.de/feed/google-csv
 
 export const dynamic = "force-dynamic";
 
@@ -123,7 +123,7 @@ export async function GET(): Promise<Response> {
   return new Response(`${lines.join("\n")}\n`, {
     headers: {
       "Content-Type": "text/tab-separated-values; charset=utf-8",
-      "Content-Disposition": 'inline; filename="hausgeraete-pfeffer-google-feed.tsv"',
+      "Content-Disposition": 'inline; filename="bbc-best-box-containerhandel-google-feed.tsv"',
       "Cache-Control": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
       "X-Robots-Tag": "noindex",
     },

@@ -25,7 +25,7 @@ import {
 } from "./bankTransfer";
 
 const VALID = {
-  holder: "Hausgeräte Pfeffer OHG",
+  holder: "BBC Best Box Containerhandel e.K.",
   iban: "DE89 3704 0044 0532 0130 00",
   bic: "COBADEFFXXX",
   bank: "Commerzbank",
@@ -141,7 +141,7 @@ describe("Relecture des coordonnées enregistrées", () => {
    */
   it("accepte une ligne écrite avant l'ajout du type de virement", () => {
     const ancien = coerceBankTransfer({
-      holder: "Hausgeräte Pfeffer OHG",
+      holder: "BBC Best Box Containerhandel e.K.",
       iban: "DE89 3704 0044 0532 0130 00",
       bic: "COBADEFFXXX",
       bank: "Commerzbank",
@@ -149,7 +149,7 @@ describe("Relecture des coordonnées enregistrées", () => {
     });
 
     assert.equal(ancien.transferType, "");
-    assert.equal(ancien.holder, "Hausgeräte Pfeffer OHG");
+    assert.equal(ancien.holder, "BBC Best Box Containerhandel e.K.");
     assert.equal(ancien.configured, true);
   });
 

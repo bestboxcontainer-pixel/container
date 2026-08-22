@@ -8,7 +8,7 @@ import { findLegalPage } from "@/server/legalPages";
 import { paragraphsOf, stripMarks } from "@/lib/richText";
 import type { LegalPage, LegalSection, LegalSlug } from "@/content/legal/types";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hausgeratepfeffer.de";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestbox-containerhandel.de";
 
 function formatDate(iso: string, locale: string): string {
   return new Date(iso).toLocaleDateString(locale === "en" ? "en-GB" : "de-DE", {
@@ -29,7 +29,7 @@ export async function buildLegalMetadata(slug: LegalSlug, locale: string): Promi
   const first = stripMarks(page.intro ?? page.sections[0]?.body ?? "");
 
   return {
-    title: `${page.title} | Hausgeräte Pfeffer`,
+    title: `${page.title} | BBC Best Box Containerhandel e.K.`,
     description: first.slice(0, 155),
     alternates: {
       canonical: `${SITE_URL}${path}`,

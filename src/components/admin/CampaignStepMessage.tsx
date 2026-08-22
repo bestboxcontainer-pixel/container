@@ -298,7 +298,7 @@ export function CampaignStepMessage({ draft, products, onChange }: CampaignStepM
               </div>
 
               <p className="mt-3 text-center text-[10px] leading-4 text-muted-foreground">
-                Hausgeräte Pfeffer OHG · Matthiasstraße 15 · 54290 Trier
+                BBC Best Box Containerhandel e.K. · Petersweg 11a · 22946 Großensee
                 <br />
                 Impressum · Datenschutz · lien de désinscription
               </p>

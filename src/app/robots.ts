@@ -1,15 +1,16 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hausgeratepfeffer.de";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestbox-containerhandel.de";
 
+// La vitrine publique est désactivée : plus rien à explorer hors du
+// back-office et des API, qui restent exclus de l'index.
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        // Back-office, API et tunnel d'achat n'ont rien à faire dans l'index
-        disallow: ["/admin", "/api", "/warenkorb", "/kasse", "/bestellung", "/en/warenkorb", "/en/kasse", "/en/bestellung"],
+        disallow: ["/admin", "/api"],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,

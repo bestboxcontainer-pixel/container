@@ -12,6 +12,8 @@
   --font-heading: var(--font-sans);
   --color-sale: var(--sale);
   --color-sale-foreground: var(--sale-foreground);
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
   --color-badge: var(--badge);
   --color-badge-foreground: var(--badge-foreground);
   --color-footer: var(--footer);
@@ -61,30 +63,38 @@
   --card-foreground: #001424;
   --popover: #ffffff;
   --popover-foreground: #001424;
-  --primary: #e3000e;
+  /* Palette BBC Best Box Containerhandel — voir TARGET.md § Brand (v2, affinée).
+     Terracotta bruni (containers/corten) en primaire/CTA, bleu encre profond en
+     secondaire (en-tête, pied de page), touche ardoise très pâle en accent, et
+     un bronze discret pour de petits détails (voir --gold ci-dessous). Le
+     rouge/jaune restent utilisés pour les badges de remise du catalogue admin
+     (sémantique universelle, sans lien avec la couleur de marque). */
+  --primary: #b8551f;
   --primary-foreground: #ffffff;
-  --secondary: #242424;
+  --secondary: #0a1d30;
   --secondary-foreground: #ffffff;
-  --muted: #f8f8f8;
+  --muted: #f7f7f8;
   --muted-foreground: #6b7280;
-  --accent: #ffca2b;
-  --accent-foreground: #242424;
+  --accent: #e9edf1;
+  --accent-foreground: #0a1d30;
+  --gold: #c9a876;
+  --gold-foreground: #0a1d30;
   --destructive: #e3000e;
   --sale: #e3000e;
   --sale-foreground: #ffffff;
   --badge: #ffca2b;
   --badge-foreground: #242424;
-  --footer: #1a1a1a;
+  --footer: #0a1d30;
   --footer-foreground: #ffffff;
   --border: #e5e7eb;
   --input: #e5e7eb;
-  --ring: #e3000e;
+  --ring: #b8551f;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
+  --radius: 0.75rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);

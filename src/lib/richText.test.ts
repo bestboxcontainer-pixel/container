@@ -95,9 +95,9 @@ describe("parseRichText — liens", () => {
   });
 
   it("accepte https, mailto et tel", () => {
-    assert.ok(isSafeHref("https://hausgeratepfeffer.de"));
+    assert.ok(isSafeHref("https://bestbox-containerhandel.de"));
     assert.ok(isSafeHref("http://example.org/pfad"));
-    assert.ok(isSafeHref("mailto:service@hausgeratepfeffer.de"));
+    assert.ok(isSafeHref("mailto:service@bestbox-containerhandel.de"));
     assert.ok(isSafeHref("tel:+4930123456"));
   });
 

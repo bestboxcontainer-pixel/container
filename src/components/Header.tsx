@@ -1,66 +1,72 @@
-import Image from "next/image";
-import { getTranslations } from "next-intl/server";
-import { User } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { CategoryMenu } from "@/components/CategoryMenu";
-import { SearchBar } from "@/components/SearchBar";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import { CartIndicator } from "@/components/cart/CartIndicator";
-import { WishlistIndicator } from "@/components/wishlist/WishlistIndicator";
+import { Phone } from "lucide-react";
+import { COMPANY } from "@/content/legal";
+import { ContainerGlyph } from "@/components/ContainerGlyph";
 
-export async function Header() {
-  const t = await getTranslations("header");
-  const common = await getTranslations("common");
+const NAV_LINKS = [
+  { href: "/sortiment", label: "Sortiment" },
+  { href: "/vermietung", label: "Vermietung" },
+  { href: "/ueber-uns", label: "Über uns" },
+  { href: "/kontakt", label: "Kontakt" },
+] as const;
 
+/**
+ * En-tête du site vitrine (marketing), distinct du back-office.
+ * Marque en texte + pictogramme : pas de logo image dédié pour l'instant.
+ */
+export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full">
-      <div className="bg-secondary text-secondary-foreground">
-        <div className="mx-auto flex max-w-screen-xl flex-wrap items-center gap-3 px-3 py-3">
-          <CategoryMenu />
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-secondary/95 text-secondary-foreground backdrop-blur supports-[backdrop-filter]:bg-secondary/80">
+      <div className="mx-auto flex max-w-screen-xl items-center gap-6 px-4 py-3.5 sm:px-6">
+        <Link href="/" className="flex items-center gap-2.5 whitespace-nowrap">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white shadow-sm">
+            <ContainerGlyph className="h-4.5 w-4.5" />
+          </span>
+          <span className="flex flex-col leading-none">
+            <span className="text-[15px] font-black tracking-tight text-white">
+              BBC <span className="text-primary">Best Box</span>
+            </span>
+            <span className="hidden text-[11px] font-medium tracking-wide text-white/55 sm:inline">
+              Containerhandel e.K.
+            </span>
+          </span>
+        </Link>
 
-          <Link
-            href="/"
-            aria-label={t("homeAriaLabel")}
-            className="flex items-center rounded-sm bg-white px-2 py-1.5"
-          >
-            <Image
-              src="/images/logo-full.png"
-              alt={t("logoAlt")}
-              width={1242}
-              height={406}
-              priority
-              className="h-8 w-auto sm:h-9"
-            />
-          </Link>
-
-          <div className="order-3 w-full sm:order-2 sm:flex-1">
-            <SearchBar placeholder={common("searchPlaceholder")} label={t("search")} />
-          </div>
-
-          <nav className="order-2 ml-auto flex items-center gap-3 text-xs sm:order-3 sm:ml-0 sm:gap-4">
-            {/* Espace client. La cible est toujours « /konto » : cette page rend
-                le tableau de bord au client connecté et renvoie les autres vers
-                « /konto/anmelden » (requireCustomer). Lire le cookie de session
-                ici forcerait le rendu dynamique de tout le catalogue, qui est
-                prérendu — le lien resterait juste, mais les fiches produits
-                perdraient leur rendu statique. */}
+        <nav className="ml-auto hidden items-center gap-7 text-[13px] font-semibold uppercase tracking-wide md:flex">
+          {NAV_LINKS.map((link) => (
             <Link
-              href="/konto"
-              prefetch={false}
-              className="flex flex-col items-center gap-1 hover:text-primary"
+              key={link.href}
+              href={link.href}
+              className="text-white/75 transition-colors hover:text-white"
             >
-              <User className="h-5 w-5" />
-              <span className="hidden sm:inline">{common("account")}</span>
+              {link.label}
             </Link>
-            {/* Comme le panier, la liste de souhaits vit dans le navigateur */}
-            <WishlistIndicator />
-            {/* Le compteur d'articles vit côté client : le panier est en localStorage */}
-            <CartIndicator className="relative flex flex-col items-center gap-1 hover:text-primary" />
-            {/* Choix de la langue : reste visible et lisible dès le format mobile */}
-            <LanguageSwitcher className="shrink-0 border-l border-white/15 pl-3" />
-          </nav>
-        </div>
+          ))}
+        </nav>
+
+        <a
+          href={`tel:${COMPANY.phone.replace(/\s+/g, "")}`}
+          className="ml-auto hidden items-center gap-2 text-sm font-semibold text-white/85 hover:text-white sm:flex md:ml-0"
+        >
+          <Phone className="h-4 w-4" aria-hidden />
+          {COMPANY.phone}
+        </a>
+
+        <Link
+          href="/kontakt"
+          className="ml-auto rounded-full bg-gradient-to-b from-primary to-[#9a4315] px-5 py-2.5 text-sm font-bold text-primary-foreground shadow-sm shadow-black/20 transition-transform hover:scale-[1.02] hover:shadow-md md:ml-0"
+        >
+          Anfrage stellen
+        </Link>
       </div>
+
+      <nav className="flex items-center gap-5 overflow-x-auto border-t border-white/10 px-4 py-2 text-sm font-medium md:hidden">
+        {NAV_LINKS.map((link) => (
+          <Link key={link.href} href={link.href} className="whitespace-nowrap text-white/80">
+            {link.label}
+          </Link>
+        ))}
+      </nav>
     </header>
   );
 }

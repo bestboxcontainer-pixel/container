@@ -69,7 +69,7 @@ export function buildAdminOtpEmail(input: AdminOtpEmailInput): Omit<MailMessage,
                  il disparaîtrait sur un bandeau sombre. -->
             <tr>
               <td align="center" style="background-color:#ffffff; padding:32px 24px 24px 24px; border-radius:6px 6px 0 0;">
-                <img src="${logo}" alt="Hausgeräte Pfeffer" width="${LOGO_WIDTH}" height="${LOGO_HEIGHT}" style="display:block; width:${LOGO_WIDTH}px; height:auto; border:0; outline:none; text-decoration:none;" />
+                <img src="${logo}" alt="BBC Best Box Containerhandel e.K." width="${LOGO_WIDTH}" height="${LOGO_HEIGHT}" style="display:block; width:${LOGO_WIDTH}px; height:auto; border:0; outline:none; text-decoration:none;" />
               </td>
             </tr>
             <tr>
@@ -121,7 +121,7 @@ export function buildAdminOtpEmail(input: AdminOtpEmailInput): Omit<MailMessage,
           <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%;">
             <tr>
               <td align="center" style="padding:20px 16px 0 16px; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:20px; color:#4b5563;">
-                Hausgeräte Pfeffer — message automatique, merci de ne pas y répondre.
+                BBC Best Box Containerhandel e.K. — message automatique, merci de ne pas y répondre.
               </td>
             </tr>
           </table>
@@ -133,7 +133,7 @@ export function buildAdminOtpEmail(input: AdminOtpEmailInput): Omit<MailMessage,
 </html>`;
 
   const text = [
-    "Votre code de connexion à l'administration Hausgeräte Pfeffer",
+    "Votre code de connexion à l'administration BBC Best Box Containerhandel e.K.",
     "",
     `Bonjour ${name},`,
     "Saisissez ce code sur la page de connexion pour terminer votre accès à l'administration.",

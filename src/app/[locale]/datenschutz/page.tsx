@@ -1,18 +1,11 @@
-import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
 import { LegalPageView, buildLegalMetadata } from "@/components/legal/LegalPageView";
 
-const SLUG = "datenschutz" as const;
-
-type PageParams = Promise<{ locale: string }>;
-
-export async function generateMetadata({ params }: { params: PageParams }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  return await buildLegalMetadata(SLUG, locale);
+  return buildLegalMetadata("datenschutz", locale);
 }
 
-export default async function DatenschutzPage({ params }: { params: PageParams }) {
+export default async function DatenschutzPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  setRequestLocale(locale);
-  return <LegalPageView slug={SLUG} locale={locale} />;
+  return <LegalPageView slug="datenschutz" locale={locale} />;
 }

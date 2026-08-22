@@ -20,7 +20,7 @@ import type { OrderRecord } from "@/server/orders";
 import { buildInvoicePdf, lignesVirement, urlVignette } from "./invoice";
 
 const BANK: BankTransferSettings = {
-  holder: "Hausgeräte Pfeffer OHG",
+  holder: "BBC Best Box Containerhandel e.K.",
   iban: "DE89 3704 0044 0532 0130 00",
   bic: "COBADEFFXXX",
   bank: "Commerzbank",
@@ -43,7 +43,7 @@ describe("Bloc bancaire de la facture", () => {
   it("porte le compte et la référence sur une commande en virement non réglée", () => {
     const lignes = aplati(lignesVirement(COMMANDE, BANK));
 
-    assert.match(lignes, /Kontoinhaber: Hausgeräte Pfeffer OHG/);
+    assert.match(lignes, /Kontoinhaber: BBC Best Box Containerhandel e.K./);
     assert.match(lignes, /IBAN: DE89 3704 0044 0532 0130 00/);
     assert.match(lignes, /BIC: COBADEFFXXX/);
     assert.match(lignes, /Bank: Commerzbank/);

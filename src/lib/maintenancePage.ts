@@ -18,7 +18,7 @@ export const PAGE_MAINTENANCE = `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Wartungsarbeiten — Hausgeräte Pfeffer</title>
+<title>Wartungsarbeiten — BBC Best Box Containerhandel e.K.</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; }
   body {
@@ -80,13 +80,13 @@ export const PAGE_MAINTENANCE = `<!doctype html>
 </head>
 <body>
   <main class="carte">
-    <p class="marque">Hausgeräte <span>Pfeffer</span></p>
+    <p class="marque">BBC Best Box <span>Containerhandel e.K.</span></p>
     <h1>Wir sind gleich wieder für Sie da</h1>
     <p>Unser Shop wird gerade überarbeitet. In Kürze steht Ihnen das gesamte Sortiment wieder zur Verfügung.</p>
     <p>Vielen Dank für Ihr Verständnis.</p>
     <p class="contact">
       Fragen? Schreiben Sie uns an
-      <a href="mailto:kontakt@hausgeratepfeffer.de">kontakt@hausgeratepfeffer.de</a>
+      <a href="mailto:kontakt@bestbox-containerhandel.de">kontakt@bestbox-containerhandel.de</a>
     </p>
   </main>
 </body>

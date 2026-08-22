@@ -136,7 +136,7 @@ export const categoryPages: CategoryPageData[] = [
     ],
     {
       intro:
-        "Vom klassischen Kaffeevollautomaten bis zur kompakten Siebträgermaschine – bei Hausgeräte Pfeffer finden Sie die passende Lösung für Ihren perfekten Kaffeegenuss.",
+        "Vom klassischen Kaffeevollautomaten bis zur kompakten Siebträgermaschine – bei BBC Best Box Containerhandel e.K. finden Sie die passende Lösung für Ihren perfekten Kaffeegenuss.",
       sections: [
         {
           heading: "Kaffeevollautomat oder Siebträgermaschine?",

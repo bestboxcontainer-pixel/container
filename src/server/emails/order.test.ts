@@ -17,7 +17,7 @@ import type { OrderRecord } from "@/server/orders";
 import type { BankTransferSettings } from "@/lib/bankTransfer";
 import { buildOrderConfirmationEmail, buildOrderNotificationEmail } from "./order";
 
-const SITE = "https://hausgeratepfeffer.de";
+const SITE = "https://bestbox-containerhandel.de";
 process.env.NEXT_PUBLIC_SITE_URL = SITE;
 
 function order(overrides: Partial<OrderRecord> = {}): OrderRecord {
@@ -89,7 +89,7 @@ function order(overrides: Partial<OrderRecord> = {}): OrderRecord {
 
 /** Coordonnées telles qu'elles sortent du back-office, IBAN déjà normalisé. */
 const BANK: BankTransferSettings = {
-  holder: "Hausgeräte Pfeffer OHG",
+  holder: "BBC Best Box Containerhandel e.K.",
   iban: "DE89 3704 0044 0532 0130 00",
   bic: "COBADEFFXXX",
   bank: "Commerzbank",
@@ -220,7 +220,7 @@ describe("Confirmation à l'acheteur", () => {
     const mail = buildOrderConfirmationEmail(order(), BANK);
 
     for (const part of [mail.html, mail.text]) {
-      assert.match(part, /Hausgeräte Pfeffer OHG/);
+      assert.match(part, /BBC Best Box Containerhandel e.K./);
       assert.match(part, /DE89 3704 0044 0532 0130 00/);
       assert.match(part, /COBADEFFXXX/);
       assert.match(part, /Commerzbank/);

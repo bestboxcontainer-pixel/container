@@ -110,7 +110,7 @@ function contentFor(rank: 1 | 2 | 3): MailContent {
       preheader: "Wir haben Ihren Warenkorb gespeichert – wir helfen gern weiter.",
       heading: "Ihr Warenkorb ist noch da",
       paragraphs: [
-        "Sie haben vor Kurzem eine Bestellung bei Hausgeräte Pfeffer begonnen, sie aber nicht abgeschlossen. Falls etwas nicht geklappt hat oder Sie einfach unterbrochen wurden: Ihr Warenkorb ist weiterhin für Sie gespeichert.",
+        "Sie haben vor Kurzem eine Bestellung bei BBC Best Box Containerhandel e.K. begonnen, sie aber nicht abgeschlossen. Falls etwas nicht geklappt hat oder Sie einfach unterbrochen wurden: Ihr Warenkorb ist weiterhin für Sie gespeichert.",
         "Über den Button unten setzen Sie Ihre Bestellung genau dort fort, wo Sie aufgehört haben – Ihre Angaben sind noch da.",
       ],
       actionLabel: "Bestellung fortsetzen",

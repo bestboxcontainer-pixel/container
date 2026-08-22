@@ -1,50 +1,49 @@
 import type { MetadataRoute } from "next";
-import { getCategoryPages } from "@/server/store";
 import { routing } from "@/i18n/routing";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hausgeratepfeffer.de";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestbox-containerhandel.de";
 
 /** L'allemand vit à la racine, l'anglais sous /en — voir src/i18n/routing.ts. */
-function urlFor(path: string, locale: string): string {
+function urlFor(locale: string): string {
   const prefix = locale === routing.defaultLocale ? "" : `/${locale}`;
-  return `${SITE_URL}${prefix}${path === "/" ? "" : path}` || SITE_URL;
+  return `${SITE_URL}${prefix}` || SITE_URL;
 }
 
 /** Chaque URL déclare ses équivalents dans l'autre langue (hreflang). */
-function alternatesFor(path: string): Record<string, string> {
-  return Object.fromEntries(routing.locales.map((locale) => [locale, urlFor(path, locale)]));
+function alternates(): Record<string, string> {
+  return Object.fromEntries(routing.locales.map((locale) => [locale, urlFor(locale)]));
 }
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const categories = await getCategoryPages();
+/** Chemins publics du site vitrine marketing (hors racine, ajoutée séparément). */
+const PATHS = [
+  "sortiment",
+  "vermietung",
+  "ueber-uns",
+  "kontakt",
+  "impressum",
+  "datenschutz",
+  "agb",
+] as const;
 
-  const paths: { path: string; priority: number; changeFrequency: "daily" | "weekly" | "monthly" }[] =
-    [{ path: "/", priority: 1, changeFrequency: "daily" }];
-
-  for (const category of categories) {
-    paths.push({
-      path: `/${category.group}/${category.slug}`,
-      priority: 0.8,
-      changeFrequency: "weekly",
-    });
-    for (const product of category.products) {
-      paths.push({
-        path: `/${category.group}/${category.slug}/${product.slug}`,
-        priority: 0.7,
-        changeFrequency: "weekly",
-      });
-    }
-  }
-
+export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  return paths.flatMap(({ path, priority, changeFrequency }) =>
+  const home = routing.locales.map((locale) => ({
+    url: urlFor(locale),
+    lastModified: now,
+    changeFrequency: "yearly" as const,
+    priority: 1,
+    alternates: { languages: alternates() },
+  }));
+
+  const pages = PATHS.flatMap((path) =>
     routing.locales.map((locale) => ({
-      url: urlFor(path, locale),
+      url: `${urlFor(locale)}/${path}`,
       lastModified: now,
-      changeFrequency,
-      priority,
-      alternates: { languages: alternatesFor(path) },
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
   );
+
+  return [...home, ...pages];
 }

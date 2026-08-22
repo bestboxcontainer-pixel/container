@@ -1,5 +1,5 @@
 /**
- * Contenu légal et informatif en ALLEMAND — Hausgeräte Pfeffer.
+ * Contenu légal et informatif en ALLEMAND — BBC Best Box Containerhandel e.K.
  *
  * ATTENTION : toutes les données d'entreprise sont des PLACEHOLDERS
  * (adresse, HRB, USt-IdNr., WEEE, tarifs). Voir docs/LEGAL.md pour la liste
@@ -8,6 +8,14 @@
  * État du droit retenu : juillet 2026 (§ 5 DDG, § 356a BGB / Widerrufsbutton
  * depuis le 19.06.2026, ElektroG avec § 18a à partir du 01.07.2026, BattDG,
  * PAngV, DSGVO/TDDDG, VSBG § 36 — plateforme ODR fermée depuis le 20.07.2025).
+ *
+ * NOTE DE REBRANDING : le corps rédactionnel de ces pages (Impressum, AGB,
+ * FAQ, Über uns, etc.) décrit toujours une activité de vente au détail
+ * d'appareils électroménagers/multimédia — reliquat du gabarit d'origine.
+ * L'identité de l'entreprise a été mise à jour, mais ce contenu narratif
+ * n'a pas été réécrit pour coller à une activité de négoce de conteneurs ;
+ * il faudra le refaire si ces pages sont un jour réaffichées publiquement
+ * (la vitrine qui les exposait est retirée dans le cadre de ce même chantier).
  */
 
 import type { LegalPageMap } from "./types";
@@ -21,18 +29,20 @@ const UPDATED_AT = "2026-07-26";
  * et deux jeux de coordonnées qui divergeraient seraient pires qu'un seul faux.
  */
 export const COMPANY = {
-  name: "Hausgeräte Pfeffer OHG",
-  street: "Matthiasstraße 15",
-  city: "54290 Trier",
-  postalCode: "54290",
-  locality: "Trier",
+  name: "BBC Best Box Containerhandel e.K.",
+  street: "Petersweg 11a",
+  city: "22946 Großensee",
+  postalCode: "22946",
+  locality: "Großensee",
   country: "Deutschland",
-  email: "kontakt@hausgeratepfeffer.de",
-  phone: "+49 176 14111374",
-  managingDirector: "Klaus-Walter Pfeffer",
-  // Une OHG s'inscrit en section A (HRA), pas B, et le registre du ressort de
-  // Trier est tenu par l'Amtsgericht Wittlich.
-  register: "Amtsgericht Wittlich, HRA 40155",
+  email: "kontakt@bestbox-containerhandel.de",
+  phone: "+49 4154 000000",
+  owner: "Peer Kunz",
+  registeredSince: "20. April 2006",
+  // Ein eingetragener Kaufmann (e.K.) wird als Einzelkaufmann in Abteilung A
+  // des Handelsregisters (HRA) geführt; für den Sitz in Großensee
+  // (Schleswig-Holstein) ist das Amtsgericht Lübeck zuständig.
+  register: "Amtsgericht Lübeck, HRA 3471",
   // À RENSEIGNER : la facture doit porter le numéro de TVA (§ 14 Abs. 4 Nr. 2
   // UStG). Tant que cette valeur reste un gabarit, chaque facture émise est
   // incomplète.
@@ -40,7 +50,7 @@ export const COMPANY = {
   // À RENSEIGNER : numéro d'enregistrement auprès de la fondation EAR, exigé
   // de tout distributeur d'équipements électriques (§ 6 ElektroG).
   weee: "WEEE-Reg.-Nr. DE00000000",
-  domain: "www.hausgeratepfeffer.de",
+  domain: "www.bestbox-containerhandel.de",
 } as const;
 
 /** Adresse de retour (identique au siège dans ce modèle). */
@@ -48,7 +58,7 @@ const RETURN_ADDRESS = `${COMPANY.name}, Retourenannahme, ${COMPANY.street}, ${C
 
 /** Avertissement placé en tête de chaque page juridique. */
 const DISCLAIMER =
-  "Rechtlicher Hinweis: Dieser Text ist eine sorgfältig erstellte Vorlage für den Onlineshop Hausgeräte Pfeffer. Sämtliche Unternehmensangaben (Anschrift, Handelsregister, Umsatzsteuer-Identifikationsnummer, WEEE-Registrierungsnummer, Versandkosten, Dienstleister) sind Platzhalter und müssen vor der Veröffentlichung durch die tatsächlichen Daten ersetzt werden. Lassen Sie den Text anschließend anwaltlich prüfen – erst dann ist er rechtssicher verwendbar.";
+  "Rechtlicher Hinweis: Dieser Text ist eine sorgfältig erstellte Vorlage für den Onlineshop BBC Best Box Containerhandel e.K. Sämtliche Unternehmensangaben (Anschrift, Handelsregister, Umsatzsteuer-Identifikationsnummer, WEEE-Registrierungsnummer, Versandkosten, Dienstleister) sind Platzhalter und müssen vor der Veröffentlichung durch die tatsächlichen Daten ersetzt werden. Lassen Sie den Text anschließend anwaltlich prüfen – erst dann ist er rechtssicher verwendbar.";
 
 /** Assemble le chapeau : avertissement puis texte d'introduction. */
 function intro(lead: string): string {
@@ -79,7 +89,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Vertreten durch",
-        body: `Vertretungsberechtigter Gesellschafter: ${COMPANY.managingDirector}\n\nDer Gesellschafter ist einzelvertretungsberechtigt.`,
+        body: `Inhaber: ${COMPANY.owner}\n\nAls eingetragener Einzelkaufmann (e.K.) haftet der Inhaber persönlich und unbeschränkt.`,
       },
       {
         heading: "Kontakt",
@@ -92,7 +102,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Registereintrag",
-        body: `Eintragung im Handelsregister\nRegistergericht und Registernummer: ${COMPANY.register}`,
+        body: `Eintragung im Handelsregister seit dem ${COMPANY.registeredSince}\nRegistergericht und Registernummer: ${COMPANY.register}`,
       },
       {
         heading: "Umsatzsteuer-Identifikationsnummer",
@@ -109,7 +119,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Verantwortlich für den redaktionellen Inhalt",
-        body: `Verantwortlich nach § 18 Absatz 2 Medienstaatsvertrag (MStV):\n${COMPANY.managingDirector}, Anschrift wie oben.`,
+        body: `Verantwortlich nach § 18 Absatz 2 Medienstaatsvertrag (MStV):\n${COMPANY.owner}, Anschrift wie oben.`,
       },
       {
         heading: "Betriebshaftpflichtversicherung",
@@ -141,7 +151,15 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Bildnachweis",
-        body: "Produkt- und Stimmungsbilder stammen von den jeweiligen Herstellern sowie aus lizenzfreien Bilddatenbanken. Die vollständige Liste der Bildquellen ist vor der Veröffentlichung zu ergänzen.",
+        body: "Die Containerfotos auf dieser Website stammen von Wikimedia Commons und sind frei lizenziert:",
+        list: [
+          "Igor Ovsyannykov — „Shipping containers in a port“, CC0 (keine Namensnennung erforderlich)",
+          "AgainErick — „Shipping container stacks – Port of Rotterdam“, CC BY-SA 4.0",
+          "Carsten Steger — „Aerial image of the Eurogate and Burchardkai container terminals“ (Hamburg), CC BY-SA 4.0",
+          "Immanuel Giel — „Container architecture in Germany 01“, CC BY-SA 4.0",
+          "Immanuel Giel — „Container architecture in Germany 02“, CC BY-SA 4.0",
+          "Immanuel Giel — „Container architecture in Germany 03“, CC0 (keine Namensnennung erforderlich)",
+        ],
       },
     ],
   },
@@ -153,7 +171,7 @@ export const deLegalPages: LegalPageMap = {
     slug: "agb",
     title: "Allgemeine Geschäftsbedingungen",
     intro: intro(
-      "Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für alle Bestellungen, die Verbraucherinnen und Verbraucher sowie Unternehmen über den Onlineshop von Hausgeräte Pfeffer aufgeben. Stand: 26. Juli 2026.",
+      "Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für alle Bestellungen, die Verbraucherinnen und Verbraucher sowie Unternehmen über den Onlineshop von BBC Best Box Containerhandel e.K. aufgeben. Stand: 26. Juli 2026.",
     ),
     updatedAt: UPDATED_AT,
     sections: [
@@ -256,7 +274,7 @@ export const deLegalPages: LegalPageMap = {
         heading: "§ 16 Anwendbares Recht, Gerichtsstand und Schlussbestimmungen",
         body:
           "Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts. Gegenüber Verbrauchern gilt diese Rechtswahl nur insoweit, als dadurch der Schutz nicht entzogen wird, der durch zwingende Bestimmungen des Rechts des Staates gewährt wird, in dem der Verbraucher seinen gewöhnlichen Aufenthalt hat.\n\n" +
-          "Ist der Kunde Kaufmann, juristische Person des öffentlichen Rechts oder öffentlich-rechtliches Sondervermögen, ist ausschließlicher Gerichtsstand für alle Streitigkeiten aus diesem Vertrag unser Geschäftssitz in Trier.\n\n" +
+          "Ist der Kunde Kaufmann, juristische Person des öffentlichen Rechts oder öffentlich-rechtliches Sondervermögen, ist ausschließlicher Gerichtsstand für alle Streitigkeiten aus diesem Vertrag unser Geschäftssitz in Großensee.\n\n" +
           "Sollte eine Bestimmung dieser AGB unwirksam sein oder werden, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.",
       },
     ],
@@ -281,12 +299,12 @@ export const deLegalPages: LegalPageMap = {
           `${COMPANY.street}, ${COMPANY.city}, ${COMPANY.country}`,
           `Telefon: ${COMPANY.phone}`,
           `E-Mail: ${COMPANY.email}`,
-          `Vertreten durch: ${COMPANY.managingDirector}`,
+          `Vertreten durch: ${COMPANY.owner}`,
         ],
       },
       {
         heading: "2. Datenschutzbeauftragter",
-        body: "Unseren betrieblichen Datenschutzbeauftragten erreichen Sie unter datenschutz@hausgeratepfeffer.de oder postalisch unter der oben genannten Anschrift mit dem Zusatz „Datenschutzbeauftragter“. Ob eine Bestellpflicht besteht, richtet sich nach § 38 BDSG; die Angabe ist vor der Veröffentlichung zu prüfen.",
+        body: "Unseren betrieblichen Datenschutzbeauftragten erreichen Sie unter datenschutz@bestbox-containerhandel.de oder postalisch unter der oben genannten Anschrift mit dem Zusatz „Datenschutzbeauftragter“. Ob eine Bestellpflicht besteht, richtet sich nach § 38 BDSG; die Angabe ist vor der Veröffentlichung zu prüfen.",
       },
       {
         heading: "3. Rechtsgrundlagen der Verarbeitung",
@@ -391,7 +409,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "19. Zuständige Aufsichtsbehörde",
-        body: "Für uns zuständig ist der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Rheinland-Pfalz, Hintere Bleiche 34, 55116 Mainz.",
+        body: "Für uns zuständig ist das Unabhängige Landeszentrum für Datenschutz Schleswig-Holstein (ULD), Holstenstraße 98, 24103 Kiel.",
       },
       {
         heading: "20. Datensicherheit und automatisierte Entscheidungen",
@@ -871,12 +889,12 @@ export const deLegalPages: LegalPageMap = {
     slug: "ueber-uns",
     title: "Über uns",
     intro:
-      "Hausgeräte Pfeffer ist ein Fachhändler für Haushaltsgeräte und Multimedia mit Sitz in Trier. Wir verkaufen keine Geräte von der Stange, sondern beraten dazu – vom passenden Nischenmaß bis zur richtigen Bildwiederholrate.",
+      "BBC Best Box Containerhandel e.K. ist ein Fachhändler für Haushaltsgeräte und Multimedia mit Sitz in Großensee. Wir verkaufen keine Geräte von der Stange, sondern beraten dazu – vom passenden Nischenmaß bis zur richtigen Bildwiederholrate.",
     updatedAt: UPDATED_AT,
     sections: [
       {
         heading: "Wer wir sind",
-        body: "Was als kleiner Elektrofachbetrieb begann, ist heute ein Onlineshop mit angeschlossenem Lager und eigenem Serviceteam. Der Name steht für das, was uns wichtig ist: ehrliche Beratung, faire Preise und ein Ansprechpartner, der auch nach dem Kauf noch da ist. Geführt wird das Unternehmen von Martin Pfeffer.",
+        body: "Was als kleiner Elektrofachbetrieb begann, ist heute ein Onlineshop mit angeschlossenem Lager und eigenem Serviceteam. Der Name steht für das, was uns wichtig ist: ehrliche Beratung, faire Preise und ein Ansprechpartner, der auch nach dem Kauf noch da ist. Geführt wird das Unternehmen von Peer Kunz.",
       },
       {
         heading: "Unser Sortiment",
@@ -896,11 +914,11 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Standort und Logistik",
-        body: "Unser Sitz ist Trier, von dort steuern wir Einkauf, Kundenservice und Retourenabwicklung. Der Versand erfolgt über Paketdienste und spezialisierte Zwei-Mann-Speditionen für Großgeräte, damit auch ein 90 Kilogramm schwerer Kühlschrank sicher an seinem Platz ankommt.",
+        body: "Unser Sitz ist Großensee, von dort steuern wir Einkauf, Kundenservice und Retourenabwicklung. Der Versand erfolgt über Paketdienste und spezialisierte Zwei-Mann-Speditionen für Großgeräte, damit auch ein 90 Kilogramm schwerer Kühlschrank sicher an seinem Platz ankommt.",
       },
       {
-        heading: "Arbeiten bei Hausgeräte Pfeffer",
-        body: "Wir suchen regelmäßig Verstärkung in Beratung, Technik und Logistik. Wenn Sie Freude daran haben, Menschen wirklich weiterzuhelfen, statt nur Bestellungen abzuarbeiten, schreiben Sie uns an kontakt@hausgeratepfeffer.de – auch Initiativbewerbungen sind willkommen.",
+        heading: "Arbeiten bei BBC Best Box Containerhandel e.K.",
+        body: "Wir suchen regelmäßig Verstärkung in Beratung, Technik und Logistik. Wenn Sie Freude daran haben, Menschen wirklich weiterzuhelfen, statt nur Bestellungen abzuarbeiten, schreiben Sie uns an kontakt@bestbox-containerhandel.de – auch Initiativbewerbungen sind willkommen.",
       },
     ],
   },
@@ -945,7 +963,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Datenschutzanfragen",
-        body: "Auskunft, Berichtigung oder Löschung Ihrer Daten beantragen Sie unter datenschutz@hausgeratepfeffer.de oder postalisch mit dem Zusatz „Datenschutzbeauftragter“. Wir antworten innerhalb der gesetzlichen Frist von einem Monat.",
+        body: "Auskunft, Berichtigung oder Löschung Ihrer Daten beantragen Sie unter datenschutz@bestbox-containerhandel.de oder postalisch mit dem Zusatz „Datenschutzbeauftragter“. Wir antworten innerhalb der gesetzlichen Frist von einem Monat.",
       },
       {
         heading: "Presse und Kooperationen",
@@ -953,7 +971,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Rechtliche Angaben",
-        body: `${COMPANY.name}, vertreten durch den Geschäftsführer ${COMPANY.managingDirector}. Registergericht: ${COMPANY.register}. Umsatzsteuer-Identifikationsnummer: ${COMPANY.vatId}. ${COMPANY.weee}. Vollständige Angaben finden Sie im Impressum.`,
+        body: `${COMPANY.name}, vertreten durch den Inhaber ${COMPANY.owner}. Registergericht: ${COMPANY.register}. Umsatzsteuer-Identifikationsnummer: ${COMPANY.vatId}. ${COMPANY.weee}. Vollständige Angaben finden Sie im Impressum.`,
       },
     ],
   },

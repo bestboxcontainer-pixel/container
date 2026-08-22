@@ -9,14 +9,12 @@ const lato = Lato({
   variable: "--font-lato",
 });
 
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://hausgeratepfeffer.de").replace(
-  /\/+$/,
-  "",
-);
+const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestbox-containerhandel.de"
+).replace(/\/+$/, "");
 
-const TITLE = "Hausgeräte Pfeffer | Elektrogeräte & Multimedia online kaufen";
-const DESCRIPTION =
-  "Große Auswahl an Haushaltsgeräten, Küchengeräten, TV & Audio und Smart Home Produkten zu günstigen Preisen. Schnelle Lieferung, faire Garantie.";
+const TITLE = "BBC Best Box Containerhandel e.K.";
+const DESCRIPTION = "BBC Best Box Containerhandel e.K. — Petersweg 11a, 22946 Großensee.";
 
 export const metadata: Metadata = {
   // Nécessaire pour que les images Open Graph données en chemin relatif
@@ -29,7 +27,7 @@ export const metadata: Metadata = {
   // chaque page publique le fait déjà via generateMetadata.
   openGraph: {
     type: "website",
-    siteName: "Hausgeräte Pfeffer",
+    siteName: "BBC Best Box Containerhandel e.K.",
     title: TITLE,
     description: DESCRIPTION,
     locale: "de_DE",

@@ -10,7 +10,7 @@
     "language": "Sprache",
     "home": "Start",
     "breadcrumb": "Navigationspfad",
-    "shopName": "Hausgeräte Pfeffer",
+    "shopName": "BBC Best Box Containerhandel e.K.",
     "groupNames": {
       "haushalt": "Haushalt",
       "multimedia": "Multimedia"
@@ -34,8 +34,8 @@
     "whatsappTitle": "Fragen? Schreiben Sie uns über WhatsApp"
   },
   "header": {
-    "homeAriaLabel": "Hausgeräte Pfeffer – Startseite",
-    "logoAlt": "Hausgeräte Pfeffer",
+    "homeAriaLabel": "BBC Best Box Containerhandel e.K. – Startseite",
+    "logoAlt": "BBC Best Box Containerhandel e.K.",
     "search": "Suchen"
   },
   "hero": {
@@ -89,7 +89,7 @@
     "brands": "Top-Marken",
     "brandsNote": "Über 40 Hersteller im Sortiment",
     "brandItems": "{count} Artikel",
-    "metaTitle": "Hausgeräte Pfeffer | Elektrogeräte & Multimedia online kaufen",
+    "metaTitle": "BBC Best Box Containerhandel e.K. | Elektrogeräte & Multimedia online kaufen",
     "metaDescription": "Große Auswahl an Haushaltsgeräten, Küchengeräten, TV & Audio und Smart Home Produkten zu günstigen Preisen. Standardversand kostenlos, 14 Tage Rückgaberecht.",
     "promoTitle": "Topaktuell",
     "promo": {
@@ -134,13 +134,13 @@
     "serviceDetail": "Altgeräte-Mitnahme auf Wunsch"
   },
   "group": {
-    "metaTitle": "{label} – Geräte und Zubehör | Hausgeräte Pfeffer",
-    "metaDescription": "Alle Kategorien aus dem Bereich {label} bei Hausgeräte Pfeffer: geprüfte Marken, faire Preise und schnelle Lieferung.",
+    "metaTitle": "{label} – Geräte und Zubehör | BBC Best Box Containerhandel e.K.",
+    "metaDescription": "Alle Kategorien aus dem Bereich {label} bei BBC Best Box Containerhandel e.K.: geprüfte Marken, faire Preise und schnelle Lieferung.",
     "intro": "Alle Kategorien aus dem Bereich {label} auf einen Blick.",
     "productCount": "{count, plural, =0 {Noch keine Artikel} one {# Artikel} other {# Artikel}}"
   },
   "category": {
-    "metaTitle": "{label} | Hausgeräte Pfeffer",
+    "metaTitle": "{label} | BBC Best Box Containerhandel e.K.",
     "productsCount": "<b>{filtered}</b> von {total} Produkten",
     "sortBy": "Sortieren nach",
     "sortRelevance": "Relevanz",
@@ -168,7 +168,7 @@
       "from600": "600 € - 1.000 €",
       "over1000": "Über 1.000 €"
     },
-    "guideTitle": "{label} bei Hausgeräte Pfeffer",
+    "guideTitle": "{label} bei BBC Best Box Containerhandel e.K.",
     "guideDiscover": "{label} entdecken",
     "guideAdvice": "Beratung anfragen"
   },
@@ -181,7 +181,7 @@
     "ratingOf": "{rating} von 5",
     "reviewCount": "{count, plural, one {# Bewertung} other {# Bewertungen}}",
     "paymentTitle": "Sichere Zahlungsarten",
-    "metaTitle": "{name} | Hausgeräte Pfeffer",
+    "metaTitle": "{name} | BBC Best Box Containerhandel e.K.",
     "onRequest": "Auf Anfrage",
     "originalPrice": "Ursprünglicher Preis",
     "manufacturerPrice": "UVP des Herstellers",
@@ -202,8 +202,8 @@
     "galleryView": "Ansicht {index} von {total} anzeigen"
   },
   "search": {
-    "metaTitle": "Suche | Hausgeräte Pfeffer",
-    "metaTitleWithQuery": "Suche nach „{query}“ | Hausgeräte Pfeffer",
+    "metaTitle": "Suche | BBC Best Box Containerhandel e.K.",
+    "metaTitleWithQuery": "Suche nach „{query}“ | BBC Best Box Containerhandel e.K.",
     "title": "Suche",
     "resultsFor": "Suchergebnisse für „{query}“",
     "resultCount": "{count, plural, =0 {Kein Treffer} one {# Treffer} other {# Treffer}}",
@@ -257,8 +257,8 @@
     "decline": "Ablehnen"
   },
   "footer": {
-    "logoAlt": "Hausgeräte Pfeffer",
-    "homeAriaLabel": "Hausgeräte Pfeffer – Startseite",
+    "logoAlt": "BBC Best Box Containerhandel e.K.",
+    "homeAriaLabel": "BBC Best Box Containerhandel e.K. – Startseite",
     "deliveryTitle": "Standardversand: kostenlos (3–5 Tage)",
     "deliveryDetail": "Expressversand: 70 € (24–48 Stunden)",
     "warrantyTitle": "14 Tage Rückgaberecht",
@@ -281,11 +281,11 @@
     "linkPrivacy": "Datenschutz",
     "linkTerms": "AGB",
     "linkCookies": "Cookie-Einstellungen",
-    "copyright": "© {year} Hausgeräte Pfeffer. Alle Preise inkl. gesetzl. MwSt."
+    "copyright": "© {year} BBC Best Box Containerhandel e.K.. Alle Preise inkl. gesetzl. MwSt."
   },
   "cart": {
     "title": "Warenkorb",
-    "metaTitle": "Warenkorb | Hausgeräte Pfeffer",
+    "metaTitle": "Warenkorb | BBC Best Box Containerhandel e.K.",
     "addToCart": "In den Warenkorb",
     "buyNow": "Sofort kaufen",
     "added": "Hinzugefügt",
@@ -329,7 +329,7 @@
     "campaignFreeShipping": "Versandkostenfrei durch Ihre Aktion"
   },
   "checkout": {
-    "metaTitle": "Kasse | Hausgeräte Pfeffer",
+    "metaTitle": "Kasse | BBC Best Box Containerhandel e.K.",
     "title": "Kasse",
     "backToCart": "Zurück zum Warenkorb",
     "emptyTitle": "Ihr Warenkorb ist leer",
@@ -455,7 +455,7 @@
       "invalid_quantity": "Bitte wählen Sie je Artikel eine Menge zwischen 1 und 20."
     },
     "confirmation": {
-      "metaTitle": "Bestellbestätigung {orderNumber} | Hausgeräte Pfeffer",
+      "metaTitle": "Bestellbestätigung {orderNumber} | BBC Best Box Containerhandel e.K.",
       "title": "Vielen Dank für Ihre Bestellung",
       "subtitle": "Ihre Bestellung ist bei uns eingegangen.",
       "orderNumber": "Bestellnummer",

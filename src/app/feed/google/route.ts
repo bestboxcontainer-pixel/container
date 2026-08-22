@@ -12,7 +12,7 @@ import {
 // officielle. Seuls les produits actifs y figurent.
 //
 // À déclarer dans Merchant Center comme source de données planifiée :
-//   https://hausgeratepfeffer.de/feed/google
+//   https://bestbox-containerhandel.de/feed/google
 
 export const dynamic = "force-dynamic";
 

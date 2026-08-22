@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 // un lien partagé sur WhatsApp, Facebook ou X n'affiche ni image ni titre —
 // juste l'URL brute.
 
-const SITE_NAME = "Hausgeräte Pfeffer";
+const SITE_NAME = "BBC Best Box Containerhandel e.K.";
 const DEFAULT_OG_IMAGE = "/images/logo-full.png";
 
 function ogLocale(locale: string): string {

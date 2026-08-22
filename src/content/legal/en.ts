@@ -1,5 +1,5 @@
 /**
- * Contenu légal et informatif en ANGLAIS — Hausgeräte Pfeffer.
+ * Contenu légal et informatif en ANGLAIS — BBC Best Box Containerhandel e.K.
  *
  * Traduction professionnelle du corpus allemand (de.ts), mêmes clés et même
  * structure de sections. Pour les pages juridiques, une mention indique que
@@ -7,6 +7,11 @@
  *
  * ATTENTION : toutes les données d'entreprise sont des PLACEHOLDERS.
  * Voir docs/LEGAL.md.
+ *
+ * NOTE DE REBRANDING : voir de.ts — le corps rédactionnel de ces pages décrit
+ * toujours une activité de vente au détail d'appareils électroménagers, non
+ * réécrit pour une activité de négoce de conteneurs (la vitrine qui les
+ * exposait a été retirée dans le cadre de ce même chantier).
  */
 
 import type { LegalPageMap } from "./types";
@@ -16,17 +21,18 @@ const UPDATED_AT = "2026-07-26";
 
 /** Coordonnées de l'entreprise — À REMPLACER par les données réelles. */
 const COMPANY = {
-  name: "Hausgeräte Pfeffer OHG",
-  street: "Matthiasstraße 15",
-  city: "54290 Trier",
+  name: "BBC Best Box Containerhandel e.K.",
+  street: "Petersweg 11a",
+  city: "22946 Großensee",
   country: "Germany",
-  email: "kontakt@hausgeratepfeffer.de",
-  phone: "+49 176 14111374",
-  managingDirector: "Martin Pfeffer",
-  register: "Amtsgericht Wittlich (Local Court of Wittlich), HRA 00000",
+  email: "kontakt@bestbox-containerhandel.de",
+  phone: "+49 4154 000000",
+  owner: "Peer Kunz",
+  registeredSince: "20 April 2006",
+  register: "Amtsgericht Lübeck (Local Court of Lübeck), HRA 3471",
   vatId: "DE000000000",
   weee: "WEEE reg. no. DE00000000",
-  domain: "www.hausgeratepfeffer.de",
+  domain: "www.bestbox-containerhandel.de",
 } as const;
 
 /** Adresse de retour (identique au siège dans ce modèle). */
@@ -34,7 +40,7 @@ const RETURN_ADDRESS = `${COMPANY.name}, Returns Department, ${COMPANY.street}, 
 
 /** Avertissement placé en tête de chaque page juridique. */
 const DISCLAIMER =
-  "Legal notice: This text is a carefully prepared template for the Hausgeräte Pfeffer online shop. All company details (address, commercial register, VAT identification number, WEEE registration number, shipping rates, service providers) are placeholders and must be replaced with the actual data before publication. Have the text reviewed by a qualified lawyer afterwards — only then is it fit for live use.";
+  "Legal notice: This text is a carefully prepared template for the BBC Best Box Containerhandel e.K. online shop. All company details (address, commercial register, VAT identification number, WEEE registration number, shipping rates, service providers) are placeholders and must be replaced with the actual data before publication. Have the text reviewed by a qualified lawyer afterwards — only then is it fit for live use.";
 
 /** Mention indiquant que la version allemande prévaut. */
 const GERMAN_PREVAILS =
@@ -64,7 +70,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Represented by",
-        body: `Authorised partner: ${COMPANY.managingDirector}\n\nThe partner has sole power of representation.`,
+        body: `Owner: ${COMPANY.owner}\n\nAs a registered sole trader (eingetragener Kaufmann, e.K.), the owner is personally and unlimitedly liable.`,
       },
       {
         heading: "Contact",
@@ -77,7 +83,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Commercial register",
-        body: `Entered in the German commercial register.\nRegistering court and register number: ${COMPANY.register}`,
+        body: `Entered in the German commercial register since ${COMPANY.registeredSince}.\nRegistering court and register number: ${COMPANY.register}`,
       },
       {
         heading: "VAT identification number",
@@ -94,7 +100,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Responsible for editorial content",
-        body: `Responsible pursuant to section 18(2) MStV:\n${COMPANY.managingDirector}, address as above.`,
+        body: `Responsible pursuant to section 18(2) MStV:\n${COMPANY.owner}, address as above.`,
       },
       {
         heading: "Business liability insurance",
@@ -126,7 +132,15 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Image credits",
-        body: "Product and lifestyle images are provided by the respective manufacturers or sourced from royalty-free image libraries. The complete list of image sources must be added before publication.",
+        body: "The container photos on this website come from Wikimedia Commons and are freely licensed:",
+        list: [
+          "Igor Ovsyannykov — \"Shipping containers in a port\", CC0 (no attribution required)",
+          "AgainErick — \"Shipping container stacks – Port of Rotterdam\", CC BY-SA 4.0",
+          "Carsten Steger — \"Aerial image of the Eurogate and Burchardkai container terminals\" (Hamburg), CC BY-SA 4.0",
+          "Immanuel Giel — \"Container architecture in Germany 01\", CC BY-SA 4.0",
+          "Immanuel Giel — \"Container architecture in Germany 02\", CC BY-SA 4.0",
+          "Immanuel Giel — \"Container architecture in Germany 03\", CC0 (no attribution required)",
+        ],
       },
     ],
   },
@@ -138,7 +152,7 @@ export const enLegalPages: LegalPageMap = {
     slug: "agb",
     title: "General Terms and Conditions",
     intro: intro(
-      "These General Terms and Conditions (GTC) apply to all orders placed by consumers and businesses through the Hausgeräte Pfeffer online shop. Last updated: 26 July 2026.",
+      "These General Terms and Conditions (GTC) apply to all orders placed by consumers and businesses through the BBC Best Box Containerhandel e.K. online shop. Last updated: 26 July 2026.",
     ),
     updatedAt: UPDATED_AT,
     sections: [
@@ -241,7 +255,7 @@ export const enLegalPages: LegalPageMap = {
         heading: "Section 16 Applicable law, place of jurisdiction and final provisions",
         body:
           "German law applies, excluding the UN Convention on Contracts for the International Sale of Goods. In relation to consumers, this choice of law applies only insofar as it does not deprive the consumer of the protection afforded by mandatory provisions of the law of the country in which the consumer has their habitual residence.\n\n" +
-          "If the customer is a merchant, a legal entity under public law or a special fund under public law, the exclusive place of jurisdiction for all disputes arising from this contract is our registered office in Trier.\n\n" +
+          "If the customer is a merchant, a legal entity under public law or a special fund under public law, the exclusive place of jurisdiction for all disputes arising from this contract is our registered office in Großensee.\n\n" +
           "Should any provision of these GTC be or become invalid, the validity of the remaining provisions shall remain unaffected.",
       },
     ],
@@ -266,12 +280,12 @@ export const enLegalPages: LegalPageMap = {
           `${COMPANY.street}, ${COMPANY.city}, ${COMPANY.country}`,
           `Phone: ${COMPANY.phone}`,
           `Email: ${COMPANY.email}`,
-          `Represented by: ${COMPANY.managingDirector}`,
+          `Represented by: ${COMPANY.owner}`,
         ],
       },
       {
         heading: "2. Data protection officer",
-        body: "You can contact our data protection officer at datenschutz@hausgeratepfeffer.de or by post at the address above, marked \"Datenschutzbeauftragter\". Whether an appointment is mandatory depends on section 38 of the German Federal Data Protection Act and must be verified before publication.",
+        body: "You can contact our data protection officer at datenschutz@bestbox-containerhandel.de or by post at the address above, marked \"Datenschutzbeauftragter\". Whether an appointment is mandatory depends on section 38 of the German Federal Data Protection Act and must be verified before publication.",
       },
       {
         heading: "3. Legal bases for processing",
@@ -374,7 +388,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "19. Competent supervisory authority",
-        body: "The authority responsible for us is the State Commissioner for Data Protection and Freedom of Information of Rhineland-Palatinate (Landesbeauftragter für den Datenschutz und die Informationsfreiheit Rheinland-Pfalz), Hintere Bleiche 34, 55116 Mainz, Germany.",
+        body: "The authority responsible for us is the Independent Centre for Data Protection Schleswig-Holstein (Unabhängiges Landeszentrum für Datenschutz Schleswig-Holstein, ULD), Holstenstraße 98, 24103 Kiel, Germany.",
       },
       {
         heading: "20. Data security and automated decision-making",
@@ -854,12 +868,12 @@ export const enLegalPages: LegalPageMap = {
     slug: "ueber-uns",
     title: "About Us",
     intro:
-      "Hausgeräte Pfeffer is a specialist retailer for household appliances and consumer electronics based in Trier. We don't just sell appliances off the shelf — we advise on them, from the right recess dimensions to the right refresh rate.",
+      "BBC Best Box Containerhandel e.K. is a specialist retailer for household appliances and consumer electronics based in Großensee. We don't just sell appliances off the shelf — we advise on them, from the right recess dimensions to the right refresh rate.",
     updatedAt: UPDATED_AT,
     sections: [
       {
         heading: "Who we are",
-        body: "What began as a small electrical retailer is today an online shop with its own warehouse and in-house service team. The name stands for what matters to us: honest advice, fair prices and a contact person who is still there after the sale. The company is led by Martin Pfeffer.",
+        body: "What began as a small electrical retailer is today an online shop with its own warehouse and in-house service team. The name stands for what matters to us: honest advice, fair prices and a contact person who is still there after the sale. The company is led by Peer Kunz.",
       },
       {
         heading: "Our range",
@@ -879,11 +893,11 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Location and logistics",
-        body: "We are based in Trier, from where we manage purchasing, customer service and returns. Shipping is handled by parcel services and specialist two-person freight carriers for large appliances, so that even a 90-kilogram refrigerator arrives safely in its place.",
+        body: "We are based in Großensee, from where we manage purchasing, customer service and returns. Shipping is handled by parcel services and specialist two-person freight carriers for large appliances, so that even a 90-kilogram refrigerator arrives safely in its place.",
       },
       {
-        heading: "Working at Hausgeräte Pfeffer",
-        body: "We regularly look for reinforcements in advice, technical service and logistics. If you enjoy genuinely helping people rather than just processing orders, write to us at kontakt@hausgeratepfeffer.de — speculative applications are welcome too.",
+        heading: "Working at BBC Best Box Containerhandel e.K.",
+        body: "We regularly look for reinforcements in advice, technical service and logistics. If you enjoy genuinely helping people rather than just processing orders, write to us at kontakt@bestbox-containerhandel.de — speculative applications are welcome too.",
       },
     ],
   },
@@ -928,7 +942,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Data protection requests",
-        body: "To request access to, rectification of or erasure of your data, write to datenschutz@hausgeratepfeffer.de or by post marked \"Datenschutzbeauftragter\". We respond within the statutory period of one month.",
+        body: "To request access to, rectification of or erasure of your data, write to datenschutz@bestbox-containerhandel.de or by post marked \"Datenschutzbeauftragter\". We respond within the statutory period of one month.",
       },
       {
         heading: "Press and partnerships",
@@ -936,7 +950,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Company details",
-        body: `${COMPANY.name}, represented by Managing Director ${COMPANY.managingDirector}. Registering court: ${COMPANY.register}. VAT identification number: ${COMPANY.vatId}. ${COMPANY.weee}. Full details can be found in our legal notice (Impressum).`,
+        body: `${COMPANY.name}, represented by the owner, ${COMPANY.owner}. Registering court: ${COMPANY.register}. VAT identification number: ${COMPANY.vatId}. ${COMPANY.weee}. Full details can be found in our legal notice (Impressum).`,
       },
     ],
   },

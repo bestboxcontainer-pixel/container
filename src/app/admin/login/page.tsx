@@ -159,7 +159,7 @@ export default function AdminLoginPage() {
           <div className="flex justify-center bg-white px-6 pt-8 pb-6">
             <Image
               src="/images/logo-full.png"
-              alt="Hausgeräte Pfeffer"
+              alt="BBC Best Box Containerhandel e.K."
               width={1242}
               height={406}
               priority
@@ -294,7 +294,7 @@ export default function AdminLoginPage() {
         </div>
 
         <p className="mt-4 text-center text-xs text-muted-foreground">
-          Hausgeräte Pfeffer — administration
+          BBC Best Box Containerhandel e.K. — administration
         </p>
       </div>
     </div>

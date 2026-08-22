@@ -116,7 +116,7 @@ export function AdminSidebar({
           onClick={() => setMobileOpen(false)}
           className="block text-sm leading-tight font-black tracking-tight"
         >
-          Hausgeräte Pfeffer
+          BBC Best Box Containerhandel e.K.
           <span className="mt-0.5 block text-[11px] font-semibold tracking-widest text-primary uppercase">
             Administration
           </span>
@@ -195,7 +195,7 @@ export function AdminSidebar({
       {/* Barre mobile : la même navigation, ouverte par-dessus le contenu */}
       <div className="sticky top-0 z-40 flex items-center justify-between border-b border-border bg-secondary px-4 py-3 text-secondary-foreground lg:hidden">
         <Link href="/admin" className="text-sm font-black">
-          Hausgeräte Pfeffer — Admin
+          BBC Best Box Containerhandel e.K. — Admin
         </Link>
         <button
           type="button"

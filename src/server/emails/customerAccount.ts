@@ -51,8 +51,8 @@ export function layout(input: LayoutInput): string {
   const lang = input.locale;
   const footer =
     lang === "en"
-      ? "Hausgeräte Pfeffer — automated message, please do not reply."
-      : "Hausgeräte Pfeffer — automatische Nachricht, bitte nicht antworten.";
+      ? "BBC Best Box Containerhandel e.K. — automated message, please do not reply."
+      : "BBC Best Box Containerhandel e.K. — automatische Nachricht, bitte nicht antworten.";
 
   const body = input.paragraphs
     .map(
@@ -100,7 +100,7 @@ export function layout(input: LayoutInput): string {
           <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%; background-color:#ffffff; border:1px solid #e0e2e6; border-radius:6px;">
             <tr>
               <td align="center" style="background-color:#ffffff; padding:32px 24px 24px 24px; border-radius:6px 6px 0 0;">
-                <img src="${logo}" alt="Hausgeräte Pfeffer" width="${LOGO_WIDTH}" height="${LOGO_HEIGHT}" style="display:block; width:${LOGO_WIDTH}px; height:auto; border:0; outline:none; text-decoration:none;" />
+                <img src="${logo}" alt="BBC Best Box Containerhandel e.K." width="${LOGO_WIDTH}" height="${LOGO_HEIGHT}" style="display:block; width:${LOGO_WIDTH}px; height:auto; border:0; outline:none; text-decoration:none;" />
               </td>
             </tr>
             <tr>
@@ -208,11 +208,11 @@ export function buildWelcomeEmail(input: WelcomeEmailInput): Omit<MailMessage, "
   const paragraphs = de
     ? [
         `Hallo ${name},`,
-        "Ihr Kundenkonto bei Hausgeräte Pfeffer wurde angelegt. Sie können sich ab sofort anmelden, Ihre Bestellungen einsehen und Ihre Adressen verwalten.",
+        "Ihr Kundenkonto bei BBC Best Box Containerhandel e.K. wurde angelegt. Sie können sich ab sofort anmelden, Ihre Bestellungen einsehen und Ihre Adressen verwalten.",
       ]
     : [
         `Hello ${name},`,
-        "your Hausgeräte Pfeffer customer account has been created. You can sign in right away to review your orders and manage your addresses.",
+        "your BBC Best Box Containerhandel e.K. customer account has been created. You can sign in right away to review your orders and manage your addresses.",
       ];
 
   const footnote = de

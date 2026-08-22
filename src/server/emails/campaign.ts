@@ -44,12 +44,12 @@ const LOGO_HEIGHT = Math.round((LOGO_WIDTH * 406) / 1242);
  * doivent être remplacées ici EN MÊME TEMPS que dans les pages légales.
  */
 const IMPRESSUM = {
-  name: "Hausgeräte Pfeffer OHG",
-  street: "Matthiasstraße 15",
-  city: "54290 Trier",
+  name: "BBC Best Box Containerhandel e.K.",
+  street: "Petersweg 11a",
+  city: "22946 Großensee",
   country: "Deutschland",
-  managingDirector: "Martin Pfeffer",
-  register: "Amtsgericht Wittlich, HRA 00000",
+  managingDirector: "Peer Kunz",
+  register: "Amtsgericht Lübeck, HRA 3471",
   vatId: "DE000000000",
 } as const;
 
@@ -401,7 +401,7 @@ function renderHtml(input: RenderInput & { paragraphs: string[]; token: string }
           <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%; background-color:#ffffff; border:1px solid #e0e2e6; border-radius:6px;">
             <tr>
               <td align="center" style="background-color:#ffffff; padding:32px 24px 24px 24px; border-radius:6px 6px 0 0;">
-                <img src="${logo}" alt="Hausgeräte Pfeffer" width="${LOGO_WIDTH}" height="${LOGO_HEIGHT}" style="display:block; width:${LOGO_WIDTH}px; height:auto; border:0; outline:none; text-decoration:none;" />
+                <img src="${logo}" alt="BBC Best Box Containerhandel e.K." width="${LOGO_WIDTH}" height="${LOGO_HEIGHT}" style="display:block; width:${LOGO_WIDTH}px; height:auto; border:0; outline:none; text-decoration:none;" />
               </td>
             </tr>
             <tr>

@@ -27,7 +27,7 @@ function validInput(overrides: Partial<LegalPageInput> = {}): LegalPageInput {
       {
         heading: "Diensteanbieter",
         body: "Verantwortlich für diesen Onlineshop ist:",
-        list: ["Hausgeräte Pfeffer GmbH", "Musterstraße 12"],
+        list: ["BBC Best Box Containerhandel e.K.", "Musterstraße 12"],
       },
     ],
     updatedAt: "2026-07-28",
@@ -41,7 +41,7 @@ describe("normalizeLegalPage — contenu accepté", () => {
     assert.ok(result.ok);
     assert.equal(result.page.slug, "impressum");
     assert.equal(result.page.title, "Impressum");
-    assert.deepEqual(result.page.sections[0].list, ["Hausgeräte Pfeffer GmbH", "Musterstraße 12"]);
+    assert.deepEqual(result.page.sections[0].list, ["BBC Best Box Containerhandel e.K.", "Musterstraße 12"]);
   });
 
   it("omet le chapeau quand il est vide plutôt que d'afficher un encadré vide", () => {

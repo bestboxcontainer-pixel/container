@@ -80,7 +80,7 @@ export function CategoryPreview({
 
         <section className="border-t border-border pt-4">
           <h2 className="text-sm font-black text-foreground">
-            {displayLabel ? `${displayLabel} bei Hausgeräte Pfeffer` : "Kaufberatung"}
+            {displayLabel ? `${displayLabel} bei BBC Best Box Containerhandel e.K.` : "Kaufberatung"}
           </h2>
           <p className="mt-2 text-xs text-muted-foreground">
             {intro.trim() || <Placeholder>Introduction du guide non renseignée</Placeholder>}

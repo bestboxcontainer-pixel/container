@@ -10,7 +10,7 @@
     "language": "Language",
     "home": "Home",
     "breadcrumb": "Breadcrumb",
-    "shopName": "Hausgeräte Pfeffer",
+    "shopName": "BBC Best Box Containerhandel e.K.",
     "groupNames": {
       "haushalt": "Home Appliances",
       "multimedia": "Multimedia"
@@ -34,8 +34,8 @@
     "whatsappTitle": "Questions? Message us on WhatsApp"
   },
   "header": {
-    "homeAriaLabel": "Hausgeräte Pfeffer – home page",
-    "logoAlt": "Hausgeräte Pfeffer",
+    "homeAriaLabel": "BBC Best Box Containerhandel e.K. – home page",
+    "logoAlt": "BBC Best Box Containerhandel e.K.",
     "search": "Search"
   },
   "hero": {
@@ -89,7 +89,7 @@
     "brands": "Top brands",
     "brandsNote": "More than 40 manufacturers in stock",
     "brandItems": "{count} items",
-    "metaTitle": "Hausgeräte Pfeffer | Home appliances & multimedia online",
+    "metaTitle": "BBC Best Box Containerhandel e.K. | Home appliances & multimedia online",
     "metaDescription": "A wide range of home appliances, kitchen appliances, TV & audio and smart home products at fair prices. Free standard delivery, 14-day returns.",
     "promoTitle": "Trending now",
     "promo": {
@@ -134,13 +134,13 @@
     "serviceDetail": "Old appliance taken away on request"
   },
   "group": {
-    "metaTitle": "{label} – appliances and accessories | Hausgeräte Pfeffer",
-    "metaDescription": "Every category in {label} at Hausgeräte Pfeffer: trusted brands, fair prices and fast delivery.",
+    "metaTitle": "{label} – appliances and accessories | BBC Best Box Containerhandel e.K.",
+    "metaDescription": "Every category in {label} at BBC Best Box Containerhandel e.K.: trusted brands, fair prices and fast delivery.",
     "intro": "Every category in {label} at a glance.",
     "productCount": "{count, plural, =0 {No items yet} one {# item} other {# items}}"
   },
   "category": {
-    "metaTitle": "{label} | Hausgeräte Pfeffer",
+    "metaTitle": "{label} | BBC Best Box Containerhandel e.K.",
     "productsCount": "<b>{filtered}</b> of {total} products",
     "sortBy": "Sort by",
     "sortRelevance": "Relevance",
@@ -168,7 +168,7 @@
       "from600": "€600 - €1,000",
       "over1000": "Over €1,000"
     },
-    "guideTitle": "{label} at Hausgeräte Pfeffer",
+    "guideTitle": "{label} at BBC Best Box Containerhandel e.K.",
     "guideDiscover": "Browse {label}",
     "guideAdvice": "Request advice"
   },
@@ -181,7 +181,7 @@
     "ratingOf": "{rating} out of 5",
     "reviewCount": "{count, plural, one {# review} other {# reviews}}",
     "paymentTitle": "Secure payment methods",
-    "metaTitle": "{name} | Hausgeräte Pfeffer",
+    "metaTitle": "{name} | BBC Best Box Containerhandel e.K.",
     "onRequest": "On request",
     "originalPrice": "Original price",
     "manufacturerPrice": "Manufacturer's RRP",
@@ -202,8 +202,8 @@
     "galleryView": "Show view {index} of {total}"
   },
   "search": {
-    "metaTitle": "Search | Hausgeräte Pfeffer",
-    "metaTitleWithQuery": "Search for “{query}” | Hausgeräte Pfeffer",
+    "metaTitle": "Search | BBC Best Box Containerhandel e.K.",
+    "metaTitleWithQuery": "Search for “{query}” | BBC Best Box Containerhandel e.K.",
     "title": "Search",
     "resultsFor": "Search results for “{query}”",
     "resultCount": "{count, plural, =0 {No results} one {# result} other {# results}}",
@@ -257,8 +257,8 @@
     "decline": "Decline"
   },
   "footer": {
-    "logoAlt": "Hausgeräte Pfeffer",
-    "homeAriaLabel": "Hausgeräte Pfeffer – home page",
+    "logoAlt": "BBC Best Box Containerhandel e.K.",
+    "homeAriaLabel": "BBC Best Box Containerhandel e.K. – home page",
     "deliveryTitle": "Standard delivery: free (3–5 days)",
     "deliveryDetail": "Express delivery: €70 (24–48 hours)",
     "warrantyTitle": "14-day return policy",
@@ -281,11 +281,11 @@
     "linkPrivacy": "Privacy policy",
     "linkTerms": "Terms & conditions",
     "linkCookies": "Cookie settings",
-    "copyright": "© {year} Hausgeräte Pfeffer. All prices include statutory VAT."
+    "copyright": "© {year} BBC Best Box Containerhandel e.K.. All prices include statutory VAT."
   },
   "cart": {
     "title": "Cart",
-    "metaTitle": "Cart | Hausgeräte Pfeffer",
+    "metaTitle": "Cart | BBC Best Box Containerhandel e.K.",
     "addToCart": "Add to cart",
     "buyNow": "Buy now",
     "added": "Added",
@@ -329,7 +329,7 @@
     "campaignFreeShipping": "Free shipping through your current offer"
   },
   "checkout": {
-    "metaTitle": "Checkout | Hausgeräte Pfeffer",
+    "metaTitle": "Checkout | BBC Best Box Containerhandel e.K.",
     "title": "Checkout",
     "backToCart": "Back to cart",
     "emptyTitle": "Your cart is empty",
@@ -455,7 +455,7 @@
       "invalid_quantity": "Please choose a quantity between 1 and 20 per item."
     },
     "confirmation": {
-      "metaTitle": "Order confirmation {orderNumber} | Hausgeräte Pfeffer",
+      "metaTitle": "Order confirmation {orderNumber} | BBC Best Box Containerhandel e.K.",
       "title": "Thank you for your order",
       "subtitle": "We have received your order.",
       "orderNumber": "Order number",

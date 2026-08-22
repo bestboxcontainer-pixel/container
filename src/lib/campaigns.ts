@@ -344,7 +344,7 @@ export const CAMPAIGN_TYPES: readonly CampaignTypeDefinition[] = [
     suggestedHours: 336,
     de: {
       subject: "Neu im Sortiment: {produit}",
-      headline: "Neu bei Hausgeräte Pfeffer",
+      headline: "Neu bei BBC Best Box Containerhandel e.K.",
       bodyText:
         "Hallo {prenom},\n\n" +
         "{marque} {produit} ist ab sofort bei uns erhältlich – zum Preis von {prix}.\n\n" +
@@ -354,7 +354,7 @@ export const CAMPAIGN_TYPES: readonly CampaignTypeDefinition[] = [
     },
     en: {
       subject: "New in our range: {produit}",
-      headline: "New at Hausgeräte Pfeffer",
+      headline: "New at BBC Best Box Containerhandel e.K.",
       bodyText:
         "Hello {prenom},\n\n" +
         "the {marque} {produit} is now available from us, priced at {prix}.\n\n" +

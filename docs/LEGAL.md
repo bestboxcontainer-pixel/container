@@ -1,4 +1,4 @@
-# Contenu légal et informatif — Hausgeräte Pfeffer
+# Contenu légal et informatif — BBC Best Box Containerhandel e.K.
 
 Ce document décrit le corpus légal livré dans `src/content/legal/`, ce qu'il couvre,
 ce qui **doit impérativement être personnalisé avant la mise en ligne**, et les sources
@@ -135,23 +135,33 @@ Les slugs de ce corpus sont `widerruf` et `retoure`. Il faut soit aligner le foo
 
 ## 5. À remplacer impérativement avant la mise en ligne
 
-### 5.1 Données d'entreprise (fictives dans tout le corpus)
+### 5.1 Données d'entreprise (encore fictives sur certains points — voir ci-dessous)
 
-| Élément | Valeur actuelle (placeholder) | Où |
-| --- | --- | --- |
-| Raison sociale | `Hausgeräte Pfeffer GmbH` | `COMPANY.name` dans `de.ts` et `en.ts` |
-| Adresse | `Musterstraße 12, 10115 Berlin` | idem |
-| E-mail | `service@hausgeratepfeffer.de` | idem |
-| Téléphone | `+49 176 14111374` (réel) | idem |
-| Gérant | `Martin Pfeffer` | idem |
-| Registre du commerce | `Amtsgericht Berlin-Charlottenburg HRB 000000` | idem |
-| N° TVA intracommunautaire | `DE000000000` | idem |
-| N° WEEE (stiftung ear) | `DE00000000` | idem |
-| N° registre batteries (BattDG) | `DE00000000` | `impressum`, `elektroaltgeraete` |
-| N° registre emballages LUCID | `DE0000000000000` | `impressum`, `elektroaltgeraete` |
-| Adresse de retour | identique au siège | `RETURN_ADDRESS` |
-| Adresse e-mail DPO | `datenschutz@hausgeratepfeffer.de` | `datenschutz`, `kontakt` |
-| Domaine | `www.hausgeratepfeffer.de` | `COMPANY.domain` |
+Mis à jour en 2026-08 avec l'identité réelle de l'entreprise. Restent des placeholders :
+le numéro de TVA intracommunautaire, le numéro WEEE, l'e-mail et le téléphone.
+
+| Élément | Valeur actuelle | Statut | Où |
+| --- | --- | --- | --- |
+| Raison sociale | `BBC Best Box Containerhandel e.K.` | réel | `COMPANY.name` dans `de.ts` et `en.ts` |
+| Forme juridique | e.K. (Einzelkaufmann) | réel | idem |
+| Adresse | `Petersweg 11a, 22946 Großensee, Schleswig-Holstein` | réel | idem |
+| Inhaber (propriétaire) | `Peer Kunz` | réel | `COMPANY.owner` |
+| Registre du commerce | `Amtsgericht Lübeck, HRA 3471` | réel | idem |
+| Inscrit depuis | `20 avril 2006` | réel | `COMPANY.registeredSince` |
+| E-mail | `kontakt@bestbox-containerhandel.de` | placeholder | idem |
+| Téléphone | `+49 4154 000000` | placeholder | idem |
+| N° TVA intracommunautaire | `DE000000000` | placeholder | idem |
+| N° WEEE (stiftung ear) | `DE00000000` | placeholder | idem |
+| N° registre batteries (BattDG) | `DE00000000` | placeholder | `impressum`, `elektroaltgeraete` |
+| N° registre emballages LUCID | `DE0000000000000` | placeholder | `impressum`, `elektroaltgeraete` |
+| Adresse de retour | identique au siège | réel | `RETURN_ADDRESS` |
+| Domaine | `www.bestbox-containerhandel.de` | placeholder, à réserver | `COMPANY.domain` |
+
+Par ailleurs, la vitrine publique qui exposait ces pages légales a été retirée (voir
+`README.md`) : seul le back-office `/admin` reste en service. Le contenu rédactionnel de
+ces pages (Impressum, AGB, FAQ, Über uns…) décrit toujours une activité de vente
+d'électroménager, non réécrite pour une activité de négoce de conteneurs — voir la note en
+tête de `de.ts` / `en.ts`.
 
 Les constantes `COMPANY` de `de.ts` et `en.ts` sont **volontairement dupliquées** (le pays
 diffère : `Deutschland` / `Germany`). Modifier les deux.

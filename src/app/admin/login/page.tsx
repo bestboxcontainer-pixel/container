@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { ContainerGlyph } from "@/components/ContainerGlyph";
 
 interface Challenge {
   challengeId: string;
@@ -154,17 +154,15 @@ export default function AdminLoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-muted px-4 py-10">
       <div className="w-full max-w-sm">
         <div className="overflow-hidden rounded-sm border border-border bg-white shadow-sm">
-          {/* Logo centré sur fond blanc : le lettrage est presque noir, il faut
-              un fond clair. Le filet rouge reprend celui de l'e-mail de code. */}
-          <div className="flex justify-center bg-white px-6 pt-8 pb-6">
-            <Image
-              src="/images/logo-full.png"
-              alt="BBC Best Box Containerhandel e.K."
-              width={1242}
-              height={406}
-              priority
-              className="h-12 w-auto"
-            />
+          {/* Marque centrée sur fond blanc. Le filet en dessous reprend la
+              couleur primaire, comme celui de l'e-mail de code. */}
+          <div className="flex flex-col items-center gap-2 bg-white px-6 pt-8 pb-6">
+            <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-white">
+              <ContainerGlyph className="h-6 w-6" />
+            </span>
+            <span className="text-lg font-black tracking-tight text-secondary">
+              BBC <span className="text-primary">Best Box</span>
+            </span>
           </div>
           <div className="h-1 bg-primary" />
 

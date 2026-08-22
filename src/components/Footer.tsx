@@ -8,7 +8,7 @@ const CONTAINER_LINKS = [
   { href: "/vermietung", label: "Vermietung" },
   { href: "/sortiment#lagercontainer", label: "Lagercontainer" },
   { href: "/sortiment#buerocontainer", label: "Bürocontainer" },
-  { href: "/sortiment#wohncontainer", label: "Wohncontainer" },
+  { href: "/sortiment#seecontainer", label: "Seecontainer" },
 ] as const;
 
 const COMPANY_LINKS = [

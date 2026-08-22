@@ -5,16 +5,15 @@ import {
   Boxes,
   Building2,
   Clock,
-  Home as HomeIcon,
   Leaf,
   MapPin,
   Package,
   ShieldCheck,
+  Ship,
   ShowerHead,
   Sparkles,
   TreePine,
   Truck,
-  Wrench,
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Header } from "@/components/Header";
@@ -118,22 +117,16 @@ const CATEGORIES = [
     text: "Einzel- und Mehrfachanlagen als mobiles Büro auf der Baustelle oder im Betrieb.",
   },
   {
-    id: "wohncontainer",
-    icon: HomeIcon,
-    title: "Wohncontainer",
-    text: "Voll ausgestattete Raumzellen für Unterkunft, Pause und temporäres Wohnen.",
+    id: "seecontainer",
+    icon: Ship,
+    title: "Seecontainer",
+    text: "Robuste ISO-Container für Transport und Lagerung, neu und geprüft gebraucht.",
   },
   {
     id: "sanitaercontainer",
     icon: ShowerHead,
     title: "Sanitärcontainer",
     text: "WC-, Dusch- und Waschcontainer für Baustellen, Events und Betriebsgelände.",
-  },
-  {
-    id: "baucontainer",
-    icon: Wrench,
-    title: "Baucontainer",
-    text: "Robuste Container für den Baustelleneinsatz, einzeln oder als Kombination.",
   },
   {
     id: "sondercontainer",

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { ArrowRight, Boxes, Building2, Home as HomeIcon, ShowerHead, Truck, Wrench } from "lucide-react";
+import { ArrowRight, Boxes, Building2, Ship, ShowerHead, Truck } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Sortiment | BBC Best Box Containerhandel e.K.",
-  description: "Lager-, Büro-, Wohn-, Sanitär-, Bau- und Sondercontainer — neu und gebraucht, kaufen oder mieten.",
+  description: "Lager-, Büro-, See-, Sanitär- und Sondercontainer — neu und gebraucht, kaufen oder mieten.",
 };
 
 const CATEGORIES = [
@@ -25,11 +25,11 @@ const CATEGORIES = [
     points: ["Heizung, Strom, Fenster", "Einzel- oder Mehrfachanlage", "Zwei-Etagen-Kombinationen möglich"],
   },
   {
-    id: "wohncontainer",
-    icon: HomeIcon,
-    title: "Wohncontainer",
-    text: "Voll ausgestattete Raumzellen für temporäres Wohnen, Personalunterkünfte oder Pausenräume — mit Sanitärbereich auf Wunsch.",
-    points: ["Wärmedämmung nach Bedarf", "Küchen- und Sanitärmodule", "Für Dauer- und Kurzzeitnutzung"],
+    id: "seecontainer",
+    icon: Ship,
+    title: "Seecontainer",
+    text: "Robuste ISO-Container für Transport, Umschlag und Lagerung — neu oder geprüft gebraucht, in Standardgrößen.",
+    points: ["ISO-Normmaße 20' und 40'", "Wetter- und diebstahlsicher", "Neu und geprüft gebraucht"],
   },
   {
     id: "sanitaercontainer",
@@ -37,13 +37,6 @@ const CATEGORIES = [
     title: "Sanitärcontainer",
     text: "WC-, Dusch- und Waschcontainer für Baustellen, Veranstaltungen und Betriebsgelände, inklusive Frisch- und Abwassertechnik.",
     points: ["WC-, Dusch- und Waschmodule", "Frisch-/Abwassertechnik integriert", "Für Baustellen und Events"],
-  },
-  {
-    id: "baucontainer",
-    icon: Wrench,
-    title: "Baucontainer",
-    text: "Robuste Container für den täglichen Baustelleneinsatz — als Mannschaftscontainer, Materiallager oder Kombination aus beidem.",
-    points: ["Stapelbar und stoßfest", "Für den harten Baustellenalltag", "Kombinierbar mit Sanitärmodul"],
   },
   {
     id: "sondercontainer",
@@ -63,7 +56,7 @@ export default function SortimentPage() {
           <div className="mx-auto max-w-screen-xl px-4 py-14 sm:px-6">
             <p className="text-sm font-bold uppercase tracking-wide text-primary">Sortiment</p>
             <h1 className="mt-3 max-w-2xl text-3xl font-black text-white sm:text-4xl">
-              Sechs Container-Kategorien, neu und gebraucht
+              Fünf Container-Kategorien, neu und gebraucht
             </h1>
             <p className="mt-4 max-w-xl text-white/75">
               Alle Container sind in verschiedenen Längen, Breiten und Höhen erhältlich und

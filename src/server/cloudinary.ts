@@ -15,7 +15,7 @@ import { v2 as cloudinary, type UploadApiOptions, type UploadApiResponse } from 
 import { slugify } from "@/lib/slugify";
 
 /** Dossier Cloudinary qui reçoit les visuels produits. */
-export const CLOUDINARY_PRODUCT_FOLDER = "hausgeraete-pfeffer/products";
+export const CLOUDINARY_PRODUCT_FOLDER = "bbc-best-box/products";
 
 /**
  * Largeur (et hauteur) maximale conservée à l'upload. 1600 px suffisent

@@ -39,9 +39,18 @@ const STATS = [
  * siehe Bildnachweis auf der Impressum-Seite für Quelle/Lizenz je Bild.
  */
 const HERO_PHOTOS: readonly PhotoSlide[] = [
-  { src: "/images/container/hero-port-1.jpg", alt: "Stapel von Frachtcontainern im Hafen" },
-  { src: "/images/container/hero-rotterdam-2.jpg", alt: "Containerstapel im Hafen Rotterdam" },
-  { src: "/images/container/hero-hamburg-3.jpg", alt: "Luftaufnahme des Container-Terminals im Hafen Hamburg" },
+  {
+    src: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403193/bbc-best-box/site/hero-port-1-8hwmc1.jpg",
+    alt: "Stapel von Frachtcontainern im Hafen",
+  },
+  {
+    src: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403201/bbc-best-box/site/hero-rotterdam-2-vnmxx4.jpg",
+    alt: "Containerstapel im Hafen Rotterdam",
+  },
+  {
+    src: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403212/bbc-best-box/site/hero-hamburg-3-xgx1wi.jpg",
+    alt: "Luftaufnahme des Container-Terminals im Hafen Hamburg",
+  },
 ] as const;
 
 /**
@@ -56,42 +65,42 @@ const DESIGN_LINES = [
     icon: Package,
     title: "Mattschwarz",
     text: "Container in mattschwarzer RAL-Lackierung — moderner, zurückhaltender Auftritt für Firmengelände und Baustelle.",
-    photo: "/images/container/gallery-modulbau-de.jpg",
+    photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403217/bbc-best-box/site/gallery-modulbau-de-1eyg37.jpg",
   },
   {
     id: "naturholz",
     icon: Leaf,
     title: "Naturholz",
     text: "Fassaden- oder Innenverkleidung aus Holz für eine warme, natürliche Optik.",
-    photo: "/images/container/gallery-office-de.jpg",
+    photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403222/bbc-best-box/site/gallery-office-de-rnnl7b.jpg",
   },
   {
     id: "premiumholz",
     icon: TreePine,
     title: "Premium-Holz",
     text: "Hochwertige Holzverkleidung mit feinerer Oberfläche und langlebigem Wetterschutz.",
-    photo: "/images/container/gallery-wohnwerte-de.jpg",
+    photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403228/bbc-best-box/site/gallery-wohnwerte-de-dw1h24.jpg",
   },
   {
     id: "verglast",
     icon: Sparkles,
     title: "Verglast",
     text: "Großzügige Fensterfronten für lichtdurchflutete Räume — ideal für Empfang, Verkauf oder Büro.",
-    photo: "/images/container/gallery-modulbau-de.jpg",
+    photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403217/bbc-best-box/site/gallery-modulbau-de-1eyg37.jpg",
   },
   {
     id: "modular",
     icon: Building2,
     title: "Modular",
     text: "Einzeln oder als mehrgeschossige Anlage kombinierbar — flexibel erweiterbar nach Bedarf.",
-    photo: "/images/container/gallery-office-de.jpg",
+    photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403222/bbc-best-box/site/gallery-office-de-rnnl7b.jpg",
   },
   {
     id: "wc-duschen",
     icon: ShowerHead,
     title: "WC & Duschen",
     text: "Voll ausgestattete Sanitärcontainer mit WC-, Dusch- und Waschbereich.",
-    photo: "/images/container/gallery-wohnwerte-de.jpg",
+    photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403228/bbc-best-box/site/gallery-wohnwerte-de-dw1h24.jpg",
   },
 ] as const;
 

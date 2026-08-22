@@ -26,7 +26,7 @@ export function Header() {
             <span className="text-[15px] font-black tracking-tight text-white">
               BBC <span className="text-gold">Best Box</span>
             </span>
-            <span className="hidden text-[11px] font-bold tracking-wide text-gold sm:inline">
+            <span className="hidden text-[11px] font-bold tracking-wide text-white sm:inline">
               Containerhandel e.K.
             </span>
           </span>

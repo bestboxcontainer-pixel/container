@@ -35,7 +35,7 @@ export function Footer() {
               <p className="text-base font-black text-white">
                 BBC <span className="text-gold">Best Box</span>
               </p>
-              <p className="mt-0.5 text-xs font-bold text-gold">Containerhandel e.K.</p>
+              <p className="mt-0.5 text-xs font-bold text-white">Containerhandel e.K.</p>
             </div>
           </div>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/65">

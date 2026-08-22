@@ -71,7 +71,7 @@ const DESIGN_LINES = [
     icon: Leaf,
     title: "Naturholz",
     text: "Fassaden- oder Innenverkleidung aus Holz für eine warme, natürliche Optik.",
-    photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403222/bbc-best-box/site/gallery-office-de-rnnl7b.jpg",
+    photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403228/bbc-best-box/site/gallery-wohnwerte-de-dw1h24.jpg",
   },
   {
     id: "premiumholz",
@@ -85,14 +85,14 @@ const DESIGN_LINES = [
     icon: Sparkles,
     title: "Verglast",
     text: "Großzügige Fensterfronten für lichtdurchflutete Räume — ideal für Empfang, Verkauf oder Büro.",
-    photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403217/bbc-best-box/site/gallery-modulbau-de-1eyg37.jpg",
+    photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403222/bbc-best-box/site/gallery-office-de-rnnl7b.jpg",
   },
   {
     id: "modular",
     icon: Building2,
     title: "Modular",
     text: "Einzeln oder als mehrgeschossige Anlage kombinierbar — flexibel erweiterbar nach Bedarf.",
-    photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403222/bbc-best-box/site/gallery-office-de-rnnl7b.jpg",
+    photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403217/bbc-best-box/site/gallery-modulbau-de-1eyg37.jpg",
   },
   {
     id: "wc-duschen",
@@ -232,10 +232,10 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Kauf oder Miete */}
+        {/* Kauf */}
         <section className="bg-accent">
-          <div className="mx-auto grid max-w-screen-xl gap-5 px-4 py-14 sm:px-6 md:grid-cols-2">
-            <div className="rounded-sm bg-white p-8">
+          <div className="mx-auto max-w-screen-xl px-4 py-14 sm:px-6">
+            <div className="mx-auto max-w-xl rounded-sm bg-white p-8">
               <h3 className="text-xl font-black text-foreground">Container kaufen</h3>
               <p className="mt-3 text-sm leading-relaxed text-foreground/70">
                 Neu oder geprüft gebraucht, direkt aus unserem Bestand — inklusive Lieferung und
@@ -246,20 +246,6 @@ export default function HomePage() {
                 className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary"
               >
                 Zum Sortiment
-                <ArrowRight className="h-4 w-4" aria-hidden />
-              </Link>
-            </div>
-            <div className="rounded-sm bg-secondary p-8 text-secondary-foreground">
-              <h3 className="text-xl font-black text-white">Container mieten</h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/75">
-                Flexible Mietdauer für Baustellen, Events oder Übergangslösungen — ohne lange
-                Kapitalbindung.
-              </p>
-              <Link
-                href="/vermietung"
-                className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-gold"
-              >
-                Zur Vermietung
                 <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
             </div>

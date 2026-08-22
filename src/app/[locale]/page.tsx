@@ -105,6 +105,12 @@ const DESIGN_LINES = [
 
 const CATEGORIES = [
   {
+    id: "seecontainer",
+    icon: Ship,
+    title: "Seecontainer",
+    text: "Robuste ISO-Container für Transport und Lagerung, neu und geprüft gebraucht.",
+  },
+  {
     id: "lagercontainer",
     icon: Boxes,
     title: "Lagercontainer",
@@ -115,12 +121,6 @@ const CATEGORIES = [
     icon: Building2,
     title: "Bürocontainer",
     text: "Einzel- und Mehrfachanlagen als mobiles Büro auf der Baustelle oder im Betrieb.",
-  },
-  {
-    id: "seecontainer",
-    icon: Ship,
-    title: "Seecontainer",
-    text: "Robuste ISO-Container für Transport und Lagerung, neu und geprüft gebraucht.",
   },
   {
     id: "sanitaercontainer",
@@ -172,10 +172,7 @@ export default function HomePage() {
 
           <div className="relative z-10 mx-auto grid max-w-screen-xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center md:py-24">
             <div>
-              <p className="text-sm font-bold uppercase tracking-wide text-primary">
-                Containerhandel e.K.
-              </p>
-              <h1 className="mt-3 text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
+              <h1 className="text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
                 Container kaufen und mieten — schnell, zuverlässig, deutschlandweit
               </h1>
               <p className="mt-5 max-w-lg text-base leading-relaxed text-white/75">
@@ -186,7 +183,7 @@ export default function HomePage() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href="/sortiment"
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-primary to-[#9a4315] px-5 py-3 text-sm font-bold text-primary-foreground shadow-sm hover:shadow-md"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-secondary shadow-sm hover:bg-white/90 hover:shadow-md"
                 >
                   Sortiment ansehen
                   <ArrowRight className="h-4 w-4" aria-hidden />
@@ -218,12 +215,12 @@ export default function HomePage() {
           <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
             <h2 className="text-2xl font-black text-foreground sm:text-3xl">Container-Kategorien</h2>
 
-            <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
               {CATEGORIES.map((category) => (
                 <Link
                   key={category.id}
                   href={`/sortiment#${category.id}`}
-                  className="flex flex-col items-center gap-3 rounded-2xl border border-border bg-white p-5 text-center shadow-sm transition-shadow hover:shadow-md"
+                  className="flex w-36 shrink-0 flex-col items-center gap-3 rounded-2xl border border-border bg-white p-5 text-center shadow-sm transition-shadow hover:shadow-md sm:w-40"
                 >
                   <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-secondary">
                     <category.icon className="h-6 w-6" aria-hidden />
@@ -260,7 +257,7 @@ export default function HomePage() {
               </p>
               <Link
                 href="/vermietung"
-                className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary"
+                className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-gold"
               >
                 Zur Vermietung
                 <ArrowRight className="h-4 w-4" aria-hidden />
@@ -299,7 +296,7 @@ export default function HomePage() {
                   <p className="mt-3 text-sm leading-relaxed text-white/70">{line.text}</p>
                   <Link
                     href="/sortiment"
-                    className="mt-5 inline-flex items-center justify-center gap-2 rounded-full border border-white/25 px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-white hover:bg-white/10"
+                    className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-b from-[#5B82CE] to-[#33509E] px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-white shadow-[0_2px_10px_rgba(59,124,245,0.22)] transition-transform hover:scale-[1.02] hover:shadow-[0_2px_14px_rgba(59,124,245,0.32)]"
                   >
                     Produkte ansehen
                     <ArrowRight className="h-3.5 w-3.5" aria-hidden />
@@ -310,24 +307,10 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Warum wir */}
-        <section className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
-          <h2 className="text-2xl font-black text-foreground sm:text-3xl">Warum BBC Best Box</h2>
-          <div className="mt-10 grid gap-8 sm:grid-cols-3">
-            {BENEFITS.map((benefit) => (
-              <div key={benefit.title}>
-                <benefit.icon className="h-7 w-7 text-primary" aria-hidden />
-                <h3 className="mt-4 font-bold text-foreground">{benefit.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-foreground/70">{benefit.text}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
         {/* Ablauf */}
         <section className="bg-muted">
-          <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
-            <h2 className="text-2xl font-black text-foreground sm:text-3xl">So einfach geht&apos;s</h2>
+          <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6">
+            <h2 className="text-2xl font-black text-foreground sm:text-3xl">Wie läuft die Lieferung ab?</h2>
             <div className="mt-10 grid gap-8 sm:grid-cols-3">
               {STEPS.map((item) => (
                 <div key={item.step}>
@@ -343,7 +326,7 @@ export default function HomePage() {
         </section>
 
         {/* CTA */}
-        <section className="bg-secondary text-secondary-foreground">
+        <section className="border-y-2 border-gray-300 bg-secondary text-secondary-foreground">
           <div className="mx-auto flex max-w-screen-xl flex-col items-start gap-5 px-4 py-14 sm:px-6 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 className="text-2xl font-black text-white sm:text-3xl">
@@ -355,11 +338,25 @@ export default function HomePage() {
             </div>
             <Link
               href="/kontakt"
-              className="inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3 text-sm font-bold text-primary-foreground hover:opacity-90"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-[#5B82CE] to-[#33509E] px-6 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-[0_2px_10px_rgba(59,124,245,0.25)] transition-transform hover:scale-[1.02] hover:shadow-[0_2px_14px_rgba(59,124,245,0.35)]"
             >
               Jetzt Kontakt aufnehmen
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
+          </div>
+        </section>
+
+        {/* Warum wir */}
+        <section className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6">
+          <h2 className="text-2xl font-black text-foreground sm:text-3xl">Warum BBC Best Box</h2>
+          <div className="mt-10 grid gap-6 sm:grid-cols-3">
+            {BENEFITS.map((benefit) => (
+              <div key={benefit.title} className="rounded-2xl border border-emerald/30 bg-accent p-5">
+                <benefit.icon className="h-7 w-7 text-emerald" aria-hidden />
+                <h3 className="mt-4 font-bold text-foreground">{benefit.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-foreground/70">{benefit.text}</p>
+              </div>
+            ))}
           </div>
         </section>
       </main>

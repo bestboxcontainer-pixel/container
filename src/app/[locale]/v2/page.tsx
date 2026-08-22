@@ -99,7 +99,7 @@ export default function HomePageV2() {
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
                 href="/sortiment"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-primary to-[#9a4315] px-6 py-3 text-sm font-bold text-primary-foreground shadow-sm hover:shadow-md"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-primary to-[#a8420f] px-6 py-3 text-sm font-bold text-primary-foreground shadow-sm hover:shadow-md"
               >
                 Sortiment entdecken
                 <ArrowRight className="h-4 w-4" aria-hidden />
@@ -253,7 +253,7 @@ export default function HomePageV2() {
             </p>
             <Link
               href="/kontakt"
-              className="mt-2 inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-primary to-[#9a4315] px-6 py-3 text-sm font-bold text-primary-foreground shadow-sm hover:shadow-md"
+              className="mt-2 inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-primary to-[#a8420f] px-6 py-3 text-sm font-bold text-primary-foreground shadow-sm hover:shadow-md"
             >
               Jetzt anfragen
               <ArrowRight className="h-4 w-4" aria-hidden />

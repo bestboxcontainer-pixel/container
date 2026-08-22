@@ -19,14 +19,14 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-secondary/95 text-secondary-foreground backdrop-blur supports-[backdrop-filter]:bg-secondary/80">
       <div className="mx-auto flex max-w-screen-xl items-center gap-6 px-4 py-3.5 sm:px-6">
         <Link href="/" className="flex items-center gap-2.5 whitespace-nowrap">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white shadow-sm">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gold text-white shadow-sm">
             <ContainerGlyph className="h-4.5 w-4.5" />
           </span>
           <span className="flex flex-col leading-none">
             <span className="text-[15px] font-black tracking-tight text-white">
-              BBC <span className="text-primary">Best Box</span>
+              BBC <span className="text-gold">Best Box</span>
             </span>
-            <span className="hidden text-[11px] font-medium tracking-wide text-white/55 sm:inline">
+            <span className="hidden text-[11px] font-bold tracking-wide text-gold sm:inline">
               Containerhandel e.K.
             </span>
           </span>
@@ -54,7 +54,7 @@ export function Header() {
 
         <Link
           href="/kontakt"
-          className="ml-auto rounded-full bg-gradient-to-b from-primary to-[#9a4315] px-5 py-2.5 text-sm font-bold text-primary-foreground shadow-sm shadow-black/20 transition-transform hover:scale-[1.02] hover:shadow-md md:ml-0"
+          className="ml-auto rounded-full bg-gradient-to-b from-[#5B82CE] to-[#33509E] px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-white shadow-[0_2px_10px_rgba(59,124,245,0.25)] transition-transform hover:scale-[1.02] hover:shadow-[0_2px_14px_rgba(59,124,245,0.35)] md:ml-0"
         >
           Anfrage stellen
         </Link>

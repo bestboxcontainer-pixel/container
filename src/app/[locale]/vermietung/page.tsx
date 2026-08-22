@@ -42,7 +42,7 @@ export default function VermietungPage() {
       <main className="flex-1">
         <section className="bg-secondary text-secondary-foreground">
           <div className="mx-auto max-w-screen-xl px-4 py-14 sm:px-6">
-            <p className="text-sm font-bold uppercase tracking-wide text-primary">Vermietung</p>
+            <p className="text-sm font-bold uppercase tracking-wide text-gold">Vermietung</p>
             <h1 className="mt-3 max-w-2xl text-3xl font-black text-white sm:text-4xl">
               Container mieten statt kaufen
             </h1>
@@ -52,7 +52,7 @@ export default function VermietungPage() {
             </p>
             <Link
               href="/kontakt"
-              className="mt-7 inline-flex items-center gap-2 rounded-sm bg-primary px-5 py-3 text-sm font-bold text-primary-foreground hover:opacity-90"
+              className="mt-7 inline-flex items-center gap-2 rounded-sm bg-white px-5 py-3 text-sm font-bold text-secondary hover:bg-white/90"
             >
               Mietangebot anfragen
               <ArrowRight className="h-4 w-4" aria-hidden />

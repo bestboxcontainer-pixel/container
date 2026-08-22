@@ -14,6 +14,10 @@
   --color-sale-foreground: var(--sale-foreground);
   --color-gold: var(--gold);
   --color-gold-foreground: var(--gold-foreground);
+  --color-steel: var(--steel);
+  --color-steel-foreground: var(--steel-foreground);
+  --color-emerald: var(--emerald);
+  --color-emerald-foreground: var(--emerald-foreground);
   --color-badge: var(--badge);
   --color-badge-foreground: var(--badge-foreground);
   --color-footer: var(--footer);
@@ -58,36 +62,46 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #001424;
+  --foreground: #1a1d21;
   --card: #ffffff;
-  --card-foreground: #001424;
+  --card-foreground: #1a1d21;
   --popover: #ffffff;
-  --popover-foreground: #001424;
-  /* Palette BBC Best Box Containerhandel — voir TARGET.md § Brand (v2, affinée).
-     Terracotta bruni (containers/corten) en primaire/CTA, bleu encre profond en
-     secondaire (en-tête, pied de page), touche ardoise très pâle en accent, et
-     un bronze discret pour de petits détails (voir --gold ci-dessous). Le
-     rouge/jaune restent utilisés pour les badges de remise du catalogue admin
-     (sémantique universelle, sans lien avec la couleur de marque). */
+  --popover-foreground: #1a1d21;
+  /* Palette BBC Best Box Containerhandel — essai « v5 » (2026-08).
+     Terracotta corten en accent seul (boutons/liens sur fond clair), bleu
+     marine profond pour en-tête/pied de page/sections sombres, vert émeraude
+     en fond neutre + bordures des sections claires (jamais en dominante
+     pleine page), et un or/ambre vif réservé aux petites touches sur fond
+     marine (badge du logo, texte « Best Box », icônes de contact du footer,
+     eyebrow) — choisi pour rester dans le registre maritime/premium tout en
+     tranchant net sur le marine, sans se confondre avec le terracotta ni
+     l'émeraude. --steel conservé
+     pour compat mais plus utilisé par défaut. Rouge/jaune inchangés :
+     badges de remise du catalogue admin, sémantique universelle sans lien
+     avec la marque. */
   --primary: #b8551f;
   --primary-foreground: #ffffff;
-  --secondary: #0a1d30;
+  --secondary: #0b1f33;
   --secondary-foreground: #ffffff;
-  --muted: #f7f7f8;
-  --muted-foreground: #6b7280;
-  --accent: #e9edf1;
-  --accent-foreground: #0a1d30;
-  --gold: #c9a876;
-  --gold-foreground: #0a1d30;
+  --muted: #eef3f0;
+  --muted-foreground: #4d5f55;
+  --accent: #e3efe9;
+  --accent-foreground: #1b4332;
+  --emerald: #2f6b4f;
+  --emerald-foreground: #ffffff;
+  --steel: #5b6670;
+  --steel-foreground: #ffffff;
+  --gold: #f0a830;
+  --gold-foreground: #0b1f33;
   --destructive: #e3000e;
   --sale: #e3000e;
   --sale-foreground: #ffffff;
   --badge: #ffca2b;
   --badge-foreground: #242424;
-  --footer: #0a1d30;
+  --footer: #0b1f33;
   --footer-foreground: #ffffff;
-  --border: #e5e7eb;
-  --input: #e5e7eb;
+  --border: #d7e3dc;
+  --input: #d7e3dc;
   --ring: #b8551f;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);

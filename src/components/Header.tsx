@@ -1,7 +1,7 @@
+import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { Phone } from "lucide-react";
 import { COMPANY } from "@/content/legal";
-import { ContainerGlyph } from "@/components/ContainerGlyph";
 
 const NAV_LINKS = [
   { href: "/sortiment", label: "Sortiment" },
@@ -19,9 +19,14 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-secondary/95 text-secondary-foreground backdrop-blur supports-[backdrop-filter]:bg-secondary/80">
       <div className="mx-auto flex max-w-screen-xl items-center gap-6 px-4 py-3.5 sm:px-6">
         <Link href="/" className="flex items-center gap-2.5 whitespace-nowrap">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gold text-white shadow-sm">
-            <ContainerGlyph className="h-4.5 w-4.5" />
-          </span>
+          <Image
+            src="/images/logo-badge.png"
+            alt="BBC Best Box Containerhandel e.K."
+            width={160}
+            height={160}
+            priority
+            className="h-9 w-9 shrink-0"
+          />
           <span className="flex flex-col leading-none">
             <span className="text-[15px] font-black tracking-tight text-white">
               BBC <span className="text-gold">Best Box</span>

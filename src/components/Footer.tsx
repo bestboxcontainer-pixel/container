@@ -1,7 +1,7 @@
+import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { COMPANY } from "@/content/legal";
-import { ContainerGlyph } from "@/components/ContainerGlyph";
 
 const CONTAINER_LINKS = [
   { href: "/sortiment", label: "Sortiment" },
@@ -28,9 +28,13 @@ export function Footer() {
       <div className="mx-auto grid max-w-screen-xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gold text-white">
-              <ContainerGlyph className="h-4.5 w-4.5" />
-            </span>
+            <Image
+              src="/images/logo-badge.png"
+              alt="BBC Best Box Containerhandel e.K."
+              width={160}
+              height={160}
+              className="h-9 w-9 shrink-0"
+            />
             <div className="leading-none">
               <p className="text-base font-black text-white">
                 BBC <span className="text-gold">Best Box</span>

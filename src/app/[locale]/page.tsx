@@ -33,6 +33,16 @@ const STATS = [
   { value: "Persönlich", label: "Beratung vor Ort" },
 ] as const;
 
+/** Faits vérifiables sur l'entreprise (voir COMPANY.registeredSince = 2006). */
+const TRUST_FACTS = [
+  "Seit 2006 am Markt",
+  "Inhabergeführtes Unternehmen",
+  "500+ Container im Bestand",
+  "Neu & geprüft gebraucht",
+  "Lieferung deutschlandweit",
+  "Persönliche Beratung",
+] as const;
+
 /**
  * Echte Fotos (keine KI-Bilder) unter freier Lizenz von Wikimedia Commons —
  * siehe Bildnachweis auf der Impressum-Seite für Quelle/Lizenz je Bild.
@@ -232,23 +242,22 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Kauf */}
-        <section className="bg-accent">
-          <div className="mx-auto max-w-screen-xl px-4 py-14 sm:px-6">
-            <div className="mx-auto max-w-xl rounded-sm bg-white p-8">
-              <h3 className="text-xl font-black text-foreground">Container kaufen</h3>
-              <p className="mt-3 text-sm leading-relaxed text-foreground/70">
-                Neu oder geprüft gebraucht, direkt aus unserem Bestand — inklusive Lieferung und
-                Aufstellung nach Absprache.
-              </p>
-              <Link
-                href="/sortiment"
-                className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary"
-              >
-                Zum Sortiment
-                <ArrowRight className="h-4 w-4" aria-hidden />
-              </Link>
-            </div>
+        {/* Bandeau de confiance défilant — faits vérifiables sur l'entreprise */}
+        <section className="overflow-hidden border-y border-white/10 bg-secondary py-4">
+          <div className="flex w-max animate-[defilement_28s_linear_infinite]">
+            {[0, 1].map((copy) => (
+              <div key={copy} className="flex shrink-0 items-center gap-10 pr-10">
+                {TRUST_FACTS.map((fact) => (
+                  <span
+                    key={`${copy}-${fact}`}
+                    className="flex items-center gap-2 text-sm font-semibold whitespace-nowrap text-white/85"
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden />
+                    {fact}
+                  </span>
+                ))}
+              </div>
+            ))}
           </div>
         </section>
 

@@ -38,11 +38,11 @@ const USE_CASES = [
 export default function VermietungPage() {
   return (
     <>
-      <Header />
+      <Header variant="overlay" />
       <main className="flex-1">
-        <section className="bg-secondary text-secondary-foreground">
+        <section className="bg-secondary pt-[var(--header-height)] text-secondary-foreground">
           <div className="mx-auto max-w-screen-xl px-4 py-14 sm:px-6">
-            <p className="text-sm font-bold uppercase tracking-wide text-gold">Vermietung</p>
+            <p className="text-sm font-bold uppercase tracking-wide text-signal">Vermietung</p>
             <h1 className="mt-3 max-w-2xl text-3xl font-black text-white sm:text-4xl">
               Container mieten statt kaufen
             </h1>

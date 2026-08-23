@@ -173,10 +173,10 @@ const STEPS = [
 export default function HomePage() {
   return (
     <>
-      <Header />
+      <Header variant="overlay" />
       <main className="flex-1">
         {/* Hero */}
-        <section className="relative isolate overflow-hidden bg-secondary text-secondary-foreground">
+        <section className="relative isolate overflow-hidden bg-secondary pt-[var(--header-height)] text-secondary-foreground">
           <PhotoHeroCarousel slides={HERO_PHOTOS} />
           <div className="absolute inset-0 z-[1] bg-gradient-to-r from-secondary via-secondary/85 to-secondary/40" />
 
@@ -193,7 +193,7 @@ export default function HomePage() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href="/sortiment"
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-secondary shadow-sm hover:bg-white/90 hover:shadow-md"
+                  className="inline-flex items-center gap-2 rounded-full bg-signal px-5 py-3 text-sm font-bold text-signal-foreground shadow-sm transition-colors hover:bg-signal/90"
                 >
                   Sortiment ansehen
                   <ArrowRight className="h-4 w-4" aria-hidden />
@@ -252,7 +252,7 @@ export default function HomePage() {
                     key={`${copy}-${fact}`}
                     className="flex items-center gap-2 text-sm font-semibold whitespace-nowrap text-white/85"
                   >
-                    <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden />
+                    <span className="h-1.5 w-1.5 rounded-full bg-signal" aria-hidden />
                     {fact}
                   </span>
                 ))}
@@ -291,7 +291,7 @@ export default function HomePage() {
                   <p className="mt-3 text-sm leading-relaxed text-white/70">{line.text}</p>
                   <Link
                     href="/sortiment"
-                    className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-b from-[#5B82CE] to-[#33509E] px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-white shadow-[0_2px_10px_rgba(59,124,245,0.22)] transition-transform hover:scale-[1.02] hover:shadow-[0_2px_14px_rgba(59,124,245,0.32)]"
+                    className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-signal px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-signal-foreground shadow-sm transition-colors hover:bg-signal/90"
                   >
                     Produkte ansehen
                     <ArrowRight className="h-3.5 w-3.5" aria-hidden />
@@ -321,7 +321,7 @@ export default function HomePage() {
         </section>
 
         {/* CTA */}
-        <section className="border-y-2 border-gray-300 bg-secondary text-secondary-foreground">
+        <section className="border-y border-white/10 bg-secondary text-secondary-foreground">
           <div className="mx-auto flex max-w-screen-xl flex-col items-start gap-5 px-4 py-14 sm:px-6 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 className="text-2xl font-black text-white sm:text-3xl">
@@ -333,7 +333,7 @@ export default function HomePage() {
             </div>
             <Link
               href="/kontakt"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-[#5B82CE] to-[#33509E] px-6 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-[0_2px_10px_rgba(59,124,245,0.25)] transition-transform hover:scale-[1.02] hover:shadow-[0_2px_14px_rgba(59,124,245,0.35)]"
+              className="inline-flex items-center gap-2 rounded-full bg-signal px-6 py-3 text-sm font-bold uppercase tracking-wide text-signal-foreground shadow-sm transition-colors hover:bg-signal/90"
             >
               Jetzt Kontakt aufnehmen
               <ArrowRight className="h-4 w-4" aria-hidden />
@@ -346,8 +346,8 @@ export default function HomePage() {
           <h2 className="text-2xl font-black text-foreground sm:text-3xl">Warum BBC Best Box</h2>
           <div className="mt-10 grid gap-6 sm:grid-cols-3">
             {BENEFITS.map((benefit) => (
-              <div key={benefit.title} className="rounded-2xl border border-emerald/30 bg-accent p-5">
-                <benefit.icon className="h-7 w-7 text-emerald" aria-hidden />
+              <div key={benefit.title} className="rounded-2xl border border-border bg-muted p-5">
+                <benefit.icon className="h-7 w-7 text-primary" aria-hidden />
                 <h3 className="mt-4 font-bold text-foreground">{benefit.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-foreground/70">{benefit.text}</p>
               </div>

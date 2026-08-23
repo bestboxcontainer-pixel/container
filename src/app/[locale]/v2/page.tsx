@@ -78,7 +78,7 @@ const PROJECT_TYPES = [
 export default function HomePageV2() {
   return (
     <>
-      <Header />
+      <Header variant="overlay" />
       <main className="flex-1">
         {/* Hero */}
         <section className="relative isolate overflow-hidden bg-secondary text-secondary-foreground">
@@ -146,7 +146,7 @@ export default function HomePageV2() {
                     isSignature ? "border-white/10 bg-secondary text-white" : "border-border bg-white"
                   }`}
                 >
-                  <span className="block h-1 w-10 rounded-full bg-gradient-to-r from-primary to-gold" />
+                  <span className="block h-1 w-10 rounded-full bg-gradient-to-r from-primary to-signal" />
                   <p className="mt-4 text-xs font-bold uppercase tracking-wide text-primary">
                     {line.title}
                   </p>
@@ -207,7 +207,7 @@ export default function HomePageV2() {
         </section>
 
         {/* Montage modulaire */}
-        <section className="bg-secondary text-secondary-foreground">
+        <section className="bg-secondary pt-[var(--header-height)] text-secondary-foreground">
           <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
             <h2 className="text-2xl font-black text-white sm:text-3xl">Ein- und mehrgeschossige Anlagen</h2>
             <p className="mt-3 max-w-xl text-white/70">

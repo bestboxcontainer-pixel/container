@@ -11,6 +11,27 @@ const CONTAINER_LINKS = [
   { href: "/sortiment#seecontainer", label: "Seecontainer" },
 ] as const;
 
+/** Pages de conseil : ce sont elles qui captent la recherche organique. */
+const RATGEBER_LINKS = [
+  { href: "/container-masse", label: "Maße & Typen" },
+  { href: "/zustandsklassen", label: "Zustandsklassen" },
+  { href: "/lieferung", label: "Lieferung & Aufstellung" },
+  { href: "/faq", label: "Häufige Fragen" },
+] as const;
+
+/**
+ * Pages de service et espace client. Le § 312d BGB impose que les conditions
+ * de livraison, de paiement et de rétractation soient joignables depuis chaque
+ * page : le pied de page est l'endroit où l'acheteur les cherche.
+ */
+const SERVICE_LINKS = [
+  { href: "/versand", label: "Versand & Lieferung" },
+  { href: "/zahlungsarten", label: "Zahlungsarten" },
+  { href: "/retoure", label: "Retoure" },
+  { href: "/konto", label: "Kundenkonto" },
+  { href: "/merkliste", label: "Merkliste" },
+] as const;
+
 const COMPANY_LINKS = [
   { href: "/ueber-uns", label: "Über uns" },
   { href: "/kontakt", label: "Kontakt" },
@@ -20,12 +41,14 @@ const LEGAL_LINKS = [
   { href: "/impressum", label: "Impressum" },
   { href: "/datenschutz", label: "Datenschutz" },
   { href: "/agb", label: "AGB" },
+  { href: "/widerruf", label: "Widerrufsbelehrung" },
+  { href: "/elektroaltgeraete", label: "Elektroaltgeräte" },
 ] as const;
 
 export function Footer() {
   return (
-    <footer className="border-t-4 border-gray-300 bg-footer text-footer-foreground">
-      <div className="mx-auto grid max-w-screen-xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
+    <footer className="border-t-4 border-signal bg-footer text-footer-foreground">
+      <div className="mx-auto grid max-w-screen-xl gap-10 px-4 py-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-3 xl:grid-cols-[1.5fr_1fr_1fr_1fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-2.5">
             <Image
@@ -37,7 +60,7 @@ export function Footer() {
             />
             <div className="leading-none">
               <p className="text-base font-black text-white">
-                BBC <span className="text-gold">Best Box</span>
+                BBC <span className="text-signal">Best Box</span>
               </p>
               <p className="mt-0.5 text-xs font-bold text-white">Containerhandel e.K.</p>
             </div>
@@ -48,19 +71,19 @@ export function Footer() {
           </p>
           <ul className="mt-5 space-y-2.5 text-sm text-white/75">
             <li className="flex items-start gap-2">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-signal" aria-hidden />
               <span>
                 {COMPANY.street}, {COMPANY.city}
               </span>
             </li>
             <li className="flex items-center gap-2">
-              <Phone className="h-4 w-4 shrink-0 text-gold" aria-hidden />
+              <Phone className="h-4 w-4 shrink-0 text-signal" aria-hidden />
               <a href={`tel:${COMPANY.phone.replace(/\s+/g, "")}`} className="hover:text-white">
                 {COMPANY.phone}
               </a>
             </li>
             <li className="flex items-center gap-2">
-              <Mail className="h-4 w-4 shrink-0 text-gold" aria-hidden />
+              <Mail className="h-4 w-4 shrink-0 text-signal" aria-hidden />
               <a href={`mailto:${COMPANY.email}`} className="hover:text-white">
                 {COMPANY.email}
               </a>
@@ -69,6 +92,8 @@ export function Footer() {
         </div>
 
         <FooterColumn title="Container" links={CONTAINER_LINKS} />
+        <FooterColumn title="Ratgeber" links={RATGEBER_LINKS} />
+        <FooterColumn title="Service" links={SERVICE_LINKS} />
         <FooterColumn title="Unternehmen" links={COMPANY_LINKS} />
         <FooterColumn title="Rechtliches" links={LEGAL_LINKS} />
       </div>

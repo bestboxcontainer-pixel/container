@@ -25,6 +25,7 @@ const RATGEBER_LINKS = [
  * page : le pied de page est l'endroit où l'acheteur les cherche.
  */
 const SERVICE_LINKS = [
+  { href: "/ankauf", label: "Container-Ankauf" },
   { href: "/versand", label: "Versand & Lieferung" },
   { href: "/zahlungsarten", label: "Zahlungsarten" },
   { href: "/retoure", label: "Retoure" },

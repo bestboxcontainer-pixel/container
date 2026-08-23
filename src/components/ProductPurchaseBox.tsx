@@ -16,7 +16,7 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
   // L'étiquette ne s'affiche que si les trois conditions sont réunies : une
   // classe renseignée, une famille effectivement soumise à étiquetage, et une
   // classe qui tient sur l'échelle de cette famille. Une donnée qui échoue à
-  // l'un des trois ne s'affiche pas — un « A+ » sur un lave-linge, par exemple,
+  // l'un des trois ne s'affiche pas : un « A+ » sur un lave-linge, par exemple,
   // date d'avant le rééchelonnage de 2021 et induirait l'acheteur en erreur.
   const echelle = product.categorySlug ? echelleEnergie(product.categorySlug) : undefined;
   const classeEnergie =
@@ -32,7 +32,7 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
             détail de vocabulaire : annoncer une réduction sur son propre prix
             antérieur oblige à afficher le prix le plus bas des trente derniers
             jours (§ 11 PAngV), et à l'avoir réellement pratiqué. Une référence
-            fabricant, elle, se compare librement — à condition d'être désignée
+            fabricant, elle, se compare librement : à condition d'être désignée
             pour ce qu'elle est. */}
         {product.oldPrice && (
           <p className="text-sm text-muted-foreground">
@@ -49,7 +49,7 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
         </div>
         {/* Vente flash : le décompte est l'argument principal, il vient juste
             sous le prix. Les autres campagnes affichent leur pastille et rien
-            de plus — un compte à rebours sur une offre de deux semaines
+            de plus : un compte à rebours sur une offre de deux semaines
             fabrique une urgence qui n'existe pas. */}
         {product.promoCountdown && product.promoEndsAt && (
           <div className="mt-2">
@@ -81,7 +81,7 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
             {classeEnergie}
           </span>
           <span>
-            {t("energyLabel")} — {t("energyScale", { best: echelle.meilleure, worst: echelle.pire })}
+            {t("energyLabel")}: {t("energyScale", { best: echelle.meilleure, worst: echelle.pire })}
           </span>
         </p>
       )}

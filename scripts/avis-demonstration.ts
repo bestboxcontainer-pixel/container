@@ -1,7 +1,7 @@
 /**
  * Avis de démonstration, pour juger du rendu d'un catalogue vivant.
  *
- * ATTENTION — ces avis ne sont pas des avis de clients. Publier de faux avis
+ * ATTENTION : ces avis ne sont pas des avis de clients. Publier de faux avis
  * est déloyal en toutes circonstances au sens de l'annexe au § 3 Abs. 3 UWG
  * (n° 23b et 23c) : ils doivent disparaître avant l'ouverture de la boutique.
  * Ils alimentent en outre l'AggregateRating du balisage JSON-LD, donc les
@@ -30,7 +30,7 @@ import { MARQUE_DEMONSTRATION } from "../src/server/reviews";
  * pour refuser d'afficher ces avis : le script et le site doivent reconnaître
  * les mêmes lignes, sans quoi la purge et le filtrage porteraient à côté.
  */
-const MARQUE = `${MARQUE_DEMONSTRATION} Avis de démonstration — à supprimer avant l'ouverture`;
+const MARQUE = `${MARQUE_DEMONSTRATION} Avis de démonstration, à supprimer avant l'ouverture`;
 
 const AVIS_MIN = 5;
 const AVIS_MAX = 9;
@@ -95,7 +95,7 @@ const VILLES = [
 //
 // Un vrai avis d'acheteur est court. Très court, le plus souvent : « Alles
 // gut », « Passt », « Läuft leise, bin zufrieden ». Il est écrit vite, depuis
-// un téléphone, sans relecture — d'où les points finaux absents, les phrases
+// un téléphone, sans relecture : d'où les points finaux absents, les phrases
 // sans verbe et les minuscules.
 //
 // La version précédente composait des paragraphes bien bâtis : ouverture,
@@ -339,7 +339,7 @@ function redigerTexte(
 
   if (longueur < 0.4) {
     // Éclair : une appréciation, rien d'autre. Sur quatre étoiles, la réserve
-    // tient lieu d'avis — « Gut, nur etwas laut » est un avis entier.
+    // tient lieu d'avis : « Gut, nur etwas laut » est un avis entier.
     if (note === 5) {
       corps = piocher(BREFS);
     } else {
@@ -396,8 +396,8 @@ function redigerTexte(
   // outre pour déposer leur avis plus vite.
   let titre = alea() < 0.5 ? "" : piocher(TITRES);
 
-  // Un titre que le texte répète mot pour mot — « Sehr zufrieden » au-dessus
-  // de « … Sehr zufrieden » — ne s'écrit pas tout seul. On l'efface plutôt
+  // Un titre que le texte répète mot pour mot, « Sehr zufrieden » au-dessus
+  // de « … Sehr zufrieden » : ne s'écrit pas tout seul. On l'efface plutôt
   // que d'en tirer un autre : le champ vide est le cas le plus courant.
   if (titre && corps.toLowerCase().includes(titre.toLowerCase())) titre = "";
 
@@ -477,7 +477,7 @@ async function composer(): Promise<LigneAvis[]> {
     const dates = dater(total);
 
     // Des textes aussi courts se répètent vite. Deux « Alles gut » à la suite
-    // sur la même fiche se voient immédiatement — on repioche tant que le
+    // sur la même fiche se voient immédiatement : on repioche tant que le
     // texte est déjà pris, puis on laisse passer : mieux vaut une répétition
     // qu'une boucle sans fin sur une fiche à neuf avis.
     const dejaDits = new Set<string>();
@@ -537,19 +537,19 @@ function resumer(lignes: LigneAvis[]): void {
   }
   const incompletes = [...annees.values()].filter((vues) => vues.size < 2).length;
   console.log(
-    `  fiches servies : ${annees.size} — dont ${incompletes} sans les deux millésimes`,
+    `  fiches servies : ${annees.size}, dont ${incompletes} sans les deux millésimes`,
   );
 }
 
 async function essai(): Promise<void> {
   const lignes = await composer();
-  console.log("SIMULATION — rien n'est écrit en base.\n");
+  console.log("SIMULATION: rien n'est écrit en base.\n");
   resumer(lignes);
 
   console.log("\n  Trois avis au hasard :");
   for (const l of [lignes[3], lignes[Math.floor(lignes.length / 2)], lignes[lignes.length - 2]]) {
     console.log(
-      `\n  ${"★".repeat(l.rating)} « ${l.title} » — ${l.authorName}, ${l.city}, ` +
+      `\n  ${"★".repeat(l.rating)} « ${l.title} », ${l.authorName}, ${l.city}, ` +
         `${l.createdAt.toISOString().slice(0, 10)}\n    ${l.body}`,
     );
   }

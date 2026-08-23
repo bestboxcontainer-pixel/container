@@ -31,6 +31,7 @@ const SERVICE_LINKS = [
   { href: "/retoure", label: "Retoure" },
   { href: "/konto", label: "Kundenkonto" },
   { href: "/merkliste", label: "Merkliste" },
+  { href: "/suche", label: "Suche" },
 ] as const;
 
 const COMPANY_LINKS = [
@@ -67,7 +68,7 @@ export function Footer() {
             </div>
           </div>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/65">
-            Verkauf und Vermietung von See-, Lager-, Büro- und Sonderfahrzeugcontainern —
+            Verkauf und Vermietung von See-, Lager-, Büro- und Sonderfahrzeugcontainern
             neu und gebraucht, deutschlandweite Lieferung.
           </p>
           <ul className="mt-5 space-y-2.5 text-sm text-white/75">

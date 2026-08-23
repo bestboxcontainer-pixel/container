@@ -8,7 +8,7 @@ import { useEffect } from "react";
  * POURQUOI CE COMPOSANT EXISTE. La fin du tunnel n'est pas un chargement de
  * page : `CheckoutFlow` appelle `router.push()`, et Next remplace le contenu
  * sans que le navigateur recharge quoi que ce soit. Les événements que GTM
- * fabrique tout seul — `gtm.js`, `gtm.dom`, `gtm.load` — ne se produisent donc
+ * fabrique tout seul, `gtm.js`, `gtm.dom`, `gtm.load`, ne se produisent donc
  * qu'une fois, à la première page ouverte par le visiteur, jamais sur la
  * confirmation. Un déclencheur bâti sur eux ne se lève pas après un achat.
  *
@@ -61,7 +61,7 @@ const euros = (centimes: number): number => Math.round(centimes) / 100;
  * Google Ads dédoublonne de son côté sur l'identifiant de transaction, à
  * condition qu'il soit renseigné dans la balise. Les deux garde-fous se
  * complètent : celui-ci évite l'appel, l'autre rattrape ce qui passerait quand
- * même — navigateur privé, stockage refusé, autre appareil.
+ * même : navigateur privé, stockage refusé, autre appareil.
  */
 function dejaCompte(orderNumber: string): boolean {
   const cle = `hp.purchase.${orderNumber}`;

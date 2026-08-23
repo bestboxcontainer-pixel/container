@@ -176,7 +176,7 @@ function toRecord(row: NonNullable<OrderRow>): OrderRecord {
     paymentMethodKey: row.paymentMethodKey,
     paymentMethodLabel: row.paymentMethodLabel,
     paymentMethodFee: row.paymentMethodFee,
-    // Une clé inconnue en base — mode retiré du catalogue plus tard — retombe
+    // Une clé inconnue en base, mode retiré du catalogue plus tard, retombe
     // sur le standard plutôt que de casser l'affichage de la commande.
     shippingMethodKey: isShippingMethodKey(row.shippingMethodKey)
       ? row.shippingMethodKey
@@ -342,7 +342,7 @@ const LEGACY_ORDER_PREFIXES = ["HP"] as const;
  * Rang de départ de la numérotation des commandes.
  *
  * Un numéro qui commence à 1 apprend au premier client qu'il est le premier, et
- * à tous les suivants combien peu l'ont précédé — sur un bon de commande, une
+ * à tous les suivants combien peu l'ont précédé : sur un bon de commande, une
  * facture et chaque e-mail de suivi. La numérotation part donc d'un rang déjà
  * avancé, comme le fait n'importe quelle boutique qui ne veut pas publier son
  * volume d'affaires.
@@ -394,7 +394,7 @@ interface ReservedLine {
 
 /**
  * Rattachement d'une commande à la campagne qui l'a provoquée. Reconstitué par
- * l'appelant HTTP à partir du cookie d'attribution — jamais depuis la charge
+ * l'appelant HTTP à partir du cookie d'attribution, jamais depuis la charge
  * utile du formulaire.
  */
 export interface CampaignContext {
@@ -459,12 +459,12 @@ async function releaseReservations(reserved: ReservedLine[], reference: string):
  * `customerId` est un paramètre distinct de la charge utile, et non un champ de
  * `CheckoutInput` : il vient exclusivement du cookie de session côté serveur.
  * Le navigateur ne doit jamais pouvoir désigner le compte auquel une commande
- * est rattachée. Sans compte connecté, il reste vide — la commande en tant
+ * est rattachée. Sans compte connecté, il reste vide, la commande en tant
  * qu'invité fonctionne exactement comme avant.
  *
  * `campaignContext` suit la même règle : il est reconstitué côté serveur depuis
  * le cookie d'attribution. Il ne fait qu'énoncer une prétention, que cette
- * fonction revalide entièrement — existence de la campagne, période, avantage
+ * fonction revalide entièrement : existence de la campagne, période, avantage
  * réellement accordé.
  */
 export async function createOrder(
@@ -533,8 +533,8 @@ export async function createOrder(
   if (!method) throw new OrderError("invalid_payment_method");
 
   // 4. Attribution marketing et avantage associé. La campagne est retenue dès
-  // qu'elle existe — c'est ce qui rend le chiffre d'affaires attribué
-  // exploitable —, mais la livraison offerte, elle, n'est accordée que si la
+  // qu'elle existe : c'est ce qui rend le chiffre d'affaires attribué
+  // exploitable, mais la livraison offerte, elle, n'est accordée que si la
   // campagne l'accorde vraiment et court encore.
   const attribution = campaignContext
     ? await resolveCampaignAttribution(campaignContext)
@@ -712,7 +712,7 @@ export async function createOrder(
           } catch (erreur) {
             // Le quota est déjà pris : l'utilisation ne sera pas accordée deux
             // fois. Seul le rattachement à cette commande manque, ce qui rend la
-            // limite par client inopérante pour cette adresse — un incident à
+            // limite par client inopérante pour cette adresse, un incident à
             // corriger à la main, pas une raison d'annuler une commande payée.
             console.error(
               `[commande ${row.orderNumber}] rachat du coupon ${couponAccepte.coupon.code} non enregistré :`,
@@ -876,7 +876,7 @@ export async function recordOrderEvent(
  *
  * Écrit sans condition : le webhook peut arriver plusieurs fois pour la même
  * commande, et la dernière référence connue est la bonne. Aucun événement n'est
- * consigné — ce n'est pas un changement d'état, seulement un numéro de dossier.
+ * consigné : ce n'est pas un changement d'état, seulement un numéro de dossier.
  */
 export async function setOrderGatewayReference(
   orderId: string,

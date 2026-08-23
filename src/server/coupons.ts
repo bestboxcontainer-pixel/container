@@ -2,7 +2,7 @@
  * Coupons : lecture, vérification, consommation.
  *
  * Toute la confiance est ici. Le navigateur envoie un code et un panier ; ni
- * l'un ni l'autre ne sont crus sur parole — le coupon est relu en base, le
+ * l'un ni l'autre ne sont crus sur parole : le coupon est relu en base, le
  * panier rechiffré à partir des prix réels, et la remise recalculée avec la
  * même fonction que celle qui a servi à l'aperçu.
  */
@@ -69,7 +69,7 @@ export type CouponCheck =
  * plus utile est donc celui d'un panier insuffisant, et il vient en dernier.
  *
  * `email` est facultatif : à l'étape du panier, on ne le connaît pas encore. La
- * limite par client n'est alors pas vérifiable, et elle le sera à la commande —
+ * limite par client n'est alors pas vérifiable, et elle le sera à la commande
  * moment où elle compte vraiment.
  */
 export async function checkCoupon(
@@ -123,7 +123,7 @@ export async function checkCoupon(
  * `checkCoupon` lit le compteur, la commande s'écrit, puis le compteur
  * s'incrémente : entre la lecture et l'écriture, une seconde commande peut
  * lire la même valeur et passer elle aussi. Un coupon limité à cent usages
- * part alors cent-une fois — autant de remises accordées hors quota, et le
+ * part alors cent-une fois : autant de remises accordées hors quota, et le
  * défaut ne se voit qu'à la lecture des comptes.
  *
  * La réservation ferme cette fenêtre : le quota est vérifié par la base
@@ -145,7 +145,7 @@ export async function reserveCouponUse(coupon: CouponRecord, email: string): Pro
   // Sans quota par client, un incrément conditionnel suffit : la clause WHERE
   // est évaluée par la base au moment d'écrire, ce qui est déjà atomique. Une
   // transaction sérialisable ne protégerait rien de plus et sérialiserait
-  // inutilement toutes les commandes portant le même code — sous quelques
+  // inutilement toutes les commandes portant le même code, sous quelques
   // requêtes simultanées, certaines n'obtiennent même plus de transaction.
   if (coupon.maxPerCustomer === 0) {
     try {
@@ -202,7 +202,7 @@ export async function reserveCouponUse(coupon: CouponRecord, email: string): Pro
   } catch (erreur) {
     if (erreur instanceof QuotaClientAtteint) return false;
     // Conflit de sérialisation : deux commandes se sont croisées. La base a
-    // annulé l'une des deux — refuser la remise vaut mieux que l'accorder deux
+    // annulé l'une des deux : refuser la remise vaut mieux que l'accorder deux
     // fois. Le client paie plein tarif, la commande passe.
     console.error("[coupon] réservation impossible :", erreur);
     return false;

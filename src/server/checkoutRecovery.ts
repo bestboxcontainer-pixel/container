@@ -1,5 +1,5 @@
 /**
- * Relance des tunnels de commande abandonnés — accès aux données.
+ * Relance des tunnels de commande abandonnés : accès aux données.
  *
  * Ce module est le seul à parler à Prisma pour cette fonctionnalité. Les
  * calculs qui n'ont pas besoin de la base vivent dans
@@ -192,7 +192,7 @@ export async function findRecoveryByToken(token: string) {
  * La suppression est écrite dans EmailSuppression, la table que partagent les
  * campagnes marketing : deux listes de refus concurrentes finiraient par se
  * contredire, et un client désabonné d'un côté recevrait l'autre. Se désabonner
- * depuis une relance de panier coupe donc aussi les campagnes — c'est bien ce
+ * depuis une relance de panier coupe donc aussi les campagnes, c'est bien ce
  * qu'un lien « ne plus recevoir de messages » promet.
  *
  * Renvoie false si le jeton est inconnu, pour que l'appelant réponde 404 sans
@@ -245,7 +245,7 @@ export async function listRecoveries(options: {
   perPage: number;
 }): Promise<{ rows: RecoveryRow[]; total: number }> {
   // Le filtre porte sur stoppedReason, pas sur un champ « state » : l'état est
-  // dérivé, pas stocké — un champ de plus serait une source de contradiction.
+  // dérivé, pas stocké : un champ de plus serait une source de contradiction.
   const where =
     options.state === undefined
       ? {}
@@ -535,7 +535,7 @@ async function stopRecovery(id: string, reason: RecoveryStoppedReason): Promise<
 /**
  * Minimisation des données : une adresse sans commande n'a aucune raison
  * d'être conservée plus de trente jours. EmailSuppression, lui, n'est jamais
- * purgé — c'est la preuve du refus.
+ * purgé : c'est la preuve du refus.
  */
 async function purgeOldRecoveries(now: Date): Promise<number> {
   const cutoff = new Date(now.getTime() - RECOVERY_RETENTION_DAYS * 24 * 60 * 60_000);

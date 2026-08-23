@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Check } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -40,7 +41,7 @@ type ProductPageParams = Promise<{
  * est servie à la demande, comme la page d'accueil, les groupes et les
  * catégories, et le build ne touche plus au catalogue.
  *
- * ATTENTION — ne pas rétablir un `generateStaticParams` qui rendrait une liste
+ * ATTENTION : ne pas rétablir un `generateStaticParams` qui rendrait une liste
  * vide. La mise en page racine lit `headers()` pour connaître la langue, ce qui
  * rend toute la boutique dynamique. Avec une liste de paramètres, même vide,
  * Next classe pourtant la route en pré-rendu : la première visite compose alors
@@ -156,8 +157,11 @@ export default async function ProductPage({ params }: { params: ProductPageParam
           </div>
         </div>
 
-        <div className="mx-auto max-w-screen-xl px-3 py-6">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <div className="mx-auto max-w-screen-xl px-4 py-10 sm:px-6">
+          {/* La galerie prend un peu plus de place que la colonne d'achat : à
+              parts égales, le visuel d'un conteneur devenait trop petit pour
+              qu'on juge de la finition, qui est ce que l'acheteur regarde. */}
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
             <ProductGallery
               image={productData.image}
               images={productData.images}
@@ -173,7 +177,7 @@ export default async function ProductPage({ params }: { params: ProductPageParam
                 {/* L'étoile suppose des avis : sans eux, elle affichait la note
                     rédactionnelle comme une moyenne de clients. Celle-ci reste
                     plus bas, sous son nom, dans la section des avis.
-                    La référence article, elle, s'affiche toujours — elle était
+                    La référence article, elle, s'affiche toujours, elle était
                     jusqu'ici emportée avec la note sur les fiches non notées. */}
                 <p className="mt-1 text-sm text-muted-foreground">
                   {typeof noteMoyenne === "number" && avisPublies > 0 && (
@@ -193,22 +197,38 @@ export default async function ProductPage({ params }: { params: ProductPageParam
           </div>
         </div>
 
-        <section className="mx-auto max-w-screen-xl px-3 py-8">
-          <h2 className="mb-4 text-xl font-black text-foreground">{t("details")}</h2>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-            <div>
-              <h3 className="mb-2 text-sm font-bold text-foreground">{t("description")}</h3>
-              <p className="text-sm text-muted-foreground">{description}</p>
-            </div>
-            <div>
-              <h3 className="mb-2 text-sm font-bold text-foreground">{t("features")}</h3>
-              <ul className="space-y-1.5 text-sm text-muted-foreground">
-                {productData.bullets.map((bullet) => (
-                  <li key={bullet} className="flex gap-2">
-                    <span className="text-primary">✓</span> {bullet}
-                  </li>
-                ))}
-              </ul>
+        {/* Deux blocs distincts plutôt que deux colonnes de texte nu : sur un
+            conteneur, les caractéristiques chiffrées sont l'information qui
+            décide de l'achat, et elles se lisent mieux en liste cadrée qu'en
+            paragraphe. Le fond clair les détache de la description. */}
+        <section className="border-t border-border bg-muted">
+          <div className="mx-auto max-w-screen-xl px-4 py-14 sm:px-6">
+            <h2 className="text-2xl font-black text-foreground sm:text-3xl">{t("details")}</h2>
+
+            <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
+              <div className="rounded-2xl border border-border bg-white p-6">
+                <h3 className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
+                  {t("description")}
+                </h3>
+                <p className="mt-4 text-sm leading-relaxed text-foreground/80">{description}</p>
+              </div>
+
+              <div className="rounded-2xl border border-border bg-white p-6">
+                <h3 className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
+                  {t("features")}
+                </h3>
+                <ul className="mt-4 divide-y divide-border">
+                  {productData.bullets.map((bullet) => (
+                    <li
+                      key={bullet}
+                      className="flex items-start gap-3 py-3 text-sm text-foreground/80 first:pt-0 last:pb-0"
+                    >
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </section>

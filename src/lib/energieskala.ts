@@ -3,7 +3,7 @@
  *
  * Le règlement (UE) 2017/1369 impose au vendeur à distance d'afficher la classe
  * d'un appareil « à proximité du prix », accompagnée de l'étendue de l'échelle
- * applicable — sans quoi un « A » ne veut rien dire : c'est le haut de l'échelle
+ * applicable : sans quoi un « A » ne veut rien dire : c'est le haut de l'échelle
  * pour un lave-linge, le milieu pour un four.
  *
  * Deux échelles cohabitent encore en 2026. Les familles rééchelonnées depuis
@@ -26,10 +26,10 @@ export interface EchelleEnergie {
   readonly pire: string;
 }
 
-/** Échelle A–G, issue du rééchelonnage de 2021. */
+/** Échelle A : G, issue du rééchelonnage de 2021. */
 const ECHELLE_REECHELONNEE: EchelleEnergie = { meilleure: "A", pire: "G" };
 
-/** Échelle A+++–D, maintenue pour les familles non encore rééchelonnées. */
+/** Échelle A+++ : D, maintenue pour les familles non encore rééchelonnées. */
 const ECHELLE_HISTORIQUE: EchelleEnergie = { meilleure: "A+++", pire: "D" };
 
 /**

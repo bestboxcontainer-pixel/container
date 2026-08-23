@@ -1,4 +1,4 @@
-# Contenu légal et informatif — BBC Best Box Containerhandel e.K.
+# Contenu légal et informatif : BBC Best Box Containerhandel e.K.
 
 Ce document décrit le corpus légal livré dans `src/content/legal/`, ce qu'il couvre,
 ce qui **doit impérativement être personnalisé avant la mise en ligne**, et les sources
@@ -73,7 +73,7 @@ export { deLegalPages, enLegalPages };
 ```
 
 `getLegalHref` produit `/<slug>` en allemand et `/en/<slug>` en anglais. **Si le routage
-retenu diffère, cette fonction est le seul point à modifier** — les liens de pied de page
+retenu diffère, cette fonction est le seul point à modifier**, les liens de pied de page
 en découlent.
 
 Les colonnes du pied de page sont réparties ainsi :
@@ -129,13 +129,13 @@ Les slugs de ce corpus sont `widerruf` et `retoure`. Il faut soit aligner le foo
 - **Batteriegesetz / BattDG** : interdiction du tout-venant, reprise gratuite à l'adresse
   d'expédition, signification des symboles Pb / Cd / Hg, consigne de sécurité lithium-ion,
   points de collecte communaux.
-- **Contenu commercial cohérent avec le site** : livraison gratuite dès 50 €, 1–3 jours
+- **Contenu commercial cohérent avec le site** : livraison gratuite dès 50 €, 1-3 jours
   ouvrés, service de montage sur demande, reprise de l'ancien appareil, garantie 2 ans,
   paiement facture / PayPal / carte / SEPA / virement, drones (< 250 g).
 
 ## 5. À remplacer impérativement avant la mise en ligne
 
-### 5.1 Données d'entreprise (encore fictives sur certains points — voir ci-dessous)
+### 5.1 Données d'entreprise (encore fictives sur certains points, voir ci-dessous)
 
 Mis à jour en 2026-08 avec l'identité réelle de l'entreprise. Restent des placeholders :
 le numéro de TVA intracommunautaire, le numéro WEEE, l'e-mail et le téléphone.
@@ -160,7 +160,7 @@ le numéro de TVA intracommunautaire, le numéro WEEE, l'e-mail et le téléphon
 Par ailleurs, la vitrine publique qui exposait ces pages légales a été retirée (voir
 `README.md`) : seul le back-office `/admin` reste en service. Le contenu rédactionnel de
 ces pages (Impressum, AGB, FAQ, Über uns…) décrit toujours une activité de vente
-d'électroménager, non réécrite pour une activité de négoce de conteneurs — voir la note en
+d'électroménager, non réécrite pour une activité de négoce de conteneurs, voir la note en
 tête de `de.ts` / `en.ts`.
 
 Les constantes `COMPANY` de `de.ts` et `en.ts` sont **volontairement dupliquées** (le pays
@@ -168,30 +168,30 @@ diffère : `Deutschland` / `Germany`). Modifier les deux.
 
 ### 5.2 Éléments juridiques à compléter
 
-1. **Assurance responsabilité civile professionnelle / exploitation** — nom, adresse et
+1. **Assurance responsabilité civile professionnelle / exploitation**, nom, adresse et
    étendue géographique de l'assureur (`impressum`, section « Betriebshaftpflichtversicherung »).
    Obligatoire pour les prestations de service au sens du § 2 DL-InfoV (service de montage).
-2. **Prestataires de paiement** — nommer explicitement chaque prestataire (PayPal (Europe)
+2. **Prestataires de paiement** : nommer explicitement chaque prestataire (PayPal (Europe)
    S.à r.l. et Cie, S.C.A., acquéreur carte, prestataire du paiement sur facture) avec adresse
    dans `datenschutz` §6 et `zahlungsarten`.
-3. **Agence d'information sur la solvabilité** — nom et adresse de la Wirtschaftsauskunftei
+3. **Agence d'information sur la solvabilité** : nom et adresse de la Wirtschaftsauskunftei
    utilisée pour le paiement sur facture (`datenschutz` §7). Une information séparée type
    « Schufa-Klausel » est en général exigée.
-4. **Hébergeur** — nom, adresse et pays de l'hébergeur du shop, plus mention du contrat de
+4. **Hébergeur** : nom, adresse et pays de l'hébergeur du shop, plus mention du contrat de
    sous-traitance art. 28 RGPD (`datenschutz` §4).
-5. **Transporteurs et partenaires de montage** — identifier les destinataires réels
+5. **Transporteurs et partenaires de montage** : identifier les destinataires réels
    (`datenschutz` §8).
-6. **Outils d'analytics / marketing** — la section 13 de `datenschutz` est un cadre vide :
+6. **Outils d'analytics / marketing** : la section 13 de `datenschutz` est un cadre vide :
    énumérer chaque outil, son fournisseur, les données traitées, la durée et les transferts
    hors UE. Aucune page ne doit être publiée avec cette section laissée en l'état.
-7. **Autorité de contrôle** — actuellement la Berliner Beauftragte für Datenschutz und
+7. **Autorité de contrôle** : actuellement la Berliner Beauftragte für Datenschutz und
    Informationsfreiheit ; à ajuster au siège réel.
-8. **Délégué à la protection des données** — vérifier l'obligation de désignation
+8. **Délégué à la protection des données** : vérifier l'obligation de désignation
    (§ 38 BDSG) avant d'annoncer un DPO.
-9. **Position § 36 VSBG** — le corpus indique « ni disposés ni tenus » de participer à un
+9. **Position § 36 VSBG** : le corpus indique « ni disposés ni tenus » de participer à un
    règlement extrajudiciaire. Décision commerciale à confirmer ; l'obligation d'information ne
    s'applique pas aux entreprises de 10 salariés ou moins au 31 décembre de l'année précédente.
-10. **Mention de TVA** — si l'entreprise relève du régime des petites entreprises
+10. **Mention de TVA** : si l'entreprise relève du régime des petites entreprises
     (§ 19 UStG), toutes les mentions « inkl. gesetzl. MwSt. » doivent être remplacées.
 
 ### 5.3 Données commerciales à confirmer
@@ -204,7 +204,7 @@ mais doivent être alignés sur les contrats logistiques et de service réels :
 - Livraison jusqu'au lieu d'installation 29 € ; déballage et reprise de l'emballage 9 €.
 - Raccordement lave-linge / sèche-linge / lave-vaisselle 49 € ; réfrigérateur pose libre 39 € ;
   encastrement 89 € ; fixation murale TV 99 €.
-- Délais 1–3 jours ouvrés ; articles « Auf Anfrage » 2–4 semaines ; réservation 7 jours en
+- Délais 1-3 jours ouvrés ; articles « Auf Anfrage » 2-4 semaines ; réservation 7 jours en
   paiement d'avance ; paiement sur facture à 14 jours.
 - Droit de rétractation légal 14 jours **+ droit de retour contractuel volontaire 30 jours**
   (repris du bandeau de confiance du site). Si ce geste commercial n'est pas voulu, retirer
@@ -217,7 +217,7 @@ mais doivent être alignés sur les contrats logistiques et de service réels :
 
 Ces obligations ne sont pas du contenu texte et relèvent d'autres chantiers :
 
-- **Bouton de rétractation (§ 356a BGB)** — obligatoire depuis le 19.06.2026 : bouton
+- **Bouton de rétractation (§ 356a BGB)** : obligatoire depuis le 19.06.2026 : bouton
   « Vertrag widerrufen » visible et accessible pendant tout le délai, formulaire en deux
   étapes (nom, identification du contrat, moyen de contact électronique), bouton de
   confirmation distinct, puis accusé de réception immédiat sur support durable avec date et
@@ -241,14 +241,14 @@ Ces obligations ne sont pas du contenu texte et relèvent d'autres chantiers :
 
 Recherche effectuée en juillet 2026. Sources officielles et cabinets spécialisés :
 
-- Impressum / § 5 DDG — [IHK Chemnitz, « Die Impressumspflicht »](https://www.ihk.de/chemnitz/recht-und-steuern/rechtsinformationen/internetrecht/pflichtangaben-im-internet-die-impressumspflicht-4401580), [eRecht24](https://www.e-recht24.de/artikel/datenschutz/209.html)
-- Fermeture de la plateforme ODR au 20.07.2025 — [IT-Recht Kanzlei](https://www.it-recht-kanzlei.de/entfernung-informationen-os-plattform.html), [IHK Osnabrück](https://www.ihk.de/osnabrueck/recht-und-fair-play/recht/internetrecht/einstellung-os-plattform-6474562), [WBS Legal](https://www.wbs.legal/it-und-internet-recht/eu-streitbeilegungsplattform-os-plattform-eingestellt-jetzt-impressum-aktualisieren-83428/)
-- § 36 VSBG et Universalschlichtungsstelle des Bundes (Kehl) — [gesetze-im-internet.de, § 36 VSBG](https://www.gesetze-im-internet.de/vsbg/__36.html), [Bundesamt für Justiz](https://www.bundesjustizamt.de/DE/Themen/Verbraucherrechte/Verbraucherstreitbeilegung/Unternehmen/Unternehmen_node.html)
-- Muster-Widerrufsbelehrung (Anlage 1 EGBGB) et Muster-Widerrufsformular (Anlage 2 EGBGB) — [buzer.de, Anlage 1](https://www.buzer.de/Anlage_1_EGBGB.htm), [buzer.de, Anlage 2](https://www.buzer.de/Anlage_2_EGBGB.htm), [BMJ, Musterbelehrungen Widerrufsrecht im Fernabsatz](https://www.bmjv.de/DE/service/formulare/form_widerrufsrecht/form_widerrufsrecht_node.html)
-- Widerrufsbutton / § 356a BGB au 19.06.2026 — [Wettbewerbszentrale](https://www.wettbewerbszentrale.de/die-zeit-laeuft-ab-19-06-2026-ist-der-widerrufsbutton-pflicht/), [Noerr, loi de transposition](https://www.noerr.com/de/insights/umsetzungsgesetz-zum-widerrufsbutton-veroeffentlicht), [Datenschutz-Generator, FAQ Widerrufsbutton](https://datenschutz-generator.de/widerrufsbutton/), [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/widerrufsbutton-ab-juni-2026-onlinevertraege-einfacher-widerrufen-118449)
-- ElektroG §§ 17, 18, 18a et nouvelles obligations au 01.07.2026 — [buzer.de, § 17 ElektroG](https://www.buzer.de/17_ElektroG.htm), [elektrogesetz.de, reprise par le commerce](https://www.elektrogesetz.de/themen/ruecknahme-handel/), [IT-Recht Kanzlei, nouvelle obligation de marquage](https://www.it-recht-kanzlei.de/elektrogesetz-neue-informationspflicht-muelltonne.html), [Shopbetreiber-Blog](https://shopbetreiber-blog.de/elektrog-ab-1-7-2026-ruecknahmepflicht-fuer-e-zigaretten-und-neues-ruecknahmesymbol)
-- Batteries / BattDG — [batteriegesetz.de, obligations](https://www.batteriegesetz.de/umsetzung/pflichten/), [IT-Recht Kanzlei, obligations d'information en ligne](https://www.it-recht-kanzlei.de/informationspflichten-batterien-online-battdg.html), [IHK Mittlerer Niederrhein](https://mittlerer-niederrhein.ihk.de/themen/umwelt/abfall-und-kreislaufwirtschaft/batterierecht-durchfuehrungsgesetz)
-- PAngV — [gesetze-im-internet.de, PAngV](https://www.gesetze-im-internet.de/pangv_2022/BJNR492110021.html), [IT-Recht Kanzlei, guide PAngV](https://www.it-recht-kanzlei.de/preisangabenverordnung.html)
-- Datenschutzerklärung / RGPD / § 25 TDDDG — [IHK Schleswig-Holstein](https://www.ihk.de/schleswig-holstein/recht/recht-im-internet/pflichtangaben-internet-datenschutzerklaerung-1359834), [eRecht24, RGPD pour boutiques en ligne](https://www.e-recht24.de/datenschutz/7902-datenschutzerklaerung-fuer-online-shops-was-shopbetreiber-wissen-muessen.html)
-- GPSR et nouveau ProdSG (19.02.2026) — [Dr. Bahr, FAQ GPSR](https://www.dr-bahr.com/infos/rechts-faq/rechts-faq-produktsicherheitsverordnung-gpsr-pflichten-fuer-online-shop-betreiber.html), [Händlerbund](https://www.haendlerbund.de/de/ratgeber/recht/produktsicherheitsverordnung), [eRecht24](https://www.e-recht24.de/ecommerce/13370-produktsicherheitsverordnung-im-e-commerce.html)
-- Drones (FAQ) — [drohnen.de, drones de moins de 250 g](https://www.drohnen.de/84616/drohne-unter-250g-registrieren-versichern/), [drohnen.de, enregistrement LBA](https://www.drohnen.de/84600/drohne-beim-luftfahrt-bundesamt-registrieren/), [drohnen.de, brevet de télépilote UE](https://www.drohnen.de/33450/eu-drohnenfuehrerschein/)
+- Impressum / § 5 DDG: [IHK Chemnitz, « Die Impressumspflicht »](https://www.ihk.de/chemnitz/recht-und-steuern/rechtsinformationen/internetrecht/pflichtangaben-im-internet-die-impressumspflicht-4401580), [eRecht24](https://www.e-recht24.de/artikel/datenschutz/209.html)
+- Fermeture de la plateforme ODR au 20.07.2025: [IT-Recht Kanzlei](https://www.it-recht-kanzlei.de/entfernung-informationen-os-plattform.html), [IHK Osnabrück](https://www.ihk.de/osnabrueck/recht-und-fair-play/recht/internetrecht/einstellung-os-plattform-6474562), [WBS Legal](https://www.wbs.legal/it-und-internet-recht/eu-streitbeilegungsplattform-os-plattform-eingestellt-jetzt-impressum-aktualisieren-83428/)
+- § 36 VSBG et Universalschlichtungsstelle des Bundes (Kehl), [gesetze-im-internet.de, § 36 VSBG](https://www.gesetze-im-internet.de/vsbg/__36.html), [Bundesamt für Justiz](https://www.bundesjustizamt.de/DE/Themen/Verbraucherrechte/Verbraucherstreitbeilegung/Unternehmen/Unternehmen_node.html)
+- Muster-Widerrufsbelehrung (Anlage 1 EGBGB) et Muster-Widerrufsformular (Anlage 2 EGBGB), [buzer.de, Anlage 1](https://www.buzer.de/Anlage_1_EGBGB.htm), [buzer.de, Anlage 2](https://www.buzer.de/Anlage_2_EGBGB.htm), [BMJ, Musterbelehrungen Widerrufsrecht im Fernabsatz](https://www.bmjv.de/DE/service/formulare/form_widerrufsrecht/form_widerrufsrecht_node.html)
+- Widerrufsbutton / § 356a BGB au 19.06.2026: [Wettbewerbszentrale](https://www.wettbewerbszentrale.de/die-zeit-laeuft-ab-19-06-2026-ist-der-widerrufsbutton-pflicht/), [Noerr, loi de transposition](https://www.noerr.com/de/insights/umsetzungsgesetz-zum-widerrufsbutton-veroeffentlicht), [Datenschutz-Generator, FAQ Widerrufsbutton](https://datenschutz-generator.de/widerrufsbutton/), [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/widerrufsbutton-ab-juni-2026-onlinevertraege-einfacher-widerrufen-118449)
+- ElektroG §§ 17, 18, 18a et nouvelles obligations au 01.07.2026, [buzer.de, § 17 ElektroG](https://www.buzer.de/17_ElektroG.htm), [elektrogesetz.de, reprise par le commerce](https://www.elektrogesetz.de/themen/ruecknahme-handel/), [IT-Recht Kanzlei, nouvelle obligation de marquage](https://www.it-recht-kanzlei.de/elektrogesetz-neue-informationspflicht-muelltonne.html), [Shopbetreiber-Blog](https://shopbetreiber-blog.de/elektrog-ab-1-7-2026-ruecknahmepflicht-fuer-e-zigaretten-und-neues-ruecknahmesymbol)
+- Batteries / BattDG: [batteriegesetz.de, obligations](https://www.batteriegesetz.de/umsetzung/pflichten/), [IT-Recht Kanzlei, obligations d'information en ligne](https://www.it-recht-kanzlei.de/informationspflichten-batterien-online-battdg.html), [IHK Mittlerer Niederrhein](https://mittlerer-niederrhein.ihk.de/themen/umwelt/abfall-und-kreislaufwirtschaft/batterierecht-durchfuehrungsgesetz)
+- PAngV: [gesetze-im-internet.de, PAngV](https://www.gesetze-im-internet.de/pangv_2022/BJNR492110021.html), [IT-Recht Kanzlei, guide PAngV](https://www.it-recht-kanzlei.de/preisangabenverordnung.html)
+- Datenschutzerklärung / RGPD / § 25 TDDDG: [IHK Schleswig-Holstein](https://www.ihk.de/schleswig-holstein/recht/recht-im-internet/pflichtangaben-internet-datenschutzerklaerung-1359834), [eRecht24, RGPD pour boutiques en ligne](https://www.e-recht24.de/datenschutz/7902-datenschutzerklaerung-fuer-online-shops-was-shopbetreiber-wissen-muessen.html)
+- GPSR et nouveau ProdSG (19.02.2026): [Dr. Bahr, FAQ GPSR](https://www.dr-bahr.com/infos/rechts-faq/rechts-faq-produktsicherheitsverordnung-gpsr-pflichten-fuer-online-shop-betreiber.html), [Händlerbund](https://www.haendlerbund.de/de/ratgeber/recht/produktsicherheitsverordnung), [eRecht24](https://www.e-recht24.de/ecommerce/13370-produktsicherheitsverordnung-im-e-commerce.html)
+- Drones (FAQ): [drohnen.de, drones de moins de 250 g](https://www.drohnen.de/84616/drohne-unter-250g-registrieren-versichern/), [drohnen.de, enregistrement LBA](https://www.drohnen.de/84600/drohne-beim-luftfahrt-bundesamt-registrieren/), [drohnen.de, brevet de télépilote UE](https://www.drohnen.de/33450/eu-drohnenfuehrerschein/)

@@ -4,7 +4,7 @@ import type { StockMovementRecord } from "@/server/types";
 // Gestion du stock : chaque variation est écrite avec son mouvement dans une
 // même transaction, pour que le stock et l'historique ne divergent jamais.
 
-/** Motifs autorisés — reflet des commentaires du schéma Prisma. */
+/** Motifs autorisés : reflet des commentaires du schéma Prisma. */
 export const STOCK_REASONS = ["wareneingang", "korrektur", "verkauf", "retoure"] as const;
 
 export type StockReason = (typeof STOCK_REASONS)[number];

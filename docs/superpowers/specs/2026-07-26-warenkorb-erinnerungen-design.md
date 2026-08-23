@@ -12,7 +12,7 @@ paniers se perdent en cours de route.
 ## Objectif
 
 Quatre e-mails automatiques en allemand vers les visiteurs qui ont commencé le tunnel sans le
-terminer. Le premier est un message de support — « le paiement n'a pas fonctionné ? » — les
+terminer. Le premier est un message de support, « le paiement n'a pas fonctionné ? », les
 suivants relancent progressivement. Chaque mail affiche le produit avec son image, son prix et sa
 disponibilité, un bouton pour reprendre le paiement là où il s'est arrêté, et juste en dessous un
 lien vers la page contact. La séquence s'arrête dès qu'une commande est passée ou que la personne
@@ -28,7 +28,7 @@ se désabonne.
 - Page de suivi dans le back-office et interrupteur global.
 
 Hors périmètre : relance des commandes créées mais non payées (`paymentStatus: "offen"`,
-typiquement un virement Vorkasse jamais effectué) — c'est une séquence distincte, avec des délais
+typiquement un virement Vorkasse jamais effectué), c'est une séquence distincte, avec des délais
 en jours et un ton de rappel de paiement, à traiter plus tard. Version anglaise des mails : le
 champ `locale` est stocké mais tous les gabarits sont en allemand dans cette version.
 
@@ -98,7 +98,7 @@ le septième jour. Chaque ligne contient `productId`, `brand`, `name`, `image`, 
 
 ### Désabonnements : `EmailSuppression`, déjà présent
 
-Le chantier des campagnes marketing a introduit `EmailSuppression` — clé primaire `email` en
+Le chantier des campagnes marketing a introduit `EmailSuppression`, clé primaire `email` en
 minuscules, `reason` parmi `desinscription | rejet | plainte`, `campaignId` facultatif. Cette
 séquence l'utilise telle quelle, avec `reason: "desinscription"` et `campaignId: null`.
 
@@ -123,7 +123,7 @@ l'erreur côté client.
 
 La route serveur (`src/app/api/checkout/recovery/route.ts`) :
 
-1. relit les produits en base à partir des `productId` reçus — les prix, images, stocks et libellés
+1. relit les produits en base à partir des `productId` reçus, les prix, images, stocks et libellés
    du mail viennent de la base, jamais du navigateur, comme dans `POST /api/checkout` ;
 2. recalcule les montants avec les fonctions de `src/lib/cart.ts` ;
 3. fait un `upsert` sur `emailNormalized`.
@@ -151,13 +151,13 @@ tranche de 10 minutes. Au-delà, réponse `429` et rien n'est écrit en base.
 
 `src/instrumentation.ts` exporte `register()`, appelée une fois au démarrage de chaque instance du
 serveur Next. Le fichier va dans `src/`, pas à la racine, parce que le projet utilise un dossier
-`src` — c'est ce que prescrit `node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/instrumentation.md`.
+`src` : c'est ce que prescrit `node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/instrumentation.md`.
 
 `register()` lance un `setInterval` de 60 secondes sur le dispatcher et rend la main
 immédiatement : la documentation précise que la fonction doit se terminer avant que le serveur
 accepte des requêtes, donc aucun travail long ne s'y exécute. Elle sort sans rien faire si
 `process.env.NEXT_RUNTIME !== "nodejs"`, et un drapeau posé sur `globalThis` empêche un second
-intervalle après un rechargement à chaud — même protection que celle déjà appliquée au client
+intervalle après un rechargement à chaud : même protection que celle déjà appliquée au client
 Prisma dans `src/server/prisma.ts`.
 
 `src/server/checkoutRecovery.ts` porte le dispatcher. À chaque tick :
@@ -167,7 +167,7 @@ Prisma dans `src/server/prisma.ts`.
    tick sort **sans toucher aux enregistrements** : la séquence ne doit pas se consumer parce que
    la clé Resend manque en local.
 3. Sélection des lignes où `nextSendAt <= maintenant`, `stoppedAt` vide, et `claimedAt` vide ou
-   antérieur à 5 minutes — un verrou plus vieux que ça vient d'un processus mort.
+   antérieur à 5 minutes : un verrou plus vieux que ça vient d'un processus mort.
 4. Pose du verrou ligne par ligne via un `updateMany` conditionné sur `claimedAt` : si deux ticks
    se chevauchent, un seul obtient la ligne.
 5. Vérifications de dernière minute : email absent de `EmailSuppression`, et aucune `Order` portant
@@ -178,7 +178,7 @@ Prisma dans `src/server/prisma.ts`.
    qui travaille sur `emailNormalized`.
 6. Rendu du gabarit correspondant à `sentCount + 1`, envoi via `sendMail()`.
 7. En cas de succès : `sentCount + 1`, `sendAttempts` remis à 0, `lastSentAt` à maintenant,
-   `nextSendAt` au délai suivant — `null` après le quatrième, avec `stoppedReason: "completed"`.
+   `nextSendAt` au délai suivant : `null` après le quatrième, avec `stoppedReason: "completed"`.
    En cas d'échec Resend : verrou relâché, `sendAttempts + 1`, `nextSendAt` repoussé de
    30 minutes. À la troisième tentative infructueuse, la ligne est stoppée en `failed` et l'erreur
    est écrite en console.
@@ -190,12 +190,12 @@ de 500 abandons ne doit pas déclencher un rejet en masse.
 
 **Rafraîchissement avant rendu.** Juste avant l'étape 6, les produits du panier figé sont relus en
 base : prix, stock, image et nom du message sont ceux du jour de l'envoi, pas ceux de l'abandon.
-Un article dont le prix a augmenté ne doit pas être annoncé à l'ancien tarif — le tunnel
+Un article dont le prix a augmenté ne doit pas être annoncé à l'ancien tarif, le tunnel
 facturerait le nouveau, et l'écart est une publicité trompeuse. Un article disparu du catalogue ou
 passé en `active: false` retombe sur les valeurs figées et s'affiche `Derzeit nicht verfügbar`.
 
-**Découpage.** Les calculs sans base de données — délais, libellés de disponibilité et d'état,
-encodage du panier, construction des URL — vivent dans `src/lib/checkoutRecovery.ts`, importable
+**Découpage.** Les calculs sans base de données : délais, libellés de disponibilité et d'état,
+encodage du panier, construction des URL : vivent dans `src/lib/checkoutRecovery.ts`, importable
 par le back-office comme par les scripts de test. `src/server/checkoutRecovery.ts` ne porte que ce
 qui touche Prisma. C'est la séparation déjà en place entre `src/lib/cart.ts` et
 `src/server/orders.ts`, et entre `src/lib/campaigns.ts` et le reste du chantier campagnes.
@@ -222,10 +222,10 @@ Disponibilité, calculée à l'envoi et non à la capture :
 État, depuis `Product.condition` : `new` → `Neuware`, `refurbished` → `Generalüberholt`,
 `used` → `Gebraucht`.
 
-### Mail 1 — 10 minutes
+### Mail 1: 10 minutes
 
 Objet : **Brauchen Sie Hilfe bei Ihrer Bestellung?**
-Preheader : *Ihr Warenkorb ist gespeichert – wir helfen gern weiter.*
+Preheader : *Ihr Warenkorb ist gespeichert, wir helfen gern weiter.*
 Titre : *Hat beim Abschluss etwas nicht funktioniert?*
 
 > Sie haben vor wenigen Minuten eine Bestellung bei Hausgeräte Pfeffer begonnen, sie aber nicht
@@ -233,23 +233,23 @@ Titre : *Hat beim Abschluss etwas nicht funktioniert?*
 >
 > Falls es an der Zahlung gelegen hat: Manchmal bricht eine Verbindung ab oder eine Eingabe wird
 > nicht übernommen. Über den Button unten setzen Sie Ihre Bestellung genau dort fort, wo Sie
-> aufgehört haben – Ihre Angaben sind noch gespeichert.
+> aufgehört haben: Ihre Angaben sind noch gespeichert.
 
 Bouton : **Bestellung fortsetzen**
-Sous le bouton : *Probleme bei der Zahlung? Schreiben Sie uns kurz – wir antworten am gleichen
+Sous le bouton : *Probleme bei der Zahlung? Schreiben Sie uns kurz, wir antworten am gleichen
 Werktag.* → **Zum Kontaktformular**
 
-### Mail 2 — +24 heures
+### Mail 2: +24 heures
 
 Objet : **Ihr Gerät ist noch für Sie verfügbar**
-Preheader : *Ihr Warenkorb wartet – versandkostenfrei ab 50,00 €.*
+Preheader : *Ihr Warenkorb wartet, versandkostenfrei ab 50,00 €.*
 Titre : *Ihr Warenkorb ist noch da*
 
 > Ihre Auswahl liegt weiterhin in Ihrem Warenkorb. Sie können die Bestellung mit einem Klick
 > abschließen, ohne Ihre Daten erneut eingeben zu müssen.
 >
 > Gut zu wissen: Ab 50,00 € Warenwert liefern wir versandkostenfrei innerhalb Deutschlands. Und
-> Sie haben 14 Tage Widerrufsrecht – passt das Gerät nicht, nehmen wir es zurück.
+> Sie haben 14 Tage Widerrufsrecht: passt das Gerät nicht, nehmen wir es zurück.
 
 Le seuil de franco est interpolé depuis `FREE_SHIPPING_THRESHOLD_CENTS` (`src/lib/cart.ts`), jamais
 écrit en dur : changer la constante doit changer le mail.
@@ -257,14 +257,14 @@ Le seuil de franco est interpolé depuis `FREE_SHIPPING_THRESHOLD_CENTS` (`src/l
 Bouton : **Jetzt abschließen**
 Sous le bouton : *Unsicher bei der Auswahl? Wir beraten Sie gern.* → **Kontakt aufnehmen**
 
-### Mail 3 — +3 jours
+### Mail 3: +3 jours
 
 Objet : **Noch Fragen zu Ihrem Gerät?**
-Preheader : *Maße, Anschluss, Lieferzeit – fragen Sie uns.*
+Preheader : *Maße, Anschluss, Lieferzeit, fragen Sie uns.*
 Titre : *Sprechen Sie mit uns, bevor Sie sich entscheiden*
 
-> Ein Haushaltsgerät kauft man nicht jeden Tag. Wenn Sie noch etwas klären möchten – Maße,
-> Anschluss, Lieferzeit oder Entsorgung des Altgeräts – beantworten wir Ihre Fragen gern
+> Ein Haushaltsgerät kauft man nicht jeden Tag. Wenn Sie noch etwas klären möchten, Maße,
+> Anschluss, Lieferzeit oder Entsorgung des Altgeräts, beantworten wir Ihre Fragen gern
 > persönlich.
 >
 > Ihr Warenkorb bleibt gespeichert. Sie können ihn jederzeit über den Button unten öffnen.
@@ -272,13 +272,13 @@ Titre : *Sprechen Sie mit uns, bevor Sie sich entscheiden*
 Bouton : **Warenkorb ansehen**
 Sous le bouton : *Lieber direkt fragen? Wir sind für Sie erreichbar.* → **Frage stellen**
 
-### Mail 4 — +7 jours
+### Mail 4: +7 jours
 
 Objet : **Wir sind weiterhin für Sie da**
 Preheader : *Weitere Modelle in derselben Kategorie.*
 Titre : *Falls Sie sich anders entschieden haben*
 
-> Ihr gespeicherter Warenkorb wird bald automatisch gelöscht. Das ist völlig in Ordnung –
+> Ihr gespeicherter Warenkorb wird bald automatisch gelöscht. Das ist völlig in Ordnung
 > vielleicht war es nicht das passende Gerät.
 >
 > In derselben Kategorie führen wir weitere Modelle, auch in anderen Preislagen. Und wenn Sie
@@ -311,18 +311,18 @@ quel à l'API Resend.
 
 ## Reprise du paiement
 
-`/kasse?fortsetzen=<token>` — le composant serveur de la page caisse lit le jeton, charge la
+`/kasse?fortsetzen=<token>` : le composant serveur de la page caisse lit le jeton, charge la
 `CheckoutRecovery` et passe le panier figé et l'email à `CheckoutFlow`. Côté client, un effet au
 montage :
 
-1. réécrit `localStorage` sous la clé `hgp.cart.v1` avec les lignes du panier restauré — le mail
+1. réécrit `localStorage` sous la clé `hgp.cart.v1` avec les lignes du panier restauré, le mail
    est souvent ouvert sur un autre appareil que celui de l'abandon, le panier local est donc vide
    ou différent ;
 2. pré-remplit le champ email ;
 3. ouvre directement l'étape enregistrée dans `lastStep`.
 
 Jeton inconnu, ou enregistrement purgé : la page caisse s'ouvre normalement sur le panier courant,
-sans message d'erreur — un lien de mail vieux de six semaines ne doit pas afficher une page cassée.
+sans message d'erreur : un lien de mail vieux de six semaines ne doit pas afficher une page cassée.
 
 Les prix et stocks sont de toute façon recontrôlés en base par `POST /api/checkout` : un panier
 restauré ne peut pas faire passer un ancien prix.
@@ -338,16 +338,16 @@ aussi en `POST` direct.
 La confirmation écrit une ligne `EmailSuppression` et stoppe la `CheckoutRecovery` en `unsubscribed`. Page de
 confirmation en allemand, sans possibilité de se réabonner : le refus est définitif.
 
-L'URL n'a pas de préfixe de langue en allemand — `localePrefix: "as-needed"` et `defaultLocale: "de"`
-dans `src/i18n/routing.ts` — donc les liens des mails pointent vers `/abmeldung`, et la variante
+L'URL n'a pas de préfixe de langue en allemand, `localePrefix: "as-needed"` et `defaultLocale: "de"`
+dans `src/i18n/routing.ts` : donc les liens des mails pointent vers `/abmeldung`, et la variante
 anglaise vit sous `/en/abmeldung`. La page est marquée `robots: { index: false }`, comme la page
 caisse.
 
 ## Arrêt sur paiement
 
 Dans `createOrder()` (`src/server/orders.ts`), après la transaction de création : la
-`CheckoutRecovery` portant le même `emailNormalized` — il en existe au plus une, grâce à la
-contrainte d'unicité — passe en `stoppedReason: "converted"` avec `nextSendAt: null`. L'écriture
+`CheckoutRecovery` portant le même `emailNormalized`, il en existe au plus une, grâce à la
+contrainte d'unicité : passe en `stoppedReason: "converted"` avec `nextSendAt: null`. L'écriture
 passe par un `updateMany` conditionné sur `stoppedAt: null`, ce qui ne lève pas d'erreur quand
 aucune ligne ne correspond, le cas le plus fréquent.
 
@@ -396,7 +396,7 @@ Nouveaux :
 |---|---|
 | `src/instrumentation.ts` | démarrage du tick de 60 s |
 | `src/server/scheduler.ts` | registre des tâches périodiques, appelé par l'instrumentation |
-| `src/lib/checkoutRecovery.ts` | calendrier, libellés, encodage du panier — sans Prisma ni React |
+| `src/lib/checkoutRecovery.ts` | calendrier, libellés, encodage du panier, sans Prisma ni React |
 | `src/server/checkoutRecovery.ts` | capture, dispatcher, verrou, purge, statistiques |
 | `src/server/emails/checkoutRecovery.ts` | les quatre gabarits allemands et le bloc produit |
 | `src/server/recoveryRate.ts` | limiteur par IP de la route de capture |
@@ -424,7 +424,7 @@ Modifiés :
 
 Le projet n'a pas de framework de test. Deux niveaux :
 
-**`scripts/test-recovery.ts`** — crée une session factice à partir d'un produit réel du catalogue,
+**`scripts/test-recovery.ts`** : crée une session factice à partir d'un produit réel du catalogue,
 puis pour chacun des quatre rangs : force `sentCount` et `nextSendAt` dans le passé, exécute le
 dispatcher avec `DRY_RUN=1`, et écrit le HTML rendu dans
 `.next/cache/recovery-preview/mail-N.html`. Aucun mail ne part. Sert à contrôler les quatre
@@ -436,7 +436,7 @@ lien de désabonnement.
 1. remplir un panier, saisir un email à l'étape contact, quitter le site ;
 2. vérifier la ligne créée en base avec `npm run db:studio` ;
 3. avancer `nextSendAt` à la main, attendre un tick, vérifier la réception ;
-4. cliquer **Bestellung fortsetzen** depuis un autre navigateur — le panier doit se reconstituer
+4. cliquer **Bestellung fortsetzen** depuis un autre navigateur, le panier doit se reconstituer
    et l'étape doit être la bonne ;
 5. terminer la commande, vérifier que la ligne passe en `converted` et qu'aucun autre mail ne
    part ;

@@ -9,8 +9,8 @@ import type { ProductRecord } from "@/server/types";
  */
 
 export const SORT_OPTIONS = [
-  { value: "name", label: "Nom A–Z" },
-  { value: "brand", label: "Marque A–Z" },
+  { value: "name", label: "Nom A, Z" },
+  { value: "brand", label: "Marque A, Z" },
   { value: "price-asc", label: "Prix croissant" },
   { value: "price-desc", label: "Prix décroissant" },
   { value: "stock-asc", label: "Stock croissant" },

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { StockProductRow, StockReason } from "@/server/stock";
 
-// Seuls les types viennent du module serveur — la liste de choix reste locale
+// Seuls les types viennent du module serveur : la liste de choix reste locale
 // pour qu'aucun code Prisma n'atterrisse dans le bundle client.
 const REASON_OPTIONS: { value: StockReason; label: string }[] = [
   { value: "korrektur", label: "Correction" },

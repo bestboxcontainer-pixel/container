@@ -41,7 +41,7 @@ export interface SelectableProduct {
 
 /**
  * Relit un réglage stocké en JSON. Toute valeur douteuse ramène au défaut :
- * un réglage illisible ne doit pas vider le flux — un catalogue absent de
+ * un réglage illisible ne doit pas vider le flux, un catalogue absent de
  * Google coûte plus cher qu'un catalogue trop large.
  */
 export function parseMerchantSelection(value: unknown): MerchantSelection {

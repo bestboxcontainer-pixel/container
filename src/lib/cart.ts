@@ -1,8 +1,8 @@
 // Panier de la boutique.
 //
 // Ce module est volontairement isolé de React : il contient les constantes
-// tarifaires, les calculs de montants — repris tels quels côté serveur dans
-// src/server/orders.ts — et un petit magasin persisté dans localStorage que
+// tarifaires, les calculs de montants : repris tels quels côté serveur dans
+// src/server/orders.ts : et un petit magasin persisté dans localStorage que
 // CartProvider branche sur React via useSyncExternalStore.
 //
 // Aucune directive "use client" ici : le serveur importe les constantes et les
@@ -37,7 +37,7 @@ export const SHIPPING_METHODS = [
   },
   {
     key: "express",
-    /** 70,00 € — supplément de service, soumis à la TVA comme la marchandise. */
+    /** 70,00 €, supplément de service, soumis à la TVA comme la marchandise. */
     cents: 7_000,
     minDays: 1,
     maxDays: 2,
@@ -79,7 +79,7 @@ export const MAX_QUANTITY_PER_LINE = 20;
 export const MAX_CART_LINES = 40;
 
 export interface CartLine {
-  /** Identifiant du produit en base — seule donnée à laquelle le serveur se fie. */
+  /** Identifiant du produit en base : seule donnée à laquelle le serveur se fie. */
   productId: string;
   slug: string;
   brand: string;
@@ -115,7 +115,7 @@ export interface CartTotals {
  * Formatage identique à `formatPrice` de src/server/store.ts, mais utilisable
  * dans un composant client : ce module n'importe pas Prisma.
  * Le format reste allemand dans les deux langues, comme partout dans la
- * boutique — c'est un magasin allemand, les prix sont en euros.
+ * boutique : c'est un magasin allemand, les prix sont en euros.
  */
 export function formatCents(cents: number): string {
   return `${(cents / 100).toLocaleString("de-DE", {
@@ -136,15 +136,15 @@ export function includedVatCents(grossCents: number, ratePercent = VAT_RATE_PERC
 
 export interface TotalsOptions {
   /**
-   * Mode de livraison choisi par le client. Absent, c'est le standard —
-   * gratuit — qui s'applique : le panier et le tiroir latéral affichent donc le
+   * Mode de livraison choisi par le client. Absent, c'est le standard
+   * gratuit : qui s'applique : le panier et le tiroir latéral affichent donc le
    * montant le plus bas tant que le client n'a rien choisi dans le tunnel.
    */
   shippingMethodKey?: ShippingMethodKey;
   /**
    * Remise d'un code de réduction, en centimes.
    *
-   * Calculée ailleurs — `computeCouponDiscount` — et transmise ici : ce module
+   * Calculée ailleurs, `computeCouponDiscount`, et transmise ici : ce module
    * ne connaît pas les règles des coupons, il ne fait qu'appliquer un montant
    * déjà arrêté. C'est ce qui permet à l'aperçu du panier et à la facture de
    * partager le même calcul sans partager les règles.

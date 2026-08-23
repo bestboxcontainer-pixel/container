@@ -49,7 +49,7 @@ export interface CampaignLanding {
  * Une campagne terminée ne rend pas sa page : elle afficherait des prix qui ne
  * sont plus appliqués au panier, ce qui est la définition d'une publicité
  * trompeuse. Les visiteurs qui reviennent par un vieux lien tombent donc sur
- * une page introuvable — le catalogue reste accessible par la navigation.
+ * une page introuvable : le catalogue reste accessible par la navigation.
  */
 export async function getCampaignLanding(
   slug: string,

@@ -1,4 +1,4 @@
-# Reprise du projet — état au 26 juillet 2026
+# Reprise du projet : état au 26 juillet 2026
 
 Ce document résume ce qui a été construit pendant la nuit, comment lancer le
 projet, et ce qui reste à faire côté commerçant.
@@ -12,7 +12,7 @@ npm run db:seed        # catalogue, moyens de paiement, compte administrateur
 npm run dev            # http://localhost:3000
 ```
 
-Back-office : http://localhost:3000/admin — `admin@example.com` / `change-me`.
+Back-office : http://localhost:3000/admin, `admin@example.com` / `change-me`.
 Ces identifiants viennent de `.env.local` et ne servent qu'au premier démarrage :
 dès qu'un compte existe en base, c'est le mot de passe haché qui fait foi.
 **Change ce mot de passe avant toute mise en ligne** (Zugänge → changer le mot de passe).
@@ -46,7 +46,7 @@ Envoi des codes : SMTP de la boîte Hostinger de la boutique
 renseigner dans `.env.local` : `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`,
 `SMTP_PASSWORD`, `MAIL_FROM` et `MAIL_FROM_NAME`. En développement, si ces
 variables manquent, le code s'affiche dans la console du serveur et sur la page
-de connexion — ce repli est verrouillé sur `NODE_ENV === "development"`. En
+de connexion : ce repli est verrouillé sur `NODE_ENV === "development"`. En
 production, la connexion échoue proprement (502) tant que l'envoi n'est pas
 possible.
 
@@ -59,7 +59,7 @@ L'adresse se change depuis **Utilisateurs** (`/admin/users`), bouton « Modifier
 l'adresse e-mail » sur la ligne du compte. Elle sert à la fois d'identifiant de
 connexion et de destinataire du code : l'interface demande donc une
 confirmation avant d'enregistrer. `ADMIN_EMAIL` dans `.env.local` n'est qu'un
-compte d'amorçage, utilisé uniquement quand la table `AdminUser` est vide — le
+compte d'amorçage, utilisé uniquement quand la table `AdminUser` est vide, le
 modifier ne change rien à un compte déjà créé.
 
 L'e-mail reprend le logo sur fond blanc avec un filet rouge, en tableaux et
@@ -136,7 +136,7 @@ premier (options de livraison, 14 jours de rétractation), +24 h après le deuxi
   (`/admin/warenkorb-erinnerungen`) coupant l'envoi sans redéploiement.
 - **Planificateur interne**, pas de cron système : `src/instrumentation.ts` démarre un
   `setInterval` de 60 s au lancement de chaque instance Next (`next dev` ou `next start`
-  uniquement — un hébergement serverless ne déclencherait rien). `POST
+  uniquement: un hébergement serverless ne déclencherait rien). `POST
   /api/cron/recovery`, protégé par `RECOVERY_CRON_SECRET`, reste le point d'entrée pour
   un cron externe si l'hébergement change un jour.
 - **Coupon `WARENKORB10`** créé en base pour le troisième message : 10 %, dès 300 €
@@ -147,19 +147,19 @@ premier (options de livraison, 14 jours de rétractation), +24 h après le deuxi
 
 ## Limites connues, à traiter avant d'ouvrir la boutique
 
-1. **Aucun e-mail n'est envoyé** — la confirmation de commande par e-mail est
+1. **Aucun e-mail n'est envoyé** : la confirmation de commande par e-mail est
    obligatoire (§ 312i Abs. 1 Nr. 3 BGB). La clé `smtp_password` existe déjà
    dans Integrationen, il reste à brancher l'envoi. En attendant, la page de
    confirmation ne promet pas d'e-mail.
-2. **Aucun paiement n'est encaissé** — virement et facture fonctionnent de bout
+2. **Aucun paiement n'est encaissé** : virement et facture fonctionnent de bout
    en bout ; PayPal, carte, SEPA et Sofort créent la commande en attente de
    paiement et affichent que le prestataire sera branché via Integrationen.
-3. **Bouton de rétractation en ligne** — obligatoire depuis le 19 juin 2026
+3. **Bouton de rétractation en ligne** : obligatoire depuis le 19 juin 2026
    (§ 356a BGB). Le texte est en place, la fonctionnalité reste à construire ;
    sans elle, le délai de rétractation se prolonge.
 4. **IBAN de démonstration** sur la page de confirmation, signalée comme telle.
 5. **Livraison Allemagne uniquement**, frais 4,95 € et franco à 50 € codés dans
-   `src/lib/cart.ts` — pas encore pilotables depuis le back-office.
+   `src/lib/cart.ts` : pas encore pilotables depuis le back-office.
 
 ## À faire avant la mise en ligne
 

@@ -12,7 +12,7 @@ import type { Product } from "@/types/home";
 // des colonnes « *En » facultatives. Ce module charge une seule fois les
 // traductions puis les applique à des données déjà chargées par le store.
 // Le repli est systématique : si le champ anglais est vide, l'allemand est
-// affiché — jamais de champ vide sur la boutique.
+// affiché : jamais de champ vide sur la boutique.
 
 // ---- Types ----
 
@@ -154,7 +154,7 @@ export function localizeCategoryPages(
  * Le cache s'arrête volontairement aux lignes brutes. `CatalogTranslations`
  * porte des `Map`, or `unstable_cache` sérialise ce qu'il stocke : une `Map`
  * en ressortirait en objet vide, tous les `.get()` renverraient `undefined` et
- * la boutique anglaise retomberait silencieusement en allemand — une panne sans
+ * la boutique anglaise retomberait silencieusement en allemand, une panne sans
  * message d'erreur. Les `Map` sont donc assemblées après coup, hors du cache.
  */
 const chargerLignesTraduction = unstable_cache(

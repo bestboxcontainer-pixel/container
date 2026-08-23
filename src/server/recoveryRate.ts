@@ -3,7 +3,7 @@
  *
  * Cette route est publique et prend une adresse e-mail : sans limite, elle
  * permettrait de faire envoyer des messages de la boutique à n'importe qui, en
- * boucle. Même principe que src/server/customerRate.ts — compteur en mémoire,
+ * boucle. Même principe que src/server/customerRate.ts, compteur en mémoire,
  * suffisant pour une instance unique. Avec plusieurs instances, il faudra
  * déplacer ces compteurs dans Redis.
  */

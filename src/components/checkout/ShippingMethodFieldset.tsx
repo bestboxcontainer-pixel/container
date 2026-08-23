@@ -7,7 +7,7 @@ import type { ShippingMethodKey } from "@/lib/cart";
 
 // Choix du mode de livraison, posé dans la première étape du tunnel : le client
 // voit le total définitif avant même d'arriver sur le paiement, comme l'exige
-// § 312j Abs. 2 BGB — les frais de livraison ne doivent pas apparaître au dernier
+// § 312j Abs. 2 BGB, les frais de livraison ne doivent pas apparaître au dernier
 // moment.
 //
 // Le tarif et le délai viennent de SHIPPING_METHODS (src/lib/cart.ts), jamais
@@ -38,7 +38,7 @@ export function ShippingMethodFieldset({
         return (
           <li key={method.key}>
             <label
-              className={`flex cursor-pointer items-start gap-3 rounded-sm border p-4 transition-colors ${
+              className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition-colors ${
                 active ? "border-primary bg-primary/5" : "border-border hover:border-primary/50"
               }`}
             >

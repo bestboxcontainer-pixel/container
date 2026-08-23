@@ -1,6 +1,6 @@
 # BBC Best Box Containerhandel e.K.
 
-Back-office (admin) d'origine e-commerce — la vitrine publique bilingue a été
+Back-office (admin) d'origine e-commerce : la vitrine publique bilingue a été
 retirée à la demande du client et remplacée par une page blanche. Seul
 `/admin` reste en service : produits, commandes, back-office complet et flux
 Google Merchant.
@@ -9,13 +9,13 @@ Domaine : **bestbox-containerhandel.de** (placeholder)
 
 ## Stack
 
-- **Next.js 16** — App Router, React 19, TypeScript strict
-- **PostgreSQL (Neon)** via **Prisma 7** — une seule base pour le développement
+- **Next.js 16** : App Router, React 19, TypeScript strict
+- **PostgreSQL (Neon)** via **Prisma 7** : une seule base pour le développement
   et la production
-- **Tailwind CSS v4** — jetons de design en oklch
-- **next-intl** — allemand à la racine, anglais sous `/en`
-- **Cloudinary** — stockage des images produits
-- **Nodemailer** — e-mails transactionnels via le SMTP Hostinger de la boutique
+- **Tailwind CSS v4** : jetons de design en oklch
+- **next-intl** : allemand à la racine, anglais sous `/en`
+- **Cloudinary** : stockage des images produits
+- **Nodemailer** : e-mails transactionnels via le SMTP Hostinger de la boutique
 
 ## Démarrer en local
 
@@ -27,7 +27,7 @@ npm run dev                # http://localhost:3000
 
 Back-office : `http://localhost:3000/admin`. La connexion demande un mot de
 passe **puis** un code à six chiffres envoyé par e-mail. Sans SMTP configuré,
-le code s'affiche dans la console du serveur — repli réservé au développement.
+le code s'affiche dans la console du serveur : repli réservé au développement.
 
 ## Commandes
 
@@ -47,7 +47,7 @@ npm run db:studio  # explorateur de base Prisma
 
 | Fichier | Contenu |
 |---|---|
-| [`docs/DEPLOY.md`](docs/DEPLOY.md) | **Mise en ligne sur Hostinger** — variables, migrations, cron, vérifications |
+| [`docs/DEPLOY.md`](docs/DEPLOY.md) | **Mise en ligne sur Hostinger**, variables, migrations, cron, vérifications |
 | [`docs/HANDOVER.md`](docs/HANDOVER.md) | État du projet, ce qui est construit, limites connues |
 | [`docs/DATABASE.md`](docs/DATABASE.md) | Base PostgreSQL, migrations, sauvegardes |
 | [`docs/IMAGES.md`](docs/IMAGES.md) | Cloudinary et gestion des visuels produits |
@@ -59,8 +59,8 @@ npm run db:studio  # explorateur de base Prisma
 
 ```
 src/
-  app/[locale]/     # vitrine désactivée — une seule page vierge (voir docs/HANDOVER.md)
-  app/admin/        # back-office, hors routage multilingue — seule partie active
+  app/[locale]/     # vitrine désactivée : une seule page vierge (voir docs/HANDOVER.md)
+  app/admin/        # back-office, hors routage multilingue, seule partie active
   app/api/admin/    # routes serveur du back-office
   app/api/cron/     # tâches planifiées
   app/feed/         # flux Google Merchant (XML et CSV)
@@ -73,7 +73,7 @@ docs/               # documentation d'exploitation
 
 ## Variables d'environnement
 
-Voir [`.env.example`](.env.example) — dix-sept variables, toutes commentées.
+Voir [`.env.example`](.env.example) : dix-sept variables, toutes commentées.
 Les valeurs réelles vivent dans `.env.local`, jamais dans le dépôt.
 
 ## Licence

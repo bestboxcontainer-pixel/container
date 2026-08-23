@@ -34,7 +34,7 @@
     "whatsappTitle": "Fragen? Schreiben Sie uns über WhatsApp"
   },
   "header": {
-    "homeAriaLabel": "BBC Best Box Containerhandel e.K. – Startseite",
+    "homeAriaLabel": "BBC Best Box Containerhandel e.K., Startseite",
     "logoAlt": "BBC Best Box Containerhandel e.K.",
     "search": "Suchen"
   },
@@ -47,35 +47,35 @@
       "summer": {
         "eyebrow": "SOMMER SALE",
         "title": "Bis zu 10% auf Haushaltsgeräte",
-        "subtitle": "Kühlen, Waschen, Kochen & Multimedia — jetzt zu Bestpreisen sichern.",
+        "subtitle": "Kühlen, Waschen, Kochen & Multimedia, jetzt zu Bestpreisen sichern.",
         "cta": "Jetzt shoppen",
         "alt": "Moderne Küche mit hochwertigen Einbaugeräten"
       },
       "cinema": {
         "eyebrow": "HEIMKINO-WOCHEN",
         "title": "4K-Fernseher ab 449 €",
-        "subtitle": "OLED, QLED und Ambilight — großes Kino für Ihr Wohnzimmer.",
+        "subtitle": "OLED, QLED und Ambilight, großes Kino für Ihr Wohnzimmer.",
         "cta": "Fernseher entdecken",
         "alt": "Großer Fernseher mit Ambient-Beleuchtung im abgedunkelten Wohnzimmer"
       },
       "drones": {
         "eyebrow": "NEU IM SORTIMENT",
         "title": "Drohnen für jeden Flugstil",
-        "subtitle": "Kameradrohnen unter 249 g — startklar ohne Führerschein, ab 199 €.",
+        "subtitle": "Kameradrohnen unter 249 g, startklar ohne Führerschein, ab 199 €.",
         "cta": "Drohnen ansehen",
         "alt": "Kameradrohne im Flug über einem Wald"
       },
       "laundry": {
         "eyebrow": "WASCHTAG-DEALS",
         "title": "Waschmaschinen ab 429 €",
-        "subtitle": "Frontlader mit 1400 U/Min, Mengenautomatik und Aquastop — inklusive Anschluss-Service.",
+        "subtitle": "Frontlader mit 1400 U/Min, Mengenautomatik und Aquastop, inklusive Anschluss-Service.",
         "cta": "Waschmaschinen ansehen",
         "alt": "Waschmaschine in einem hellen Hauswirtschaftsraum"
       },
       "coffee": {
         "eyebrow": "KAFFEE-WOCHEN",
         "title": "Kaffeevollautomaten ab 219 €",
-        "subtitle": "Frisch gemahlen statt aufgewärmt — Modelle von De'Longhi, Siemens und Jura.",
+        "subtitle": "Frisch gemahlen statt aufgewärmt, Modelle von De'Longhi, Siemens und Jura.",
         "cta": "Kaffeemaschinen ansehen",
         "alt": "Espresso mit frischer Crema in einer Tasse"
       }
@@ -126,15 +126,15 @@
     }
   },
   "trust": {
-    "shippingTitle": "Standardversand: kostenlos (3–5 Tage)",
-    "shippingDetail": "Expressversand: 70 € (24–48 Stunden)",
+    "shippingTitle": "Standardversand: kostenlos (3-5 Tage)",
+    "shippingDetail": "Expressversand: 70 € (24-48 Stunden)",
     "returnTitle": "14 Tage Rückgaberecht",
     "returnDetail": "Ohne Angabe von Gründen",
     "serviceTitle": "Anschluss- & Montageservice",
     "serviceDetail": "Altgeräte-Mitnahme auf Wunsch"
   },
   "group": {
-    "metaTitle": "{label} – Geräte und Zubehör | BBC Best Box Containerhandel e.K.",
+    "metaTitle": "{label}: Geräte und Zubehör | BBC Best Box Containerhandel e.K.",
     "metaDescription": "Alle Kategorien aus dem Bereich {label} bei BBC Best Box Containerhandel e.K.: geprüfte Marken, faire Preise und schnelle Lieferung.",
     "intro": "Alle Kategorien aus dem Bereich {label} auf einen Blick.",
     "productCount": "{count, plural, =0 {Noch keine Artikel} one {# Artikel} other {# Artikel}}"
@@ -190,12 +190,12 @@
     "energyScale": "auf einer Skala von {best} (höchste Effizienz) bis {worst} (geringste Effizienz)",
     "energyDatasheet": "Produktdatenblatt",
     "vatNote": "inkl. MwSt., zzgl. Service & Versandkosten",
-    "inStock": "Vorrätig – Standardversand kostenlos (3–5 Tage)",
-    "outOfStock": "Auf Anfrage – kommt in 2-4 Wochen",
+    "inStock": "Vorrätig, Standardversand kostenlos (3-5 Tage)",
+    "outOfStock": "Auf Anfrage, kommt in 2-4 Wochen",
     "decreaseQuantity": "Anzahl um 1 verringern",
     "increaseQuantity": "Anzahl um 1 erhöhen",
     "addToCart": "In den Warenkorb",
-    "fastDelivery": "Standardversand kostenlos (3–5 Tage) · Express 70 € (24–48 Std.)",
+    "fastDelivery": "Standardversand kostenlos (3-5 Tage) · Express 70 € (24-48 Std.)",
     "warranty": "14 Tage Rückgaberecht ohne Angabe von Gründen",
     "vatOnly": "inkl. MwSt.",
     "galleryLabel": "Weitere Produktansichten",
@@ -210,7 +210,7 @@
     "emptyTitle": "Zu „{query}“ haben wir nichts gefunden",
     "emptyHint": "Prüfen Sie die Schreibweise oder suchen Sie mit einem allgemeineren Begriff, etwa nach der Marke oder der Geräteart.",
     "promptTitle": "Wonach suchen Sie?",
-    "promptHint": "Geben Sie mindestens zwei Zeichen ein — Marke, Modell oder Geräteart.",
+    "promptHint": "Geben Sie mindestens zwei Zeichen ein: Marke, Modell oder Geräteart.",
     "backToShop": "Zum Sortiment"
   },
   "reviews": {
@@ -218,10 +218,10 @@
     "count": "{count, plural, one {# Bewertung} other {# Bewertungen}}",
     "starsLabel": "{star} Sterne",
     "starsAria": "{rating} von 5 Sternen",
-    "listAria": "Kundenbewertungen, {count, plural, one {# Bewertung} other {# Bewertungen}} — zum Blättern scrollen",
-    "scrollHint": "{count, plural, one {# Bewertung} other {Alle # Bewertungen}} — im Feld scrollen",
+    "listAria": "Kundenbewertungen, {count, plural, one {# Bewertung} other {# Bewertungen}}, zum Blättern scrollen",
+    "scrollHint": "{count, plural, one {# Bewertung} other {Alle # Bewertungen}}, im Feld scrollen",
     "emptyTitle": "Für dieses Produkt gibt es noch keine Kundenbewertungen.",
-    "emptyHint": "Teilen Sie Ihre Erfahrung und schreiben Sie die erste Bewertung — sie hilft anderen bei der Entscheidung.",
+    "emptyHint": "Teilen Sie Ihre Erfahrung und schreiben Sie die erste Bewertung, sie hilft anderen bei der Entscheidung.",
     "editorial": "Redaktionelle Einschätzung: {rating} von 5",
     "writeTitle": "Bewertung schreiben",
     "formRatingLabel": "Ihre Bewertung",
@@ -250,7 +250,7 @@
   },
   "consent": {
     "title": "Live-Chat aktivieren?",
-    "body": "Für Warenkorb, Sitzung und Sprachwahl setzen wir technisch notwendige Cookies – dafür brauchen wir keine Einwilligung. Unser Live-Chat (Smartsupp s.r.o., Tschechische Republik) speichert zusätzlich eine Besucherkennung auf Ihrem Gerät. Nur so sehen wir, dass Sie da sind, und können Sie von uns aus ansprechen.",
+    "body": "Für Warenkorb, Sitzung und Sprachwahl setzen wir technisch notwendige Cookies, dafür brauchen wir keine Einwilligung. Unser Live-Chat (Smartsupp s.r.o., Tschechische Republik) speichert zusätzlich eine Besucherkennung auf Ihrem Gerät. Nur so sehen wir, dass Sie da sind, und können Sie von uns aus ansprechen.",
     "note": "Auch ohne Einwilligung erreichen Sie uns jederzeit über die Chat-Schaltfläche unten rechts. Ihre Wahl ändern Sie jederzeit im Fußbereich der Seite.",
     "privacyLink": "Datenschutzerklärung",
     "accept": "Akzeptieren",
@@ -258,9 +258,9 @@
   },
   "footer": {
     "logoAlt": "BBC Best Box Containerhandel e.K.",
-    "homeAriaLabel": "BBC Best Box Containerhandel e.K. – Startseite",
-    "deliveryTitle": "Standardversand: kostenlos (3–5 Tage)",
-    "deliveryDetail": "Expressversand: 70 € (24–48 Stunden)",
+    "homeAriaLabel": "BBC Best Box Containerhandel e.K., Startseite",
+    "deliveryTitle": "Standardversand: kostenlos (3-5 Tage)",
+    "deliveryDetail": "Expressversand: 70 € (24-48 Stunden)",
     "warrantyTitle": "14 Tage Rückgaberecht",
     "warrantyDetail": "Ohne Angabe von Gründen",
     "paymentTitle": "Sichere Zahlung",
@@ -313,8 +313,8 @@
     "total": "Gesamtsumme",
     "vatIncluded": "inkl. {rate} % MwSt. ({amount})",
     "vatNote": "Alle Preise inkl. gesetzlicher MwSt.",
-    "shippingStandardHint": "Der Standardversand ist kostenlos – ohne Mindestbestellwert.",
-    "shippingRule": "Standardversand kostenlos (3–5 Werktage), Expressversand 70,00 € (24–48 Stunden). Die Versandart wählen Sie an der Kasse.",
+    "shippingStandardHint": "Der Standardversand ist kostenlos, ohne Mindestbestellwert.",
+    "shippingRule": "Standardversand kostenlos (3-5 Werktage), Expressversand 70,00 € (24-48 Stunden). Die Versandart wählen Sie an der Kasse.",
     "deliveryTime": "Der Versand erfolgt nach Zahlungseingang.",
     "withdrawalHint": "Als Verbraucher haben Sie ein 14-tägiges Widerrufsrecht (§ 355 BGB). Einzelheiten in der Widerrufsbelehrung.",
     "toCheckout": "Zur Kasse",
@@ -389,11 +389,11 @@
     "shippingMethods": {
       "standard": {
         "label": "Standardversand",
-        "delay": "Lieferung in 3–5 Werktagen"
+        "delay": "Lieferung in 3-5 Werktagen"
       },
       "express": {
         "label": "Expressversand",
-        "delay": "Lieferung in 24–48 Stunden"
+        "delay": "Lieferung in 24-48 Stunden"
       }
     },
     "deliveryTitle": "Lieferung",
@@ -460,7 +460,7 @@
       "subtitle": "Ihre Bestellung ist bei uns eingegangen.",
       "orderNumber": "Bestellnummer",
       "orderDate": "Bestelldatum",
-      "emailNotice": "Bitte sehen Sie in Ihrem E-Mail-Postfach nach: Dort finden Sie alle Einzelheiten zu Ihrer Bestellung sowie unsere Bankverbindung für die Zahlung. Wenn Sie sofort Unterstützung brauchen, nutzen Sie den WhatsApp-Button unten links oder den Live-Chat unten rechts – damit erreichen Sie direkt einen Mitarbeiter unseres Kundenservice.",
+      "emailNotice": "Bitte sehen Sie in Ihrem E-Mail-Postfach nach: Dort finden Sie alle Einzelheiten zu Ihrer Bestellung sowie unsere Bankverbindung für die Zahlung. Wenn Sie sofort Unterstützung brauchen, nutzen Sie den WhatsApp-Button unten links oder den Live-Chat unten rechts, damit erreichen Sie direkt einen Mitarbeiter unseres Kundenservice.",
       "notFoundTitle": "Bestellung nicht gefunden",
       "notFoundText": "Der Link ist unvollständig oder abgelaufen. Bitte verwenden Sie den Link aus Ihrer Bestellbestätigung.",
       "itemsTitle": "Bestellte Artikel",
@@ -495,7 +495,7 @@
   },
   "wishlist": {
     "title": "Merkliste",
-    "intro": "Gemerkte Artikel bleiben in diesem Browser gespeichert — ohne Konto und ohne Anmeldung.",
+    "intro": "Gemerkte Artikel bleiben in diesem Browser gespeichert, ohne Konto und ohne Anmeldung.",
     "add": "Auf die Merkliste",
     "remove": "Von der Merkliste entfernen",
     "loading": "Merkliste wird geladen …",

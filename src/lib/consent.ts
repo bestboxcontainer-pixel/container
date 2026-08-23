@@ -8,7 +8,7 @@ import { useSyncExternalStore } from "react";
  *
  * UN SEUL SERVICE EST CONCERNÉ AUJOURD'HUI : le chat Smartsupp, qui pose une
  * identification de visiteur dès qu'il se charge. Le panier, la session, la
- * langue et la sécurité restent hors de ce mécanisme — ils relèvent du § 25
+ * langue et la sécurité restent hors de ce mécanisme, ils relèvent du § 25
  * Abs. 2 Nr. 2 TDDDG et ne se demandent pas.
  *
  * Le jour où un fragment posé depuis le back-office chargera une mesure
@@ -18,7 +18,7 @@ import { useSyncExternalStore } from "react";
  *
  * Le choix vit dans le navigateur, comme le panier et la liste de souhaits :
  * c'est la donnée du visiteur, elle n'a pas à faire un aller-retour serveur.
- * L'enregistrer est lui-même exempté de consentement — sans mémoire du refus,
+ * L'enregistrer est lui-même exempté de consentement, sans mémoire du refus,
  * il faudrait redemander à chaque page.
  */
 
@@ -73,7 +73,7 @@ function ecrireStockage(valeur: Consentement): void {
     else window.localStorage.setItem(CLE_CONSENTEMENT, valeur);
   } catch {
     // Stockage refusé : le choix ne vaudra que pour cette page. Tant pis pour
-    // le confort, jamais pour le respect du refus — rien ne se charge sans un
+    // le confort, jamais pour le respect du refus, rien ne se charge sans un
     // « accepte » en mémoire.
   }
 }
@@ -121,7 +121,7 @@ export function repondreConsentement(valeur: "accepte" | "refuse"): void {
   poser({ consentement: valeur, reglagesOuverts: false, hydrate: true });
 }
 
-/** Rouvre le bandeau — appelé depuis le lien « Cookie-Einstellungen ». */
+/** Rouvre le bandeau : appelé depuis le lien « Cookie-Einstellungen ». */
 export function ouvrirReglagesConsentement(): void {
   poser({ ...instantane, reglagesOuverts: true, hydrate: true });
 }

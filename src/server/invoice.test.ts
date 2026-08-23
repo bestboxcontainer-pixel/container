@@ -2,7 +2,7 @@
  * Tests du bloc bancaire de la facture et de la préparation des vignettes.
  *
  * L'enjeu : la facture d'une commande payée d'avance doit porter le compte sur
- * lequel virer et la référence à indiquer — c'est la pièce que le client passe
+ * lequel virer et la référence à indiquer : c'est la pièce que le client passe
  * à sa banque. Inversement, une facture déjà réglée, ou réglée autrement, ne
  * doit surtout pas réclamer un virement de plus.
  *
@@ -80,8 +80,8 @@ describe("Bloc bancaire de la facture", () => {
 });
 
 /**
- * Commande d'essai. Les désignations sont volontairement longues — elles tiennent
- * sur deux lignes — et l'adresse complète : c'est le cas défavorable, celui qui
+ * Commande d'essai. Les désignations sont volontairement longues, elles tiennent
+ * sur deux lignes : et l'adresse complète : c'est le cas défavorable, celui qui
  * décide de la pagination.
  */
 function commandeEssai(nbArticles: number, remiseCents: number): OrderRecord {

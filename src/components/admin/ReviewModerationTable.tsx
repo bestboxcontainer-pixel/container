@@ -170,7 +170,7 @@ export function ReviewModerationTable({ reviews }: { reviews: ReviewRecord[] }) 
                   <tr key={review.id} className="border-b border-border bg-muted/40 last:border-0">
                     <td colSpan={7} className="px-4 py-4">
                       <p className="mb-3 text-xs font-bold tracking-wide text-muted-foreground uppercase">
-                        Modifier l&apos;avis — {review.productName ?? review.productId}
+                        Modifier l&apos;avis: {review.productName ?? review.productId}
                       </p>
 
                       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

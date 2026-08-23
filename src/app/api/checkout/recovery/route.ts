@@ -8,8 +8,8 @@ import type { RecoveryStep } from "@/lib/checkoutRecovery";
 //
 // Deux appelants :
 //   - le tunnel de commande, dès que l'adresse e-mail est validée à l'étape
-//     « contact » — l'e-mail arrive alors dans le corps de la requête ;
-//   - le panier, à chaque ajout d'article — sans e-mail dans le corps, mais
+//     « contact » : l'e-mail arrive alors dans le corps de la requête ;
+//   - le panier, à chaque ajout d'article : sans e-mail dans le corps, mais
 //     pour un client connecté. Son adresse ne vient jamais du navigateur dans
 //     ce cas : elle est relue depuis sa session, la seule source qui fasse foi
 //     pour une adresse qu'il n'a pas retapée dans ce panier.
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
 
   // L'e-mail saisi dans le tunnel fait autorité s'il est valide ; sinon, pour
   // un appel du panier, seule la session d'un compte connecté peut fournir une
-  // adresse — jamais le corps de la requête, qu'un visiteur pourrait forger.
+  // adresse : jamais le corps de la requête, qu'un visiteur pourrait forger.
   const email = EMAIL_PATTERN.test(submitted)
     ? submitted
     : ((await getCurrentCustomer())?.email ?? "");

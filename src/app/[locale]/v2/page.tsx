@@ -25,7 +25,7 @@ import { HeroCarousel, type HeroSlide } from "@/components/HeroCarousel";
 // aucun contenu copié depuis le site de référence. Non listée dans le sitemap :
 // page de comparaison interne, pas encore un choix définitif.
 export const metadata: Metadata = {
-  title: "BBC Best Box Containerhandel e.K. — Entwurf B",
+  title: "BBC Best Box Containerhandel e.K., Entwurf B",
   description: "Zweiter Entwurf der Startseite, näher an der Struktur von Referenzseiten aus der Containerbranche.",
   robots: { index: false, follow: false },
 };
@@ -38,10 +38,10 @@ const TRUST_BADGES = [
 ] as const;
 
 const FINISH_LINES = [
-  { id: "basic", title: "Basic-Line", text: "Verzinkter Stahlcontainer, funktional und robust — die wirtschaftliche Grundausstattung." },
+  { id: "basic", title: "Basic-Line", text: "Verzinkter Stahlcontainer, funktional und robust, die wirtschaftliche Grundausstattung." },
   { id: "farb", title: "Farb-Line", text: "Außenanstrich in einer RAL-Farbe Ihrer Wahl, passend zu Firmen- oder Baustellendesign." },
   { id: "natur", title: "Natur-Line", text: "Holzverkleidung an Fassade oder Innenraum für eine warme, natürliche Optik." },
-  { id: "office", title: "Office-Line", text: "Ausgestattet mit Bodenbelag, Elektrik und Klimatisierung — startklar als Büro." },
+  { id: "office", title: "Office-Line", text: "Ausgestattet mit Bodenbelag, Elektrik und Klimatisierung, startklar als Büro." },
   { id: "comfort", title: "Comfort-Line", text: "Gedämmt und möbliert für Wohn- und Pausennutzung über längere Zeiträume." },
   { id: "signature", title: "Signature-Line", text: "Großzügige Fensterfronten und hochwertige Innenausstattung für repräsentative Zwecke." },
 ] as const;
@@ -63,9 +63,9 @@ const CATEGORIES = [
 ] as const;
 
 const DIMENSIONS = [
-  { label: "Länge", value: "3 – 12 m" },
-  { label: "Breite", value: "2,4 – 3,0 m" },
-  { label: "Höhe", value: "2,6 – 3,0 m" },
+  { label: "Länge", value: "3 bis 12 m" },
+  { label: "Breite", value: "2,4 bis 3,0 m" },
+  { label: "Höhe", value: "2,6 bis 3,0 m" },
 ] as const;
 
 const PROJECT_TYPES = [
@@ -90,7 +90,7 @@ export default function HomePageV2() {
               BBC Best Box Containerhandel e.K.
             </p>
             <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-black leading-tight text-white sm:text-5xl">
-              Ihr Partner für Container — Verkauf, Vermietung, Sonderanfertigung
+              Ihr Partner für Container: Verkauf, Vermietung, Sonderanfertigung
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-white/75">
               Aus eigenem Bestand in Großensee beliefern wir Kunden in ganz Deutschland mit
@@ -133,7 +133,7 @@ export default function HomePageV2() {
             <h2 className="text-2xl font-black text-foreground sm:text-3xl">Ausstattungslinien</h2>
           </div>
           <p className="mt-3 max-w-2xl text-foreground/70">
-            Vom funktionalen Basismodell bis zur repräsentativen Ausführung — wählen Sie die
+            Vom funktionalen Basismodell bis zur repräsentativen Ausführung, wählen Sie die
             passende Linie für Ihren Container.
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -212,7 +212,7 @@ export default function HomePageV2() {
             <h2 className="text-2xl font-black text-white sm:text-3xl">Ein- und mehrgeschossige Anlagen</h2>
             <p className="mt-3 max-w-xl text-white/70">
               Container lassen sich einzeln, nebeneinander oder gestapelt zu größeren Anlagen
-              kombinieren — von 2 bis zu 5 Modulen.
+              kombinieren: von 2 bis zu 5 Modulen.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               {[1, 2, 3, 4, 5].map((modules) => (

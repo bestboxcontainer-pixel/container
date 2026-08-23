@@ -3,7 +3,7 @@ import { routing } from "@/i18n/routing";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestbox-containerhandel.de";
 
-/** L'allemand vit à la racine, l'anglais sous /en — voir src/i18n/routing.ts. */
+/** L'allemand vit à la racine, l'anglais sous /en, voir src/i18n/routing.ts. */
 function urlFor(locale: string): string {
   const prefix = locale === routing.defaultLocale ? "" : `/${locale}`;
   return `${SITE_URL}${prefix}` || SITE_URL;

@@ -136,11 +136,11 @@ export const categoryPages: CategoryPageData[] = [
     ],
     {
       intro:
-        "Vom klassischen Kaffeevollautomaten bis zur kompakten Siebträgermaschine – bei BBC Best Box Containerhandel e.K. finden Sie die passende Lösung für Ihren perfekten Kaffeegenuss.",
+        "Vom klassischen Kaffeevollautomaten bis zur kompakten Siebträgermaschine, bei BBC Best Box Containerhandel e.K. finden Sie die passende Lösung für Ihren perfekten Kaffeegenuss.",
       sections: [
         {
           heading: "Kaffeevollautomat oder Siebträgermaschine?",
-          body: "Vollautomaten übernehmen Mahlen, Brühen und Milchaufschäumen auf Knopfdruck – ideal für den Alltag. Wer Wert auf volle Kontrolle über Mahlgrad, Brühdruck und Crema legt, greift zur klassischen Siebträgermaschine.",
+          body: "Vollautomaten übernehmen Mahlen, Brühen und Milchaufschäumen auf Knopfdruck, ideal für den Alltag. Wer Wert auf volle Kontrolle über Mahlgrad, Brühdruck und Crema legt, greift zur klassischen Siebträgermaschine.",
         },
         {
           heading: "Worauf Sie beim Kauf achten sollten",
@@ -148,7 +148,7 @@ export const categoryPages: CategoryPageData[] = [
         },
         {
           heading: "Beliebte Marken im Bereich Kaffeemaschinen",
-          body: "De'Longhi, Siemens, Jura, Krups, Philips und Melitta zählen zu den gefragtesten Herstellern – bei uns finden Sie aktuelle Modelle aller Marken im direkten Vergleich.",
+          body: "De'Longhi, Siemens, Jura, Krups, Philips und Melitta zählen zu den gefragtesten Herstellern, bei uns finden Sie aktuelle Modelle aller Marken im direkten Vergleich.",
         },
       ],
       closing:
@@ -223,7 +223,7 @@ export const categoryPages: CategoryPageData[] = [
     ],
     {
       intro:
-        "Saubere Wäsche, geringer Energieverbrauch und leiser Betrieb – unsere Waschmaschinen überzeugen mit moderner Technik für jeden Haushalt.",
+        "Saubere Wäsche, geringer Energieverbrauch und leiser Betrieb, unsere Waschmaschinen überzeugen mit moderner Technik für jeden Haushalt.",
       sections: [
         {
           heading: "Frontlader oder Toplader?",
@@ -309,7 +309,7 @@ export const categoryPages: CategoryPageData[] = [
     ],
     {
       intro:
-        "Ob vollintegrierbar oder freistehend – ein guter Geschirrspüler spart Zeit, Wasser und Energie im Vergleich zum Abwasch von Hand.",
+        "Ob vollintegrierbar oder freistehend: ein guter Geschirrspüler spart Zeit, Wasser und Energie im Vergleich zum Abwasch von Hand.",
       sections: [
         {
           heading: "Vollintegrierbar, teilintegrierbar oder freistehend?",
@@ -395,7 +395,7 @@ export const categoryPages: CategoryPageData[] = [
     ],
     {
       intro:
-        "Von klassischen Bodenstaubsaugern über wendige Akkusauger bis zum selbstständigen Saugroboter – wir haben die passende Lösung für jeden Boden.",
+        "Von klassischen Bodenstaubsaugern über wendige Akkusauger bis zum selbstständigen Saugroboter, wir haben die passende Lösung für jeden Boden.",
       sections: [
         {
           heading: "Beutellos, mit Beutel oder Saugroboter?",
@@ -480,7 +480,7 @@ export const categoryPages: CategoryPageData[] = [
     ],
     {
       intro:
-        "Vom Einbaubackofen mit Pyrolyse-Selbstreinigung bis zum kompletten Herd-Set – für jede Küche die passende Wärmequelle.",
+        "Vom Einbaubackofen mit Pyrolyse-Selbstreinigung bis zum kompletten Herd-Set, für jede Küche die passende Wärmequelle.",
       sections: [
         {
           heading: "Einbaubackofen oder Herd-Set?",
@@ -566,7 +566,7 @@ export const categoryPages: CategoryPageData[] = [
     ],
     {
       intro:
-        "Kneten, Rühren, Mixen und mehr – eine Küchenmaschine erleichtert die tägliche Zubereitung in der Küche erheblich.",
+        "Kneten, Rühren, Mixen und mehr: eine Küchenmaschine erleichtert die tägliche Zubereitung in der Küche erheblich.",
       sections: [
         {
           heading: "Kompakte Küchenmaschine oder Profi-Modell?",
@@ -652,7 +652,7 @@ export const categoryPages: CategoryPageData[] = [
     ],
     {
       intro:
-        "Angenehme Temperaturen an heißen Tagen – mit unseren Split- und mobilen Klimageräten behalten Sie in jedem Raum einen kühlen Kopf.",
+        "Angenehme Temperaturen an heißen Tagen: mit unseren Split- und mobilen Klimageräten behalten Sie in jedem Raum einen kühlen Kopf.",
       sections: [
         {
           heading: "Mobiles Klimagerät oder fest installierte Split-Anlage?",
@@ -738,7 +738,7 @@ export const categoryPages: CategoryPageData[] = [
     ],
     {
       intro:
-        "Von der Kamera bis zur Akkulaufzeit – bei uns finden Sie aktuelle Smartphones aller großen Hersteller im Vergleich.",
+        "Von der Kamera bis zur Akkulaufzeit: bei uns finden Sie aktuelle Smartphones aller großen Hersteller im Vergleich.",
       sections: [
         {
           heading: "Welches Betriebssystem passt zu mir?",
@@ -910,7 +910,7 @@ export const categoryPages: CategoryPageData[] = [
     ],
     {
       intro:
-        "OLED, QLED oder LED – für echtes Kino-Feeling zu Hause bieten wir aktuelle Fernseher aller gängigen Bildschirmtechnologien.",
+        "OLED, QLED oder LED: für echtes Kino-Feeling zu Hause bieten wir aktuelle Fernseher aller gängigen Bildschirmtechnologien.",
       sections: [
         {
           heading: "OLED, QLED oder LED?",
@@ -996,7 +996,7 @@ export const categoryPages: CategoryPageData[] = [
     ],
     {
       intro:
-        "Ob Notebook für unterwegs oder leistungsstarker Desktop-PC – bei uns finden Sie die passende Ausstattung für Arbeit, Kreativität und Gaming.",
+        "Ob Notebook für unterwegs oder leistungsstarker Desktop-PC, bei uns finden Sie die passende Ausstattung für Arbeit, Kreativität und Gaming.",
       sections: [
         {
           heading: "Notebook oder Desktop-PC?",
@@ -1082,7 +1082,7 @@ export const categoryPages: CategoryPageData[] = [
     ],
     {
       intro:
-        "Fitness-Tracking, Benachrichtigungen und smarte Funktionen direkt am Handgelenk – für einen aktiven und vernetzten Alltag.",
+        "Fitness-Tracking, Benachrichtigungen und smarte Funktionen direkt am Handgelenk, für einen aktiven und vernetzten Alltag.",
       sections: [
         {
           heading: "Smartwatch oder Fitness-Tracker?",

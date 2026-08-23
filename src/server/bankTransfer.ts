@@ -4,7 +4,7 @@
  * Ces quatre lignes et les deux textes d'instruction sont ce que le client lit
  * après avoir commandé, sur la page de confirmation comme dans son e-mail. Ils
  * étaient écrits en dur dans la page ; ils vivent maintenant dans une ligne de
- * la table générique `Setting`, modifiable depuis /admin/payments — même
+ * la table générique `Setting`, modifiable depuis /admin/payments, même
  * mécanique que la configuration du prestataire de paiement, pas de modèle
  * dédié pour six champs.
  *

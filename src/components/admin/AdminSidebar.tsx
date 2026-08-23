@@ -68,7 +68,7 @@ export function AdminSidebar({
       title: "Boutique",
       entries: [
         // « Clients » a été retiré : la liste ne faisait que redonner ce que la
-        // fiche de commande affiche déjà — nom, adresse électronique,
+        // fiche de commande affiche déjà : nom, adresse électronique,
         // téléphone, adresses de facturation et de livraison. Deux entrées de
         // menu pour la même information obligent à chercher où regarder.
         { label: "Commandes", href: "/admin/orders", icon: Receipt },
@@ -195,7 +195,7 @@ export function AdminSidebar({
       {/* Barre mobile : la même navigation, ouverte par-dessus le contenu */}
       <div className="sticky top-0 z-40 flex items-center justify-between border-b border-border bg-secondary px-4 py-3 text-secondary-foreground lg:hidden">
         <Link href="/admin" className="text-sm font-black">
-          BBC Best Box Containerhandel e.K. — Admin
+          BBC Best Box Containerhandel e.K., Admin
         </Link>
         <button
           type="button"

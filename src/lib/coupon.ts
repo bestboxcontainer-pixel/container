@@ -2,7 +2,7 @@
  * Calcul d'une remise de coupon.
  *
  * Ce module ne connaît ni la base ni le réseau : il prend un coupon déjà lu et
- * un panier déjà chiffré, et rend la remise. C'est volontaire — la même
+ * un panier déjà chiffré, et rend la remise. C'est volontaire, la même
  * fonction sert à l'aperçu affiché au client et au montant réellement facturé,
  * de sorte qu'aucun des deux ne puisse dériver de l'autre.
  *

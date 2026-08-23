@@ -13,7 +13,7 @@
  * Les montants archivés dans la commande sont TTC, la TVA y étant *contenue*
  * (Preisangabenverordnung § 3). Le décompte présente donc des lignes TTC qui
  * s'additionnent réellement jusqu'au total, et la taxe est indiquée comme
- * « enthaltene USt. » — jamais « zzgl. », qui signifierait qu'on l'ajoute.
+ * « enthaltene USt. », jamais « zzgl. », qui signifierait qu'on l'ajoute.
  *
  * pdf-lib n'embarque que les polices WinAnsi : tout caractère hors de ce jeu
  * doit être translittéré avant écriture, sinon la génération échoue.
@@ -54,7 +54,7 @@ const COL_PREIS = 462; // bord droit
  * s'adapte, du confortable au serré, pendant que le reste garde ses proportions.
  *
  * Les paliers sont rangés du plus lisible au plus compact. On retient le premier
- * qui entre dans la place disponible — jamais un cran plus serré que nécessaire.
+ * qui entre dans la place disponible : jamais un cran plus serré que nécessaire.
  */
 interface Densite {
   /** Côté de la vignette produit, en points. Zéro la supprime. */
@@ -68,7 +68,7 @@ interface Densite {
 }
 
 /**
- * Le premier palier est le cas courant — une commande d'un à trois articles — et
+ * Le premier palier est le cas courant, une commande d'un à trois articles, et
  * c'est celui qu'on lit sur un téléphone, où la facture s'ouvre en pleine
  * largeur d'écran. Il est donc composé large. Les paliers suivants ne servent
  * qu'aux commandes fournies, où la lisibilité cède le pas au fait de tenir sur
@@ -118,7 +118,7 @@ const HAUTEUR_PIED = 135;
  */
 function winAnsi(valeur: string): string {
   return (valeur ?? "")
-    .replace(/[—–]/g, "-")
+    .replace(/[, , ]/g, "-")
     .replace(/[“”„]/g, '"')
     .replace(/[‘’‚]/g, "'")
     .replace(/…/g, "...")
@@ -203,7 +203,7 @@ function couperEnLignes(
  * Adresse de la vignette à télécharger.
  *
  * Les visuels sont livrés par Cloudinary en `f_auto`, c'est-à-dire en AVIF ou
- * WebP selon le client — deux formats que pdf-lib ne sait pas embarquer. On force
+ * WebP selon le client : deux formats que pdf-lib ne sait pas embarquer. On force
  * donc le JPEG et une largeur de 160 px, largement suffisante pour une case de
  * 46 points. Une image servie depuis un chemin local est ignorée : la facture
  * est composée hors requête HTTP, sans origine à laquelle la rattacher.
@@ -233,7 +233,7 @@ function formatImage(octets: Uint8Array): "png" | "jpg" | null {
 /**
  * Télécharge une vignette. Tout échec rend `null` : réseau coupé, image
  * supprimée, format exotique, délai dépassé. La facture part alors avec une
- * case vide — une pièce jointe manquante serait bien pire qu'une photo
+ * case vide : une pièce jointe manquante serait bien pire qu'une photo
  * manquante.
  */
 async function chargerVignette(source: string): Promise<Uint8Array | null> {
@@ -257,7 +257,7 @@ async function chargerVignette(source: string): Promise<Uint8Array | null> {
  * Uniquement pour une commande dont le paiement n'est pas encore arrivé : le
  * client règle sur pièce, il ne doit pas avoir à rouvrir son e-mail pour
  * retrouver l'IBAN. Une commande déjà payée, ou réglée à réception (facture,
- * contre-remboursement), n'a rien à faire d'un appel à virer — la liste rendue
+ * contre-remboursement), n'a rien à faire d'un appel à virer, la liste rendue
  * est alors vide.
  *
  * Le texte d'instruction, lui, reste sur la page de confirmation et dans
@@ -552,7 +552,7 @@ export async function buildInvoicePdf(
   // Remise du coupon, déduite entre le sous-total et la livraison. Sans cette
   // ligne, une facture remisée ne s'additionnait plus : le client lisait un
   // sous-total et un port dont la somme dépassait le total facturé, ce qu'une
-  // facture ne peut pas se permettre. Le code est nommé à côté du montant —
+  // facture ne peut pas se permettre. Le code est nommé à côté du montant
   // c'est la pièce qui justifie la déduction en cas de contrôle.
   if (order.discountCents > 0) {
     ligneTotal(

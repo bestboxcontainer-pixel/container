@@ -41,8 +41,8 @@ function confirmationUrl(order: OrderRecord): string {
  * rend l'adresse vers laquelle envoyer le navigateur.
  *
  * Ne lève jamais : la commande est déjà écrite et en attente de règlement. Un
- * prestataire injoignable doit la laisser payable autrement — virement,
- * facture — plutôt que de faire échouer une commande valable sous les yeux du
+ * prestataire injoignable doit la laisser payable autrement, virement,
+ * facture : plutôt que de faire échouer une commande valable sous les yeux du
  * client.
  */
 async function startOnlinePayment(order: OrderRecord): Promise<string | undefined> {

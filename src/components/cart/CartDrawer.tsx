@@ -5,9 +5,23 @@ import { useEffect, useId, useRef } from "react";
 import type { ReactNode } from "react";
 import { Minus, Plus, ShoppingCart, Trash2, Truck, X } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { useCart } from "@/components/cart/CartProvider";
 import { formatCents, MAX_QUANTITY_PER_LINE } from "@/lib/cart";
+
+/**
+ * Pages où l'onglet flottant ne doit pas apparaître.
+ *
+ * Sur le panier et à la caisse, il n'ouvre qu'un résumé de ce que la page
+ * montre déjà en plus grand, et il se posait par-dessus la carte de
+ * récapitulatif : à droite, au milieu de la hauteur, exactement là où tombe la
+ * ligne du total. Masquer un montant pendant que l'acheteur le vérifie est le
+ * pire endroit possible pour un élément flottant.
+ *
+ * `usePathname` de `@/i18n/navigation` rend le chemin sans le préfixe de
+ * langue : une seule entrée par page couvre donc l'allemand et l'anglais.
+ */
+const PAGES_SANS_ONGLET = ["/warenkorb", "/kasse"];
 
 // Panier latéral.
 //
@@ -54,6 +68,8 @@ export function CartDrawer({ paymentSlot }: { paymentSlot?: ReactNode }) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const titleId = useId();
+  const chemin = usePathname();
+  const ongletMasque = PAGES_SANS_ONGLET.includes(chemin);
 
   const close = closeDrawer;
   useDismissable(open, close);
@@ -77,7 +93,7 @@ export function CartDrawer({ paymentSlot }: { paymentSlot?: ReactNode }) {
   // Vider le panier depuis le tiroir le fait disparaître. Sans cette remise à
   // zéro, `open` resterait vrai : le défilement de la page resterait bloqué et
   // le tiroir se rouvrirait seul au prochain ajout. L'ajustement se fait pendant
-  // le rendu — React relance aussitôt, avant tout affichage et tout effet.
+  // le rendu : React relance aussitôt, avant tout affichage et tout effet.
   if (open && count === 0) closeDrawer();
 
   // Rien à montrer tant que le panier est vide : ni bouton, ni panneau.
@@ -85,27 +101,29 @@ export function CartDrawer({ paymentSlot }: { paymentSlot?: ReactNode }) {
 
   return (
     <>
-      <button
-        ref={triggerRef}
-        type="button"
-        onClick={openDrawer}
-        aria-haspopup="dialog"
-        aria-expanded={open}
-        className="fixed top-1/2 right-0 z-40 flex -translate-y-1/2 items-center gap-2 rounded-l-sm bg-primary py-3 pr-3 pl-3.5 text-primary-foreground shadow-lg transition-all hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-safe:hover:pr-4"
-      >
-        <span className="relative">
-          <ShoppingCart className="h-5 w-5" aria-hidden />
-          <span className="absolute -top-2 -right-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-white px-1 text-[10px] leading-none font-black text-primary">
-            {count > 99 ? "99+" : count}
+      {!ongletMasque && (
+        <button
+          ref={triggerRef}
+          type="button"
+          onClick={openDrawer}
+          aria-haspopup="dialog"
+          aria-expanded={open}
+          className="fixed top-1/2 right-0 z-40 flex -translate-y-1/2 items-center gap-2 rounded-l-xl bg-primary py-3 pr-3 pl-3.5 text-primary-foreground shadow-lg transition-all hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-safe:hover:pr-4"
+        >
+          <span className="relative">
+            <ShoppingCart className="h-5 w-5" aria-hidden />
+            <span className="absolute -top-2 -right-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-white px-1 text-[10px] leading-none font-black text-primary">
+              {count > 99 ? "99+" : count}
+            </span>
           </span>
-        </span>
-        <span className="sr-only">
-          {t("indicatorWithItems", { count, total: formatCents(totals.totalCents) })}
-        </span>
-        <span className="hidden text-sm font-black lg:inline" aria-hidden>
-          {formatCents(totals.totalCents)}
-        </span>
-      </button>
+          <span className="sr-only">
+            {t("indicatorWithItems", { count, total: formatCents(totals.totalCents) })}
+          </span>
+          <span className="hidden text-sm font-black lg:inline" aria-hidden>
+            {formatCents(totals.totalCents)}
+          </span>
+        </button>
+      )}
 
       {open && (
         <div className="fixed inset-0 z-50">

@@ -30,7 +30,7 @@ export default async function AdminPaymentsPage() {
       {/* Deux couches à ne pas confondre : la table ci-dessus décide de ce que
           le client VOIT au moment de payer ; le bloc ci-dessous décide de qui
           ENCAISSE. Un moyen de paiement peut très bien être affiché sans être
-          rattaché à un prestataire — c'est le cas du virement. */}
+          rattaché à un prestataire : c'est le cas du virement. */}
       <div className="mt-10">
         <h2 className="mb-1 text-lg font-black text-foreground">
           Paiement en ligne (carte bancaire)

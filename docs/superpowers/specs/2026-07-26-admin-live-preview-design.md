@@ -26,7 +26,7 @@ client et se met à jour à chaque frappe. Bureau uniquement dans un premier tem
 Hors périmètre : version mobile du panneau, prévisualisation des autres formulaires
 (univers, méthodes de paiement, utilisateurs).
 
-## Partie 1 — Upload Cloudinary dans le formulaire catégorie
+## Partie 1 : Upload Cloudinary dans le formulaire catégorie
 
 `ImageUploadField` existe déjà et fait le travail : envoi vers `/api/admin/upload`, qui pousse
 sur Cloudinary et retombe sur un stockage local si les clés manquent. Le formulaire produit
@@ -36,7 +36,7 @@ Le champ texte « Chemin de l'image » de `CategoryForm` est remplacé par ce co
 modification côté API ni côté base. Le champ texte reste accessible dans le composant, à côté du
 bouton d'envoi, donc coller une URL existante reste possible.
 
-## Partie 2 — Panneau de prévisualisation
+## Partie 2 : Panneau de prévisualisation
 
 ### Contrainte
 
@@ -49,18 +49,18 @@ Le back-office vit hors du segment `[locale]` : ces composants ne peuvent pas y 
 Trois composants autonomes dans `src/components/admin/`, qui reprennent le balisage et les
 classes Tailwind du site public sans aucune de ces dépendances :
 
-- `PreviewImage` — une image avec ses états vides : « Aucune image » quand la valeur est
+- `PreviewImage` : une image avec ses états vides : « Aucune image » quand la valeur est
   absente, « Aperçu indisponible » quand le chargement échoue. Rendu en `unoptimized` pour
   accepter n'importe quelle source pendant la saisie.
-- `CategoryPreview` — adresse simulée, fil d'ariane, en-tête (image, libellé, description),
+- `CategoryPreview` : adresse simulée, fil d'ariane, en-tête (image, libellé, description),
   guide d'achat (introduction, sections, conclusion).
-- `ProductPreview` — deux vues commutables : « Fiche produit » (galerie, marque, nom,
+- `ProductPreview`: deux vues commutables : « Fiche produit » (galerie, marque, nom,
   description courte, ancien prix, prix, badge, disponibilité, caractéristiques) et
   « Carte en liste » (le rendu de `ProductCard`).
 
 Les libellés figés du site sont repris en allemand depuis `src/messages/de.json` pour rester
-fidèles : « Start », « {label} bei Hausgeräte Pfeffer », « Vorrätig – Lieferung in 1-3
-Werktagen », « Auf Anfrage – kommt in 2-4 Wochen », « Ursprünglicher Preis ».
+fidèles : « Start », « {label} bei Hausgeräte Pfeffer », « Vorrätig, Lieferung in 1-3
+Werktagen », « Auf Anfrage : kommt in 2-4 Wochen », « Ursprünglicher Preis ».
 
 Écarté : envelopper le panneau dans `NextIntlClientProvider` avec de faux contextes panier et
 liste d'envies. Plus fidèle, mais une plomberie fragile qui lierait le back-office aux
@@ -84,7 +84,7 @@ gauche, panneau `sticky top-6` à droite, `hidden xl:block`. Le conteneur du bac
 - Produit sans image : l'image de la catégorie prend le relais, comme sur la boutique.
 - Champ vide : mention grisée « (non renseigné) » plutôt qu'un trou dans la mise en page.
 - Stock à zéro : « Auf Anfrage ». Stock sous le seuil d'alerte : mention de stock faible.
-- Note hors de l'intervalle 0–5 ou non numérique : l'étoile n'est pas affichée.
+- Note hors de l'intervalle 0-5 ou non numérique : l'étoile n'est pas affichée.
 
 ## Vérification
 

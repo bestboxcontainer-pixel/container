@@ -14,13 +14,13 @@ import { describe, it } from "node:test";
 import { classeCoherente, echelleEnergie } from "./energieskala";
 
 describe("echelleEnergie", () => {
-  it("donne l'échelle A–G aux familles rééchelonnées en 2021", () => {
+  it("donne l'échelle A: G aux familles rééchelonnées en 2021", () => {
     for (const slug of ["waschmaschinen", "geschirrspueler", "fernseher", "smartphones"]) {
       assert.deepEqual(echelleEnergie(slug), { meilleure: "A", pire: "G" }, slug);
     }
   });
 
-  it("garde l'échelle A+++–D pour les fours et les climatiseurs", () => {
+  it("garde l'échelle A+++: D pour les fours et les climatiseurs", () => {
     for (const slug of ["backoefen-herde", "klimageraete"]) {
       assert.deepEqual(echelleEnergie(slug), { meilleure: "A+++", pire: "D" }, slug);
     }
@@ -43,7 +43,7 @@ describe("classeCoherente", () => {
   const aG = { meilleure: "A", pire: "G" } as const;
   const historique = { meilleure: "A+++", pire: "D" } as const;
 
-  it("accepte une lettre simple sur l'échelle A–G", () => {
+  it("accepte une lettre simple sur l'échelle A: G", () => {
     for (const classe of ["A", "B", "C", "D", "E", "F", "G"]) {
       assert.equal(classeCoherente(classe, aG), true, classe);
     }

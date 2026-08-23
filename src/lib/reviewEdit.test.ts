@@ -3,7 +3,7 @@
  *
  * L'enjeu : cet écran est le seul endroit où le contenu d'un avis publié peut
  * changer après coup. Trop permissif, il laisse écrire ce qu'un visiteur
- * n'aurait pas pu déposer — et un avis retouché reste un avis affiché à des
+ * n'aurait pas pu déposer : et un avis retouché reste un avis affiché à des
  * acheteurs.
  *
  * Lancer avec : npm test

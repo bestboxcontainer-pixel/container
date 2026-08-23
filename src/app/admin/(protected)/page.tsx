@@ -154,9 +154,9 @@ export default async function AdminDashboardPage() {
   const PRICE_STEPS = [20000, 50000, 100000, 150000];
   const priceBuckets: PriceBucket[] = [
     { label: "moins de 200 €", count: 0 },
-    { label: "200–499 €", count: 0 },
-    { label: "500–999 €", count: 0 },
-    { label: "1 000–1 499 €", count: 0 },
+    { label: "200-499 €", count: 0 },
+    { label: "500-999 €", count: 0 },
+    { label: "1 000-1 499 €", count: 0 },
     { label: "1 500 € et plus", count: 0 },
   ];
   for (const product of products) {

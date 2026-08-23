@@ -254,7 +254,7 @@ type Mark = ComponentType;
  *
  * La correspondance se fait sur la clé, puis sur le nom du pictogramme lucide :
  * un moyen créé à la main avec l'icône « credit-card » montre donc quand même
- * les logos des cartes. Retourne null quand rien n'est reconnu — l'appelant
+ * les logos des cartes. Retourne null quand rien n'est reconnu, l'appelant
  * retombe alors sur le pictogramme.
  */
 export function brandMarksFor(key: string, icon: string): Mark[] | null {

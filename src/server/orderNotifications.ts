@@ -15,7 +15,7 @@
  * Ces messages sont transactionnels : ils ne tiennent pas compte de la table
  * EmailSuppression, qui ne concerne que les campagnes commerciales. Un client
  * désabonné de la newsletter doit malgré tout recevoir la confirmation de la
- * commande qu'il vient de passer — c'est une obligation contractuelle
+ * commande qu'il vient de passer : c'est une obligation contractuelle
  * (§ 312i al. 1 nº 3 BGB), pas de la publicité.
  */
 
@@ -40,7 +40,7 @@ function isMailDevFallback(): boolean {
  * Adresses du vendeur, dans l'ordre de priorité suivant.
  *
  * 1. ORDER_NOTIFICATION_EMAILS, si elle est renseignée : liste explicite,
- *    séparée par des virgules. Elle fait autorité seule — c'est le moyen de
+ *    séparée par des virgules. Elle fait autorité seule, c'est le moyen de
  *    router les commandes vers une boîte dédiée (ventes@, service@) sans
  *    toucher au code.
  * 2. Sinon : la boîte de la boutique (ADMIN_EMAIL) et les comptes du
@@ -119,7 +119,7 @@ async function logToOrder(orderId: string, note: string): Promise<void> {
 export async function sendOrderEmails(order: OrderRecord): Promise<void> {
   if (isMailDevFallback()) {
     console.info(
-      `[bestellung] ${order.orderNumber} : aucun SMTP configuré — confirmation vers ${order.email} et notification vendeur non envoyées.`,
+      `[bestellung] ${order.orderNumber} : aucun SMTP configuré, confirmation vers ${order.email} et notification vendeur non envoyées.`,
     );
     return;
   }

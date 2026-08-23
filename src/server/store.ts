@@ -564,14 +564,14 @@ function toViewCategory(
 /**
  * Catalogue complet, mis en cache sous le tag du catalogue.
  *
- * C'est la lecture la plus lourde du projet — toutes les catégories, tous leurs
- * produits actifs — et presque chaque page de la boutique s'en sert. Sans
+ * C'est la lecture la plus lourde du projet : toutes les catégories, tous leurs
+ * produits actifs : et presque chaque page de la boutique s'en sert. Sans
  * cache, le build la rejouait pour chacune des 919 pages, à quinze secondes
  * l'appel contre Neon. Le tag est purgé par `invaliderCatalogue()` à chaque
  * écriture du back-office ; `revalidate` n'est qu'un garde-fou si une écriture
  * oubliait de le faire.
  *
- * La valeur renvoyée est intégralement sérialisable — que des chaînes, nombres
+ * La valeur renvoyée est intégralement sérialisable, que des chaînes, nombres
  * et booléens, les dates de promotion étant déjà converties en ISO par
  * `toViewProduct`. C'est la condition pour passer par `unstable_cache` : une
  * `Map` ou un `Date` en ressortirait dénaturé.
@@ -631,7 +631,7 @@ export async function getCategoryPage(
  * Fiche produit. Passe par le catalogue, donc hérite des promotions de campagne
  * sans avoir à les rappliquer : un seul endroit décide du prix affiché.
  *
- * C'est bien `getCategoryPages()` — la version mise en cache — et non
+ * C'est bien `getCategoryPages()`, la version mise en cache, et non
  * `getCategoryPage()`. Les fiches sont composées à chaque visite depuis que le
  * build ne les pré-rend plus ; une lecture directe en base ferait payer à Neon
  * une requête par consultation, soit précisément le trafic que l'on cherchait à
@@ -660,7 +660,7 @@ export function getRelatedProducts(
 }
 
 /**
- * Produits d'une liste d'identifiants, vus par la boutique — donc remises de
+ * Produits d'une liste d'identifiants, vus par la boutique, donc remises de
  * campagne comprises. Sert à la page d'action, qui connaît sa sélection par
  * identifiants et non par catégorie.
  *

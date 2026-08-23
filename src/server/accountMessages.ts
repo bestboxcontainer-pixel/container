@@ -6,7 +6,7 @@ import { PASSWORD_MIN_LENGTH, type AccountErrorCode } from "@/server/customers";
  *
  * La boutique est allemande : `error` porte le message allemand, seul texte
  * qu'un appelant brut (curl, intégration) verra. L'interface, elle, traduit à
- * partir de `code` via le namespace « account » — l'anglais est donc complet
+ * partir de `code` via le namespace « account », l'anglais est donc complet
  * sans dupliquer les libellés ici.
  *
  * Aucun message ne distingue « adresse inconnue » de « mot de passe faux » :

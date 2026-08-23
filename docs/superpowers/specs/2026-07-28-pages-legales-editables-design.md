@@ -9,7 +9,7 @@ Les onze pages légales et informatives (`impressum`, `agb`, `datenschutz`,
 `widerruf`, `versand`, `zahlungsarten`, `retoure`, `elektroaltgeraete`, `faq`,
 `ueber-uns`, `kontakt`) sont écrites en dur dans `src/content/legal/de.ts` et
 `src/content/legal/en.ts`. Elles portent les informations les plus sensibles du
-site — raison sociale, adresse, gérant, registre du commerce, numéro de TVA,
+site : raison sociale, adresse, gérant, registre du commerce, numéro de TVA,
 numéro WEEE, conditions de vente. Les corriger demande aujourd'hui un
 développeur et un déploiement.
 
@@ -67,10 +67,10 @@ pendant qu'on corrige une coquille.
 
 - Entrée « Pages & mentions légales » dans la section Système de la barre
   latérale.
-- `/admin/pages` — liste des onze pages : titre, badge *Personnalisée* /
+- `/admin/pages` : liste des onze pages : titre, badge *Personnalisée* /
   *D'origine*, date et auteur de la dernière modification, alerte si la version
   anglaise est absente.
-- `/admin/pages/[slug]` — onglets **Deutsch** / **English**. Sections repliables,
+- `/admin/pages/[slug]` : onglets **Deutsch** / **English**. Sections repliables,
   réordonnables, ajoutables, supprimables. Barre d'outils gras / italique / lien
   sur chaque champ de texte, agissant sur la sélection. Aperçu du rendu sous
   chaque champ.
@@ -86,7 +86,7 @@ connus, titre non vide, section sans titre refusée, longueurs bornées, liens
 filtrés.
 
 Après écriture : `revalidatePath("/", "layout")`. Le passage par la racine est
-nécessaire et non par excès de prudence — le pied de page reprend les titres des
+nécessaire et non par excès de prudence : le pied de page reprend les titres des
 pages légales, il change donc lui aussi.
 
 ### Écarté volontairement
@@ -102,7 +102,7 @@ pages légales, il change donc lui aussi.
 ne pas interroger la base deux fois dans un même rendu.
 
 À adapter : les onze `page.tsx`, `LegalPageView`, `buildLegalMetadata`, la page
-FAQ et `Footer` — ses libellés de colonnes viennent des titres de pages, qui
+FAQ et `Footer` : ses libellés de colonnes viennent des titres de pages, qui
 deviennent donc éditables eux aussi.
 
 ## Tests

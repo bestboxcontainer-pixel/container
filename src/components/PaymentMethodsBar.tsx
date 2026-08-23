@@ -15,7 +15,7 @@ import {
 import { brandMarksFor } from "@/components/PaymentIcons";
 
 /**
- * Moyens de paiement affichés en vitrine — fiche produit, pied de page, panier.
+ * Moyens de paiement affichés en vitrine : fiche produit, pied de page, panier.
  *
  * Cette liste est volontairement figée dans le code et ne dépend pas de ce qui
  * est activé en base. Un bandeau qui change de contenu selon l'état du
@@ -88,8 +88,8 @@ function feeLabelFor(feeLabel: string, freeLabel: string): string {
 
 interface PaymentMethodsBarProps {
   /**
-   * `section` — bandeau autonome avec titre, pour la fiche produit et le pied de page.
-   * `inline` — rangée de logos seule, pour le panier, la caisse et le tiroir.
+   * `section` : bandeau autonome avec titre, pour la fiche produit et le pied de page.
+   * `inline` : rangée de logos seule, pour le panier, la caisse et le tiroir.
    */
   variant?: "section" | "inline";
   className?: string;

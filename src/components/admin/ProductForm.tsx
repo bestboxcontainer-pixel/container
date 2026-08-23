@@ -263,7 +263,7 @@ export function ProductForm({
           </p>
           <p className="mb-4 text-xs text-muted-foreground">
             Laissé vide, chaque champ reprend automatiquement la version allemande sur la fiche
-            anglaise — ce n&apos;est jamais une erreur, juste une traduction pas encore faite.
+            anglaise : ce n&apos;est jamais une erreur, juste une traduction pas encore faite.
           </p>
 
           <label className="mb-4 block text-sm">
@@ -368,7 +368,7 @@ export function ProductForm({
 
         <div className="mb-4 grid grid-cols-3 gap-4">
           <label className="text-sm">
-            <span className="mb-1 block font-semibold text-foreground">Note (0–5)</span>
+            <span className="mb-1 block font-semibold text-foreground">Note (0-5)</span>
             <input
               type="number"
               step="0.1"
@@ -420,7 +420,7 @@ export function ProductForm({
           )}
           {lowStock && (
             <span className="rounded-sm bg-accent px-2 py-1 text-xs font-bold text-accent-foreground">
-              Stock faible — seuil d&apos;alerte atteint
+              Stock faible: seuil d&apos;alerte atteint
             </span>
           )}
         </div>

@@ -9,7 +9,7 @@ import { loadSelectableCatalog, saveMerchantSelection } from "@/server/merchantS
 // Les identifiants reçus sont confrontés au catalogue réel : un produit
 // supprimé entre l'affichage de l'écran et l'envoi est écarté sans faire
 // échouer l'enregistrement. En revanche, restreindre à zéro produit est
-// refusé — le flux se viderait, et la boutique disparaîtrait de Google sans
+// refusé : le flux se viderait, et la boutique disparaîtrait de Google sans
 // que personne ne l'ait voulu.
 
 export async function PUT(request: Request) {

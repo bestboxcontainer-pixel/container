@@ -5,7 +5,7 @@
  * en masque : la couleur ci-dessous les habille. Aucune des marques concernées
  * n'a de logotype multicolore, donc l'aplat officiel donne bien le logo réel.
  *
- * La clé est le nom **normalisé** — sans casse, sans espaces ni ponctuation.
+ * La clé est le nom **normalisé** : sans casse, sans espaces ni ponctuation.
  * Le catalogue mélange les graphies (« Samsung » et « SAMSUNG », « Siemens » et
  * « SIEMENS ») selon la source d'import ; comparer sur le nom brut laisserait
  * la moitié des marques sans logo.
@@ -75,7 +75,7 @@ function normaliser(nom: string): string {
 
 /**
  * Logo de la marque, ou `null` si elle n'en a pas. L'appelant retombe alors
- * sur le nom écrit — mieux vaut un nom lisible qu'un emplacement vide.
+ * sur le nom écrit : mieux vaut un nom lisible qu'un emplacement vide.
  */
 export function brandLogo(nom: string): { src: string; color: string } | null {
   const logo = LOGOS[normaliser(nom)];

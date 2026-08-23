@@ -10,7 +10,7 @@ import { AnnouncementBarClient } from "@/components/AnnouncementBarClient";
  * page sous les yeux du visiteur, exactement au moment où il lit le haut de
  * l'écran.
  *
- * La partie interactive — la fermeture, et le souvenir qu'on en garde — vit
+ * La partie interactive, la fermeture, et le souvenir qu'on en garde, vit
  * dans le composant client.
  */
 export async function AnnouncementBar() {

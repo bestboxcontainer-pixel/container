@@ -3,8 +3,8 @@
  *
  * L'enjeu : ces deux messages sont la seule preuve que le client et le vendeur
  * reçoivent de la commande. On vérifie donc qu'ils contiennent réellement les
- * montants, les adresses et les liens attendus — un gabarit qui « compile »
- * mais oublie le total serait une confirmation sans valeur —, que la langue
+ * montants, les adresses et les liens attendus : un gabarit qui « compile »
+ * mais oublie le total serait une confirmation sans valeur, que la langue
  * suit celle de la commande, et qu'aucun texte saisi par le client ne peut
  * injecter de HTML.
  *
@@ -199,8 +199,8 @@ describe("Confirmation à l'acheteur", () => {
 
   it("nomme le mode de livraison retenu, dans la langue du message", () => {
     const de = buildOrderConfirmationEmail(order());
-    assert.match(de.html, /Standardversand \(3–5 Werktage\)/);
-    assert.match(de.text, /Standardversand \(3–5 Werktage\)/);
+    assert.match(de.html, /Standardversand \(3-5 Werktage\)/);
+    assert.match(de.text, /Standardversand \(3-5 Werktage\)/);
 
     const express = order({
       shippingMethodKey: "express",
@@ -210,10 +210,10 @@ describe("Confirmation à l'acheteur", () => {
       locale: "en",
     });
     const en = buildOrderConfirmationEmail(express);
-    assert.match(en.html, /Express delivery \(24–48 hours\)/);
+    assert.match(en.html, /Express delivery \(24-48 hours\)/);
     // Le supplément doit apparaître comme un montant, jamais comme « free ».
     assert.match(en.html, /70,00 €/);
-    assert.doesNotMatch(en.text, /Shipping — Express delivery \(24–48 hours\): free/);
+    assert.doesNotMatch(en.text, /Shipping : Express delivery \(24-48 hours\): free/);
   });
 
   it("joint les coordonnées du virement à une commande en Vorkasse", () => {

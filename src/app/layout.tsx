@@ -14,7 +14,7 @@ const SITE_URL = (
 ).replace(/\/+$/, "");
 
 const TITLE = "BBC Best Box Containerhandel e.K.";
-const DESCRIPTION = "BBC Best Box Containerhandel e.K. — Petersweg 11a, 22946 Großensee.";
+const DESCRIPTION = "BBC Best Box Containerhandel e.K., Petersweg 11a, 22946 Großensee.";
 
 export const metadata: Metadata = {
   // Nécessaire pour que les images Open Graph données en chemin relatif

@@ -1,5 +1,5 @@
 /**
- * Contenu légal et informatif en ALLEMAND — BBC Best Box Containerhandel e.K.
+ * Contenu légal et informatif en ALLEMAND : BBC Best Box Containerhandel e.K.
  *
  * ATTENTION : toutes les données d'entreprise sont des PLACEHOLDERS
  * (adresse, HRB, USt-IdNr., WEEE, tarifs). Voir docs/LEGAL.md pour la liste
@@ -7,11 +7,11 @@
  *
  * État du droit retenu : juillet 2026 (§ 5 DDG, § 356a BGB / Widerrufsbutton
  * depuis le 19.06.2026, ElektroG avec § 18a à partir du 01.07.2026, BattDG,
- * PAngV, DSGVO/TDDDG, VSBG § 36 — plateforme ODR fermée depuis le 20.07.2025).
+ * PAngV, DSGVO/TDDDG, VSBG § 36 : plateforme ODR fermée depuis le 20.07.2025).
  *
  * NOTE DE REBRANDING : le corps rédactionnel de ces pages (Impressum, AGB,
  * FAQ, Über uns, etc.) décrit toujours une activité de vente au détail
- * d'appareils électroménagers/multimédia — reliquat du gabarit d'origine.
+ * d'appareils électroménagers/multimédia : reliquat du gabarit d'origine.
  * L'identité de l'entreprise a été mise à jour, mais ce contenu narratif
  * n'a pas été réécrit pour coller à une activité de négoce de conteneurs ;
  * il faudra le refaire si ces pages sont un jour réaffichées publiquement
@@ -24,7 +24,7 @@ import type { LegalPageMap } from "./types";
 const UPDATED_AT = "2026-07-26";
 
 /**
- * Coordonnées de l'entreprise — À REMPLACER par les données réelles.
+ * Coordonnées de l'entreprise : À REMPLACER par les données réelles.
  * Exportées : la facture PDF y puise les mentions exigées par le § 14 UStG,
  * et deux jeux de coordonnées qui divergeraient seraient pires qu'un seul faux.
  */
@@ -58,7 +58,7 @@ const RETURN_ADDRESS = `${COMPANY.name}, Retourenannahme, ${COMPANY.street}, ${C
 
 /** Avertissement placé en tête de chaque page juridique. */
 const DISCLAIMER =
-  "Rechtlicher Hinweis: Dieser Text ist eine sorgfältig erstellte Vorlage für den Onlineshop BBC Best Box Containerhandel e.K. Sämtliche Unternehmensangaben (Anschrift, Handelsregister, Umsatzsteuer-Identifikationsnummer, WEEE-Registrierungsnummer, Versandkosten, Dienstleister) sind Platzhalter und müssen vor der Veröffentlichung durch die tatsächlichen Daten ersetzt werden. Lassen Sie den Text anschließend anwaltlich prüfen – erst dann ist er rechtssicher verwendbar.";
+  "Rechtlicher Hinweis: Dieser Text ist eine sorgfältig erstellte Vorlage für den Onlineshop BBC Best Box Containerhandel e.K. Sämtliche Unternehmensangaben (Anschrift, Handelsregister, Umsatzsteuer-Identifikationsnummer, WEEE-Registrierungsnummer, Versandkosten, Dienstleister) sind Platzhalter und müssen vor der Veröffentlichung durch die tatsächlichen Daten ersetzt werden. Lassen Sie den Text anschließend anwaltlich prüfen, erst dann ist er rechtssicher verwendbar.";
 
 /** Assemble le chapeau : avertissement puis texte d'introduction. */
 function intro(lead: string): string {
@@ -67,7 +67,7 @@ function intro(lead: string): string {
 
 export const deLegalPages: LegalPageMap = {
   /* ------------------------------------------------------------------ */
-  /* Impressum — § 5 DDG                                                 */
+  /* Impressum: § 5 DDG                                                 */
   /* ------------------------------------------------------------------ */
   impressum: {
     slug: "impressum",
@@ -133,7 +133,7 @@ export const deLegalPages: LegalPageMap = {
       {
         heading: "Verbraucherstreitbeilegung",
         body:
-          "Hinweis nach § 36 Verbraucherstreitbeilegungsgesetz (VSBG): Wir sind weder bereit noch verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen. Sollten Sie mit unserem Service nicht zufrieden sein, wenden Sie sich bitte zunächst direkt an unseren Kundenservice – wir finden fast immer eine Lösung.\n\n" +
+          "Hinweis nach § 36 Verbraucherstreitbeilegungsgesetz (VSBG): Wir sind weder bereit noch verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen. Sollten Sie mit unserem Service nicht zufrieden sein, wenden Sie sich bitte zunächst direkt an unseren Kundenservice, wir finden fast immer eine Lösung.\n\n" +
           "Zuständige Verbraucherschlichtungsstelle wäre: Universalschlichtungsstelle des Bundes, Zentrum für Schlichtung e. V., Straßburger Straße 8, 77694 Kehl am Rhein, www.verbraucher-schlichter.de.\n\n" +
           "Die frühere Online-Streitbeilegungsplattform (OS-Plattform) der Europäischen Kommission wurde zum 20. Juli 2025 endgültig eingestellt. Ein Link auf diese Plattform darf seitdem nicht mehr angegeben werden; wir verzichten daher bewusst auf einen entsprechenden Hinweis.",
       },
@@ -153,12 +153,12 @@ export const deLegalPages: LegalPageMap = {
         heading: "Bildnachweis",
         body: "Die Containerfotos auf dieser Website stammen von Wikimedia Commons und sind frei lizenziert:",
         list: [
-          "Igor Ovsyannykov — „Shipping containers in a port“, CC0 (keine Namensnennung erforderlich)",
-          "AgainErick — „Shipping container stacks – Port of Rotterdam“, CC BY-SA 4.0",
-          "Carsten Steger — „Aerial image of the Eurogate and Burchardkai container terminals“ (Hamburg), CC BY-SA 4.0",
-          "Immanuel Giel — „Container architecture in Germany 01“, CC BY-SA 4.0",
-          "Immanuel Giel — „Container architecture in Germany 02“, CC BY-SA 4.0",
-          "Immanuel Giel — „Container architecture in Germany 03“, CC0 (keine Namensnennung erforderlich)",
+          "Igor Ovsyannykov: „Shipping containers in a port“, CC0 (keine Namensnennung erforderlich)",
+          "AgainErick: „Shipping container stacks, Port of Rotterdam“, CC BY-SA 4.0",
+          "Carsten Steger: „Aerial image of the Eurogate and Burchardkai container terminals“ (Hamburg), CC BY-SA 4.0",
+          "Immanuel Giel: „Container architecture in Germany 01“, CC BY-SA 4.0",
+          "Immanuel Giel: „Container architecture in Germany 02“, CC BY-SA 4.0",
+          "Immanuel Giel: „Container architecture in Germany 03“, CC0 (keine Namensnennung erforderlich)",
         ],
       },
     ],
@@ -187,7 +187,7 @@ export const deLegalPages: LegalPageMap = {
         body:
           "Die Darstellung der Produkte im Onlineshop stellt kein rechtlich bindendes Angebot dar, sondern eine unverbindliche Aufforderung zur Bestellung.\n\n" +
           "Durch Anklicken der Schaltfläche „Zahlungspflichtig bestellen“ geben Sie ein verbindliches Angebot zum Kauf der im Warenkorb enthaltenen Waren ab. Unmittelbar nach dem Absenden der Bestellung erhalten Sie eine automatische Empfangsbestätigung per E-Mail. Diese Bestätigung dokumentiert lediglich den Eingang Ihrer Bestellung und stellt noch keine Annahme des Antrags dar.\n\n" +
-          "Der Kaufvertrag kommt zustande, sobald wir Ihre Bestellung durch eine gesonderte Auftragsbestätigung per E-Mail annehmen, die Ware versenden oder – bei Vorkasse – die Zahlungsaufforderung übersenden. Nehmen wir die Bestellung nicht innerhalb von fünf Werktagen an, gilt sie als abgelehnt; bereits geleistete Zahlungen erstatten wir unverzüglich.\n\n" +
+          "Der Kaufvertrag kommt zustande, sobald wir Ihre Bestellung durch eine gesonderte Auftragsbestätigung per E-Mail annehmen, die Ware versenden oder, bei Vorkasse, die Zahlungsaufforderung übersenden. Nehmen wir die Bestellung nicht innerhalb von fünf Werktagen an, gilt sie als abgelehnt; bereits geleistete Zahlungen erstatten wir unverzüglich.\n\n" +
           "Bestellungen mit Speditionslieferung, Montageservice oder Sonderanfertigungen bestätigen wir stets gesondert, weil hierfür ein Liefertermin abzustimmen ist.",
       },
       {
@@ -236,13 +236,13 @@ export const deLegalPages: LegalPageMap = {
         heading: "§ 9 Mängelhaftung (Gewährleistung)",
         body:
           "Es gilt das gesetzliche Mängelhaftungsrecht. Für neue Waren beträgt die Verjährungsfrist für Mängelansprüche von Verbrauchern zwei Jahre ab Ablieferung der Ware. Zeigt sich innerhalb eines Jahres seit Ablieferung ein Mangel, wird vermutet, dass die Ware bereits bei Übergabe mangelhaft war.\n\n" +
-          "Bei Waren mit digitalen Elementen – etwa Smart-TVs, Smartwatches oder vernetzten Haushaltsgeräten – stellen wir sicher, dass Sie über Aktualisierungen informiert werden, die für den Erhalt der Vertragsmäßigkeit erforderlich sind, und diese während des maßgeblichen Zeitraums erhalten (§§ 475b, 475c BGB).\n\n" +
+          "Bei Waren mit digitalen Elementen, etwa Smart-TVs, Smartwatches oder vernetzten Haushaltsgeräten, stellen wir sicher, dass Sie über Aktualisierungen informiert werden, die für den Erhalt der Vertragsmäßigkeit erforderlich sind, und diese während des maßgeblichen Zeitraums erhalten (§§ 475b, 475c BGB).\n\n" +
           "Gegenüber Unternehmern beträgt die Verjährungsfrist für Mängelansprüche bei neuen Waren ein Jahr ab Gefahrübergang. Die gesetzlichen Regelungen zum Lieferantenregress bleiben unberührt.\n\n" +
           "Bitte melden Sie Mängel unserem Kundenservice, bevor Sie ein Gerät zurücksenden. So können wir häufig direkt einen Techniker oder den Herstellerservice beauftragen, was für Sie deutlich schneller ist.",
       },
       {
         heading: "§ 10 Herstellergarantien",
-        body: "Neben der gesetzlichen Mängelhaftung gewähren viele Hersteller eigene Garantien, etwa auf Motoren, Kompressoren oder Displays. Diese Garantien sind freiwillige Zusatzleistungen des jeweiligen Herstellers und lassen die gesetzlichen Rechte unberührt. Die genauen Garantiebedingungen finden Sie in den Unterlagen des Geräts sowie – soweit vorhanden – auf der jeweiligen Produktseite.",
+        body: "Neben der gesetzlichen Mängelhaftung gewähren viele Hersteller eigene Garantien, etwa auf Motoren, Kompressoren oder Displays. Diese Garantien sind freiwillige Zusatzleistungen des jeweiligen Herstellers und lassen die gesetzlichen Rechte unberührt. Die genauen Garantiebedingungen finden Sie in den Unterlagen des Geräts sowie, soweit vorhanden, auf der jeweiligen Produktseite.",
       },
       {
         heading: "§ 11 Transportschäden",
@@ -252,7 +252,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "§ 12 Rücknahme von Altgeräten und Batterien",
-        body: "Als Vertreiber von Elektro- und Elektronikgeräten nehmen wir Altgeräte im gesetzlich vorgeschriebenen Umfang unentgeltlich zurück und beteiligen uns an der Rücknahme von Altbatterien. Die Einzelheiten – einschließlich der 1:1- und 0:1-Rücknahme, der Abholung bei Lieferung und der Rücksendung kleiner Altgeräte – finden Sie auf der Seite „Elektroaltgeräte & Batterien“.",
+        body: "Als Vertreiber von Elektro- und Elektronikgeräten nehmen wir Altgeräte im gesetzlich vorgeschriebenen Umfang unentgeltlich zurück und beteiligen uns an der Rücknahme von Altbatterien. Die Einzelheiten, einschließlich der 1:1- und 0:1-Rücknahme, der Abholung bei Lieferung und der Rücksendung kleiner Altgeräte, finden Sie auf der Seite „Elektroaltgeräte & Batterien“.",
       },
       {
         heading: "§ 13 Aufrechnung und Zurückbehaltungsrecht",
@@ -281,7 +281,7 @@ export const deLegalPages: LegalPageMap = {
   },
 
   /* ------------------------------------------------------------------ */
-  /* Datenschutzerklärung — DSGVO / TDDDG                                */
+  /* Datenschutzerklärung: DSGVO / TDDDG                                */
   /* ------------------------------------------------------------------ */
   datenschutz: {
     slug: "datenschutz",
@@ -310,10 +310,10 @@ export const deLegalPages: LegalPageMap = {
         heading: "3. Rechtsgrundlagen der Verarbeitung",
         body: "Wir verarbeiten personenbezogene Daten nur auf einer der folgenden Rechtsgrundlagen:",
         list: [
-          "Artikel 6 Absatz 1 Buchstabe a DSGVO – Ihre Einwilligung, etwa für Newsletter oder nicht notwendige Cookies",
-          "Artikel 6 Absatz 1 Buchstabe b DSGVO – Erfüllung des Kaufvertrags oder vorvertragliche Maßnahmen",
-          "Artikel 6 Absatz 1 Buchstabe c DSGVO – Erfüllung rechtlicher Pflichten, insbesondere handels- und steuerrechtlicher Aufbewahrungspflichten",
-          "Artikel 6 Absatz 1 Buchstabe f DSGVO – unsere berechtigten Interessen, etwa Betrugsprävention, IT-Sicherheit und Verbesserung unseres Angebots",
+          "Artikel 6 Absatz 1 Buchstabe a DSGVO: Ihre Einwilligung, etwa für Newsletter oder nicht notwendige Cookies",
+          "Artikel 6 Absatz 1 Buchstabe b DSGVO: Erfüllung des Kaufvertrags oder vorvertragliche Maßnahmen",
+          "Artikel 6 Absatz 1 Buchstabe c DSGVO: Erfüllung rechtlicher Pflichten, insbesondere handels- und steuerrechtlicher Aufbewahrungspflichten",
+          "Artikel 6 Absatz 1 Buchstabe f DSGVO: unsere berechtigten Interessen, etwa Betrugsprävention, IT-Sicherheit und Verbesserung unseres Angebots",
         ],
       },
       {
@@ -340,7 +340,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "8. Versand und Montageservice",
-        body: "Zur Zustellung geben wir Name, Lieferanschrift und – für die Terminabstimmung bei Speditionslieferungen sowie beim Anschluss- und Montageservice – Telefonnummer oder E-Mail-Adresse an den beauftragten Logistik- beziehungsweise Servicepartner weiter. Rechtsgrundlage ist Artikel 6 Absatz 1 Buchstabe b DSGVO.",
+        body: "Zur Zustellung geben wir Name, Lieferanschrift und, für die Terminabstimmung bei Speditionslieferungen sowie beim Anschluss- und Montageservice, Telefonnummer oder E-Mail-Adresse an den beauftragten Logistik- beziehungsweise Servicepartner weiter. Rechtsgrundlage ist Artikel 6 Absatz 1 Buchstabe b DSGVO.",
       },
       {
         heading: "9. Kundenbewertungen",
@@ -366,10 +366,10 @@ export const deLegalPages: LegalPageMap = {
       {
         heading: "13. Cookies und Einwilligungsverwaltung",
         body:
-          "Der Betrieb dieses Shops beruht auf technisch notwendigen Cookies: Warenkorb, Sitzungsverwaltung, Sprachwahl und Sicherheit. Sie sind nach § 25 Absatz 2 Nummer 2 TDDDG einwilligungsfrei; die damit verbundene Datenverarbeitung stützt sich auf Artikel 6 Absatz 1 Buchstabe f DSGVO. Einwilligungsfrei ist auch die Speicherung Ihrer Antwort auf das Einwilligungsbanner – ohne sie müssten wir Sie auf jeder Seite erneut fragen.\n\n" +
+          "Der Betrieb dieses Shops beruht auf technisch notwendigen Cookies: Warenkorb, Sitzungsverwaltung, Sprachwahl und Sicherheit. Sie sind nach § 25 Absatz 2 Nummer 2 TDDDG einwilligungsfrei; die damit verbundene Datenverarbeitung stützt sich auf Artikel 6 Absatz 1 Buchstabe f DSGVO. Einwilligungsfrei ist auch die Speicherung Ihrer Antwort auf das Einwilligungsbanner, ohne sie müssten wir Sie auf jeder Seite erneut fragen.\n\n" +
           "Einen Live-Chat der Smartsupp s.r.o. (Tschechische Republik) bieten wir über eine Schaltfläche unten rechts an. Beim Laden speichert dieser Dienst eine Besucherkennung auf Ihrem Gerät. Sie ist für den Betrieb des Shops nicht erforderlich und wird deshalb nur mit Ihrer Einwilligung gesetzt (§ 25 Absatz 1 TDDDG). Rechtsgrundlage der anschließenden Datenverarbeitung ist Artikel 6 Absatz 1 Buchstabe a DSGVO.\n\n" +
           "Willigen Sie im Banner ein, wird der Chat auf allen Seiten des Shops geladen. Smartsupp erkennt dann Ihren Besuch, kann Ihnen von sich aus eine Begrüßungsnachricht anzeigen und übermittelt uns dabei aufgerufene Seite, Verweisadresse, Browserangaben und IP-Adresse. Die Besucherkennung ordnet außerdem die Nachrichten eines Gesprächs einander zu; ihre Speicherdauer richtet sich nach den Angaben von Smartsupp in dessen eigener Dokumentation.\n\n" +
-          "Lehnen Sie ab oder antworten Sie nicht, wird kein Smartsupp-Skript ausgeführt, kein Cookie dieses Anbieters gesetzt und es gelangen keine Daten an ihn. Die Schaltfläche unten rechts bleibt bestehen: Klicken Sie darauf, fordern Sie den Chat ausdrücklich an (§ 25 Absatz 2 Nummer 2 TDDDG) und können uns wie gewohnt schreiben – ohne dass Ihr Besuch zuvor an Smartsupp gemeldet worden wäre.\n\n" +
+          "Lehnen Sie ab oder antworten Sie nicht, wird kein Smartsupp-Skript ausgeführt, kein Cookie dieses Anbieters gesetzt und es gelangen keine Daten an ihn. Die Schaltfläche unten rechts bleibt bestehen: Klicken Sie darauf, fordern Sie den Chat ausdrücklich an (§ 25 Absatz 2 Nummer 2 TDDDG) und können uns wie gewohnt schreiben, ohne dass Ihr Besuch zuvor an Smartsupp gemeldet worden wäre.\n\n" +
           "Ihre Einwilligung gilt bis zum Widerruf. Sie können sie jederzeit über den Link „Cookie-Einstellungen“ im Fußbereich jeder Seite ändern; der Widerruf wirkt für die Zukunft und ist so einfach wie die Erteilung.\n\n" +
           "Cookies zur Reichweitenmessung, zu Werbezwecken oder von sozialen Netzwerken setzen wir nicht.\n\n" +
           "Zusätzlich können Sie Cookies in Ihrem Browser löschen oder blockieren. Einige Funktionen des Shops stehen dann möglicherweise nicht mehr vollständig zur Verfügung.",
@@ -380,7 +380,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "15. Empfänger und Übermittlung in Drittländer",
-        body: "Empfänger Ihrer Daten sind ausschließlich Dienstleister, die wir sorgfältig ausgewählt haben und die als Auftragsverarbeiter nach Artikel 28 DSGVO für uns tätig werden, sowie Stellen, an die wir aufgrund gesetzlicher Pflichten übermitteln müssen (etwa Finanzbehörden). Dazu zählt die Smartsupp s.r.o. (Tschechische Republik) als Anbieter des Live-Chats – nach Ihrer Einwilligung ab dem Seitenaufruf, andernfalls ausschließlich für Gespräche, die Sie selbst eröffnen. Eine Übermittlung in Länder außerhalb der EU und des EWR findet nur statt, wenn ein Angemessenheitsbeschluss der Europäischen Kommission vorliegt oder geeignete Garantien im Sinne der Artikel 44 ff. DSGVO – insbesondere Standardvertragsklauseln – vereinbart sind.",
+        body: "Empfänger Ihrer Daten sind ausschließlich Dienstleister, die wir sorgfältig ausgewählt haben und die als Auftragsverarbeiter nach Artikel 28 DSGVO für uns tätig werden, sowie Stellen, an die wir aufgrund gesetzlicher Pflichten übermitteln müssen (etwa Finanzbehörden). Dazu zählt die Smartsupp s.r.o. (Tschechische Republik) als Anbieter des Live-Chats, nach Ihrer Einwilligung ab dem Seitenaufruf, andernfalls ausschließlich für Gespräche, die Sie selbst eröffnen. Eine Übermittlung in Länder außerhalb der EU und des EWR findet nur statt, wenn ein Angemessenheitsbeschluss der Europäischen Kommission vorliegt oder geeignete Garantien im Sinne der Artikel 44 ff. DSGVO, insbesondere Standardvertragsklauseln, vereinbart sind.",
       },
       {
         heading: "16. Speicherdauer",
@@ -436,7 +436,7 @@ export const deLegalPages: LegalPageMap = {
     updatedAt: UPDATED_AT,
     sections: [
       {
-        heading: "Widerrufsbelehrung – Widerrufsrecht",
+        heading: "Widerrufsbelehrung: Widerrufsrecht",
         body:
           "Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen.\n\n" +
           "Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die Waren in Besitz genommen haben bzw. hat.\n\n" +
@@ -445,26 +445,26 @@ export const deLegalPages: LegalPageMap = {
           "Zur Wahrung der Widerrufsfrist reicht es aus, dass Sie die Mitteilung über die Ausübung des Widerrufsrechts vor Ablauf der Widerrufsfrist absenden.",
       },
       {
-        heading: "Widerrufsbelehrung – Folgen des Widerrufs",
+        heading: "Widerrufsbelehrung: Folgen des Widerrufs",
         body:
           "Wenn Sie diesen Vertrag widerrufen, haben wir Ihnen alle Zahlungen, die wir von Ihnen erhalten haben, einschließlich der Lieferkosten (mit Ausnahme der zusätzlichen Kosten, die sich daraus ergeben, dass Sie eine andere Art der Lieferung als die von uns angebotene, günstigste Standardlieferung gewählt haben), unverzüglich und spätestens binnen vierzehn Tagen ab dem Tag zurückzuzahlen, an dem die Mitteilung über Ihren Widerruf dieses Vertrags bei uns eingegangen ist. Für diese Rückzahlung verwenden wir dasselbe Zahlungsmittel, das Sie bei der ursprünglichen Transaktion eingesetzt haben, es sei denn, mit Ihnen wurde ausdrücklich etwas anderes vereinbart; in keinem Fall werden Ihnen wegen dieser Rückzahlung Entgelte berechnet.\n\n" +
           "Wir können die Rückzahlung verweigern, bis wir die Waren wieder zurückerhalten haben oder bis Sie den Nachweis erbracht haben, dass Sie die Waren zurückgesandt haben, je nachdem, welches der frühere Zeitpunkt ist.\n\n" +
           `Sie haben die Waren unverzüglich und in jedem Fall spätestens binnen vierzehn Tagen ab dem Tag, an dem Sie uns über den Widerruf dieses Vertrags unterrichten, an ${RETURN_ADDRESS} zurückzusenden oder zu übergeben. Die Frist ist gewahrt, wenn Sie die Waren vor Ablauf der Frist von vierzehn Tagen absenden.\n\n` +
           "Wir tragen die Kosten der Rücksendung der Waren.\n\n" +
           "Sie müssen für einen etwaigen Wertverlust der Waren nur aufkommen, wenn dieser Wertverlust auf einen zur Prüfung der Beschaffenheit, Eigenschaften und Funktionsweise der Waren nicht notwendigen Umgang mit ihnen zurückzuführen ist.\n\n" +
-          "– Ende der Widerrufsbelehrung –",
+          "Ende der Widerrufsbelehrung",
       },
       {
         heading: "Fristbeginn bei mehreren Waren und Teillieferungen",
         body:
           "Umfasst Ihre Bestellung mehrere Waren, die Sie in einer einheitlichen Bestellung bestellt haben und die getrennt geliefert werden, beginnt die Widerrufsfrist an dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die letzte Ware in Besitz genommen haben bzw. hat.\n\n" +
-          "Wird eine Ware in mehreren Teilsendungen oder Stücken geliefert – etwa eine Einbauküche oder ein Gerät mit separatem Zubehör –, beginnt die Frist an dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die letzte Teilsendung oder das letzte Stück in Besitz genommen haben bzw. hat.",
+          "Wird eine Ware in mehreren Teilsendungen oder Stücken geliefert (etwa eine Einbauküche oder ein Gerät mit separatem Zubehör), beginnt die Frist an dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die letzte Teilsendung oder das letzte Stück in Besitz genommen haben bzw. hat.",
       },
       {
         heading: "Widerruf in Textform",
         body:
           "Für den Widerruf genügt eine eindeutige Erklärung in Textform. Am schnellsten geht es per E-Mail an " +
-          `${COMPANY.email} – nennen Sie darin Ihren Namen, Ihre Bestellnummer und den Artikel, den Sie zurückgeben möchten. Ebenso möglich sind ein Brief an die im Impressum genannte Anschrift oder ein Anruf unter ${COMPANY.phone}.\n\n` +
+          `${COMPANY.email}: Nennen Sie darin Ihren Namen, Ihre Bestellnummer und den Artikel, den Sie zurückgeben möchten. Ebenso möglich sind ein Brief an die im Impressum genannte Anschrift oder ein Anruf unter ${COMPANY.phone}.\n\n` +
           "Sie können dafür das unten abgedruckte Muster-Widerrufsformular verwenden; vorgeschrieben ist es nicht.\n\n" +
           "Über den Eingang Ihrer Erklärung erhalten Sie unverzüglich eine Bestätigung per E-Mail, mit Datum und Uhrzeit des Eingangs.",
       },
@@ -495,7 +495,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Digitale Inhalte",
-        body: "Bei Verträgen über die Lieferung von nicht auf einem körperlichen Datenträger befindlichen digitalen Inhalten – etwa Download-Codes für Spiele oder Software – erlischt Ihr Widerrufsrecht nach § 356 Absatz 5 BGB, wenn wir mit der Vertragserfüllung begonnen haben, nachdem Sie ausdrücklich zugestimmt haben, dass wir vor Ablauf der Widerrufsfrist beginnen, und Sie Ihre Kenntnis vom Erlöschen des Widerrufsrechts bestätigt haben. Wir bestätigen Ihnen dies zusätzlich auf einem dauerhaften Datenträger.",
+        body: "Bei Verträgen über die Lieferung von nicht auf einem körperlichen Datenträger befindlichen digitalen Inhalten, etwa Download-Codes für Spiele oder Software, erlischt Ihr Widerrufsrecht nach § 356 Absatz 5 BGB, wenn wir mit der Vertragserfüllung begonnen haben, nachdem Sie ausdrücklich zugestimmt haben, dass wir vor Ablauf der Widerrufsfrist beginnen, und Sie Ihre Kenntnis vom Erlöschen des Widerrufsrechts bestätigt haben. Wir bestätigen Ihnen dies zusätzlich auf einem dauerhaften Datenträger.",
       },
       {
         heading: "Freiwilliges 30-Tage-Rückgaberecht",
@@ -549,7 +549,7 @@ export const deLegalPages: LegalPageMap = {
       {
         heading: "Anschluss- und Montageservice",
         body:
-          "Auf Wunsch schließen unsere Servicepartner Ihr neues Gerät fachgerecht an und nehmen es in Betrieb. Die Leistung buchen Sie nicht im Warenkorb, sondern telefonisch oder per E-Mail – am besten vor der Bestellung, damit wir sie mit der Lieferung zusammen einplanen können.\n\n" +
+          "Auf Wunsch schließen unsere Servicepartner Ihr neues Gerät fachgerecht an und nehmen es in Betrieb. Die Leistung buchen Sie nicht im Warenkorb, sondern telefonisch oder per E-Mail, am besten vor der Bestellung, damit wir sie mit der Lieferung zusammen einplanen können.\n\n" +
           "Voraussetzung ist, dass alle bauseitigen Anschlüsse (Strom, Wasser, Abwasser, Abluft, Antennen- oder Netzwerkanschluss) vorhanden, frei zugänglich und normgerecht sind. Elektroarbeiten an der Hausinstallation dürfen wir nicht ausführen.",
         list: [
           "Anschluss einer Waschmaschine, eines Trockners oder eines Geschirrspülers: 49,00 Euro",
@@ -562,9 +562,9 @@ export const deLegalPages: LegalPageMap = {
       {
         heading: "Mitnahme des Altgeräts",
         body:
-          "Bei der Lieferung eines neuen Elektrogeräts nehmen wir Ihr gleichartiges Altgerät auf Wunsch unentgeltlich mit (1:1-Rücknahme). Melden Sie den Wunsch bitte telefonisch oder per E-Mail an, sobald Sie bestellt haben – gern auch schon davor –, damit die Spedition die Rücknahme einplanen kann. Sie können den Hinweis auch im Anmerkungsfeld der Bestellung hinterlassen.\n\n" +
+          "Bei der Lieferung eines neuen Elektrogeräts nehmen wir Ihr gleichartiges Altgerät auf Wunsch unentgeltlich mit (1:1-Rücknahme). Melden Sie den Wunsch bitte telefonisch oder per E-Mail an, sobald Sie bestellt haben (gern auch schon davor), damit die Spedition die Rücknahme einplanen kann. Sie können den Hinweis auch im Anmerkungsfeld der Bestellung hinterlassen.\n\n" +
           "Das Altgerät muss abgeklemmt, entleert, gereinigt und frei zugänglich am Ort der Anlieferung bereitstehen. Die Demontage eines fest eingebauten Altgeräts ist nicht Bestandteil der kostenlosen Mitnahme, kann aber als kostenpflichtige Zusatzleistung gebucht werden.\n\n" +
-          "Alle weiteren Rücknahmemöglichkeiten – insbesondere für kleine Altgeräte ohne Neukauf – beschreiben wir auf der Seite „Elektroaltgeräte & Batterien“.",
+          "Alle weiteren Rücknahmemöglichkeiten, insbesondere für kleine Altgeräte ohne Neukauf, beschreiben wir auf der Seite „Elektroaltgeräte & Batterien“.",
       },
       {
         heading: "Teillieferungen",
@@ -572,11 +572,11 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Wo bleibt meine Bestellung?",
-        body: "Den Stand Ihrer Bestellung sehen Sie jederzeit über den Link in Ihrer Bestellbestätigung, und in Ihrem Kundenkonto unter „Meine Bestellungen“. Sobald die Ware unser Lager verlässt, setzen wir den Status auf „versandt“. Die Sendungsnummer und – bei Speditionslieferungen – die Kontaktdaten für die Terminabstimmung teilen wir Ihnen per E-Mail mit, sobald sie uns vorliegen.",
+        body: "Den Stand Ihrer Bestellung sehen Sie jederzeit über den Link in Ihrer Bestellbestätigung, und in Ihrem Kundenkonto unter „Meine Bestellungen“. Sobald die Ware unser Lager verlässt, setzen wir den Status auf „versandt“. Die Sendungsnummer und, bei Speditionslieferungen, die Kontaktdaten für die Terminabstimmung teilen wir Ihnen per E-Mail mit, sobald sie uns vorliegen.",
       },
       {
         heading: "Transportschäden",
-        body: "Bitte prüfen Sie die Sendung möglichst bei Anlieferung. Melden Sie sichtbare Schäden dem Zusteller und lassen Sie diese bei Speditionslieferungen auf dem Ablieferbeleg vermerken. Informieren Sie anschließend unseren Kundenservice – wir organisieren Ersatz oder Reparatur. Ihre gesetzlichen Gewährleistungsrechte bleiben davon in jedem Fall unberührt.",
+        body: "Bitte prüfen Sie die Sendung möglichst bei Anlieferung. Melden Sie sichtbare Schäden dem Zusteller und lassen Sie diese bei Speditionslieferungen auf dem Ablieferbeleg vermerken. Informieren Sie anschließend unseren Kundenservice, wir organisieren Ersatz oder Reparatur. Ihre gesetzlichen Gewährleistungsrechte bleiben davon in jedem Fall unberührt.",
       },
     ],
   },
@@ -600,7 +600,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Sofortüberweisung",
-        body: "Sie werden am Ende des Bestellvorgangs zum Online-Banking Ihrer Bank weitergeleitet und geben die Überweisung dort direkt frei. Wir erhalten die Zahlungsbestätigung unmittelbar und können sofort mit dem Versand beginnen – ein eigenes Konto bei einem Zahlungsdienst brauchen Sie dafür nicht.",
+        body: "Sie werden am Ende des Bestellvorgangs zum Online-Banking Ihrer Bank weitergeleitet und geben die Überweisung dort direkt frei. Wir erhalten die Zahlungsbestätigung unmittelbar und können sofort mit dem Versand beginnen, ein eigenes Konto bei einem Zahlungsdienst brauchen Sie dafür nicht.",
       },
       {
         heading: "PayPal",
@@ -654,10 +654,10 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "So melden Sie eine Rücksendung an",
-        body: "Bitte melden Sie die Rücksendung vorab an – so ordnen wir Ihr Paket sofort zu und erstatten schneller.",
+        body: "Bitte melden Sie die Rücksendung vorab an, so ordnen wir Ihr Paket sofort zu und erstatten schneller.",
         list: [
           `E-Mail an ${COMPANY.email} mit Bestellnummer und Artikelbezeichnung`,
-          "Muster-Widerrufsformular von der Seite „Widerrufsrecht“, ausgefüllt per E-Mail oder Post – vorgeschrieben ist es nicht",
+          "Muster-Widerrufsformular von der Seite „Widerrufsrecht“, ausgefüllt per E-Mail oder Post, vorgeschrieben ist es nicht",
           `Telefon: ${COMPANY.phone}, montags bis samstags von 8 bis 20 Uhr`,
         ],
       },
@@ -669,11 +669,11 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Verpackung und Zubehör",
-        body: "Verwenden Sie nach Möglichkeit den Originalkarton mit den Transportsicherungen – gerade bei Waschmaschinen und Fernsehern schützt das vor Schäden. Legen Sie sämtliches Zubehör, Fernbedienungen, Kabel, Handbücher und beigelegte Gutscheine bei. Fehlen Teile, können wir den Wertersatz nur anteilig erstatten.",
+        body: "Verwenden Sie nach Möglichkeit den Originalkarton mit den Transportsicherungen. Gerade bei Waschmaschinen und Fernsehern schützt das vor Schäden. Legen Sie sämtliches Zubehör, Fernbedienungen, Kabel, Handbücher und beigelegte Gutscheine bei. Fehlen Teile, können wir den Wertersatz nur anteilig erstatten.",
       },
       {
         heading: "Prüfung der Ware und Wertersatz",
-        body: "Sie dürfen die Ware prüfen, wie es Ihnen auch im Ladengeschäft möglich wäre – also auspacken, ansehen und die Funktionen testen. Für einen Wertverlust, der über diese Prüfung hinausgeht (zum Beispiel eine bereits eingebaute Dunstabzugshaube mit Bohrspuren oder eine intensiv genutzte Kaffeemaschine mit Kalkrückständen), können wir Wertersatz verlangen.",
+        body: "Sie dürfen die Ware prüfen, wie es Ihnen auch im Ladengeschäft möglich wäre, also auspacken, ansehen und die Funktionen testen. Für einen Wertverlust, der über diese Prüfung hinausgeht (zum Beispiel eine bereits eingebaute Dunstabzugshaube mit Bohrspuren oder eine intensiv genutzte Kaffeemaschine mit Kalkrückständen), können wir Wertersatz verlangen.",
       },
       {
         heading: "Rückerstattung",
@@ -682,8 +682,8 @@ export const deLegalPages: LegalPageMap = {
       {
         heading: "Reklamation eines Mangels",
         body:
-          "Für neue Geräte gilt die gesetzliche Mängelhaftung von zwei Jahren ab Ablieferung. Zeigt sich innerhalb der ersten zwölf Monate ein Mangel, wird vermutet, dass er bereits bei Übergabe vorlag – Sie müssen also nichts beweisen.\n\n" +
-          "Melden Sie den Mangel bitte zuerst unserem Kundenservice und halten Sie Bestellnummer, Seriennummer und eine kurze Fehlerbeschreibung bereit. Bei Großgeräten beauftragen wir in der Regel einen Techniker vor Ort, statt das Gerät zu transportieren – das ist schneller und schont das Gerät.",
+          "Für neue Geräte gilt die gesetzliche Mängelhaftung von zwei Jahren ab Ablieferung. Zeigt sich innerhalb der ersten zwölf Monate ein Mangel, wird vermutet, dass er bereits bei Übergabe vorlag. Sie müssen also nichts beweisen.\n\n" +
+          "Melden Sie den Mangel bitte zuerst unserem Kundenservice und halten Sie Bestellnummer, Seriennummer und eine kurze Fehlerbeschreibung bereit. Bei Großgeräten beauftragen wir in der Regel einen Techniker vor Ort, statt das Gerät zu transportieren, das ist schneller und schont das Gerät.",
       },
       {
         heading: "Garantie zusätzlich zur Gewährleistung",
@@ -701,7 +701,7 @@ export const deLegalPages: LegalPageMap = {
   },
 
   /* ------------------------------------------------------------------ */
-  /* Elektroaltgeräte & Batterien — ElektroG / BattDG                    */
+  /* Elektroaltgeräte & Batterien: ElektroG / BattDG                    */
   /* ------------------------------------------------------------------ */
   elektroaltgeraete: {
     slug: "elektroaltgeraete",
@@ -728,7 +728,7 @@ export const deLegalPages: LegalPageMap = {
       {
         heading: "Unsere Rücknahme: 0:1 für kleine Altgeräte",
         body:
-          "Kleine Altgeräte, bei denen keine äußere Abmessung mehr als 25 Zentimeter beträgt, nehmen wir auch ohne Neukauf zurück – auf haushaltsübliche Mengen von bis zu drei Geräten je Geräteart beschränkt (§ 17 Absatz 1 Satz 1 Nummer 2 ElektroG).\n\n" +
+          "Kleine Altgeräte, bei denen keine äußere Abmessung mehr als 25 Zentimeter beträgt, nehmen wir auch ohne Neukauf zurück, auf haushaltsübliche Mengen von bis zu drei Geräten je Geräteart beschränkt (§ 17 Absatz 1 Satz 1 Nummer 2 ElektroG).\n\n" +
           "Beispiele sind Rasierer, elektrische Zahnbürsten, Küchenwaagen, Kopfhörer, Kabel, Netzteile, Fernbedienungen und kleine Bluetooth-Lautsprecher.",
       },
       {
@@ -736,7 +736,7 @@ export const deLegalPages: LegalPageMap = {
         body: "Als Versandhändler bieten wir Ihnen zumutbare, kostenfreie Rückgabemöglichkeiten an:",
         list: [
           `Rücksendung kleiner Altgeräte an: ${COMPANY.name}, Altgeräterücknahme, ${COMPANY.street}, ${COMPANY.city}. Ein kostenloses Versandlabel erhalten Sie über unseren Kundenservice.`,
-          "Abholung von Großgeräten bei der Anlieferung des Neugeräts – bitte bereits bei der Bestellung angeben",
+          "Abholung von Großgeräten bei der Anlieferung des Neugeräts, bitte bereits bei der Bestellung angeben",
           "Nachträgliche Abholung eines Großgeräts nach Terminabsprache mit unserem Kundenservice",
           `Fragen zur Rücknahme: ${COMPANY.email} oder ${COMPANY.phone}`,
         ],
@@ -760,9 +760,9 @@ export const deLegalPages: LegalPageMap = {
         heading: "Bedeutung der Batteriesymbole",
         body: "Batterien und Akkus tragen ebenfalls das Symbol der durchgestrichenen Mülltonne. Enthalten sie bestimmte Schadstoffe, steht darunter zusätzlich ein chemisches Kürzel:",
         list: [
-          "Pb – die Batterie enthält mehr als 0,004 Masseprozent Blei",
-          "Cd – die Batterie enthält mehr als 0,002 Masseprozent Cadmium",
-          "Hg – die Batterie enthält mehr als 0,0005 Masseprozent Quecksilber",
+          "Pb: die Batterie enthält mehr als 0,004 Masseprozent Blei",
+          "Cd: die Batterie enthält mehr als 0,002 Masseprozent Cadmium",
+          "Hg: die Batterie enthält mehr als 0,0005 Masseprozent Quecksilber",
         ],
       },
       {
@@ -771,7 +771,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Kommunale Sammelstellen",
-        body: "Unabhängig von unserer Rücknahme können Sie Altgeräte und Altbatterien kostenlos bei den Sammelstellen der öffentlich-rechtlichen Entsorgungsträger abgeben – etwa auf Wertstoffhöfen oder über Schadstoffmobile. Die Standorte finden Sie auf der Website Ihrer Stadt oder Ihres Landkreises.",
+        body: "Unabhängig von unserer Rücknahme können Sie Altgeräte und Altbatterien kostenlos bei den Sammelstellen der öffentlich-rechtlichen Entsorgungsträger abgeben, etwa auf Wertstoffhöfen oder über Schadstoffmobile. Die Standorte finden Sie auf der Website Ihrer Stadt oder Ihres Landkreises.",
       },
       {
         heading: "Unsere Registrierungen",
@@ -786,13 +786,13 @@ export const deLegalPages: LegalPageMap = {
   },
 
   /* ------------------------------------------------------------------ */
-  /* FAQ — pas d'avertissement juridique                                 */
+  /* FAQ : pas d'avertissement juridique                                 */
   /* ------------------------------------------------------------------ */
   faq: {
     slug: "faq",
     title: "Häufige Fragen",
     intro:
-      "Von der Lieferzeit über den Montageservice bis zur Drohnenregistrierung: Hier finden Sie Antworten auf die Fragen, die uns am häufigsten erreichen. Ist Ihre Frage nicht dabei, rufen Sie uns an oder schreiben Sie uns – montags bis samstags von 8 bis 20 Uhr.",
+      "Von der Lieferzeit über den Montageservice bis zur Drohnenregistrierung: Hier finden Sie Antworten auf die Fragen, die uns am häufigsten erreichen. Ist Ihre Frage nicht dabei, rufen Sie uns an oder schreiben Sie uns, montags bis samstags von 8 bis 20 Uhr.",
     updatedAt: UPDATED_AT,
     sections: [
       {
@@ -801,23 +801,23 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Was kostet der Versand?",
-        body: "Der Standardversand innerhalb Deutschlands ist kostenlos – ohne Mindestbestellwert, unabhängig von Größe und Gewicht der Ware. Wünschen Sie die Lieferung innerhalb von 24 bis 48 Stunden, kostet der Expressversand pauschal 70,00 Euro. Andere Zuschläge gibt es nicht. Die für Ihre Bestellung geltenden Kosten sehen Sie immer im Warenkorb, bevor Sie bestellen.",
+        body: "Der Standardversand innerhalb Deutschlands ist kostenlos, ohne Mindestbestellwert, unabhängig von Größe und Gewicht der Ware. Wünschen Sie die Lieferung innerhalb von 24 bis 48 Stunden, kostet der Expressversand pauschal 70,00 Euro. Andere Zuschläge gibt es nicht. Die für Ihre Bestellung geltenden Kosten sehen Sie immer im Warenkorb, bevor Sie bestellen.",
       },
       {
         heading: "Liefern Sie auch ins Ausland?",
-        body: "Standardmäßig liefern wir innerhalb Deutschlands, einschließlich der Inseln. Lieferungen ins europäische Ausland sind nach Absprache möglich – schreiben Sie uns vor der Bestellung, dann prüfen wir Machbarkeit und Kosten für Ihre Adresse.",
+        body: "Standardmäßig liefern wir innerhalb Deutschlands, einschließlich der Inseln. Lieferungen ins europäische Ausland sind nach Absprache möglich. Schreiben Sie uns vor der Bestellung, dann prüfen wir Machbarkeit und Kosten für Ihre Adresse.",
       },
       {
         heading: "Wird das Gerät bis in die Wohnung gebracht?",
-        body: "Der Speditionsversand endet standardmäßig an der Bordsteinkante. Für 29,00 Euro bringen unsere Speditionspartner das Gerät bis an den gewünschten Aufstellort, auch in obere Etagen; das Auspacken und die Entsorgung der Transportverpackung kosten zusätzlich 9,00 Euro. Diese beiden Leistungen buchen Sie nicht im Warenkorb – rufen Sie uns an oder schreiben Sie uns, dann stimmen wir sie mit der Spedition ab. Bitte messen Sie vorher Treppenhaus, Türen und Aufzug aus.",
+        body: "Der Speditionsversand endet standardmäßig an der Bordsteinkante. Für 29,00 Euro bringen unsere Speditionspartner das Gerät bis an den gewünschten Aufstellort, auch in obere Etagen; das Auspacken und die Entsorgung der Transportverpackung kosten zusätzlich 9,00 Euro. Diese beiden Leistungen buchen Sie nicht im Warenkorb, rufen Sie uns an oder schreiben Sie uns, dann stimmen wir sie mit der Spedition ab. Bitte messen Sie vorher Treppenhaus, Türen und Aufzug aus.",
       },
       {
         heading: "Bieten Sie Anschluss und Montage an?",
-        body: "Ja: 49 Euro für Waschmaschine, Trockner oder Geschirrspüler, 39 Euro für freistehende Kühlgeräte, 89 Euro für den Einbau in eine vorbereitete Nische und 99 Euro für die Wandmontage eines Fernsehers. Den Service vereinbaren Sie telefonisch oder per E-Mail, am besten vor der Bestellung – im Warenkorb lässt er sich nicht mitbestellen. Voraussetzung sind vorhandene, frei zugängliche und normgerechte Anschlüsse. Arbeiten an der Hauselektrik dürfen wir nicht ausführen.",
+        body: "Ja: 49 Euro für Waschmaschine, Trockner oder Geschirrspüler, 39 Euro für freistehende Kühlgeräte, 89 Euro für den Einbau in eine vorbereitete Nische und 99 Euro für die Wandmontage eines Fernsehers. Den Service vereinbaren Sie telefonisch oder per E-Mail, am besten vor der Bestellung, im Warenkorb lässt er sich nicht mitbestellen. Voraussetzung sind vorhandene, frei zugängliche und normgerechte Anschlüsse. Arbeiten an der Hauselektrik dürfen wir nicht ausführen.",
       },
       {
         heading: "Nehmen Sie mein altes Gerät mit?",
-        body: "Ja, und zwar kostenlos. Beim Kauf eines neuen Geräts nehmen wir ein gleichartiges Altgerät bei der Anlieferung mit. Sagen Sie uns rechtzeitig Bescheid – telefonisch, per E-Mail oder über das Anmerkungsfeld der Bestellung –, damit die Spedition die Rücknahme einplanen kann. Das Altgerät sollte abgeklemmt, entleert, gereinigt und frei zugänglich bereitstehen. Kleine Altgeräte, bei denen keine äußere Abmessung 25 Zentimeter überschreitet, nehmen wir sogar ohne Neukauf zurück – bis zu drei Stück je Geräteart. Alle weiteren Rücknahmewege stehen auf der Seite „Elektroaltgeräte & Batterien“.",
+        body: "Ja, und zwar kostenlos. Beim Kauf eines neuen Geräts nehmen wir ein gleichartiges Altgerät bei der Anlieferung mit. Sagen Sie uns rechtzeitig Bescheid (telefonisch, per E-Mail oder über das Anmerkungsfeld der Bestellung), damit die Spedition die Rücknahme einplanen kann. Das Altgerät sollte abgeklemmt, entleert, gereinigt und frei zugänglich bereitstehen. Kleine Altgeräte, bei denen keine äußere Abmessung 25 Zentimeter überschreitet, nehmen wir sogar ohne Neukauf zurück, bis zu drei Stück je Geräteart. Alle weiteren Rücknahmewege stehen auf der Seite „Elektroaltgeräte & Batterien“.",
       },
       {
         heading: "Welche Zahlungsarten kann ich nutzen?",
@@ -829,47 +829,47 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Wie lange habe ich Garantie?",
-        body: "Auf alle Neugeräte gilt die gesetzliche Mängelhaftung von zwei Jahren ab Ablieferung. Tritt in den ersten zwölf Monaten ein Defekt auf, wird vermutet, dass er von Anfang an vorlag – Sie müssen also nichts beweisen. Viele Hersteller gewähren zusätzlich freiwillige Garantien, etwa auf Motoren oder Kompressoren.",
+        body: "Auf alle Neugeräte gilt die gesetzliche Mängelhaftung von zwei Jahren ab Ablieferung. Tritt in den ersten zwölf Monaten ein Defekt auf, wird vermutet, dass er von Anfang an vorlag. Sie müssen also nichts beweisen. Viele Hersteller gewähren zusätzlich freiwillige Garantien, etwa auf Motoren oder Kompressoren.",
       },
       {
         heading: "Was ist der Unterschied zwischen Garantie und Gewährleistung?",
-        body: "Die Gewährleistung ist Ihr gesetzliches Recht uns gegenüber und dauert zwei Jahre. Eine Garantie ist eine freiwillige Zusage des Herstellers, die darüber hinausgehen kann – etwa zehn Jahre auf den Motor einer Waschmaschine. Die Garantie ersetzt die Gewährleistung nicht, sondern kommt zusätzlich hinzu. Sie entscheiden, welchen Weg Sie nutzen.",
+        body: "Die Gewährleistung ist Ihr gesetzliches Recht uns gegenüber und dauert zwei Jahre. Eine Garantie ist eine freiwillige Zusage des Herstellers, die darüber hinausgehen kann, etwa zehn Jahre auf den Motor einer Waschmaschine. Die Garantie ersetzt die Gewährleistung nicht, sondern kommt zusätzlich hinzu. Sie entscheiden, welchen Weg Sie nutzen.",
       },
       {
         heading: "Wie lange kann ich einen Artikel zurückgeben?",
-        body: "Es gibt zwei Wege zurück. Ihr gesetzliches Widerrufsrecht läuft 14 Tage ab Erhalt der Ware und verlangt keine Begründung; maßgeblich ist die Widerrufsbelehrung. Darüber hinaus räumen wir Ihnen freiwillig ein vertragliches Rückgaberecht von 30 Tagen ab Erhalt der Ware ein – vorausgesetzt, der Artikel ist unbenutzt, vollständig und wiederverkaufsfähig. Dieses zusätzliche Recht schränkt Ihre gesetzlichen Rechte nicht ein.",
+        body: "Es gibt zwei Wege zurück. Ihr gesetzliches Widerrufsrecht läuft 14 Tage ab Erhalt der Ware und verlangt keine Begründung; maßgeblich ist die Widerrufsbelehrung. Darüber hinaus räumen wir Ihnen freiwillig ein vertragliches Rückgaberecht von 30 Tagen ab Erhalt der Ware ein, vorausgesetzt, der Artikel ist unbenutzt, vollständig und wiederverkaufsfähig. Dieses zusätzliche Recht schränkt Ihre gesetzlichen Rechte nicht ein.",
       },
       {
         heading: "Wie schicke ich etwas zurück?",
-        body: `Melden Sie die Rücksendung vorab an – per E-Mail an ${COMPANY.email} oder telefonisch unter ${COMPANY.phone}. Das Muster-Widerrufsformular finden Sie auf der Seite „Widerrufsrecht“; Sie müssen es aber nicht verwenden, eine formlose eindeutige Erklärung genügt. Für Pakete erhalten Sie ein kostenloses Rücksendeetikett. Großgeräte holen wir nach Terminabsprache bei Ihnen ab; bitte klemmen Sie das Gerät vorher ab und entleeren Sie es. Legen Sie sämtliches Zubehör bei und verwenden Sie möglichst den Originalkarton mit den Transportsicherungen.`,
+        body: `Melden Sie die Rücksendung vorab an, per E-Mail an ${COMPANY.email} oder telefonisch unter ${COMPANY.phone}. Das Muster-Widerrufsformular finden Sie auf der Seite „Widerrufsrecht“; Sie müssen es aber nicht verwenden, eine formlose eindeutige Erklärung genügt. Für Pakete erhalten Sie ein kostenloses Rücksendeetikett. Großgeräte holen wir nach Terminabsprache bei Ihnen ab; bitte klemmen Sie das Gerät vorher ab und entleeren Sie es. Legen Sie sämtliches Zubehör bei und verwenden Sie möglichst den Originalkarton mit den Transportsicherungen.`,
       },
       {
         heading: "Was kostet die Rücksendung?",
-        body: "Nichts. Wir tragen die Kosten der Rücksendung – sowohl für Pakete als auch für die Abholung von Großgeräten durch die Spedition.",
+        body: "Nichts. Wir tragen die Kosten der Rücksendung, sowohl für Pakete als auch für die Abholung von Großgeräten durch die Spedition.",
       },
       {
         heading: "Wann bekomme ich mein Geld zurück?",
-        body: "Wir erstatten den Kaufpreis spätestens 14 Tage nach Eingang Ihres Widerrufs, sobald die Ware bei uns eingetroffen ist oder Sie den Absendenachweis vorgelegt haben. Die Rückzahlung erfolgt über das ursprüngliche Zahlungsmittel; Gebühren entstehen Ihnen dabei nicht. Hinsendekosten fallen beim Standardversand nicht an. Haben Sie den Expressversand gewählt, bleibt dessen Aufpreis nach § 357 Absatz 2 BGB bei Ihnen: Erstattet wird nur, was die günstigste Standardlieferung gekostet hätte – und die ist bei uns kostenlos.",
+        body: "Wir erstatten den Kaufpreis spätestens 14 Tage nach Eingang Ihres Widerrufs, sobald die Ware bei uns eingetroffen ist oder Sie den Absendenachweis vorgelegt haben. Die Rückzahlung erfolgt über das ursprüngliche Zahlungsmittel; Gebühren entstehen Ihnen dabei nicht. Hinsendekosten fallen beim Standardversand nicht an. Haben Sie den Expressversand gewählt, bleibt dessen Aufpreis nach § 357 Absatz 2 BGB bei Ihnen: Erstattet wird nur, was die günstigste Standardlieferung gekostet hätte, und die ist bei uns kostenlos.",
       },
       {
-        heading: "Ein Artikel ist „Auf Anfrage“ – was bedeutet das?",
+        heading: "Ein Artikel ist „Auf Anfrage“, was bedeutet das?",
         body: "Der Artikel ist aktuell nicht auf Lager, aber lieferbar. Wir bestellen ihn nach Ihrem Auftrag beim Hersteller; die Lieferzeit beträgt üblicherweise zwei bis vier Wochen. Sie können solche Artikel ganz normal bestellen und erhalten von uns eine Rückmeldung, sobald ein konkreter Termin feststeht.",
       },
       {
         heading: "Woher weiß ich, ob ein Einbaugerät in meine Küche passt?",
-        body: "Entscheidend sind die Nischenmaße in Höhe, Breite und Tiefe sowie die Position der Anschlüsse. Alle Geräte- und Nischenmaße finden Sie in den technischen Daten auf der Produktseite. Messen Sie im Zweifel nach oder rufen Sie uns an – unsere Beratung prüft mit Ihnen gemeinsam, ob das Gerät passt, und schlägt Alternativen vor.",
+        body: "Entscheidend sind die Nischenmaße in Höhe, Breite und Tiefe sowie die Position der Anschlüsse. Alle Geräte- und Nischenmaße finden Sie in den technischen Daten auf der Produktseite. Messen Sie im Zweifel nach oder rufen Sie uns an, unsere Beratung prüft mit Ihnen gemeinsam, ob das Gerät passt, und schlägt Alternativen vor.",
       },
       {
         heading: "Wo finde ich die Energieeffizienzklasse eines Geräts?",
-        body: "Auf jeder Produktseite zeigen wir das EU-Energielabel mit der Effizienzklasse sowie das offizielle Produktdatenblatt. Dort stehen auch Verbrauchswerte, Geräuschemissionen und – bei Waschmaschinen und Geschirrspülern – Wasserverbrauch je Programm. Achten Sie beim Vergleich unbedingt auf dieselbe Programm- und Beladungsangabe.",
+        body: "Auf jeder Produktseite zeigen wir das EU-Energielabel mit der Effizienzklasse sowie das offizielle Produktdatenblatt. Dort stehen auch Verbrauchswerte, Geräuschemissionen und, bei Waschmaschinen und Geschirrspülern, Wasserverbrauch je Programm. Achten Sie beim Vergleich unbedingt auf dieselbe Programm- und Beladungsangabe.",
       },
       {
         heading: "Was muss ich beim Kauf einer Drohne beachten?",
-        body: "In Deutschland gilt die EU-Drohnenverordnung. Als Fernpilot müssen Sie sich beim Luftfahrt-Bundesamt registrieren und erhalten eine elektronische Registrierungsnummer (e-ID), die Sie gut sichtbar an der Drohne anbringen. Außerdem ist eine Halterhaftpflichtversicherung nach § 43 Luftverkehrsgesetz gesetzlich vorgeschrieben – auch für sehr leichte Modelle. Fliegen dürfen Sie in der offenen Kategorie bis 120 Meter Höhe, stets in Sichtweite und nicht über Menschenansammlungen; Flugverbotszonen wie Flughäfen, Krankenhäuser, Bundesfernstraßen und Naturschutzgebiete sind tabu.",
+        body: "In Deutschland gilt die EU-Drohnenverordnung. Als Fernpilot müssen Sie sich beim Luftfahrt-Bundesamt registrieren und erhalten eine elektronische Registrierungsnummer (e-ID), die Sie gut sichtbar an der Drohne anbringen. Außerdem ist eine Halterhaftpflichtversicherung nach § 43 Luftverkehrsgesetz gesetzlich vorgeschrieben, auch für sehr leichte Modelle. Fliegen dürfen Sie in der offenen Kategorie bis 120 Meter Höhe, stets in Sichtweite und nicht über Menschenansammlungen; Flugverbotszonen wie Flughäfen, Krankenhäuser, Bundesfernstraßen und Naturschutzgebiete sind tabu.",
       },
       {
         heading: "Brauche ich für eine Drohne unter 250 Gramm einen Drohnenführerschein?",
-        body: "Nein. Für Drohnen unter 250 Gramm beziehungsweise der Klasse C0 ist weder der EU-Kompetenznachweis A1/A3 noch das EU-Fernpilotenzeugnis A2 erforderlich. Registrierung und Versicherung sind trotzdem Pflicht, sobald die Drohne – wie fast alle Kameramodelle – einen Sensor zur Erfassung personenbezogener Daten besitzt. Die Bildaufnahme über Privatgrundstücken bleibt zudem durch Persönlichkeitsrechte und Datenschutz begrenzt.",
+        body: "Nein. Für Drohnen unter 250 Gramm beziehungsweise der Klasse C0 ist weder der EU-Kompetenznachweis A1/A3 noch das EU-Fernpilotenzeugnis A2 erforderlich. Registrierung und Versicherung sind trotzdem Pflicht, sobald die Drohne, wie fast alle Kameramodelle, einen Sensor zur Erfassung personenbezogener Daten besitzt. Die Bildaufnahme über Privatgrundstücken bleibt zudem durch Persönlichkeitsrechte und Datenschutz begrenzt.",
       },
       {
         heading: "Kann ich als Firma bestellen und eine Rechnung mit Umsatzsteuerausweis erhalten?",
@@ -883,13 +883,13 @@ export const deLegalPages: LegalPageMap = {
   },
 
   /* ------------------------------------------------------------------ */
-  /* Über uns — pas d'avertissement juridique                            */
+  /* Über uns : pas d'avertissement juridique                            */
   /* ------------------------------------------------------------------ */
   "ueber-uns": {
     slug: "ueber-uns",
     title: "Über uns",
     intro:
-      "BBC Best Box Containerhandel e.K. ist ein Fachhändler für Haushaltsgeräte und Multimedia mit Sitz in Großensee. Wir verkaufen keine Geräte von der Stange, sondern beraten dazu – vom passenden Nischenmaß bis zur richtigen Bildwiederholrate.",
+      "BBC Best Box Containerhandel e.K. ist ein Fachhändler für Haushaltsgeräte und Multimedia mit Sitz in Großensee. Wir verkaufen keine Geräte von der Stange, sondern beraten dazu, vom passenden Nischenmaß bis zur richtigen Bildwiederholrate.",
     updatedAt: UPDATED_AT,
     sections: [
       {
@@ -902,7 +902,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Beratung statt Bestellformular",
-        body: "Ein Kühlschrank, der nicht in die Nische passt, oder ein Fernseher, der im hellen Wohnzimmer zu dunkel ist, ärgert lange. Deshalb ist unsere Beratung montags bis samstags von 8 bis 20 Uhr unter +49 176 14111374 erreichbar. Wir fragen nach Nischenmaßen, Anschlüssen, Wasserhärte oder Raumgröße – und sagen auch, wenn das günstigere Modell für Ihren Fall das bessere ist.",
+        body: "Ein Kühlschrank, der nicht in die Nische passt, oder ein Fernseher, der im hellen Wohnzimmer zu dunkel ist, ärgert lange. Deshalb ist unsere Beratung montags bis samstags von 8 bis 20 Uhr unter +49 176 14111374 erreichbar. Wir fragen nach Nischenmaßen, Anschlüssen, Wasserhärte oder Raumgröße, und sagen auch, wenn das günstigere Modell für Ihren Fall das bessere ist.",
       },
       {
         heading: "Service und Montage",
@@ -910,7 +910,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Nachhaltigkeit und Altgeräte",
-        body: "Wir nehmen Ihr Altgerät bei der Lieferung kostenlos mit und führen es der fachgerechten Verwertung zu. Kleine Altgeräte und Altbatterien nehmen wir auch ohne Neukauf zurück. Bei der Sortimentsauswahl achten wir auf Reparierbarkeit, Ersatzteilverfügbarkeit und lange Update-Zusagen bei vernetzten Geräten – Kriterien, die im Datenblatt selten stehen, im Alltag aber den Unterschied machen.",
+        body: "Wir nehmen Ihr Altgerät bei der Lieferung kostenlos mit und führen es der fachgerechten Verwertung zu. Kleine Altgeräte und Altbatterien nehmen wir auch ohne Neukauf zurück. Bei der Sortimentsauswahl achten wir auf Reparierbarkeit, Ersatzteilverfügbarkeit und lange Update-Zusagen bei vernetzten Geräten, Kriterien, die im Datenblatt selten stehen, im Alltag aber den Unterschied machen.",
       },
       {
         heading: "Standort und Logistik",
@@ -918,19 +918,19 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Arbeiten bei BBC Best Box Containerhandel e.K.",
-        body: "Wir suchen regelmäßig Verstärkung in Beratung, Technik und Logistik. Wenn Sie Freude daran haben, Menschen wirklich weiterzuhelfen, statt nur Bestellungen abzuarbeiten, schreiben Sie uns an kontakt@bestbox-containerhandel.de – auch Initiativbewerbungen sind willkommen.",
+        body: "Wir suchen regelmäßig Verstärkung in Beratung, Technik und Logistik. Wenn Sie Freude daran haben, Menschen wirklich weiterzuhelfen, statt nur Bestellungen abzuarbeiten, schreiben Sie uns an kontakt@bestbox-containerhandel.de, auch Initiativbewerbungen sind willkommen.",
       },
     ],
   },
 
   /* ------------------------------------------------------------------ */
-  /* Kontakt — pas d'avertissement juridique                             */
+  /* Kontakt : pas d'avertissement juridique                             */
   /* ------------------------------------------------------------------ */
   kontakt: {
     slug: "kontakt",
     title: "Kontakt",
     intro:
-      "Ob Beratung vor dem Kauf, Frage zur Lieferung oder Reklamation: Wir sind montags bis samstags von 8 bis 20 Uhr für Sie da. Halten Sie bei Fragen zu einer Bestellung bitte Ihre Bestellnummer bereit – das beschleunigt alles.",
+      "Ob Beratung vor dem Kauf, Frage zur Lieferung oder Reklamation: Wir sind montags bis samstags von 8 bis 20 Uhr für Sie da. Halten Sie bei Fragen zu einer Bestellung bitte Ihre Bestellnummer bereit, das beschleunigt alles.",
     updatedAt: UPDATED_AT,
     sections: [
       {
@@ -950,7 +950,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Retouren und Altgeräte",
-        body: "Bitte senden Sie Retouren und kleine Altgeräte nicht unangekündigt zurück, sondern melden Sie sie vorab an – so ordnen wir Ihre Sendung sofort zu.",
+        body: "Bitte senden Sie Retouren und kleine Altgeräte nicht unangekündigt zurück, sondern melden Sie sie vorab an, so ordnen wir Ihre Sendung sofort zu.",
         list: [
           `Retourenannahme: ${RETURN_ADDRESS}`,
           `Altgeräterücknahme: ${COMPANY.name}, Altgeräterücknahme, ${COMPANY.street}, ${COMPANY.city}`,

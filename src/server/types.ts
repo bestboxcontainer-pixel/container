@@ -96,7 +96,7 @@ export interface IntegrationRecord {
   label: string;
   description: string;
   enabled: boolean;
-  /** Affichage masqué, par ex. "••••4242" — le clair ne quitte jamais le serveur. */
+  /** Affichage masqué, par ex. "••••4242", le clair ne quitte jamais le serveur. */
   maskedValue?: string;
   configured: boolean;
   updatedAt?: string;

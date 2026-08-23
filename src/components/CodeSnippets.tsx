@@ -15,7 +15,7 @@ import { splitSnippetForHead, type SnippetPlacement } from "@/server/codeSnippet
  * n'importe quel autre script de la page. La distinction n'est pas théorique :
  * elle est la raison pour laquelle ce composant reste un composant serveur.
  *
- * L'emplacement « En-tête » subit un traitement supplémentaire — voir
+ * L'emplacement « En-tête » subit un traitement supplémentaire, voir
  * `splitSnippetForHead` : les `<meta>` et `<link>` en sont extraits pour être
  * rendus comme éléments React, que React remonte dans le `<head>`. Sans cela,
  * une balise de vérification de propriété resterait dans le corps de page, où

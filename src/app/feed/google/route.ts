@@ -109,7 +109,7 @@ export async function GET(): Promise<Response> {
   const base = siteUrl();
 
   const channelHeader =
-    tag("title", `${SHOP_NAME} — Produktdatenfeed`, "  ") +
+    tag("title", `${SHOP_NAME}: Produktdatenfeed`, "  ") +
     tag("link", base, "  ") +
     tag(
       "description",

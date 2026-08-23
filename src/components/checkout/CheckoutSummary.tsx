@@ -10,7 +10,7 @@ import type { CartLine, CartTotals } from "@/lib/cart";
 //
 // § 312j Abs. 2 BGB impose que le prix total, les frais de livraison et les
 // caractéristiques essentielles des articles soient visibles « unmittelbar
-// bevor der Verbraucher seine Bestellung abgibt » — donc juste au-dessus du
+// bevor der Verbraucher seine Bestellung abgibt », donc juste au-dessus du
 // bouton, sans que le client ait à ouvrir quoi que ce soit.
 
 export function CheckoutSummary({
@@ -28,14 +28,14 @@ export function CheckoutSummary({
   const t = useTranslations("checkout");
 
   return (
-    <div className="rounded-sm border border-border bg-white p-5">
+    <div className="rounded-2xl border border-border bg-white p-6">
       <h2 className="mb-4 text-lg font-black text-foreground">{t("summaryTitle")}</h2>
 
       {showItems && (
         <ul className="mb-4 space-y-3 border-b border-border pb-4">
           {lines.map((line) => (
             <li key={line.productId} className="flex items-start gap-3">
-              <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-sm bg-muted">
+              <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-muted">
                 {line.image && (
                   <Image
                     src={line.image}
@@ -70,7 +70,7 @@ export function CheckoutSummary({
           <dt className="text-muted-foreground">{t("subtotal")}</dt>
           <dd className="font-semibold text-foreground">{formatCents(totals.subtotalCents)}</dd>
         </div>
-        {/* Remise, entre le sous-total et la livraison — l'ordre dans lequel
+        {/* Remise, entre le sous-total et la livraison, l'ordre dans lequel
             elle se calcule. Le code est rappelé dessous : une somme retirée
             sans justification est la première chose qu'un client conteste. */}
         {totals.discountCents > 0 && (
@@ -114,7 +114,7 @@ export function CheckoutSummary({
       {/* La zone de livraison n'est plus annoncée ici : la boutique expédie
           au-delà de l'Allemagne, et une mention figée contredirait le pays que
           le client vient de choisir dans son adresse. */}
-      <p className="mt-3 flex items-start gap-2 rounded-sm bg-muted px-3 py-2 text-xs text-muted-foreground">
+      <p className="mt-3 flex items-start gap-2 rounded-xl bg-muted px-3 py-2 text-xs text-muted-foreground">
         <Truck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />
         <span>{t("deliveryTime")}</span>
       </p>

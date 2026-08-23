@@ -314,7 +314,7 @@ export function CouponManager({ coupons }: { coupons: CouponRow[] }) {
               onChange={(e) => setEdite({ ...edite, enabled: e.target.checked })}
               className="h-4 w-4 rounded-sm border-border accent-primary"
             />
-            Actif — le code est accepté à la caisse
+            Actif : le code est accepté à la caisse
           </label>
 
           {erreur && (

@@ -4,7 +4,7 @@
  * Ce module ne connaît ni Prisma ni React : il tient les délais de la séquence,
  * les libellés allemands et l'encodage du panier figé. Il est importé par le
  * répartiteur, par les gabarits d'e-mail, par le back-office et par les scripts
- * de test — exactement le rôle que src/lib/cart.ts joue pour le panier.
+ * de test : exactement le rôle que src/lib/cart.ts joue pour le panier.
  *
  * La séquence complète est décrite dans
  * docs/superpowers/specs/2026-07-26-warenkorb-erinnerungen-design.md
@@ -24,7 +24,7 @@ export type RecoveryStoppedReason = "" | "converted" | "unsubscribed" | "complet
  * Les libellés sont recopiés plutôt que référencés, comme dans OrderItem : le
  * message doit rester lisible si l'article quitte le catalogue entre l'abandon
  * et le septième jour. Le prix et le stock, eux, sont rafraîchis en base avant
- * chaque envoi — ces valeurs-ci ne servent que de repli.
+ * chaque envoi : ces valeurs-ci ne servent que de repli.
  */
 export interface RecoveryLine {
   productId: string;
@@ -55,7 +55,7 @@ const HOUR = 60 * MINUTE;
  *
  * Vingt minutes pour le premier : assez pour laisser le visiteur revenir de
  * lui-même, encore assez tôt pour un simple rappel. Huit heures avant le
- * deuxième — le temps d'une nuit ou d'une journée de travail. Vingt-quatre
+ * deuxième : le temps d'une nuit ou d'une journée de travail. Vingt-quatre
  * heures avant le troisième, dernière relance avant suppression du panier.
  */
 export const RECOVERY_DELAYS_MS: readonly number[] = [20 * MINUTE, 8 * HOUR, 24 * HOUR];
@@ -98,7 +98,7 @@ export const RESUME_QUERY_PARAM = "fortsetzen";
 
 // ---- Code promotionnel du troisième message ----
 //
-// Code fixe, à saisir manuellement au panier — pas de lien qui l'appliquerait
+// Code fixe, à saisir manuellement au panier : pas de lien qui l'appliquerait
 // tout seul, pour rester sur le même mécanisme que n'importe quel coupon de la
 // boutique. La ligne Coupon correspondante vit en base (table Coupon, code
 // ci-dessous) : c'est elle qui fait foi pour le pourcentage et le seuil,

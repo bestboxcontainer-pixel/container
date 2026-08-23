@@ -41,7 +41,7 @@ export default async function UnsubscribePage({
 
   const token = rawToken?.trim() ?? "";
   // Un jeton lisible seulement : la vérification d'existence est faite à la
-  // confirmation, pas ici — charger la page ne doit rien écrire ni révéler.
+  // confirmation, pas ici : charger la page ne doit rien écrire ni révéler.
   const validShape = /^[0-9a-f]{64}$/.test(token);
   const recovery = validShape ? await findRecoveryByToken(token) : null;
 

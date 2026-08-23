@@ -1,6 +1,6 @@
 // Modèle de données de la boutique Hausgeräte Pfeffer.
 // Base de production et de développement : PostgreSQL (Neon), via la seule
-// variable DATABASE_URL — voir docs/DATABASE.md.
+// variable DATABASE_URL : voir docs/DATABASE.md.
 // Contrainte volontaire : ni enum Prisma ni liste scalaire, pour que le même
 // schéma reste portable d'un moteur SQL à l'autre.
 // Sous Postgres, un `String` est un `text` sans limite de longueur : aucune
@@ -131,7 +131,7 @@ model Review {
   rating        Int
   title         String    @default("")
   body          String
-  // pending | approved | rejected — en texte, pour rester portable
+  // pending | approved | rejected : en texte, pour rester portable
   status        String    @default("pending")
   moderatorNote String?
   moderatedAt   DateTime?
@@ -187,7 +187,7 @@ model Order {
   orderNumber String @unique
 
   // Rattachement FACULTATIF à un compte client. La commande en tant qu'invité
-  // reste possible — l'obliger à créer un compte serait contraire au principe
+  // reste possible : l'obliger à créer un compte serait contraire au principe
   // de minimisation (art. 5 § 1 c RGPD) rappelé par la DSK en mars 2022.
   customerId String?
 
@@ -217,7 +217,7 @@ model Order {
   billingCity       String
   billingCountry    String @default("DE")
 
-  // Adresse de livraison — recopiée depuis la facturation si identique
+  // Adresse de livraison : recopiée depuis la facturation si identique
   shippingSameAsBilling Boolean @default(true)
   shippingSalutation    String  @default("")
   shippingFirstName     String  @default("")
@@ -233,8 +233,8 @@ model Order {
   paymentMethodLabel String
   paymentMethodFee   String @default("")
 
-  // Mode de livraison choisi par le client : standard (gratuit, 3–5 jours) ou
-  // express (70 €, 24–48 h). La clé sert à réafficher le mode dans la langue du
+  // Mode de livraison choisi par le client : standard (gratuit, 3-5 jours) ou
+  // express (70 €, 24-48 h). La clé sert à réafficher le mode dans la langue du
   // lecteur, le libellé garde une trace lisible même si les modes évoluent.
   // Les commandes antérieures au choix du mode reçoivent le standard, qui était
   // alors le seul existant.
@@ -278,7 +278,7 @@ model Order {
   stockRestored Boolean @default(false)
 
   // Attribution marketing. Renseignés quand la commande suit un clic sur le
-  // lien d'une campagne — le cookie posé par /c/<jeton> vit trente jours. Une
+  // lien d'une campagne : le cookie posé par /c/<jeton> vit trente jours. Une
   // commande sans clic préalable n'est attribuée à personne, c'est ce qui rend
   // le chiffre exploitable.
   campaignId           String?
@@ -379,7 +379,7 @@ model Customer {
   // Toujours haché en scrypt (src/lib/password.ts). Ne sort jamais du serveur.
   passwordHash String
 
-  // Identité — « salutation » reste un texte libre court (herr | frau | divers),
+  // Identité : « salutation » reste un texte libre court (herr | frau | divers),
   // pas un enum Prisma, pour rester compatible SQLite et PostgreSQL.
   salutation String @default("")
   firstName  String
@@ -393,7 +393,7 @@ model Customer {
   billingCity       String @default("")
   billingCountry    String @default("DE")
 
-  // Adresse de livraison — ignorée tant que shippingSameAsBilling est vrai
+  // Adresse de livraison : ignorée tant que shippingSameAsBilling est vrai
   shippingSameAsBilling Boolean @default(true)
   shippingSalutation    String  @default("")
   shippingFirstName     String  @default("")
@@ -422,7 +422,7 @@ model Customer {
 }
 
 // Réinitialisation du mot de passe : seul le SHA-256 du jeton est stocké.
-// Le jeton en clair n'existe que dans le lien envoyé par e-mail — une fuite de
+// Le jeton en clair n'existe que dans le lien envoyé par e-mail, une fuite de
 // la base ne permet donc pas de prendre la main sur un compte.
 model CustomerPasswordReset {
   id         String    @id @default(cuid())
@@ -460,7 +460,7 @@ model AdminUser {
 model AdminLoginChallenge {
   id          String    @id
   // Unique à dessein : un compte n'a jamais qu'un défi vivant à la fois. C'est
-  // la base qui garantit l'invariant, et non plus l'ordre des requêtes — deux
+  // la base qui garantit l'invariant, et non plus l'ordre des requêtes, deux
   // connexions simultanées ne peuvent donc plus créer deux défis et expédier
   // deux codes.
   adminUserId String    @unique
@@ -623,7 +623,7 @@ model CampaignRecipient {
   email     String
   firstName String @default("")
   lastName  String @default("")
-  // de | en — langue dans laquelle le message est composé
+  // de | en : langue dans laquelle le message est composé
   locale    String @default("de")
 
   // Jeton aléatoire de 32 octets porté par les liens de suivi et de
@@ -658,7 +658,7 @@ model CampaignRecipient {
 }
 
 // Liste de blocage globale. Une désinscription vaut pour toutes les campagnes
-// à venir, pas seulement pour celle d'où le client est parti — l'inverse
+// à venir, pas seulement pour celle d'où le client est parti, l'inverse
 // reviendrait à ignorer sa demande dès le message suivant.
 model EmailSuppression {
   // Toujours normalisée en minuscules avant écriture.
@@ -699,7 +699,7 @@ model CampaignEvent {
 // Fragments de code injectés dans les pages de la boutique sans redéploiement :
 // Google Tag Manager, pixel publicitaire, balise de vérification d'un moteur.
 //
-// Le contenu est inséré tel quel, sans échappement — c'est tout l'intérêt, et
+// Le contenu est inséré tel quel, sans échappement, c'est tout l'intérêt, et
 // c'est aussi pourquoi l'écran est réservé aux administrateurs : y coller un
 // fragment revient à exécuter du code sur chaque page vue.
 model CodeSnippet {
@@ -740,7 +740,7 @@ model Coupon {
 
   // percent | fixed | freeShipping
   kind String @default("percent")
-  // Pourcentage (1–100) ou montant en centimes selon `kind`. Ignoré pour la
+  // Pourcentage (1-100) ou montant en centimes selon `kind`. Ignoré pour la
   // livraison offerte.
   value Int @default(0)
 
@@ -854,7 +854,7 @@ model CheckoutRecovery {
   // (minuscules, sans espaces) pour tous les rapprochements.
   email           String
   emailNormalized String @unique
-  // de | en — langue du tunnel. Les gabarits sont allemands dans cette
+  // de | en : langue du tunnel. Les gabarits sont allemands dans cette
   // version ; le champ est en place pour la traduction à venir.
   locale          String @default("de")
 

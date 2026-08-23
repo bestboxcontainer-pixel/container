@@ -7,14 +7,14 @@
  * La table `LegalContent` prime sur les fichiers versionnés : dès qu'une page a
  * été enregistrée une fois depuis le back-office, modifier `de.ts` n'a plus
  * aucun effet visible. La page « datenschutz » est dans ce cas. Le fichier
- * reste la source de référence — il est corrigé lui aussi — mais c'est ici que
+ * reste la source de référence, il est corrigé lui aussi, mais c'est ici que
  * se joue ce que le visiteur lit.
  *
  * Le script ne touche que l'allemand, langue de référence. L'anglais se
  * régénère ensuite par le script de traduction, à partir de cette version.
  *
  * Idempotent : relancé, il ne fait rien de plus. Il refuse d'écrire à l'aveugle
- * si les sections attendues ont été remaniées depuis — mieux vaut s'arrêter que
+ * si les sections attendues ont été remaniées depuis, mieux vaut s'arrêter que
  * d'écraser un texte relu par un juriste.
  *
  * Usage :
@@ -44,7 +44,7 @@ const CORPS_COOKIES =
   "Zusätzlich können Sie Cookies in Ihrem Browser löschen oder blockieren. Einige Funktionen des Shops stehen dann möglicherweise nicht mehr vollständig zur Verfügung.";
 
 const PHRASE_DESTINATAIRE =
-  " Dazu zählt die Smartsupp s.r.o. (Tschechische Republik) als Anbieter des Live-Chats – ausschließlich für Gespräche, die Sie selbst eröffnen.";
+  " Dazu zählt die Smartsupp s.r.o. (Tschechische Republik) als Anbieter des Live-Chats, ausschließlich für Gespräche, die Sie selbst eröffnen.";
 
 interface Section {
   heading?: string;

@@ -27,7 +27,7 @@ export default async function AdminAnnoncePage() {
         </h1>
         <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
           Message affiché tout en haut de la boutique : une promotion en cours, un délai de
-          livraison exceptionnel, une fermeture. Un seul bandeau paraît à la fois — le premier
+          livraison exceptionnel, une fermeture. Un seul bandeau paraît à la fois, le premier
           actif dans l&apos;ordre indiqué, dont la fenêtre de dates est ouverte.
         </p>
         <p className="mt-2 text-sm text-muted-foreground">

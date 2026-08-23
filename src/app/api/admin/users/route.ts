@@ -18,7 +18,7 @@ export async function GET() {
   const { session, unauthorized } = await requireAdminApi();
   if (unauthorized) return unauthorized;
 
-  // listAdminUsers liefert bewusst kein Passwortfeld — auch keinen Hash.
+  // listAdminUsers liefert bewusst kein Passwortfeld, auch keinen Hash.
   // Les superadmins ne sortent d'ici que pour un autre superadmin.
   const users = await listAdminUsers({
     includeSuperadmins: await isSuperadminSession(session),

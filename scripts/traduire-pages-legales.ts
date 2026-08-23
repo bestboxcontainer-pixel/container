@@ -8,8 +8,8 @@
  * boutiques différentes. Sur des CGV ou une notice de rétractation, l'écart
  * n'est pas cosmétique.
  *
- * Le script prend l'allemand tel qu'il est SERVI aujourd'hui — donc la version
- * en base — et enregistre sa traduction sous la locale anglaise. La structure
+ * Le script prend l'allemand tel qu'il est SERVI aujourd'hui, donc la version
+ * en base : et enregistre sa traduction sous la locale anglaise. La structure
  * est reprise à l'identique : même nombre de sections, même ordre, mêmes
  * intitulés dans le même rôle. Un écart de structure entre les deux langues
  * réintroduirait exactement le problème qu'on corrige.
@@ -64,12 +64,12 @@ async function main() {
     const anglais = traductions[row.slug];
 
     if (!anglais) {
-      ignorees.push(`${row.slug} — pas de traduction fournie`);
+      ignorees.push(`${row.slug} : pas de traduction fournie`);
       continue;
     }
     if (anglais.sections.length !== allemand.sections.length) {
       ignorees.push(
-        `${row.slug} — ${anglais.sections.length} sections traduites pour ${allemand.sections.length} en allemand`,
+        `${row.slug} : ${anglais.sections.length} sections traduites pour ${allemand.sections.length} en allemand`,
       );
       continue;
     }

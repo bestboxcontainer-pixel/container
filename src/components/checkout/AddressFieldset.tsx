@@ -26,7 +26,7 @@ export const EMPTY_ADDRESS: AddressValue = {
 };
 
 const INPUT =
-  "w-full rounded-sm border border-border bg-white px-3 py-2 text-sm outline-none focus:border-primary";
+  "w-full rounded-xl border border-border bg-white px-3.5 py-2.5 text-sm outline-none focus:border-primary";
 
 const LABEL = "mb-1 block text-sm font-semibold text-foreground";
 

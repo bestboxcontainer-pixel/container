@@ -8,7 +8,7 @@
  * La base l'emporte quand une ligne existe. Sinon le fichier est servi. Ce
  * repli n'est pas seulement une commodité de démarrage : ces pages sont
  * obligatoires (Impressum, Widerrufsbelehrung…). Si la base est injoignable ou
- * si une ligne est illisible, elles doivent quand même s'afficher — d'où les
+ * si une ligne est illisible, elles doivent quand même s'afficher, d'où les
  * `try/catch` qui retombent sur le fichier au lieu de laisser remonter
  * l'erreur.
  *

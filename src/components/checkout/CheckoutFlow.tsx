@@ -59,7 +59,7 @@ type Step = (typeof STEPS)[number];
 /**
  * Étapes réellement affichées. Avec un seul moyen de paiement actif, l'écran de
  * choix ne propose rien à choisir : il est retiré du fil et le moyen unique est
- * retenu d'office. Le récapitulatif final continue de le nommer — § 312j Abs. 2
+ * retenu d'office. Le récapitulatif final continue de le nommer, § 312j Abs. 2
  * BGB veut que le client voie ce qu'il valide, pas qu'il l'ait cliqué.
  */
 /**
@@ -90,7 +90,7 @@ function visibleSteps(methodCount: number): readonly Step[] {
 }
 
 const INPUT =
-  "w-full rounded-sm border border-border bg-white px-3 py-2 text-sm outline-none focus:border-primary";
+  "w-full rounded-xl border border-border bg-white px-3.5 py-2.5 text-sm outline-none focus:border-primary";
 const LABEL = "mb-1 block text-sm font-semibold text-foreground";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -118,7 +118,7 @@ function validateAddress(address: AddressValue): CheckoutError | undefined {
 /**
  * Coordonnées pré-remplies quand un client est connecté.
  * Toujours facultatif : sans compte, le tunnel se comporte exactement comme
- * avant. Ces valeurs ne servent qu'au confort de saisie — le rattachement de la
+ * avant. Ces valeurs ne servent qu'au confort de saisie, le rattachement de la
  * commande au compte se décide côté serveur, à partir du cookie de session.
  */
 export interface CheckoutCustomer {
@@ -146,7 +146,7 @@ export function CheckoutFlow({
 
   // Une session reprise depuis un message de relance fixe l'étape et l'adresse
   // dès le premier rendu : ce sont des valeurs initiales dérivées des props,
-  // pas un effet de bord — seule l'écriture dans le panier (système externe)
+  // pas un effet de bord : seule l'écriture dans le panier (système externe)
   // a sa place dans un effet, plus bas.
   const [step, setStep] = useState<Step>(() => resumed?.step ?? "contact");
   const [shippingMethodKey, setShippingMethodKey] = useState<ShippingMethodKey>(
@@ -185,7 +185,7 @@ export function CheckoutFlow({
   // Totaux recalculés ici plutôt que repris du panier : seul le tunnel connaît
   // le mode de livraison retenu. Le récapitulatif de droite suit donc le clic du
   // client immédiatement, sans aller-retour serveur. Le serveur refera le même
-  // calcul à la commande — c'est lui qui facture.
+  // calcul à la commande : c'est lui qui facture.
   const totals = computeTotals(lines, {
     shippingMethodKey,
     freeShipping: campaign.freeShipping,
@@ -308,7 +308,7 @@ export function CheckoutFlow({
 
   if (done) {
     return (
-      <p role="status" className="rounded-sm border border-border bg-white px-4 py-10 text-center text-sm font-semibold text-foreground">
+      <p role="status" className="rounded-2xl border border-border bg-white px-4 py-10 text-center text-sm font-semibold text-foreground">
         {t("submitting")}
       </p>
     );
@@ -316,7 +316,7 @@ export function CheckoutFlow({
 
   if (!ready) {
     return (
-      <p className="rounded-sm border border-border bg-white px-4 py-10 text-center text-sm text-muted-foreground">
+      <p className="rounded-2xl border border-border bg-white px-4 py-10 text-center text-sm text-muted-foreground">
         {t("submitting")}
       </p>
     );
@@ -324,13 +324,13 @@ export function CheckoutFlow({
 
   if (lines.length === 0) {
     return (
-      <div className="rounded-sm border border-border bg-white px-6 py-14 text-center">
+      <div className="rounded-2xl border border-border bg-white px-6 py-14 text-center">
         <ShoppingCart className="mx-auto mb-4 h-10 w-10 text-border" aria-hidden />
         <h2 className="text-xl font-black text-foreground">{t("emptyTitle")}</h2>
         <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">{t("emptyText")}</p>
         <Link
           href="/"
-          className="mt-6 inline-block rounded-sm bg-primary px-6 py-2.5 text-sm font-bold text-primary-foreground hover:brightness-110"
+          className="mt-6 inline-block rounded-full bg-primary px-6 py-2.5 text-sm font-bold text-primary-foreground hover:brightness-110"
         >
           {t("emptyCta")}
         </Link>
@@ -354,7 +354,7 @@ export function CheckoutFlow({
                   disabled={index > stepIndex}
                   onClick={() => setStep(entry)}
                   aria-current={entry === step ? "step" : undefined}
-                  className={`flex items-center gap-2 rounded-sm border px-3 py-2 text-sm font-bold ${
+                  className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold ${
                     entry === step
                       ? "border-primary bg-primary text-primary-foreground"
                       : reached
@@ -379,7 +379,7 @@ export function CheckoutFlow({
         {error && (
           <p
             role="alert"
-            className="mb-4 rounded-sm border border-destructive bg-destructive/5 px-4 py-3 text-sm font-semibold text-destructive"
+            className="mb-4 rounded-xl border border-destructive bg-destructive/5 px-4 py-3 text-sm font-semibold text-destructive"
           >
             {errorMessage(error)}
           </p>
@@ -387,7 +387,7 @@ export function CheckoutFlow({
 
         {step === "contact" && (
           <div className="space-y-4">
-            <section className="rounded-sm border border-border bg-white p-5">
+            <section className="rounded-2xl border border-border bg-white p-6">
               <h2 className="mb-1 text-lg font-black text-foreground">{t("contactTitle")}</h2>
               <p className="mb-4 text-sm text-muted-foreground">{t("contactHint")}</p>
 
@@ -429,7 +429,7 @@ export function CheckoutFlow({
               </div>
             </section>
 
-            <section className="rounded-sm border border-border bg-white p-5">
+            <section className="rounded-2xl border border-border bg-white p-6">
               <h2 className="mb-4 text-lg font-black text-foreground">{t("billingTitle")}</h2>
               <AddressFieldset idPrefix="billing" value={billing} onChange={setBilling} />
 
@@ -445,7 +445,7 @@ export function CheckoutFlow({
             </section>
 
             {!sameAsBilling && (
-              <section className="rounded-sm border border-border bg-white p-5">
+              <section className="rounded-2xl border border-border bg-white p-6">
                 <h2 className="mb-4 text-lg font-black text-foreground">{t("shippingTitle")}</h2>
                 <AddressFieldset idPrefix="shipping" value={shipping} onChange={setShipping} />
               </section>
@@ -453,12 +453,12 @@ export function CheckoutFlow({
 
             {/* Mode de livraison choisi avant le paiement : le récapitulatif de
                 droite, et donc le total, se mettent à jour immédiatement. */}
-            <section className="rounded-sm border border-border bg-white p-5">
+            <section className="rounded-2xl border border-border bg-white p-6">
               <h2 className="mb-4 text-lg font-black text-foreground">{t("shippingMethodTitle")}</h2>
               <ShippingMethodFieldset value={shippingMethodKey} onChange={setShippingMethodKey} />
             </section>
 
-            <section className="rounded-sm border border-border bg-white p-5">
+            <section className="rounded-2xl border border-border bg-white p-6">
               <label className={LABEL} htmlFor="checkout-note">
                 {t("noteTitle")}
               </label>
@@ -480,7 +480,7 @@ export function CheckoutFlow({
               <button
                 type="button"
                 onClick={goToPayment}
-                className="rounded-sm bg-primary px-6 py-2.5 text-sm font-bold text-primary-foreground hover:brightness-110"
+                className="rounded-full bg-primary px-6 py-2.5 text-sm font-bold text-primary-foreground hover:brightness-110"
               >
                 {t("next")}
               </button>
@@ -490,7 +490,7 @@ export function CheckoutFlow({
 
         {step === "payment" && (
           <div className="space-y-4">
-            <section className="rounded-sm border border-border bg-white p-5">
+            <section className="rounded-2xl border border-border bg-white p-6">
               <h2 className="mb-4 text-lg font-black text-foreground">{t("paymentTitle")}</h2>
 
               {methods.length === 0 ? (
@@ -504,7 +504,7 @@ export function CheckoutFlow({
                     return (
                       <li key={method.id}>
                         <label
-                          className={`flex cursor-pointer items-start gap-3 rounded-sm border p-4 transition-colors ${
+                          className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition-colors ${
                             active ? "border-primary bg-primary/5" : "border-border hover:border-primary/50"
                           }`}
                         >
@@ -560,7 +560,7 @@ export function CheckoutFlow({
                 type="button"
                 disabled={methods.length === 0}
                 onClick={goToReview}
-                className="rounded-sm bg-primary px-6 py-2.5 text-sm font-bold text-primary-foreground hover:brightness-110 disabled:opacity-50"
+                className="rounded-full bg-primary px-6 py-2.5 text-sm font-bold text-primary-foreground hover:brightness-110 disabled:opacity-50"
               >
                 {t("next")}
               </button>
@@ -570,7 +570,7 @@ export function CheckoutFlow({
 
         {step === "review" && (
           <div className="space-y-4">
-            <section className="rounded-sm border border-border bg-white p-5">
+            <section className="rounded-2xl border border-border bg-white p-6">
               <h2 className="mb-1 text-lg font-black text-foreground">{t("reviewTitle")}</h2>
               <p className="text-sm text-muted-foreground">{t("reviewIntro")}</p>
             </section>
@@ -619,15 +619,15 @@ export function CheckoutFlow({
             </div>
 
             {note && (
-              <section className="rounded-sm border border-border bg-white p-5">
+              <section className="rounded-2xl border border-border bg-white p-6">
                 <h3 className="mb-1 text-sm font-black text-foreground">{t("reviewNote")}</h3>
                 <p className="text-sm whitespace-pre-line text-muted-foreground">{note}</p>
               </section>
             )}
 
-            {/* Caractéristiques essentielles des articles — art. 246a § 1 al. 1
-                phr. 1 no 1 EGBGB — reprises juste avant le bouton. */}
-            <section className="rounded-sm border border-border bg-white p-5">
+            {/* Caractéristiques essentielles des articles, art. 246a § 1 al. 1
+                phr. 1 no 1 EGBGB, reprises juste avant le bouton. */}
+            <section className="rounded-2xl border border-border bg-white p-6">
               <h3 className="mb-3 text-sm font-black text-foreground">{t("reviewItems")}</h3>
               <ul className="divide-y divide-border">
                 {lines.map((line) => (
@@ -655,7 +655,7 @@ export function CheckoutFlow({
             </section>
 
             {/* Consentements exigés avant l'engagement. */}
-            <section className="rounded-sm border border-border bg-white p-5">
+            <section className="rounded-2xl border border-border bg-white p-6">
               <label className="mb-3 flex items-start gap-2 text-sm text-foreground">
                 <input
                   type="checkbox"
@@ -704,12 +704,12 @@ export function CheckoutFlow({
             {/* Bouton de commande : § 312j Abs. 3 BGB impose ce libellé et rien
                 d'autre sur la surface cliquable. Le rappel du montant total est
                 placé en dessous, hors du bouton. */}
-            <div className="rounded-sm border border-primary/40 bg-white p-5">
+            <div className="rounded-2xl border border-primary/40 bg-white p-6">
               <button
                 type="button"
                 onClick={submit}
                 disabled={pending}
-                className="w-full rounded-sm bg-primary px-6 py-4 text-base font-black text-primary-foreground hover:brightness-110 disabled:opacity-60"
+                className="w-full rounded-full bg-primary px-6 py-4 text-base font-black text-primary-foreground hover:brightness-110 disabled:opacity-60"
               >
                 {pending ? t("submitting") : t("submit")}
               </button>
@@ -759,7 +759,7 @@ function ReviewCard({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-sm border border-border bg-white p-5">
+    <section className="rounded-2xl border border-border bg-white p-6">
       <div className="mb-2 flex items-start justify-between gap-2">
         <h3 className="text-sm font-black text-foreground">{title}</h3>
         {onEdit && (

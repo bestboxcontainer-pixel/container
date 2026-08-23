@@ -7,7 +7,7 @@
  *  1. Le compte est facultatif. Rien ici n'est appelé par le tunnel de
  *     commande invité : commander sans compte reste possible et inchangé.
  *     Imposer un compte pour une commande ponctuelle est contraire au principe
- *     de minimisation (art. 5 § 1 c RGPD) — position de la Datenschutzkonferenz
+ *     de minimisation (art. 5 § 1 c RGPD), position de la Datenschutzkonferenz
  *     du 24 mars 2022 sur les comptes clients dans le commerce en ligne.
  *
  *  2. Aucune fonction ne révèle si une adresse e-mail est enregistrée.
@@ -16,7 +16,7 @@
  *     Sheet, WSTG-IDNT-04).
  *
  *  3. Supprimer un compte n'efface jamais les commandes : elles restent
- *     soumises aux délais de conservation comptables allemands — huit ans pour
+ *     soumises aux délais de conservation comptables allemands, huit ans pour
  *     les justificatifs et les factures depuis le BEG IV du 29 octobre 2024
  *     (§ 147 al. 3 AO, § 257 al. 4 HGB), dix ans pour les livres et les
  *     comptes annuels. L'art. 17 § 3 b RGPD réserve expressément ce cas. Les
@@ -46,7 +46,7 @@ import { COUNTRY_CODES, isValidPostalCode } from "@/lib/countries";
 
 /**
  * Longueur minimale du mot de passe : douze caractères, sans règle de
- * composition imposée. La longueur prime sur la complexité — le BSI
+ * composition imposée. La longueur prime sur la complexité, le BSI
  * (ORP.4.A22) et l'OWASP Authentication Cheat Sheet vont dans le même sens, et
  * une contrainte trop bavarde pousse aux mots de passe réutilisés.
  * La borne haute est large (les phrases de passe doivent passer) mais présente,
@@ -60,13 +60,13 @@ export const PASSWORD_MAX_LENGTH = 200;
 export const RESET_TTL_MINUTES = 30;
 
 /**
- * Pays acceptés dans une adresse — la liste ISO complète proposée par le
+ * Pays acceptés dans une adresse : la liste ISO complète proposée par le
  * sélecteur du tunnel de commande. Le formulaire et le serveur lisent la même
  * source : un pays affiché est donc toujours un pays enregistrable.
  */
 export const SUPPORTED_COUNTRIES = COUNTRY_CODES;
 
-/** Civilités acceptées — texte libre court, pas d'enum Prisma. */
+/** Civilités acceptées : texte libre court, pas d'enum Prisma. */
 export const SALUTATIONS = ["", "herr", "frau", "divers"] as const;
 
 /** Adresse de remplacement posée sur les commandes d'un compte supprimé. */
@@ -362,7 +362,7 @@ export async function registerCustomer(input: SignUpInput): Promise<void> {
  *
  * Quand l'adresse n'existe pas, un haché factice est tout de même vérifié :
  * la réponse prend le même temps que pour un compte réel. Un compte désactivé
- * est traité exactement comme un mot de passe faux — la boutique n'a pas à
+ * est traité exactement comme un mot de passe faux, la boutique n'a pas à
  * dire au visiteur qu'il a été bloqué.
  */
 export async function authenticateCustomer(
@@ -553,7 +553,7 @@ async function deliverMail(
   context: string,
 ): Promise<void> {
   if (isAccountMailDevFallback()) {
-    console.info(`[konto] E-mail « ${context} » vers ${to} — aucun fournisseur configuré.`);
+    console.info(`[konto] E-mail « ${context} » vers ${to}, aucun fournisseur configuré.`);
     return;
   }
   try {

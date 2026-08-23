@@ -7,14 +7,14 @@ import { COMPANY } from "@/content/legal";
 
 export const metadata: Metadata = {
   title: "Über uns | BBC Best Box Containerhandel e.K.",
-  description: "BBC Best Box Containerhandel e.K. — Inhabergeführter Containerhandel mit Sitz in Großensee, Schleswig-Holstein.",
+  description: "BBC Best Box Containerhandel e.K.: inhabergeführter Containerhandel mit Sitz in Großensee, Schleswig-Holstein.",
 };
 
 const VALUES = [
   {
     icon: ShieldCheck,
     title: "Verlässlichkeit",
-    text: "Was wir zusagen, halten wir — bei Lieferterminen ebenso wie beim Zustand jedes Containers.",
+    text: "Was wir zusagen, halten wir, bei Lieferterminen ebenso wie beim Zustand jedes Containers.",
   },
   {
     icon: Users,
@@ -41,7 +41,7 @@ export default function UeberUnsPage() {
             </h1>
             <p className="mt-4 max-w-xl text-white/75">
               {COMPANY.name} handelt seit {COMPANY.registeredSince} mit Containern für Gewerbe,
-              Bauwesen und Privatkunden — von {COMPANY.locality} aus, deutschlandweit.
+              Bauwesen und Privatkunden: von {COMPANY.locality} aus, deutschlandweit.
             </p>
           </div>
         </section>
@@ -57,7 +57,7 @@ export default function UeberUnsPage() {
               </p>
               <p className="mt-4 text-sm leading-relaxed text-foreground/70">
                 Unser Schwerpunkt liegt auf Verkauf und Vermietung von See-, Lager-, Büro-,
-                Wohn- und Sanitärcontainern — neu und geprüft gebraucht, ergänzt um
+                Wohn- und Sanitärcontainern: neu und geprüft gebraucht, ergänzt um
                 Sonderanfertigungen nach Kundenwunsch.
               </p>
             </div>
@@ -83,7 +83,7 @@ export default function UeberUnsPage() {
             <div>
               <h2 className="text-2xl font-black text-foreground">Lernen Sie uns kennen</h2>
               <p className="mt-2 text-foreground/70">
-                Rufen Sie an oder schreiben Sie uns — wir beraten Sie gerne zu Ihrem Vorhaben.
+                Rufen Sie an oder schreiben Sie uns: wir beraten Sie gerne zu Ihrem Vorhaben.
               </p>
             </div>
             <Link

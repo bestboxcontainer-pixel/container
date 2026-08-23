@@ -3,7 +3,7 @@
  *
  * L'hébergement ne fournit pas de cron système : le rythme vit donc dans le
  * processus Node lui-même. Cela suppose un serveur qui tourne en continu
- * (`next dev`, `next start`) — c'est le cas sur l'hébergement actuel. En
+ * (`next dev`, `next start`) : c'est le cas sur l'hébergement actuel. En
  * serverless, l'intervalle ne se déclencherait pas et il faudrait appeler
  * /api/cron/recovery depuis l'extérieur ; la route existe pour cela.
  *

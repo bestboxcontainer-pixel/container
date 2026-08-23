@@ -11,7 +11,7 @@ const ROLE_LABELS: Record<string, string> = {
 };
 
 function formatDateTime(value?: string): string {
-  if (!value) return "—";
+  if (!value) return "-";
   return new Date(value).toLocaleString("fr-FR", {
     day: "2-digit",
     month: "2-digit",

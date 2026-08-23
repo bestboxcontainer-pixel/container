@@ -18,7 +18,7 @@ const CARD = "rounded-sm border border-border bg-white p-5";
  *
  * Cocher un article l'ajoute au flux, indépendamment de sa catégorie. Un
  * produit ajouté plus tard au catalogue ne part pas tout seul : il faut
- * revenir cocher sa case ici — contrepartie du choix « par produit » plutôt
+ * revenir cocher sa case ici : contrepartie du choix « par produit » plutôt
  * que « par catégorie ».
  *
  * Les catégories ne servent qu'à regrouper l'affichage ; chacune propose un
@@ -223,7 +223,7 @@ export function MerchantFeedSelector({ catalog, selection }: MerchantFeedSelecto
                                 }`}
                               >
                                 {product.brand} {product.name}
-                                {!product.active && " — inactif, jamais transmis"}
+                                {!product.active && "inactif, jamais transmis"}
                               </label>
                             </li>
                           );

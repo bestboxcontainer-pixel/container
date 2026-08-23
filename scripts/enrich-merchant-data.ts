@@ -80,7 +80,7 @@ const UNIT_TOKEN = /^(kw|kg|w|g|btu|gb|tb|zoll|mhz|ghz|l|ml)$/i;
  *
  * Deux nuances évitent de jeter une vraie désignation de modèle :
  *   - un nombre nu n'est une caractéristique que si son unité le suit
- *     (« 1200 W ») ; seul, c'est le modèle — OnePlus 12, Xiaomi 14 ;
+ *     (« 1200 W ») ; seul, c'est le modèle, OnePlus 12, Xiaomi 14 ;
  *   - une unité isolée ne compte que si un nombre la précède, sinon
  *     « G 7000 » (Miele) serait lu comme « 7000 grammes ».
  */
@@ -113,7 +113,7 @@ export function deriveModelReference(name: string): string | null {
 
   const tokens = base
     .split(/\s+/)
-    .map((token) => token.replace(/^[-–—/]+|[-–—/]+$/g, "").trim())
+    .map((token) => token.replace(/^[-, , /]+|[-, , /]+$/g, "").trim())
     .filter(Boolean)
     .filter((token) => !DESCRIPTIVE_WORDS.has(token.toLowerCase()));
 
@@ -207,7 +207,7 @@ async function main(): Promise<void> {
 
   if (withoutMpn.length > 0) {
     console.log("");
-    console.log(`  Sans MPN dérivable (${withoutMpn.length}) — à saisir à la main :`);
+    console.log(`  Sans MPN dérivable (${withoutMpn.length}), à saisir à la main :`);
     for (const label of withoutMpn) console.log(`    - ${label}`);
   }
 

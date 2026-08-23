@@ -24,11 +24,11 @@ export const dynamic = "force-dynamic";
 
 // Les coordonnées bancaires du virement se saisissent dans le back-office
 // (/admin/payments) et sont relues ici. Tant qu'elles n'ont pas été
-// renseignées, ce sont celles de la démonstration qui s'affichent — avec
+// renseignées, ce sont celles de la démonstration qui s'affichent, avec
 // l'avertissement qui va avec.
 //
 // Elles accompagnent désormais tout moyen de paiement qui aboutit à un virement
-// — c'est-à-dire tous sauf la facture et le contre-remboursement. Aucun
+//, c'est-à-dire tous sauf la facture et le contre-remboursement. Aucun
 // prestataire n'encaisse à la place de la boutique : renvoyer le client vers un
 // « paiement en ligne » qui n'existe pas le laissait sans moyen de payer.
 
@@ -248,7 +248,7 @@ export default async function OrderConfirmationPage({
               {/* Instructions de paiement selon le mode choisi */}
               <PaymentInstructions order={order} />
 
-              {/* Droit de rétractation — information post-contractuelle (§ 312f BGB) */}
+              {/* Droit de rétractation : information post-contractuelle (§ 312f BGB) */}
               <section className="rounded-sm border border-border bg-white p-5">
                 <h2 className="mb-2 flex items-center gap-2 text-lg font-black text-foreground">
                   <ShieldCheck className="h-5 w-5 text-primary" aria-hidden />

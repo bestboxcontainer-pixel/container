@@ -3,7 +3,7 @@
  *
  * Mêmes contraintes de mise en page que les autres gabarits du dossier :
  * tableaux, styles en ligne, `color-scheme: light`. C'est la seule entorse
- * autorisée à la règle « pas de style en ligne » du dépôt — aucun client de
+ * autorisée à la règle « pas de style en ligne » du dépôt, aucun client de
  * messagerie ne respecte une feuille de style externe.
  *
  * Le premier message est un message de support, pas une offre : c'est le seul
@@ -61,7 +61,7 @@ function productBlock(line: RecoveryLine): string {
                       <p style="margin:0 0 4px 0; font-size:15px; line-height:21px; color:#6b7280; text-transform:uppercase;">${escapeHtml(line.brand)}</p>
                       <p style="margin:0 0 8px 0; font-size:19px; line-height:25px; font-weight:bold; color:#1f2430;">${escapeHtml(line.name)}</p>
                       <p style="margin:0 0 6px 0; font-size:19px; line-height:25px; color:#1f2430;">${quantity}${escapeHtml(price)}</p>
-                      <p style="margin:0; font-size:16px; line-height:22px; color:#4b5563;">${escapeHtml(availabilityLabel(line))} — ${escapeHtml(conditionLabel(line.condition))}</p>
+                      <p style="margin:0; font-size:16px; line-height:22px; color:#4b5563;">${escapeHtml(availabilityLabel(line))}, ${escapeHtml(conditionLabel(line.condition))}</p>
                     </td>
                   </tr>
                 </table>`;
@@ -107,14 +107,14 @@ function contentFor(rank: 1 | 2 | 3): MailContent {
   if (rank === 1) {
     return {
       subject: "Ihr Warenkorb wartet auf Sie",
-      preheader: "Wir haben Ihren Warenkorb gespeichert – wir helfen gern weiter.",
+      preheader: "Wir haben Ihren Warenkorb gespeichert, wir helfen gern weiter.",
       heading: "Ihr Warenkorb ist noch da",
       paragraphs: [
         "Sie haben vor Kurzem eine Bestellung bei BBC Best Box Containerhandel e.K. begonnen, sie aber nicht abgeschlossen. Falls etwas nicht geklappt hat oder Sie einfach unterbrochen wurden: Ihr Warenkorb ist weiterhin für Sie gespeichert.",
-        "Über den Button unten setzen Sie Ihre Bestellung genau dort fort, wo Sie aufgehört haben – Ihre Angaben sind noch da.",
+        "Über den Button unten setzen Sie Ihre Bestellung genau dort fort, wo Sie aufgehört haben. Ihre Angaben sind noch da.",
       ],
       actionLabel: "Bestellung fortsetzen",
-      contactLead: "Fragen zu Ihrer Bestellung? Schreiben Sie uns kurz – wir antworten am gleichen Werktag.",
+      contactLead: "Fragen zu Ihrer Bestellung? Schreiben Sie uns kurz, wir antworten am gleichen Werktag.",
       contactLabel: "Zum Kontaktformular",
     };
   }
@@ -125,7 +125,7 @@ function contentFor(rank: 1 | 2 | 3): MailContent {
       heading: "Ihr Warenkorb ist noch da",
       paragraphs: [
         "Ihre Auswahl liegt weiterhin in Ihrem Warenkorb. Sie können die Bestellung mit einem Klick abschließen, ohne Ihre Daten erneut eingeben zu müssen.",
-        "Gut zu wissen: Der Standardversand ist bei uns immer kostenlos, ohne Mindestbestellwert. Wer es eilig hat, wählt den Expressversand für 70,00 €. Und Sie haben in jedem Fall 14 Tage Widerrufsrecht – passt das Gerät nicht, nehmen wir es zurück.",
+        "Gut zu wissen: Der Standardversand ist bei uns immer kostenlos, ohne Mindestbestellwert. Wer es eilig hat, wählt den Expressversand für 70,00 €. Und Sie haben in jedem Fall 14 Tage Widerrufsrecht, passt das Gerät nicht, nehmen wir es zurück.",
       ],
       actionLabel: "Jetzt abschließen",
       contactLead: "Unsicher bei der Auswahl? Wir beraten Sie gern.",
@@ -133,11 +133,11 @@ function contentFor(rank: 1 | 2 | 3): MailContent {
     };
   }
   return {
-    subject: "Ihr Warenkorb wird bald gelöscht – 10 % geschenkt",
+    subject: "Ihr Warenkorb wird bald gelöscht: 10 % geschenkt",
     preheader: `Nutzen Sie ${RECOVERY_COUPON_PERCENT} % Rabatt auf Ihre Bestellung ab ${RECOVERY_COUPON_MIN_SUBTOTAL_CENTS / 100} €.`,
     heading: "Ihr Warenkorb wird in Kürze gelöscht",
     paragraphs: [
-      "Ihr gespeicherter Warenkorb wird bald automatisch gelöscht. Das ist völlig in Ordnung – vielleicht war es nicht das passende Gerät.",
+      "Ihr gespeicherter Warenkorb wird bald automatisch gelöscht. Das ist völlig in Ordnung, vielleicht war es nicht das passende Gerät.",
       "Falls Sie sich noch entscheiden möchten, haben wir Ihnen einen Rabattcode mitgeschickt. Geben Sie ihn beim Bezahlen im Warenkorb ein.",
     ],
     actionLabel: "Bestellung fortsetzen",

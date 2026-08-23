@@ -9,7 +9,7 @@ import { X } from "lucide-react";
  * Le défilement est en CSS, pas en JavaScript : une animation pilotée par le
  * fil principal saccade dès que la page travaille, et c'est justement au
  * chargement que le bandeau est visible. Le texte est écrit deux fois à la
- * suite et l'ensemble glisse d'exactement la moitié de sa largeur — la boucle
+ * suite et l'ensemble glisse d'exactement la moitié de sa largeur, la boucle
  * se referme alors sans saut visible.
  *
  * La fermeture est retenue dans le navigateur, par identifiant de bandeau :

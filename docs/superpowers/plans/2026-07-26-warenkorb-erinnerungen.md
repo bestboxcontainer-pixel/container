@@ -1,4 +1,4 @@
-# Warenkorb-Erinnerungen — Plan d'implémentation
+# Warenkorb-Erinnerungen: Plan d'implémentation
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -15,7 +15,7 @@
 - **Ce n'est pas le Next.js d'avant.** Avant d'écrire du code touchant une convention de fichier (`instrumentation`, `route.ts`, `searchParams`, `params`), lire le guide correspondant dans `node_modules/next/dist/docs/01-app/`. `params` et `searchParams` sont des `Promise` dans cette version.
 - **Schéma Prisma :** aucun `enum` Prisma, aucune liste scalaire. Les états sont des `String` commentés, les listes sont du JSON dans un `String`. Le même schéma doit fonctionner à l'identique sous SQLite et sous PostgreSQL.
 - **Montants :** toujours en centimes, toujours TTC. `taxCents` est la TVA *contenue* dans le total.
-- **Commentaires de code en français.** Ils expliquent le *pourquoi*, pas le *quoi* — c'est le registre de tout le dépôt.
+- **Commentaires de code en français.** Ils expliquent le *pourquoi*, pas le *quoi*, c'est le registre de tout le dépôt.
 - **Contenu des messages en allemand**, repris mot pour mot depuis la section « Les quatre e-mails » de la spec. Aucun texte inventé, aucun placeholder.
 - **Zéro emoji** dans le code, les commentaires, les messages et l'interface.
 - **TypeScript strict, pas de `any`.** Exports nommés, composants en PascalCase, utilitaires en camelCase.
@@ -193,7 +193,7 @@ Créer `src/lib/checkoutRecovery.ts` :
  * Ce module ne connaît ni Prisma ni React : il tient les délais de la séquence,
  * les libellés allemands et l'encodage du panier figé. Il est importé par le
  * répartiteur, par les gabarits d'e-mail, par le back-office et par les scripts
- * de test — exactement le rôle que src/lib/cart.ts joue pour le panier.
+ * de test : exactement le rôle que src/lib/cart.ts joue pour le panier.
  *
  * La séquence complète est décrite dans
  * docs/superpowers/specs/2026-07-26-warenkorb-erinnerungen-design.md
@@ -213,7 +213,7 @@ export type RecoveryStoppedReason = "" | "converted" | "unsubscribed" | "complet
  * Les libellés sont recopiés plutôt que référencés, comme dans OrderItem : le
  * message doit rester lisible si l'article quitte le catalogue entre l'abandon
  * et le septième jour. Le prix et le stock, eux, sont rafraîchis en base avant
- * chaque envoi — ces valeurs-ci ne servent que de repli.
+ * chaque envoi : ces valeurs-ci ne servent que de repli.
  */
 export interface RecoveryLine {
   productId: string;
@@ -393,7 +393,7 @@ model CheckoutRecovery {
   // (minuscules, sans espaces) pour tous les rapprochements.
   email           String
   emailNormalized String @unique
-  // de | en — langue du tunnel. Les gabarits sont allemands dans cette
+  // de | en : langue du tunnel. Les gabarits sont allemands dans cette
   // version ; le champ est en place pour la traduction à venir.
   locale          String @default("de")
 
@@ -442,7 +442,7 @@ model CheckoutRecovery {
 npx prisma migrate dev --name relance_paniers_abandonnes
 ```
 
-Attendu : nouveau dossier sous `prisma/migrations/`, client régénéré dans `src/generated/prisma`. Vérifier que la migration ne contient que la création de `CheckoutRecovery` — si elle touche les tables `Campaign*`, c'est que le schéma avait dérivé de la base : arrêter et le signaler avant d'aller plus loin.
+Attendu : nouveau dossier sous `prisma/migrations/`, client régénéré dans `src/generated/prisma`. Vérifier que la migration ne contient que la création de `CheckoutRecovery`, si elle touche les tables `Campaign*`, c'est que le schéma avait dérivé de la base : arrêter et le signaler avant d'aller plus loin.
 
 - [ ] **Step 7 : Ajouter le script npm**
 
@@ -479,7 +479,7 @@ git commit -m "Ajouter le modèle CheckoutRecovery et le socle de la relance"
 - Create: `scripts/tests/recovery-mails.ts`
 
 **Interfaces:**
-- Consumes: de la tâche 1 — `RecoveryLine`, `availabilityLabel`, `conditionLabel`, `categoryPathFromProductPath`, `RESUME_QUERY_PARAM`. De l'existant — `MailMessage` (`src/lib/mailer.ts`), `siteUrl()` et le `layout()` interne de `src/server/emails/customerAccount.ts`.
+- Consumes: de la tâche 1, `RecoveryLine`, `availabilityLabel`, `conditionLabel`, `categoryPathFromProductPath`, `RESUME_QUERY_PARAM`. De l'existant, `MailMessage` (`src/lib/mailer.ts`), `siteUrl()` et le `layout()` interne de `src/server/emails/customerAccount.ts`.
 - Produces: `MailMessage.headers?: Record<string, string>` ; `recoveryMail(input: RecoveryMailInput): MailMessage` ; `RecoveryMailInput { rank: 1 | 2 | 3 | 4; lines: RecoveryLine[]; totalCents: number; resumeToken: string }` ; `resumeUrl(token: string): string` ; `unsubscribeUrl(token: string): string`.
 
 - [ ] **Step 1 : Écrire le test qui échoue**
@@ -622,7 +622,7 @@ Attendu : échec sur `Cannot find module '../../src/server/emails/checkoutRecove
 
 - [ ] **Step 3 : Ouvrir `layout()` au partage**
 
-Dans `src/server/emails/customerAccount.ts`, ajouter `export` devant `function layout` et devant `function escapeHtml`, et exporter le type `LayoutInput`. Rien d'autre ne change dans ce fichier : les gabarits de la relance doivent avoir exactement la même ossature — logo, filet rouge `#e3000e`, tableaux — sinon la boutique enverrait deux chartes différentes.
+Dans `src/server/emails/customerAccount.ts`, ajouter `export` devant `function layout` et devant `function escapeHtml`, et exporter le type `LayoutInput`. Rien d'autre ne change dans ce fichier : les gabarits de la relance doivent avoir exactement la même ossature, logo, filet rouge `#e3000e`, tableaux, sinon la boutique enverrait deux chartes différentes.
 
 Ajouter à `LayoutInput` un champ facultatif :
 
@@ -680,7 +680,7 @@ En-tête et imports :
  *
  * Mêmes contraintes de mise en page que les autres gabarits du dossier :
  * tableaux, styles en ligne, `color-scheme: light`. C'est la seule entorse
- * autorisée à la règle « pas de style en ligne » du dépôt — aucun client de
+ * autorisée à la règle « pas de style en ligne » du dépôt, aucun client de
  * messagerie ne respecte une feuille de style externe.
  *
  * Le premier message est un message de support, pas une offre : c'est le seul
@@ -719,7 +719,7 @@ function contactUrl(): string {
 }
 ```
 
-Formatage des montants — reprendre le format allemand utilisé partout dans la boutique, `1.234,56 €` :
+Formatage des montants : reprendre le format allemand utilisé partout dans la boutique, `1.234,56 €` :
 
 ```ts
 function formatPrice(cents: number): string {
@@ -743,7 +743,7 @@ function productBlock(line: RecoveryLine): string {
                       <p style="margin:0 0 2px 0; font-size:12px; line-height:18px; color:#6b7280; text-transform:uppercase;">${escapeHtml(line.brand)}</p>
                       <p style="margin:0 0 6px 0; font-size:15px; line-height:21px; font-weight:bold; color:#1f2430;">${escapeHtml(line.name)}</p>
                       <p style="margin:0 0 4px 0; font-size:15px; line-height:21px; color:#1f2430;">${quantity}${escapeHtml(price)}</p>
-                      <p style="margin:0; font-size:13px; line-height:19px; color:#4b5563;">${escapeHtml(availabilityLabel(line))} — ${escapeHtml(conditionLabel(line.condition))}</p>
+                      <p style="margin:0; font-size:13px; line-height:19px; color:#4b5563;">${escapeHtml(availabilityLabel(line))}, ${escapeHtml(conditionLabel(line.condition))}</p>
                     </td>
                   </tr>
                 </table>`;
@@ -778,26 +778,26 @@ function contentFor(rank: 1 | 2 | 3 | 4): MailContent {
   if (rank === 1) {
     return {
       subject: "Brauchen Sie Hilfe bei Ihrer Bestellung?",
-      preheader: "Ihr Warenkorb ist gespeichert – wir helfen gern weiter.",
+      preheader: "Ihr Warenkorb ist gespeichert, wir helfen gern weiter.",
       heading: "Hat beim Abschluss etwas nicht funktioniert?",
       paragraphs: [
         "Sie haben vor wenigen Minuten eine Bestellung bei Hausgeräte Pfeffer begonnen, sie aber nicht abgeschlossen. Ihr Warenkorb liegt weiterhin für Sie bereit.",
-        "Falls es an der Zahlung gelegen hat: Manchmal bricht eine Verbindung ab oder eine Eingabe wird nicht übernommen. Über den Button unten setzen Sie Ihre Bestellung genau dort fort, wo Sie aufgehört haben – Ihre Angaben sind noch gespeichert.",
+        "Falls es an der Zahlung gelegen hat: Manchmal bricht eine Verbindung ab oder eine Eingabe wird nicht übernommen. Über den Button unten setzen Sie Ihre Bestellung genau dort fort, wo Sie aufgehört haben. Ihre Angaben sind noch gespeichert.",
       ],
       actionLabel: "Bestellung fortsetzen",
       actionTarget: "resume",
-      contactLead: "Probleme bei der Zahlung? Schreiben Sie uns kurz – wir antworten am gleichen Werktag.",
+      contactLead: "Probleme bei der Zahlung? Schreiben Sie uns kurz, wir antworten am gleichen Werktag.",
       contactLabel: "Zum Kontaktformular",
     };
   }
   if (rank === 2) {
     return {
       subject: "Ihr Gerät ist noch für Sie verfügbar",
-      preheader: `Ihr Warenkorb wartet – versandkostenfrei ab ${formatPrice(FREE_SHIPPING_THRESHOLD_CENTS)}.`,
+      preheader: `Ihr Warenkorb wartet, versandkostenfrei ab ${formatPrice(FREE_SHIPPING_THRESHOLD_CENTS)}.`,
       heading: "Ihr Warenkorb ist noch da",
       paragraphs: [
         "Ihre Auswahl liegt weiterhin in Ihrem Warenkorb. Sie können die Bestellung mit einem Klick abschließen, ohne Ihre Daten erneut eingeben zu müssen.",
-        `Gut zu wissen: Ab ${formatPrice(FREE_SHIPPING_THRESHOLD_CENTS)} Warenwert liefern wir versandkostenfrei innerhalb Deutschlands. Und Sie haben 14 Tage Widerrufsrecht – passt das Gerät nicht, nehmen wir es zurück.`,
+        `Gut zu wissen: Ab ${formatPrice(FREE_SHIPPING_THRESHOLD_CENTS)} Warenwert liefern wir versandkostenfrei innerhalb Deutschlands. Und Sie haben 14 Tage Widerrufsrecht, passt das Gerät nicht, nehmen wir es zurück.`,
       ],
       actionLabel: "Jetzt abschließen",
       actionTarget: "resume",
@@ -808,10 +808,10 @@ function contentFor(rank: 1 | 2 | 3 | 4): MailContent {
   if (rank === 3) {
     return {
       subject: "Noch Fragen zu Ihrem Gerät?",
-      preheader: "Maße, Anschluss, Lieferzeit – fragen Sie uns.",
+      preheader: "Maße, Anschluss, Lieferzeit, fragen Sie uns.",
       heading: "Sprechen Sie mit uns, bevor Sie sich entscheiden",
       paragraphs: [
-        "Ein Haushaltsgerät kauft man nicht jeden Tag. Wenn Sie noch etwas klären möchten – Maße, Anschluss, Lieferzeit oder Entsorgung des Altgeräts – beantworten wir Ihre Fragen gern persönlich.",
+        "Ein Haushaltsgerät kauft man nicht jeden Tag. Wenn Sie noch etwas klären möchten, Maße, Anschluss, Lieferzeit oder Entsorgung des Altgeräts, beantworten wir Ihre Fragen gern persönlich.",
         "Ihr Warenkorb bleibt gespeichert. Sie können ihn jederzeit über den Button unten öffnen.",
       ],
       actionLabel: "Warenkorb ansehen",
@@ -825,7 +825,7 @@ function contentFor(rank: 1 | 2 | 3 | 4): MailContent {
     preheader: "Weitere Modelle in derselben Kategorie.",
     heading: "Falls Sie sich anders entschieden haben",
     paragraphs: [
-      "Ihr gespeicherter Warenkorb wird bald automatisch gelöscht. Das ist völlig in Ordnung – vielleicht war es nicht das passende Gerät.",
+      "Ihr gespeicherter Warenkorb wird bald automatisch gelöscht. Das ist völlig in Ordnung, vielleicht war es nicht das passende Gerät.",
       "In derselben Kategorie führen wir weitere Modelle, auch in anderen Preislagen. Und wenn Sie etwas Bestimmtes suchen, das Sie bei uns online nicht finden: fragen Sie uns, wir haben oft mehr auf Lager, als die Website zeigt.",
     ],
     actionLabel: "Weitere Geräte ansehen",
@@ -958,7 +958,7 @@ git commit -m "Composer les quatre messages allemands de relance de panier"
 - Modify: `src/components/checkout/CheckoutFlow.tsx`
 
 **Interfaces:**
-- Consumes: tâche 1 — `normalizeEmail`, `encodeCart`, `nextSendAtFor`, `RecoveryLine`, `RecoveryStep`, `RecoveryStoppedReason`. Existant — `prisma`, `computeTotals` et les constantes de `src/lib/cart.ts`.
+- Consumes: tâche 1, `normalizeEmail`, `encodeCart`, `nextSendAtFor`, `RecoveryLine`, `RecoveryStep`, `RecoveryStoppedReason`. Existant, `prisma`, `computeTotals` et les constantes de `src/lib/cart.ts`.
 - Produces: `captureRecovery(input: CaptureInput): Promise<void>` avec `CaptureInput { email: string; locale: string; step: RecoveryStep; lines: { productId: string; quantity: number }[] }` ; `stopRecoveryForEmail(email: string, reason: RecoveryStoppedReason): Promise<void>` ; `findRecoveryByToken(token: string): Promise<RecoveryRecord | null>` ; `recoveryLimiter` avec `check(ip)` / `register(ip)`.
 
 - [ ] **Step 1 : Écrire le test qui échoue**
@@ -1106,7 +1106,7 @@ Créer `src/server/checkoutRecovery.ts` :
 
 ```ts
 /**
- * Relance des tunnels de commande abandonnés — accès aux données.
+ * Relance des tunnels de commande abandonnés : accès aux données.
  *
  * Ce module est le seul à parler à Prisma pour cette fonctionnalité. Les
  * calculs qui n'ont pas besoin de la base vivent dans
@@ -1269,7 +1269,7 @@ export async function findRecoveryByToken(token: string) {
 }
 ```
 
-Vérifier le nom réel de la fonction de calcul dans `src/lib/cart.ts` avant d'écrire l'import : si elle ne s'appelle pas `computeTotals`, utiliser le nom du fichier et corriger l'appel — les champs attendus sont `subtotalCents`, `shippingCents`, `totalCents`.
+Vérifier le nom réel de la fonction de calcul dans `src/lib/cart.ts` avant d'écrire l'import : si elle ne s'appelle pas `computeTotals`, utiliser le nom du fichier et corriger l'appel, les champs attendus sont `subtotalCents`, `shippingCents`, `totalCents`.
 
 - [ ] **Step 4 : Lancer le test pour vérifier qu'il passe**
 
@@ -1289,7 +1289,7 @@ Créer `src/server/recoveryRate.ts` :
  *
  * Cette route est publique et prend une adresse e-mail : sans limite, elle
  * permettrait de faire envoyer des messages de la boutique à n'importe qui, en
- * boucle. Même principe que src/server/customerRate.ts — compteur en mémoire,
+ * boucle. Même principe que src/server/customerRate.ts, compteur en mémoire,
  * suffisant pour une instance unique. Avec plusieurs instances, il faudra
  * déplacer ces compteurs dans Redis.
  */
@@ -1423,7 +1423,7 @@ function captureRecovery(email: string, step: string, lines: CartLine[], locale:
 
 `keepalive: true` est indispensable : l'appel part au moment où le visiteur change d'étape, et sans lui le navigateur annulerait la requête s'il fermait l'onglet dans la seconde.
 
-Puis, dans le passage de `contact` à `payment` — juste avant le `setStep("payment")` de la ligne 145 — ajouter :
+Puis, dans le passage de `contact` à `payment`, juste avant le `setStep("payment")` de la ligne 145, ajouter :
 
 ```tsx
     captureRecovery(email.trim(), "contact", lines, locale);
@@ -1477,7 +1477,7 @@ git commit -m "Capturer la session de paiement dès la saisie de l'adresse"
 - Modify: `.env.example`
 
 **Interfaces:**
-- Consumes: tâches 1 à 3 — tout `src/lib/checkoutRecovery.ts`, `recoveryMail`, `decodeCart`, `sendMail`, `isMailConfigured`.
+- Consumes: tâches 1 à 3, tout `src/lib/checkoutRecovery.ts`, `recoveryMail`, `decodeCart`, `sendMail`, `isMailConfigured`.
 - Produces: `runRecoveryTick(options?: { now?: Date; dryRun?: boolean }): Promise<TickResult>` avec `TickResult { sent: number; skipped: number; failed: number; purged: number }` ; `isRecoveryEnabled(): Promise<boolean>` ; `setRecoveryEnabled(enabled: boolean): Promise<void>` ; `startScheduler(): void`.
 
 - [ ] **Step 1 : Étendre le test**
@@ -1814,7 +1814,7 @@ async function stopRecovery(id: string, reason: RecoveryStoppedReason): Promise<
 /**
  * Minimisation des données : une adresse sans commande n'a aucune raison
  * d'être conservée plus de trente jours. EmailSuppression, lui, n'est jamais
- * purgé — c'est la preuve du refus.
+ * purgé : c'est la preuve du refus.
  */
 async function purgeOldRecoveries(now: Date): Promise<number> {
   const cutoff = new Date(now.getTime() - RECOVERY_RETENTION_DAYS * 24 * 60 * 60_000);
@@ -1845,7 +1845,7 @@ Créer `src/server/scheduler.ts` :
  *
  * L'hébergement ne fournit pas de cron système : le rythme vit donc dans le
  * processus Node lui-même. Cela suppose un serveur qui tourne en continu
- * (`next dev`, `next start`) — c'est le cas sur l'hébergement actuel. En
+ * (`next dev`, `next start`) : c'est le cas sur l'hébergement actuel. En
  * serverless, l'intervalle ne se déclencherait pas et il faudrait appeler
  * /api/cron/recovery depuis l'extérieur ; la route existe pour cela.
  *
@@ -1884,7 +1884,7 @@ Créer `src/instrumentation.ts` :
 ```ts
 /**
  * Point d'entrée appelé une fois au démarrage de chaque instance du serveur
- * Next. Le fichier vit dans src/ parce que le projet utilise un dossier src —
+ * Next. Le fichier vit dans src/ parce que le projet utilise un dossier src
  * voir node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/instrumentation.md
  *
  * La documentation précise que `register` doit se terminer avant que le serveur
@@ -1897,7 +1897,7 @@ export function register(): void {
   // n'ont pas leur place.
   if (process.env.NEXT_RUNTIME !== "nodejs") return;
 
-  // Import différé : charger le planificateur — et donc Prisma — au niveau du
+  // Import différé : charger le planificateur, et donc Prisma, au niveau du
   // module ferait échouer la compilation du bundle Edge.
   void import("@/server/scheduler").then(({ startScheduler }) => startScheduler());
 }
@@ -1989,11 +1989,11 @@ git commit -m "Envoyer la séquence de relance depuis un planificateur interne"
 cat node_modules/next/dist/docs/01-app/03-api-reference/04-functions/use-search-params.md
 ```
 
-Et, pour la page serveur, vérifier la forme de `searchParams` dans cette version de Next — c'est une `Promise` qu'il faut attendre.
+Et, pour la page serveur, vérifier la forme de `searchParams` dans cette version de Next, c'est une `Promise` qu'il faut attendre.
 
 - [ ] **Step 2 : Lire le jeton dans la page caisse**
 
-Dans `src/app/[locale]/kasse/page.tsx`, ajouter `searchParams` à la signature de la page — la page est déjà `force-dynamic`, rien à changer de ce côté — puis :
+Dans `src/app/[locale]/kasse/page.tsx`, ajouter `searchParams` à la signature de la page, la page est déjà `force-dynamic`, rien à changer de ce côté, puis :
 
 ```tsx
   const { [RESUME_QUERY_PARAM]: rawToken } = await searchParams;
@@ -2055,7 +2055,7 @@ et, juste après les déclarations d'état :
   }, [resumed]);
 ```
 
-Vérifier dans `src/lib/cart.ts` comment le magasin détecte un changement de `localStorage` : s'il expose une fonction d'écriture ou de rechargement, l'appeler plutôt que d'émettre un `StorageEvent` à la main. Un magasin construit sur `useSyncExternalStore` a nécessairement un mécanisme de notification — l'utiliser est plus sûr que de simuler un évènement du navigateur.
+Vérifier dans `src/lib/cart.ts` comment le magasin détecte un changement de `localStorage` : s'il expose une fonction d'écriture ou de rechargement, l'appeler plutôt que d'émettre un `StorageEvent` à la main. Un magasin construit sur `useSyncExternalStore` a nécessairement un mécanisme de notification, l'utiliser est plus sûr que de simuler un évènement du navigateur.
 
 - [ ] **Step 4 : Vérifier dans le navigateur**
 
@@ -2095,7 +2095,7 @@ git commit -m "Reprendre le tunnel de commande depuis le lien du message"
 
 **Interfaces:**
 - Consumes: `findRecoveryByToken`, `stopRecoveryForEmail`, `normalizeEmail`.
-- Produces: `unsubscribeByToken(token: string): Promise<boolean>` — `true` si une suppression a été enregistrée, `false` si le jeton est inconnu.
+- Produces: `unsubscribeByToken(token: string): Promise<boolean>` · `true` si une suppression a été enregistrée, `false` si le jeton est inconnu.
 
 - [ ] **Step 1 : Étendre le test**
 
@@ -2157,7 +2157,7 @@ Ajouter à `src/server/checkoutRecovery.ts` :
  * La suppression est écrite dans EmailSuppression, la table que partagent les
  * campagnes marketing : deux listes de refus concurrentes finiraient par se
  * contredire, et un client désabonné d'un côté recevrait l'autre. Se désabonner
- * depuis une relance de panier coupe donc aussi les campagnes — c'est bien ce
+ * depuis une relance de panier coupe donc aussi les campagnes, c'est bien ce
  * qu'un lien « ne plus recevoir de messages » promet.
  *
  * Renvoie false si le jeton est inconnu, pour que l'appelant réponde 404 sans
@@ -2230,7 +2230,7 @@ export async function POST(request: Request) {
 
 - [ ] **Step 6 : Écrire la page**
 
-Créer `src/app/[locale]/abmeldung/page.tsx`, sur le modèle des autres pages de `src/app/[locale]/` — `Header`, `Breadcrumb`, contenu, `Footer`, `setRequestLocale`, `hasLocale` et `notFound` comme dans `kasse/page.tsx`.
+Créer `src/app/[locale]/abmeldung/page.tsx`, sur le modèle des autres pages de `src/app/[locale]/` · `Header`, `Breadcrumb`, contenu, `Footer`, `setRequestLocale`, `hasLocale` et `notFound` comme dans `kasse/page.tsx`.
 
 Métadonnées :
 
@@ -2327,11 +2327,11 @@ et dans `src/messages/en.json` :
 - [ ] **Step 8 : Vérifier dans le navigateur**
 
 1. Relever un `resumeToken` avec `npx prisma studio`.
-2. Ouvrir `http://localhost:3000/abmeldung?token=<token>` : la page s'affiche, **et la table `EmailSuppression` reste vide** — c'est le point à vérifier, un chargement ne doit rien écrire.
+2. Ouvrir `http://localhost:3000/abmeldung?token=<token>` : la page s'affiche, **et la table `EmailSuppression` reste vide**, c'est le point à vérifier, un chargement ne doit rien écrire.
 3. Cliquer le bouton : message de confirmation, ligne créée dans `EmailSuppression`, `CheckoutRecovery.stoppedReason` à `unsubscribed`.
 4. Recharger et recliquer : pas d'erreur.
 5. Ouvrir avec un jeton inventé : la page annonce que le lien n'est plus valide.
-6. `curl -X POST 'http://localhost:3000/api/abmeldung' -d 'token=<autre-token>'` : réponse `{"ok":true}` — c'est la forme qu'envoie Gmail.
+6. `curl -X POST 'http://localhost:3000/api/abmeldung' -d 'token=<autre-token>'` : réponse `{"ok":true}`, c'est la forme qu'envoie Gmail.
 
 - [ ] **Step 9 : Vérifier la compilation**
 
@@ -2402,7 +2402,7 @@ Ajouter dans `scripts/tests/recovery-flow.ts`, avant le `console.log` final :
 npx tsx scripts/tests/recovery-flow.ts
 ```
 
-Attendu : passe déjà — `stopRecoveryForEmail` existe depuis la tâche 3. C'est le filet qui garantit que l'étape suivante ne casse rien.
+Attendu : passe déjà, `stopRecoveryForEmail` existe depuis la tâche 3. C'est le filet qui garantit que l'étape suivante ne casse rien.
 
 - [ ] **Step 3 : Brancher `createOrder`**
 
@@ -2422,7 +2422,7 @@ Dans `src/server/orders.ts`, importer `stopRecoveryForEmail` depuis `@/server/ch
   }
 ```
 
-Repérer le point exact : la fin de `createOrder`, autour de la ligne 622 où `paymentStatus: "offen"` est écrit, puis le `return` de la fonction. L'appel va **après** la transaction, jamais dedans — une écriture de plus dans la transaction de commande allongerait un verrou qui doit rester court.
+Repérer le point exact : la fin de `createOrder`, autour de la ligne 622 où `paymentStatus: "offen"` est écrit, puis le `return` de la fonction. L'appel va **après** la transaction, jamais dedans, une écriture de plus dans la transaction de commande allongerait un verrou qui doit rester court.
 
 - [ ] **Step 4 : Vérifier de bout en bout**
 
@@ -2463,7 +2463,7 @@ git commit -m "Arrêter la séquence de relance dès qu'une commande est passée
 - Modify: `src/components/admin/AdminSidebar.tsx`
 
 **Interfaces:**
-- Consumes: `isRecoveryEnabled`, `setRecoveryEnabled`, `stopRecoveryForEmail`, `decodeCart`, `RECOVERY_RETENTION_DAYS`. Existant — `requireAdminApi()` de `src/lib/adminApi.ts` et `src/lib/pagination.ts`.
+- Consumes: `isRecoveryEnabled`, `setRecoveryEnabled`, `stopRecoveryForEmail`, `decodeCart`, `RECOVERY_RETENTION_DAYS`. Existant, `requireAdminApi()` de `src/lib/adminApi.ts` et `src/lib/pagination.ts`.
 - Produces: `RecoveryState = "active" | "converted" | "unsubscribed" | "completed" | "failed"` ; `RecoveryRow { id: string; email: string; totalCents: number; lastStep: string; sentCount: number; state: RecoveryState; itemCount: number; createdAt: Date; lastSentAt: Date | null }` ; `listRecoveries(options: { state?: RecoveryState; page: number; perPage: number }): Promise<{ rows: RecoveryRow[]; total: number }>` ; `recoveryStats(): Promise<{ captured: number; sent: number; converted: number; ratePercent: number }>`.
 
 - [ ] **Step 1 : Écrire les lectures**
@@ -2502,7 +2502,7 @@ export async function listRecoveries(options: {
   perPage: number;
 }): Promise<{ rows: RecoveryRow[]; total: number }> {
   // Le filtre porte sur stoppedReason, pas sur un champ « state » : l'état est
-  // dérivé, pas stocké — un champ de plus serait une source de contradiction.
+  // dérivé, pas stocké : un champ de plus serait une source de contradiction.
   const where =
     options.state === undefined
       ? {}
@@ -2627,11 +2627,11 @@ export async function POST(request: Request) {
 
 - [ ] **Step 3 : Écrire la page**
 
-Créer `src/app/admin/(protected)/warenkorb-erinnerungen/page.tsx`, calquée sur `src/app/admin/(protected)/orders/page.tsx` — même en-tête, même gestion de `searchParams` pour la page et le filtre, même composant de pagination.
+Créer `src/app/admin/(protected)/warenkorb-erinnerungen/page.tsx`, calquée sur `src/app/admin/(protected)/orders/page.tsx`, même en-tête, même gestion de `searchParams` pour la page et le filtre, même composant de pagination.
 
 Elle appelle `recoveryStats()`, `listRecoveries()` et `isRecoveryEnabled()`, puis rend quatre tuiles de compteurs et `<RecoveryTable …>`.
 
-Libellés allemands des tuiles : `Erfasste Warenkörbe`, `Gesendete Nachrichten`, `Abgeschlossene Bestellungen`, `Rückgewinnungsquote`. Sous-titre de la page : `Letzte 30 Tage` — la même fenêtre que la purge, sinon le taux ne veut rien dire.
+Libellés allemands des tuiles : `Erfasste Warenkörbe`, `Gesendete Nachrichten`, `Abgeschlossene Bestellungen`, `Rückgewinnungsquote`. Sous-titre de la page : `Letzte 30 Tage`, la même fenêtre que la purge, sinon le taux ne veut rien dire.
 
 - [ ] **Step 4 : Écrire le tableau**
 
@@ -2641,7 +2641,7 @@ Colonnes : `E-Mail`, `Warenkorb` (montant et nombre d'articles), `Schritt`, `Nac
 
 Libellés d'état, en allemand : `Läuft`, `Bestellt`, `Abgemeldet`, `Abgeschlossen`, `Fehlgeschlagen`. Étapes : `Kontakt`, `Zahlung`, `Prüfung`.
 
-En tête du tableau, l'interrupteur global : une case à cocher étiquetée `Erinnerungen aktiv`, qui poste `{ action: "toggle", enabled }` puis rafraîchit via `router.refresh()`. Une confirmation `window.confirm` à la désactivation, avec le texte `Keine Warenkorb-Erinnerungen mehr senden?` — couper la séquence est une décision, pas une case qu'on décoche par mégarde.
+En tête du tableau, l'interrupteur global : une case à cocher étiquetée `Erinnerungen aktiv`, qui poste `{ action: "toggle", enabled }` puis rafraîchit via `router.refresh()`. Une confirmation `window.confirm` à la désactivation, avec le texte `Keine Warenkorb-Erinnerungen mehr senden?`, couper la séquence est une décision, pas une case qu'on décoche par mégarde.
 
 Action de ligne, visible seulement quand l'état vaut `Läuft` : un bouton `Stoppen` qui poste `{ action: "stop", id }`.
 
@@ -2703,7 +2703,7 @@ Deux règles à respecter, elles sont écrites dans le fichier : le corps d'une 
 
 - [ ] **Step 2 : Insérer la section allemande**
 
-Dans `src/content/legal/de.ts`, page `datenschutz`, insérer une nouvelle section **juste après « 10. Newsletter »** — les deux traitent d'envois par e-mail, la lecture reste cohérente — puis **renuméroter les dix sections suivantes**, de l'ancienne 11 à l'ancienne 20, qui deviennent 12 à 21.
+Dans `src/content/legal/de.ts`, page `datenschutz`, insérer une nouvelle section **juste après « 10. Newsletter »**, les deux traitent d'envois par e-mail, la lecture reste cohérente, puis **renuméroter les dix sections suivantes**, de l'ancienne 11 à l'ancienne 20, qui deviennent 12 à 21.
 
 ```ts
       {
@@ -2731,7 +2731,7 @@ Dans `src/content/legal/en.ts`, page `datenschutz`, même position et même renu
 
 - [ ] **Step 3 : Documenter dans le dossier de reprise**
 
-Ajouter une section à `docs/HANDOVER.md` : ce que fait la séquence, où vit le planificateur, comment couper l'envoi depuis le back-office, et l'avertissement sur l'hébergement — le tick vit dans le processus Node, donc en serverless il faudrait appeler `POST /api/cron/recovery` depuis un cron externe.
+Ajouter une section à `docs/HANDOVER.md` : ce que fait la séquence, où vit le planificateur, comment couper l'envoi depuis le back-office, et l'avertissement sur l'hébergement, le tick vit dans le processus Node, donc en serverless il faudrait appeler `POST /api/cron/recovery` depuis un cron externe.
 
 Y noter aussi le point juridique, pour qui reprendra le dossier : l'envoi se fait sans consentement préalable, ce qui est un choix assumé du propriétaire malgré le § 7 UWG ; les garde-fous sont le cadrage du premier message en message de support, le lien de désabonnement dans les quatre messages, et l'interrupteur du back-office.
 

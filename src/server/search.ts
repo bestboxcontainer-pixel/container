@@ -9,7 +9,7 @@ import type { Locale } from "@/i18n/routing";
  * Le tri se fait en mémoire sur le catalogue déjà chargé, et non par une
  * requête SQL. Trois raisons : le catalogue tient en quelques centaines de
  * fiches, les prix promotionnels des campagnes sont déjà appliqués à ce
- * stade — une requête directe les ignorerait et afficherait des prix faux —,
+ * stade (une requête directe les ignorerait et afficherait des prix faux),
  * et la recherche porte sur les textes traduits, qui ne vivent pas dans les
  * colonnes interrogées.
  */

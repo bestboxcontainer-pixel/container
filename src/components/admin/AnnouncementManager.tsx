@@ -139,8 +139,8 @@ export function AnnouncementManager({ announcements }: { announcements: Announce
             >
               {edite.scrolling ? (
                 <div className="flex overflow-hidden">
-                  {/* Même construction que la boutique — deux groupes larges
-                      d'au moins un écran — pour que l'aperçu montre le
+                  {/* Même construction que la boutique : deux groupes larges
+                      d'au moins un écran : pour que l'aperçu montre le
                       défilement réel et non une version approchée. */}
                   <div
                     className="flex w-max shrink-0 whitespace-nowrap motion-safe:animate-[defilement_linear_infinite]"
@@ -180,7 +180,7 @@ export function AnnouncementManager({ announcements }: { announcements: Announce
                 onChange={(e) => setEdite({ ...edite, messageDe: e.target.value })}
                 maxLength={300}
                 className={CHAMP}
-                placeholder="Sommeraktion – 20 % mit Code SOMMER20"
+                placeholder="Sommeraktion: 20 % mit Code SOMMER20"
               />
             </div>
             <div>
@@ -193,7 +193,7 @@ export function AnnouncementManager({ announcements }: { announcements: Announce
                 onChange={(e) => setEdite({ ...edite, messageEn: e.target.value })}
                 maxLength={300}
                 className={CHAMP}
-                placeholder="Summer sale – 20 % off with code SOMMER20"
+                placeholder="Summer sale: 20 % off with code SOMMER20"
               />
             </div>
           </div>

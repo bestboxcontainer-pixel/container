@@ -2,7 +2,7 @@
  * Coordonnées bancaires du virement (Vorkasse) : forme des données, contrôle de
  * saisie et rendu du texte d'instruction.
  *
- * Ce module ne touche pas la base — la lecture et l'écriture vivent dans
+ * Ce module ne touche pas la base : la lecture et l'écriture vivent dans
  * `src/server/bankTransfer.ts`. La séparation permet de tester les règles là où
  * elles comptent : le contrôle de l'IBAN et le remplacement des repères du
  * texte d'instruction.
@@ -16,7 +16,7 @@ export interface BankTransferSettings {
   /** Nom de l'établissement. Facultatif : masqué s'il est vide. */
   bank: string;
   /**
-   * Type de virement attendu — « SEPA-Echtzeitüberweisung », « Standard »…
+   * Type de virement attendu : « SEPA-Echtzeitüberweisung », « Standard »…
    * Saisie libre : la banque du vendeur impose sa propre terminologie, et une
    * liste figée finirait par ne plus correspondre à aucune d'elles. Facultatif,
    * donc masqué s'il est vide, au même titre que le nom de l'établissement.
@@ -50,7 +50,7 @@ export const BANK_TRANSFER_DEFAULTS: BankTransferSettings = {
   // n'affichent simplement aucune ligne de plus.
   transferType: "",
   // Une phrase, pas deux. La seconde annonçait l'expédition après réception du
-  // paiement — une évidence pour qui vient de lire qu'il doit virer, et une
+  // paiement : une évidence pour qui vient de lire qu'il doit virer, et une
   // ligne de plus dans un message que le commerçant trouvait déjà trop chargé.
   instructions: {
     de: "Bitte überweisen Sie den Gesamtbetrag von {total} auf unser Konto unter Angabe der Bestellnummer {orderNumber}.",
@@ -60,8 +60,8 @@ export const BANK_TRANSFER_DEFAULTS: BankTransferSettings = {
 
 /**
  * Moyens de paiement qui n'appellent aucun virement : la facture se règle à
- * réception, le contre-remboursement se règle au livreur. Tous les autres —
- * Vorkasse, Sofortüberweisung, et tout moyen créé depuis le back-office —
+ * réception, le contre-remboursement se règle au livreur. Tous les autres
+ * Vorkasse, Sofortüberweisung, et tout moyen créé depuis le back-office
  * aboutissent à un virement sur le compte de la boutique, puisque aucun
  * prestataire n'encaisse à sa place.
  */
@@ -73,7 +73,7 @@ const KEYS_SANS_VIREMENT = new Set(["rechnung", "nachnahme"]);
  *
  * Le test portait auparavant sur la seule clé « vorkasse ». Un commerçant qui
  * nomme son unique moyen « Sofortüberweisung » se retrouvait alors avec un
- * client sans IBAN — donc sans moyen de payer — et une commande qui n'arrivait
+ * client sans IBAN, donc sans moyen de payer, et une commande qui n'arrivait
  * jamais. La règle est inversée : on affiche l'IBAN sauf là où il n'a
  * manifestement rien à faire.
  */
@@ -96,7 +96,7 @@ export function formatIban(value: string): string {
 /**
  * Validation complète : structure, longueur, puis clé de contrôle mod 97
  * (ISO 7064). Une faute de frappe dans un IBAN envoie l'argent du client dans
- * le vide — le contrôle vaut largement ses dix lignes.
+ * le vide : le contrôle vaut largement ses dix lignes.
  */
 export function isValidIban(value: string): boolean {
   const iban = normalizeIban(value);

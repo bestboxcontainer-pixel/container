@@ -6,7 +6,7 @@
  * documents sont composés dans une fonction serveur, et selon l'hébergeur le
  * dossier `public/` n'est pas garanti présent aux côtés du code (sur Vercel il
  * faut l'ajouter au traçage des fichiers, sur un conteneur il y est). Embarquer
- * les octets supprime la question — et un logo manquant à cause d'un chemin se
+ * les octets supprime la question : et un logo manquant à cause d'un chemin se
  * verrait immédiatement.
  *
  * Les e-mails, eux, pointent sur l'image hébergée par le site dès que son
@@ -14,7 +14,7 @@
  * dépendre du réseau, mais plusieurs messageries la listaient en bas du message
  * comme un « logo.png » téléchargeable : le client recevait sa confirmation de
  * commande accompagnée d'une pièce jointe qui n'en était pas une. Le repli
- * `cid:` reste en place tant que NEXT_PUBLIC_SITE_URL n'est pas renseignée —
+ * `cid:` reste en place tant que NEXT_PUBLIC_SITE_URL n'est pas renseignée
  * en développement, typiquement.
  *
  * Source : public/images/logo-full.png (1242 x 406), réduit à 400 px de large,

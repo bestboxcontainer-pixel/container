@@ -5,7 +5,7 @@ import { saveBankTransferSettings } from "@/server/bankTransfer";
 
 // Coordonnées du virement, saisies depuis /admin/payments.
 //
-// Rien de secret ici — ces données sont destinées à être lues par le client —,
+// Rien de secret ici (ces données sont destinées à être lues par le client),
 // mais elles sont le seul endroit du site où il envoie de l'argent : la saisie
 // est refusée si l'IBAN ou le BIC ne tiennent pas la route, plutôt que
 // d'enregistrer une coquille que personne ne rattrapera.

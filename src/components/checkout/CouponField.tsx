@@ -11,7 +11,7 @@ import type { CartLine, ShippingMethodKey } from "@/lib/cart";
  *
  * Le navigateur n'annonce jamais un montant : il envoie un code et le contenu
  * du panier en identifiants, et le serveur rechiffre tout avant de répondre.
- * Ce que ce composant affiche n'est donc qu'un aperçu — la remise réellement
+ * Ce que ce composant affiche n'est donc qu'un aperçu, la remise réellement
  * facturée est recalculée à la commande, par le même code serveur.
  *
  * Le coupon est revérifié dès que le panier ou le mode de livraison change. Un
@@ -171,14 +171,14 @@ export function CouponField({
   }, [codeApplique, panier, shippingMethodKey, locale]);
 
   return (
-    <div className="rounded-sm border border-border bg-white p-5">
+    <div className="rounded-2xl border border-border bg-white p-6">
       <h2 className="mb-1 flex items-center gap-2 text-sm font-black text-foreground">
         <Tag className="h-4 w-4 shrink-0 text-primary" aria-hidden />
         {t("title")}
       </h2>
 
       {applied ? (
-        <div className="mt-3 flex items-start justify-between gap-3 rounded-sm bg-muted px-3 py-2">
+        <div className="mt-3 flex items-start justify-between gap-3 rounded-xl bg-muted px-3 py-2">
           <p className="min-w-0 text-sm">
             <span className="block font-bold text-foreground">
               {t("applied", { code: applied.code })}
@@ -191,7 +191,7 @@ export function CouponField({
             type="button"
             onClick={retirer}
             aria-label={t("remove")}
-            className="shrink-0 rounded-sm p-1 text-muted-foreground hover:text-destructive"
+            className="shrink-0 rounded-full p-1.5 text-muted-foreground hover:text-destructive"
           >
             <X className="h-4 w-4" aria-hidden />
           </button>
@@ -218,13 +218,13 @@ export function CouponField({
               autoComplete="off"
               autoCapitalize="characters"
               maxLength={40}
-              className="w-full min-w-0 rounded-sm border border-border bg-white px-3 py-2 text-sm uppercase outline-none focus:border-primary"
+              className="w-full min-w-0 rounded-xl border border-border bg-white px-3.5 py-2.5 text-sm uppercase outline-none focus:border-primary"
             />
             <button
               type="button"
               onClick={() => void soumettre()}
               disabled={enCours || saisie.trim().length === 0}
-              className="shrink-0 rounded-sm bg-foreground px-4 py-2 text-sm font-bold text-white hover:brightness-125 disabled:opacity-50"
+              className="shrink-0 rounded-full bg-foreground px-5 py-2.5 text-sm font-bold text-white hover:brightness-125 disabled:opacity-50"
             >
               {enCours ? t("checking") : t("apply")}
             </button>

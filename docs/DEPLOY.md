@@ -1,4 +1,4 @@
-# Mise en ligne — Hostinger
+# Mise en ligne : Hostinger
 
 Procédure de déploiement de Hausgeräte Pfeffer sur Hostinger, en Node.js.
 
@@ -15,14 +15,14 @@ déploient pas de la même façon :
 Le VPS est la voie la plus sûre : le site est une application rendue côté
 serveur avec base de données, envoi d'e-mails et tâche planifiée à la minute.
 L'hébergement mutualisé fonctionne, mais la mémoire allouée à la compilation y
-est limitée — voir « Build sur une machine limitée » plus bas.
+est limitée : voir « Build sur une machine limitée » plus bas.
 
 ---
 
 ## 1. Ce qu'il faut avoir sous la main
 
 - **Node 22 recommandé**, et surtout pas n'importe quelle version 20. Prisma 7
-  n'accepte que `20.19+`, `22.12+` ou `24+` — et refuse de s'installer sur les
+  n'accepte que `20.19+`, `22.12+` ou `24+`et refuse de s'installer sur les
   autres, l'installation entière échoue :
 
   ```
@@ -36,7 +36,7 @@ est limitée — voir « Build sur une machine limitée » plus bas.
   Node.js version → 22**, puis relancer le déploiement. Le `.nvmrc` du dépôt
   demande la même version pour les outils qui savent le lire.
 - L'URL de la base **PostgreSQL Neon** (chaîne « pooled », avec `sslmode=require`).
-- Les trois clés **Cloudinary** — sans elles, l'envoi d'images est refusé en
+- Les trois clés **Cloudinary** : sans elles, l'envoi d'images est refusé en
   production, et c'est par là que passeront toutes les photos produits.
 - Les identifiants **SMTP Hostinger** de `kontakt@hausgeratepfeffer.de`.
   Sans eux, plus personne n'entre dans le back-office : le code de connexion à
@@ -46,7 +46,7 @@ est limitée — voir « Build sur une machine limitée » plus bas.
 ## 2. Variables d'environnement
 
 La liste complète et commentée est dans [`.env.example`](../.env.example).
-Elles vivent dans un fichier `.env.local` déposé à la racine sur le serveur —
+Elles vivent dans un fichier `.env.local` déposé à la racine sur le serveur
 jamais dans le dépôt Git, qui est public.
 
 Générer chaque secret séparément :
@@ -58,9 +58,9 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 Trois secrets doivent être **régénérés pour la production**, différents de ceux
 utilisés en développement :
 
-- `ADMIN_SESSION_SECRET` — signature des sessions du back-office
-- `CUSTOMER_SESSION_SECRET` — signature des sessions clients
-- `INTEGRATION_ENCRYPTION_KEY` — chiffrement des clés de paiement en base
+- `ADMIN_SESSION_SECRET` : signature des sessions du back-office
+- `CUSTOMER_SESSION_SECRET` : signature des sessions clients
+- `INTEGRATION_ENCRYPTION_KEY` : chiffrement des clés de paiement en base
 
 Attention à `INTEGRATION_ENCRYPTION_KEY` : la changer après coup rend
 illisibles les clés d'intégration déjà enregistrées en base. Elle se fixe
@@ -68,13 +68,13 @@ illisibles les clés d'intégration déjà enregistrées en base. Elle se fixe
 
 Ne pas oublier non plus :
 
-- `NEXT_PUBLIC_SITE_URL=https://hausgeratepfeffer.de` — sans barre finale. Cette
+- `NEXT_PUBLIC_SITE_URL=https://hausgeratepfeffer.de`, sans barre finale. Cette
   variable est lue **au moment du build**, pas au démarrage : la changer impose
   de reconstruire. Elle alimente les URL canoniques, le sitemap, le flux Google
   Merchant et tous les liens contenus dans les e-mails.
 - `NODE_ENV=production`
-- `CRON_SECRET` — sinon la route d'envoi des campagnes reste fermée.
-- `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` — les
+- `CRON_SECRET` : sinon la route d'envoi des campagnes reste fermée.
+- `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`, les
   trois, sinon **l'envoi d'images depuis le back-office est refusé en
   production**. Le message affiché est alors « Le stockage des images n'est pas
   configuré ». Ce refus est délibéré : sans Cloudinary, le code se rabat sur
@@ -91,7 +91,7 @@ Ne pas oublier non plus :
 
 Un envoi d'image traverse aussi le reverse proxy, qui a son propre plafond. La
 configuration Nginx plus bas porte `client_max_body_size 12M` pour cette raison
-— l'application, elle, refuse au-delà de 5 Mo. Sur l'hébergement mutualisé
+l'application, elle, refuse au-delà de 5 Mo. Sur l'hébergement mutualisé
 hPanel, ce plafond n'est pas réglable : un fichier trop lourd y est coupé par le
 proxy avant d'atteindre l'application, et le back-office n'affiche alors qu'un
 « L'envoi a échoué » sans détail, faute de réponse JSON.
@@ -152,13 +152,13 @@ sudo certbot --nginx -d hausgeratepfeffer.de -d www.hausgeratepfeffer.de
 ```
 
 `X-Forwarded-Proto` n'est pas décoratif : sans lui, l'application se croit en
-HTTP et les cookies de session, marqués `Secure`, ne sont jamais posés — la
+HTTP et les cookies de session, marqués `Secure`, ne sont jamais posés, la
 connexion au back-office tourne alors en boucle.
 
 ## 4. Déploiement sur hébergement web Node.js (hPanel)
 
 1. hPanel → **Avancé → Node.js** → créer l'application.
-   - Version de Node : **22** (voir l'étape 1 — une version 20 antérieure à
+   - Version de Node : **22** (voir l'étape 1, une version 20 antérieure à
      20.19 fait échouer l'installation de Prisma)
    - Racine de l'application : le dossier du site
    - Fichier de démarrage : **`server.js`** (fourni à la racine du dépôt)
@@ -168,7 +168,7 @@ connexion au back-office tourne alors en boucle.
    l'étape 2.
 
    Les variables saisies dans l'onglet « Variables d'environnement » de hPanel
-   sont posées dans le processus démarré par Passenger — pas dans la session
+   sont posées dans le processus démarré par Passenger, pas dans la session
    SSH où l'on construit. Le build ne les verrait pas, échouerait faute de
    `DATABASE_URL`, et figerait `NEXT_PUBLIC_SITE_URL` sur `localhost` dans tous
    les liens des e-mails. Un `.env.local` sur le serveur couvre les deux : Next
@@ -180,7 +180,7 @@ connexion au back-office tourne alors en boucle.
 ```bash
 npm ci                        # installe et génère le client Prisma
 npx prisma migrate deploy     # applique les migrations à la base Neon
-npm run build                 # base réveillée au préalable — voir plus bas
+npm run build                 # base réveillée au préalable, voir plus bas
 ```
 
 5. **Restart** de l'application depuis hPanel.
@@ -214,8 +214,8 @@ démarrage. Sur hPanel, saisir les variables **avant** de lancer le build.
 
 ### Build sur une machine limitée
 
-Si `npm run build` s'interrompt sans message — le processus est tué faute de
-mémoire —, construire en local et n'envoyer que le dossier `.next/`.
+Si `npm run build` s'interrompt sans message : le processus est tué faute de
+mémoire, construire en local et n'envoyer que le dossier `.next/`.
 
 Ne **jamais** transférer `node_modules/` depuis un poste de développement :
 Prisma y installe un moteur de requête compilé pour le système du poste. Un
@@ -256,7 +256,7 @@ se fait une seule fois :
 npm run db:seed
 ```
 
-À sauter si la base Neon contient déjà le catalogue — c'est le cas ici, la même
+À sauter si la base Neon contient déjà le catalogue, c'est le cas ici, la même
 base sert le développement et la production (voir [`DATABASE.md`](DATABASE.md)).
 
 Neon met le calcul en veille après inactivité : la première requête après une
@@ -282,8 +282,8 @@ Ce que ça change :
 
 C'est le point important : tu te connectes sur `/admin`, et à partir de là tu
 navigues dans la boutique comme un client pendant que les visiteurs continuent
-de voir la page d'attente. Tu peux donc tout relire — fiches produits, panier,
-tunnel de commande — avant d'ouvrir.
+de voir la page d'attente. Tu peux donc tout relire, fiches produits, panier,
+tunnel de commande : avant d'ouvrir.
 
 Pour ouvrir la boutique : passer la variable à `0` (ou la supprimer) et
 **redémarrer l'application** depuis hPanel. La variable est lue au démarrage.
@@ -298,7 +298,7 @@ Deux choix volontaires derrière ce comportement :
   de maintenance qui interroge la base ne s'afficherait pas ce jour-là.
 
 La session admin est reconnue sur la seule signature de son jeton, sans requête
-en base — pour la même raison. Le jeton est signé et daté : il ne s'obtient pas
+en base : pour la même raison. Le jeton est signé et daté : il ne s'obtient pas
 sans être passé par le mot de passe **et** le code à six chiffres.
 
 ## 7. Tâche planifiée des campagnes e-mail
@@ -318,7 +318,7 @@ que l'heure du prochain lot n'est pas atteinte.
 
 **En production, la boutique est fermée par défaut.** Rien à faire pour cela :
 un déploiement neuf sert la page d'attente, et il faut demander explicitement
-l'ouverture. C'est le sens sûr de l'erreur — un oubli laisse le site fermé
+l'ouverture. C'est le sens sûr de l'erreur, un oubli laisse le site fermé
 plutôt que d'exposer un catalogue inachevé.
 
 Ce qui se passe tant qu'elle est fermée :
@@ -327,12 +327,12 @@ Ce qui se passe tant qu'elle est fermée :
 |---|---|
 | Toute la boutique | page d'attente en allemand, **503** |
 | `/api/...` (panier, commande, compte) | JSON d'erreur, **503** |
-| `/admin` et `/api/admin/...` | **ouverts** — c'est par là qu'on entre |
+| `/admin` et `/api/admin/...` | **ouverts** : c'est par là qu'on entre |
 | `/api/cron/...` | ouvert, déjà protégé par `CRON_SECRET` |
 | La boutique, **connecté en administrateur** | site complet et normal |
 
 Cette dernière ligne est tout l'intérêt du dispositif : on se connecte sur
-`/admin`, et la boutique se comporte comme si elle était ouverte — on peut la
+`/admin`, et la boutique se comporte comme si elle était ouverte, on peut la
 parcourir, tester le tunnel d'achat, vérifier chaque fiche, pendant que les
 visiteurs ne voient que la page d'attente.
 
@@ -347,13 +347,13 @@ MAINTENANCE_MODE=0
 ```
 
 puis redémarrer l'application. Rien d'autre à changer. Supprimer la variable ne
-suffit pas — c'est voulu : seule une décision écrite ouvre la boutique.
+suffit pas : c'est voulu : seule une décision écrite ouvre la boutique.
 
 ### Vérifier que la fermeture fonctionne
 
 En navigation privée, sinon le test est faussé : si votre navigateur porte
 encore un cookie de session administrateur, le site vous répondra normalement,
-et c'est exactement ce qui est demandé — mais ce n'est pas ce que voit un
+et c'est exactement ce qui est demandé : mais ce n'est pas ce que voit un
 visiteur.
 
 ```bash
@@ -385,7 +385,7 @@ Puis, dans le navigateur :
 
 ## 9. Ce qui reste à traiter avant d'ouvrir la boutique
 
-Repris de [`HANDOVER.md`](HANDOVER.md) — ces points ne bloquent pas le
+Repris de [`HANDOVER.md`](HANDOVER.md) : ces points ne bloquent pas le
 déploiement mais bloquent la vente réelle :
 
 0. **Supprimer les avis de démonstration.** La base en contient plusieurs
@@ -403,12 +403,12 @@ déploiement mais bloquent la vente réelle :
    avis réellement déposés par des clients ne sont pas concernés. À lancer
    **avant** d'ouvrir la boutique au public.
 
-1. Confirmation de commande par e-mail (§ 312i Abs. 1 Nr. 3 BGB) — obligatoire.
+1. Confirmation de commande par e-mail (§ 312i Abs. 1 Nr. 3 BGB), obligatoire.
 2. Aucun paiement encaissé : virement et facture fonctionnent, les prestataires
    (PayPal, carte, SEPA) restent à brancher via Intégrations.
 3. Bouton de rétractation en ligne (§ 356a BGB, obligatoire depuis le
    19 juin 2026) : le texte est en place, la fonctionnalité reste à construire.
 4. IBAN de démonstration sur la page de confirmation.
-5. Informations d'entreprise fictives dans les mentions légales — voir
+5. Informations d'entreprise fictives dans les mentions légales, voir
    [`LEGAL.md`](LEGAL.md), à faire relire par un juriste.
 6. Supprimer les deux commandes et les trois avis de test restés en base.

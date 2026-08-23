@@ -27,7 +27,7 @@ const VIDE: CodeSnippetInput = {
 
 /** Explication affichée sous le choix d'emplacement. */
 const AIDE_EMPLACEMENT: Readonly<Record<SnippetPlacement, string>> = {
-  head: "Balises de vérification, préconnexions, gestionnaires de balises. Les <meta> et <link> sont remontés dans le <head> de la page ; un script en ligne, lui, s'exécute en tête du corps de page — ce qui convient à Google Tag Manager.",
+  head: "Balises de vérification, préconnexions, gestionnaires de balises. Les <meta> et <link> sont remontés dans le <head> de la page ; un script en ligne, lui, s'exécute en tête du corps de page, ce qui convient à Google Tag Manager.",
   bodyStart:
     "Juste après l'ouverture du corps de page. C'est là que va le <noscript> d'un gestionnaire de balises.",
   bodyEnd: "En fin de page, après tout le contenu. Le meilleur choix par défaut pour un script de mesure : il ne retarde pas l'affichage.",

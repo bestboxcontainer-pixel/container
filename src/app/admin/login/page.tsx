@@ -292,7 +292,7 @@ export default function AdminLoginPage() {
         </div>
 
         <p className="mt-4 text-center text-xs text-muted-foreground">
-          BBC Best Box Containerhandel e.K. — administration
+          BBC Best Box Containerhandel e.K., administration
         </p>
       </div>
     </div>

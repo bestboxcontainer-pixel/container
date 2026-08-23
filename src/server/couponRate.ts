@@ -2,8 +2,8 @@
  * Limitation des essais de codes de réduction.
  *
  * Sans elle, la vérification devient un banc d'essai : on y enchaîne les codes
- * jusqu'à en trouver un qui réponde « ok ». Les codes courts et devinables —
- * SOMMER20, WELCOME10 — tombent en quelques minutes.
+ * jusqu'à en trouver un qui réponde « ok ». Les codes courts et devinables
+ * SOMMER20, WELCOME10 : tombent en quelques minutes.
  *
  * Le compteur vit en mémoire, comme celui des connexions administrateur : un
  * redémarrage le remet à zéro, ce qui est acceptable pour ralentir une
@@ -28,7 +28,7 @@ const PURGE_MS = 30_000;
  * Nombre de relais de confiance placés devant l'application.
  *
  * Un derrière Nginx ou Passenger, ce qui est le cas en production. Zéro si
- * l'application est jointe en direct — l'en-tête n'est alors plus qu'une
+ * l'application est jointe en direct : l'en-tête n'est alors plus qu'une
  * déclaration du client, et cette valeur le dit.
  *
  * Ce réglage n'est pas une commodité : sans lui, il suffirait d'envoyer un
@@ -65,7 +65,7 @@ function purger(maintenant: number, forcer = false): void {
  * droite l'adresse dont il a reçu la requête. Les entrées de gauche viennent du
  * client et valent ce qu'il a bien voulu écrire ; seules les dernières ont été
  * posées par nos propres relais. On saute donc exactement le nombre de relais
- * connus — ni plus, ce qui reviendrait à croire le client, ni moins, ce qui
+ * connus : ni plus, ce qui reviendrait à croire le client, ni moins, ce qui
  * confondrait tous les visiteurs derrière l'adresse du relais.
  *
  * Une liste trop courte pour ce compte signale une requête qui n'a pas traversé
@@ -134,7 +134,7 @@ export function checkCouponRate(
   // Nouveau compteur. Si la carte est pleine, on purge d'abord ce qui est échu.
   //
   // Ce qui reste court encore : effacer un compteur vivant pour faire de la
-  // place offrirait un contournement — il suffirait de saturer la carte pour
+  // place offrirait un contournement : il suffirait de saturer la carte pour
   // effacer le sien et repartir de zéro. On refuse donc le nouvel appelant
   // jusqu'à ce qu'une fenêtre se libère d'elle-même.
   if (compteurs.size >= APPELANTS_MAX) {

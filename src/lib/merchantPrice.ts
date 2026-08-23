@@ -10,7 +10,7 @@
  * Or deux prix de référence coexistent dans le catalogue. Celui d'une campagne
  * est figé à l'entrée du produit dans l'opération et porte ses dates : c'est une
  * promotion au sens strict. L'ancien prix saisi à la main dans la fiche, lui,
- * n'a ni début, ni fin, ni prix antérieurement pratiqué — c'est une référence
+ * n'a ni début, ni fin, ni prix antérieurement pratiqué, c'est une référence
  * fabricant, que la fiche affiche comme telle. Le flux ne l'annonce donc pas
  * comme une remise et se contente du prix réellement facturé.
  *

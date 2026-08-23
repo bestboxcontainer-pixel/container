@@ -40,7 +40,7 @@ const LOGO_HEIGHT = Math.round((LOGO_WIDTH * 406) / 1242);
  *
  * Recopiée ici et non importée : ce module ne doit dépendre d'aucun contenu de
  * page, et les valeurs sont de toute façon des données d'entreprise à figer une
- * fois pour toutes. Elles sont encore fictives — voir docs/LEGAL.md — et
+ * fois pour toutes. Elles sont encore fictives, voir docs/LEGAL.md, et
  * doivent être remplacées ici EN MÊME TEMPS que dans les pages légales.
  */
 const IMPRESSUM = {
@@ -145,7 +145,7 @@ function clickUrl(token: string, path?: string): string {
   const base = `${siteUrl()}/c/${token}`;
   // La destination voulue voyage en paramètre : la route /c sait ainsi vers
   // quelle fiche renvoyer quand la campagne porte plusieurs produits. Si elle
-  // l'ignore, le client atterrit simplement sur la page d'action — le clic
+  // l'ignore, le client atterrit simplement sur la page d'action, le clic
   // reste compté dans les deux cas.
   if (!path) return base;
   return `${base}?ziel=${encodeURIComponent(path)}`;
@@ -461,7 +461,7 @@ function renderText(input: RenderInput & { bodyText: string }): string {
   if (input.products.length > 0) {
     lines.push("");
     for (const product of input.products) {
-      lines.push(`- ${product.brand} ${product.name} — ${priceText(product, input.locale)}`);
+      lines.push(`- ${product.brand} ${product.name}, ${priceText(product, input.locale)}`);
     }
   }
 
@@ -470,8 +470,8 @@ function renderText(input: RenderInput & { bodyText: string }): string {
     "---",
     `${IMPRESSUM.name}, ${IMPRESSUM.street}, ${IMPRESSUM.city}, ${IMPRESSUM.country}`,
     isEnglish
-      ? `Managing director: ${IMPRESSUM.managingDirector} — ${IMPRESSUM.register} — VAT ID: ${IMPRESSUM.vatId}`
-      : `Geschäftsführer: ${IMPRESSUM.managingDirector} — ${IMPRESSUM.register} — USt-IdNr.: ${IMPRESSUM.vatId}`,
+      ? `Managing director: ${IMPRESSUM.managingDirector}, ${IMPRESSUM.register}, VAT ID: ${IMPRESSUM.vatId}`
+      : `Geschäftsführer: ${IMPRESSUM.managingDirector}, ${IMPRESSUM.register}, USt-IdNr.: ${IMPRESSUM.vatId}`,
     `Impressum: ${input.legalUrl}`,
     `${isEnglish ? "Privacy policy" : "Datenschutz"}: ${input.privacyUrl}`,
     "",

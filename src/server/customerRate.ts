@@ -59,7 +59,7 @@ const login = createLimiter(5, 15 * 60 * 1000);
 
 /**
  * Mot de passe oublié : trois demandes par adresse et par heure.
- * Le compteur s'incrémente que l'adresse existe ou non — sinon le simple fait
+ * Le compteur s'incrémente que l'adresse existe ou non, sinon le simple fait
  * d'être bloqué révélerait l'existence du compte.
  */
 const reset = createLimiter(3, 60 * 60 * 1000);

@@ -6,7 +6,7 @@ import { useConsentement } from "@/lib/consent";
 /**
  * File d'attente de l'API Smartsupp.
  * Le chargeur rejoue `smartsupp._` une fois prêt : les appels passés avant la
- * fin du chargement — ici « ouvre le chat » — ne sont donc pas perdus.
+ * fin du chargement, ici « ouvre le chat », ne sont donc pas perdus.
  */
 type SmartsuppQueue = ((...args: unknown[]) => void) & { _: unknown[][] };
 
@@ -22,7 +22,7 @@ const LOADER = "https://www.smartsuppchat.com/loader.js?";
 /**
  * Éléments que le chargeur Smartsupp ajoute au corps de page une fois le widget
  * prêt. Leur présence est le seul signal fiable que quelque chose de visible a
- * remplacé notre bouton — `window.smartsupp`, lui, existe dès qu'on crée la file
+ * remplacé notre bouton : `window.smartsupp`, lui, existe dès qu'on crée la file
  * d'attente, donc avant même que le script soit parti.
  *
  * Le sélecteur ratisse large volontairement. Smartsupp ne s'engage sur aucun nom
@@ -53,7 +53,7 @@ let injecte = false;
  *
  * `ouvrirLeChat` distingue les deux entrées : le visiteur qui clique veut voir
  * la fenêtre s'ouvrir, celui qui a simplement accepté le chat ne veut pas
- * qu'elle lui saute au visage — Smartsupp décidera lui-même, à sa cadence, de
+ * qu'elle lui saute au visage : Smartsupp décidera lui-même, à sa cadence, de
  * lui adresser le message de bienvenue.
  *
  * `enEchec` n'est utile qu'à celui qui attend devant son bouton ; le chargement
@@ -81,11 +81,11 @@ function injecterSmartsupp(
 
   if (ouvrirLeChat) {
     // Mis en file avant tout le reste : le chargeur l'exécutera, le chat
-    // s'ouvrira sans second clic — y compris si le script est déjà parti tout
+    // s'ouvrira sans second clic : y compris si le script est déjà parti tout
     // seul après l'accord au bandeau.
     window.smartsupp("chat:open");
 
-    // Filet : script chargé mais widget jamais posé — clé refusée, compte
+    // Filet : script chargé mais widget jamais posé, clé refusée, compte
     // suspendu, connexion temps réel coupée. Le visiteur récupère son bouton.
     //
     // Posé à chaque demande, et non à la seule injection : le script ne part
@@ -107,7 +107,7 @@ function injecterSmartsupp(
   script.src = LOADER;
   // Le chargement du fichier ne prouve rien : c'est l'apparition du widget qui
   // fait foi, et elle est observée dans le composant. On ne signale donc rien
-  // ici — le bouton garde sa roue jusqu'à ce que le widget soit là.
+  // ici : le bouton garde sa roue jusqu'à ce que le widget soit là.
   //
   // Un bloqueur de publicité filtre couramment ce domaine : mieux vaut rendre
   // la main au visiteur que laisser un bouton qui tourne dans le vide.
@@ -125,7 +125,7 @@ function injecterSmartsupp(
  *
  * 1. Le visiteur a accepté au bandeau : le chat se charge tout seul dès
  *    l'ouverture de la page. C'est la seule manière d'obtenir ce que Smartsupp
- *    sait faire — voir le visiteur arriver, le compter parmi les connectés,
+ *    sait faire : voir le visiteur arriver, le compter parmi les connectés,
  *    lui adresser un message de bienvenue au bout de quelques secondes et
  *    prévenir l'application du commerçant. Le script pose une identification
  *    de visiteur : elle n'est pas nécessaire à la boutique, elle relève donc
@@ -135,7 +135,7 @@ function injecterSmartsupp(
  * 2. Le visiteur a refusé, ou n'a pas encore répondu : le bouton ci-dessous
  *    reste, et rien ne part tant qu'il ne clique pas. Le clic EST la demande
  *    expresse du service, cas que le § 25 Abs. 2 Nr. 2 TDDDG dispense de
- *    recueil préalable. Refuser le bandeau ne prive donc personne du chat —
+ *    recueil préalable. Refuser le bandeau ne prive donc personne du chat
  *    cela prive seulement le commerçant de l'aborder le premier.
  *
  * La page « Datenschutzerklärung » décrit ce fonctionnement ; les deux doivent
@@ -153,14 +153,14 @@ export function SmartsuppLauncher({
   const [etat, setEtat] = useState<Etat>("repos");
   const { consentement } = useConsentement();
 
-  // Le widget, une fois posé, survit au démontage du composant — un changement
+  // Le widget, une fois posé, survit au démontage du composant, un changement
   // de langue remonte cette partie de l'arbre alors que le chat, lui, reste dans
   // la page. Sans cette lecture, le bouton reviendrait se poser par-dessus.
   //
   // On observe la présence du conteneur, et non `window.smartsupp` : cette
   // variable est créée pour la file d'attente, donc dès le clic. S'y fier
   // faisait disparaître le bouton immédiatement, avant que le chargeur ait rendu
-  // quoi que ce soit — le visiteur cliquait, tout s'effaçait, et aucun chat ne
+  // quoi que ce soit : le visiteur cliquait, tout s'effaçait, et aucun chat ne
   // s'ouvrait.
   //
   // `useSyncExternalStore` est la façon prévue de lire une valeur qui vit hors

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 // Bloc Open Graph / Twitter Card partagé par les pages publiques. Sans lui,
-// un lien partagé sur WhatsApp, Facebook ou X n'affiche ni image ni titre —
+// un lien partagé sur WhatsApp, Facebook ou X n'affiche ni image ni titre
 // juste l'URL brute.
 
 const SITE_NAME = "BBC Best Box Containerhandel e.K.";

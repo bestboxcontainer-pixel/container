@@ -6,7 +6,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 // Le client de l'application, pour que le seed vise exactement la même base
-// que le site — un second createClient() avait fini par diverger.
+// que le site : un second createClient() avait fini par diverger.
 import { prisma } from "../src/server/prisma";
 import { hashPassword } from "../src/lib/password";
 import { slugify } from "../src/lib/slugify";
@@ -178,7 +178,7 @@ async function seedCatalog(): Promise<void> {
 // leurs clés d'accès et restent des libellés tant qu'elles manquent.
 //
 // Aucun n'annonce de remise : le tunnel de commande ne sait pas en appliquer,
-// et un escompte affiché mais jamais déduit se retournerait contre nous — le
+// et un escompte affiché mais jamais déduit se retournerait contre nous, le
 // client qui retire 2 % de son virement paierait moins que sa facture.
 const PAYMENT_METHODS = [
   {

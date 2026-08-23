@@ -2,7 +2,7 @@
  * Clé du chat de la boutique.
  *
  * Écrite ici plutôt que dans une variable d'environnement : c'est une valeur
- * publique par construction — elle figure dans le code d'installation que
+ * publique par construction : elle figure dans le code d'installation que
  * Smartsupp destine au HTML de n'importe quel site, et part de toute façon dans
  * le navigateur de chaque visiteur. Rien à voir avec un jeton d'API, qui ouvre
  * l'accès aux conversations et n'a sa place ni dans un dépôt ni dans un bundle.
@@ -17,7 +17,7 @@
  * lue en priorité, pour brancher un autre compte sans toucher au code. Elle n'a
  * jamais servi à cela : elle a servi deux fois à recevoir un jeton d'API REST à
  * la place de la clé du widget, et à écraser silencieusement une valeur juste
- * par une valeur refusée. Le piège est double — la variable est `NEXT_PUBLIC_`,
+ * par une valeur refusée. Le piège est double, la variable est `NEXT_PUBLIC_`,
  * donc figée dans le bundle à la compilation : la retirer de l'hébergeur puis
  * redémarrer ne change rien tant que le site n'est pas reconstruit, et l'on
  * cherche l'erreur là où elle n'est plus.
@@ -27,13 +27,13 @@
  * contre un mode de panne silencieux à chaque déploiement.
  *
  * POURQUOI CE FICHIER PLUTÔT QUE LE COMPOSANT. Trois endroits ont besoin de
- * savoir si un chat existe : le chat lui-même, le bandeau de consentement — qui
- * ne doit rien demander pour un service absent — et le lien « Cookie-
+ * savoir si un chat existe : le chat lui-même, le bandeau de consentement, qui
+ * ne doit rien demander pour un service absent : et le lien « Cookie-
  * Einstellungen » du pied de page, qui n'aurait alors rien à rouvrir. Le
  * composant `SmartsuppChat` est un composant serveur : l'importer depuis le
  * bandeau, qui vit dans le navigateur, embarquerait `next-intl/server` avec lui.
  */
 export const CLE_SMARTSUPP = "68f9f508d7291022372070e0ba6f68bb963ad5f6";
 
-/** Vrai si un chat est joignable — décide du bandeau et du lien de réglages. */
+/** Vrai si un chat est joignable : décide du bandeau et du lien de réglages. */
 export const CHAT_CONFIGURE = CLE_SMARTSUPP.length > 0;

@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Sortiment | BBC Best Box Containerhandel e.K.",
-  description: "Lager-, Büro-, See-, Sanitär- und Sondercontainer — neu und gebraucht, kaufen oder mieten.",
+  description: "Lager-, Büro-, See-, Sanitär- und Sondercontainer, neu und gebraucht, kaufen oder mieten.",
 };
 
 const CATEGORIES = [
@@ -15,20 +15,20 @@ const CATEGORIES = [
     icon: Boxes,
     title: "Lagercontainer",
     text: "Wetterfeste Stahlcontainer für die sichere Lagerung von Material, Werkzeug, Ersatzteilen und Waren. Abschließbar, isoliert oder unisoliert, in Standardgrößen von 6 bis 12 Metern.",
-    points: ["Diebstahl- und wettergeschützt", "Standardlängen 6–12 m", "Regalsysteme auf Wunsch"],
+    points: ["Diebstahl- und wettergeschützt", "Standardlängen 6-12 m", "Regalsysteme auf Wunsch"],
   },
   {
     id: "buerocontainer",
     icon: Building2,
     title: "Bürocontainer",
-    text: "Mobile Büroeinheiten für Baustelle, Werksgelände oder Übergangslösung — einzeln oder als mehrgeschossige Anlage mit mehreren Modulen kombinierbar.",
+    text: "Mobile Büroeinheiten für Baustelle, Werksgelände oder Übergangslösung, einzeln oder als mehrgeschossige Anlage mit mehreren Modulen kombinierbar.",
     points: ["Heizung, Strom, Fenster", "Einzel- oder Mehrfachanlage", "Zwei-Etagen-Kombinationen möglich"],
   },
   {
     id: "seecontainer",
     icon: Ship,
     title: "Seecontainer",
-    text: "Robuste ISO-Container für Transport, Umschlag und Lagerung — neu oder geprüft gebraucht, in Standardgrößen.",
+    text: "Robuste ISO-Container für Transport, Umschlag und Lagerung, neu oder geprüft gebraucht, in Standardgrößen.",
     points: ["ISO-Normmaße 20' und 40'", "Wetter- und diebstahlsicher", "Neu und geprüft gebraucht"],
   },
   {
@@ -42,7 +42,7 @@ const CATEGORIES = [
     id: "sondercontainer",
     icon: Truck,
     title: "Sondercontainer",
-    text: "Individuelle Umbauten nach Ihren Maßen — Werkstattcontainer, Verkaufsstände, Technikräume oder projektspezifische Sonderanfertigungen.",
+    text: "Individuelle Umbauten nach Ihren Maßen, Werkstattcontainer, Verkaufsstände, Technikräume oder projektspezifische Sonderanfertigungen.",
     points: ["Maßgeschneiderte Umbauten", "Beratung zu Ihrem Einsatzzweck", "Angebot nach Aufmaß"],
   },
 ] as const;
@@ -111,7 +111,7 @@ export default function SortimentPage() {
             <div>
               <h2 className="text-2xl font-black text-foreground">Nicht das Richtige dabei?</h2>
               <p className="mt-2 text-foreground/70">
-                Wir realisieren auch individuelle Sonderanfertigungen — sprechen Sie uns an.
+                Wir realisieren auch individuelle Sonderanfertigungen. Sprechen Sie uns an.
               </p>
             </div>
             <Link

@@ -6,7 +6,7 @@
  * Produktseite ». Une fiche sans cotes contredit cette promesse, et un
  * lave-linge qui n'entre pas dans la niche revient aux frais de la boutique.
  *
- * Chaque cote ci-dessous est relevée sur la fiche du fabricant — l'URL figure
+ * Chaque cote ci-dessous est relevée sur la fiche du fabricant, l'URL figure
  * en regard. AUCUNE valeur n'est estimée ni déduite d'un modèle voisin : un
  * chiffre approximatif sur une niche de cuisine coûte un retour de
  * marchandise. Un modèle absent de cette table reste sans cotes, et le script
@@ -35,7 +35,7 @@ const FICHIER_CSV = "docs/dimensions-a-completer.csv";
 interface Cote {
   /** Référence du modèle, telle qu'elle figure dans le nom du produit. */
   ref: string;
-  /** Hauteur, largeur, profondeur en millimètres — dans cet ordre. */
+  /** Hauteur, largeur, profondeur en millimètres, dans cet ordre. */
   h: number;
   b: number;
   t: number;
@@ -173,7 +173,7 @@ const COTES = [...LAVE_LINGE, ...CLIMATISEURS];
 /** Puce telle qu'elle s'affiche sur la fiche, au format déjà en place. */
 function puce(cote: Cote): string {
   const base = `Maße (H × B × T): ${cote.h} × ${cote.b} × ${cote.t} mm`;
-  return cote.note ? `${base} — ${cote.note}` : base;
+  return cote.note ? `${base}, ${cote.note}` : base;
 }
 
 /** Vrai si la fiche annonce déjà des cotes, sous une forme ou une autre. */
@@ -195,7 +195,7 @@ async function importer(essai: boolean): Promise<void> {
   for (const ligne of lignes) {
     const [marque, modele, h, b, t] = ligne.split(";");
     if (!h?.trim() || !b?.trim() || !t?.trim()) {
-      console.log(`  ignoré (cote manquante) : ${marque} — ${modele}`);
+      console.log(`  ignoré (cote manquante) : ${marque}, ${modele}`);
       continue;
     }
 
@@ -204,7 +204,7 @@ async function importer(essai: boolean): Promise<void> {
       select: { id: true, bullets: true, description: true },
     });
     if (!produit) {
-      console.log(`  introuvable au catalogue : ${marque} — ${modele}`);
+      console.log(`  introuvable au catalogue : ${marque}, ${modele}`);
       continue;
     }
 
@@ -212,7 +212,7 @@ async function importer(essai: boolean): Promise<void> {
     if (porteDesCotes(bullets, produit.description)) continue;
 
     const cote: Cote = { ref: modele, h: Number(h), b: Number(b), t: Number(t), source: "" };
-    console.log(`  ${marque} — ${modele}\n      + ${puce(cote)}`);
+    console.log(`  ${marque}: ${modele}\n      + ${puce(cote)}`);
     if (!essai) {
       await prisma.product.update({
         where: { id: produit.id },
@@ -222,7 +222,7 @@ async function importer(essai: boolean): Promise<void> {
     ecrits += 1;
   }
 
-  console.log(`\n${essai ? "SIMULATION" : "Écriture terminée"} — ${ecrits} fiches complétées.`);
+  console.log(`\n${essai ? "SIMULATION" : "Écriture terminée"}, ${ecrits} fiches complétées.`);
 }
 
 async function main(): Promise<void> {
@@ -269,7 +269,7 @@ async function main(): Promise<void> {
 
   const absents = COTES.filter((c) => !servis.has(c.ref)).map((c) => c.ref);
 
-  console.log(`\n${essai ? "SIMULATION — rien n'est écrit." : "Écriture terminée."}`);
+  console.log(`\n${essai ? "SIMULATION, rien n'est écrit." : "Écriture terminée."}`);
   console.log(`  fiches complétées : ${ecrits}`);
   console.log(`  déjà pourvues     : ${dejaFaits}`);
   if (absents.length > 0) {
@@ -284,7 +284,7 @@ async function main(): Promise<void> {
   });
   if (restants.length > 0) {
     console.log(`\n  ${restants.length} fiches encore sans cotes :`);
-    for (const p of restants) console.log(`    ${p.brand} — ${p.name}`);
+    for (const p of restants) console.log(`    ${p.brand}, ${p.name}`);
 
     // Tableau à faire remplir : le point-virgule et le BOM pour qu'Excel
     // allemand l'ouvre sans réglage, les cotes en millimètres.

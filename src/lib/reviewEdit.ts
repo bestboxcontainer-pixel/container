@@ -3,7 +3,7 @@
  *
  * Un modérateur retouche un avis pour de bonnes raisons : corriger une faute,
  * retirer un nom de famille, effacer un numéro de téléphone laissé dans le
- * texte. Les bornes sont donc celles du dépôt public — un avis corrigé ne doit
+ * texte. Les bornes sont donc celles du dépôt public, un avis corrigé ne doit
  * pas pouvoir devenir ce qu'un visiteur n'aurait jamais pu écrire.
  *
  * La date de dépôt est modifiable, mais jamais dans le futur : un avis daté de

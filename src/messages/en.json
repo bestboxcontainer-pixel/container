@@ -34,7 +34,7 @@
     "whatsappTitle": "Questions? Message us on WhatsApp"
   },
   "header": {
-    "homeAriaLabel": "BBC Best Box Containerhandel e.K. – home page",
+    "homeAriaLabel": "BBC Best Box Containerhandel e.K., home page",
     "logoAlt": "BBC Best Box Containerhandel e.K.",
     "search": "Search"
   },
@@ -47,35 +47,35 @@
       "summer": {
         "eyebrow": "SUMMER SALE",
         "title": "Up to 10% off home appliances",
-        "subtitle": "Cooling, laundry, cooking and multimedia — grab our best prices now.",
+        "subtitle": "Cooling, laundry, cooking and multimedia, grab our best prices now.",
         "cta": "Shop now",
         "alt": "Modern kitchen with premium built-in appliances"
       },
       "cinema": {
         "eyebrow": "HOME CINEMA WEEKS",
         "title": "4K TVs from €449",
-        "subtitle": "OLED, QLED and Ambilight — big-screen cinema for your living room.",
+        "subtitle": "OLED, QLED and Ambilight, big-screen cinema for your living room.",
         "cta": "Discover TVs",
         "alt": "Large TV with ambient lighting in a darkened living room"
       },
       "drones": {
         "eyebrow": "NEW ARRIVALS",
         "title": "Drones for every flying style",
-        "subtitle": "Camera drones under 249 g — ready to fly without a licence, from €199.",
+        "subtitle": "Camera drones under 249 g, ready to fly without a licence, from €199.",
         "cta": "View drones",
         "alt": "Camera drone flying above a forest"
       },
       "laundry": {
         "eyebrow": "LAUNDRY DAY DEALS",
         "title": "Washing machines from €429",
-        "subtitle": "Front loaders with 1,400 rpm, automatic load sensing and Aquastop — installation service included.",
+        "subtitle": "Front loaders with 1,400 rpm, automatic load sensing and Aquastop, installation service included.",
         "cta": "View washing machines",
         "alt": "Washing machine in a bright utility room"
       },
       "coffee": {
         "eyebrow": "COFFEE WEEKS",
         "title": "Bean-to-cup machines from €219",
-        "subtitle": "Freshly ground instead of reheated — models by De'Longhi, Siemens and Jura.",
+        "subtitle": "Freshly ground instead of reheated, models by De'Longhi, Siemens and Jura.",
         "cta": "View coffee machines",
         "alt": "Espresso with fresh crema in a cup"
       }
@@ -126,15 +126,15 @@
     }
   },
   "trust": {
-    "shippingTitle": "Standard delivery: free (3–5 days)",
-    "shippingDetail": "Express delivery: €70 (24–48 hours)",
+    "shippingTitle": "Standard delivery: free (3-5 days)",
+    "shippingDetail": "Express delivery: €70 (24-48 hours)",
     "returnTitle": "14-day return policy",
     "returnDetail": "No reason required",
     "serviceTitle": "Installation & assembly service",
     "serviceDetail": "Old appliance taken away on request"
   },
   "group": {
-    "metaTitle": "{label} – appliances and accessories | BBC Best Box Containerhandel e.K.",
+    "metaTitle": "{label}: appliances and accessories | BBC Best Box Containerhandel e.K.",
     "metaDescription": "Every category in {label} at BBC Best Box Containerhandel e.K.: trusted brands, fair prices and fast delivery.",
     "intro": "Every category in {label} at a glance.",
     "productCount": "{count, plural, =0 {No items yet} one {# item} other {# items}}"
@@ -190,12 +190,12 @@
     "energyScale": "on a scale from {best} (most efficient) to {worst} (least efficient)",
     "energyDatasheet": "Product information sheet",
     "vatNote": "incl. VAT, plus service and shipping costs",
-    "inStock": "In stock – free standard delivery (3–5 days)",
-    "outOfStock": "On request – available in 2-4 weeks",
+    "inStock": "In stock, free standard delivery (3-5 days)",
+    "outOfStock": "On request, available in 2-4 weeks",
     "decreaseQuantity": "Decrease quantity by 1",
     "increaseQuantity": "Increase quantity by 1",
     "addToCart": "Add to cart",
-    "fastDelivery": "Free standard delivery (3–5 days) · Express €70 (24–48 h)",
+    "fastDelivery": "Free standard delivery (3-5 days) · Express €70 (24-48 h)",
     "warranty": "14-day return policy, no reason required",
     "vatOnly": "incl. VAT",
     "galleryLabel": "More product views",
@@ -210,7 +210,7 @@
     "emptyTitle": "We found nothing for “{query}”",
     "emptyHint": "Check the spelling, or try a broader term such as the brand or the type of appliance.",
     "promptTitle": "What are you looking for?",
-    "promptHint": "Enter at least two characters — brand, model or type of appliance.",
+    "promptHint": "Enter at least two characters: brand, model or type of appliance.",
     "backToShop": "Browse the range"
   },
   "reviews": {
@@ -218,10 +218,10 @@
     "count": "{count, plural, one {# review} other {# reviews}}",
     "starsLabel": "{star} stars",
     "starsAria": "{rating} out of 5 stars",
-    "listAria": "Customer reviews, {count, plural, one {# review} other {# reviews}} — scroll to browse",
-    "scrollHint": "{count, plural, one {# review} other {All # reviews}} — scroll inside the box",
+    "listAria": "Customer reviews, {count, plural, one {# review} other {# reviews}}, scroll to browse",
+    "scrollHint": "{count, plural, one {# review} other {All # reviews}}, scroll inside the box",
     "emptyTitle": "There are no customer reviews for this product yet.",
-    "emptyHint": "Share your experience and write the first review — it helps others decide.",
+    "emptyHint": "Share your experience and write the first review, it helps others decide.",
     "editorial": "Editorial assessment: {rating} out of 5",
     "writeTitle": "Write a review",
     "formRatingLabel": "Your rating",
@@ -250,7 +250,7 @@
   },
   "consent": {
     "title": "Enable live chat?",
-    "body": "We use strictly necessary cookies for your basket, session and language – those need no consent. Our live chat (Smartsupp s.r.o., Czech Republic) additionally stores a visitor ID on your device. It is the only way for us to see that you are here and to reach out to you first.",
+    "body": "We use strictly necessary cookies for your basket, session and language, those need no consent. Our live chat (Smartsupp s.r.o., Czech Republic) additionally stores a visitor ID on your device. It is the only way for us to see that you are here and to reach out to you first.",
     "note": "Without consent you can still reach us any time via the chat button in the bottom right. You can change your choice at any time in the site footer.",
     "privacyLink": "Privacy policy",
     "accept": "Accept",
@@ -258,9 +258,9 @@
   },
   "footer": {
     "logoAlt": "BBC Best Box Containerhandel e.K.",
-    "homeAriaLabel": "BBC Best Box Containerhandel e.K. – home page",
-    "deliveryTitle": "Standard delivery: free (3–5 days)",
-    "deliveryDetail": "Express delivery: €70 (24–48 hours)",
+    "homeAriaLabel": "BBC Best Box Containerhandel e.K., home page",
+    "deliveryTitle": "Standard delivery: free (3-5 days)",
+    "deliveryDetail": "Express delivery: €70 (24-48 hours)",
     "warrantyTitle": "14-day return policy",
     "warrantyDetail": "No reason required",
     "paymentTitle": "Secure payment",
@@ -313,8 +313,8 @@
     "total": "Total",
     "vatIncluded": "incl. {rate} % VAT ({amount})",
     "vatNote": "All prices include statutory VAT.",
-    "shippingStandardHint": "Standard delivery is free — with no minimum order value.",
-    "shippingRule": "Standard delivery free (3–5 working days), express delivery 70.00 € (24–48 hours). You choose the shipping method at checkout.",
+    "shippingStandardHint": "Standard delivery is free, with no minimum order value.",
+    "shippingRule": "Standard delivery free (3-5 working days), express delivery 70.00 € (24-48 hours). You choose the shipping method at checkout.",
     "deliveryTime": "Dispatch takes place after receipt of payment.",
     "withdrawalHint": "As a consumer you have a 14-day right of withdrawal (§ 355 BGB). See the withdrawal policy for details.",
     "toCheckout": "Proceed to checkout",
@@ -389,11 +389,11 @@
     "shippingMethods": {
       "standard": {
         "label": "Standard delivery",
-        "delay": "Delivered in 3–5 working days"
+        "delay": "Delivered in 3-5 working days"
       },
       "express": {
         "label": "Express delivery",
-        "delay": "Delivered within 24–48 hours"
+        "delay": "Delivered within 24-48 hours"
       }
     },
     "deliveryTitle": "Delivery",
@@ -495,7 +495,7 @@
   },
   "wishlist": {
     "title": "Wishlist",
-    "intro": "Saved items stay in this browser — no account and no sign-in required.",
+    "intro": "Saved items stay in this browser, no account and no sign-in required.",
     "add": "Add to wishlist",
     "remove": "Remove from wishlist",
     "loading": "Loading your wishlist …",

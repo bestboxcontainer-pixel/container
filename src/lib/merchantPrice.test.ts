@@ -2,7 +2,7 @@
  * Tests des prix annoncés dans le flux Google Merchant.
  *
  * L'enjeu : `sale_price` déclare une promotion, pas un bon prix. L'attribuer à
- * un ancien prix saisi à la main revient à annoncer une remise sans terme —
+ * un ancien prix saisi à la main revient à annoncer une remise sans terme
  * l'un des motifs qui font basculer un compte en contrôle manuel. À l'inverse,
  * taire la remise d'une campagne réelle prive la boutique de l'affichage promo
  * auquel elle a droit. Les deux erreurs se paient.

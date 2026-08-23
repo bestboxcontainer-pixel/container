@@ -21,7 +21,7 @@ export default function KontaktPage() {
               Sprechen Sie mit uns
             </h1>
             <p className="mt-4 max-w-xl text-white/75">
-              Ob Kauf, Miete oder Sonderanfertigung — schildern Sie uns Ihr Vorhaben, wir melden
+              Ob Kauf, Miete oder Sonderanfertigung: Schildern Sie uns Ihr Vorhaben, wir melden
               uns zeitnah mit einem passenden Angebot.
             </p>
           </div>
@@ -56,7 +56,7 @@ export default function KontaktPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <Clock className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
-                  <span>Montag – Freitag, 8 – 17 Uhr</span>
+                  <span>Montag bis Freitag, 8 bis 17 Uhr</span>
                 </li>
               </ul>
             </div>
@@ -64,7 +64,7 @@ export default function KontaktPage() {
             <form className="rounded-sm border border-border p-6 sm:p-8">
               <h2 className="text-xl font-black text-foreground">Anfrage senden</h2>
               <p className="mt-1 text-sm text-foreground/60">
-                Dieses Formular ist aktuell nicht angebunden — bitte kontaktieren Sie uns
+                Dieses Formular ist aktuell nicht angebunden: Bitte kontaktieren Sie uns
                 vorerst per Telefon oder E-Mail.
               </p>
               <div className="mt-6 grid gap-4 sm:grid-cols-2">

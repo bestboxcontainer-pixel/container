@@ -18,7 +18,7 @@ const STOCK_LEFT = 7;
 const STOCK_TOTAL = 40;
 
 // Horloge à la seconde : le serveur ignore l'heure du visiteur et renvoie donc
-// null — le vrai compte à rebours ne démarre qu'après l'hydratation.
+// null : le vrai compte à rebours ne démarre qu'après l'hydratation.
 let cachedSecond: number | null = null;
 
 function subscribe(onStoreChange: () => void): () => void {

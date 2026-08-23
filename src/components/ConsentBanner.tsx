@@ -8,7 +8,7 @@ import { CHAT_CONFIGURE } from "@/lib/smartsupp";
 /**
  * Bandeau de consentement, en bas de l'écran.
  *
- * Il ne demande qu'une chose — le chat en direct — et le dit en toutes lettres.
+ * Il ne demande qu'une chose, le chat en direct, et le dit en toutes lettres.
  * Un bandeau qui réclame « tous les cookies » alors que la boutique n'en pose
  * pas d'autres ne serait pas une information, seulement un réflexe.
  *

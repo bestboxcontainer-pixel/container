@@ -3,7 +3,7 @@ import { JsonLd, type JsonLdValue } from "@/components/seo/JsonLd";
 // Balisage ItemList d'une page catégorie : la liste des produits telle
 // qu'affichée, dans le même ordre. Suit le format que Google documente pour
 // les carrousels génériques (position + url par élément, sans dupliquer prix
-// ou disponibilité — ces informations restent au balisage Product de chaque
+// ou disponibilité : ces informations restent au balisage Product de chaque
 // fiche, seule source qui doive rester alignée sur le flux Merchant).
 
 export interface ItemListJsonLdItem {

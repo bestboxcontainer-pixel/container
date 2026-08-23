@@ -11,7 +11,7 @@ import type { ShippingMethodKey } from "@/lib/cart";
  *
  * Rien de ce que le navigateur envoie n'est cru : il transmet des identifiants
  * de produit et des quantités, jamais des prix. Le panier est rechiffré à
- * partir de la base, exactement comme au moment de facturer — sans quoi il
+ * partir de la base, exactement comme au moment de facturer, sans quoi il
  * suffirait d'annoncer un sous-total gonflé pour franchir le minimum d'un
  * coupon.
  *

@@ -3,7 +3,7 @@
  *
  * Les vingt-deux pages juridiques de la boutique sont réécrites en base depuis
  * le back-office : le gabarit `src/content/legal/de.ts` ne les alimente plus.
- * Corriger le code n'a donc aucun effet sur ce que lit un visiteur — ni sur ce
+ * Corriger le code n'a donc aucun effet sur ce que lit un visiteur, ni sur ce
  * que lit l'examinateur de Google Merchant Center. D'où ce script, qui opère
  * là où le texte vit réellement.
  *
@@ -14,8 +14,8 @@
  *      elle-même que ses conditions de livraison sont indicatives ne passe pas
  *      l'examen du compte marchand.
  *
- *   2. « Elektroaltgeräte » affiche trois numéros de registre nuls — dont deux
- *      suivis du mot « Platzhalter » —, une adresse de reprise inventée
+ *   2. « Elektroaltgeräte » affiche trois numéros de registre nuls, dont deux
+ *      suivis du mot « Platzhalter », une adresse de reprise inventée
  *      (Musterstraße 12, 10115 Berlin) et une forme juridique qui contredit
  *      l'Impressum : GmbH ici, OHG partout ailleurs. Faute des vrais numéros,
  *      la section entière disparaît : mieux vaut ne rien annoncer qu'annoncer
@@ -106,7 +106,7 @@ function retirerSection(page: PageStockee, heading: string): void {
  * Renumérote les titres de la forme « 4. Intitulé ».
  *
  * Retirer une section au milieu d'une page numérotée laisse un trou dans la
- * suite — « 3, 5, 6 » —, qui se lit comme un paragraphe escamoté. Les titres
+ * suite (« 3, 5, 6 »), qui se lit comme un paragraphe escamoté. Les titres
  * sans numéro ne sont pas touchés et n'entrent pas dans le compte.
  */
 function renumeroterSections(page: PageStockee): void {
@@ -204,12 +204,12 @@ async function alignerBandeau(): Promise<number> {
   for (const barre of barres) {
     const attendu = traduireOffre(barre.messageDe);
     if (barre.messageEn === attendu) {
-      console.log(`  bandeau ${barre.id} — déjà aligné`);
+      console.log(`  bandeau ${barre.id}: déjà aligné`);
       continue;
     }
 
     modifiees += 1;
-    console.log(`  bandeau ${barre.id} — offre anglaise différente de l'allemande`);
+    console.log(`  bandeau ${barre.id}: offre anglaise différente de l'allemande`);
     console.log(`      avant : ${barre.messageEn}`);
     console.log(`      après : ${attendu}`);
 
@@ -237,7 +237,7 @@ function traduireOffre(messageDe: string): string {
 }
 
 async function main(): Promise<void> {
-  console.log(APPLIQUER ? "Application des corrections.\n" : "Simulation — aucune écriture. Ajoutez --appliquer pour écrire.\n");
+  console.log(APPLIQUER ? "Application des corrections.\n" : "Simulation, aucune écriture. Ajoutez --appliquer pour écrire.\n");
 
   let modifiees = 0;
 
@@ -252,7 +252,7 @@ async function main(): Promise<void> {
       try {
         page = JSON.parse(ligne.data) as PageStockee;
       } catch {
-        console.log(`  ${ligne.slug}/${ligne.locale} — contenu illisible, ignoré`);
+        console.log(`  ${ligne.slug}/${ligne.locale}: contenu illisible, ignoré`);
         continue;
       }
 
@@ -261,13 +261,13 @@ async function main(): Promise<void> {
       const apres = JSON.stringify(page);
 
       if (avant === apres) {
-        console.log(`  ${ligne.slug}/${ligne.locale} — déjà conforme`);
+        console.log(`  ${ligne.slug}/${ligne.locale}: déjà conforme`);
         continue;
       }
 
       modifiees += 1;
       const ecart = avant.length - apres.length;
-      console.log(`  ${ligne.slug}/${ligne.locale} — ${correction.motif} (${ecart} caractères retirés)`);
+      console.log(`  ${ligne.slug}/${ligne.locale}: ${correction.motif} (${ecart} caractères retirés)`);
 
       if (APPLIQUER) {
         await prisma.legalContent.updateMany({

@@ -72,7 +72,7 @@ export const MARQUE_DEMONSTRATION = "[DEMO]";
  *
  * Le défaut est l'invisibilité : publier de faux avis est déloyal au sens de
  * l'annexe au § 3 Abs. 3 UWG (n° 23b et 23c), et alimente en outre la note
- * agrégée du balisage — donc les étoiles affichées par Google. Un oubli de
+ * agrégée du balisage : donc les étoiles affichées par Google. Un oubli de
  * purge avant mise en ligne ne doit pas suffire à les faire apparaître : il
  * faut poser la variable, ce qu'on ne fait que sur un poste de travail.
  */
@@ -85,8 +85,8 @@ function demonstrationVisible(): boolean {
  *
  * Le `NOT … contains` employé seul ne suffit pas : en SQL, une comparaison
  * portant sur une colonne à NULL ne vaut ni vrai ni faux, et la ligne tombe.
- * Un avis authentique dont la note de modération est vide — le cas ordinaire,
- * un modérateur n'écrit une note que s'il a quelque chose à dire — disparaîtra
+ * Un avis authentique dont la note de modération est vide, le cas ordinaire,
+ * un modérateur n'écrit une note que s'il a quelque chose à dire, disparaîtra
  * donc avec les faux. Les deux cas sont énoncés séparément pour cette raison.
  *
  * Exporté parce que la fiche produit et le comptage des cartes de liste
@@ -227,7 +227,7 @@ export async function moderateReview(
  *
  * Distinct de `moderateReview`, qui ne touche qu'au statut : ici on retouche
  * ce que le visiteur lit. Le statut, la note de modération et l'auteur de la
- * décision ne bougent pas — corriger une faute d'orthographe n'est pas
+ * décision ne bougent pas : corriger une faute d'orthographe n'est pas
  * remodérer, et un avis publié le reste.
  *
  * La date de dépôt n'est écrite que si l'écran en a envoyé une : sans cela,

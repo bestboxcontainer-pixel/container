@@ -222,7 +222,7 @@ function itemsTable(
     total: string;
     subtotal: string;
     shipping: string;
-    /** Mode retenu, déjà traduit : « Expressversand (24–48 Stunden) ». */
+    /** Mode retenu, déjà traduit : « Expressversand (24-48 Stunden) ». */
     shippingMethod: string;
     freeShipping: string;
     /** Étiquette de la remise ; le code y est déjà accolé s'il y en a un. */
@@ -248,7 +248,7 @@ function itemsTable(
     order.shippingCents === 0 ? labels.freeShipping : formatCents(order.shippingCents);
   // Le mode de livraison est nommé sur la ligne des frais : « 70,00 € » seul
   // laisserait le client chercher d'où vient la somme.
-  const shippingLabel = `${labels.shipping} — ${labels.shippingMethod}`;
+  const shippingLabel = `${labels.shipping} : ${labels.shippingMethod}`;
 
   const summaryRow = (label: string, value: string, strong = false) =>
     `<tr>
@@ -295,7 +295,7 @@ function itemsTable(
  * Étiquette de la ligne de remise, code compris.
  *
  * Le code est nommé plutôt que sous-entendu : c'est la réponse à la question
- * que pose toute somme retirée d'une facture — au titre de quoi. Le vendeur y
+ * que pose toute somme retirée d'une facture : au titre de quoi. Le vendeur y
  * lit du même coup quel coupon a servi, sans ouvrir le back-office.
  */
 function discountLabel(order: OrderRecord, de: boolean): string {
@@ -307,17 +307,17 @@ function discountLabel(order: OrderRecord, de: boolean): string {
  * Mode de livraison rendu dans la langue du message.
  *
  * Les délais sont écrits en clair plutôt que dérivés de `minDays`/`maxDays` :
- * l'express se dit « 24–48 heures », pas « 1–2 jours », et c'est bien cette
+ * l'express se dit « 24-48 heures », pas « 1-2 jours », et c'est bien cette
  * promesse-là qui a été faite au client dans le tunnel.
  */
 const SHIPPING_METHOD_TEXTS = {
   de: {
-    standard: "Standardversand (3–5 Werktage)",
-    express: "Expressversand (24–48 Stunden)",
+    standard: "Standardversand (3-5 Werktage)",
+    express: "Expressversand (24-48 Stunden)",
   },
   en: {
-    standard: "Standard delivery (3–5 working days)",
-    express: "Express delivery (24–48 hours)",
+    standard: "Standard delivery (3-5 working days)",
+    express: "Express delivery (24-48 hours)",
   },
   fr: {
     standard: "Livraison standard (3 à 5 jours ouvrés)",
@@ -341,7 +341,7 @@ function addressLines(address: OrderAddress): string[] {
   ];
 }
 
-/** Version texte brut d'une adresse — les clients sans HTML la voient. */
+/** Version texte brut d'une adresse : les clients sans HTML la voient. */
 function addressText(address: OrderAddress): string {
   return [
     address.company,
@@ -358,7 +358,7 @@ function itemsText(order: OrderRecord): string {
   return order.items
     .map(
       (item) =>
-        `- ${item.quantity} × ${`${item.brand} ${item.name}`.trim()} — ${formatCents(item.lineTotalCents)}`,
+        `- ${item.quantity} × ${`${item.brand} ${item.name}`.trim()}, ${formatCents(item.lineTotalCents)}`,
     )
     .join("\n");
 }
@@ -502,7 +502,7 @@ export function buildOrderConfirmationEmail(
   // Moyen de paiement : retiré quand il fait doublon.
   //
   // Sur un virement, le bloc ne faisait que redire l'encadré bancaire juste
-  // au-dessus — « Zahlung : Sofortüberweisung » sous « Bankverbindung ». Il
+  // au-dessus : « Zahlung : Sofortüberweisung » sous « Bankverbindung ». Il
   // reste pour les autres moyens, où il porte une information que rien ne
   // donne ailleurs, ainsi que dès qu'il y a des frais à annoncer : une somme
   // facturée ne peut pas disparaître d'une confirmation.
@@ -524,7 +524,7 @@ export function buildOrderConfirmationEmail(
     : "";
 
   // Réduite à la mention légale. La première phrase renvoyait au bouton de
-  // suivi, qui n'existe plus — elle désignait un lien absent. Ce qui reste est
+  // suivi, qui n'existe plus : elle désignait un lien absent. Ce qui reste est
   // ce que § 312f BGB attend d'une confirmation : que le client sache où
   // trouver son droit de rétractation.
   const footnote = de
@@ -534,8 +534,8 @@ export function buildOrderConfirmationEmail(
   const html = layout({
     lang,
     preheader: de
-      ? `Bestellung ${order.orderNumber} — ${formatCents(order.totalCents)}`
-      : `Order ${order.orderNumber} — ${formatCents(order.totalCents)}`,
+      ? `Bestellung ${order.orderNumber}, ${formatCents(order.totalCents)}`
+      : `Order ${order.orderNumber}, ${formatCents(order.totalCents)}`,
     heading,
     intro,
     // Les coordonnées bancaires passent avant le détail des articles.
@@ -543,7 +543,7 @@ export function buildOrderConfirmationEmail(
     // Ce message a un seul objet pour qui paie par virement : où envoyer
     // l'argent, et sous quelle référence. Placé après le tableau, le bloc
     // obligeait à faire défiler deux écrans sur un téléphone pour trouver
-    // l'IBAN — le client rangeait le mail sans avoir viré. L'ordre suit
+    // l'IBAN : le client rangeait le mail sans avoir viré. L'ordre suit
     // désormais ce qu'il a à faire : ce qu'on attend de lui d'abord, la
     // justification du montant ensuite.
     //
@@ -556,8 +556,8 @@ export function buildOrderConfirmationEmail(
     // la page de confirmation, ouverte juste après l'achat.
     footnote: escapeHtml(footnote),
     footer: de
-      ? "BBC Best Box Containerhandel e.K. — automatische Nachricht zu Ihrer Bestellung."
-      : "BBC Best Box Containerhandel e.K. — automated message about your order.",
+      ? "BBC Best Box Containerhandel e.K., automatische Nachricht zu Ihrer Bestellung."
+      : "BBC Best Box Containerhandel e.K., automated message about your order.",
   });
 
   const text = [
@@ -581,7 +581,7 @@ export function buildOrderConfirmationEmail(
     ...(order.discountCents > 0
       ? [`${discountLabel(order, de)}: − ${formatCents(order.discountCents)}`]
       : []),
-    `${de ? "Versand" : "Shipping"} — ${shippingMethod}: ${order.shippingCents === 0 ? (de ? "kostenlos" : "free") : formatCents(order.shippingCents)}`,
+    `${de ? "Versand" : "Shipping"}, ${shippingMethod}: ${order.shippingCents === 0 ? (de ? "kostenlos" : "free") : formatCents(order.shippingCents)}`,
     `${de ? "Gesamtsumme" : "Total"}: ${formatCents(order.totalCents)}`,
     "",
     // Même règle que la version HTML : sur un virement sans frais, le moyen de
@@ -622,9 +622,9 @@ export function buildOrderNotificationEmail(order: OrderRecord): Omit<MailMessag
 
   const intro = [
     `Commande <strong>${escapeHtml(order.orderNumber)}</strong> reçue le ${escapeHtml(placed)}.`,
-    `Montant : <strong>${escapeHtml(formatCents(order.totalCents))}</strong> — paiement : ${escapeHtml(order.paymentMethodLabel)}${order.paymentMethodFee ? ` (${escapeHtml(order.paymentMethodFee)})` : ""}.`,
+    `Montant : <strong>${escapeHtml(formatCents(order.totalCents))}</strong>, paiement : ${escapeHtml(order.paymentMethodLabel)}${order.paymentMethodFee ? ` (${escapeHtml(order.paymentMethodFee)})` : ""}.`,
     express
-      ? `<strong>${escapeHtml(shippingMethod)}</strong> — à préparer en priorité.`
+      ? `<strong>${escapeHtml(shippingMethod)}</strong>, à préparer en priorité.`
       : `Livraison : ${escapeHtml(shippingMethod)}.`,
   ];
 
@@ -662,14 +662,14 @@ export function buildOrderNotificationEmail(order: OrderRecord): Omit<MailMessag
 
   const html = layout({
     lang: "fr",
-    preheader: `${order.orderNumber} — ${formatCents(order.totalCents)} — ${order.paymentMethodLabel}`,
+    preheader: `${order.orderNumber}, ${formatCents(order.totalCents)}, ${order.paymentMethodLabel}`,
     heading,
     intro,
     blocks: [table, customer, shippingPanel, billingPanel, notePanel].filter(Boolean),
     action: { label: "Ouvrir dans le back-office", url: adminUrl },
     footnote:
       "Le stock a déjà été réservé à l'enregistrement de la commande. Le paiement est encore en attente : à confirmer dans le back-office dès réception.",
-    footer: "BBC Best Box Containerhandel e.K. — notification automatique du back-office.",
+    footer: "BBC Best Box Containerhandel e.K., notification automatique du back-office.",
   });
 
   const text = [
@@ -709,7 +709,7 @@ export function buildOrderNotificationEmail(order: OrderRecord): Omit<MailMessag
     .join("\n");
 
   return {
-    subject: `Nouvelle commande ${order.orderNumber} — ${formatCents(order.totalCents)}`,
+    subject: `Nouvelle commande ${order.orderNumber}, ${formatCents(order.totalCents)}`,
     html,
     text,
   };

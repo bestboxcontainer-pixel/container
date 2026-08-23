@@ -168,7 +168,7 @@ export function RecoveryTable({
                   {dateFormatter.format(new Date(row.createdAt))}
                 </td>
                 <td className="px-4 py-3 whitespace-nowrap text-muted-foreground">
-                  {row.lastSentAt ? dateFormatter.format(new Date(row.lastSentAt)) : "—"}
+                  {row.lastSentAt ? dateFormatter.format(new Date(row.lastSentAt)) : "-"}
                 </td>
                 <td className="px-4 py-3 text-right whitespace-nowrap">
                   {row.state === "active" && (

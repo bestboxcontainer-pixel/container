@@ -72,7 +72,7 @@ export function BankTransferForm({ state }: BankTransferFormProps) {
     <form onSubmit={handleSubmit} className="rounded-sm border border-border bg-white p-4 md:p-6">
       {!state.configured && (
         <p className="mb-5 rounded-sm border border-destructive bg-destructive/5 px-3 py-2 text-xs text-foreground">
-          <span className="font-bold text-destructive">Coordonnées de démonstration — </span>
+          <span className="font-bold text-destructive">Coordonnées de démonstration, </span>
           l&apos;IBAN ci-dessous est un jeu de test et n&apos;appartient à aucun compte. Tant
           qu&apos;il n&apos;est pas remplacé, le client voit un avertissement sur sa page de
           confirmation et aucun virement ne peut aboutir.
@@ -131,7 +131,7 @@ export function BankTransferForm({ state }: BankTransferFormProps) {
         {/* Saisie libre plutôt qu'une liste : le libellé doit être celui que le
             client retrouvera dans son application bancaire, et il change d'une
             banque à l'autre. Affiché tel quel aux clients allemands comme
-            anglophones — écrivez-le dans la langue de la boutique. */}
+            anglophones : écrivez-le dans la langue de la boutique. */}
         <label className="block">
           <span className={LABEL}>
             Type de virement{" "}
@@ -167,7 +167,7 @@ export function BankTransferForm({ state }: BankTransferFormProps) {
 
         <div className="space-y-4">
           <label className="block">
-            <span className={LABEL}>Allemand — clients de la boutique</span>
+            <span className={LABEL}>Allemand : clients de la boutique</span>
             <textarea
               value={instructionsDe}
               onChange={(event) => setInstructionsDe(event.target.value)}
@@ -177,7 +177,7 @@ export function BankTransferForm({ state }: BankTransferFormProps) {
           </label>
 
           <label className="block">
-            <span className={LABEL}>Anglais — commandes passées sur /en</span>
+            <span className={LABEL}>Anglais : commandes passées sur /en</span>
             <textarea
               value={instructionsEn}
               onChange={(event) => setInstructionsEn(event.target.value)}

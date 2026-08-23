@@ -6,14 +6,14 @@ import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Vermietung | BBC Best Box Containerhandel e.K.",
-  description: "Container flexibel mieten — Lager-, Büro-, Wohn- und Sanitärcontainer für Baustellen, Events und Übergangslösungen.",
+  description: "Container flexibel mieten: Lager-, Büro-, Wohn- und Sanitärcontainer für Baustellen, Events und Übergangslösungen.",
 };
 
 const ADVANTAGES = [
   {
     icon: CalendarClock,
     title: "Flexible Mietdauer",
-    text: "Von wenigen Wochen bis zu mehreren Jahren — die Laufzeit richtet sich nach Ihrem Projekt, nicht umgekehrt.",
+    text: "Von wenigen Wochen bis zu mehreren Jahren: die Laufzeit richtet sich nach Ihrem Projekt, nicht umgekehrt.",
   },
   {
     icon: PackageCheck,
@@ -91,7 +91,7 @@ export default function VermietungPage() {
             <div>
               <h2 className="text-2xl font-black text-foreground">Welchen Container brauchen Sie?</h2>
               <p className="mt-2 text-foreground/70">
-                Schildern Sie uns Einsatzzweck und Zeitraum — wir schlagen die passende Lösung vor.
+                Schildern Sie uns Einsatzzweck und Zeitraum: wir schlagen die passende Lösung vor.
               </p>
             </div>
             <Link

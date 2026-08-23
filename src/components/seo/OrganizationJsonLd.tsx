@@ -11,12 +11,12 @@ import { MERCHANT_COUNTRY, MERCHANT_LANGUAGE, SHOP_NAME, SHOP_PHONE, siteUrl } f
 // À placer une seule fois, dans la mise en page racine ou sur la page d'accueil.
 
 interface OrganizationJsonLdProps {
-  /** Profils officiels de la boutique — renforce l'identification de l'entité. */
+  /** Profils officiels de la boutique : renforce l'identification de l'entité. */
   sameAs?: string[];
   /**
    * Adresse postale du siège. Par défaut celle de l'Impressum : Google compare
    * le balisage et la page, et une entité sans adresse est plus difficile à
-   * rattacher — c'est l'un des signaux qui accélèrent la validation d'un compte
+   * rattacher : c'est l'un des signaux qui accélèrent la validation d'un compte
    * Merchant Center. La renseigner à la main ne servirait qu'à la faire diverger.
    */
   address?: {

@@ -1,8 +1,8 @@
 /**
  * Registre des prestataires de paiement et configuration du prestataire actif.
  *
- * Un seul prestataire encaisse à la fois. La configuration — lequel, et quels
- * moyens de paiement il prend en charge — tient dans une ligne de la table
+ * Un seul prestataire encaisse à la fois. La configuration, lequel, et quels
+ * moyens de paiement il prend en charge : tient dans une ligne de la table
  * générique `Setting` : pas de modèle dédié pour deux champs.
  *
  * Les clés API ne passent jamais par ici : elles vivent chiffrées dans la table
@@ -96,7 +96,7 @@ export async function saveGatewayConfig(input: GatewayConfig): Promise<GatewayCo
  * Prestataire à employer pour encaisser une commande réglée avec `methodKey`,
  * ou null si elle doit rester réglée hors ligne.
  *
- * Rend null dès qu'une condition manque — prestataire coupé, moyen de paiement
+ * Rend null dès qu'une condition manque : prestataire coupé, moyen de paiement
  * non rattaché, clés absentes. Une configuration incomplète fait ainsi retomber
  * la commande sur le règlement hors ligne, comme un virement, au lieu
  * d'échouer devant le client.
@@ -119,7 +119,7 @@ export async function ensureGatewayIntegrations(): Promise<void> {
   const fields = allGateways().flatMap((gateway) =>
     gateway.meta.keys.map((key) => ({
       key: key.integrationKey,
-      label: `${gateway.meta.label} — ${key.label}`,
+      label: `${gateway.meta.label}, ${key.label}`,
       description: key.hint,
     })),
   );

@@ -19,11 +19,14 @@ import { Link } from "@/i18n/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PhotoHeroCarousel, type PhotoSlide } from "@/components/PhotoHeroCarousel";
+import { ProductCard } from "@/components/ProductCard";
+import { getCategoryPages } from "@/server/store";
+import type { Product } from "@/types/home";
 
 export const metadata: Metadata = {
-  title: "BBC Best Box Containerhandel e.K. — Container kaufen & mieten",
+  title: "BBC Best Box Containerhandel e.K. | Container kaufen & mieten",
   description:
-    "Lager-, Büro-, Wohn- und Sanitärcontainer, neu und gebraucht — Verkauf und Vermietung, Lieferung deutschlandweit.",
+    "Lager-, Büro-, Wohn- und Sanitärcontainer, neu und gebraucht. Verkauf und Vermietung, Lieferung deutschlandweit.",
 };
 
 const STATS = [
@@ -44,7 +47,7 @@ const TRUST_FACTS = [
 ] as const;
 
 /**
- * Echte Fotos (keine KI-Bilder) unter freier Lizenz von Wikimedia Commons —
+ * Echte Fotos (keine KI-Bilder) unter freier Lizenz von Wikimedia Commons,
  * siehe Bildnachweis auf der Impressum-Seite für Quelle/Lizenz je Bild.
  */
 const HERO_PHOTOS: readonly PhotoSlide[] = [
@@ -65,7 +68,7 @@ const HERO_PHOTOS: readonly PhotoSlide[] = [
 /**
  * Design-Linien: eigene Namen und Texte, keine Übernahme von Konzepten
  * Dritter. Fotos wiederverwendet aus HERO/„Unsere Container“-Bestand (siehe
- * Bildnachweis im Impressum) — für jede Linie ein eigenes Foto liegt (noch)
+ * Bildnachweis im Impressum): für jede Linie ein eigenes Foto liegt (noch)
  * nicht vor.
  */
 const DESIGN_LINES = [
@@ -73,7 +76,7 @@ const DESIGN_LINES = [
     id: "mattschwarz",
     icon: Package,
     title: "Mattschwarz",
-    text: "Container in mattschwarzer RAL-Lackierung — moderner, zurückhaltender Auftritt für Firmengelände und Baustelle.",
+    text: "Container in mattschwarzer RAL-Lackierung: moderner, zurückhaltender Auftritt für Firmengelände und Baustelle.",
     photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403217/bbc-best-box/site/gallery-modulbau-de-1eyg37.jpg",
   },
   {
@@ -94,14 +97,14 @@ const DESIGN_LINES = [
     id: "verglast",
     icon: Sparkles,
     title: "Verglast",
-    text: "Großzügige Fensterfronten für lichtdurchflutete Räume — ideal für Empfang, Verkauf oder Büro.",
+    text: "Großzügige Fensterfronten für lichtdurchflutete Räume, ideal für Empfang, Verkauf oder Büro.",
     photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403222/bbc-best-box/site/gallery-office-de-rnnl7b.jpg",
   },
   {
     id: "modular",
     icon: Building2,
     title: "Modular",
-    text: "Einzeln oder als mehrgeschossige Anlage kombinierbar — flexibel erweiterbar nach Bedarf.",
+    text: "Einzeln oder als mehrgeschossige Anlage kombinierbar, flexibel erweiterbar nach Bedarf.",
     photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403217/bbc-best-box/site/gallery-modulbau-de-1eyg37.jpg",
   },
   {
@@ -150,7 +153,7 @@ const BENEFITS = [
   {
     icon: ShieldCheck,
     title: "Geprüfte Qualität",
-    text: "Jeder Container wird vor der Auslieferung technisch geprüft — neu wie gebraucht.",
+    text: "Jeder Container wird vor der Auslieferung technisch geprüft, neu wie gebraucht.",
   },
   {
     icon: Clock,
@@ -165,12 +168,38 @@ const BENEFITS = [
 ] as const;
 
 const STEPS = [
-  { step: "1", title: "Anfrage stellen", text: "Container-Typ, Maße und Einsatzort schildern — per Telefon, E-Mail oder Formular." },
+  { step: "1", title: "Anfrage stellen", text: "Container-Typ, Maße und Einsatzort schildern: per Telefon, E-Mail oder Formular." },
   { step: "2", title: "Angebot erhalten", text: "Wir prüfen Verfügbarkeit und Zustand und melden uns mit einem passenden Angebot." },
   { step: "3", title: "Liefern lassen", text: "Nach Zusage liefern wir termingerecht und stellen den Container bei Ihnen auf." },
 ] as const;
 
-export default function HomePage() {
+/**
+ * Extrait du catalogue pour la page d'accueil.
+ *
+ * Prélèvement à tour de rôle plutôt que les huit premiers : le catalogue est
+ * trié par catégorie, et une simple troncature ne montrerait que des
+ * Lagercontainer. On fait donc un tour par catégorie avant d'en reprendre une.
+ */
+async function extraitDuCatalogue(maximum = 8): Promise<Product[]> {
+  const pages = await getCategoryPages();
+  const files = pages.map((page) => [...page.products]).filter((file) => file.length > 0);
+
+  const extrait: Product[] = [];
+  for (let rang = 0; extrait.length < maximum; rang += 1) {
+    const restantes = files.filter((file) => file.length > rang);
+    if (restantes.length === 0) break;
+    for (const file of restantes) {
+      if (extrait.length >= maximum) break;
+      extrait.push(file[rang]);
+    }
+  }
+
+  return extrait;
+}
+
+export default async function HomePage() {
+  const produits = await extraitDuCatalogue();
+
   return (
     <>
       <Header variant="overlay" />
@@ -183,11 +212,11 @@ export default function HomePage() {
           <div className="relative z-10 mx-auto grid max-w-screen-xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center md:py-24">
             <div>
               <h1 className="text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
-                Container kaufen und mieten — schnell, zuverlässig, deutschlandweit
+                Container kaufen und mieten: schnell, zuverlässig, deutschlandweit
               </h1>
               <p className="mt-5 max-w-lg text-base leading-relaxed text-white/75">
                 BBC Best Box Containerhandel beliefert Gewerbe, Baustellen und Privatkunden mit
-                Lager-, Büro-, Wohn- und Sanitärcontainern — neu und gebraucht, aus eigenem
+                Lager-, Büro-, Wohn- und Sanitärcontainern: neu und gebraucht, aus eigenem
                 Bestand.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
@@ -242,7 +271,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Bandeau de confiance défilant — faits vérifiables sur l'entreprise */}
+        {/* Bandeau de confiance défilant : faits vérifiables sur l'entreprise */}
         <section className="overflow-hidden border-y border-white/10 bg-secondary py-4">
           <div className="flex w-max animate-[defilement_28s_linear_infinite]">
             {[0, 1].map((copy) => (
@@ -265,7 +294,7 @@ export default function HomePage() {
         <section className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
           <h2 className="text-2xl font-black text-foreground sm:text-3xl">Unsere Container</h2>
           <p className="mt-3 max-w-xl text-foreground/70">
-            Entdecken Sie unsere hochwertigen Design-Linien für jeden Bedarf – alle Varianten auf
+            Entdecken Sie unsere hochwertigen Design-Linien für jeden Bedarf, alle Varianten auf
             einen Blick.
           </p>
 
@@ -278,7 +307,7 @@ export default function HomePage() {
                 <div className="relative aspect-video">
                   <Image
                     src={line.photo}
-                    alt={`${line.title} — Beispielcontainer`}
+                    alt={`${line.title}, Beispielcontainer`}
                     fill
                     sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     className="object-cover"
@@ -301,6 +330,40 @@ export default function HomePage() {
             ))}
           </div>
         </section>
+
+        {/* Verfügbare Container : lecture réelle du catalogue, pas une liste
+            écrite en dur. La section disparaît si le catalogue est vide, plutôt
+            que d'afficher une grille creuse. */}
+        {produits.length > 0 && (
+          <section className="border-t border-border">
+            <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
+              <div className="flex flex-wrap items-end justify-between gap-4">
+                <div>
+                  <h2 className="text-2xl font-black text-foreground sm:text-3xl">
+                    Verfügbare Container
+                  </h2>
+                  <p className="mt-3 max-w-xl text-foreground/70">
+                    Ein Auszug aus dem Bestand, quer durch alle Kategorien. Maße, Zustandsklasse
+                    und Preis stehen auf der jeweiligen Detailseite.
+                  </p>
+                </div>
+                <Link
+                  href="/sortiment"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline"
+                >
+                  Ganzes Sortiment
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </Link>
+              </div>
+
+              <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+                {produits.map((produit) => (
+                  <ProductCard key={produit.slug ?? produit.name} product={produit} />
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Ablauf */}
         <section className="bg-muted">
@@ -328,7 +391,7 @@ export default function HomePage() {
                 Bereit für Ihren Container?
               </h2>
               <p className="mt-2 text-white/75">
-                Sprechen Sie mit uns — wir finden die passende Lösung für Ihr Projekt.
+                Sprechen Sie mit uns: wir finden die passende Lösung für Ihr Projekt.
               </p>
             </div>
             <Link

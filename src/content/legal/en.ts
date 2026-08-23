@@ -1,5 +1,5 @@
 /**
- * Contenu légal et informatif en ANGLAIS — BBC Best Box Containerhandel e.K.
+ * Contenu légal et informatif en ANGLAIS : BBC Best Box Containerhandel e.K.
  *
  * Traduction professionnelle du corpus allemand (de.ts), mêmes clés et même
  * structure de sections. Pour les pages juridiques, une mention indique que
@@ -8,7 +8,7 @@
  * ATTENTION : toutes les données d'entreprise sont des PLACEHOLDERS.
  * Voir docs/LEGAL.md.
  *
- * NOTE DE REBRANDING : voir de.ts — le corps rédactionnel de ces pages décrit
+ * NOTE DE REBRANDING : voir de.ts, le corps rédactionnel de ces pages décrit
  * toujours une activité de vente au détail d'appareils électroménagers, non
  * réécrit pour une activité de négoce de conteneurs (la vitrine qui les
  * exposait a été retirée dans le cadre de ce même chantier).
@@ -19,7 +19,7 @@ import type { LegalPageMap } from "./types";
 /** Date de dernière révision rédactionnelle du corpus anglais. */
 const UPDATED_AT = "2026-07-26";
 
-/** Coordonnées de l'entreprise — À REMPLACER par les données réelles. */
+/** Coordonnées de l'entreprise : À REMPLACER par les données réelles. */
 const COMPANY = {
   name: "BBC Best Box Containerhandel e.K.",
   street: "Petersweg 11a",
@@ -40,7 +40,7 @@ const RETURN_ADDRESS = `${COMPANY.name}, Returns Department, ${COMPANY.street}, 
 
 /** Avertissement placé en tête de chaque page juridique. */
 const DISCLAIMER =
-  "Legal notice: This text is a carefully prepared template for the BBC Best Box Containerhandel e.K. online shop. All company details (address, commercial register, VAT identification number, WEEE registration number, shipping rates, service providers) are placeholders and must be replaced with the actual data before publication. Have the text reviewed by a qualified lawyer afterwards — only then is it fit for live use.";
+  "Legal notice: This text is a carefully prepared template for the BBC Best Box Containerhandel e.K. online shop. All company details (address, commercial register, VAT identification number, WEEE registration number, shipping rates, service providers) are placeholders and must be replaced with the actual data before publication. Have the text reviewed by a qualified lawyer afterwards, only then is it fit for live use.";
 
 /** Mention indiquant que la version allemande prévaut. */
 const GERMAN_PREVAILS =
@@ -53,7 +53,7 @@ function intro(lead: string): string {
 
 export const enLegalPages: LegalPageMap = {
   /* ------------------------------------------------------------------ */
-  /* Impressum / Legal notice — § 5 DDG                                  */
+  /* Impressum / Legal notice: § 5 DDG                                  */
   /* ------------------------------------------------------------------ */
   impressum: {
     slug: "impressum",
@@ -114,7 +114,7 @@ export const enLegalPages: LegalPageMap = {
       {
         heading: "Consumer dispute resolution",
         body:
-          "Notice pursuant to section 36 of the German Consumer Dispute Resolution Act (Verbraucherstreitbeilegungsgesetz, VSBG): We are neither willing nor obliged to participate in dispute resolution proceedings before a consumer arbitration board. If you are dissatisfied with our service, please contact our customer service team first — we resolve almost every issue directly.\n\n" +
+          "Notice pursuant to section 36 of the German Consumer Dispute Resolution Act (Verbraucherstreitbeilegungsgesetz, VSBG): We are neither willing nor obliged to participate in dispute resolution proceedings before a consumer arbitration board. If you are dissatisfied with our service, please contact our customer service team first, we resolve almost every issue directly.\n\n" +
           "The competent consumer arbitration board would be: Universalschlichtungsstelle des Bundes, Zentrum für Schlichtung e. V., Straßburger Straße 8, 77694 Kehl am Rhein, Germany, www.verbraucher-schlichter.de.\n\n" +
           "The European Commission's Online Dispute Resolution (ODR) platform was permanently shut down on 20 July 2025. Linking to that platform is no longer permitted, which is why we deliberately do not provide such a link.",
       },
@@ -134,12 +134,12 @@ export const enLegalPages: LegalPageMap = {
         heading: "Image credits",
         body: "The container photos on this website come from Wikimedia Commons and are freely licensed:",
         list: [
-          "Igor Ovsyannykov — \"Shipping containers in a port\", CC0 (no attribution required)",
-          "AgainErick — \"Shipping container stacks – Port of Rotterdam\", CC BY-SA 4.0",
-          "Carsten Steger — \"Aerial image of the Eurogate and Burchardkai container terminals\" (Hamburg), CC BY-SA 4.0",
-          "Immanuel Giel — \"Container architecture in Germany 01\", CC BY-SA 4.0",
-          "Immanuel Giel — \"Container architecture in Germany 02\", CC BY-SA 4.0",
-          "Immanuel Giel — \"Container architecture in Germany 03\", CC0 (no attribution required)",
+          "Igor Ovsyannykov: \"Shipping containers in a port\", CC0 (no attribution required)",
+          "AgainErick: \"Shipping container stacks, Port of Rotterdam\", CC BY-SA 4.0",
+          "Carsten Steger: \"Aerial image of the Eurogate and Burchardkai container terminals\" (Hamburg), CC BY-SA 4.0",
+          "Immanuel Giel: \"Container architecture in Germany 01\", CC BY-SA 4.0",
+          "Immanuel Giel: \"Container architecture in Germany 02\", CC BY-SA 4.0",
+          "Immanuel Giel: \"Container architecture in Germany 03\", CC0 (no attribution required)",
         ],
       },
     ],
@@ -168,7 +168,7 @@ export const enLegalPages: LegalPageMap = {
         body:
           "The presentation of products in the online shop does not constitute a legally binding offer but a non-binding invitation to place an order.\n\n" +
           "By clicking the \"Place binding order\" button you submit a binding offer to purchase the items in your shopping basket. Immediately after submitting your order you will receive an automated acknowledgement of receipt by email. This acknowledgement merely documents that we have received your order and does not yet constitute acceptance of your offer.\n\n" +
-          "The purchase contract is concluded as soon as we accept your order by way of a separate order confirmation sent by email, dispatch the goods or — in the case of advance payment — send you the payment request. If we do not accept your order within five working days, it is deemed to have been rejected and any payments already made will be refunded without delay.\n\n" +
+          "The purchase contract is concluded as soon as we accept your order by way of a separate order confirmation sent by email, dispatch the goods or, in the case of advance payment, send you the payment request. If we do not accept your order within five working days, it is deemed to have been rejected and any payments already made will be refunded without delay.\n\n" +
           "Orders involving freight forwarder delivery, installation services or custom-made items are always confirmed separately because a delivery date has to be arranged.",
       },
       {
@@ -211,13 +211,13 @@ export const enLegalPages: LegalPageMap = {
         heading: "Section 8 Right of withdrawal",
         body:
           "Consumers have a statutory right of withdrawal of 14 days. The full withdrawal instructions, the online withdrawal function pursuant to section 356a BGB and the model withdrawal form can be found on our \"Right of withdrawal\" page; both are also included in our order confirmation.\n\n" +
-          "In addition to the statutory right of withdrawal, we voluntarily grant you a contractual right of return of 30 days from receipt of the goods. This contractual right requires the goods to be complete, undamaged and in resaleable condition. Your statutory rights — in particular the 14-day right of withdrawal and your rights in respect of defects — are not restricted by this.",
+          "In addition to the statutory right of withdrawal, we voluntarily grant you a contractual right of return of 30 days from receipt of the goods. This contractual right requires the goods to be complete, undamaged and in resaleable condition. Your statutory rights, in particular the 14-day right of withdrawal and your rights in respect of defects, are not restricted by this.",
       },
       {
         heading: "Section 9 Liability for defects (statutory warranty)",
         body:
           "The statutory law on liability for defects applies. For new goods, consumers' claims for defects become time-barred two years after delivery of the goods. If a defect becomes apparent within one year of delivery, it is presumed that the goods were already defective at the time of handover.\n\n" +
-          "For goods with digital elements — such as smart TVs, smartwatches or connected household appliances — we ensure that you are informed of, and receive, the updates required to maintain conformity with the contract during the relevant period (sections 475b and 475c BGB).\n\n" +
+          "For goods with digital elements, such as smart TVs, smartwatches or connected household appliances, we ensure that you are informed of, and receive, the updates required to maintain conformity with the contract during the relevant period (sections 475b and 475c BGB).\n\n" +
           "Vis-à-vis business customers, claims for defects in new goods become time-barred one year after the transfer of risk. Statutory provisions on supplier recourse remain unaffected.\n\n" +
           "Please report defects to our customer service team before returning an appliance. In many cases we can arrange for a technician or the manufacturer's service directly, which is considerably faster for you.",
       },
@@ -233,7 +233,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Section 12 Take-back of waste equipment and batteries",
-        body: "As a distributor of electrical and electronic equipment we take back waste equipment free of charge to the extent required by law and participate in the take-back of waste batteries. Full details — including 1:1 and 0:1 take-back, collection on delivery and returning small waste appliances — can be found on our \"Waste electrical equipment & batteries\" page.",
+        body: "As a distributor of electrical and electronic equipment we take back waste equipment free of charge to the extent required by law and participate in the take-back of waste batteries. Full details, including 1:1 and 0:1 take-back, collection on delivery and returning small waste appliances, can be found on our \"Waste electrical equipment & batteries\" page.",
       },
       {
         heading: "Section 13 Set-off and right of retention",
@@ -262,7 +262,7 @@ export const enLegalPages: LegalPageMap = {
   },
 
   /* ------------------------------------------------------------------ */
-  /* Privacy policy — GDPR / TDDDG                                       */
+  /* Privacy policy: GDPR / TDDDG                                       */
   /* ------------------------------------------------------------------ */
   datenschutz: {
     slug: "datenschutz",
@@ -291,10 +291,10 @@ export const enLegalPages: LegalPageMap = {
         heading: "3. Legal bases for processing",
         body: "We process personal data only on one of the following legal bases:",
         list: [
-          "Article 6(1)(a) GDPR — your consent, for example for newsletters or non-essential cookies",
-          "Article 6(1)(b) GDPR — performance of the purchase contract or pre-contractual measures",
-          "Article 6(1)(c) GDPR — compliance with legal obligations, in particular commercial and tax retention requirements",
-          "Article 6(1)(f) GDPR — our legitimate interests, such as fraud prevention, IT security and improving our services",
+          "Article 6(1)(a) GDPR: your consent, for example for newsletters or non-essential cookies",
+          "Article 6(1)(b) GDPR: performance of the purchase contract or pre-contractual measures",
+          "Article 6(1)(c) GDPR: compliance with legal obligations, in particular commercial and tax retention requirements",
+          "Article 6(1)(f) GDPR: our legitimate interests, such as fraud prevention, IT security and improving our services",
         ],
       },
       {
@@ -321,7 +321,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "8. Shipping and installation services",
-        body: "For delivery purposes we pass on your name, delivery address and — for scheduling freight forwarder deliveries and connection or installation services — your telephone number or email address to the logistics or service partner engaged. The legal basis is Article 6(1)(b) GDPR.",
+        body: "For delivery purposes we pass on your name, delivery address and, for scheduling freight forwarder deliveries and connection or installation services, your telephone number or email address to the logistics or service partner engaged. The legal basis is Article 6(1)(b) GDPR.",
       },
       {
         heading: "9. Customer reviews",
@@ -347,7 +347,7 @@ export const enLegalPages: LegalPageMap = {
       {
         heading: "13. Cookies and consent management",
         body:
-          "We use cookies and comparable technologies. Technically necessary cookies — for the shopping basket, session management and security, for example — are used on the basis of section 25(2) of the German Telecommunications Digital Services Data Protection Act (TDDDG) without consent; the associated data processing is based on Article 6(1)(f) GDPR.\n\n" +
+          "We use cookies and comparable technologies. Technically necessary cookies, for the shopping basket, session management and security, for example, are used on the basis of section 25(2) of the German Telecommunications Digital Services Data Protection Act (TDDDG) without consent; the associated data processing is based on Article 6(1)(f) GDPR.\n\n" +
           "All other cookies, in particular for statistics and marketing, are used only with your express consent under section 25(1) TDDDG in conjunction with Article 6(1)(a) GDPR. You give this consent via our consent banner and can change or withdraw it at any time with effect for the future using the \"Cookie settings\" link in the footer. Where recognised consent management services are used, we take their signals into account.\n\n" +
           "This currently concerns a single service: the live chat provided by Smartsupp s.r.o. (Czech Republic). When loaded, it stores a visitor ID on your device. If you consent in the banner, the chat is loaded on every page of the shop; Smartsupp then recognises your visit, may show you a greeting message on its own initiative, and receives the page requested, the referring address, browser details and your IP address.\n\n" +
           "If you decline or do not answer, no Smartsupp script is executed, no cookie of that provider is set and no data reaches it. The button in the bottom right remains: by clicking it you expressly request the chat (section 25(2) no. 2 TDDDG) and can write to us as usual, without your visit having been reported to Smartsupp beforehand.\n\n" +
@@ -359,7 +359,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "15. Recipients and transfers to third countries",
-        body: "Recipients of your data are exclusively service providers we have selected with care and who act for us as processors under Article 28 GDPR, as well as bodies to which we are legally required to transfer data (such as tax authorities). Transfers to countries outside the EU and the EEA take place only where an adequacy decision of the European Commission exists or appropriate safeguards within the meaning of Articles 44 et seq. GDPR — in particular standard contractual clauses — have been agreed.",
+        body: "Recipients of your data are exclusively service providers we have selected with care and who act for us as processors under Article 28 GDPR, as well as bodies to which we are legally required to transfer data (such as tax authorities). Transfers to countries outside the EU and the EEA take place only where an adequacy decision of the European Commission exists or appropriate safeguards within the meaning of Articles 44 et seq. GDPR, in particular standard contractual clauses, have been agreed.",
       },
       {
         heading: "16. Retention periods",
@@ -415,7 +415,7 @@ export const enLegalPages: LegalPageMap = {
     updatedAt: UPDATED_AT,
     sections: [
       {
-        heading: "Withdrawal instructions — right of withdrawal",
+        heading: "Withdrawal instructions, right of withdrawal",
         body:
           "You have the right to withdraw from this contract within fourteen days without giving any reason.\n\n" +
           "The withdrawal period will expire after fourteen days from the day on which you acquire, or a third party other than the carrier and indicated by you acquires, physical possession of the goods.\n\n" +
@@ -424,26 +424,26 @@ export const enLegalPages: LegalPageMap = {
           "To meet the withdrawal deadline, it is sufficient for you to send your communication concerning your exercise of the right of withdrawal before the withdrawal period has expired.",
       },
       {
-        heading: "Withdrawal instructions — effects of withdrawal",
+        heading: "Withdrawal instructions, effects of withdrawal",
         body:
           "If you withdraw from this contract, we shall reimburse to you all payments received from you, including the costs of delivery (with the exception of the supplementary costs resulting from your choice of a type of delivery other than the least expensive type of standard delivery offered by us), without undue delay and in any event not later than fourteen days from the day on which we are informed about your decision to withdraw from this contract. We will carry out such reimbursement using the same means of payment as you used for the initial transaction, unless you have expressly agreed otherwise; in any event, you will not incur any fees as a result of such reimbursement.\n\n" +
           "We may withhold reimbursement until we have received the goods back or you have supplied evidence of having sent back the goods, whichever is the earliest.\n\n" +
           `You shall send back the goods or hand them over to us at ${RETURN_ADDRESS} without undue delay and in any event not later than fourteen days from the day on which you communicate your withdrawal from this contract to us. The deadline is met if you send back the goods before the period of fourteen days has expired.\n\n` +
           "We will bear the cost of returning the goods.\n\n" +
           "You are only liable for any diminished value of the goods resulting from the handling other than what is necessary to establish the nature, characteristics and functioning of the goods.\n\n" +
-          "— End of withdrawal instructions —",
+          "End of withdrawal instructions",
       },
       {
         heading: "Start of the period for multiple goods and partial deliveries",
         body:
           "If your order comprises several goods ordered in one order and delivered separately, the withdrawal period expires fourteen days from the day on which you acquire, or a third party other than the carrier and indicated by you acquires, physical possession of the last item.\n\n" +
-          "If goods are delivered in several lots or pieces — for example a fitted kitchen or an appliance with separate accessories — the period runs from the day on which you acquire, or a third party other than the carrier and indicated by you acquires, physical possession of the last lot or piece.",
+          "If goods are delivered in several lots or pieces, for example a fitted kitchen or an appliance with separate accessories, the period runs from the day on which you acquire, or a third party other than the carrier and indicated by you acquires, physical possession of the last lot or piece.",
       },
       {
         heading: "Withdrawal in text form",
         body:
           "An unequivocal statement in text form is all that is needed. The quickest route is an email to " +
-          `${COMPANY.email} — state your name, your order number and the item you wish to return. A letter to the address given in our legal notice, or a call to ${COMPANY.phone}, works just as well.\n\n` +
+          `${COMPANY.email}: State your name, your order number and the item you wish to return. A letter to the address given in our legal notice, or a call to ${COMPANY.phone}, works just as well.\n\n` +
           "You may use the model withdrawal form reproduced below, but it is not obligatory.\n\n" +
           "We will send you an acknowledgement of receipt by email without undue delay, stating the date and time of receipt.",
       },
@@ -474,7 +474,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Digital content",
-        body: "For contracts concerning the supply of digital content not supplied on a tangible medium — such as download codes for games or software — your right of withdrawal expires under section 356(5) BGB once we have begun performance of the contract after you have expressly agreed that we may begin before the end of the withdrawal period and have acknowledged your awareness that your right of withdrawal thereby lapses. We additionally confirm this to you on a durable medium.",
+        body: "For contracts concerning the supply of digital content not supplied on a tangible medium, such as download codes for games or software, your right of withdrawal expires under section 356(5) BGB once we have begun performance of the contract after you have expressly agreed that we may begin before the end of the withdrawal period and have acknowledged your awareness that your right of withdrawal thereby lapses. We additionally confirm this to you on a durable medium.",
       },
       {
         heading: "Voluntary 30-day return policy",
@@ -528,7 +528,7 @@ export const enLegalPages: LegalPageMap = {
       {
         heading: "Connection and installation service",
         body:
-          "On request, our service partners will connect your new appliance professionally and put it into operation. You do not book this service in the basket but by telephone or email — ideally before ordering, so that we can schedule it together with the delivery.\n\n" +
+          "On request, our service partners will connect your new appliance professionally and put it into operation. You do not book this service in the basket but by telephone or email, ideally before ordering, so that we can schedule it together with the delivery.\n\n" +
           "This requires all on-site connections (electricity, water, waste water, exhaust air, aerial or network connection) to be present, freely accessible and compliant with applicable standards. We are not permitted to carry out electrical work on your building installation.",
         list: [
           "Connecting a washing machine, tumble dryer or dishwasher: 49.00 euros",
@@ -541,9 +541,9 @@ export const enLegalPages: LegalPageMap = {
       {
         heading: "Collection of your old appliance",
         body:
-          "When we deliver a new electrical appliance, we will collect your equivalent old appliance free of charge on request (1:1 take-back). Please tell us in good time — by telephone, by email, or in the comments field of your order — so that the carrier can plan the collection.\n\n" +
+          "When we deliver a new electrical appliance, we will collect your equivalent old appliance free of charge on request (1:1 take-back). Please tell us in good time, by telephone, by email, or in the comments field of your order, so that the carrier can plan the collection.\n\n" +
           "The old appliance must be disconnected, emptied, cleaned and freely accessible at the place of delivery. Dismantling a built-in old appliance is not part of the free collection service but can be booked as a chargeable extra.\n\n" +
-          "All other take-back options — in particular for small waste appliances without a new purchase — are described on our \"Waste electrical equipment & batteries\" page.",
+          "All other take-back options, in particular for small waste appliances without a new purchase, are described on our \"Waste electrical equipment & batteries\" page.",
       },
       {
         heading: "Partial deliveries",
@@ -551,11 +551,11 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Where is my order?",
-        body: "You can check the status of your order at any time using the link in your order confirmation, and in your customer account under \"My orders\". As soon as the goods leave our warehouse we set the status to \"dispatched\". We send you the consignment number — and, for freight forwarder deliveries, the contact details for scheduling — by email as soon as we have them.",
+        body: "You can check the status of your order at any time using the link in your order confirmation, and in your customer account under \"My orders\". As soon as the goods leave our warehouse we set the status to \"dispatched\". We send you the consignment number, and, for freight forwarder deliveries, the contact details for scheduling, by email as soon as we have them.",
       },
       {
         heading: "Transport damage",
-        body: "Please inspect the shipment on delivery where possible. Report visible damage to the carrier and, in the case of freight deliveries, have it noted on the delivery receipt. Then contact our customer service team — we will arrange a replacement or repair. Your statutory rights in respect of defects remain unaffected in all cases.",
+        body: "Please inspect the shipment on delivery where possible. Report visible damage to the carrier and, in the case of freight deliveries, have it noted on the delivery receipt. Then contact our customer service team, we will arrange a replacement or repair. Your statutory rights in respect of defects remain unaffected in all cases.",
       },
     ],
   },
@@ -579,7 +579,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Sofortüberweisung",
-        body: "At the end of the order process you are redirected to your bank's online banking, where you authorise the transfer directly. We receive confirmation immediately and can start dispatch straight away — you do not need an account with a separate payment service.",
+        body: "At the end of the order process you are redirected to your bank's online banking, where you authorise the transfer directly. We receive confirmation immediately and can start dispatch straight away, you do not need an account with a separate payment service.",
       },
       {
         heading: "PayPal",
@@ -633,10 +633,10 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "How to register a return",
-        body: "Please register your return in advance — that way we can allocate your parcel immediately and refund you faster.",
+        body: "Please register your return in advance, that way we can allocate your parcel immediately and refund you faster.",
         list: [
           `Email to ${COMPANY.email} stating your order number and the item description`,
-          "The model withdrawal form from our \"Right of withdrawal\" page, completed and sent by email or post — it is not obligatory",
+          "The model withdrawal form from our \"Right of withdrawal\" page, completed and sent by email or post, it is not obligatory",
           `Phone: ${COMPANY.phone}, Monday to Saturday, 8 a.m. to 8 p.m.`,
         ],
       },
@@ -648,11 +648,11 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Packaging and accessories",
-        body: "Where possible, use the original box with the transport locks — this is particularly important for washing machines and televisions. Please enclose all accessories, remote controls, cables, manuals and any vouchers supplied. If parts are missing, we can only refund part of the value.",
+        body: "Where possible, use the original box with the transport locks, this is particularly important for washing machines and televisions. Please enclose all accessories, remote controls, cables, manuals and any vouchers supplied. If parts are missing, we can only refund part of the value.",
       },
       {
         heading: "Inspecting the goods and diminished value",
-        body: "You may examine the goods just as you would be able to in a shop — unpack them, look at them and test their functions. For any diminished value that goes beyond such inspection (for example an extractor hood that has already been installed and shows drill marks, or a heavily used coffee machine with limescale residue), we may claim compensation.",
+        body: "You may examine the goods just as you would be able to in a shop, unpack them, look at them and test their functions. For any diminished value that goes beyond such inspection (for example an extractor hood that has already been installed and shows drill marks, or a heavily used coffee machine with limescale residue), we may claim compensation.",
       },
       {
         heading: "Refunds",
@@ -661,8 +661,8 @@ export const enLegalPages: LegalPageMap = {
       {
         heading: "Reporting a defect",
         body:
-          "New appliances are covered by the statutory liability for defects for two years from delivery. If a defect becomes apparent within the first twelve months, it is presumed to have existed at the time of handover — so you do not have to prove anything.\n\n" +
-          "Please report the defect to our customer service team first and have your order number, the serial number and a brief fault description to hand. For large appliances we usually send a technician to you rather than transporting the appliance — this is faster and gentler on the equipment.",
+          "New appliances are covered by the statutory liability for defects for two years from delivery. If a defect becomes apparent within the first twelve months, it is presumed to have existed at the time of handover, so you do not have to prove anything.\n\n" +
+          "Please report the defect to our customer service team first and have your order number, the serial number and a brief fault description to hand. For large appliances we usually send a technician to you rather than transporting the appliance, this is faster and gentler on the equipment.",
       },
       {
         heading: "Guarantees in addition to statutory rights",
@@ -715,7 +715,7 @@ export const enLegalPages: LegalPageMap = {
         body: "As a distance seller we offer you reasonable, free return options:",
         list: [
           `Send small waste appliances to: ${COMPANY.name}, Waste Appliance Returns, ${COMPANY.street}, ${COMPANY.city}, ${COMPANY.country}. Our customer service team will provide a free shipping label.`,
-          "Collection of large appliances when your new appliance is delivered — please indicate this when ordering",
+          "Collection of large appliances when your new appliance is delivered, please indicate this when ordering",
           "Subsequent collection of a large appliance by appointment with our customer service team",
           `Questions about take-back: ${COMPANY.email} or ${COMPANY.phone}`,
         ],
@@ -739,14 +739,14 @@ export const enLegalPages: LegalPageMap = {
         heading: "Meaning of the battery symbols",
         body: "Batteries and rechargeable batteries also bear the crossed-out wheeled bin symbol. If they contain certain hazardous substances, a chemical abbreviation appears underneath:",
         list: [
-          "Pb — the battery contains more than 0.004 per cent lead by mass",
-          "Cd — the battery contains more than 0.002 per cent cadmium by mass",
-          "Hg — the battery contains more than 0.0005 per cent mercury by mass",
+          "Pb: the battery contains more than 0.004 per cent lead by mass",
+          "Cd: the battery contains more than 0.002 per cent cadmium by mass",
+          "Hg: the battery contains more than 0.0005 per cent mercury by mass",
         ],
       },
       {
         heading: "Safety notice for lithium batteries",
-        body: "Lithium-ion batteries can catch fire if damaged, short-circuited or stored improperly. Please tape over the terminals before returning them, and do not send damaged or swollen batteries by post — hand these in at a municipal collection point instead. Our customer service team will be happy to advise you.",
+        body: "Lithium-ion batteries can catch fire if damaged, short-circuited or stored improperly. Please tape over the terminals before returning them, and do not send damaged or swollen batteries by post, hand these in at a municipal collection point instead. Our customer service team will be happy to advise you.",
       },
       {
         heading: "Municipal collection points",
@@ -765,13 +765,13 @@ export const enLegalPages: LegalPageMap = {
   },
 
   /* ------------------------------------------------------------------ */
-  /* FAQ — pas d'avertissement juridique                                 */
+  /* FAQ : pas d'avertissement juridique                                 */
   /* ------------------------------------------------------------------ */
   faq: {
     slug: "faq",
     title: "Frequently Asked Questions",
     intro:
-      "From delivery times and installation services to drone registration: here are the answers to the questions we are asked most often. If yours isn't covered, call us or send us an email — we are available Monday to Saturday, 8 a.m. to 8 p.m.",
+      "From delivery times and installation services to drone registration: here are the answers to the questions we are asked most often. If yours isn't covered, call us or send us an email, we are available Monday to Saturday, 8 a.m. to 8 p.m.",
     updatedAt: UPDATED_AT,
     sections: [
       {
@@ -780,23 +780,23 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "How much does shipping cost?",
-        body: "Standard delivery within Germany is free — with no minimum order value, whatever the size or weight of the goods. If you want delivery within 24 to 48 hours, express shipping costs a flat 70.00 euros. There are no other surcharges. The costs for your order are always shown in the shopping basket before you buy.",
+        body: "Standard delivery within Germany is free, with no minimum order value, whatever the size or weight of the goods. If you want delivery within 24 to 48 hours, express shipping costs a flat 70.00 euros. There are no other surcharges. The costs for your order are always shown in the shopping basket before you buy.",
       },
       {
         heading: "Do you ship outside Germany?",
-        body: "As standard we deliver within Germany, including the islands. Deliveries to other European countries are possible by arrangement — write to us before ordering and we will check feasibility and costs for your address.",
+        body: "As standard we deliver within Germany, including the islands. Deliveries to other European countries are possible by arrangement, write to us before ordering and we will check feasibility and costs for your address.",
       },
       {
         heading: "Will the appliance be carried into my home?",
-        body: "Freight delivery ends at the kerbside by default. For 29.00 euros our carriers will bring the appliance to the desired installation location, including upper floors; unpacking and disposal of the transport packaging costs a further 9.00 euros. You cannot add these two services in the basket — call or email us and we will arrange them with the carrier. Please measure your stairwell, doorways and lift beforehand.",
+        body: "Freight delivery ends at the kerbside by default. For 29.00 euros our carriers will bring the appliance to the desired installation location, including upper floors; unpacking and disposal of the transport packaging costs a further 9.00 euros. You cannot add these two services in the basket, call or email us and we will arrange them with the carrier. Please measure your stairwell, doorways and lift beforehand.",
       },
       {
         heading: "Do you offer connection and installation?",
-        body: "Yes: 49 euros for a washing machine, tumble dryer or dishwasher, 39 euros for a free-standing refrigerator, 89 euros for installation in a prepared recess and 99 euros for wall-mounting a television. You arrange the service by telephone or email, ideally before ordering — it cannot be added in the basket. All connections must be present, freely accessible and compliant with standards. We are not permitted to work on your building's electrical installation.",
+        body: "Yes: 49 euros for a washing machine, tumble dryer or dishwasher, 39 euros for a free-standing refrigerator, 89 euros for installation in a prepared recess and 99 euros for wall-mounting a television. You arrange the service by telephone or email, ideally before ordering, it cannot be added in the basket. All connections must be present, freely accessible and compliant with standards. We are not permitted to work on your building's electrical installation.",
       },
       {
         heading: "Will you take my old appliance away?",
-        body: "Yes, free of charge. When you buy a new appliance we collect one equivalent old appliance on delivery. Let us know in good time — by phone, by email or in the comments field of your order — so that the carrier can plan the collection. The old appliance should be disconnected, emptied, cleaned and freely accessible. Small waste appliances with no external dimension exceeding 25 centimetres are taken back even without a new purchase — up to three per equipment type. All other take-back options are set out on the \"Waste Electrical Equipment and Batteries\" page.",
+        body: "Yes, free of charge. When you buy a new appliance we collect one equivalent old appliance on delivery. Let us know in good time, by phone, by email or in the comments field of your order, so that the carrier can plan the collection. The old appliance should be disconnected, emptied, cleaned and freely accessible. Small waste appliances with no external dimension exceeding 25 centimetres are taken back even without a new purchase, up to three per equipment type. All other take-back options are set out on the \"Waste Electrical Equipment and Batteries\" page.",
       },
       {
         heading: "Which payment methods can I use?",
@@ -808,11 +808,11 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "How long is the warranty?",
-        body: "All new appliances are covered by the statutory liability for defects for two years from delivery. If a fault occurs within the first twelve months, it is presumed to have existed from the outset — so you do not have to prove anything. Many manufacturers also grant voluntary guarantees, for example on motors or compressors.",
+        body: "All new appliances are covered by the statutory liability for defects for two years from delivery. If a fault occurs within the first twelve months, it is presumed to have existed from the outset, so you do not have to prove anything. Many manufacturers also grant voluntary guarantees, for example on motors or compressors.",
       },
       {
         heading: "What is the difference between a guarantee and statutory warranty rights?",
-        body: "Statutory warranty rights are your legal rights against us and last two years. A guarantee is a voluntary manufacturer promise that may go further — ten years on a washing machine motor, for instance. A guarantee does not replace your statutory rights; it comes on top of them, and you decide which route to use.",
+        body: "Statutory warranty rights are your legal rights against us and last two years. A guarantee is a voluntary manufacturer promise that may go further, ten years on a washing machine motor, for instance. A guarantee does not replace your statutory rights; it comes on top of them, and you decide which route to use.",
       },
       {
         heading: "How long do I have to return an item?",
@@ -820,39 +820,39 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "How do I send something back?",
-        body: `Register the return in advance — by email to ${COMPANY.email} or by phone on ${COMPANY.phone}. The model withdrawal form is on our "Right of withdrawal" page, though you need not use it: an unequivocal statement is enough. For parcels you receive a free return label. Large appliances are collected from you by appointment; please disconnect and empty the appliance beforehand. Enclose all accessories and use the original box with its transport locks if you can.`,
+        body: `Register the return in advance, by email to ${COMPANY.email} or by phone on ${COMPANY.phone}. The model withdrawal form is on our "Right of withdrawal" page, though you need not use it: an unequivocal statement is enough. For parcels you receive a free return label. Large appliances are collected from you by appointment; please disconnect and empty the appliance beforehand. Enclose all accessories and use the original box with its transport locks if you can.`,
       },
       {
         heading: "What does a return cost?",
-        body: "Nothing. We bear the return costs — both for parcels and for the collection of large appliances by the freight forwarder.",
+        body: "Nothing. We bear the return costs, both for parcels and for the collection of large appliances by the freight forwarder.",
       },
       {
         heading: "When will I get my money back?",
-        body: "We refund the purchase price no later than 14 days after receiving your withdrawal, once the goods have arrived with us or you have provided proof of dispatch. The refund is made using your original payment method and no fees apply. There are no outbound shipping costs to refund with standard delivery. If you chose express delivery, its surcharge stays with you under section 357(2) BGB: we refund only what the cheapest standard delivery would have cost — and that is free.",
+        body: "We refund the purchase price no later than 14 days after receiving your withdrawal, once the goods have arrived with us or you have provided proof of dispatch. The refund is made using your original payment method and no fees apply. There are no outbound shipping costs to refund with standard delivery. If you chose express delivery, its surcharge stays with you under section 357(2) BGB: we refund only what the cheapest standard delivery would have cost, and that is free.",
       },
       {
-        heading: "An item is marked \"On request\" — what does that mean?",
+        heading: "An item is marked \"On request\", what does that mean?",
         body: "The item is not currently in stock but is available. We order it from the manufacturer once you place your order; delivery usually takes two to four weeks. You can order such items as normal and we will get back to you as soon as a firm date is confirmed.",
       },
       {
         heading: "How do I know whether a built-in appliance fits my kitchen?",
-        body: "What matters are the recess dimensions in height, width and depth and the position of the connections. All appliance and recess dimensions are listed in the technical data on the product page. If in doubt, measure again or call us — our advisers will check the fit with you and suggest alternatives.",
+        body: "What matters are the recess dimensions in height, width and depth and the position of the connections. All appliance and recess dimensions are listed in the technical data on the product page. If in doubt, measure again or call us, our advisers will check the fit with you and suggest alternatives.",
       },
       {
         heading: "Where do I find an appliance's energy efficiency class?",
-        body: "Every product page shows the EU energy label with the efficiency class as well as the official product information sheet. It also lists consumption figures, noise emissions and — for washing machines and dishwashers — water consumption per programme. When comparing, always make sure the programme and load settings are the same.",
+        body: "Every product page shows the EU energy label with the efficiency class as well as the official product information sheet. It also lists consumption figures, noise emissions and, for washing machines and dishwashers, water consumption per programme. When comparing, always make sure the programme and load settings are the same.",
       },
       {
         heading: "What do I need to know before buying a drone?",
-        body: "The EU drone regulation applies in Germany. As a remote pilot you must register with the Federal Aviation Office (Luftfahrt-Bundesamt) and receive an electronic registration number (e-ID) that you must attach visibly to the drone. Third-party liability insurance is also a legal requirement under section 43 of the German Aviation Act — even for very light models. In the open category you may fly up to 120 metres, always within visual line of sight and never over crowds; no-fly zones such as airports, hospitals, federal motorways and nature reserves are off limits.",
+        body: "The EU drone regulation applies in Germany. As a remote pilot you must register with the Federal Aviation Office (Luftfahrt-Bundesamt) and receive an electronic registration number (e-ID) that you must attach visibly to the drone. Third-party liability insurance is also a legal requirement under section 43 of the German Aviation Act, even for very light models. In the open category you may fly up to 120 metres, always within visual line of sight and never over crowds; no-fly zones such as airports, hospitals, federal motorways and nature reserves are off limits.",
       },
       {
         heading: "Do I need a drone licence for a drone under 250 grams?",
-        body: "No. For drones under 250 grams or in class C0 neither the EU A1/A3 proof of competency nor the A2 remote pilot certificate is required. Registration and insurance are still mandatory as soon as the drone has a sensor capable of capturing personal data — which applies to virtually all camera models. Filming over private property also remains limited by personality rights and data protection law.",
+        body: "No. For drones under 250 grams or in class C0 neither the EU A1/A3 proof of competency nor the A2 remote pilot certificate is required. Registration and insurance are still mandatory as soon as the drone has a sensor capable of capturing personal data, which applies to virtually all camera models. Filming over private property also remains limited by personality rights and data protection law.",
       },
       {
         heading: "Can I order as a business and receive a VAT invoice?",
-        body: "Yes. Enter your company name in the \"Company\" field during the order process. The invoice is attached to your order confirmation as a PDF and shows the VAT included. If you need your VAT identification number on the invoice, please add it to the comments field of your order or send it to us afterwards — there is no dedicated field for it in the order process yet. Please note two differences from consumer purchases: businesses have no statutory right of withdrawal, and the limitation period for defect claims on new goods is one year from the passing of risk rather than two. Our voluntary 30-day return right does apply to you as well.",
+        body: "Yes. Enter your company name in the \"Company\" field during the order process. The invoice is attached to your order confirmation as a PDF and shows the VAT included. If you need your VAT identification number on the invoice, please add it to the comments field of your order or send it to us afterwards, there is no dedicated field for it in the order process yet. Please note two differences from consumer purchases: businesses have no statutory right of withdrawal, and the limitation period for defect claims on new goods is one year from the passing of risk rather than two. Our voluntary 30-day return right does apply to you as well.",
       },
       {
         heading: "What if an appliance fails after the two years are up?",
@@ -862,13 +862,13 @@ export const enLegalPages: LegalPageMap = {
   },
 
   /* ------------------------------------------------------------------ */
-  /* About us — pas d'avertissement juridique                            */
+  /* About us : pas d'avertissement juridique                            */
   /* ------------------------------------------------------------------ */
   "ueber-uns": {
     slug: "ueber-uns",
     title: "About Us",
     intro:
-      "BBC Best Box Containerhandel e.K. is a specialist retailer for household appliances and consumer electronics based in Großensee. We don't just sell appliances off the shelf — we advise on them, from the right recess dimensions to the right refresh rate.",
+      "BBC Best Box Containerhandel e.K. is a specialist retailer for household appliances and consumer electronics based in Großensee. We don't just sell appliances off the shelf, we advise on them, from the right recess dimensions to the right refresh rate.",
     updatedAt: UPDATED_AT,
     sections: [
       {
@@ -881,7 +881,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Advice rather than an order form",
-        body: "A fridge that doesn't fit the recess, or a television that looks too dark in a bright living room, is an annoyance that lasts. That is why our advisers are available Monday to Saturday, 8 a.m. to 8 p.m., on +49 176 14111374. We ask about recess dimensions, connections, water hardness and room size — and we will say so when the cheaper model is the better choice for your situation.",
+        body: "A fridge that doesn't fit the recess, or a television that looks too dark in a bright living room, is an annoyance that lasts. That is why our advisers are available Monday to Saturday, 8 a.m. to 8 p.m., on +49 176 14111374. We ask about recess dimensions, connections, water hardness and room size, and we will say so when the cheaper model is the better choice for your situation.",
       },
       {
         heading: "Service and installation",
@@ -889,7 +889,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Sustainability and old appliances",
-        body: "We collect your old appliance free of charge on delivery and pass it on for proper recycling. Small waste appliances and waste batteries are taken back even without a new purchase. When selecting our range we look at repairability, spare part availability and long update commitments for connected devices — criteria that rarely appear on a spec sheet but make all the difference in everyday use.",
+        body: "We collect your old appliance free of charge on delivery and pass it on for proper recycling. Small waste appliances and waste batteries are taken back even without a new purchase. When selecting our range we look at repairability, spare part availability and long update commitments for connected devices, criteria that rarely appear on a spec sheet but make all the difference in everyday use.",
       },
       {
         heading: "Location and logistics",
@@ -897,19 +897,19 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Working at BBC Best Box Containerhandel e.K.",
-        body: "We regularly look for reinforcements in advice, technical service and logistics. If you enjoy genuinely helping people rather than just processing orders, write to us at kontakt@bestbox-containerhandel.de — speculative applications are welcome too.",
+        body: "We regularly look for reinforcements in advice, technical service and logistics. If you enjoy genuinely helping people rather than just processing orders, write to us at kontakt@bestbox-containerhandel.de, speculative applications are welcome too.",
       },
     ],
   },
 
   /* ------------------------------------------------------------------ */
-  /* Contact — pas d'avertissement juridique                             */
+  /* Contact : pas d'avertissement juridique                             */
   /* ------------------------------------------------------------------ */
   kontakt: {
     slug: "kontakt",
     title: "Contact",
     intro:
-      "Whether you need advice before buying, have a question about a delivery or want to report a problem: we are here Monday to Saturday, 8 a.m. to 8 p.m. For questions about an order, please have your order number to hand — it speeds everything up.",
+      "Whether you need advice before buying, have a question about a delivery or want to report a problem: we are here Monday to Saturday, 8 a.m. to 8 p.m. For questions about an order, please have your order number to hand, it speeds everything up.",
     updatedAt: UPDATED_AT,
     sections: [
       {
@@ -929,7 +929,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Returns and waste appliances",
-        body: "Please do not send returns or small waste appliances back unannounced — register them in advance so that we can allocate your shipment immediately.",
+        body: "Please do not send returns or small waste appliances back unannounced, register them in advance so that we can allocate your shipment immediately.",
         list: [
           `Returns department: ${RETURN_ADDRESS}`,
           `Waste appliance returns: ${COMPANY.name}, Waste Appliance Returns, ${COMPANY.street}, ${COMPANY.city}, ${COMPANY.country}`,

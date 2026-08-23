@@ -9,7 +9,7 @@ import { MAX_QUANTITY_PER_LINE } from "@/lib/cart";
 import { cn } from "@/lib/utils";
 
 interface AddToCartButtonProps {
-  /** Identifiant en base — c'est la seule donnée dont le serveur se sert. */
+  /** Identifiant en base : c'est la seule donnée dont le serveur se sert. */
   productId: string;
   slug: string;
   brand: string;
@@ -72,13 +72,13 @@ export function AddToCartButton({
 
     // Le panier latéral se déroule aussitôt : le compteur qui s'incrémente à
     // l'autre bout de l'écran passe inaperçu, et l'on reclique en croyant que
-    // rien ne s'est produit — l'article part alors en double.
+    // rien ne s'est produit : l'article part alors en double.
     openDrawer();
   }
 
   /**
    * Achat direct : même ajout, puis la caisse, sans repasser par le panier.
-   * L'article y est bien déposé au passage — la caisse lit le panier, et une
+   * L'article y est bien déposé au passage : la caisse lit le panier, et une
    * commande sans ligne n'aurait aucun sens.
    */
   function handleBuyNow() {

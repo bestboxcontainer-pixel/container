@@ -51,8 +51,8 @@ export function layout(input: LayoutInput): string {
   const lang = input.locale;
   const footer =
     lang === "en"
-      ? "BBC Best Box Containerhandel e.K. — automated message, please do not reply."
-      : "BBC Best Box Containerhandel e.K. — automatische Nachricht, bitte nicht antworten.";
+      ? "BBC Best Box Containerhandel e.K., automated message, please do not reply."
+      : "BBC Best Box Containerhandel e.K., automatische Nachricht, bitte nicht antworten.";
 
   const body = input.paragraphs
     .map(
@@ -159,8 +159,8 @@ export function buildPasswordResetEmail(input: PasswordResetEmailInput): Omit<Ma
       ];
 
   const footnote = de
-    ? `Der Link ist ${input.expiresInMinutes} Minuten gültig und kann nur einmal verwendet werden. Haben Sie die Zurücksetzung nicht angefordert, ignorieren Sie diese E-Mail — Ihr Passwort bleibt unverändert.`
-    : `The link is valid for ${input.expiresInMinutes} minutes and can be used only once. If you did not request the reset, simply ignore this email — your password stays unchanged.`;
+    ? `Der Link ist ${input.expiresInMinutes} Minuten gültig und kann nur einmal verwendet werden. Haben Sie die Zurücksetzung nicht angefordert, ignorieren Sie diese E-Mail. Ihr Passwort bleibt unverändert.`
+    : `The link is valid for ${input.expiresInMinutes} minutes and can be used only once. If you did not request the reset, simply ignore this email, your password stays unchanged.`;
 
   const html = layout({
     locale: input.locale,

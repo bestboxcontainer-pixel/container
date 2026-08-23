@@ -206,7 +206,7 @@ export function formatDuration(seconds: number): string {
 /**
  * Code court porté par les liens et recopié sur les commandes attribuées.
  * L'unicité est garantie par la contrainte de base, l'appelant réessaie en cas
- * de collision — 32^6 combinaisons rendent le cas très improbable.
+ * de collision : 32^6 combinaisons rendent le cas très improbable.
  */
 export function generateCampaignCode(): string {
   let code = "";
@@ -272,7 +272,7 @@ export type TemplateVariable = (typeof TEMPLATE_VARIABLES)[number];
 /**
  * Les quatre modèles. Les textes allemands sont ceux réellement envoyés aux
  * clients de la boutique ; l'anglais sert aux comptes dont la langue est « en ».
- * Le ton change franchement d'un type à l'autre — c'est tout l'intérêt d'avoir
+ * Le ton change franchement d'un type à l'autre : c'est tout l'intérêt d'avoir
  * quatre types plutôt qu'un seul champ libre.
  */
 export const CAMPAIGN_TYPES: readonly CampaignTypeDefinition[] = [
@@ -285,7 +285,7 @@ export const CAMPAIGN_TYPES: readonly CampaignTypeDefinition[] = [
     showsCountdown: false,
     suggestedHours: 168,
     de: {
-      subject: "{remise} auf {produit} – nur bis {fin}",
+      subject: "{remise} auf {produit}, nur bis {fin}",
       headline: "{remise} auf {produit}",
       bodyText:
         "Hallo {prenom},\n\n" +
@@ -296,7 +296,7 @@ export const CAMPAIGN_TYPES: readonly CampaignTypeDefinition[] = [
       ctaLabel: "Zum Angebot",
     },
     en: {
-      subject: "{remise} on {produit} – until {fin} only",
+      subject: "{remise} on {produit}, until {fin} only",
       headline: "{remise} on {produit}",
       bodyText:
         "Hello {prenom},\n\n" +
@@ -315,21 +315,21 @@ export const CAMPAIGN_TYPES: readonly CampaignTypeDefinition[] = [
     suggestedHours: 48,
     de: {
       subject: "Nur {duree}: {remise} auf {produit}",
-      headline: "Blitzangebot – nur {duree}",
+      headline: "Blitzangebot, nur {duree}",
       bodyText:
         "Hallo {prenom},\n\n" +
         "{marque} {produit} für {prix_promo} statt {prix}.\n\n" +
-        "Die Aktion endet am {fin}. Danach gilt wieder der reguläre Preis – " +
+        "Die Aktion endet am {fin}. Danach gilt wieder der reguläre Preis, " +
         "die Stückzahl ist begrenzt.",
       ctaLabel: "Jetzt sichern",
     },
     en: {
       subject: "{duree} only: {remise} on {produit}",
-      headline: "Flash deal – {duree} only",
+      headline: "Flash deal, {duree} only",
       bodyText:
         "Hello {prenom},\n\n" +
         "the {marque} {produit} is yours for {prix_promo} instead of {prix}.\n\n" +
-        "The deal ends on {fin}. After that the regular price applies again – " +
+        "The deal ends on {fin}. After that the regular price applies again, " +
         "stock is limited.",
       ctaLabel: "Grab the deal",
     },
@@ -347,7 +347,7 @@ export const CAMPAIGN_TYPES: readonly CampaignTypeDefinition[] = [
       headline: "Neu bei BBC Best Box Containerhandel e.K.",
       bodyText:
         "Hallo {prenom},\n\n" +
-        "{marque} {produit} ist ab sofort bei uns erhältlich – zum Preis von {prix}.\n\n" +
+        "{marque} {produit} ist ab sofort bei uns erhältlich, zum Preis von {prix}.\n\n" +
         "Wir haben das Gerät ausgewählt, weil es in seiner Klasse überzeugt. " +
         "Alle technischen Daten finden Sie auf der Produktseite.",
       ctaLabel: "Produkt ansehen",
@@ -445,7 +445,7 @@ export const CAMPAIGN_STATUS_LABELS: Record<CampaignStatus, string> = {
 
 /**
  * Une campagne applique-t-elle sa remise sur le site ?
- * Le brouillon ne compte pas — sinon un prix baisserait avant même que le
+ * Le brouillon ne compte pas : sinon un prix baisserait avant même que le
  * premier message soit parti. L'annulation retire la remise immédiatement.
  */
 export function statusAppliesDiscount(status: CampaignStatus): boolean {

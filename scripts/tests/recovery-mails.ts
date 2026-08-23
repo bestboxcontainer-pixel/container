@@ -40,7 +40,7 @@ mkdirSync(OUT, { recursive: true });
 const SUBJECTS = [
   "Ihr Warenkorb wartet auf Sie",
   "Ihr Gerät ist noch für Sie verfügbar",
-  "Ihr Warenkorb wird bald gelöscht – 10 % geschenkt",
+  "Ihr Warenkorb wird bald gelöscht: 10 % geschenkt",
 ];
 
 for (const rank of [1, 2, 3] as const) {

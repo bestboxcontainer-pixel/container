@@ -2,7 +2,7 @@
  * Tests des coordonnées de virement.
  *
  * L'enjeu : ce sont les seules données du site sur lesquelles le client envoie
- * de l'argent. Un IBAN mal recopié n'est rattrapé par personne — on vérifie
+ * de l'argent. Un IBAN mal recopié n'est rattrapé par personne, on vérifie
  * donc que la clé de contrôle est réellement calculée, et que le texte
  * d'instruction saisi par le vendeur ressort avec le montant et le numéro de
  * commande à la place des repères.
@@ -136,7 +136,7 @@ describe("Relecture des coordonnées enregistrées", () => {
   /**
    * Les coordonnées écrites en base avant l'ajout du type de virement n'ont pas
    * ce champ. Elles doivent continuer de sortir intactes, sans que le champ
-   * manquant ne soit comblé par une valeur de démonstration — le client verrait
+   * manquant ne soit comblé par une valeur de démonstration, le client verrait
    * alors une consigne que le vendeur n'a jamais donnée.
    */
   it("accepte une ligne écrite avant l'ajout du type de virement", () => {
@@ -170,8 +170,8 @@ describe("Rendu de l'instruction", () => {
   });
 
   it("remplace toutes les occurrences d'un même repère", () => {
-    const text = renderBankInstructions("{orderNumber} — Referenz: {orderNumber}", values);
-    assert.equal(text, "HP-2026-000042 — Referenz: HP-2026-000042");
+    const text = renderBankInstructions("{orderNumber}, Referenz: {orderNumber}", values);
+    assert.equal(text, "HP-2026-000042: Referenz: HP-2026-000042");
   });
 
   it("laisse intact un repère inconnu", () => {

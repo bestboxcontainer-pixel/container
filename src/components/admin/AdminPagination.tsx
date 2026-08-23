@@ -56,7 +56,7 @@ export function AdminPagination({
       aria-label="Pagination"
     >
       <p className="text-xs text-muted-foreground">
-        {firstItem}–{lastItem} sur {totalItems} {label}
+        {firstItem} : {lastItem} sur {totalItems} {label}
       </p>
 
       {pageCount > 1 && (

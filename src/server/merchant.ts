@@ -27,7 +27,7 @@ export type { GoogleCategory } from "@/lib/googleTaxonomy";
 // identifiants annoncés à Google sont rigoureusement identiques à ceux de la page,
 // première cause de refus ("mismatch prix/disponibilité entre le flux et la page").
 //
-// Référence : Product data specification — support.google.com/merchants/answer/7052112
+// Référence : Product data specification, support.google.com/merchants/answer/7052112
 
 // ---- Paramètres de la boutique ----
 
@@ -37,7 +37,7 @@ export const MERCHANT_COUNTRY = "DE";
 export const MERCHANT_CURRENCY = "EUR";
 /** Langue du contenu du flux. */
 export const MERCHANT_LANGUAGE = "de";
-/** Taux de TVA appliqué en Allemagne — déjà compris dans priceCents. */
+/** Taux de TVA appliqué en Allemagne : déjà compris dans priceCents. */
 export const MERCHANT_VAT_RATE = 0.19;
 
 export const SHOP_NAME = "BBC Best Box Containerhandel e.K.";
@@ -60,12 +60,12 @@ export function absoluteUrl(pathOrUrl: string): string {
 
 /**
  * Conditions de livraison annoncées sur la boutique (TrustBar :
- * « Standardversand: kostenlos (3–5 Tage) »). Ces valeurs DOIVENT rester
+ * « Standardversand: kostenlos (3-5 Tage) »). Ces valeurs DOIVENT rester
  * alignées sur ce qui est écrit sur le site : Google compare le flux et la page.
  *
- * Le mode express (70 €, 24–48 h) n'est volontairement pas déclaré ici : le flux
- * ne porte qu'une offre de livraison par produit, et c'est le mode par défaut —
- * donc le standard — qui doit y figurer. L'express reste proposé au panier.
+ * Le mode express (70 €, 24-48 h) n'est volontairement pas déclaré ici : le flux
+ * ne porte qu'une offre de livraison par produit, et c'est le mode par défaut
+ * donc le standard : qui doit y figurer. L'express reste proposé au panier.
  */
 export const MERCHANT_SHIPPING = {
   country: MERCHANT_COUNTRY,
@@ -96,7 +96,7 @@ export const MERCHANT_RETURN_POLICY = {
   category: "https://schema.org/MerchantReturnFiniteReturnWindow",
   method: "https://schema.org/ReturnByMail",
   /**
-   * La boutique supporte les frais de retour — c'est ce qu'annonce la page
+   * La boutique supporte les frais de retour : c'est ce qu'annonce la page
    * « Retoure et réclamation » : étiquette de renvoi fournie pour les colis,
    * enlèvement organisé pour les appareils livrés par transporteur. Sans cette
    * précision, Google applique son hypothèse par défaut, moins favorable, et
@@ -191,7 +191,7 @@ const merchantSelect = {
  * du flux à celui de la page, et la page, elle, affiche déjà le prix remisé.
  *
  * `respectSelection` applique en plus le choix de catégories enregistré depuis
- * le back-office. Les deux flux le posent ; l'écran de contrôle, non — il doit
+ * le back-office. Les deux flux le posent ; l'écran de contrôle, non, il doit
  * continuer d'auditer le catalogue entier, y compris ce qui n'est pas diffusé,
  * sinon un produit écarté du flux disparaîtrait aussi du diagnostic.
  */
@@ -218,7 +218,7 @@ export async function loadMerchantProducts(
   });
 }
 
-/** Charge un produit unique — utilisé par le balisage JSON-LD de la page produit. */
+/** Charge un produit unique : utilisé par le balisage JSON-LD de la page produit. */
 export async function getMerchantProductBySlug(
   slug: string,
 ): Promise<MerchantProduct | undefined> {
@@ -273,8 +273,8 @@ export function merchantEffectivePriceCents(product: MerchantProduct): number {
 
 /**
  * Prix de référence, celui qui s'affiche barré. Pendant une campagne c'est le
- * prix figé à l'entrée du produit dans la campagne — celui annoncé dans le
- * message —, sinon l'ancien prix éditorial de la fiche. À défaut des deux, le
+ * prix figé à l'entrée du produit dans la campagne, celui annoncé dans le
+ * message, sinon l'ancien prix éditorial de la fiche. À défaut des deux, le
  * prix courant : il n'y a alors pas de promotion à déclarer.
  */
 export function merchantReferencePriceCents(product: MerchantProduct): number {
@@ -346,7 +346,7 @@ export function merchantAdditionalImageUrls(product: MerchantProduct): string[] 
   }
 }
 
-/** Titre du flux — doit correspondre au titre affiché sur la page produit. */
+/** Titre du flux : doit correspondre au titre affiché sur la page produit. */
 export function merchantTitle(product: MerchantProduct): string {
   return plainText(`${product.brand} ${product.name}`).slice(0, 150);
 }
@@ -362,7 +362,7 @@ export function merchantDescription(product: MerchantProduct): string {
 
   const bullets = parseBullets(product.bullets);
   const parts = [
-    `${product.brand} ${product.name} — ${product.category.label} von ${product.brand}.`,
+    `${product.brand} ${product.name}: ${product.category.label} von ${product.brand}.`,
     plainText(product.category.description),
     bullets.length > 0 ? `Ausstattung: ${bullets.join(", ")}.` : "",
     conditionFor(product.condition) === "new" ? "Zustand: fabrikneu und originalverpackt." : "",
@@ -395,12 +395,12 @@ export interface MerchantShippingEntry {
 }
 
 /**
- * Frais de port du produit — volontairement jamais renseigné dans le flux.
+ * Frais de port du produit : volontairement jamais renseigné dans le flux.
  *
  * Une balise `g:shipping` sur un produit prend le pas sur les règles définies au
  * niveau du compte Merchant Center pour ce même produit. La boutique propose
  * deux modes (Standardversand gratuit, Express à 70 €), tous deux configurés
- * comme conditions de livraison du compte — un seul peut être porté par le
+ * comme conditions de livraison du compte : un seul peut être porté par le
  * flux (une seule balise par article), ce qui masquerait l'autre. Ne rien
  * déclarer ici laisse Google appliquer les deux règles du compte pour chaque
  * produit, plutôt qu'une seule imposée par le flux.
@@ -417,7 +417,7 @@ export interface MerchantRecord {
   description: string;
   link: string;
   imageLink: string;
-  /** Vues complémentaires — attribut additional_image_link, 10 au maximum chez Google. */
+  /** Vues complémentaires: attribut additional_image_link, 10 au maximum chez Google. */
   additionalImageLinks: string[];
   availability: MerchantAvailability;
   /** Prix de référence ; en promotion, c'est l'ancien prix barré de la page. */
@@ -458,14 +458,14 @@ export interface MerchantRecord {
 
 /**
  * Date de validité du prix : un an, renouvelée à chaque génération du flux.
- * Une campagne la ramène à sa date de fin — au-delà, le prix annoncé n'est plus
+ * Une campagne la ramène à sa date de fin, au-delà, le prix annoncé n'est plus
  * celui de la boutique, et un `priceValidUntil` trop lointain sur un prix promo
  * est exactement le genre d'incohérence qui fait refuser une fiche.
  */
 /**
  * Fenêtre du prix promotionnel, au format d'intervalle ISO 8601 attendu par
  * Google : « début/fin ». Absente quand la remise ne vient pas d'une campagne
- * — un ancien prix saisi à la main dans la fiche produit n'a pas de terme
+ * un ancien prix saisi à la main dans la fiche produit n'a pas de terme
  * connu, et inventer une date de fin serait pire que de n'en donner aucune.
  */
 function salePriceWindow(promotion?: ProductPromotion): string | undefined {
@@ -590,7 +590,7 @@ export function auditMerchantProduct(
     issues.push({
       level: "error",
       attribute: "image_link",
-      message: "Aucune image produit ni image de catégorie enregistrée — Google refuse l'offre.",
+      message: "Aucune image produit ni image de catégorie enregistrée, Google refuse l'offre.",
     });
   } else if (!product.image?.trim()) {
     issues.push({
@@ -605,7 +605,7 @@ export function auditMerchantProduct(
     issues.push({
       level: "warning",
       attribute: "title",
-      message: `Titel ist mit ${record.title.length} Zeichen sehr kurz — Modellbezeichnung und Kernmerkmal ergänzen.`,
+      message: `Titel ist mit ${record.title.length} Zeichen sehr kurz, Modellbezeichnung und Kernmerkmal ergänzen.`,
     });
   }
 
@@ -621,7 +621,7 @@ export function auditMerchantProduct(
     issues.push({
       level: "error",
       attribute: "price",
-      message: "Prix manquant ou égal à 0 — l'offre est refusée.",
+      message: "Prix manquant ou égal à 0, l'offre est refusée.",
     });
   }
 
@@ -647,7 +647,7 @@ export function auditMerchantProduct(
     issues.push({
       level: "error",
       attribute: "brand",
-      message: "Marque manquante — c'est un attribut obligatoire pour les articles neufs.",
+      message: "Marque manquante, c'est un attribut obligatoire pour les articles neufs.",
     });
   }
 
@@ -699,7 +699,7 @@ export function auditMerchantProduct(
     issues.push({
       level: "error",
       attribute: "id",
-      message: "L'identifiant d'offre est utilisé par un autre produit — les identifiants doivent être uniques.",
+      message: "L'identifiant d'offre est utilisé par un autre produit, les identifiants doivent être uniques.",
     });
   }
 
@@ -715,13 +715,13 @@ export function auditMerchantProduct(
   // -- Versand --
   // Volontairement absent du flux pour chaque produit : voir merchantShipping().
   // Les règles de livraison (Standard gratuit, Express 70 €) vivent au niveau du
-  // compte Merchant Center, pas ici — rien à signaler produit par produit.
+  // compte Merchant Center, pas ici : rien à signaler produit par produit.
 
   if (!record.shippingWeight) {
     issues.push({
       level: "warning",
       attribute: "shipping_weight",
-      message: "Poids d'expédition manquant — sans poids, impossible d'utiliser des règles de livraison basées sur le poids.",
+      message: "Poids d'expédition manquant, sans poids, impossible d'utiliser des règles de livraison basées sur le poids.",
     });
   }
 
@@ -733,7 +733,7 @@ export function auditMerchantProduct(
   // MPN-Daten hinzu » (aide Merchant Center, attribut certification).
   //
   // L'avertissement ne se justifie donc que pour un article qui ne porte ni
-  // l'un ni l'autre — là, l'étiquette énergie manquera réellement dans
+  // l'un ni l'autre : là, l'étiquette énergie manquera réellement dans
   // l'annonce. Le lever pour toute la catégorie marquait cent cinquante-trois
   // fiches parfaitement diffusables et noyait les quarante-neuf qui, elles,
   // demandaient une action.
@@ -763,7 +763,7 @@ export function auditMerchantProduct(
   if (!product.active) {
     issues.push({
       level: "warning",
-      attribute: "—",
+      attribute: "-",
       message: "Le produit est désactivé et n'est pas repris dans le flux.",
     });
   }
@@ -789,7 +789,7 @@ export interface MerchantOverview {
   ready: number;
   blocked: number;
   withWarnings: number;
-  /** Nombre de produits sans GTIN — à compléter par le commerçant. */
+  /** Nombre de produits sans GTIN : à compléter par le commerçant. */
   missingGtin: number;
   missingMpn: number;
   missingOwnImage: number;

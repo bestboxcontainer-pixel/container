@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
     /**
      * Nombre de processus qui composent les pages à la construction du site.
      *
-     * Next en ouvre autant que la machine a de cœurs — soixante-trois sur le
+     * Next en ouvre autant que la machine a de cœurs, soixante-trois sur le
      * serveur de mise en ligne. Chacun ouvre sa propre connexion à la base :
      * une rafale de requêtes simultanées à chaque déploiement, sur une base
      * distante facturée au volume transféré. C'est ce qui a épuisé le quota et

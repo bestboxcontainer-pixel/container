@@ -61,7 +61,7 @@ export async function ProductReviewSection({
   /**
    * Avis validés, chargés une seule fois par la page produit et partagés avec
    * le balisage JSON-LD. Les lire ici séparément ferait deux requêtes pour la
-   * même liste, et surtout laisserait le balisage diverger de l'affichage —
+   * même liste, et surtout laisserait le balisage diverger de l'affichage
    * exactement ce que Google refuse.
    */
   reviews: ReviewRecord[];

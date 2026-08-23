@@ -28,7 +28,7 @@ import { CAMPAIGN_COOKIE } from "@/lib/campaigns";
  * Signale un ajout au panier au serveur, pour la relance de panier abandonné.
  *
  * Sans e-mail : contrairement à l'appel du tunnel de commande, celui-ci ne
- * porte jamais d'adresse. Un visiteur anonyme reste anonyme — rien à capturer.
+ * porte jamais d'adresse. Un visiteur anonyme reste anonyme, rien à capturer.
  * Un client connecté, lui, est déjà identifié par sa session ; c'est la route
  * qui relit son adresse côté serveur, jamais le navigateur qui la lui
  * fournirait. Volontairement sans await : un ajout au panier ne doit jamais
@@ -73,7 +73,7 @@ interface CartContextValue {
    *
    * Il vit ici plutôt que dans le tiroir lui-même : c'est le bouton d'ajout qui
    * décide de l'ouvrir, et les deux composants sont à des endroits opposés de
-   * l'arbre — le tiroir dans la mise en page, le bouton dans la fiche produit.
+   * l'arbre : le tiroir dans la mise en page, le bouton dans la fiche produit.
    */
   drawerOpen: boolean;
   openDrawer: () => void;
@@ -89,7 +89,7 @@ const CartContext = createContext<CartContextValue | null>(null);
  *
  * Le cookie n'est lu ici que pour savoir s'il vaut la peine de poser la
  * question : sans lui, la grande majorité des visites n'émet aucune requête.
- * Sa présence ne décide de rien — c'est /api/campaign-context qui répond, en
+ * Sa présence ne décide de rien : c'est /api/campaign-context qui répond, en
  * relisant la campagne en base, et le tunnel de commande refait le contrôle.
  * Un cookie recopié d'un ami n'offre donc pas la livraison gratuite.
  */

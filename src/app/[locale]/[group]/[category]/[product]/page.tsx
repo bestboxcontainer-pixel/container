@@ -121,7 +121,9 @@ export default async function ProductPage({ params }: { params: ProductPageParam
   const common = await getTranslations("common");
 
   const { category: categoryData, product: productData } = data;
-  const relatedProducts = getRelatedProducts(categoryData, productData.slug ?? "", 6);
+  // Quatre fiches : la grille en compte quatre par ligne sur grand écran, et
+  // une cinquième repartait seule sur une deuxième rangée.
+  const relatedProducts = getRelatedProducts(categoryData, productData.slug ?? "", 4);
 
   const shortText = productShortText(productData, categoryData.label, locale);
   const description = productLongText(productData, categoryData.label, locale);
@@ -161,7 +163,7 @@ export default async function ProductPage({ params }: { params: ProductPageParam
           {/* La galerie prend un peu plus de place que la colonne d'achat : à
               parts égales, le visuel d'un conteneur devenait trop petit pour
               qu'on juge de la finition, qui est ce que l'acheteur regarde. */}
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]">
             <ProductGallery
               image={productData.image}
               images={productData.images}

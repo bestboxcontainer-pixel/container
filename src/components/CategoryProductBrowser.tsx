@@ -1,11 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useTranslations } from "next-intl";
-import { SlidersHorizontal } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { SlidersHorizontal, X } from "lucide-react";
 import { CategoryFilters, PRICE_RANGES } from "@/components/CategoryFilters";
 import { ProductCard } from "@/components/ProductCard";
 import { Reveal } from "@/components/Reveal";
+import { CATEGORY_GRID_TOKENS } from "@/lib/categoryLayoutTokens";
 import { parsePrice } from "@/lib/price";
 import type { Product } from "@/types/home";
 
@@ -21,6 +22,7 @@ const SORT_OPTIONS: { value: SortOption; labelKey: string }[] = [
 
 export function CategoryProductBrowser({ products }: { products: Product[] }) {
   const t = useTranslations("category");
+  const locale = useLocale();
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<string | null>(null);
   const [minRatings, setMinRatings] = useState<number[]>([]);
@@ -96,8 +98,36 @@ export function CategoryProductBrowser({ products }: { products: Product[] }) {
     setInStockOnly(false);
   }
 
+  /**
+   * Filtres actifs rappelés au-dessus de la grille. Sur grand écran la colonne
+   * est visible, mais elle défile : passé quelques marques, on ne sait plus ce
+   * qui reste coché plus haut.
+   */
+  const activeChips: { key: string; label: string; onRemove: () => void }[] = [
+    ...selectedBrands.map((brand) => ({
+      key: `brand-${brand}`,
+      label: brand,
+      onRemove: () => toggleBrand(brand),
+    })),
+    ...(priceRange ? [{
+      key: `price-${priceRange}`,
+      label: t(`priceRanges.${priceRange}`),
+      onRemove: () => setPriceRange(null),
+    }] : []),
+    ...minRatings.map((rating) => ({
+      key: `rating-${rating}`,
+      label: t("filterMinStars", { rating: rating.toLocaleString(locale) }),
+      onRemove: () => toggleMinRating(rating),
+    })),
+    ...(inStockOnly ? [{
+      key: "in-stock",
+      label: t("filterInStockOnly"),
+      onRemove: () => setInStockOnly(false),
+    }] : []),
+  ];
+
   return (
-    <div className="flex flex-col gap-6 lg:flex-row">
+    <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
       <CategoryFilters
         brandOptions={brandOptions}
         selectedBrands={selectedBrands}
@@ -115,8 +145,8 @@ export function CategoryProductBrowser({ products }: { products: Product[] }) {
         resultCount={filteredProducts.length}
       />
 
-      <div className="flex-1">
-        <div className="mb-4 flex items-center justify-between gap-3 border-b border-border pb-3">
+      <div className="min-w-0 flex-1">
+        <div className={CATEGORY_GRID_TOKENS.toolbar}>
           {/* Sur petit écran, le décompte laisse sa place au bouton de filtres :
               les deux ensemble ne tiennent pas sur une ligne, et c'est le
               bouton qui sert. */}
@@ -136,7 +166,7 @@ export function CategoryProductBrowser({ products }: { products: Product[] }) {
             type="button"
             onClick={() => setFiltersOpen(true)}
             aria-expanded={filtersOpen}
-            className="flex items-center gap-2 rounded-sm border border-border px-3 py-1.5 text-sm font-semibold text-foreground hover:bg-muted lg:hidden"
+            className="flex items-center gap-2 rounded-xl border border-border px-3 py-1.5 text-sm font-semibold text-foreground hover:bg-muted lg:hidden"
           >
             <SlidersHorizontal className="h-4 w-4" aria-hidden />
             {activeFilterCount > 0
@@ -150,7 +180,7 @@ export function CategoryProductBrowser({ products }: { products: Product[] }) {
               aria-label={t("sortBy")}
               value={sortBy}
               onChange={(event) => setSortBy(event.target.value as SortOption)}
-              className="rounded-sm border border-border bg-white px-2 py-1.5 text-sm font-semibold text-foreground"
+              className={CATEGORY_GRID_TOKENS.select}
             >
               {SORT_OPTIONS.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -161,8 +191,27 @@ export function CategoryProductBrowser({ products }: { products: Product[] }) {
           </label>
         </div>
 
+        {activeChips.length > 0 && (
+          <div className={CATEGORY_GRID_TOKENS.chipRow}>
+            {activeChips.map((chip) => (
+              <button
+                key={chip.key}
+                type="button"
+                onClick={chip.onRemove}
+                className={CATEGORY_GRID_TOKENS.chip}
+              >
+                {chip.label}
+                <X className="h-3 w-3" aria-hidden />
+              </button>
+            ))}
+            <button type="button" onClick={resetFilters} className={CATEGORY_GRID_TOKENS.chipClear}>
+              {t("filtersReset")}
+            </button>
+          </div>
+        )}
+
         {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
+          <div className={CATEGORY_GRID_TOKENS.grid}>
             {filteredProducts.map((product, index) => (
               <Reveal key={product.slug ?? product.name} delay={Math.min(index * 60, 300)}>
                 <ProductCard product={product} />
@@ -170,7 +219,7 @@ export function CategoryProductBrowser({ products }: { products: Product[] }) {
             ))}
           </div>
         ) : (
-          <div className="flex flex-col items-center gap-3 rounded-sm border border-dashed border-border py-16 text-center">
+          <div className={CATEGORY_GRID_TOKENS.empty}>
             <p className="font-semibold text-foreground">{t("emptyTitle")}</p>
             <p className="text-sm text-muted-foreground">{t("emptyHint")}</p>
             <button

@@ -160,6 +160,7 @@
     "filterPrice": "Price",
     "filterRating": "Rating",
     "filterMinStars": "{rating} stars and up",
+    "filterAvailability": "Availability",
     "filterInStockOnly": "In stock only",
     "priceRanges": {
       "under100": "Up to €100",

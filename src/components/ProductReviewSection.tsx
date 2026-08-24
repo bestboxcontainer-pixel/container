@@ -1,5 +1,5 @@
 import { getLocale, getTranslations } from "next-intl/server";
-import { Star } from "lucide-react";
+import { ChevronDown, Star } from "lucide-react";
 import type { ReviewRecord } from "@/server/types";
 import { ReviewForm } from "@/components/ReviewForm";
 import { formatRating } from "@/lib/formatRating";
@@ -180,8 +180,23 @@ export async function ProductReviewSection({
         </div>
       )}
 
-      <h3 className="mb-3 text-lg font-black text-foreground">{t("writeTitle")}</h3>
-      <ReviewForm productId={productId} />
+      {/* Formulaire replié par défaut. Déployé, il occupait la moitié de la
+          fiche, y compris sur les produits sans le moindre avis : déposer un
+          avis est une action volontaire, pas la première chose à montrer.
+          `details` s'ouvre sans JavaScript, le formulaire reste donc
+          atteignable même si le script ne charge pas. */}
+      <details className="group rounded-2xl border border-border bg-white">
+        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 marker:content-['']">
+          <span className="text-base font-black text-foreground">{t("writeTitle")}</span>
+          <ChevronDown
+            className="h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180"
+            aria-hidden
+          />
+        </summary>
+        <div className="border-t border-border px-5 py-5">
+          <ReviewForm productId={productId} />
+        </div>
+      </details>
     </section>
   );
 }

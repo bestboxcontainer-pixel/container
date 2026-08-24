@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Header } from "@/components/Header";
@@ -87,26 +86,24 @@ export default async function CategoryPage({ params }: { params: CategoryPagePar
           </div>
         </div>
 
-        <div id="produkte" className="mx-auto max-w-screen-xl scroll-mt-20 px-3 py-6">
-          <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-            <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-sm border border-border sm:h-24 sm:w-24">
-              <Image src={data.image} alt={data.label} fill sizes="96px" className="object-cover" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-black text-foreground sm:text-3xl">{data.label}</h1>
-              <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{data.description}</p>
-            </div>
-          </div>
+        <div id="produkte" className="mx-auto max-w-screen-xl scroll-mt-20 px-3 py-8">
+          {/* Le bandeau de catégorie a été retiré : le fil d'Ariane porte déjà
+              le nom, et le répéter en gros au-dessus des produits repoussait la
+              grille sans rien apprendre. Le titre reste dans le balisage, sans
+              quoi la page perdrait son seul h1. */}
+          <h1 className="sr-only">{data.label}</h1>
 
           <CategoryProductBrowser products={data.products} />
-
-          <PaymentMethodsBar
-            variant="inline"
-            className="mt-8 rounded-sm border border-border bg-white p-5"
-          />
         </div>
 
         <CategoryGuide label={data.label} guide={data.guide} />
+
+        <div className="mx-auto max-w-screen-xl px-3 pb-10">
+          <PaymentMethodsBar
+            variant="inline"
+            className="rounded-2xl border border-border bg-white p-5"
+          />
+        </div>
       </main>
       <Footer />
 

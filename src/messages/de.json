@@ -160,6 +160,7 @@
     "filterPrice": "Preis",
     "filterRating": "Bewertung",
     "filterMinStars": "ab {rating} Sterne",
+    "filterAvailability": "Verfügbarkeit",
     "filterInStockOnly": "Nur sofort lieferbar",
     "priceRanges": {
       "under100": "Bis 100 €",

@@ -2,24 +2,19 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import {
   ArrowRight,
-  Boxes,
-  Building2,
   Clock,
-  Leaf,
   MapPin,
-  Package,
   ShieldCheck,
-  Ship,
-  ShowerHead,
-  Sparkles,
-  TreePine,
-  Truck,
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PhotoHeroCarousel, type PhotoSlide } from "@/components/PhotoHeroCarousel";
 import { ProductCard } from "@/components/ProductCard";
+import { SizeItem } from "@/components/SizeItem";
+import { HOME_CATEGORY_CARDS } from "@/lib/homeCategoryCards";
+import { HOME_SIZE_SECTION_TOKENS } from "@/lib/homeLayoutTokens";
+import { HOME_FAQS, HOME_SIZE_GROUPS } from "@/lib/homeSections";
 import { getCategoryPages } from "@/server/store";
 import type { Product } from "@/types/home";
 
@@ -65,90 +60,6 @@ const HERO_PHOTOS: readonly PhotoSlide[] = [
   },
 ] as const;
 
-/**
- * Design-Linien: eigene Namen und Texte, keine Übernahme von Konzepten
- * Dritter. Fotos wiederverwendet aus HERO/„Unsere Container“-Bestand (siehe
- * Bildnachweis im Impressum): für jede Linie ein eigenes Foto liegt (noch)
- * nicht vor.
- */
-const DESIGN_LINES = [
-  {
-    id: "mattschwarz",
-    icon: Package,
-    title: "Mattschwarz",
-    text: "Container in mattschwarzer RAL-Lackierung: moderner, zurückhaltender Auftritt für Firmengelände und Baustelle.",
-    photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403217/bbc-best-box/site/gallery-modulbau-de-1eyg37.jpg",
-  },
-  {
-    id: "naturholz",
-    icon: Leaf,
-    title: "Naturholz",
-    text: "Fassaden- oder Innenverkleidung aus Holz für eine warme, natürliche Optik.",
-    photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403228/bbc-best-box/site/gallery-wohnwerte-de-dw1h24.jpg",
-  },
-  {
-    id: "premiumholz",
-    icon: TreePine,
-    title: "Premium-Holz",
-    text: "Hochwertige Holzverkleidung mit feinerer Oberfläche und langlebigem Wetterschutz.",
-    photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403228/bbc-best-box/site/gallery-wohnwerte-de-dw1h24.jpg",
-  },
-  {
-    id: "verglast",
-    icon: Sparkles,
-    title: "Verglast",
-    text: "Großzügige Fensterfronten für lichtdurchflutete Räume, ideal für Empfang, Verkauf oder Büro.",
-    photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403222/bbc-best-box/site/gallery-office-de-rnnl7b.jpg",
-  },
-  {
-    id: "modular",
-    icon: Building2,
-    title: "Modular",
-    text: "Einzeln oder als mehrgeschossige Anlage kombinierbar, flexibel erweiterbar nach Bedarf.",
-    photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403217/bbc-best-box/site/gallery-modulbau-de-1eyg37.jpg",
-  },
-  {
-    id: "wc-duschen",
-    icon: ShowerHead,
-    title: "WC & Duschen",
-    text: "Voll ausgestattete Sanitärcontainer mit WC-, Dusch- und Waschbereich.",
-    photo: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403228/bbc-best-box/site/gallery-wohnwerte-de-dw1h24.jpg",
-  },
-] as const;
-
-const CATEGORIES = [
-  {
-    id: "seecontainer",
-    icon: Ship,
-    title: "Seecontainer",
-    text: "Robuste ISO-Container für Transport und Lagerung, neu und geprüft gebraucht.",
-  },
-  {
-    id: "lagercontainer",
-    icon: Boxes,
-    title: "Lagercontainer",
-    text: "Wetterfeste Container zur sicheren Lagerung von Material, Werkzeug und Waren.",
-  },
-  {
-    id: "buerocontainer",
-    icon: Building2,
-    title: "Bürocontainer",
-    text: "Einzel- und Mehrfachanlagen als mobiles Büro auf der Baustelle oder im Betrieb.",
-  },
-  {
-    id: "sanitaercontainer",
-    icon: ShowerHead,
-    title: "Sanitärcontainer",
-    text: "WC-, Dusch- und Waschcontainer für Baustellen, Events und Betriebsgelände.",
-  },
-  {
-    id: "sondercontainer",
-    icon: Truck,
-    title: "Sondercontainer",
-    text: "Individuelle Umbauten und Sonderanfertigungen nach Ihren Maßen und Anforderungen.",
-  },
-] as const;
-
 const BENEFITS = [
   {
     icon: ShieldCheck,
@@ -181,7 +92,16 @@ const STEPS = [
  * Lagercontainer. On fait donc un tour par catégorie avant d'en reprendre une.
  */
 async function extraitDuCatalogue(maximum = 8): Promise<Product[]> {
-  const pages = await getCategoryPages();
+  // Le reste de la page est statique : une base injoignable doit faire
+  // disparaître la seule section qui en dépend, pas toute la page d'accueil.
+  let pages: Awaited<ReturnType<typeof getCategoryPages>>;
+  try {
+    pages = await getCategoryPages();
+  } catch (error) {
+    console.error("[accueil] catalogue illisible, section produits masquée", error);
+    return [];
+  }
+
   const files = pages.map((page) => [...page.products]).filter((file) => file.length > 0);
 
   const extrait: Product[] = [];
@@ -199,6 +119,7 @@ async function extraitDuCatalogue(maximum = 8): Promise<Product[]> {
 
 export default async function HomePage() {
   const produits = await extraitDuCatalogue();
+  const [lengthGroup, widthGroup, heightGroup] = HOME_SIZE_GROUPS;
 
   return (
     <>
@@ -249,28 +170,6 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* Sortiment */}
-        <section className="bg-muted">
-          <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
-            <h2 className="text-2xl font-black text-foreground sm:text-3xl">Container-Kategorien</h2>
-
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
-              {CATEGORIES.map((category) => (
-                <Link
-                  key={category.id}
-                  href={`/sortiment#${category.id}`}
-                  className="flex w-36 shrink-0 flex-col items-center gap-3 rounded-2xl border border-border bg-white p-5 text-center shadow-sm transition-shadow hover:shadow-md sm:w-40"
-                >
-                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-secondary">
-                    <category.icon className="h-6 w-6" aria-hidden />
-                  </span>
-                  <span className="text-sm font-semibold text-foreground">{category.title}</span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Bandeau de confiance défilant : faits vérifiables sur l'entreprise */}
         <section className="overflow-hidden border-y border-white/10 bg-secondary py-4">
           <div className="flex w-max animate-[defilement_28s_linear_infinite]">
@@ -292,42 +191,128 @@ export default async function HomePage() {
 
         {/* Unsere Container */}
         <section className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
-          <h2 className="text-2xl font-black text-foreground sm:text-3xl">Unsere Container</h2>
-          <p className="mt-3 max-w-xl text-foreground/70">
-            Entdecken Sie unsere hochwertigen Design-Linien für jeden Bedarf, alle Varianten auf
-            einen Blick.
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">
+                Unsere Container
+              </p>
+              <h2 className="mt-3 text-2xl font-black text-foreground sm:text-3xl">
+                Fünf gefragte Kategorien, direkt im Überblick
+              </h2>
+            </div>
+            <Link
+              href="/sortiment"
+              className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline"
+            >
+              Ganzes Sortiment
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </div>
+
+          <p className="mt-4 max-w-2xl text-foreground/70">
+            Von Seecontainer bis Sondercontainer: diese fünf Bereiche bilden die stärksten
+            Anfragen im Tagesgeschäft ab und führen direkt zu den passenden Abschnitten im
+            Sortiment.
           </p>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {DESIGN_LINES.map((line) => (
-              <div
-                key={line.id}
-                className="overflow-hidden rounded-2xl bg-secondary text-secondary-foreground shadow-sm"
+          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+            {HOME_CATEGORY_CARDS.map((card) => (
+              <Link
+                key={card.id}
+                href={`/sortiment#${card.id}`}
+                className="group overflow-hidden rounded-[1.75rem] border border-[#d8e1f0] bg-white shadow-[0_24px_80px_-48px_rgba(22,43,95,0.45)] transition-transform duration-300 hover:-translate-y-1"
               >
-                <div className="relative aspect-video">
+                <div className="relative aspect-[4/3] overflow-hidden bg-[#f5f8fd]">
                   <Image
-                    src={line.photo}
-                    alt={`${line.title}, Beispielcontainer`}
+                    src={card.imageSrc}
+                    alt={card.imageAlt}
                     fill
-                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover"
+                    sizes="(min-width: 1280px) 20vw, (min-width: 768px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
                 </div>
                 <div className="p-5">
-                  <h3 className="text-sm font-black uppercase tracking-wide text-white">
-                    {line.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-white/70">{line.text}</p>
-                  <Link
-                    href="/sortiment"
-                    className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-signal px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-signal-foreground shadow-sm transition-colors hover:bg-signal/90"
-                  >
-                    Produkte ansehen
-                    <ArrowRight className="h-3.5 w-3.5" aria-hidden />
-                  </Link>
+                  <h3 className="text-lg font-black text-foreground">{card.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-foreground/70">{card.text}</p>
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">
+                    Kategorie ansehen
+                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
+                  </span>
                 </div>
-              </div>
+              </Link>
             ))}
+          </div>
+        </section>
+
+        {/* Größen : bandeau sombre, containers posés sur une ligne de sol.
+            Les visuels sont blancs sur fond transparent : sur le navy ils
+            ressortent, et sans cadre autour c'est bien le container qu'on
+            regarde. */}
+        <section className={HOME_SIZE_SECTION_TOKENS.section}>
+          <span className={HOME_SIZE_SECTION_TOKENS.glow} aria-hidden />
+          <span className={HOME_SIZE_SECTION_TOKENS.glowSoft} aria-hidden />
+
+          <div className={HOME_SIZE_SECTION_TOKENS.container}>
+            <header className={HOME_SIZE_SECTION_TOKENS.header}>
+              <div className="max-w-2xl">
+                <p className={HOME_SIZE_SECTION_TOKENS.eyebrow}>Größenvielfalt</p>
+                <h2 className="mt-3 text-2xl font-black tracking-[-0.02em] sm:text-3xl">
+                  Verschiedene Größen – flexibel kombinierbar
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-white/60 sm:text-base">
+                  Längen, Breiten und Höhen modular kombinieren – für jedes Projekt die passende
+                  Dimension.
+                </p>
+              </div>
+
+              <dl className={HOME_SIZE_SECTION_TOKENS.counterRow}>
+                {HOME_SIZE_GROUPS.map((group) => (
+                  <div key={group.id}>
+                    <dt className="sr-only">{group.title}</dt>
+                    <dd>
+                      <span className={HOME_SIZE_SECTION_TOKENS.counterValue}>
+                        {group.options.length}
+                      </span>
+                      <span className={HOME_SIZE_SECTION_TOKENS.counterLabel}>{group.title}</span>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </header>
+
+            <div className="mt-10">
+              <div className={HOME_SIZE_SECTION_TOKENS.groupHead}>
+                <h3 className={HOME_SIZE_SECTION_TOKENS.groupTitle}>{lengthGroup.title}</h3>
+                <span className={HOME_SIZE_SECTION_TOKENS.groupRange}>{lengthGroup.subtitle}</span>
+              </div>
+
+              <ul className="mt-6 grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-5">
+                {lengthGroup.options.map((option) => (
+                  <SizeItem key={`laengen-${option.label}`} option={option} />
+                ))}
+              </ul>
+            </div>
+
+            <div className={HOME_SIZE_SECTION_TOKENS.specRow}>
+              {[widthGroup, heightGroup].map((group) => (
+                <div key={group.id}>
+                  <div className={HOME_SIZE_SECTION_TOKENS.groupHead}>
+                    <h3 className={HOME_SIZE_SECTION_TOKENS.groupTitle}>{group.title}</h3>
+                    <span className={HOME_SIZE_SECTION_TOKENS.groupRange}>{group.subtitle}</span>
+                  </div>
+
+                  <ul
+                    className={`mt-6 grid gap-x-5 gap-y-8 ${
+                      group.options.length === 2 ? "grid-cols-2" : "grid-cols-3"
+                    }`}
+                  >
+                    {group.options.map((option) => (
+                      <SizeItem key={`${group.id}-${option.label}`} option={option} />
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -364,6 +349,39 @@ export default async function HomePage() {
             </div>
           </section>
         )}
+
+        {/* FAQ */}
+        <section className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
+          <div className="max-w-3xl">
+            <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">FAQ</p>
+            <h2 className="mt-3 text-2xl font-black text-foreground sm:text-3xl">
+              Häufige Fragen zu unseren Containern
+            </h2>
+            <p className="mt-3 text-foreground/70">
+              Die wichtigsten Punkte zu Verfügbarkeit, Größen, Lieferung und Sonderausbau auf
+              einen Blick.
+            </p>
+          </div>
+
+          <div className="mt-8 space-y-4">
+            {HOME_FAQS.map((item) => (
+              <details
+                key={item.question}
+                className="group rounded-[1.5rem] border border-[#d8e1f0] bg-white shadow-[0_20px_70px_-52px_rgba(22,43,95,0.42)]"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left text-base font-black text-foreground sm:px-6 sm:py-5 sm:text-lg">
+                  <span>{item.question}</span>
+                  <span className="text-2xl leading-none text-primary transition-transform duration-300 group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <div className="px-5 pb-5 text-sm leading-relaxed text-foreground/70 sm:px-6 sm:pb-6 sm:text-base">
+                  <p>{item.answer}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </section>
 
         {/* Ablauf */}
         <section className="bg-muted">

@@ -86,8 +86,8 @@ describe("HOME_SIZE_ACCENT", () => {
       return value <= 0.03928 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
     };
     const luminance = 0.2126 * channel(1) + 0.7152 * channel(3) + 0.0722 * channel(5);
-    // Le fond de section est --secondary (#0b2239), luminance ~0.0151.
-    const contrast = (luminance + 0.05) / (0.0151 + 0.05);
+    // Le fond de section est --secondary (#071825), luminance ~0.0083.
+    const contrast = (luminance + 0.05) / (0.0083 + 0.05);
 
     assert.equal(contrast >= 4.5, true);
   });

@@ -8,7 +8,7 @@
  * second plan derrière leur propre encadrement.
  */
 
-/** Terracotta éclairci : le --primary (#be5310) manque de contraste sur navy. */
+/** Terracotta éclairci : le --primary (#a8490e) manque de contraste sur navy. */
 export const HOME_SIZE_ACCENT = "#e8813a";
 
 export const HOME_SIZE_SECTION_TOKENS = {

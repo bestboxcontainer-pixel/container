@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import {
-  ArrowRight,
-  Clock,
-  MapPin,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowRight, Clock, MapPin, ShieldCheck } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { PhotoHeroCarousel, type PhotoSlide } from "@/components/PhotoHeroCarousel";
+import { type PhotoSlide } from "@/components/PhotoHeroCarousel";
 import { ProductCard } from "@/components/ProductCard";
 import { SizeItem } from "@/components/SizeItem";
 import { HOME_CATEGORY_CARDS } from "@/lib/homeCategoryCards";
@@ -24,12 +19,6 @@ export const metadata: Metadata = {
     "Lager-, Büro-, Wohn- und Sanitärcontainer, neu und gebraucht. Verkauf und Vermietung, Lieferung deutschlandweit.",
 };
 
-const STATS = [
-  { value: "500+", label: "Container im Bestand" },
-  { value: "Bundesweit", label: "Lieferung & Aufstellung" },
-  { value: "Kauf & Miete", label: "Flexible Modelle" },
-  { value: "Persönlich", label: "Beratung vor Ort" },
-] as const;
 
 /** Faits vérifiables sur l'entreprise (voir COMPANY.registeredSince = 2006). */
 const TRUST_FACTS = [
@@ -45,6 +34,14 @@ const TRUST_FACTS = [
  * Echte Fotos (keine KI-Bilder) unter freier Lizenz von Wikimedia Commons,
  * siehe Bildnachweis auf der Impressum-Seite für Quelle/Lizenz je Bild.
  */
+/**
+ * Visuels du hero.
+ *
+ * Le diaporama est désactivé : le hero porte une seule photo, la première de
+ * cette liste. Les deux autres restent déclarées ici plutôt que supprimées,
+ * pour qu'on puisse changer de visuel ou remettre la rotation sans avoir à
+ * retrouver les adresses.
+ */
 const HERO_PHOTOS: readonly PhotoSlide[] = [
   {
     src: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403193/bbc-best-box/site/hero-port-1-8hwmc1.jpg",
@@ -59,6 +56,9 @@ const HERO_PHOTOS: readonly PhotoSlide[] = [
     alt: "Luftaufnahme des Container-Terminals im Hafen Hamburg",
   },
 ] as const;
+
+/** Photo effectivement affichée. Changer d'index suffit à changer de visuel. */
+const HERO_PHOTO = HERO_PHOTOS[0];
 
 const BENEFITS = [
   {
@@ -127,11 +127,37 @@ export default async function HomePage() {
       <main className="flex-1">
         {/* Hero */}
         <section className="relative isolate overflow-hidden bg-secondary pt-[var(--header-height)] text-secondary-foreground">
-          <PhotoHeroCarousel slides={HERO_PHOTOS} />
-          <div className="absolute inset-0 z-[1] bg-gradient-to-r from-secondary via-secondary/85 to-secondary/40" />
+          {/* Photo unique, rendue côté serveur. Le diaporama qui occupait cette
+              place était un composant client : il chargeait les trois visuels,
+              tenait un intervalle et un état de rotation, pour un fond que le
+              voile couvre en grande partie. Une seule image, en `priority`,
+              arrive plus tôt et ne coûte plus de JavaScript à la page. */}
+          <div className="absolute inset-0 overflow-hidden">
+            <Image
+              src={HERO_PHOTO.src}
+              alt={HERO_PHOTO.alt}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
+          {/* Voile de lisibilité posé sur la photo. Ses opacités étaient
+              calibrées sur l'ancien marine #0b2239 ; le marine assombri les a
+              rendues presque opaques, et la photo ne passait plus du tout.
+              À partir de md, le texte tient dans la colonne de gauche : le voile
+              peut s'alléger à droite et laisser voir le visuel. En dessous, le
+              texte occupe toute la largeur et garde un voile plus dense. */}
+          <div className="absolute inset-0 z-[1] bg-gradient-to-r from-secondary via-secondary/85 to-secondary/60 md:via-secondary/65 md:to-secondary/15" />
 
-          <div className="relative z-10 mx-auto grid max-w-screen-xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center md:py-24">
-            <div>
+          {/* La hauteur minimale donne sa place au visuel : sans elle, la section
+              se réglait sur le seul bloc de texte et la photo se réduisait à une
+              bande. Le texte est borné en largeur plutôt que posé dans une
+              colonne de grille : la moitié droite n'a plus d'occupant depuis que
+              le panneau de chiffres est parti, et une cellule vide aurait gardé
+              la gouttière sans rien y mettre. */}
+          <div className="relative z-10 mx-auto flex min-h-[28rem] w-full max-w-screen-xl items-center px-4 py-16 sm:px-6 md:min-h-[34rem] md:py-24">
+            <div className="max-w-xl">
               <h1 className="text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
                 Container kaufen und mieten: schnell, zuverlässig, deutschlandweit
               </h1>
@@ -157,16 +183,6 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-white/15 bg-white/10 p-6 shadow-lg backdrop-blur-md">
-              <div className="grid grid-cols-2 gap-6">
-                {STATS.map((stat) => (
-                  <div key={stat.label}>
-                    <p className="text-2xl font-black text-white sm:text-3xl">{stat.value}</p>
-                    <p className="mt-1 text-sm text-white/70">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </section>
 

@@ -14,9 +14,13 @@ function createClient(): PrismaClient {
   return new PrismaClient({
     adapter: new PrismaPg({
       connectionString: url,
-      // Neon met le calcul en veille après une période d'inactivité : le
-      // premier appel qui le réveille peut demander plusieurs secondes.
-      connectionTimeoutMillis: 15_000,
+      // Neon met le calcul en veille après une période d'inactivité. Le
+      // réveil a lieu pendant l'établissement de la connexion, si bien que
+      // toute la durée du démarrage est comptée dans ce délai. Mesuré depuis
+      // l'Europe sur la région us-east-2, un réveil demande couramment de 5 à
+      // 25 secondes : 15 s ne suffisaient pas et la fiche produit tombait en
+      // erreur « Connection terminated due to connection timeout ».
+      connectionTimeoutMillis: 40_000,
       // Une connexion inactive est rendue au bout de trente secondes plutôt
       // que gardée ouverte : Neon facture le temps de calcul, pas les
       // connexions, et le pooler préfère des sessions courtes.

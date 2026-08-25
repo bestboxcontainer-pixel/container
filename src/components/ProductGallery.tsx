@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { PRODUCT_GALLERY_TOKENS } from "@/lib/productLayoutTokens";
 
 // Galerie de la fiche produit : une grande vue, et les miniatures juste en
 // dessous quand le produit a plusieurs visuels. Sans vue complémentaire, le
@@ -41,7 +42,11 @@ export function ProductGallery({
           laissait deux bandes blanches qui occupaient près de la moitié de la
           hauteur pour ne rien montrer. Le recadrage reste exclu : sur une fiche
           produit, montrer l'objet entier prime sur le remplissage du cadre. */}
-      <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border bg-white">
+      <div className={PRODUCT_GALLERY_TOKENS.frame}>
+        {/* Le conteneur est détouré sur fond blanc : sans rien sous lui, il
+            flottait dans le vide. Une ombre portée très diffuse le pose, sans
+            lui ajouter le cadre que le `object-contain` interdit. */}
+        <span className={PRODUCT_GALLERY_TOKENS.halo} aria-hidden />
         <Image
           key={current}
           src={current}
@@ -49,12 +54,12 @@ export function ProductGallery({
           fill
           priority
           sizes="(min-width: 1024px) 45vw, 100vw"
-          className="object-contain p-4 transition-transform duration-500 ease-out motion-safe:group-hover:scale-105"
+          className={PRODUCT_GALLERY_TOKENS.image}
         />
       </div>
 
       {views.length > 1 && (
-        <ul className="mt-3 flex flex-wrap gap-2" aria-label={t("galleryLabel")}>
+        <ul className={PRODUCT_GALLERY_TOKENS.rail} aria-label={t("galleryLabel")}>
           {views.map((view, index) => {
             const selected = index === active;
             return (
@@ -64,11 +69,11 @@ export function ProductGallery({
                   onClick={() => setActive(index)}
                   aria-label={t("galleryView", { index: index + 1, total: views.length })}
                   aria-current={selected ? "true" : undefined}
-                  className={`relative block h-16 w-20 overflow-hidden rounded-xl border-2 bg-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:h-18 sm:w-24 ${
-                    selected ? "border-primary" : "border-border hover:border-primary/50"
+                  className={`${PRODUCT_GALLERY_TOKENS.thumb} ${
+                    selected ? PRODUCT_GALLERY_TOKENS.thumbOn : PRODUCT_GALLERY_TOKENS.thumbOff
                   }`}
                 >
-                  <Image src={view} alt="" fill sizes="80px" className="object-contain p-1.5" />
+                  <Image src={view} alt="" fill sizes="96px" className="object-contain p-1.5" />
                 </button>
               </li>
             );

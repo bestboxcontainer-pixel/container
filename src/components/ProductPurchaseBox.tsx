@@ -1,12 +1,13 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { ShieldCheck, Truck } from "lucide-react";
+import { Check, ShieldCheck, Truck } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { classeCoherente, echelleEnergie } from "@/lib/energieskala";
 import { AddToCartButton } from "@/components/cart/AddToCartButton";
 import { CampaignCountdown } from "@/components/CampaignCountdown";
 import { WishlistButton } from "@/components/wishlist/WishlistButton";
+import { PRODUCT_BUY_TOKENS } from "@/lib/productLayoutTokens";
 import type { Product } from "@/types/home";
 
 export function ProductPurchaseBox({ product }: { product: Product }) {
@@ -25,7 +26,7 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
       : undefined;
 
   return (
-    <div className="flex flex-col gap-4 rounded-sm border border-border p-4">
+    <div className={PRODUCT_BUY_TOKENS.card}>
       <div>
         {/* Le prix barré est la recommandation du fabricant, pas un prix que la
             boutique aurait elle-même pratiqué. Le nommer ainsi n'est pas un
@@ -35,24 +36,20 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
             fabricant, elle, se compare librement : à condition d'être désignée
             pour ce qu'elle est. */}
         {product.oldPrice && (
-          <p className="text-sm text-muted-foreground">
+          <p className={PRODUCT_BUY_TOKENS.oldPrice}>
             {t("manufacturerPrice")} <span className="line-through">{product.oldPrice}</span>
           </p>
         )}
-        <div className="flex items-center gap-2">
-          <p className="text-3xl font-black text-primary">{product.price}</p>
-          {product.badge && (
-            <span className="rounded-sm bg-badge px-2 py-0.5 text-xs font-bold text-badge-foreground">
-              {product.badge}
-            </span>
-          )}
+        <div className="flex flex-wrap items-center gap-3">
+          <p className={PRODUCT_BUY_TOKENS.price}>{product.price}</p>
+          {product.badge && <span className={PRODUCT_BUY_TOKENS.badge}>{product.badge}</span>}
         </div>
         {/* Vente flash : le décompte est l'argument principal, il vient juste
             sous le prix. Les autres campagnes affichent leur pastille et rien
             de plus : un compte à rebours sur une offre de deux semaines
             fabrique une urgence qui n'existe pas. */}
         {product.promoCountdown && product.promoEndsAt && (
-          <div className="mt-2">
+          <div className="mt-3">
             <CampaignCountdown endsAt={product.promoEndsAt} />
           </div>
         )}
@@ -63,7 +60,7 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
             standard est offerte, l'express ne l'est pas, et le montant se lit
             sur la page dédiée plutôt que dans une formule qui trancherait mal
             entre les deux. */}
-        <p className="text-xs text-muted-foreground">
+        <p className={PRODUCT_BUY_TOKENS.vatNote}>
           {t("vatOnly")}{" "}
           <Link href="/versand" className="underline underline-offset-2 hover:text-foreground">
             {t("shippingCosts")}
@@ -76,19 +73,25 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
           distance, avec l'étendue de l'échelle : sans elle, la lettre ne se
           situe pas. */}
       {classeEnergie && echelle && (
-        <p className="flex flex-wrap items-baseline gap-x-2 gap-y-1 text-xs text-muted-foreground">
-          <span className="rounded-sm bg-primary px-2 py-0.5 text-sm font-bold text-primary-foreground">
-            {classeEnergie}
-          </span>
+        <p className={PRODUCT_BUY_TOKENS.energy}>
+          <span className={PRODUCT_BUY_TOKENS.energyClass}>{classeEnergie}</span>
           <span>
             {t("energyLabel")}: {t("energyScale", { best: echelle.meilleure, worst: echelle.pire })}
           </span>
         </p>
       )}
 
-      <p className={`text-sm font-semibold ${inStock ? "text-foreground" : "text-muted-foreground"}`}>
-        {inStock ? `✓ ${t("inStock")}` : t("outOfStock")}
-      </p>
+      {/* La disponibilité passe d'une ligne de texte à un état coloré : c'est la
+          seule information de la carte qui change d'un produit à l'autre sans
+          que rien ne la signale. */}
+      {inStock ? (
+        <p className={PRODUCT_BUY_TOKENS.stockOn}>
+          <Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
+          <span>{t("inStock")}</span>
+        </p>
+      ) : (
+        <p className={PRODUCT_BUY_TOKENS.stockOff}>{t("outOfStock")}</p>
+      )}
 
       {/* Achat direct, quantité et ajout au panier : le composant refuse de
           dépasser le stock réel et désactive tout quand l'article est épuisé.
@@ -121,12 +124,12 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
         />
       )}
 
-      <div className="flex flex-col gap-2 border-t border-border pt-4 text-xs text-muted-foreground">
-        <p className="flex items-center gap-2">
-          <Truck className="h-4 w-4 text-primary" /> {t("fastDelivery")}
+      <div className={PRODUCT_BUY_TOKENS.trust}>
+        <p className="flex items-start gap-2">
+          <Truck className={PRODUCT_BUY_TOKENS.trustIcon} aria-hidden /> {t("fastDelivery")}
         </p>
-        <p className="flex items-center gap-2">
-          <ShieldCheck className="h-4 w-4 text-primary" /> {t("warranty")}
+        <p className="flex items-start gap-2">
+          <ShieldCheck className={PRODUCT_BUY_TOKENS.trustIcon} aria-hidden /> {t("warranty")}
         </p>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { ChevronDown, Star } from "lucide-react";
 import type { ReviewRecord } from "@/server/types";
 import { ReviewForm } from "@/components/ReviewForm";
 import { formatRating } from "@/lib/formatRating";
+import { PRODUCT_REVIEW_TOKENS, PRODUCT_SHELL_TOKENS } from "@/lib/productLayoutTokens";
 
 // Format de date par langue : « 5. Januar 2026 » en allemand,
 // « 5 January 2026 » en anglais britannique (le shop livre en Europe).
@@ -45,7 +46,11 @@ function StarRating({ value, size, label }: { value: number; size: "sm" | "lg"; 
         <Star
           key={index}
           aria-hidden
-          className={`${starClass} ${index < Math.round(value) ? "fill-accent text-accent" : "text-border"}`}
+          className={`${starClass} ${
+            index < Math.round(value)
+              ? PRODUCT_REVIEW_TOKENS.starOn
+              : PRODUCT_REVIEW_TOKENS.starOff
+          }`}
         />
       ))}
     </span>
@@ -79,43 +84,47 @@ export async function ProductReviewSection({
   });
 
   return (
-    <section id="bewertungen" className="mx-auto max-w-screen-xl px-3 py-6">
-      <h2 className="mb-4 text-xl font-black text-foreground">{t("title")}</h2>
+    // `scroll-mt-24` : le jeton de note en tête de fiche pointe ici, et
+    // l'en-tête collant recouvrait le titre à l'arrivée.
+    <section id="bewertungen" className={`${PRODUCT_SHELL_TOKENS.detailInner} scroll-mt-24`}>
+      <h2 className={`${PRODUCT_SHELL_TOKENS.sectionTitle} mb-5`}>{t("title")}</h2>
 
       {total > 0 ? (
         // Résumé resserré : la note, les étoiles et le nombre d'avis tiennent
         // sur une ligne, et les barres de répartition se réduisent à une demi-
         // largeur. Empilé et à pleine hauteur, ce seul bloc occupait un tiers
         // d'écran avant que le premier avis n'apparaisse.
-        <div className="mb-4 flex flex-col gap-4 rounded-sm border border-border px-4 py-3 sm:flex-row sm:items-center sm:gap-8">
+        <div className={PRODUCT_REVIEW_TOKENS.summary}>
           <div className="flex items-center gap-3 sm:border-r sm:border-border sm:pr-8">
-            <p className="text-3xl font-black text-foreground">{formatRating(average, locale)}</p>
+            <p className={PRODUCT_REVIEW_TOKENS.average}>{formatRating(average, locale)}</p>
             <div>
               <StarRating
                 value={average}
-                size="sm"
+                size="lg"
                 label={t("starsAria", { rating: formatRating(average, locale) })}
               />
-              <p className="mt-0.5 text-xs text-muted-foreground">{t("count", { count: total })}</p>
+              <p className="mt-1 text-xs text-muted-foreground">{t("count", { count: total })}</p>
             </div>
           </div>
 
           <div className="flex-1 space-y-1 sm:max-w-sm">
             {distribution.map((entry) => (
-              <div key={entry.star} className="flex items-center gap-2 text-xs text-muted-foreground">
-                <span className="w-12 shrink-0">{t("starsLabel", { star: entry.star })}</span>
-                <span className="h-1.5 flex-1 rounded-sm bg-muted">
-                  <span className={`block h-1.5 rounded-sm bg-accent ${barWidthClass(entry.share)}`} />
+              <div key={entry.star} className="flex items-center gap-3 text-xs text-muted-foreground">
+                <span className="w-14 shrink-0">{t("starsLabel", { star: entry.star })}</span>
+                <span className={PRODUCT_REVIEW_TOKENS.bar}>
+                  <span
+                    className={`${PRODUCT_REVIEW_TOKENS.barFill} ${barWidthClass(entry.share)}`}
+                  />
                 </span>
-                <span className="w-6 shrink-0 text-right">{entry.count}</span>
+                <span className="w-6 shrink-0 text-right tabular-nums">{entry.count}</span>
               </div>
             ))}
           </div>
         </div>
       ) : (
-        <div className="mb-6 rounded-sm border border-border p-5">
-          <p className="font-bold text-foreground">{t("emptyTitle")}</p>
-          <p className="mt-1 text-sm text-muted-foreground">{t("emptyHint")}</p>
+        <div className={`${PRODUCT_REVIEW_TOKENS.empty} mb-5`}>
+          <p className="font-black text-foreground">{t("emptyTitle")}</p>
+          <p className="mt-2 text-sm text-muted-foreground">{t("emptyHint")}</p>
           {typeof editorialRating === "number" && (
             <p className="mt-3 text-sm text-muted-foreground">
               {t("editorial", { rating: formatRating(editorialRating, locale) })}
@@ -125,7 +134,7 @@ export async function ProductReviewSection({
       )}
 
       {total > 0 && (
-        <div className="mb-8">
+        <div className="mb-5">
           {/* Trois avis visibles, le reste au défilement.
               Une fiche à soixante avis poussait le formulaire de dépôt et le
               reste de la page hors de portée : il fallait faire défiler
@@ -140,11 +149,11 @@ export async function ProductReviewSection({
             tabIndex={0}
             role="region"
             aria-label={t("listAria", { count: total })}
-            className="max-h-[22rem] overflow-y-auto overscroll-contain rounded-sm border border-border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            className={PRODUCT_REVIEW_TOKENS.list}
           >
             <ul className="divide-y divide-border">
               {reviews.map((review) => (
-                <li key={review.id} className="px-4 py-3">
+                <li key={review.id} className={PRODUCT_REVIEW_TOKENS.item}>
                   {/* Note, intitulé et date sur une seule ligne. Empilés, ils
                       faisaient à eux seuls la moitié de la hauteur d'un avis. */}
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -162,8 +171,10 @@ export async function ProductReviewSection({
                   </div>
                   {/* Une ligne de texte tirée sur toute la largeur de l'écran se
                       lit mal : on la borne à une longueur de lecture usuelle. */}
-                  <p className="mt-1 max-w-prose text-sm text-muted-foreground">{review.body}</p>
-                  <p className="mt-1.5 text-xs text-muted-foreground">
+                  <p className="mt-1.5 max-w-prose text-sm leading-relaxed text-muted-foreground">
+                    {review.body}
+                  </p>
+                  <p className="mt-1.5 text-xs font-semibold text-foreground/60">
                     {review.authorName}
                     {review.city ? `, ${review.city}` : ""}
                   </p>
@@ -185,7 +196,7 @@ export async function ProductReviewSection({
           avis est une action volontaire, pas la première chose à montrer.
           `details` s'ouvre sans JavaScript, le formulaire reste donc
           atteignable même si le script ne charge pas. */}
-      <details className="group rounded-2xl border border-border bg-white">
+      <details className={PRODUCT_REVIEW_TOKENS.form}>
         <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 marker:content-['']">
           <span className="text-base font-black text-foreground">{t("writeTitle")}</span>
           <ChevronDown

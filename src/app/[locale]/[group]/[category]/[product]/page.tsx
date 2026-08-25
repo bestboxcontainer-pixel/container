@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Check } from "lucide-react";
+import { Check, Star } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -19,6 +19,11 @@ import { productLongText, productShortText, truncateAtWord } from "@/lib/product
 import { formatRating } from "@/lib/formatRating";
 import { alternatesFor, localizedUrl } from "@/lib/hreflang";
 import { buildSocialMetadata } from "@/lib/opengraph";
+import {
+  PRODUCT_DETAIL_TOKENS,
+  PRODUCT_HERO_TOKENS,
+  PRODUCT_SHELL_TOKENS,
+} from "@/lib/productLayoutTokens";
 import type { Locale } from "@/i18n/routing";
 
 type ProductPageParams = Promise<{
@@ -142,12 +147,16 @@ export default async function ProductPage({ params }: { params: ProductPageParam
   const noteMoyenne =
     avisPublies > 0 ? avis.reduce((somme, item) => somme + item.rating, 0) / avisPublies : undefined;
 
+  // Sans équipement listé, le panneau marine se réduirait à un titre posé sur un
+  // aplat : la description reprend alors toute la largeur de la bande.
+  const aDesEquipements = productData.bullets.length > 0;
+
   return (
     <>
       <Header />
       <main className="flex-1">
-        <div className="border-b border-border bg-white">
-          <div className="mx-auto max-w-screen-xl px-3 py-3">
+        <div className={PRODUCT_SHELL_TOKENS.breadcrumbBand}>
+          <div className={PRODUCT_SHELL_TOKENS.breadcrumbInner}>
             <Breadcrumb
               items={[
                 { label: common("home"), href: "/" },
@@ -159,42 +168,54 @@ export default async function ProductPage({ params }: { params: ProductPageParam
           </div>
         </div>
 
-        <div className="mx-auto max-w-screen-xl px-4 py-10 sm:px-6">
-          {/* La galerie prend un peu plus de place que la colonne d'achat : à
-              parts égales, le visuel d'un conteneur devenait trop petit pour
-              qu'on juge de la finition, qui est ce que l'acheteur regarde. */}
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]">
-            <ProductGallery
-              image={productData.image}
-              images={productData.images}
-              alt={productData.alt}
-            />
+        <div className={PRODUCT_SHELL_TOKENS.heroBand}>
+          <div className={PRODUCT_SHELL_TOKENS.heroInner}>
+            {/* La galerie prend un peu plus de place que la colonne d'achat : à
+                parts égales, le visuel d'un conteneur devenait trop petit pour
+                qu'on juge de la finition, qui est ce que l'acheteur regarde. */}
+            <div className={PRODUCT_SHELL_TOKENS.heroGrid}>
+              <ProductGallery
+                image={productData.image}
+                images={productData.images}
+                alt={productData.alt}
+              />
 
-            <div className="flex flex-col gap-4">
-              <div>
-                <p className="text-xs font-bold tracking-wide text-muted-foreground uppercase">
-                  {productData.brand}
-                </p>
-                <h1 className="text-2xl font-black text-foreground sm:text-3xl">{productData.name}</h1>
-                {/* L'étoile suppose des avis : sans eux, elle affichait la note
-                    rédactionnelle comme une moyenne de clients. Celle-ci reste
-                    plus bas, sous son nom, dans la section des avis.
-                    La référence article, elle, s'affiche toujours, elle était
-                    jusqu'ici emportée avec la note sur les fiches non notées. */}
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {typeof noteMoyenne === "number" && avisPublies > 0 && (
-                    <>
-                      ⭐ {t("ratingOf", { rating: formatRating(noteMoyenne, locale) })} ·{" "}
-                      {t("reviewCount", { count: avisPublies })} ·{" "}
-                    </>
-                  )}
-                  {t("sku")}: {productData.sku}
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-foreground/80">{shortText}</p>
+              <div className={PRODUCT_HERO_TOKENS.buyColumn}>
+                <div>
+                  <p className={PRODUCT_HERO_TOKENS.brandPill}>{productData.brand}</p>
+                  <h1 className={PRODUCT_HERO_TOKENS.title}>{productData.name}</h1>
+
+                  {/* Note et référence en deux jetons distincts. Accolées sur une
+                      même ligne de texte, elles se lisaient comme une seule
+                      phrase, et la référence disparaissait dans la note.
+                      La note n'apparaît qu'avec de vrais avis : sans eux, elle
+                      affichait la note rédactionnelle comme une moyenne de
+                      clients. Celle-ci reste plus bas, sous son nom, dans la
+                      section des avis. */}
+                  <div className={PRODUCT_HERO_TOKENS.metaRow}>
+                    {typeof noteMoyenne === "number" && avisPublies > 0 && (
+                      <a href="#bewertungen" className={PRODUCT_HERO_TOKENS.ratingChip}>
+                        <Star className="h-3.5 w-3.5 fill-primary" aria-hidden />
+                        {t("ratingOf", { rating: formatRating(noteMoyenne, locale) })}
+                        <span className="font-semibold opacity-70">
+                          {t("reviewCount", { count: avisPublies })}
+                        </span>
+                      </a>
+                    )}
+                    <span className={PRODUCT_HERO_TOKENS.skuChip}>
+                      {t("sku")} {productData.sku}
+                    </span>
+                  </div>
+
+                  <p className={PRODUCT_HERO_TOKENS.lede}>{shortText}</p>
+                </div>
+
+                <ProductPurchaseBox product={productData} />
+                {/* Variante `inline` : la variante `section` posait une bande
+                    pleine largeur, bord à bord et sur fond gris, à l'intérieur
+                    d'une colonne large de quatre cents pixels. */}
+                <PaymentMethodsBar variant="inline" className="px-1" />
               </div>
-
-              <ProductPurchaseBox product={productData} />
-              <PaymentMethodsBar />
             </div>
           </div>
         </div>
@@ -202,41 +223,39 @@ export default async function ProductPage({ params }: { params: ProductPageParam
         {/* Deux blocs distincts plutôt que deux colonnes de texte nu : sur un
             conteneur, les caractéristiques chiffrées sont l'information qui
             décide de l'achat, et elles se lisent mieux en liste cadrée qu'en
-            paragraphe. Le fond clair les détache de la description. */}
-        <section className="border-t border-border bg-muted">
-          <div className="mx-auto max-w-screen-xl px-4 py-14 sm:px-6">
-            <h2 className="text-2xl font-black text-foreground sm:text-3xl">{t("details")}</h2>
+            paragraphe. Le panneau marine leur donne le poids que deux cartes
+            blanches identiques ne leur donnaient pas. */}
+        <section className={PRODUCT_SHELL_TOKENS.detailBand}>
+          <div className={PRODUCT_SHELL_TOKENS.detailInner}>
+            <p className={PRODUCT_SHELL_TOKENS.eyebrow}>{categoryData.label}</p>
+            <h2 className={PRODUCT_SHELL_TOKENS.sectionTitle}>{t("details")}</h2>
 
-            <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
-              <div className="rounded-2xl border border-border bg-white p-6">
-                <h3 className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
-                  {t("description")}
-                </h3>
-                <p className="mt-4 text-sm leading-relaxed text-foreground/80">{description}</p>
+            <div className={aDesEquipements ? PRODUCT_DETAIL_TOKENS.grid : "mt-10"}>
+              <div className={PRODUCT_DETAIL_TOKENS.descCard}>
+                <h3 className={PRODUCT_DETAIL_TOKENS.label}>{t("description")}</h3>
+                <p className={PRODUCT_DETAIL_TOKENS.descText}>{description}</p>
               </div>
 
-              <div className="rounded-2xl border border-border bg-white p-6">
-                <h3 className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
-                  {t("features")}
-                </h3>
-                <ul className="mt-4 divide-y divide-border">
-                  {productData.bullets.map((bullet) => (
-                    <li
-                      key={bullet}
-                      className="flex items-start gap-3 py-3 text-sm text-foreground/80 first:pt-0 last:pb-0"
-                    >
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {aDesEquipements && (
+                <div className={PRODUCT_DETAIL_TOKENS.specCard}>
+                  <span className={PRODUCT_DETAIL_TOKENS.specHalo} aria-hidden />
+                  <h3 className={PRODUCT_DETAIL_TOKENS.specLabel}>{t("features")}</h3>
+                  <ul className={PRODUCT_DETAIL_TOKENS.specList}>
+                    {productData.bullets.map((bullet) => (
+                      <li key={bullet} className={PRODUCT_DETAIL_TOKENS.specItem}>
+                        <Check className={PRODUCT_DETAIL_TOKENS.specIcon} aria-hidden />
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </section>
 
         {productData.id && (
-          <div className="border-t border-border">
+          <div className={PRODUCT_SHELL_TOKENS.reviewBand}>
             <ProductReviewSection
               productId={productData.id}
               reviews={avis}
@@ -246,7 +265,7 @@ export default async function ProductPage({ params }: { params: ProductPageParam
         )}
 
         {relatedProducts.length > 0 && (
-          <div className="border-t border-border">
+          <div className={PRODUCT_SHELL_TOKENS.relatedBand}>
             <ProductGrid
               heading={t("related")}
               ctaLabel={common("showAll")}

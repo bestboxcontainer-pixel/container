@@ -40,14 +40,14 @@ export const PAYMENT_STATUS_LABELS: Record<PaymentStatus, { de: string; en: stri
 export const ORDER_STATUS_BADGES: Record<OrderStatus, string> = {
   eingegangen: "bg-accent text-accent-foreground",
   in_bearbeitung: "bg-secondary text-secondary-foreground",
-  versandt: "bg-[#16a34a] text-white",
+  versandt: "bg-success text-white",
   zugestellt: "bg-muted text-muted-foreground",
   storniert: "bg-destructive text-white",
 };
 
 export const PAYMENT_STATUS_BADGES: Record<PaymentStatus, string> = {
   offen: "bg-accent text-accent-foreground",
-  bezahlt: "bg-[#16a34a] text-white",
+  bezahlt: "bg-success text-white",
   erstattet: "bg-muted text-muted-foreground",
   fehlgeschlagen: "bg-destructive text-white",
 };

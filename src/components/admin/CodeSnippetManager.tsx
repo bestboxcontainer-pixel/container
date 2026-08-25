@@ -99,7 +99,7 @@ export function CodeSnippetManager({ snippets }: { snippets: readonly SnippetRow
             value={valeurs.name}
             onChange={(e) => modifier({ name: e.target.value })}
             placeholder="Google Tag Manager"
-            className="w-full rounded-sm border border-border px-3 py-2 text-sm outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 text-sm outline-none focus:border-primary"
           />
           <span className="mt-1 block text-xs text-muted-foreground">
             Sert uniquement à vous y retrouver ; il n&apos;apparaît pas sur la boutique.
@@ -111,7 +111,7 @@ export function CodeSnippetManager({ snippets }: { snippets: readonly SnippetRow
           <select
             value={valeurs.placement}
             onChange={(e) => modifier({ placement: e.target.value as SnippetPlacement })}
-            className="w-full rounded-sm border border-border px-3 py-2 text-sm outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 text-sm outline-none focus:border-primary"
           >
             {SNIPPET_PLACEMENTS.map((placement) => (
               <option key={placement} value={placement}>
@@ -130,7 +130,7 @@ export function CodeSnippetManager({ snippets }: { snippets: readonly SnippetRow
             rows={12}
             spellCheck={false}
             placeholder="<!-- Collez ici le code fourni par le service -->"
-            className="w-full rounded-sm border border-border px-3 py-2 font-mono text-xs outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 font-mono text-xs outline-none focus:border-primary"
           />
           <span className="mt-1 block text-xs text-muted-foreground">
             HTML brut, balises <code>&lt;script&gt;</code> comprises. Collez le code tel que le
@@ -157,7 +157,7 @@ export function CodeSnippetManager({ snippets }: { snippets: readonly SnippetRow
               max={999}
               value={valeurs.position}
               onChange={(e) => modifier({ position: Number(e.target.value) })}
-              className="w-20 rounded-sm border border-border px-3 py-2 text-sm outline-none focus:border-primary"
+              className="w-20 rounded-sm border border-input px-3 py-2 text-sm outline-none focus:border-primary"
             />
             <span className="text-xs text-muted-foreground">
               Croissant, à emplacement égal. Un mode consentement doit précéder ce qu&apos;il

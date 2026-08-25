@@ -453,12 +453,12 @@ export default async function AdminCampaignDetailPage({
                         </span>
                       )}
                       {recipient.firstClickedAt && (
-                        <span className="rounded-sm bg-[#16a34a] px-2 py-1 text-xs font-bold text-white">
+                        <span className="rounded-sm bg-success px-2 py-1 text-xs font-bold text-white">
                           Cliqué
                         </span>
                       )}
                       {recipient.attributedCents > 0 && (
-                        <span className="rounded-sm bg-[#16a34a] px-2 py-1 text-xs font-bold text-white">
+                        <span className="rounded-sm bg-success px-2 py-1 text-xs font-bold text-white">
                           Commandé
                         </span>
                       )}

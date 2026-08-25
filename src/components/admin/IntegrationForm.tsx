@@ -130,7 +130,7 @@ export function IntegrationForm({ integration }: IntegrationFormProps) {
             value={value}
             onChange={(event) => setValue(event.target.value)}
             placeholder="••••••••••••••••"
-            className="w-full rounded-sm border border-border px-3 py-2 font-mono outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 font-mono outline-none focus:border-primary"
           />
         </label>
         <button
@@ -203,7 +203,7 @@ export function IntegrationCreateForm() {
             value={key}
             onChange={(event) => setKey(event.target.value)}
             placeholder="ex. mollie_api_key"
-            className="w-full rounded-sm border border-border px-3 py-2 font-mono outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 font-mono outline-none focus:border-primary"
           />
         </label>
         <label className="text-sm">
@@ -213,7 +213,7 @@ export function IntegrationCreateForm() {
             value={label}
             onChange={(event) => setLabel(event.target.value)}
             placeholder="ex. Mollie API Key"
-            className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
           />
         </label>
       </div>
@@ -224,7 +224,7 @@ export function IntegrationCreateForm() {
           value={description}
           onChange={(event) => setDescription(event.target.value)}
           placeholder="À quoi sert cet accès ?"
-          className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+          className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
         />
       </label>
 

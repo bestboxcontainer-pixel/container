@@ -26,9 +26,9 @@ export const CATEGORY_FILTER_TOKENS = {
    * Évite une règle d'opacité qui dépendrait de la position dans le balisage.
    */
   box:
-    "flex h-[1.15rem] w-[1.15rem] shrink-0 items-center justify-center rounded-[0.35rem] border border-[#c8d3e2] bg-white text-white transition-colors peer-checked:border-primary peer-checked:bg-primary peer-focus-visible:ring-2 peer-focus-visible:ring-primary/40",
+    "flex h-[1.15rem] w-[1.15rem] shrink-0 items-center justify-center rounded-[0.35rem] border border-input bg-white text-white transition-colors peer-checked:border-primary peer-checked:bg-primary peer-focus-visible:ring-2 peer-focus-visible:ring-primary/40",
   dot:
-    "flex h-[1.15rem] w-[1.15rem] shrink-0 items-center justify-center rounded-full border border-[#c8d3e2] bg-white text-white transition-colors peer-checked:border-primary peer-checked:bg-primary peer-focus-visible:ring-2 peer-focus-visible:ring-primary/40",
+    "flex h-[1.15rem] w-[1.15rem] shrink-0 items-center justify-center rounded-full border border-input bg-white text-white transition-colors peer-checked:border-primary peer-checked:bg-primary peer-focus-visible:ring-2 peer-focus-visible:ring-primary/40",
   count:
     "shrink-0 rounded-full bg-muted px-1.5 py-0.5 text-[0.7rem] font-semibold tabular-nums text-muted-foreground",
   reset:

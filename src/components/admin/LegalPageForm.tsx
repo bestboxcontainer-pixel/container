@@ -275,7 +275,7 @@ export function LegalPageForm({ slug, label, versions }: LegalPageFormProps) {
             type="date"
             value={draft.updatedAt}
             onChange={(event) => update({ updatedAt: event.target.value })}
-            className="rounded-sm border border-border px-3 py-2 text-sm outline-none focus:border-primary"
+            className="rounded-sm border border-input px-3 py-2 text-sm outline-none focus:border-primary"
           />
           <span className="mt-1 block text-xs text-muted-foreground">
             Affichée en bas de page (« Stand »). À avancer quand le texte change sur le fond, à
@@ -467,7 +467,7 @@ function ListEditor({
             onChange={(event) =>
               onChange(items.map((entry, position) => (position === index ? event.target.value : entry)))
             }
-            className="min-w-0 flex-1 rounded-sm border border-border px-3 py-2 text-sm outline-none focus:border-primary"
+            className="min-w-0 flex-1 rounded-sm border border-input px-3 py-2 text-sm outline-none focus:border-primary"
           />
           <IconButton
             label="Supprimer cette entrée"

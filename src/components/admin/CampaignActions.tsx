@@ -155,7 +155,7 @@ export function CampaignActions({
         )}
       </div>
 
-      {notice && <p className="text-sm font-semibold text-[#16a34a]">{notice}</p>}
+      {notice && <p className="text-sm font-semibold text-success">{notice}</p>}
       {error && (
         <p role="alert" className="text-sm font-semibold text-destructive">
           {error}

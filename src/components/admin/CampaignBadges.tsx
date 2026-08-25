@@ -15,7 +15,7 @@ import {
 export const CAMPAIGN_STATUS_BADGES: Record<CampaignStatus, string> = {
   brouillon: "bg-muted text-muted-foreground",
   en_cours: "bg-accent text-accent-foreground",
-  envoyee: "bg-[#16a34a] text-white",
+  envoyee: "bg-success text-white",
   pausee: "bg-secondary text-secondary-foreground",
   annulee: "bg-destructive text-white",
 };

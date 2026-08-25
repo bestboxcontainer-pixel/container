@@ -53,7 +53,7 @@ export function ForgotPasswordForm() {
     return (
       <div role="status">
         <div className="text-center">
-          <MailCheck className="mx-auto mb-3 h-10 w-10 text-[#16a34a]" aria-hidden />
+          <MailCheck className="mx-auto mb-3 h-10 w-10 text-success" aria-hidden />
           <h2 className="text-lg font-black text-foreground">{t("forgot.doneTitle")}</h2>
           <p className="mt-2 text-sm text-muted-foreground">{t("forgot.doneText")}</p>
         </div>

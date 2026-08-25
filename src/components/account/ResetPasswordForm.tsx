@@ -57,7 +57,7 @@ export function ResetPasswordForm({ token }: { token: string }) {
   if (done) {
     return (
       <div role="status" className="text-center">
-        <CheckCircle2 className="mx-auto mb-3 h-10 w-10 text-[#16a34a]" aria-hidden />
+        <CheckCircle2 className="mx-auto mb-3 h-10 w-10 text-success" aria-hidden />
         <h2 className="text-lg font-black text-foreground">{t("reset.doneTitle")}</h2>
         <p className="mt-2 text-sm text-muted-foreground">{t("reset.doneText")}</p>
         <Link href={{ pathname: "/konto/anmelden", query: { hinweis: "passwort" } }} className={`${PRIMARY_BUTTON} mt-5`}>

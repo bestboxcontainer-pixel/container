@@ -9,7 +9,7 @@ type Tone = "neutral" | "danger" | "success";
 const TONES: Record<Tone, string> = {
   neutral: "text-muted-foreground hover:bg-muted hover:text-foreground",
   danger: "text-muted-foreground hover:bg-primary/10 hover:text-primary",
-  success: "text-muted-foreground hover:bg-[#16a34a]/10 hover:text-[#16a34a]",
+  success: "text-muted-foreground hover:bg-success/10 hover:text-success",
 };
 
 const BASE =

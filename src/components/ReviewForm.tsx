@@ -3,11 +3,12 @@
 import { useState, type FormEvent } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Star } from "lucide-react";
+import { PRODUCT_REVIEW_TOKENS } from "@/lib/productLayoutTokens";
 
 const RATING_VALUES = [1, 2, 3, 4, 5] as const;
 
 const INPUT_CLASSES =
-  "w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary";
+  "w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary";
 
 export function ReviewForm({ productId }: { productId: string }) {
   const t = useTranslations("reviews");
@@ -95,9 +96,14 @@ export function ReviewForm({ productId }: { productId: string }) {
                   onChange={() => setRating(value)}
                   className="sr-only"
                 />
+                {/* Même couleur d'étoile que la liste d'avis juste au-dessus :
+                    en `accent`, un gris bleuté très pâle, le sélecteur ne
+                    montrait pas la note qu'on venait de choisir. */}
                 <Star
                   aria-hidden
-                  className={`h-7 w-7 ${filled ? "fill-accent text-accent" : "text-border"}`}
+                  className={`h-7 w-7 ${
+                    filled ? PRODUCT_REVIEW_TOKENS.starOn : PRODUCT_REVIEW_TOKENS.starOff
+                  }`}
                 />
                 <span className="sr-only">{t("formRatingAria", { value })}</span>
               </label>

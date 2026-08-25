@@ -53,7 +53,7 @@ const VIDE: AnnouncementRow = {
 };
 
 const CHAMP =
-  "w-full rounded-sm border border-border bg-white px-3 py-2 text-sm outline-none focus:border-primary";
+  "w-full rounded-sm border border-input bg-white px-3 py-2 text-sm outline-none focus:border-primary";
 const LIBELLE = "mb-1 block text-sm font-semibold text-foreground";
 
 /** Date ISO vers la valeur attendue par un champ `datetime-local`. */
@@ -390,7 +390,7 @@ export function AnnouncementManager({ announcements }: { announcements: Announce
               </span>
               <span
                 className={`rounded-full px-2 py-0.5 text-xs font-bold ${
-                  a.enabled ? "bg-[#16a34a]/15 text-[#16a34a]" : "bg-muted text-muted-foreground"
+                  a.enabled ? "bg-success/15 text-success" : "bg-muted text-muted-foreground"
                 }`}
               >
                 {a.enabled ? "Actif" : "Inactif"}

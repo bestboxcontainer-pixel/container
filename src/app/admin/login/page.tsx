@@ -195,7 +195,7 @@ export default function AdminLoginPage() {
                     required
                     value={code}
                     onChange={(event) => setCode(event.target.value.replace(/\D/g, "").slice(0, 6))}
-                    className="w-full rounded-sm border border-border px-3 py-2.5 text-center text-2xl font-bold tracking-[0.4em] indent-[0.4em] text-foreground outline-none focus:border-primary"
+                    className="w-full rounded-sm border border-input px-3 py-2.5 text-center text-2xl font-bold tracking-[0.4em] indent-[0.4em] text-foreground outline-none focus:border-primary"
                   />
                 </label>
 
@@ -257,7 +257,7 @@ export default function AdminLoginPage() {
                     required
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
-                    className="w-full rounded-sm border border-border px-3 py-2 text-sm outline-none focus:border-primary"
+                    className="w-full rounded-sm border border-input px-3 py-2 text-sm outline-none focus:border-primary"
                   />
                 </label>
 
@@ -269,7 +269,7 @@ export default function AdminLoginPage() {
                     required
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
-                    className="w-full rounded-sm border border-border px-3 py-2 text-sm outline-none focus:border-primary"
+                    className="w-full rounded-sm border border-input px-3 py-2 text-sm outline-none focus:border-primary"
                   />
                 </label>
 

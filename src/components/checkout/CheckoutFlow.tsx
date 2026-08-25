@@ -90,7 +90,7 @@ function visibleSteps(methodCount: number): readonly Step[] {
 }
 
 const INPUT =
-  "w-full rounded-xl border border-border bg-white px-3.5 py-2.5 text-sm outline-none focus:border-primary";
+  "w-full rounded-xl border border-input bg-white px-3.5 py-2.5 text-sm outline-none focus:border-primary";
 const LABEL = "mb-1 block text-sm font-semibold text-foreground";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;

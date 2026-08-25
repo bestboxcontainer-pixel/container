@@ -132,7 +132,7 @@ export function CategoryForm({ mode, groups, initialData }: CategoryFormProps) {
                 required
                 value={group}
                 onChange={(event) => setGroup(event.target.value)}
-                className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+                className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
               >
                 {groups.length === 0 ? <option value="">Aucun univers disponible</option> : null}
                 {groups.map((option) => (
@@ -152,7 +152,7 @@ export function CategoryForm({ mode, groups, initialData }: CategoryFormProps) {
                   setSlugTouched(true);
                   setSlug(event.target.value);
                 }}
-                className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+                className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
               />
               <span className="mt-1 block text-xs text-muted-foreground">
                 Adresse : /{group || "gruppe"}/{slug || "kategorie"}
@@ -166,7 +166,7 @@ export function CategoryForm({ mode, groups, initialData }: CategoryFormProps) {
               required
               value={label}
               onChange={(event) => handleLabelChange(event.target.value)}
-              className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+              className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
             />
           </label>
 
@@ -176,7 +176,7 @@ export function CategoryForm({ mode, groups, initialData }: CategoryFormProps) {
               value={description}
               onChange={(event) => setDescription(event.target.value)}
               rows={2}
-              className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+              className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
             />
           </label>
 
@@ -199,7 +199,7 @@ export function CategoryForm({ mode, groups, initialData }: CategoryFormProps) {
               value={intro}
               onChange={(event) => setIntro(event.target.value)}
               rows={3}
-              className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+              className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
             />
           </label>
 
@@ -249,7 +249,7 @@ export function CategoryForm({ mode, groups, initialData }: CategoryFormProps) {
                 <input
                   value={section.heading}
                   onChange={(event) => updateSection(index, { heading: event.target.value })}
-                  className="w-full rounded-sm border border-border bg-white px-3 py-2 outline-none focus:border-primary"
+                  className="w-full rounded-sm border border-input bg-white px-3 py-2 outline-none focus:border-primary"
                 />
               </label>
 
@@ -259,7 +259,7 @@ export function CategoryForm({ mode, groups, initialData }: CategoryFormProps) {
                   value={section.body}
                   onChange={(event) => updateSection(index, { body: event.target.value })}
                   rows={4}
-                  className="w-full rounded-sm border border-border bg-white px-3 py-2 outline-none focus:border-primary"
+                  className="w-full rounded-sm border border-input bg-white px-3 py-2 outline-none focus:border-primary"
                 />
               </label>
             </div>
@@ -279,7 +279,7 @@ export function CategoryForm({ mode, groups, initialData }: CategoryFormProps) {
               value={closing}
               onChange={(event) => setClosing(event.target.value)}
               rows={3}
-              className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+              className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
             />
           </label>
         </div>

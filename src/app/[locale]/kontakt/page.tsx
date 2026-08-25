@@ -81,7 +81,7 @@ export default function KontaktPage() {
                     rows={5}
                     disabled
                     placeholder="Container-Typ, gewünschte Maße, Einsatzort und Zeitraum…"
-                    className="w-full rounded-sm border border-border bg-muted px-3 py-2 text-sm text-foreground placeholder:text-foreground/40 disabled:cursor-not-allowed"
+                    className="w-full rounded-sm border border-input bg-muted px-3 py-2 text-sm text-foreground placeholder:text-foreground/40 disabled:cursor-not-allowed"
                   />
                 </div>
               </div>
@@ -122,7 +122,7 @@ function Field({
         name={name}
         type={type}
         disabled
-        className="w-full rounded-sm border border-border bg-muted px-3 py-2 text-sm text-foreground disabled:cursor-not-allowed"
+        className="w-full rounded-sm border border-input bg-muted px-3 py-2 text-sm text-foreground disabled:cursor-not-allowed"
       />
     </div>
   );

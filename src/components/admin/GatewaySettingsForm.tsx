@@ -157,7 +157,7 @@ export function GatewaySettingsForm({ state, methods }: GatewaySettingsFormProps
                       </span>
                     )}
                     {ready && (
-                      <span className="rounded-sm bg-[#16a34a] px-2 py-0.5 text-[11px] font-bold text-white">
+                      <span className="rounded-sm bg-success px-2 py-0.5 text-[11px] font-bold text-white">
                         Clés OK
                       </span>
                     )}
@@ -200,7 +200,7 @@ export function GatewaySettingsForm({ state, methods }: GatewaySettingsFormProps
                 <span className="mb-1 flex flex-wrap items-center gap-2 font-semibold text-foreground">
                   {key.label}
                   {key.configured ? (
-                    <span className="text-[11px] font-bold text-[#16a34a]">✓ enregistrée</span>
+                    <span className="text-[11px] font-bold text-success">✓ enregistrée</span>
                   ) : key.optional ? (
                     <span className="text-[11px] font-bold text-muted-foreground">facultative</span>
                   ) : (
@@ -215,7 +215,7 @@ export function GatewaySettingsForm({ state, methods }: GatewaySettingsFormProps
                     setSecrets((current) => ({ ...current, [key.integrationKey]: event.target.value }))
                   }
                   placeholder={key.configured ? "•••••••• (inchangée)" : "Saisir la clé"}
-                  className="w-full rounded-sm border border-border px-3 py-2 font-mono outline-none focus:border-primary"
+                  className="w-full rounded-sm border border-input px-3 py-2 font-mono outline-none focus:border-primary"
                 />
                 <span className="mt-1 block text-xs text-muted-foreground">{key.hint}</span>
               </label>
@@ -237,12 +237,12 @@ export function GatewaySettingsForm({ state, methods }: GatewaySettingsFormProps
               {check && (
                 <div
                   className={`mt-3 rounded-sm border p-3 text-xs ${
-                    check.ok ? "border-[#16a34a] bg-[#16a34a]/5" : "border-destructive bg-destructive/5"
+                    check.ok ? "border-success bg-success/5" : "border-destructive bg-destructive/5"
                   }`}
                 >
                   <p
                     className={`text-sm font-bold ${
-                      check.ok ? "text-[#16a34a]" : "text-destructive"
+                      check.ok ? "text-success" : "text-destructive"
                     }`}
                   >
                     {check.ok ? "✓ " : "⚠ "}
@@ -312,7 +312,7 @@ export function GatewaySettingsForm({ state, methods }: GatewaySettingsFormProps
       )}
 
       {error && <p className="mb-3 text-sm font-semibold text-destructive">{error}</p>}
-      {notice && <p className="mb-3 text-sm font-semibold text-[#16a34a]">{notice}</p>}
+      {notice && <p className="mb-3 text-sm font-semibold text-success">{notice}</p>}
 
       <button
         type="submit"

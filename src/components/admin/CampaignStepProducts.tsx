@@ -9,7 +9,7 @@ import type { CampaignProductOption } from "@/server/campaignAdmin";
 import type { CategoryRecord } from "@/server/types";
 
 const inputClass =
-  "rounded-sm border border-border px-3 py-1.5 text-sm outline-none focus:border-primary";
+  "rounded-sm border border-input px-3 py-1.5 text-sm outline-none focus:border-primary";
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
   day: "2-digit",
@@ -125,7 +125,7 @@ export function CampaignStepProducts({
       </div>
 
       {notice && (
-        <p className="rounded-sm border border-[#16a34a] bg-[#16a34a]/5 px-4 py-2 text-sm font-semibold text-[#16a34a]">
+        <p className="rounded-sm border border-success bg-success/5 px-4 py-2 text-sm font-semibold text-success">
           {notice}
         </p>
       )}

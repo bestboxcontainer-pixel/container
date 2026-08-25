@@ -16,7 +16,7 @@ import type { OrderStatus, PaymentStatus } from "@/lib/orderStatus";
 // l'historique de la commande, côté serveur.
 
 const SELECT =
-  "w-full rounded-sm border border-border bg-white px-3 py-2 text-sm outline-none focus:border-primary";
+  "w-full rounded-sm border border-input bg-white px-3 py-2 text-sm outline-none focus:border-primary";
 
 export function OrderStatusPanel({
   orderId,
@@ -141,7 +141,7 @@ export function OrderStatusPanel({
         </p>
       )}
       {saved && !dirty && (
-        <p role="status" className="mb-3 text-sm font-semibold text-[#16a34a]">
+        <p role="status" className="mb-3 text-sm font-semibold text-success">
           Modifications enregistrées.
         </p>
       )}

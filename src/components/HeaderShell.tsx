@@ -44,8 +44,8 @@ export function HeaderShell({
         "group z-50 w-full text-secondary-foreground transition-colors duration-300",
         overlay ? "fixed inset-x-0 top-0" : "sticky top-0",
         merged
-          ? "bg-gradient-to-b from-secondary/75 via-secondary/30 to-transparent"
-          : "border-b border-white/10 bg-secondary/95 backdrop-blur supports-[backdrop-filter]:bg-secondary/80",
+          ? "bg-gradient-to-b from-header/75 via-header/30 to-transparent"
+          : "border-b border-white/10 bg-header/95 backdrop-blur supports-[backdrop-filter]:bg-header/90",
       )}
     >
       {children}

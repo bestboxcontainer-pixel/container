@@ -176,7 +176,7 @@ export function ProductForm({
             required
             value={categoryId}
             onChange={(event) => setCategoryId(event.target.value)}
-            className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
           >
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
@@ -193,7 +193,7 @@ export function ProductForm({
               required
               value={brand}
               onChange={(event) => setBrand(event.target.value)}
-              className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+              className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
             />
           </label>
           <label className="text-sm">
@@ -202,7 +202,7 @@ export function ProductForm({
               required
               value={name}
               onChange={(event) => setName(event.target.value)}
-              className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+              className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
             />
           </label>
         </div>
@@ -228,7 +228,7 @@ export function ProductForm({
             maxLength={SHORT_DESCRIPTION_MAX}
             rows={2}
             placeholder="Une à deux phrases qui résument le produit."
-            className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
           />
         </label>
 
@@ -241,7 +241,7 @@ export function ProductForm({
             onChange={(event) => setDescription(event.target.value)}
             rows={7}
             placeholder="Équipement, usage, contenu de la livraison …"
-            className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
           />
         </label>
 
@@ -253,7 +253,7 @@ export function ProductForm({
             value={bulletsText}
             onChange={(event) => setBulletsText(event.target.value)}
             rows={4}
-            className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
           />
         </label>
 
@@ -272,7 +272,7 @@ export function ProductForm({
               value={nameEn}
               onChange={(event) => setNameEn(event.target.value)}
               placeholder={name || "Repli sur le nom allemand"}
-              className="w-full rounded-sm border border-border bg-white px-3 py-2 outline-none focus:border-primary"
+              className="w-full rounded-sm border border-input bg-white px-3 py-2 outline-none focus:border-primary"
             />
           </label>
 
@@ -297,7 +297,7 @@ export function ProductForm({
               maxLength={SHORT_DESCRIPTION_MAX}
               rows={2}
               placeholder={shortDescription || "Repli sur la description courte allemande"}
-              className="w-full rounded-sm border border-border bg-white px-3 py-2 outline-none focus:border-primary"
+              className="w-full rounded-sm border border-input bg-white px-3 py-2 outline-none focus:border-primary"
             />
           </label>
 
@@ -308,7 +308,7 @@ export function ProductForm({
               onChange={(event) => setDescriptionEn(event.target.value)}
               rows={7}
               placeholder={description || "Repli sur la description allemande"}
-              className="w-full rounded-sm border border-border bg-white px-3 py-2 outline-none focus:border-primary"
+              className="w-full rounded-sm border border-input bg-white px-3 py-2 outline-none focus:border-primary"
             />
           </label>
 
@@ -321,7 +321,7 @@ export function ProductForm({
               onChange={(event) => setBulletsTextEn(event.target.value)}
               rows={4}
               placeholder={bulletsText || "Repli sur les caractéristiques allemandes"}
-              className="w-full rounded-sm border border-border bg-white px-3 py-2 outline-none focus:border-primary"
+              className="w-full rounded-sm border border-input bg-white px-3 py-2 outline-none focus:border-primary"
             />
           </label>
         </div>
@@ -342,7 +342,7 @@ export function ProductForm({
               value={oldPrice}
               onChange={(event) => setOldPrice(event.target.value)}
               placeholder="ex. 449,00 €"
-              className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+              className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
             />
           </label>
           <label className="text-sm">
@@ -352,7 +352,7 @@ export function ProductForm({
               value={price}
               onChange={(event) => setPrice(event.target.value)}
               placeholder="ex. 349,00 €"
-              className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+              className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
             />
           </label>
           <label className="text-sm">
@@ -361,7 +361,7 @@ export function ProductForm({
               value={badge}
               onChange={(event) => setBadge(event.target.value)}
               placeholder="ex. -20%, Nouveau"
-              className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+              className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
             />
           </label>
         </div>
@@ -376,7 +376,7 @@ export function ProductForm({
               max="5"
               value={rating}
               onChange={(event) => setRating(event.target.value)}
-              className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+              className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
             />
           </label>
           <label className="text-sm">
@@ -387,7 +387,7 @@ export function ProductForm({
               step="1"
               value={stock}
               onChange={(event) => setStock(event.target.value)}
-              className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+              className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
             />
           </label>
           <label className="text-sm">
@@ -398,7 +398,7 @@ export function ProductForm({
               step="1"
               value={lowStockThreshold}
               onChange={(event) => setLowStockThreshold(event.target.value)}
-              className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+              className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
             />
           </label>
         </div>

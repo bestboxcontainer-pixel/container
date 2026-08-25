@@ -30,7 +30,7 @@ interface ContactRow {
 const MAX_VISIBLE = 200;
 
 const inputClass =
-  "rounded-sm border border-border px-3 py-2 text-sm outline-none focus:border-primary";
+  "rounded-sm border border-input px-3 py-2 text-sm outline-none focus:border-primary";
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
   day: "2-digit",
@@ -404,7 +404,7 @@ export function CampaignStepRecipients({
             M&apos;envoyer un message de test
           </button>
           {testDone && (
-            <p className="py-2 text-sm font-semibold text-[#16a34a]">
+            <p className="py-2 text-sm font-semibold text-success">
               Message de test envoyé à {testDone}.
             </p>
           )}

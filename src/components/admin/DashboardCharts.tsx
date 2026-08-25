@@ -4,7 +4,7 @@ import { AlertTriangle, CheckCircle2, XCircle } from "lucide-react";
 // L'ambre passe sous 3:1 de contraste : chaque part porte donc une étiquette
 // chiffrée et une icône : la couleur n'est jamais la seule information.
 const STATUS_COLORS = {
-  ok: "#16a34a",
+  ok: "#116932",
   low: "#e3a008",
   out: "#e3000e",
 } as const;

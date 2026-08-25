@@ -7,7 +7,7 @@ import { MousePointerClick, ShoppingCart } from "lucide-react";
  */
 
 const BRAND = "#e3000e";
-const ORDER_COLOR = "#16a34a";
+const ORDER_COLOR = "#116932";
 
 export interface FunnelInput {
   sent: number;

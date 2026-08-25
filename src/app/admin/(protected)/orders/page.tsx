@@ -17,7 +17,7 @@ import { AdminPagination } from "@/components/admin/AdminPagination";
 import { ADMIN_PAGE_SIZE, parsePageParam } from "@/lib/pagination";
 
 const inputClass =
-  "rounded-sm border border-border px-3 py-1.5 text-sm outline-none focus:border-primary";
+  "rounded-sm border border-input px-3 py-1.5 text-sm outline-none focus:border-primary";
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
   day: "2-digit",

@@ -16,7 +16,7 @@ const STATE_LABELS: Record<RecoveryState, string> = {
 
 const STATE_BADGES: Record<RecoveryState, string> = {
   active: "bg-accent text-accent-foreground",
-  converted: "bg-[#16a34a]/10 text-[#16a34a]",
+  converted: "bg-success/10 text-success",
   unsubscribed: "bg-muted text-muted-foreground",
   completed: "bg-muted text-muted-foreground",
   failed: "bg-primary/10 text-primary",

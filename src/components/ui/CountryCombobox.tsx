@@ -15,7 +15,7 @@ import { countryOptions, type CountryOption } from "@/lib/countries";
 // retrouve « Espagne ».
 
 const FIELD =
-  "w-full rounded-sm border border-border bg-white py-2 pr-9 pl-3 text-sm outline-none focus:border-primary";
+  "w-full rounded-sm border border-input bg-white py-2 pr-9 pl-3 text-sm outline-none focus:border-primary";
 
 export function CountryCombobox({
   id,

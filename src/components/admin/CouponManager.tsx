@@ -45,7 +45,7 @@ const VIDE: CouponRow = {
 };
 
 const CHAMP =
-  "w-full rounded-sm border border-border bg-white px-3 py-2 text-sm outline-none focus:border-primary";
+  "w-full rounded-sm border border-input bg-white px-3 py-2 text-sm outline-none focus:border-primary";
 const LIBELLE = "mb-1 block text-sm font-semibold text-foreground";
 
 const NATURES: { valeur: CouponRow["kind"]; libelle: string }[] = [
@@ -384,7 +384,7 @@ export function CouponManager({ coupons }: { coupons: CouponRow[] }) {
                     <span
                       className={`rounded-full px-2 py-0.5 text-xs font-bold ${
                         c.enabled
-                          ? "bg-[#16a34a]/15 text-[#16a34a]"
+                          ? "bg-success/15 text-success"
                           : "bg-muted text-muted-foreground"
                       }`}
                     >

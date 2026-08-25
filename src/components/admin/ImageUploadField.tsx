@@ -110,7 +110,7 @@ export function ImageUploadField({
             value={value}
             onChange={(event) => onChange(event.target.value)}
             placeholder="/images/products/…, /uploads/… ou https://res.cloudinary.com/…"
-            className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
           />
           <div className="mt-2 flex flex-wrap items-center gap-3">
             <input

@@ -200,7 +200,7 @@ export function GalleryUploadField({ value, onChange, max = 8 }: GalleryUploadFi
           }}
           placeholder="/images/products/… ou https://…"
           disabled={full}
-          className="min-w-48 flex-1 rounded-sm border border-border px-3 py-1.5 text-xs outline-none focus:border-primary disabled:opacity-50"
+          className="min-w-48 flex-1 rounded-sm border border-input px-3 py-1.5 text-xs outline-none focus:border-primary disabled:opacity-50"
         />
         <button
           type="button"

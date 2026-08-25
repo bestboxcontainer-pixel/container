@@ -72,7 +72,7 @@ export function GroupForm({ mode, initialData }: GroupFormProps) {
           value={label}
           onChange={(event) => handleLabelChange(event.target.value)}
           placeholder="ex. Haushalt"
-          className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+          className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
         />
       </label>
 
@@ -87,7 +87,7 @@ export function GroupForm({ mode, initialData }: GroupFormProps) {
               setSlug(event.target.value);
             }}
             placeholder="haushalt"
-            className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
           />
           <span className="mt-1 block text-xs text-muted-foreground">
             Donne des adresses du type /{slug || "gruppe"}/kaffeemaschinen
@@ -100,7 +100,7 @@ export function GroupForm({ mode, initialData }: GroupFormProps) {
             type="number"
             value={position}
             onChange={(event) => setPosition(event.target.value)}
-            className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
           />
           <span className="mt-1 block text-xs text-muted-foreground">
             Les plus petits nombres apparaissent en premier dans le menu.

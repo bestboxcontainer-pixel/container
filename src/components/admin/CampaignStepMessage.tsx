@@ -59,7 +59,7 @@ const VARIABLE_HINTS: Record<TemplateVariable, string> = {
 };
 
 const inputClass =
-  "w-full rounded-sm border border-border px-3 py-2 text-sm outline-none focus:border-primary";
+  "w-full rounded-sm border border-input px-3 py-2 text-sm outline-none focus:border-primary";
 
 interface CampaignStepMessageProps {
   draft: CampaignDraft;

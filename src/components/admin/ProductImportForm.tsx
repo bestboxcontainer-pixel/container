@@ -94,7 +94,7 @@ export function ProductImportForm({ categories }: { categories: CategoryOption[]
           <select
             value={format}
             onChange={(event) => setFormat(event.target.value as FormatChoice)}
-            className="rounded-sm border border-border px-3 py-1.5 text-sm outline-none focus:border-primary"
+            className="rounded-sm border border-input px-3 py-1.5 text-sm outline-none focus:border-primary"
           >
             <option value="auto">Détection automatique</option>
             <option value="csv">CSV</option>
@@ -127,7 +127,7 @@ export function ProductImportForm({ categories }: { categories: CategoryOption[]
           rows={12}
           spellCheck={false}
           placeholder={CSV_HEADER}
-          className="w-full rounded-sm border border-border px-3 py-2 font-mono text-xs outline-none focus:border-primary"
+          className="w-full rounded-sm border border-input px-3 py-2 font-mono text-xs outline-none focus:border-primary"
         />
       </label>
 

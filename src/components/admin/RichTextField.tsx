@@ -119,7 +119,7 @@ export function RichTextField({
     placeholder,
     onChange: (event: { target: { value: string } }) => onChange(event.target.value),
     className:
-      "w-full rounded-sm border border-border px-3 py-2 text-sm outline-none focus:border-primary",
+      "w-full rounded-sm border border-input px-3 py-2 text-sm outline-none focus:border-primary",
   };
 
   return (

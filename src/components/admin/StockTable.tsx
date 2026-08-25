@@ -26,7 +26,7 @@ interface AdjustPayload {
 }
 
 const controlClass =
-  "rounded-sm border border-border px-2 py-1.5 text-sm outline-none focus:border-primary";
+  "rounded-sm border border-input px-2 py-1.5 text-sm outline-none focus:border-primary";
 
 export function StockTable({ products }: StockTableProps) {
   const router = useRouter();

@@ -61,7 +61,7 @@ export function ShippingMethodFieldset({
               </span>
               <span
                 className={`shrink-0 text-sm font-bold ${
-                  method.cents === 0 ? "text-[#16a34a]" : "text-foreground"
+                  method.cents === 0 ? "text-success" : "text-foreground"
                 }`}
               >
                 {price}

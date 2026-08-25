@@ -182,7 +182,7 @@ export function ReviewModerationTable({ reviews }: { reviews: ReviewRecord[] }) 
                               setBrouillon({ ...brouillon, authorName: e.target.value })
                             }
                             maxLength={REVIEW_LIMITS.authorNameMax}
-                            className="mt-1 w-full rounded-sm border border-border px-2 py-1.5 text-sm font-normal outline-none focus:border-primary"
+                            className="mt-1 w-full rounded-sm border border-input px-2 py-1.5 text-sm font-normal outline-none focus:border-primary"
                           />
                         </label>
 
@@ -193,7 +193,7 @@ export function ReviewModerationTable({ reviews }: { reviews: ReviewRecord[] }) 
                             onChange={(e) => setBrouillon({ ...brouillon, city: e.target.value })}
                             maxLength={REVIEW_LIMITS.cityMax}
                             placeholder="facultatif"
-                            className="mt-1 w-full rounded-sm border border-border px-2 py-1.5 text-sm font-normal outline-none focus:border-primary"
+                            className="mt-1 w-full rounded-sm border border-input px-2 py-1.5 text-sm font-normal outline-none focus:border-primary"
                           />
                         </label>
 
@@ -204,7 +204,7 @@ export function ReviewModerationTable({ reviews }: { reviews: ReviewRecord[] }) 
                             onChange={(e) =>
                               setBrouillon({ ...brouillon, rating: Number(e.target.value) })
                             }
-                            className="mt-1 w-full rounded-sm border border-border px-2 py-1.5 text-sm font-normal outline-none focus:border-primary"
+                            className="mt-1 w-full rounded-sm border border-input px-2 py-1.5 text-sm font-normal outline-none focus:border-primary"
                           >
                             {[5, 4, 3, 2, 1].map((note) => (
                               <option key={note} value={note}>
@@ -223,7 +223,7 @@ export function ReviewModerationTable({ reviews }: { reviews: ReviewRecord[] }) 
                             onChange={(e) =>
                               setBrouillon({ ...brouillon, createdAt: e.target.value })
                             }
-                            className="mt-1 w-full rounded-sm border border-border px-2 py-1.5 text-sm font-normal outline-none focus:border-primary"
+                            className="mt-1 w-full rounded-sm border border-input px-2 py-1.5 text-sm font-normal outline-none focus:border-primary"
                           />
                         </label>
                       </div>
@@ -235,7 +235,7 @@ export function ReviewModerationTable({ reviews }: { reviews: ReviewRecord[] }) 
                           onChange={(e) => setBrouillon({ ...brouillon, title: e.target.value })}
                           maxLength={REVIEW_LIMITS.titleMax}
                           placeholder="facultatif"
-                          className="mt-1 w-full rounded-sm border border-border px-2 py-1.5 text-sm font-normal outline-none focus:border-primary"
+                          className="mt-1 w-full rounded-sm border border-input px-2 py-1.5 text-sm font-normal outline-none focus:border-primary"
                         />
                       </label>
 
@@ -246,7 +246,7 @@ export function ReviewModerationTable({ reviews }: { reviews: ReviewRecord[] }) 
                           onChange={(e) => setBrouillon({ ...brouillon, body: e.target.value })}
                           maxLength={REVIEW_LIMITS.bodyMax}
                           rows={4}
-                          className="mt-1 w-full rounded-sm border border-border px-2 py-1.5 text-sm font-normal outline-none focus:border-primary"
+                          className="mt-1 w-full rounded-sm border border-input px-2 py-1.5 text-sm font-normal outline-none focus:border-primary"
                         />
                         <span className="mt-0.5 block font-normal text-muted-foreground">
                           {brouillon.body.trim().length} / {REVIEW_LIMITS.bodyMax} caractères
@@ -330,7 +330,7 @@ export function ReviewModerationTable({ reviews }: { reviews: ReviewRecord[] }) 
                         }
                         placeholder="Note (facultatif)"
                         maxLength={500}
-                        className="w-44 rounded-sm border border-border px-2 py-1 outline-none focus:border-primary"
+                        className="w-44 rounded-sm border border-input px-2 py-1 outline-none focus:border-primary"
                       />
                     </label>
                     <div className="flex flex-wrap justify-end gap-1">

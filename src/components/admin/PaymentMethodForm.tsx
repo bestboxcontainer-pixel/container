@@ -91,7 +91,7 @@ export function PaymentMethodForm({
             value={label}
             onChange={(event) => setLabel(event.target.value)}
             placeholder="ex. Kauf auf Rechnung"
-            className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
           />
         </label>
         <label className="text-sm">
@@ -102,7 +102,7 @@ export function PaymentMethodForm({
             value={feeLabel}
             onChange={(event) => setFeeLabel(event.target.value)}
             placeholder="kostenlos"
-            className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
           />
         </label>
       </div>
@@ -114,7 +114,7 @@ export function PaymentMethodForm({
           onChange={(event) => setDescription(event.target.value)}
           rows={2}
           placeholder="Courte indication affichée aux clients"
-          className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+          className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
         />
       </label>
 
@@ -124,7 +124,7 @@ export function PaymentMethodForm({
           <select
             value={icon}
             onChange={(event) => setIcon(event.target.value)}
-            className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
           >
             {ICON_OPTIONS.map((option) => (
               <option key={option.value} value={option.value}>

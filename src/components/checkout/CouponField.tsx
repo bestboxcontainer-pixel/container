@@ -218,7 +218,7 @@ export function CouponField({
               autoComplete="off"
               autoCapitalize="characters"
               maxLength={40}
-              className="w-full min-w-0 rounded-xl border border-border bg-white px-3.5 py-2.5 text-sm uppercase outline-none focus:border-primary"
+              className="w-full min-w-0 rounded-xl border border-input bg-white px-3.5 py-2.5 text-sm uppercase outline-none focus:border-primary"
             />
             <button
               type="button"

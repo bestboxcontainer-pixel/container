@@ -128,7 +128,7 @@ export function AddToCartButton({
         soldOut
           ? "cursor-not-allowed bg-muted text-muted-foreground"
           : added
-            ? "bg-[#16a34a] text-white"
+            ? "bg-success text-white"
             : withBuyNow
               // En second rôle sous « acheter maintenant » : le contour évite
               // deux aplats de même poids qui se disputeraient le regard.

@@ -3,7 +3,7 @@
 // aient exactement la même apparence, sans dupliquer les chaînes Tailwind.
 
 export const INPUT =
-  "w-full rounded-sm border border-border bg-white px-3 py-2 text-sm text-foreground outline-none focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary";
+  "w-full rounded-sm border border-input bg-white px-3 py-2 text-sm text-foreground outline-none focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary";
 
 export const LABEL = "mb-1 block text-sm font-semibold text-foreground";
 
@@ -24,7 +24,7 @@ export const ALERT_ERROR =
   "rounded-sm border border-destructive bg-destructive/5 px-4 py-3 text-sm font-semibold text-destructive";
 
 export const ALERT_SUCCESS =
-  "rounded-sm border border-[#16a34a] bg-[#16a34a]/5 px-4 py-3 text-sm font-semibold text-[#15803d]";
+  "rounded-sm border border-success bg-success/5 px-4 py-3 text-sm font-semibold text-success";
 
 export const ALERT_INFO =
   "rounded-sm border border-border bg-muted px-4 py-3 text-sm text-muted-foreground";

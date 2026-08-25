@@ -9,7 +9,7 @@ interface BankTransferFormProps {
 }
 
 const FIELD =
-  "w-full rounded-sm border border-border px-3 py-2 text-sm outline-none focus:border-primary";
+  "w-full rounded-sm border border-input px-3 py-2 text-sm outline-none focus:border-primary";
 const LABEL = "mb-1 block text-sm font-bold text-foreground";
 
 export function BankTransferForm({ state }: BankTransferFormProps) {
@@ -189,7 +189,7 @@ export function BankTransferForm({ state }: BankTransferFormProps) {
       </fieldset>
 
       {error && <p className="mt-4 text-sm font-semibold text-destructive">{error}</p>}
-      {notice && <p className="mt-4 text-sm font-semibold text-[#16a34a]">{notice}</p>}
+      {notice && <p className="mt-4 text-sm font-semibold text-success">{notice}</p>}
 
       <button
         type="submit"

@@ -175,7 +175,7 @@ export function CampaignWizard({
                   current
                     ? "bg-primary text-primary-foreground"
                     : done
-                      ? "bg-[#16a34a] text-white"
+                      ? "bg-success text-white"
                       : "bg-muted text-muted-foreground"
                 }`}
               >

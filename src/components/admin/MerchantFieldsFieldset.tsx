@@ -41,7 +41,7 @@ const CONDITIONS: { value: string; label: string }[] = [
 const ENERGY_CLASSES = ["", "A", "B", "C", "D", "E", "F", "G", "A+", "A++", "A+++"];
 
 const inputClass =
-  "w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary";
+  "w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary";
 
 export function MerchantFieldsFieldset({
   values,

@@ -121,7 +121,7 @@ export default async function OrderConfirmationPage({
         <div className="mx-auto max-w-screen-lg px-3 py-8">
           <div className="mb-6 rounded-sm border border-border bg-white p-6">
             <div className="flex items-start gap-3">
-              <CheckCircle2 className="mt-0.5 h-7 w-7 shrink-0 text-[#16a34a]" aria-hidden />
+              <CheckCircle2 className="mt-0.5 h-7 w-7 shrink-0 text-success" aria-hidden />
               <div>
                 <h1 className="text-2xl font-black text-foreground">{t("confirmation.title")}</h1>
                 <p className="mt-1 text-sm text-muted-foreground">{t("confirmation.subtitle")}</p>

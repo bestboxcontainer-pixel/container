@@ -72,7 +72,7 @@ export function UserForm({ allowSuperadmin = false }: { allowSuperadmin?: boolea
             required
             value={name}
             onChange={(event) => setName(event.target.value)}
-            className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
           />
         </label>
 
@@ -83,7 +83,7 @@ export function UserForm({ allowSuperadmin = false }: { allowSuperadmin?: boolea
             type="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
           />
         </label>
 
@@ -95,7 +95,7 @@ export function UserForm({ allowSuperadmin = false }: { allowSuperadmin?: boolea
             minLength={MIN_PASSWORD_LENGTH}
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
           />
           <span className="mt-1 block text-xs text-muted-foreground">
             {MIN_PASSWORD_LENGTH} caractères minimum.
@@ -107,7 +107,7 @@ export function UserForm({ allowSuperadmin = false }: { allowSuperadmin?: boolea
           <select
             value={role}
             onChange={(event) => setRole(event.target.value)}
-            className="w-full rounded-sm border border-border px-3 py-2 outline-none focus:border-primary"
+            className="w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary"
           >
             <option value="admin">Administrateur</option>
             <option value="owner">Propriétaire</option>
@@ -268,7 +268,7 @@ export function UserRowActions({ user, isSelf }: UserRowActionsProps) {
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             placeholder="Nouvelle adresse e-mail"
-            className="w-72 rounded-sm border border-border px-3 py-1.5 text-sm font-normal outline-none focus:border-primary"
+            className="w-72 rounded-sm border border-input px-3 py-1.5 text-sm font-normal outline-none focus:border-primary"
           />
           <button
             type="submit"
@@ -288,7 +288,7 @@ export function UserRowActions({ user, isSelf }: UserRowActionsProps) {
             minLength={MIN_PASSWORD_LENGTH}
             onChange={(event) => setPassword(event.target.value)}
             placeholder={`Nouveau mot de passe (min. ${MIN_PASSWORD_LENGTH})`}
-            className="w-56 rounded-sm border border-border px-3 py-1.5 text-sm font-normal outline-none focus:border-primary"
+            className="w-56 rounded-sm border border-input px-3 py-1.5 text-sm font-normal outline-none focus:border-primary"
           />
           <button
             type="submit"

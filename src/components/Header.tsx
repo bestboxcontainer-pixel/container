@@ -3,7 +3,9 @@ import { Link } from "@/i18n/navigation";
 import { Phone, UserRound } from "lucide-react";
 import { COMPANY } from "@/content/legal";
 import { HeaderShell } from "@/components/HeaderShell";
+import { HeaderNav, type HeaderNavLink } from "@/components/HeaderNav";
 import { CartIndicator } from "@/components/cart/CartIndicator";
+import { HEADER_LAYOUT_TOKENS } from "@/lib/headerLayoutTokens";
 
 /**
  * Navigation principale, réduite à cinq entrées pour tenir sur une seule ligne
@@ -13,7 +15,7 @@ import { CartIndicator } from "@/components/cart/CartIndicator";
  * atteignables depuis le pied de page : elles captent la recherche organique et
  * l'internaute y arrive le plus souvent par un moteur, pas par le menu.
  */
-const NAV_LINKS = [
+const NAV_LINKS: readonly HeaderNavLink[] = [
   { href: "/sortiment", label: "Sortiment" },
   { href: "/vermietung", label: "Vermietung" },
   { href: "/container-masse", label: "Maße & Typen" },
@@ -21,16 +23,22 @@ const NAV_LINKS = [
   { href: "/kontakt", label: "Kontakt" },
 ] as const;
 
+const CTA_LABEL = "Anfrage stellen";
+const CTA_HREF = "/kontakt";
+
 /**
  * En-tête du site, distinct du back-office. Une seule bande.
  *
- * La navigation partage la ligne de la marque et défile horizontalement quand
- * la place manque, plutôt que de se replier derrière un menu : un menu fermé
- * enterre les pages les plus demandées, et un second rang de liens alourdit
- * l'en-tête sur toutes les pages pour ne servir que sur mobile.
+ * La navigation reste en ligne à partir de `lg` et se replie derrière un bouton
+ * en dessous. Elle défilait auparavant à l'horizontale plutôt que de se
+ * replier, pour ne pas enterrer les pages les plus demandées derrière un menu
+ * fermé ; le résultat était pire sur mobile : cinq liens comprimés dans la
+ * largeur restante, atteignables par un glissement latéral que rien n'annonce.
+ * Un bouton visible vaut mieux qu'un geste invisible. Voir `HeaderNav`.
  *
- * Le panier ne quitte pas l'en-tête, sans quoi /warenkorb et /kasse
- * redeviennent inatteignables autrement qu'en tapant l'URL.
+ * Le panier et le compte ne rentrent pas dans le repli et gardent leur place
+ * dans la barre, sans quoi /warenkorb et /kasse redeviennent inatteignables
+ * autrement qu'en tapant l'URL.
  *
  * Pas de champ de recherche : le catalogue tient en six catégories, la
  * navigation y mène plus vite qu'une saisie. La page /suche reste servie et
@@ -46,8 +54,8 @@ export function Header({ variant = "solid" }: { variant?: "solid" | "overlay" })
 
   return (
     <HeaderShell overlay={variant === "overlay"}>
-      <div className="mx-auto flex max-w-screen-xl items-center gap-4 px-4 py-3 sm:px-6 lg:gap-8">
-        <Link href="/" className="flex shrink-0 items-center gap-2.5 whitespace-nowrap">
+      <div className={HEADER_LAYOUT_TOKENS.row}>
+        <Link href="/" className={HEADER_LAYOUT_TOKENS.brand}>
           <Image
             src="/images/logo-badge.png"
             alt="BBC Best Box Containerhandel e.K."
@@ -66,46 +74,40 @@ export function Header({ variant = "solid" }: { variant?: "solid" | "overlay" })
           </span>
         </Link>
 
-        {/* Défile horizontalement quand la place manque, sans replier le menu. */}
-        <nav className="flex min-w-0 flex-1 items-center gap-5 overflow-x-auto text-[13px] font-semibold whitespace-nowrap lg:gap-7">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="border-b-2 border-transparent py-1 text-white/75 transition-colors hover:border-signal hover:text-white"
+        {/* Les actions passent en `children` : elles restent rendues côté
+            serveur, et le bouton de menu se place après elles dans la rangée. */}
+        <HeaderNav links={NAV_LINKS} phone={COMPANY.phone} ctaLabel={CTA_LABEL} ctaHref={CTA_HREF}>
+          <div className={HEADER_LAYOUT_TOKENS.actions}>
+            <a
+              href={`tel:${telephone}`}
+              aria-label={`Anrufen: ${COMPANY.phone}`}
+              className="hidden items-center gap-2 text-sm font-semibold text-white/85 transition-colors hover:text-signal xl:flex"
             >
-              {link.label}
+              <Phone className="h-4 w-4" aria-hidden />
+              {COMPANY.phone}
+            </a>
+
+            <Link
+              href="/konto"
+              aria-label="Kundenkonto"
+              className="text-white/85 transition-colors hover:text-signal"
+            >
+              <UserRound className="h-5 w-5" aria-hidden />
             </Link>
-          ))}
-        </nav>
 
-        <div className="flex shrink-0 items-center gap-4">
-          <a
-            href={`tel:${telephone}`}
-            aria-label={`Anrufen: ${COMPANY.phone}`}
-            className="hidden items-center gap-2 text-sm font-semibold text-white/85 transition-colors hover:text-signal xl:flex"
-          >
-            <Phone className="h-4 w-4" aria-hidden />
-            {COMPANY.phone}
-          </a>
+            <CartIndicator className="relative flex items-center text-white/85 transition-colors hover:text-signal" />
 
-          <Link
-            href="/konto"
-            aria-label="Kundenkonto"
-            className="text-white/85 transition-colors hover:text-signal"
-          >
-            <UserRound className="h-5 w-5" aria-hidden />
-          </Link>
-
-          <CartIndicator className="relative flex items-center text-white/85 transition-colors hover:text-signal" />
-
-          <Link
-            href="/kontakt"
-            className="hidden rounded-full bg-signal px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-signal-foreground shadow-sm transition-colors hover:bg-signal/90 md:inline-block"
-          >
-            Anfrage stellen
-          </Link>
-        </div>
+            {/* Le bouton de demande ne réapparaît qu'avec la navigation en
+                ligne : en dessous, il vit dans le pied du panneau, où il a la
+                largeur de la carte au lieu d'un timbre coincé près du menu. */}
+            <Link
+              href={CTA_HREF}
+              className="hidden rounded-full bg-signal px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-signal-foreground shadow-sm transition-colors hover:bg-signal/90 lg:inline-block"
+            >
+              {CTA_LABEL}
+            </Link>
+          </div>
+        </HeaderNav>
       </div>
     </HeaderShell>
   );

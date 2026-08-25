@@ -3,33 +3,25 @@
 import Image from "next/image";
 import { useEffect, useId, useRef } from "react";
 import type { ReactNode } from "react";
-import { Minus, Plus, ShoppingCart, Trash2, Truck, X } from "lucide-react";
+import { Minus, Plus, Trash2, Truck, X } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Link, usePathname } from "@/i18n/navigation";
+import { Link } from "@/i18n/navigation";
 import { useCart } from "@/components/cart/CartProvider";
 import { formatCents, MAX_QUANTITY_PER_LINE } from "@/lib/cart";
 
-/**
- * Pages où l'onglet flottant ne doit pas apparaître.
- *
- * Sur le panier et à la caisse, il n'ouvre qu'un résumé de ce que la page
- * montre déjà en plus grand, et il se posait par-dessus la carte de
- * récapitulatif : à droite, au milieu de la hauteur, exactement là où tombe la
- * ligne du total. Masquer un montant pendant que l'acheteur le vérifie est le
- * pire endroit possible pour un élément flottant.
- *
- * `usePathname` de `@/i18n/navigation` rend le chemin sans le préfixe de
- * langue : une seule entrée par page couvre donc l'allemand et l'anglais.
- */
-const PAGES_SANS_ONGLET = ["/warenkorb", "/kasse"];
-
 // Panier latéral.
 //
-// Un bouton flottant apparaît à droite dès que le panier contient un article ;
-// il ouvre un tiroir qui liste les lignes, permet d'ajuster les quantités et
-// mène directement à la caisse. Les moyens de paiement sont rendus côté serveur
-// et passés en `paymentSlot` : le tiroir reste un composant client sans avoir à
+// Le tiroir liste les lignes du panier, permet d'ajuster les quantités et mène
+// directement à la caisse. Les moyens de paiement sont rendus côté serveur et
+// passés en `paymentSlot` : le tiroir reste un composant client sans avoir à
 // interroger la base.
+//
+// Il s'ouvre à l'ajout d'un article (`AddToCartButton` appelle `openDrawer`) et
+// n'a plus de déclencheur à lui. Une languette flottante se tenait auparavant
+// collée au bord droit, à mi-hauteur, dès que le panier contenait quelque
+// chose : elle suivait le visiteur sur toutes les pages de la boutique pour
+// n'offrir qu'un raccourci que l'en-tête donne déjà. Le panier reste atteignable
+// par l'indicateur de l'en-tête, présent à toutes les tailles d'écran.
 
 /** Le panneau se referme sur Échap et rend le reste de la page inerte. */
 function useDismissable(open: boolean, onClose: () => void) {
@@ -62,29 +54,35 @@ export function CartDrawer({ paymentSlot }: { paymentSlot?: ReactNode }) {
     setQuantity,
     remove,
     drawerOpen: open,
-    openDrawer,
     closeDrawer,
   } = useCart();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const triggerRef = useRef<HTMLButtonElement>(null);
   const titleId = useId();
-  const chemin = usePathname();
-  const ongletMasque = PAGES_SANS_ONGLET.includes(chemin);
 
   const close = closeDrawer;
   useDismissable(open, close);
 
-  // Le focus entre dans le panneau à l'ouverture et revient sur le bouton à la
-  // fermeture : au clavier, on ne repart pas du haut de la page. `wasOpen`
-  // évite de happer le focus au chargement, quand le tiroir n'a jamais été ouvert.
+  // Le focus entre dans le panneau à l'ouverture et retourne à la fermeture sur
+  // l'élément qui l'avait avant : au clavier, on ne repart pas du haut de la
+  // page. Il revenait auparavant sur la languette flottante ; sans elle, c'est
+  // le bouton d'ajout qui a ouvert le tiroir qu'il faut retrouver, et il n'est
+  // pas toujours le même. On mémorise donc l'élément actif plutôt qu'une cible
+  // fixe. `wasOpen` évite de happer le focus au chargement, quand le tiroir n'a
+  // jamais été ouvert.
   const wasOpen = useRef(false);
+  const declencheur = useRef<HTMLElement | null>(null);
   useEffect(() => {
     if (open) {
+      if (!wasOpen.current) declencheur.current = document.activeElement as HTMLElement | null;
       wasOpen.current = true;
       closeButtonRef.current?.focus();
     } else if (wasOpen.current) {
       wasOpen.current = false;
-      triggerRef.current?.focus({ preventScroll: true });
+      // L'élément peut avoir quitté la page entre-temps : on ne force rien.
+      if (declencheur.current?.isConnected) {
+        declencheur.current.focus({ preventScroll: true });
+      }
+      declencheur.current = null;
     }
   }, [open]);
 
@@ -101,29 +99,6 @@ export function CartDrawer({ paymentSlot }: { paymentSlot?: ReactNode }) {
 
   return (
     <>
-      {!ongletMasque && (
-        <button
-          ref={triggerRef}
-          type="button"
-          onClick={openDrawer}
-          aria-haspopup="dialog"
-          aria-expanded={open}
-          className="fixed top-1/2 right-0 z-40 flex -translate-y-1/2 items-center gap-2 rounded-l-xl bg-primary py-3 pr-3 pl-3.5 text-primary-foreground shadow-lg transition-all hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-safe:hover:pr-4"
-        >
-          <span className="relative">
-            <ShoppingCart className="h-5 w-5" aria-hidden />
-            <span className="absolute -top-2 -right-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-white px-1 text-[10px] leading-none font-black text-primary">
-              {count > 99 ? "99+" : count}
-            </span>
-          </span>
-          <span className="sr-only">
-            {t("indicatorWithItems", { count, total: formatCents(totals.totalCents) })}
-          </span>
-          <span className="hidden text-sm font-black lg:inline" aria-hidden>
-            {formatCents(totals.totalCents)}
-          </span>
-        </button>
-      )}
 
       {open && (
         <div className="fixed inset-0 z-50">

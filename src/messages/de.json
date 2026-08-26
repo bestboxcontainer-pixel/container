@@ -168,6 +168,17 @@
     "guideDiscover": "{label} entdecken",
     "guideAdvice": "Beratung anfragen"
   },
+  "sizes": {
+    "breadcrumb": "Maße & Typen",
+    "heading": "Container mit {size} m Länge",
+    "metaTitle": "Container {size} m | BBC Best Box Containerhandel e.K.",
+    "metaDescription": "Alle verfügbaren Container mit rund {size} m Länge: Büro-, Lager-, Sanitär- und Seecontainer im Überblick.",
+    "intro": "{count, plural, =0 {Derzeit ist kein Container dieser Länge im Bestand.} one {Ein Container mit rund {size} m Länge, quer durch alle Kategorien.} other {# Container mit rund {size} m Länge, quer durch alle Kategorien.}}",
+    "emptyTitle": "Kein Container mit {size} m Länge vorrätig",
+    "emptyHint": "Wir beschaffen laufend nach. Sagen Sie uns, was Sie brauchen, wir melden uns mit einem Angebot.",
+    "emptyLink": "Ganzes Sortiment ansehen",
+    "tolerance": "Angegeben ist die Nennlänge. Ein 20-Fuß-Container misst 6,10 m und steht daher unter 6 m; Abweichungen bis {tolerance} cm sind hier zusammengefasst."
+  },
   "product": {
     "details": "Produktdetails & Serviceinfos",
     "description": "Artikelbeschreibung",

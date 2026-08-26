@@ -70,6 +70,9 @@ export const HOME_SIZE_CARD_TOKENS = {
   /** Ligne de sol : c'est elle qui pose le container, pas un cadre. */
   floor: "h-px w-full bg-gradient-to-r from-transparent via-white/45 to-transparent",
   floorFeatured: "h-px w-full bg-gradient-to-r from-transparent via-[#e8813a] to-transparent",
+  /** Le lien occupe tout le bloc : la cible de clic est la vignette entiere. */
+  link:
+    "flex h-full flex-col rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e8813a]",
   footer: "mt-2.5 flex items-baseline justify-between gap-2",
   label: "text-base font-black tracking-[-0.02em] text-white",
   labelFeatured: "text-base font-black tracking-[-0.02em] text-[#e8813a]",

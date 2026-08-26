@@ -168,6 +168,17 @@
     "guideDiscover": "Browse {label}",
     "guideAdvice": "Request advice"
   },
+  "sizes": {
+    "breadcrumb": "Sizes & types",
+    "heading": "Containers {size} m long",
+    "metaTitle": "{size} m containers | BBC Best Box Containerhandel e.K.",
+    "metaDescription": "All available containers around {size} m in length: office, storage, sanitary and shipping containers.",
+    "intro": "{count, plural, =0 {No container of this length is currently in stock.} one {One container around {size} m long, across all categories.} other {# containers around {size} m long, across all categories.}}",
+    "emptyTitle": "No {size} m container in stock",
+    "emptyHint": "We restock continuously. Tell us what you need and we will come back with an offer.",
+    "emptyLink": "See the full range",
+    "tolerance": "Lengths are nominal. A 20-foot container measures 6.10 m and is listed under 6 m; differences up to {tolerance} cm are grouped here."
+  },
   "product": {
     "details": "Product details & service",
     "description": "Product description",

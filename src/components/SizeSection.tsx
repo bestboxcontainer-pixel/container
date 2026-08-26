@@ -1,6 +1,8 @@
 import { SizeItem } from "@/components/SizeItem";
+import { compterParTaille } from "@/lib/containerSize";
 import { HOME_SIZE_SECTION_TOKENS } from "@/lib/homeLayoutTokens";
 import { HOME_SIZE_GROUPS } from "@/lib/homeSections";
+import { getCategoryPages } from "@/server/store";
 
 /**
  * Section « Größenvielfalt » : les longueurs, largeurs et hauteurs disponibles,
@@ -10,8 +12,22 @@ import { HOME_SIZE_GROUPS } from "@/lib/homeSections";
  * même sujet : la dupliquer aurait fait diverger deux fois le même tableau de
  * dimensions.
  */
-export function SizeSection() {
+export async function SizeSection() {
   const [lengthGroup, widthGroup, heightGroup] = HOME_SIZE_GROUPS;
+
+  // Nombre de containers derrière chaque longueur. Une base injoignable rend
+  // la section muette plutôt qu'elle ne la fait disparaître : les cotes restent
+  // justes, seuls les liens s'effacent.
+  let stockParTaille = new Map<string, number>();
+  try {
+    const pages = await getCategoryPages();
+    stockParTaille = compterParTaille(
+      pages.flatMap((page) => [...page.products]),
+      lengthGroup.options.map((option) => option.label),
+    );
+  } catch (error) {
+    console.error("[tailles] stock illisible, blocs non cliquables", error);
+  }
 
   // Bandeau sombre, containers posés sur une ligne de sol. Les visuels sont
   // blancs sur fond transparent : sur le navy ils ressortent, et sans cadre
@@ -58,7 +74,17 @@ export function SizeSection() {
 
             <ul className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
               {lengthGroup.options.map((option) => (
-                <SizeItem key={`laengen-${option.label}`} option={option} />
+                <SizeItem
+                  key={`laengen-${option.label}`}
+                  option={option}
+                  // Seule une longueur réellement en stock mène quelque part.
+                  href={
+                    (stockParTaille.get(option.label) ?? 0) > 0
+                      ? `/groessen/${option.label}`
+                      : undefined
+                  }
+                  count={stockParTaille.get(option.label)}
+                />
               ))}
             </ul>
           </div>

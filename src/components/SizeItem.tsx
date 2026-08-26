@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Link } from "@/i18n/navigation";
 import { HOME_SIZE_CARD_TOKENS } from "@/lib/homeLayoutTokens";
 import { formatSizeDetail, type HomeSizeOption } from "@/lib/homeSections";
 
@@ -7,11 +8,24 @@ import { formatSizeDetail, type HomeSizeOption } from "@/lib/homeSections";
  * ligne de sol, avec son libellé et sa cote millimétrique en dessous. Aucune
  * carte ni bordure autour, pour que le visuel reste le sujet.
  */
-export function SizeItem({ option }: { option: HomeSizeOption }) {
+export function SizeItem({
+  option,
+  href,
+  count,
+}: {
+  option: HomeSizeOption;
+  /**
+   * Page des containers de cette taille. Absente pour les largeurs et les
+   * hauteurs, qui ne se filtrent pas, et pour une longueur sans stock : un
+   * lien vers une liste vide vaut moins que pas de lien.
+   */
+  href?: string;
+  /** Nombre de fiches derrière le lien, annoncé sous le libellé. */
+  count?: number;
+}) {
   const featured = option.featured === true;
-
-  return (
-    <li className={HOME_SIZE_CARD_TOKENS.item}>
+  const contenu = (
+    <>
       <div className={HOME_SIZE_CARD_TOKENS.head}>
         {featured && <span className={HOME_SIZE_CARD_TOKENS.badge}>Top-Maß</span>}
       </div>
@@ -47,8 +61,22 @@ export function SizeItem({ option }: { option: HomeSizeOption }) {
         >
           {option.label}
         </span>
-        <span className={HOME_SIZE_CARD_TOKENS.detail}>{formatSizeDetail(option.label)}</span>
+        <span className={HOME_SIZE_CARD_TOKENS.detail}>
+          {count === undefined ? formatSizeDetail(option.label) : `${count} ×`}
+        </span>
       </p>
+    </>
+  );
+
+  return (
+    <li className={HOME_SIZE_CARD_TOKENS.item}>
+      {href ? (
+        <Link href={href} className={HOME_SIZE_CARD_TOKENS.link}>
+          {contenu}
+        </Link>
+      ) : (
+        contenu
+      )}
     </li>
   );
 }

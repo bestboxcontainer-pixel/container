@@ -30,15 +30,27 @@ export const HOME_SIZE_SECTION_TOKENS = {
   groupTitle: "text-sm font-black uppercase tracking-[0.24em] text-white",
   groupRange: "text-sm font-semibold text-white/50",
   /**
+   * Chaque groupe dans son propre panneau. Posés à même le fond, Breiten et
+   * Höhen côte à côte se lisaient comme une seule rangée de cinq visuels : rien
+   * ne disait où finissait un groupe et où commençait l'autre.
+   */
+  groupPanel: "rounded-3xl bg-white/[0.035] p-5 ring-1 ring-inset ring-white/[0.07] sm:p-6",
+  groupStack: "mt-10 space-y-6",
+  /**
    * Breiten (2 valeurs) et Höhen (3 valeurs) partagent une trame 2fr/3fr : les
    * visuels y gardent la même largeur que dans la grille des longueurs.
    */
-  specRow: "mt-10 grid gap-x-6 gap-y-8 lg:grid-cols-[2fr_3fr]",
+  specRow: "grid gap-6 lg:grid-cols-[2fr_3fr]",
 } as const;
 
 export const HOME_SIZE_CARD_TOKENS = {
-  /** Pas de bordure ni d'aplat : le visuel n'est plus enfermé dans une boîte. */
-  item: "group flex flex-col",
+  /**
+   * Aplat doux et coins arrondis, sans filet : chaque dimension se détache de
+   * sa voisine sans revenir aux cartes bordées, qui reprenaient le pas sur le
+   * container qu'elles encadraient.
+   */
+  item:
+    "group flex flex-col rounded-2xl bg-white/[0.07] p-3 transition-colors duration-300 hover:bg-white/[0.12]",
   /**
    * Bandeau de badge de hauteur fixe, présent sur tous les éléments même vide :
    * il réserve la place du « Top-Maß » sans que celui-ci chevauche le visuel,
@@ -56,7 +68,7 @@ export const HOME_SIZE_CARD_TOKENS = {
   featuredGlow:
     "pointer-events-none absolute inset-x-1 bottom-0 h-14 rounded-[50%] bg-[#e8813a]/30 blur-2xl",
   /** Ligne de sol : c'est elle qui pose le container, pas un cadre. */
-  floor: "h-px w-full bg-gradient-to-r from-transparent via-white/70 to-transparent",
+  floor: "h-px w-full bg-gradient-to-r from-transparent via-white/45 to-transparent",
   floorFeatured: "h-px w-full bg-gradient-to-r from-transparent via-[#e8813a] to-transparent",
   footer: "mt-2.5 flex items-baseline justify-between gap-2",
   label: "text-base font-black tracking-[-0.02em] text-white",

@@ -8,10 +8,9 @@ import { type PhotoSlide } from "@/components/PhotoHeroCarousel";
 import { ProductCard } from "@/components/ProductCard";
 import { SizeItem } from "@/components/SizeItem";
 import { HOME_CATEGORY_CARDS } from "@/lib/homeCategoryCards";
+import { HOME_CONTAINERS } from "@/lib/homeContainers";
 import { HOME_SIZE_SECTION_TOKENS } from "@/lib/homeLayoutTokens";
 import { HOME_FAQS, HOME_SIZE_GROUPS } from "@/lib/homeSections";
-import { getCategoryPages } from "@/server/store";
-import type { Product } from "@/types/home";
 
 export const metadata: Metadata = {
   title: "BBC Best Box Containerhandel e.K. | Container kaufen & mieten",
@@ -84,41 +83,7 @@ const STEPS = [
   { step: "3", title: "Liefern lassen", text: "Nach Zusage liefern wir termingerecht und stellen den Container bei Ihnen auf." },
 ] as const;
 
-/**
- * Extrait du catalogue pour la page d'accueil.
- *
- * Prélèvement à tour de rôle plutôt que les huit premiers : le catalogue est
- * trié par catégorie, et une simple troncature ne montrerait que des
- * Lagercontainer. On fait donc un tour par catégorie avant d'en reprendre une.
- */
-async function extraitDuCatalogue(maximum = 8): Promise<Product[]> {
-  // Le reste de la page est statique : une base injoignable doit faire
-  // disparaître la seule section qui en dépend, pas toute la page d'accueil.
-  let pages: Awaited<ReturnType<typeof getCategoryPages>>;
-  try {
-    pages = await getCategoryPages();
-  } catch (error) {
-    console.error("[accueil] catalogue illisible, section produits masquée", error);
-    return [];
-  }
-
-  const files = pages.map((page) => [...page.products]).filter((file) => file.length > 0);
-
-  const extrait: Product[] = [];
-  for (let rang = 0; extrait.length < maximum; rang += 1) {
-    const restantes = files.filter((file) => file.length > rang);
-    if (restantes.length === 0) break;
-    for (const file of restantes) {
-      if (extrait.length >= maximum) break;
-      extrait.push(file[rang]);
-    }
-  }
-
-  return extrait;
-}
-
 export default async function HomePage() {
-  const produits = await extraitDuCatalogue();
   const [lengthGroup, widthGroup, heightGroup] = HOME_SIZE_GROUPS;
 
   return (
@@ -296,75 +261,80 @@ export default async function HomePage() {
               </dl>
             </header>
 
-            <div className="mt-10">
-              <div className={HOME_SIZE_SECTION_TOKENS.groupHead}>
-                <h3 className={HOME_SIZE_SECTION_TOKENS.groupTitle}>{lengthGroup.title}</h3>
-                <span className={HOME_SIZE_SECTION_TOKENS.groupRange}>{lengthGroup.subtitle}</span>
+            <div className={HOME_SIZE_SECTION_TOKENS.groupStack}>
+              <div className={HOME_SIZE_SECTION_TOKENS.groupPanel}>
+                <div className={HOME_SIZE_SECTION_TOKENS.groupHead}>
+                  <h3 className={HOME_SIZE_SECTION_TOKENS.groupTitle}>{lengthGroup.title}</h3>
+                  <span className={HOME_SIZE_SECTION_TOKENS.groupRange}>{lengthGroup.subtitle}</span>
+                </div>
+
+                <ul className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+                  {lengthGroup.options.map((option) => (
+                    <SizeItem key={`laengen-${option.label}`} option={option} />
+                  ))}
+                </ul>
               </div>
 
-              <ul className="mt-6 grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-5">
-                {lengthGroup.options.map((option) => (
-                  <SizeItem key={`laengen-${option.label}`} option={option} />
-                ))}
-              </ul>
-            </div>
+              {/* Deux panneaux distincts : alignés à même le fond, les deux
+                  valeurs de largeur et les trois de hauteur se lisaient comme
+                  une seule rangée de cinq. */}
+              <div className={HOME_SIZE_SECTION_TOKENS.specRow}>
+                {[widthGroup, heightGroup].map((group) => (
+                  <div key={group.id} className={HOME_SIZE_SECTION_TOKENS.groupPanel}>
+                    <div className={HOME_SIZE_SECTION_TOKENS.groupHead}>
+                      <h3 className={HOME_SIZE_SECTION_TOKENS.groupTitle}>{group.title}</h3>
+                      <span className={HOME_SIZE_SECTION_TOKENS.groupRange}>{group.subtitle}</span>
+                    </div>
 
-            <div className={HOME_SIZE_SECTION_TOKENS.specRow}>
-              {[widthGroup, heightGroup].map((group) => (
-                <div key={group.id}>
-                  <div className={HOME_SIZE_SECTION_TOKENS.groupHead}>
-                    <h3 className={HOME_SIZE_SECTION_TOKENS.groupTitle}>{group.title}</h3>
-                    <span className={HOME_SIZE_SECTION_TOKENS.groupRange}>{group.subtitle}</span>
+                    <ul
+                      className={`mt-5 grid gap-3 ${
+                        group.options.length === 2 ? "grid-cols-2" : "grid-cols-3"
+                      }`}
+                    >
+                      {group.options.map((option) => (
+                        <SizeItem key={`${group.id}-${option.label}`} option={option} />
+                      ))}
+                    </ul>
                   </div>
-
-                  <ul
-                    className={`mt-6 grid gap-x-5 gap-y-8 ${
-                      group.options.length === 2 ? "grid-cols-2" : "grid-cols-3"
-                    }`}
-                  >
-                    {group.options.map((option) => (
-                      <SizeItem key={`${group.id}-${option.label}`} option={option} />
-                    ))}
-                  </ul>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Verfügbare Container : lecture réelle du catalogue, pas une liste
-            écrite en dur. La section disparaît si le catalogue est vide, plutôt
-            que d'afficher une grille creuse. */}
-        {produits.length > 0 && (
-          <section className="border-t border-border">
-            <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
-              <div className="flex flex-wrap items-end justify-between gap-4">
-                <div>
-                  <h2 className="text-2xl font-black text-foreground sm:text-3xl">
-                    Verfügbare Container
-                  </h2>
-                  <p className="mt-3 max-w-xl text-foreground/70">
-                    Ein Auszug aus dem Bestand, quer durch alle Kategorien. Maße, Zustandsklasse
-                    und Preis stehen auf der jeweiligen Detailseite.
-                  </p>
-                </div>
-                <Link
-                  href="/sortiment"
-                  className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline"
-                >
-                  Ganzes Sortiment
-                  <ArrowRight className="h-4 w-4" aria-hidden />
-                </Link>
+        {/* Verfügbare Container : extrait du stock réellement proposé, avec
+            cotes, équipement et prix repris des catalogues existants. La
+            section lisait jusqu'ici le catalogue de démonstration hérité de
+            l'ancien projet, qui n'a rien à voir avec le métier. */}
+        <section className="border-t border-border">
+          <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <h2 className="text-2xl font-black text-foreground sm:text-3xl">
+                  Verfügbare Container
+                </h2>
+                <p className="mt-3 max-w-xl text-foreground/70">
+                  Ein Auszug aus dem Bestand, quer durch alle Kategorien: Seecontainer für
+                  Transport und Lagerung, Büro- und Sanitäreinheiten sowie Sonderbauten.
+                  Alle Maße und Preise verstehen sich ab Lager.
+                </p>
               </div>
-
-              <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-                {produits.map((produit) => (
-                  <ProductCard key={produit.slug ?? produit.name} product={produit} />
-                ))}
-              </div>
+              <Link
+                href="/sortiment"
+                className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline"
+              >
+                Ganzes Sortiment
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
             </div>
-          </section>
-        )}
+
+            <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+              {HOME_CONTAINERS.map((container) => (
+                <ProductCard key={container.slug} product={container} />
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* FAQ */}
         <section className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">

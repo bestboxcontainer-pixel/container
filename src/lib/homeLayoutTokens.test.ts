@@ -37,13 +37,36 @@ describe("HOME_SIZE_SECTION_TOKENS", () => {
   it("met Breiten et Hoehen cote a cote sur une trame 2fr/3fr", () => {
     assert.match(HOME_SIZE_SECTION_TOKENS.specRow, /lg:grid-cols-\[2fr_3fr\]/);
   });
+
+  it("donne a chaque groupe son propre panneau", () => {
+    assert.match(HOME_SIZE_SECTION_TOKENS.groupPanel, /\brounded-3xl\b/);
+    assert.match(HOME_SIZE_SECTION_TOKENS.groupPanel, /bg-white\/\[0\.035\]/);
+    assert.match(HOME_SIZE_SECTION_TOKENS.groupPanel, /ring-inset/);
+  });
+
+  it("garde le panneau de groupe plus sombre que les dimensions qu'il contient", () => {
+    const opacite = (token: string) => {
+      const trouve = token.match(/bg-white\/\[(0\.\d+)\]/);
+      assert.ok(trouve, `aucune opacite de fond dans : ${token}`);
+      return Number.parseFloat(trouve[1]);
+    };
+
+    // Sans cet ecart, les blocs se confondraient avec le panneau qui les porte.
+    assert.equal(
+      opacite(HOME_SIZE_CARD_TOKENS.item) > opacite(HOME_SIZE_SECTION_TOKENS.groupPanel),
+      true,
+    );
+  });
 });
 
 describe("HOME_SIZE_CARD_TOKENS", () => {
-  it("n'enferme plus le visuel dans une carte bordee", () => {
+  it("detache chaque dimension par un aplat, sans filet ni bordure", () => {
+    // Un fond suffit a separer deux voisines ; une bordure reprenait le pas
+    // sur le container qu'elle encadrait.
+    assert.match(HOME_SIZE_CARD_TOKENS.item, /\bbg-white\/\[0\.07\]/);
+    assert.match(HOME_SIZE_CARD_TOKENS.item, /\brounded-2xl\b/);
     assert.doesNotMatch(HOME_SIZE_CARD_TOKENS.item, /\bborder\b/);
-    assert.doesNotMatch(HOME_SIZE_CARD_TOKENS.item, /\bbg-/);
-    assert.doesNotMatch(HOME_SIZE_CARD_TOKENS.item, /\brounded-/);
+    assert.doesNotMatch(HOME_SIZE_CARD_TOKENS.item, /\bring-/);
   });
 
   it("cale la zone image sur le ratio des PNG recadres pour ne rien rogner", () => {

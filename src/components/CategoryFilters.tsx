@@ -148,10 +148,8 @@ export function CategoryFilters({
           pour chaque taille d'écran ferait vivre deux fois les mêmes cases à
           cocher, avec le risque qu'elles se désynchronisent. */}
       <aside
-        className={`shrink-0 lg:sticky lg:top-20 lg:block lg:max-h-[calc(100vh-6rem)] lg:w-64 lg:translate-x-0 lg:self-start lg:overflow-y-auto lg:bg-transparent lg:p-0 lg:transition-none ${
-          open
-            ? "fixed inset-y-0 left-0 z-50 w-[85%] max-w-xs translate-x-0 overflow-y-auto bg-white p-4 shadow-xl transition-transform"
-            : "fixed inset-y-0 left-0 z-50 w-[85%] max-w-xs -translate-x-full overflow-y-auto bg-white p-4 transition-transform lg:static lg:w-64"
+        className={`${CATEGORY_FILTER_TOKENS.sidebarBase} ${
+          open ? CATEGORY_FILTER_TOKENS.sidebarOpen : CATEGORY_FILTER_TOKENS.sidebarClosed
         }`}
       >
         <div className={CATEGORY_FILTER_TOKENS.panel}>

@@ -2,6 +2,37 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { CATEGORY_FILTER_TOKENS, CATEGORY_GRID_TOKENS } from "./categoryLayoutTokens";
 
+describe("CATEGORY_FILTER_TOKENS, colonne laterale", () => {
+  it("ne laisse pas la colonne passer au-dessus de l'en-tete", () => {
+    // L'en-tete est en z-50 : la colonne doit redescendre des qu'elle devient
+    // une colonne collante, sinon elle lui passe dessus au defilement.
+    assert.match(CATEGORY_FILTER_TOKENS.sidebarBase, /\blg:z-0\b/);
+    for (const token of [CATEGORY_FILTER_TOKENS.sidebarOpen, CATEGORY_FILTER_TOKENS.sidebarClosed]) {
+      assert.doesNotMatch(token, /\blg:z-50\b/);
+    }
+  });
+
+  it("ne declare qu'une seule position au-dela de lg", () => {
+    const classes = [
+      CATEGORY_FILTER_TOKENS.sidebarBase,
+      CATEGORY_FILTER_TOKENS.sidebarOpen,
+      CATEGORY_FILTER_TOKENS.sidebarClosed,
+    ].join(" ");
+    const positions = classes.match(/\blg:(static|sticky|fixed|absolute|relative)\b/g) ?? [];
+
+    // `lg:static` et `lg:sticky` ensemble laissaient l'ordre du CSS trancher.
+    assert.deepEqual(positions, ["lg:sticky"]);
+  });
+
+  it("cale le decalage haut sur la hauteur reelle de l'en-tete", () => {
+    // 6,75 rem en deux rangees, 4,5 rem au-dela de md : aucune valeur figee ne
+    // convient aux deux.
+    assert.match(CATEGORY_FILTER_TOKENS.sidebarBase, /lg:top-\[calc\(var\(--header-height\)/);
+    assert.match(CATEGORY_FILTER_TOKENS.sidebarBase, /lg:max-h-\[calc\(100vh-var\(--header-height\)/);
+    assert.doesNotMatch(CATEGORY_FILTER_TOKENS.sidebarBase, /\blg:top-\d+\b/);
+  });
+});
+
 describe("CATEGORY_FILTER_TOKENS", () => {
   it("enferme les filtres dans un panneau visible", () => {
     assert.match(CATEGORY_FILTER_TOKENS.panel, /\bborder\b/);

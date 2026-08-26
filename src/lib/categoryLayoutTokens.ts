@@ -8,6 +8,25 @@
  */
 
 export const CATEGORY_FILTER_TOKENS = {
+  /**
+   * Colonne de filtres.
+   *
+   * Le `z-50` du tiroir mobile ne doit pas survivre au-delà de `lg` : l'en-tête
+   * est lui aussi en `z-50` et vient avant dans le balisage, la colonne lui
+   * passait donc dessus au défilement, ainsi que sur le reste de la page. En
+   * colonne, elle redescend en `z-0`.
+   *
+   * Le décalage haut suit `--header-height` plutôt qu'une valeur figée : la
+   * barre mesure 6,75 rem en deux rangées et 4,5 rem au-delà de md, et un
+   * `top-20` en dur ne correspondait ni à l'une ni à l'autre.
+   */
+  sidebarBase:
+    "shrink-0 lg:sticky lg:top-[calc(var(--header-height)+1rem)] lg:z-0 lg:block lg:max-h-[calc(100vh-var(--header-height)-2rem)] lg:w-64 lg:translate-x-0 lg:self-start lg:overflow-y-auto lg:bg-transparent lg:p-0 lg:shadow-none lg:transition-none",
+  sidebarOpen:
+    "fixed inset-y-0 left-0 z-50 w-[85%] max-w-xs translate-x-0 overflow-y-auto bg-white p-4 shadow-xl transition-transform",
+  /** Fermé, le tiroir sort de l'écran ; `lg:sticky` de la base reprend au-delà. */
+  sidebarClosed:
+    "fixed inset-y-0 left-0 z-50 w-[85%] max-w-xs -translate-x-full overflow-y-auto bg-white p-4 transition-transform lg:w-64",
   /** Panneau visible, au lieu d'une liste de cases posées sur le fond. */
   panel:
     "rounded-2xl border border-border bg-white p-4 shadow-[0_20px_50px_-40px_rgba(18,40,86,0.35)]",

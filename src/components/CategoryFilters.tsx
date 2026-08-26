@@ -13,11 +13,11 @@ export interface PriceRange {
 }
 
 export const PRICE_RANGES: PriceRange[] = [
-  { id: "under100", min: 0, max: 100 },
-  { id: "from100", min: 100, max: 300 },
-  { id: "from300", min: 300, max: 600 },
-  { id: "from600", min: 600, max: 1000 },
-  { id: "over1000", min: 1000, max: Infinity },
+  { id: "under2500", min: 0, max: 2500 },
+  { id: "from2500", min: 2500, max: 5000 },
+  { id: "from5000", min: 5000, max: 10000 },
+  { id: "from10000", min: 10000, max: 25000 },
+  { id: "over25000", min: 25000, max: Infinity },
 ];
 
 export const RATING_THRESHOLDS = [4.5, 4, 3];

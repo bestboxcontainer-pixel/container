@@ -8,9 +8,10 @@ import { type PhotoSlide } from "@/components/PhotoHeroCarousel";
 import { ProductCard } from "@/components/ProductCard";
 import { SizeItem } from "@/components/SizeItem";
 import { HOME_CATEGORY_CARDS } from "@/lib/homeCategoryCards";
-import { HOME_CONTAINERS } from "@/lib/homeContainers";
 import { HOME_SIZE_SECTION_TOKENS } from "@/lib/homeLayoutTokens";
 import { HOME_FAQS, HOME_SIZE_GROUPS } from "@/lib/homeSections";
+import { getCategoryPages } from "@/server/store";
+import type { Product } from "@/types/home";
 
 export const metadata: Metadata = {
   title: "BBC Best Box Containerhandel e.K. | Container kaufen & mieten",
@@ -83,7 +84,41 @@ const STEPS = [
   { step: "3", title: "Liefern lassen", text: "Nach Zusage liefern wir termingerecht und stellen den Container bei Ihnen auf." },
 ] as const;
 
+/**
+ * Extrait du catalogue pour la page d'accueil.
+ *
+ * Prélèvement à tour de rôle plutôt que les huit premiers : le catalogue est
+ * trié par famille, et une simple troncature ne montrerait que des
+ * Seecontainer. On fait donc un tour par famille avant d'en reprendre une.
+ */
+async function extraitDuCatalogue(maximum = 8): Promise<Product[]> {
+  // Le reste de la page est statique : une base injoignable doit faire
+  // disparaître la seule section qui en dépend, pas toute la page d'accueil.
+  let pages: Awaited<ReturnType<typeof getCategoryPages>>;
+  try {
+    pages = await getCategoryPages();
+  } catch (error) {
+    console.error("[accueil] catalogue illisible, section produits masquée", error);
+    return [];
+  }
+
+  const files = pages.map((page) => [...page.products]).filter((file) => file.length > 0);
+
+  const extrait: Product[] = [];
+  for (let rang = 0; extrait.length < maximum; rang += 1) {
+    const restantes = files.filter((file) => file.length > rang);
+    if (restantes.length === 0) break;
+    for (const file of restantes) {
+      if (extrait.length >= maximum) break;
+      extrait.push(file[rang]);
+    }
+  }
+
+  return extrait;
+}
+
 export default async function HomePage() {
+  const produits = await extraitDuCatalogue();
   const [lengthGroup, widthGroup, heightGroup] = HOME_SIZE_GROUPS;
 
   return (
@@ -306,6 +341,7 @@ export default async function HomePage() {
             cotes, équipement et prix repris des catalogues existants. La
             section lisait jusqu'ici le catalogue de démonstration hérité de
             l'ancien projet, qui n'a rien à voir avec le métier. */}
+        {produits.length > 0 && (
         <section className="border-t border-border">
           <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
             <div className="flex flex-wrap items-end justify-between gap-4">
@@ -329,12 +365,13 @@ export default async function HomePage() {
             </div>
 
             <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-              {HOME_CONTAINERS.map((container) => (
-                <ProductCard key={container.slug} product={container} />
+              {produits.map((produit) => (
+                <ProductCard key={produit.slug ?? produit.name} product={produit} />
               ))}
             </div>
           </div>
         </section>
+        )}
 
         {/* FAQ */}
         <section className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">

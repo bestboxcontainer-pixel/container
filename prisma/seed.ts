@@ -47,8 +47,7 @@ interface JsonProduct {
 }
 
 const GROUP_LABELS: Record<string, string> = {
-  haushalt: "Haushalt",
-  multimedia: "Multimedia",
+  container: "Container",
 };
 
 /** "1.399,00 €" -> 139900 (centimes) */
@@ -74,6 +73,14 @@ async function seedCatalog(): Promise<void> {
 
   const groupSlugs = Array.from(new Set(categories.map((category) => category.group)));
   const groupIds = new Map<string, string>();
+
+  // Les groupes absents du catalogue sont retires : sans cela, un ancien
+  // rayon survivait a chaque execution et la boutique servait deux fonds a la
+  // fois. La cascade emporte categories et produits.
+  const obsoletes = await prisma.group.deleteMany({ where: { slug: { notIn: groupSlugs } } });
+  if (obsoletes.count > 0) {
+    console.log(`Groupes obsoletes supprimes : ${obsoletes.count}`);
+  }
 
   for (const [index, slug] of groupSlugs.entries()) {
     const group = await prisma.group.upsert({

@@ -1,1231 +1,2108 @@
 [
   {
-    "id": "66e3f9c9-c92b-4037-8d5f-30af67f94a0a",
-    "categoryId": "haushalt/kaffeemaschinen",
-    "brand": "De'Longhi",
-    "name": "Magnifica Kaffeevollautomat",
+    "id": "container/20-fuss-buerocontainer-mit-bad-ref-1101",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "20-Fuß-Bürocontainer mit Bad. (Ref: 1101)",
+    "slug": "20-fuss-buerocontainer-mit-bad-ref-1101",
     "bullets": [
-      "Kegelmahlwerk",
-      "Milchaufschäumer",
-      "5 Getränke auf Knopfdruck"
+      "Trinkwasser: Sichtbare 20-mm-PPR-Rohre",
+      "Abwasser: PVC-Sanitärrohre"
     ],
-    "oldPrice": "449,00 €",
-    "price": "349,00 €",
-    "badge": "Bestseller",
-    "rating": 4.7,
+    "shortDescription": "Zwei 1 x 1 m große Schiebefenster aus mattem Aluminium mit Sicherheitsgittern. Fotolaminierter Laminatboden.",
+    "image": "/images/container/20-fuss-buerocontainer-mit-bad-ref-1101.jpg",
+    "price": "2.190,00 €",
     "inStock": true
   },
   {
-    "id": "4e75aba0-ee7a-4d7a-aeb9-e2c2010d1183",
-    "categoryId": "haushalt/kaffeemaschinen",
-    "brand": "Siemens",
-    "name": "EQ.6 plus s700 Kaffeevollautomat",
+    "id": "container/20-fuss-seecontainer-buero-c7510",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "20-Fuß-Seecontainer-Büro (C7510)",
+    "slug": "20-fuss-seecontainer-buero-c7510",
     "bullets": [
-      "OneTouch DoubleCup",
-      "sensoFlow System",
-      "iAroma System"
+      "50 mm Steinwolle-Dämmung"
     ],
-    "price": "899,00 €",
-    "badge": "Neu",
-    "rating": 4.4,
+    "shortDescription": "Abmessungen: Größe: 6055 mm x 2438 mm x 2896 mm (Länge x Breite x Höhe)",
+    "image": "/images/container/20-fuss-seecontainer-buero-c7510.jpg",
+    "price": "2.020,00 €",
     "inStock": true
   },
   {
-    "id": "db63a491-325a-4b51-af40-4e6981f5825e",
-    "categoryId": "haushalt/kaffeemaschinen",
-    "brand": "Krups",
-    "name": "Evidence Kaffeevollautomat",
+    "id": "container/modulares-haus-athen",
+    "categoryId": "container/wohncontainer",
+    "brand": "Tiny House",
+    "name": "MODULARES HAUS ATHEN",
+    "slug": "modulares-haus-athen",
     "bullets": [
-      "15 Kaffeespezialitäten",
-      "Quattro Force Technologie",
-      "Reinigungsautomatik"
+      "18 m² Wohnfläche, Ausstattung",
+      "1 weißes, einfach verglastes PVC-Fenster (0,46 x 0,55 m)"
     ],
-    "oldPrice": "799,00 €",
-    "price": "649,00 €",
-    "badge": "-19%",
-    "rating": 4.5,
+    "shortDescription": "1 weißes, doppelt verglastes PVC-Schiebefenster (1,80 x 2,00 m) mit Plane;",
+    "image": "/images/container/modulares-haus-athen.jpg",
+    "price": "3.499,00 €",
     "inStock": true
   },
   {
-    "id": "26df8245-dfb2-456d-a159-bcecdc1661e9",
-    "categoryId": "haushalt/kaffeemaschinen",
-    "brand": "Philips",
-    "name": "Series 2200 Kaffeevollautomat",
-    "bullets": [
-      "Klassisches Milchsystem",
-      "LatteGo",
-      "5 Kaffeespezialitäten"
-    ],
-    "oldPrice": "379,00 €",
-    "price": "299,00 €",
-    "badge": "-21%",
-    "rating": 4.3,
+    "id": "container/neuer-top-saba-baucontainer",
+    "categoryId": "container/buerocontainer",
+    "brand": "Modulcontainer",
+    "name": "NEUER TOP SABA Baucontainer",
+    "slug": "neuer-top-saba-baucontainer",
+    "bullets": [],
+    "shortDescription": "Größe – Wir bieten Container bis zu 7 m Länge und 3 m Breite an.",
+    "image": "/images/container/neuer-top-saba-baucontainer.jpg",
+    "price": "2.250,00 €",
     "inStock": true
   },
   {
-    "id": "b0684934-2883-4a78-a158-e5c1b7fe03b9",
-    "categoryId": "haushalt/kaffeemaschinen",
-    "brand": "Jura",
-    "name": "ENA 4 Kaffeevollautomat",
+    "id": "container/premium-modulcontainer-ideal-fuer-moderne-unternehmen-ref-c4100",
+    "categoryId": "container/buerocontainer",
+    "brand": "Modulcontainer",
+    "name": "Premium-Modulcontainer – Ideal für moderne Unternehmen (Ref: C4100)",
+    "slug": "premium-modulcontainer-ideal-fuer-moderne-unternehmen-ref-c4100",
     "bullets": [
-      "Pulse Extraction Process",
-      "P.E.P.® Aroma",
-      "Kompaktes Design"
+      "Länge: 6 Meter",
+      "Breite: 2,40 Meter",
+      "Höhe: 2,60 Meter"
     ],
-    "price": "649,00 €",
-    "badge": "Premium",
-    "rating": 4.8,
-    "inStock": false
-  },
-  {
-    "id": "50bf334d-b64e-4931-ac9c-51b49da698f1",
-    "categoryId": "haushalt/kaffeemaschinen",
-    "brand": "Melitta",
-    "name": "Caffeo Solo Kaffeevollautomat",
-    "bullets": [
-      "Kegelmahlwerk",
-      "One-Touch-Bedienung",
-      "Aroma Extraction Technology"
-    ],
-    "oldPrice": "279,00 €",
-    "price": "219,00 €",
-    "badge": "-21%",
-    "rating": 4.2,
+    "shortDescription": "• Eine zentrale, funktionale und sichere Eingangstür aus Glas.",
+    "image": "/images/container/premium-modulcontainer-ideal-fuer-moderne-unternehmen-ref-c4100.jpg",
+    "price": "3.285,00 €",
     "inStock": true
   },
   {
-    "id": "2d2013c6-427d-4b21-ac5a-a308ec5eaeb1",
-    "categoryId": "haushalt/waschmaschinen",
-    "brand": "Samsung",
-    "name": "QuickDrive Waschmaschine, 9 kg",
+    "id": "container/mobiler-buerocontainer-mit-panoramafenstern-ref-c3301",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Mobiler Bürocontainer mit Panoramafenstern (Ref: C3301)",
+    "slug": "mobiler-buerocontainer-mit-panoramafenstern-ref-c3301",
     "bullets": [
-      "1400 U/Min",
-      "AddWash Funktion",
-      "WLAN-Steuerung"
+      "Panoramafenstern",
+      "Rahmenfarbe: Anthrazitgrau",
+      "Paneelfarbe: Weiß"
     ],
-    "oldPrice": "699,00 €",
-    "price": "549,00 €",
-    "badge": "-21%",
-    "rating": 4.6,
-    "inStock": true
-  },
-  {
-    "id": "6ac4fbf5-9838-4e9a-b2af-6180106e1c4d",
-    "categoryId": "haushalt/waschmaschinen",
-    "brand": "Bosch",
-    "name": "Serie 6 Waschmaschine, 8 kg",
-    "bullets": [
-      "i-DOS Dosierautomatik",
-      "AllergyPlus",
-      "EcoSilence Antrieb"
-    ],
-    "oldPrice": "649,00 €",
-    "price": "499,00 €",
-    "badge": "-22%",
-    "rating": 4.5,
-    "inStock": true
-  },
-  {
-    "id": "01485681-d2b0-4747-b89b-43568ccc0540",
-    "categoryId": "haushalt/waschmaschinen",
-    "brand": "Siemens",
-    "name": "iQ500 Waschmaschine, 9 kg",
-    "bullets": [
-      "varioPerfect",
-      "aquaStop",
-      "Home Connect"
-    ],
-    "price": "749,00 €",
-    "badge": "Neu",
-    "rating": 4.3,
-    "inStock": true
-  },
-  {
-    "id": "d9827572-3396-4f3f-83fd-1c41388078d3",
-    "categoryId": "haushalt/waschmaschinen",
-    "brand": "LG",
-    "name": "AI DD Waschmaschine, 10,5 kg",
-    "bullets": [
-      "Direct Drive Motor",
-      "TurboWash 360°",
-      "WLAN-Steuerung"
-    ],
-    "oldPrice": "799,00 €",
-    "price": "629,00 €",
-    "badge": "-21%",
-    "rating": 4.4,
-    "inStock": true
-  },
-  {
-    "id": "94d65505-03af-4dbc-94bc-3b991bed4574",
-    "categoryId": "haushalt/waschmaschinen",
-    "brand": "Miele",
-    "name": "W1 Waschmaschine, 8 kg",
-    "bullets": [
-      "PowerWash System",
-      "Schontrommel",
-      "Made in Germany"
-    ],
-    "price": "999,00 €",
-    "badge": "Premium",
-    "rating": 4.9,
-    "inStock": false
-  },
-  {
-    "id": "24a23ff5-118f-469f-bbf3-5015a6c77c16",
-    "categoryId": "haushalt/waschmaschinen",
-    "brand": "AEG",
-    "name": "6000 Series Waschmaschine, 7 kg",
-    "bullets": [
-      "ÖkoMix Technologie",
-      "SensiCare System",
-      "Startzeitvorwahl"
-    ],
-    "oldPrice": "549,00 €",
-    "price": "429,00 €",
-    "badge": "-22%",
-    "rating": 4.2,
-    "inStock": true
-  },
-  {
-    "id": "eda7efec-f73d-4264-b51b-a7a02a4919b2",
-    "categoryId": "haushalt/geschirrspueler",
-    "brand": "Bosch",
-    "name": "Serie 4 Geschirrspüler vollintegrierbar",
-    "slug": "bosch-geschirrspueler-vollintegrierbar",
-    "bullets": [
-      "14 Maßgedecke",
-      "Home Connect",
-      "Energieeffizienzklasse C"
-    ],
-    "oldPrice": "649,00 €",
-    "price": "499,00 €",
-    "badge": "-22%",
-    "rating": 4.5,
-    "inStock": true
-  },
-  {
-    "id": "72b63169-35a7-40c4-b832-116d779d88fe",
-    "categoryId": "haushalt/geschirrspueler",
-    "brand": "Siemens",
-    "name": "iQ300 Geschirrspüler",
-    "bullets": [
-      "varioSpeed Plus",
-      "Aqua-Sensor",
-      "3 Körbe"
-    ],
-    "oldPrice": "599,00 €",
-    "price": "479,00 €",
-    "badge": "-20%",
-    "rating": 4.4,
-    "inStock": true
-  },
-  {
-    "id": "8a301bf8-ac39-4e9d-b862-daf0bf074005",
-    "categoryId": "haushalt/geschirrspueler",
-    "brand": "Miele",
-    "name": "G 7000 Geschirrspüler",
-    "bullets": [
-      "AutoDos",
-      "3D-Besteckschublade",
-      "Made in Germany"
-    ],
-    "price": "1.099,00 €",
-    "badge": "Premium",
-    "rating": 4.8,
-    "inStock": false
-  },
-  {
-    "id": "5a3dc050-f037-4257-8408-e465e4903331",
-    "categoryId": "haushalt/geschirrspueler",
-    "brand": "AEG",
-    "name": "6000 Series Geschirrspüler",
-    "bullets": [
-      "AirDry Technologie",
-      "SoftGrip Körbe",
-      "60-Minuten-Programm"
-    ],
-    "oldPrice": "549,00 €",
-    "price": "429,00 €",
-    "badge": "-22%",
-    "rating": 4.3,
-    "inStock": true
-  },
-  {
-    "id": "1eb120b6-9f11-4c7d-9938-2ac3b107231f",
-    "categoryId": "haushalt/geschirrspueler",
-    "brand": "Beko",
-    "name": "b300 Geschirrspüler teilintegrierbar",
-    "slug": "beko-geschirrspueler-teilintegrierbar",
-    "bullets": [
-      "AquaIntense",
-      "EcoNightWash",
-      "13 Maßgedecke"
-    ],
-    "price": "379,00 €",
-    "badge": "Neu",
-    "rating": 4.1,
-    "inStock": true
-  },
-  {
-    "id": "d33e6e9a-7205-4d72-b871-a43e0db9304f",
-    "categoryId": "haushalt/geschirrspueler",
-    "brand": "Neff",
-    "name": "N 50 Geschirrspüler",
-    "bullets": [
-      "emotionLight",
-      "Zeolith-Trocknung",
-      "FlexRack Plus"
-    ],
-    "oldPrice": "749,00 €",
-    "price": "599,00 €",
-    "badge": "-20%",
-    "rating": 4.4,
-    "inStock": true
-  },
-  {
-    "id": "bdf9043c-637d-4eee-ac6c-394004cc7f35",
-    "categoryId": "haushalt/staubsauger",
-    "brand": "iRobot",
-    "name": "Roomba Saugroboter mit Wischfunktion",
-    "bullets": [
-      "App-Steuerung",
-      "Automatische Absaugstation",
-      "Für Tierhaare"
-    ],
-    "oldPrice": "549,00 €",
-    "price": "399,00 €",
-    "badge": "-27%",
-    "rating": 4.6,
-    "inStock": true
-  },
-  {
-    "id": "8dc9b52d-7dd7-4eb0-b953-cbf04aca1c3e",
-    "categoryId": "haushalt/staubsauger",
-    "brand": "Dyson",
-    "name": "V15 Detect Akkusauger",
-    "bullets": [
-      "Laser-Staubsichtbarkeit",
-      "LCD-Display",
-      "Bis 60 Min. Laufzeit"
-    ],
-    "price": "649,00 €",
-    "badge": "Premium",
-    "rating": 4.7,
-    "inStock": false
-  },
-  {
-    "id": "295adead-78dc-4035-b602-58788cbd5c41",
-    "categoryId": "haushalt/staubsauger",
-    "brand": "Miele",
-    "name": "Complete C3 Bodenstaubsauger",
-    "bullets": [
-      "HEPA-Filter",
-      "Variabler Saugkraftregler",
-      "Made in Germany"
-    ],
-    "oldPrice": "349,00 €",
-    "price": "279,00 €",
-    "badge": "-20%",
-    "rating": 4.5,
-    "inStock": true
-  },
-  {
-    "id": "51cfdf89-2091-43b1-9574-508e4277aa65",
-    "categoryId": "haushalt/staubsauger",
-    "brand": "Kärcher",
-    "name": "VC 6 Bodenstaubsauger",
-    "bullets": [
-      "RotorTurbine",
-      "Geräuscharm",
-      "Beutellos"
-    ],
-    "price": "199,00 €",
-    "badge": "Neu",
-    "rating": 4,
-    "inStock": true
-  },
-  {
-    "id": "0ccd0655-dfdd-41d2-bbd7-441eb9a2c623",
-    "categoryId": "haushalt/staubsauger",
-    "brand": "Philips",
-    "name": "3000 Series Saugroboter",
-    "bullets": [
-      "Kartierung per App",
-      "AquaProtect",
-      "Automatische Ladefunktion"
-    ],
-    "oldPrice": "399,00 €",
-    "price": "299,00 €",
-    "badge": "-25%",
-    "rating": 4.4,
-    "inStock": true
-  },
-  {
-    "id": "3e4b2864-731d-4d67-9801-43bbd3da39cd",
-    "categoryId": "haushalt/staubsauger",
-    "brand": "Rowenta",
-    "name": "X-Force Flex Akkusauger",
-    "bullets": [
-      "3-in-1-Reinigung",
-      "Flexibles Gelenk",
-      "LED-Nachleuchten"
-    ],
-    "oldPrice": "279,00 €",
-    "price": "219,00 €",
-    "badge": "-21%",
-    "rating": 4.3,
-    "inStock": true
-  },
-  {
-    "id": "9db5ca7c-1178-4570-9c37-9f043fa05a20",
-    "categoryId": "haushalt/backoefen-herde",
-    "brand": "Miele",
-    "name": "H 7000 Einbaubackofen mit Pyrolyse",
-    "slug": "miele-einbaubackofen-mit-pyrolyse",
-    "bullets": [
-      "73 L Garraum",
-      "Umluft plus",
-      "Selbstreinigung"
-    ],
-    "price": "799,00 €",
-    "badge": "Neu",
-    "rating": 4.5,
-    "inStock": true
-  },
-  {
-    "id": "29765db3-4dc9-476d-802c-deacfb6e23f5",
-    "categoryId": "haushalt/backoefen-herde",
-    "brand": "Bosch",
-    "name": "Serie 6 Einbaubackofen",
-    "bullets": [
-      "3D-Heißluft",
-      "PerfectBake",
-      "Assistenzfunktionen"
-    ],
-    "oldPrice": "899,00 €",
-    "price": "699,00 €",
-    "badge": "-22%",
-    "rating": 4.4,
-    "inStock": true
-  },
-  {
-    "id": "4fe2a5bc-5a95-4ca2-a74d-cb46f6cf2f40",
-    "categoryId": "haushalt/backoefen-herde",
-    "brand": "Siemens",
-    "name": "iQ500 Einbaubackofen",
-    "bullets": [
-      "coolStart",
-      "activeClean",
-      "Home Connect"
-    ],
-    "price": "849,00 €",
-    "badge": "Neu",
-    "rating": 4.3,
-    "inStock": true
-  },
-  {
-    "id": "f5387425-d544-4cb4-98b3-74e7493e8854",
-    "categoryId": "haushalt/backoefen-herde",
-    "brand": "AEG",
-    "name": "SurroundCook Einbaubackofen",
-    "bullets": [
-      "SteamBake Funktion",
-      "Pyrolyse-Selbstreinigung",
-      "Vollteleskopauszug"
-    ],
-    "oldPrice": "999,00 €",
-    "price": "799,00 €",
-    "badge": "-20%",
-    "rating": 4.2,
-    "inStock": true
-  },
-  {
-    "id": "d130fa1f-6ff0-4423-97d9-dee0dea8e436",
-    "categoryId": "haushalt/backoefen-herde",
-    "brand": "Neff",
-    "name": "Slide&Hide Einbaubackofen",
-    "bullets": [
-      "Versenkbare Backofentür",
-      "CircoTherm",
-      "VarioSteam"
-    ],
-    "price": "949,00 €",
-    "badge": "Premium",
-    "rating": 4.8,
-    "inStock": false
-  },
-  {
-    "id": "93ae58e6-c4ce-41b9-9c93-c0e0d2fbd6f4",
-    "categoryId": "haushalt/backoefen-herde",
-    "brand": "Bauknecht",
-    "name": "BAK5 Einbauherd-Set",
-    "slug": "bauknecht-einbauherd-set",
-    "bullets": [
-      "Autark-Kochfeld inklusive",
-      "4 Kochzonen",
-      "Aqua-Clean"
-    ],
-    "oldPrice": "699,00 €",
-    "price": "549,00 €",
-    "badge": "-21%",
-    "rating": 4.1,
-    "inStock": true
-  },
-  {
-    "id": "1f8c5dfa-7ab4-4b40-b4da-a755929db8f6",
-    "categoryId": "haushalt/kuechenmaschinen",
-    "brand": "Philips",
-    "name": "Viva Collection Küchenmaschine, 1200 W",
-    "slug": "philips-kuechenmaschine-1200-w",
-    "bullets": [
-      "ProBlend 6 Technologie",
-      "2 L Glasbehälter",
-      "Eiscrush-Funktion"
-    ],
-    "oldPrice": "89,99 €",
-    "price": "59,99 €",
-    "badge": "-33%",
-    "rating": 4.3,
-    "inStock": true
-  },
-  {
-    "id": "13427719-4b9b-4652-a64c-9bf11fb27dc3",
-    "categoryId": "haushalt/kuechenmaschinen",
-    "brand": "Bosch",
-    "name": "MUM5 Küchenmaschine",
-    "bullets": [
-      "1000 W Motor",
-      "3D PlanetaryMixing",
-      "3,9 L Edelstahlschüssel"
-    ],
-    "oldPrice": "349,00 €",
-    "price": "279,00 €",
-    "badge": "-20%",
-    "rating": 4.5,
-    "inStock": true
-  },
-  {
-    "id": "c75d010f-eb2b-49d0-85e9-b689283f7452",
-    "categoryId": "haushalt/kuechenmaschinen",
-    "brand": "KitchenAid",
-    "name": "Artisan Küchenmaschine",
-    "bullets": [
-      "4,8 L Edelstahlschüssel",
-      "10 Geschwindigkeitsstufen",
-      "Robuster Metallkorpus"
-    ],
-    "price": "599,00 €",
-    "badge": "Premium",
-    "rating": 4.8,
-    "inStock": false
-  },
-  {
-    "id": "1012d087-8c05-4e34-bbc5-a58e98db7aec",
-    "categoryId": "haushalt/kuechenmaschinen",
-    "brand": "Kenwood",
-    "name": "Chef Titanium Küchenmaschine",
-    "bullets": [
-      "1400 W Motor",
-      "Planetarisches Rührsystem",
-      "Umfangreiches Zubehör"
-    ],
-    "oldPrice": "499,00 €",
-    "price": "379,00 €",
-    "badge": "-24%",
-    "rating": 4.6,
-    "inStock": true
-  },
-  {
-    "id": "9f5a0ca7-6525-4bf5-9b4a-37c8d39cf763",
-    "categoryId": "haushalt/kuechenmaschinen",
-    "brand": "WMF",
-    "name": "Kult X Küchenmaschine",
-    "bullets": [
-      "Kompaktes Design",
-      "500 W Motor",
-      "Mix & Go Trinkflasche"
-    ],
-    "price": "149,00 €",
-    "badge": "Neu",
-    "rating": 4,
-    "inStock": true
-  },
-  {
-    "id": "7ef6d8db-3707-41cc-a03a-c7060dfdb6b5",
-    "categoryId": "haushalt/kuechenmaschinen",
-    "brand": "Krups",
-    "name": "Prep&Cook Küchenmaschine",
-    "bullets": [
-      "Kochfunktion bis 130°C",
-      "4,5 L Schüssel",
-      "Integrierte Waage"
-    ],
-    "oldPrice": "449,00 €",
-    "price": "349,00 €",
-    "badge": "-22%",
-    "rating": 4.4,
-    "inStock": true
-  },
-  {
-    "id": "5e414a3a-e571-4819-b8c4-b00e37566565",
-    "categoryId": "haushalt/klimageraete",
-    "brand": "Daikin",
-    "name": "Sensira Split-Klimagerät, 3,5 kW",
-    "slug": "daikin-split-klimageraet-3-5-kw",
-    "bullets": [
-      "Kühlen & Heizen",
-      "WLAN-fähig",
-      "Flüsterleiser Betrieb"
-    ],
-    "oldPrice": "899,00 €",
-    "price": "699,00 €",
-    "badge": "-22%",
-    "rating": 4.4,
-    "inStock": true
-  },
-  {
-    "id": "64f44b33-7f35-4145-b3a4-ba27e2ce3872",
-    "categoryId": "haushalt/klimageraete",
-    "brand": "LG",
-    "name": "Dualcool Klimagerät",
-    "bullets": [
-      "Wi-Fi Steuerung",
-      "Dual Inverter Kompressor",
-      "Schlafmodus"
-    ],
-    "oldPrice": "799,00 €",
-    "price": "649,00 €",
-    "badge": "-19%",
-    "rating": 4.5,
-    "inStock": true
-  },
-  {
-    "id": "48bf25f0-bdf5-4806-904b-a52ad2cddf71",
-    "categoryId": "haushalt/klimageraete",
-    "brand": "De'Longhi",
-    "name": "Pinguino Mobiles Klimagerät",
-    "slug": "de-longhi-mobiles-klimageraet",
-    "bullets": [
-      "3-in-1-Funktion",
-      "Real Feel Technologie",
-      "LED-Display"
-    ],
-    "price": "449,00 €",
-    "badge": "Neu",
-    "rating": 4.1,
-    "inStock": true
-  },
-  {
-    "id": "948dec6d-5609-4b83-8c9c-8ea92f2eea2d",
-    "categoryId": "haushalt/klimageraete",
-    "brand": "Comfee",
-    "name": "Eco Friendly Mobiles Klimagerät, 9000 BTU",
-    "slug": "comfee-mobiles-klimageraet-9000-btu",
-    "bullets": [
-      "App-Steuerung",
-      "Entfeuchtungsfunktion",
-      "Fensterkit inklusive"
-    ],
-    "oldPrice": "399,00 €",
-    "price": "329,00 €",
-    "badge": "-18%",
-    "rating": 4,
-    "inStock": true
-  },
-  {
-    "id": "afad8075-cf60-40e2-abdb-633afeccaf64",
-    "categoryId": "haushalt/klimageraete",
-    "brand": "Klarstein",
-    "name": "Windwaker Split-Klimagerät, 2,6 kW",
-    "slug": "klarstein-split-klimageraet-2-6-kw",
-    "bullets": [
-      "Eco-Modus",
-      "Timerfunktion",
-      "Fernbedienung inklusive"
-    ],
-    "price": "599,00 €",
-    "badge": "Premium",
-    "rating": 4.7,
-    "inStock": false
-  },
-  {
-    "id": "a0fe7fbe-8e94-4629-81f0-17fc378453e8",
-    "categoryId": "haushalt/klimageraete",
-    "brand": "Panasonic",
-    "name": "Etherea Split-Klimagerät",
-    "bullets": [
-      "nanoeX Luftreinigung",
-      "Flüsterleiser Betrieb",
-      "WLAN-fähig"
-    ],
-    "oldPrice": "999,00 €",
-    "price": "799,00 €",
-    "badge": "-20%",
-    "rating": 4.6,
-    "inStock": true
-  },
-  {
-    "id": "5012de97-ba14-48cb-852d-dfc6d4ec5f64",
-    "categoryId": "multimedia/smartphones",
-    "brand": "Apple",
-    "name": "iPhone 16, 128 GB",
-    "bullets": [
-      "6,1\" Super Retina Display",
-      "A18 Chip",
-      "Dual-Kamera-System"
-    ],
-    "oldPrice": "899,00 €",
-    "price": "799,00 €",
-    "badge": "-11%",
-    "rating": 4.7,
-    "inStock": true
-  },
-  {
-    "id": "9b214755-fa53-4d30-b079-ec4a265b6a62",
-    "categoryId": "multimedia/smartphones",
-    "brand": "Samsung",
-    "name": "Galaxy S24, 256 GB",
-    "bullets": [
-      "6,2\" Dynamic AMOLED",
-      "Snapdragon 8 Gen 3",
-      "Galaxy AI"
-    ],
-    "oldPrice": "899,00 €",
-    "price": "749,00 €",
-    "badge": "-17%",
-    "rating": 4.6,
-    "inStock": true
-  },
-  {
-    "id": "e569d532-f0d1-4064-86d1-d80775a84f08",
-    "categoryId": "multimedia/smartphones",
-    "brand": "Google",
-    "name": "Pixel 9, 128 GB",
-    "bullets": [
-      "Tensor G4 Chip",
-      "Google KI-Funktionen",
-      "6,3\" OLED-Display"
-    ],
-    "price": "699,00 €",
-    "badge": "Neu",
-    "rating": 4.4,
-    "inStock": true
-  },
-  {
-    "id": "603b6941-5b9a-49a7-876e-52ba76bd0ca9",
-    "categoryId": "multimedia/smartphones",
-    "brand": "Xiaomi",
-    "name": "14T, 256 GB",
-    "bullets": [
-      "Leica-Kamerasystem",
-      "120 W HyperCharge",
-      "6,67\" AMOLED"
-    ],
-    "oldPrice": "649,00 €",
-    "price": "499,00 €",
-    "badge": "-23%",
-    "rating": 4.3,
-    "inStock": true
-  },
-  {
-    "id": "7f45c465-f499-454f-b91d-91f1f7c4fefd",
-    "categoryId": "multimedia/smartphones",
-    "brand": "OnePlus",
-    "name": "12, 256 GB",
-    "bullets": [
-      "Hasselblad-Kamera",
-      "100 W SUPERVOOC-Laden",
-      "Snapdragon 8 Gen 3"
-    ],
-    "price": "749,00 €",
-    "badge": "Premium",
-    "rating": 4.5,
-    "inStock": false
-  },
-  {
-    "id": "3ed36423-f4af-4329-bf8b-334c946955ea",
-    "categoryId": "multimedia/smartphones",
-    "brand": "Sony",
-    "name": "Xperia 1 VI, 256 GB",
-    "bullets": [
-      "4K-Display",
-      "Zeiss-Optik",
-      "Triple-Kamera mit Zoom"
-    ],
-    "oldPrice": "1.299,00 €",
-    "price": "999,00 €",
-    "badge": "-23%",
-    "rating": 4.2,
-    "inStock": true
-  },
-  {
-    "id": "94f50982-e62f-4225-970b-da9d592bc104",
-    "categoryId": "multimedia/videospiele",
-    "brand": "Sony",
-    "name": "DualSense Wireless Controller",
-    "bullets": [
-      "Haptisches Feedback",
-      "Adaptive Trigger",
-      "Eingebautes Mikrofon"
-    ],
-    "oldPrice": "74,99 €",
-    "price": "59,99 €",
-    "badge": "-20%",
-    "rating": 4.5,
-    "inStock": true
-  },
-  {
-    "id": "a3454b82-9369-4d82-8c37-64dc31f570f4",
-    "categoryId": "multimedia/videospiele",
-    "brand": "Microsoft",
-    "name": "Xbox Wireless Controller",
-    "bullets": [
-      "Hybrid D-Pad",
-      "Strukturierte Griffe",
-      "Bluetooth-Kompatibilität"
-    ],
-    "oldPrice": "64,99 €",
-    "price": "54,99 €",
-    "badge": "-15%",
-    "rating": 4.3,
-    "inStock": true
-  },
-  {
-    "id": "882300b7-17e2-4e15-83ce-60f98dd70719",
-    "categoryId": "multimedia/videospiele",
-    "brand": "Nintendo",
-    "name": "Switch Pro Controller",
-    "bullets": [
-      "Amiibo-Funktion",
-      "Bewegungssteuerung",
-      "Integriertes HD-Rumble"
-    ],
-    "price": "69,99 €",
-    "badge": "Bestseller",
-    "rating": 4.8,
-    "inStock": true
-  },
-  {
-    "id": "53e1fdb5-a167-42f2-9958-7787c264ad32",
-    "categoryId": "multimedia/videospiele",
-    "brand": "Razer",
-    "name": "Kitty Edition Gaming-Headset",
-    "bullets": [
-      "THX Spatial Audio",
-      "Kabelloses Design",
-      "RGB-Beleuchtung"
-    ],
-    "oldPrice": "129,00 €",
-    "price": "99,99 €",
-    "badge": "-22%",
-    "rating": 4.2,
-    "inStock": true
-  },
-  {
-    "id": "83b77a6a-532a-4a23-8f5c-b4919aa3846f",
-    "categoryId": "multimedia/videospiele",
-    "brand": "Logitech",
-    "name": "G29 Lenkrad mit Pedalen",
-    "bullets": [
-      "Force-Feedback",
-      "Echtleder-Lenkrad",
-      "PS/PC-kompatibel"
-    ],
-    "price": "349,00 €",
-    "badge": "Premium",
-    "rating": 4.6,
-    "inStock": false
-  },
-  {
-    "id": "fe683912-4096-4a66-aaeb-83c97290c36a",
-    "categoryId": "multimedia/videospiele",
-    "brand": "8BitDo",
-    "name": "Ultimate Controller 2.4G",
-    "bullets": [
-      "Hall-Effekt-Sticks",
-      "Programmierbare Tasten",
-      "Ladestation inklusive"
-    ],
-    "oldPrice": "79,99 €",
-    "price": "64,99 €",
-    "badge": "-19%",
-    "rating": 4.4,
-    "inStock": true
-  },
-  {
-    "id": "cf577a02-cff1-4c3e-a70b-26128fedd21f",
-    "categoryId": "multimedia/fernseher",
-    "brand": "LG",
-    "name": "OLED evo 55\" 4K Fernseher",
-    "bullets": [
-      "120 Hz Gaming",
-      "Dolby Vision",
-      "webOS Smart TV"
-    ],
-    "oldPrice": "1.499,00 €",
-    "price": "1.199,00 €",
-    "badge": "-20%",
-    "rating": 4.6,
-    "inStock": true
-  },
-  {
-    "id": "56aa7e97-ee85-499d-9d64-cc55050bcc40",
-    "categoryId": "multimedia/fernseher",
-    "brand": "Samsung",
-    "name": "Neo QLED 65\" 4K Fernseher",
-    "bullets": [
-      "Quantum Matrix Technologie",
-      "120 Hz Gaming",
-      "Tizen Smart TV"
-    ],
-    "oldPrice": "1.799,00 €",
-    "price": "1.399,00 €",
-    "badge": "-22%",
-    "rating": 4.5,
-    "inStock": true
-  },
-  {
-    "id": "d5abf9db-eb28-4641-8dc0-8921548d639f",
-    "categoryId": "multimedia/fernseher",
-    "brand": "Sony",
-    "name": "Bravia XR 55\" OLED Fernseher",
-    "bullets": [
-      "Cognitive Processor XR",
-      "Acoustic Surface Audio",
-      "Google TV"
-    ],
-    "price": "1.599,00 €",
-    "badge": "Premium",
-    "rating": 4.8,
-    "inStock": false
-  },
-  {
-    "id": "1939d182-7ec2-491a-9d2d-4bc56c753a67",
-    "categoryId": "multimedia/fernseher",
-    "brand": "Philips",
-    "name": "Ambilight 50\" 4K Fernseher",
-    "bullets": [
-      "3-seitiges Ambilight",
-      "P5 Perfect Picture Engine",
-      "Android TV"
-    ],
-    "oldPrice": "899,00 €",
-    "price": "699,00 €",
-    "badge": "-22%",
-    "rating": 4.3,
-    "inStock": true
-  },
-  {
-    "id": "df56d9cc-9734-4556-8b97-d00e53a91ffa",
-    "categoryId": "multimedia/fernseher",
-    "brand": "Panasonic",
-    "name": "MSW504 43\" 4K Fernseher",
-    "slug": "panasonic-43-4k-fernseher",
-    "bullets": [
-      "HDR10+",
-      "Dolby Atmos",
-      "Kompaktes Design"
-    ],
-    "price": "449,00 €",
-    "badge": "Neu",
-    "rating": 4.1,
-    "inStock": true
-  },
-  {
-    "id": "15cf82e4-6d87-454d-ba19-4c5ef06daf60",
-    "categoryId": "multimedia/fernseher",
-    "brand": "Hisense",
-    "name": "ULED 65\" 4K Fernseher",
-    "bullets": [
-      "Quantum-Dot-Technologie",
-      "Dolby Vision IQ",
-      "Game Mode Pro"
-    ],
-    "oldPrice": "999,00 €",
-    "price": "749,00 €",
-    "badge": "-25%",
-    "rating": 4.4,
-    "inStock": true
-  },
-  {
-    "id": "8abf1b73-d15c-4eb2-b92c-df51cad93291",
-    "categoryId": "multimedia/computer",
-    "brand": "Apple",
-    "name": "MacBook Air 13\" M3",
-    "bullets": [
-      "8-Core CPU",
-      "18 Std. Akkulaufzeit",
-      "Liquid Retina Display"
-    ],
-    "oldPrice": "1.299,00 €",
-    "price": "1.149,00 €",
-    "badge": "-12%",
-    "rating": 4.7,
-    "inStock": true
-  },
-  {
-    "id": "1ec3f6ae-eda7-4552-94d9-eb73714f12b0",
-    "categoryId": "multimedia/computer",
-    "brand": "Dell",
-    "name": "XPS 13 Notebook",
-    "bullets": [
-      "Intel Core Ultra 7",
-      "16 GB RAM",
-      "InfinityEdge Display"
-    ],
-    "oldPrice": "1.399,00 €",
-    "price": "1.199,00 €",
-    "badge": "-14%",
-    "rating": 4.5,
-    "inStock": true
-  },
-  {
-    "id": "7f6f868d-689c-4cbf-ba99-c2f4b602921f",
-    "categoryId": "multimedia/computer",
-    "brand": "Lenovo",
-    "name": "ThinkPad X1 Carbon",
-    "bullets": [
-      "14\" 2.8K-Display",
-      "Robustes Carbon-Gehäuse",
-      "Schnelle Aufladung"
-    ],
+    "shortDescription": "• Boden: 1,8 mm / 2,0 mm PVC-Paneele mit 18 mm wasserdichter Unterkonstruktion",
+    "image": "/images/container/mobiler-buerocontainer-mit-panoramafenstern-ref-c3301.jpg",
     "price": "1.499,00 €",
-    "badge": "Premium",
-    "rating": 4.8,
-    "inStock": false
-  },
-  {
-    "id": "4a734b9d-27ed-4fad-83bc-9f251d182b88",
-    "categoryId": "multimedia/computer",
-    "brand": "HP",
-    "name": "Pavilion Desktop PC",
-    "bullets": [
-      "AMD Ryzen 7",
-      "16 GB RAM",
-      "512 GB SSD"
-    ],
-    "oldPrice": "799,00 €",
-    "price": "649,00 €",
-    "badge": "-19%",
-    "rating": 4.3,
     "inStock": true
   },
   {
-    "id": "af300988-b8f8-49f8-b7eb-22e064742e8f",
-    "categoryId": "multimedia/computer",
-    "brand": "Asus",
-    "name": "ROG Strix Gaming-Notebook",
+    "id": "container/vignonolo-modulares-haus",
+    "categoryId": "container/wohncontainer",
+    "brand": "Tiny House",
+    "name": "VIGNONOLO MODULARES HAUS",
+    "slug": "vignonolo-modulares-haus",
     "bullets": [
-      "RTX 4060",
-      "165 Hz Display",
-      "RGB-Tastatur"
+      "18 m² Wohnfläche",
+      "Innenverkleidung: OSB und glatte Hartfaserplatte",
+      "Außenverkleidung: Trockenverlegte Faserzementplatte"
     ],
-    "price": "1.699,00 €",
-    "badge": "Neu",
-    "rating": 4.4,
+    "shortDescription": "1 weißes PVC-Doppelglas-Schiebefenster (2,50 x 2,00 m) mit Markise",
+    "image": "/images/container/vignonolo-modulares-haus.jpg",
+    "price": "3.850,00 €",
     "inStock": true
   },
   {
-    "id": "03f9633a-e8c0-467c-a878-79b7309d9a65",
-    "categoryId": "multimedia/computer",
-    "brand": "Acer",
-    "name": "Swift Go 14 Notebook",
+    "id": "container/wohn-bueroeinheit-von-24-m2-ref-42290",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Wohn-/Büroeinheit von 24 m² (Ref: 42290)",
+    "slug": "wohn-bueroeinheit-von-24-m2-ref-42290",
     "bullets": [
-      "Intel Core i5",
-      "OLED-Display",
-      "10 Std. Akkulaufzeit"
+      "Abmessungen (L x B x H): 8 m x 3 m x 3 m"
     ],
-    "oldPrice": "899,00 €",
-    "price": "749,00 €",
-    "badge": "-17%",
-    "rating": 4.2,
+    "shortDescription": "– Aufteilung: Wohn-/Esszimmer mit Küche, geräumiges separates Schlafzimmer, Badezimmer",
+    "image": "/images/container/wohn-bueroeinheit-von-24-m2-ref-42290.jpg",
+    "price": "4.100,00 €",
     "inStock": true
   },
   {
-    "id": "c78d67c2-e434-4e27-b39f-f64b32a0d1f1",
-    "categoryId": "multimedia/smartwatches",
-    "brand": "Garmin",
-    "name": "Venu 3 Smartwatch",
+    "id": "container/buerocontainer-3-50-x-2-20-ref-2351",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 3,50 × 2,20 (Ref: 2351)",
+    "slug": "buerocontainer-3-50-x-2-20-ref-2351",
     "bullets": [
-      "AMOLED-Display",
-      "14 Tage Akkulaufzeit",
-      "Schlaf- & Fitness-Tracking"
+      "3,50 × 2,20 m",
+      "(Ref: 2351)",
+      "Wandheizkörper (2000 W)"
     ],
-    "oldPrice": "449,00 €",
-    "price": "349,00 €",
-    "badge": "-22%",
-    "rating": 4.6,
+    "shortDescription": "Neuer Bürocontainer mit den Maßen 3,50 x 2,20 m und einer Höhe von 2,70 m.",
+    "image": "/images/container/buerocontainer-3-50-x-2-20-ref-2351.jpg",
+    "price": "1.299,00 €",
     "inStock": true
   },
   {
-    "id": "b7d6e875-eae7-4633-a890-b4d747fdd204",
-    "categoryId": "multimedia/smartwatches",
-    "brand": "Apple",
-    "name": "Watch Series 10",
+    "id": "container/dali-modulares-projekt-24-m2-ref-11900",
+    "categoryId": "container/buerocontainer",
+    "brand": "Container",
+    "name": "Dalì Modulares Projekt 24 m² ( Ref: 11900 )",
+    "slug": "dali-modulares-projekt-24-m2-ref-11900",
     "bullets": [
-      "Größtes Retina-Display",
-      "Blutsauerstoffmessung",
-      "Wassergeschützt"
+      "DALÍ MODULARPROJEKT 8 x 3,0 m",
+      "24 m² WOHNFLÄCHE",
+      "Innenverkleidung: OSB und glatte Gipskartonplatten"
     ],
-    "oldPrice": "449,00 €",
-    "price": "399,00 €",
-    "badge": "-11%",
-    "rating": 4.7,
+    "shortDescription": "2 feststehende, doppelt verglaste Fenster, schwarzes Aluminium, 2,00 x 2,00 m",
+    "image": "/images/container/dali-modulares-projekt-24-m2-ref-11900.jpg",
+    "price": "3.329,00 €",
     "inStock": true
   },
   {
-    "id": "10f6d088-09e3-4fc7-be67-3a3386264579",
-    "categoryId": "multimedia/smartwatches",
-    "brand": "Samsung",
-    "name": "Galaxy Watch 7",
+    "id": "container/sanitaerblock-s1-mit-wc-und-waschbecken",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Sanitärcontainer",
+    "name": "SANITÄRBLOCK S1 MIT WC UND WASCHBECKEN",
+    "slug": "sanitaerblock-s1-mit-wc-und-waschbecken",
     "bullets": [
-      "BioActive Sensor",
-      "Wear OS",
-      "Sturzerkennung"
+      "Robust und langlebig: Wetter- und stoßfest",
+      "Anpassbar: An Ihre spezifischen Bedürfnisse anpassbar",
+      "Außenhöhe: 256 cm"
     ],
-    "price": "329,00 €",
-    "badge": "Neu",
-    "rating": 4.2,
+    "shortDescription": "Kompakt und leicht: Einfach zu transportieren und zu installieren.",
+    "image": "/images/container/sanitaerblock-s1-mit-wc-und-waschbecken.jpg",
+    "price": "1.150,00 €",
     "inStock": true
   },
   {
-    "id": "96d8e58c-7634-448d-bcb7-c95a7e0ffe51",
-    "categoryId": "multimedia/smartwatches",
-    "brand": "Fitbit",
-    "name": "Sense 2",
+    "id": "container/doppelter-sanitaercontainer-mit-weissem-abfalltank",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Sanitärcontainer",
+    "name": "DOPPELTER SANITÄRCONTAINER MIT WEISSEM ABFALLTANK",
+    "slug": "doppelter-sanitaercontainer-mit-weissem-abfalltank",
     "bullets": [
-      "Stresstracking",
-      "6 Tage Akkulaufzeit",
-      "Google-Integration"
+      "230V Steckdosen",
+      "PVC-Boden: robust und schnell zu reinigen"
     ],
-    "oldPrice": "299,00 €",
-    "price": "229,00 €",
-    "badge": "-23%",
-    "rating": 4.3,
+    "shortDescription": "Neuer Toilettencontainer mit Fäkalientank, Toilettenbox, Sanitärcontainer für Camping",
+    "image": "/images/container/doppelter-sanitaercontainer-mit-weissem-abfalltank.jpg",
+    "price": "2.600,00 €",
     "inStock": true
   },
   {
-    "id": "00ae96f9-1e18-4195-bf96-4edfe52755ea",
-    "categoryId": "multimedia/smartwatches",
-    "brand": "Withings",
-    "name": "ScanWatch 2",
+    "id": "container/sanitaercontainer-mini-toilette",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "WC-Container",
+    "name": "SANITÄRCONTAINER - MINI-TOILETTE",
+    "slug": "sanitaercontainer-mini-toilette",
     "bullets": [
-      "Hybride Analoguhr",
-      "EKG-Funktion",
-      "30 Tage Akkulaufzeit"
+      "Freiraum im Innenraum: Raumhöhe 2300 mm",
+      "Gewicht: ca. 450 Kilo",
+      "1,5mm starker Hart-PVC-Bodenbelag (grau gesprenkelt)"
     ],
-    "price": "299,00 €",
-    "badge": "Premium",
-    "rating": 4.8,
-    "inStock": false
-  },
-  {
-    "id": "c84ad0bd-a065-4785-81ee-6f24053dae3b",
-    "categoryId": "multimedia/smartwatches",
-    "brand": "Amazfit",
-    "name": "GTR 4",
-    "bullets": [
-      "AMOLED-Display",
-      "Zepp OS",
-      "14 Tage Akkulaufzeit"
-    ],
-    "oldPrice": "219,00 €",
-    "price": "169,00 €",
-    "badge": "-23%",
-    "rating": 4.1,
+    "shortDescription": "Außenmaße:   1610 mm x 1670 mm x 2540 mm (Länge x Breite x Höhe)",
+    "image": "/images/container/sanitaercontainer-mini-toilette.jpg",
+    "price": "1.700,00 €",
     "inStock": true
   },
   {
-    "id": "fd2a22cb-6440-4443-88f0-7d7f087151a0",
-    "categoryId": "multimedia/drohnen",
-    "brand": "DJI",
-    "name": "Mini 4 Pro Fly More Combo",
+    "id": "container/sanitaercontainer-2-00-x-2-00-m-mit-toilette-und-urinar",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "WC-Container",
+    "name": "SANITÄRCONTAINER 2,00 x 2,00 M MIT TOILETTE UND URINAR",
+    "slug": "sanitaercontainer-2-00-x-2-00-m-mit-toilette-und-urinar",
     "bullets": [
-      "Unter 249 g Startgewicht",
-      "4K/60fps HDR-Video",
-      "Rundum-Hinderniserkennung"
+      "2,00 × 2,00 m",
+      "M MIT TOILETTE UND URINAR",
+      "230V Elektroinstallation mit Steckdosen"
     ],
-    "oldPrice": "1.199,00 €",
-    "price": "1.099,00 €",
-    "badge": "-8%",
-    "rating": 4.8,
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: SANITÄRCONTAINER 2,00 x 2,00 M MIT TOILETTE UND URINAR. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/sanitaercontainer-2-00-x-2-00-m-mit-toilette-und-urinar.jpg",
+    "price": "1.950,00 €",
     "inStock": true
   },
   {
-    "id": "6811dbe3-eb1e-4569-a5a9-cdeb9d9477d6",
-    "categoryId": "multimedia/drohnen",
-    "brand": "DJI",
-    "name": "Air 3S",
+    "id": "container/sanitaercontainer-mit-dusche-wc-und-urinal",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Duschcontainer",
+    "name": "Sanitärcontainer mit Dusche, WC und Urinal",
+    "slug": "sanitaercontainer-mit-dusche-wc-und-urinal",
     "bullets": [
-      "Dual-Kamera mit 1-Zoll-Sensor",
-      "Bis 45 Minuten Flugzeit",
-      "LiDAR-Nachtlandung"
+      "Dusche",
+      "Urinal: Praktisch und platzsparend integriert",
+      "Duschen: Für eine erfrischende Reinigung"
     ],
-    "price": "1.049,00 €",
-    "badge": "Neu",
-    "rating": 4.7,
+    "shortDescription": "Die Doppelkabine des Containers ist voll ausgestattet und bietet alles, was für eine hygienische und komfortable Nutzung notwendig ist. Zur Innenausstattung gehören:",
+    "image": "/images/container/sanitaercontainer-mit-dusche-wc-und-urinal.jpg",
+    "price": "2.550,00 €",
     "inStock": true
   },
   {
-    "id": "ee8f21dc-99c8-42c1-a626-bfab0d8ec577",
-    "categoryId": "multimedia/drohnen",
-    "brand": "DJI",
-    "name": "Neo",
+    "id": "container/doppelter-sanitaercontainer-mit-abfalltank",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Sanitärcontainer",
+    "name": "DOPPELTER SANITÄRCONTAINER MIT ABFALLTANK",
+    "slug": "doppelter-sanitaercontainer-mit-abfalltank",
     "bullets": [
-      "Handstart ohne Fernsteuerung",
-      "4K-Ultraweitwinkel",
-      "135 g Leichtgewicht"
+      "230V Steckdosen",
+      "PVC-Boden: robust und schnell zu reinigen"
     ],
-    "price": "199,00 €",
-    "badge": "Bestseller",
-    "rating": 4.4,
+    "shortDescription": "Einfach Strom, Wasser und Abwasser anschließen, sofort einsatzbereit.",
+    "image": "/images/container/doppelter-sanitaercontainer-mit-abfalltank.jpg",
+    "price": "2.600,00 €",
     "inStock": true
   },
   {
-    "id": "bc417b7c-9b93-4f00-82f4-811c5e52e44f",
-    "categoryId": "multimedia/drohnen",
-    "brand": "Autel Robotics",
-    "name": "EVO Lite+ Premium Bundle",
+    "id": "container/sanitaereinheit-reinigungseinheit-1-platz",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Sanitärcontainer",
+    "name": "SANITÄREINHEIT REINIGUNGSEINHEIT 1 PLATZ",
+    "slug": "sanitaereinheit-reinigungseinheit-1-platz",
     "bullets": [
-      "1-Zoll-CMOS-Sensor",
-      "6K-Videoaufnahme",
-      "Bis 40 Minuten Flugzeit"
+      "Optimaler Komfort: Ein funktionaler und angenehmer Raum",
+      "Vollständige Autonomie: Keine Verbindung zu Netzwerken",
+      "Mobilität: Einfach zu bewegen und zu installieren"
     ],
-    "oldPrice": "1.149,00 €",
-    "price": "949,00 €",
-    "badge": "-17%",
-    "rating": 4.3,
+    "shortDescription": "Trotz ihrer kompakten Abmessungen bietet unsere maßgeschneiderte Sanitäreinheit höchsten Komfort. Im Inneren finden Sie:",
+    "image": "/images/container/sanitaereinheit-reinigungseinheit-1-platz.jpg",
+    "price": "1.200,00 €",
     "inStock": true
   },
   {
-    "id": "7aec4f0f-8de0-426d-8ad1-bbda9ad352fc",
-    "categoryId": "multimedia/drohnen",
-    "brand": "HoverAir",
-    "name": "X1 Pro",
+    "id": "container/lagercontainer-2-x-2-meter-mit-doppeltuer",
+    "categoryId": "container/lagercontainer",
+    "brand": "Lagercontainer",
+    "name": "Lagercontainer 2 × 2 Meter – mit Doppeltür",
+    "slug": "lagercontainer-2-x-2-meter-mit-doppeltuer",
     "bullets": [
-      "Selbstfliegende Kamera",
-      "8K-Video",
-      "Faltbar, passt in die Handfläche"
+      "Doppeltür",
+      "Kurz gesagt: eine",
+      "2 × 2 Meter (3,7 m² / 6,5 Fuß)"
     ],
-    "price": "549,00 €",
-    "rating": 4.2,
+    "shortDescription": "eignet sich ideal für die sichere Lagerung von Materialien, Waren oder Ausrüstung.",
+    "image": "/images/container/lagercontainer-2-x-2-meter-mit-doppeltuer.jpg",
+    "price": "1.100,00 €",
     "inStock": true
   },
   {
-    "id": "047a651a-c428-4aa4-b103-fd2c1aa550f7",
-    "categoryId": "multimedia/drohnen",
-    "brand": "Potensic",
-    "name": "ATOM 2",
+    "id": "container/grosser-lagercontainer-standardmodell-8-x-2-meter",
+    "categoryId": "container/lagercontainer",
+    "brand": "Lagercontainer",
+    "name": "Großer Lagercontainer Standardmodell 8 × 2 Meter",
+    "slug": "grosser-lagercontainer-standardmodell-8-x-2-meter",
     "bullets": [
-      "Unter 249 g Startgewicht",
-      "3-Achsen-Gimbal",
-      "Bis 32 Minuten Flugzeit"
+      "großen Doppeltüren von 175 cm Breite",
+      "70 % der Wandstärke eines Seecontainers",
+      "8 × 2 Meter (15 m² / 26 Fuß)"
     ],
-    "oldPrice": "349,00 €",
-    "price": "279,00 €",
-    "badge": "-20%",
-    "rating": 4.1,
-    "inStock": false
+    "shortDescription": "zwei unserer 4 × 2 Meter Container seitlich miteinander zu verbinden",
+    "image": "/images/container/grosser-lagercontainer-standardmodell-8-x-2-meter.jpg",
+    "price": "3.600,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/20-fuss-container-mit-16-rolltoren",
+    "categoryId": "container/lagercontainer",
+    "brand": "Sonderöffnung",
+    "name": "20-Fuß Container mit 16 Rolltoren",
+    "slug": "20-fuss-container-mit-16-rolltoren",
+    "bullets": [
+      "16 Rolltoren",
+      "16 Fuß seitliche Rolltore aus Stahl",
+      "20-Fuß Container mit 16 Fuß breitem Stahl-Rolltor"
+    ],
+    "shortDescription": "ist eine vielseitige mobile Lagereinheit, die einen zusätzlichen seitlichen Zugang zum Container bietet. Dank der erweiterten Zugangsmöglichkeiten wird der verfügbare Stauraum effizient genutzt und das",
+    "image": "/images/container/20-fuss-container-mit-16-rolltoren.jpg",
+    "price": "1.670,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/10-fuss-standardcontainer",
+    "categoryId": "container/seecontainer",
+    "brand": "Seecontainer",
+    "name": "10 Fuß Standardcontainer",
+    "slug": "10-fuss-standardcontainer",
+    "bullets": [
+      "10 Fuß",
+      "2991 mm",
+      "2840 mm"
+    ],
+    "shortDescription": "Warum Sie sich für den 10-Fuß-Container entscheiden sollten:",
+    "image": "/images/container/10-fuss-standardcontainer.jpg",
+    "price": "925,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/10-fuss-hc-seecontainer",
+    "categoryId": "container/seecontainer",
+    "brand": "High Cube",
+    "name": "10 Fuß HC Seecontainer",
+    "slug": "10-fuss-hc-seecontainer",
+    "bullets": [
+      "10 Fuß",
+      "Länge: 2.991 m",
+      "Breite: 2.438 m"
+    ],
+    "shortDescription": "Benötigen Sie eine langlebige, sichere und hochwertige Lagerlösung? Unser",
+    "image": "/images/container/10-fuss-hc-seecontainer.jpg",
+    "price": "1.050,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/10-fuss-hc-seecontainer-variante-2",
+    "categoryId": "container/seecontainer",
+    "brand": "High Cube",
+    "name": "10 Fuß HC Seecontainer (Variante 2)",
+    "slug": "10-fuss-hc-seecontainer-variante-2",
+    "bullets": [
+      "10 Fuß",
+      "Länge: 2.991 m",
+      "Breite: 2.438 m"
+    ],
+    "shortDescription": "10 Fuß High-Cube Seecontainer in geprüftem Zustand. Vielseitig einsetzbar als Lager- oder Transportcontainer.",
+    "image": "/images/container/10-fuss-hc-seecontainer-variante-2.jpg",
+    "price": "1.100,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/10-fuss-hc-seecontainer-variante-3",
+    "categoryId": "container/seecontainer",
+    "brand": "High Cube",
+    "name": "10 Fuß HC Seecontainer (Variante 3)",
+    "slug": "10-fuss-hc-seecontainer-variante-3",
+    "bullets": [
+      "10 Fuß",
+      "Länge: 2.991 m",
+      "Breite: 2.438 m"
+    ],
+    "shortDescription": "10 Fuß High-Cube Seecontainer, robust und wetterfest. Perfekt für mobile Lagerlösungen.",
+    "image": "/images/container/10-fuss-hc-seecontainer-variante-3.jpg",
+    "price": "1.060,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/10-fuss-hc-seecontainer-iicl-standard-white",
+    "categoryId": "container/seecontainer",
+    "brand": "High Cube",
+    "name": "10 Fuß HC Seecontainer – IICL Standard White",
+    "slug": "10-fuss-hc-seecontainer-iicl-standard-white",
+    "bullets": [
+      "10 Fuß",
+      "2,99 m (10 Fuß 0 Zoll)",
+      "2,44 m (8 Fuß)"
+    ],
+    "shortDescription": "10 Fuß HC Seecontainer in IICL Standard White – sofort verfügbar, geprüfte Qualität.",
+    "image": "/images/container/10-fuss-hc-seecontainer-iicl-standard-white.jpg",
+    "price": "950,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/10-fuss-kuehlcontainer-fuer-den-inlandsbereich-neu",
+    "categoryId": "container/sondercontainer",
+    "brand": "Kühlcontainer",
+    "name": "10 Fuß Kühlcontainer für den Inlandsbereich – Neu",
+    "slug": "10-fuss-kuehlcontainer-fuer-den-inlandsbereich-neu",
+    "bullets": [
+      "10 Fuß",
+      "Innenmaße (LxBxH): 2.383 x 2.292 x 2.275 mm",
+      "Außenmaße (LxBxH): 2.991 x 2.438 x 2.591 mm"
+    ],
+    "shortDescription": "Neuer 10 Fuß Kühlcontainer (Reefer) für den Inlandseinsatz. Präzise Temperaturkontrolle für Lebensmittel und temperaturempfindliche Güter.",
+    "image": "/images/container/10-fuss-kuehlcontainer-fuer-den-inlandsbereich-neu.jpg",
+    "price": "2.200,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/10-fuss-seecontainer-mit-rolltor-gebraucht",
+    "categoryId": "container/sondercontainer",
+    "brand": "Sonderöffnung",
+    "name": "10 Fuß Seecontainer mit Rolltor – Gebraucht",
+    "slug": "10-fuss-seecontainer-mit-rolltor-gebraucht",
+    "bullets": [
+      "10 Fuß",
+      "Rolltor – Gebraucht",
+      "Außenmaße: 9'10″L x 8'l x 8'6″h"
+    ],
+    "shortDescription": "19-lagiges, 1,1″ (28 mm) starkes Sperrholz in Marinequalität",
+    "image": "/images/container/10-fuss-seecontainer-mit-rolltor-gebraucht.jpg",
+    "price": "1.450,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/20-fuss-high-cube-seecontainer",
+    "categoryId": "container/seecontainer",
+    "brand": "High Cube",
+    "name": "20 Fuß High Cube Seecontainer",
+    "slug": "20-fuss-high-cube-seecontainer",
+    "bullets": [
+      "20 Fuß",
+      "6058 mm",
+      "5898 mm"
+    ],
+    "shortDescription": "20 Fuß High Cube Seecontainer mit zusätzlicher Innenhöhe. Bewährte CSC-Qualität für maritimen Einsatz.",
+    "image": "/images/container/20-fuss-high-cube-seecontainer.jpg",
+    "price": "1.550,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/20-fuss-hc-container-mit-doppeltueren",
+    "categoryId": "container/sondercontainer",
+    "brand": "Sonderöffnung",
+    "name": "20 Fuß HC Container mit Doppeltüren",
+    "slug": "20-fuss-hc-container-mit-doppeltueren",
+    "bullets": [
+      "20 Fuß",
+      "Doppeltüren",
+      "6058 mm"
+    ],
+    "shortDescription": "20 Fuß High Cube Container mit Doppeltüren an beiden Enden – maximaler Zugriff und einfache Beladung.",
+    "image": "/images/container/20-fuss-hc-container-mit-doppeltueren.jpg",
+    "price": "1.710,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/20-fuss-high-cube-container",
+    "categoryId": "container/seecontainer",
+    "brand": "High Cube",
+    "name": "20 Fuß High Cube Container",
+    "slug": "20-fuss-high-cube-container",
+    "bullets": [
+      "20 Fuß",
+      "6058 mm",
+      "5898 mm"
+    ],
+    "shortDescription": "20 Fuß High Cube Container, ideal für Lagerung und Transport sperriger Güter.",
+    "image": "/images/container/20-fuss-high-cube-container.jpg",
+    "price": "1.520,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/20-fuss-high-cube-container-variante-2",
+    "categoryId": "container/seecontainer",
+    "brand": "High Cube",
+    "name": "20 Fuß High Cube Container (Variante 2)",
+    "slug": "20-fuss-high-cube-container-variante-2",
+    "bullets": [
+      "20 Fuß",
+      "6058 mm",
+      "5898 mm"
+    ],
+    "shortDescription": "20 Fuß High Cube Container in robustem Stahl, wetterfest und langlebig.",
+    "image": "/images/container/20-fuss-high-cube-container-variante-2.jpg",
+    "price": "1.621,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/20-fuss-open-side-container",
+    "categoryId": "container/sondercontainer",
+    "brand": "Sonderöffnung",
+    "name": "20 Fuß Open Side Container",
+    "slug": "20-fuss-open-side-container",
+    "bullets": [
+      "20 Fuß",
+      "6058 mm",
+      "5898 mm"
+    ],
+    "shortDescription": "20 Fuß Open Side Container mit voll öffnender Seitenwand für einfachen Zugang über die gesamte Länge.",
+    "image": "/images/container/20-fuss-open-side-container.jpg",
+    "price": "1.850,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/20-fuss-open-side-container-variante-2",
+    "categoryId": "container/sondercontainer",
+    "brand": "Sonderöffnung",
+    "name": "20 Fuß Open Side Container (Variante 2)",
+    "slug": "20-fuss-open-side-container-variante-2",
+    "bullets": [
+      "20 Fuß",
+      "6058 mm",
+      "5898 mm"
+    ],
+    "shortDescription": "20 Fuß Open Side Container, perfekt für sperrige Ladung und einfache Be-/Entladung von der Seite.",
+    "image": "/images/container/20-fuss-open-side-container-variante-2.jpg",
+    "price": "1.800,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/20-fuss-standardcontainer",
+    "categoryId": "container/seecontainer",
+    "brand": "Seecontainer",
+    "name": "20 Fuß Standardcontainer",
+    "slug": "20-fuss-standardcontainer",
+    "bullets": [
+      "20 Fuß",
+      "6058 mm",
+      "5900 mm"
+    ],
+    "shortDescription": "20 Fuß Standardcontainer, der Klassiker für Transport und Lagerung. Robust, sicher und sofort einsetzbar.",
+    "image": "/images/container/20-fuss-standardcontainer.jpg",
+    "price": "1.451,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/20-fuss-standardcontainer-variante-2",
+    "categoryId": "container/seecontainer",
+    "brand": "Seecontainer",
+    "name": "20 Fuß Standardcontainer (Variante 2)",
+    "slug": "20-fuss-standardcontainer-variante-2",
+    "bullets": [
+      "20 Fuß",
+      "6058 mm",
+      "5900 mm"
+    ],
+    "shortDescription": "20 Fuß Standardcontainer in geprüftem Zustand – die universelle Lösung für Logistik und Lagerung.",
+    "image": "/images/container/20-fuss-standardcontainer-variante-2.jpg",
+    "price": "1.471,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/20-fuss-offener-container-gebraucht",
+    "categoryId": "container/sondercontainer",
+    "brand": "Sonderöffnung",
+    "name": "20 Fuß Offener Container – Gebraucht",
+    "slug": "20-fuss-offener-container-gebraucht",
+    "bullets": [
+      "20 Fuß",
+      "Außenmaße: 20'L x 8'B x 8'6\"H",
+      "Innenmaße: 6,9 m L x 2,3 m B x 2,3 m H"
+    ],
+    "shortDescription": "Gebrauchter 20 Fuß Open Top Container für übergroße Ladung und Krankranbeladung von oben.",
+    "image": "/images/container/20-fuss-offener-container-gebraucht.jpg",
+    "price": "1.710,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/20-fuss-versandcontainer",
+    "categoryId": "container/seecontainer",
+    "brand": "Versandcontainer",
+    "name": "20 Fuß Versandcontainer",
+    "slug": "20-fuss-versandcontainer",
+    "bullets": [
+      "20 Fuß",
+      "Außenlänge: 20 Fuß (6.058 mm)",
+      "Außenbreite: 8 Fuß (2.438 mm)"
+    ],
+    "shortDescription": "20 Fuß Versandcontainer, sofort lieferbar. Zertifiziert für See- und Landtransport.",
+    "image": "/images/container/20-fuss-versandcontainer.jpg",
+    "price": "1.600,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/20-fuss-versandcontainer-gebraucht",
+    "categoryId": "container/seecontainer",
+    "brand": "Versandcontainer",
+    "name": "20 Fuß Versandcontainer – Gebraucht",
+    "slug": "20-fuss-versandcontainer-gebraucht",
+    "bullets": [
+      "20 Fuß",
+      "Typ: Standard Gebrauchtcontainer (20 Fuß)",
+      "Länge 6,06 m × Breite 2,44 m × Höhe 2,59 m"
+    ],
+    "shortDescription": "Gebrauchter 20 Fuß Versandcontainer in solidem Zustand – günstige Lagerlösung mit langer Lebensdauer.",
+    "image": "/images/container/20-fuss-versandcontainer-gebraucht.jpg",
+    "price": "1.390,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/20-fuss-versandcontainer-mit-offener-seite",
+    "categoryId": "container/sondercontainer",
+    "brand": "Versandcontainer",
+    "name": "20 Fuß Versandcontainer mit offener Seite",
+    "slug": "20-fuss-versandcontainer-mit-offener-seite",
+    "bullets": [
+      "20 Fuß",
+      "offener Seite",
+      "Länge 6.058 mm"
+    ],
+    "shortDescription": "20 Fuß Versandcontainer mit komplett offener Seite – maximaler Zugang für sperrige Güter.",
+    "image": "/images/container/20-fuss-versandcontainer-mit-offener-seite.jpg",
+    "price": "1.785,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/20-fuss-versandcontainer-mit-seitlicher-oeffnung-gebraucht",
+    "categoryId": "container/sondercontainer",
+    "brand": "Sonderöffnung",
+    "name": "20 Fuß Versandcontainer mit seitlicher Öffnung – Gebraucht",
+    "slug": "20-fuss-versandcontainer-mit-seitlicher-oeffnung-gebraucht",
+    "bullets": [
+      "20 Fuß",
+      "seitlicher Öffnung – Gebraucht",
+      "Länge 6,06 m × Breite 2,44 m × Höhe 2,59 m"
+    ],
+    "shortDescription": "Gebrauchter 20 Fuß Versandcontainer mit seitlicher Öffnung – flexibel be- und entladen.",
+    "image": "/images/container/20-fuss-versandcontainer-mit-seitlicher-oeffnung-gebraucht.jpg",
+    "price": "1.700,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/20-fuss-versandcontainer-neu",
+    "categoryId": "container/seecontainer",
+    "brand": "Versandcontainer",
+    "name": "20 Fuß Versandcontainer – Neu",
+    "slug": "20-fuss-versandcontainer-neu",
+    "bullets": [
+      "20 Fuß",
+      "Außenlänge: 20 Fuß (6.058 mm)",
+      "Außenbreite: 8 Fuß (2.438 mm)"
+    ],
+    "shortDescription": "Neuer 20 Fuß Versandcontainer – One-Trip-Container in Top-Zustand mit Werksgarantie.",
+    "image": "/images/container/20-fuss-versandcontainer-neu.jpg",
+    "price": "1.655,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/40-fuss-high-cube-container",
+    "categoryId": "container/seecontainer",
+    "brand": "High Cube",
+    "name": "40 Fuß High Cube Container",
+    "slug": "40-fuss-high-cube-container",
+    "bullets": [
+      "40 Fuß",
+      "12192 mm",
+      "12032 mm"
+    ],
+    "shortDescription": "40 Fuß High Cube Container, robust und wetterfest – die beste Wahl für große Lasten.",
+    "image": "/images/container/40-fuss-high-cube-container.jpg",
+    "price": "1.900,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/40-fuss-high-cube-container-variante-2",
+    "categoryId": "container/seecontainer",
+    "brand": "High Cube",
+    "name": "40 Fuß High Cube Container (Variante 2)",
+    "slug": "40-fuss-high-cube-container-variante-2",
+    "bullets": [
+      "40 Fuß",
+      "12192 mm",
+      "12032 mm"
+    ],
+    "shortDescription": "40 Fuß High Cube Container mit zusätzlicher Höhe – maximales Volumen für Transport und Lagerung.",
+    "image": "/images/container/40-fuss-high-cube-container-variante-2.jpg",
+    "price": "1.621,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/40-fuss-hc-containereinheit-vollstaendig-ausgestattet-neu",
+    "categoryId": "container/seecontainer",
+    "brand": "High Cube",
+    "name": "40 Fuß HC Containereinheit – Vollständig ausgestattet – Neu",
+    "slug": "40-fuss-hc-containereinheit-vollstaendig-ausgestattet-neu",
+    "bullets": [
+      "40 Fuß",
+      "Länge: 12.192 mm | 40'0″",
+      "Breite – 2438 mm | 8′ 0″"
+    ],
+    "shortDescription": "Neuer 40 Fuß HC Containereinheit, vollständig ausgestattet und schlüsselfertig – ideal für Wohn-, Büro- oder Werkstattumbauten.",
+    "image": "/images/container/40-fuss-hc-containereinheit-vollstaendig-ausgestattet-neu.jpg",
+    "price": "3.550,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/40-fuss-hc-container-mit-4-seitentueren-gebraucht",
+    "categoryId": "container/sondercontainer",
+    "brand": "High Cube",
+    "name": "40 Fuß HC Container mit 4 Seitentüren – Gebraucht",
+    "slug": "40-fuss-hc-container-mit-4-seitentueren-gebraucht",
+    "bullets": [
+      "40 Fuß",
+      "4 Seitentüren – Gebraucht",
+      "Innenhöhe: 2695 mm"
+    ],
+    "shortDescription": "Gebrauchter 40 Fuß High Cube Container mit 4 praktischen Seitentüren für einfachen Zugang von allen Seiten. Ideal für Lager, Werkstatt oder spezielle Logistikanwendungen.",
+    "image": "/images/container/40-fuss-hc-container-mit-4-seitentueren-gebraucht.jpg",
+    "price": "2.850,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/40-fuss-hc-container-mit-seitenoeffnungen",
+    "categoryId": "container/sondercontainer",
+    "brand": "High Cube",
+    "name": "40 Fuß HC Container mit Seitenöffnungen",
+    "slug": "40-fuss-hc-container-mit-seitenoeffnungen",
+    "bullets": [
+      "40 Fuß",
+      "Seitenöffnungen",
+      "28 mm Bootsbausperrholzboden auf Stahlschwellen"
+    ],
+    "shortDescription": "40 Fuß High Cube Container mit großen Seitenöffnungen für maximale Flexibilität bei Be- und Entladung. Perfekt für sperrige Güter und schnellen Warenumschlag.",
+    "image": "/images/container/40-fuss-hc-container-mit-seitenoeffnungen.jpg",
+    "price": "2.790,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/40-fuss-hc-container-neu",
+    "categoryId": "container/seecontainer",
+    "brand": "High Cube",
+    "name": "40 Fuß HC Container – Neu",
+    "slug": "40-fuss-hc-container-neu",
+    "bullets": [
+      "40 Fuß",
+      "Länge: 12.192 mm",
+      "Breite: 2.438 mm"
+    ],
+    "shortDescription": "Neuer 40 Fuß High Cube Container in Top-Qualität. Geräumig, robust und vielseitig einsetzbar – ideal für Transport, Lagerung oder Umbauprojekte.",
+    "image": "/images/container/40-fuss-hc-container-neu.jpg",
+    "price": "1.856,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/40-fuss-high-cube-container-2",
+    "categoryId": "container/seecontainer",
+    "brand": "High Cube",
+    "name": "40 Fuß High Cube Container",
+    "slug": "40-fuss-high-cube-container-2",
+    "bullets": [
+      "40 Fuß",
+      "Länge: 12.029 mm",
+      "Breite: 2.350 mm"
+    ],
+    "shortDescription": "Klassischer 40 Fuß High Cube Container mit zusätzlicher Höhe für maximales Ladevolumen. Standardmaße, robuste Stahlkonstruktion, sofort verfügbar.",
+    "image": "/images/container/40-fuss-high-cube-container-2.jpg",
+    "price": "1.821,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/40-fuss-seecontainer-mit-seitenoeffnung",
+    "categoryId": "container/sondercontainer",
+    "brand": "Seecontainer",
+    "name": "40 Fuß Seecontainer mit Seitenöffnung",
+    "slug": "40-fuss-seecontainer-mit-seitenoeffnung",
+    "bullets": [
+      "40 Fuß",
+      "Seitenöffnung",
+      "Außenmaße : 12,19 m x 2,44 m x 2,59 m"
+    ],
+    "shortDescription": "40 Fuß Seecontainer mit praktischer Seitenöffnung für komfortablen Zugang. Wetterfest und sicher – perfekt für maritimen Einsatz und langfristige Lagerung.",
+    "image": "/images/container/40-fuss-seecontainer-mit-seitenoeffnung.jpg",
+    "price": "2.650,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/40-fuss-seecontainer-mit-seitenoeffnung-variante-2",
+    "categoryId": "container/sondercontainer",
+    "brand": "Seecontainer",
+    "name": "40 Fuß Seecontainer mit Seitenöffnung (Variante 2)",
+    "slug": "40-fuss-seecontainer-mit-seitenoeffnung-variante-2",
+    "bullets": [
+      "40 Fuß",
+      "Seitenöffnung",
+      "Außenmaße : 12,19 m x 2,44 m x 2,59 m"
+    ],
+    "shortDescription": "Alternative Ausführung des 40 Fuß Seecontainers mit Seitenöffnung. Robust, wetterfest und vielseitig einsetzbar für Transport oder Lagerung.",
+    "image": "/images/container/40-fuss-seecontainer-mit-seitenoeffnung-variante-2.jpg",
+    "price": "2.700,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/40-fuss-weisser-container-neu",
+    "categoryId": "container/seecontainer",
+    "brand": "Seecontainer",
+    "name": "40 Fuß Weißer Container – Neu",
+    "slug": "40-fuss-weisser-container-neu",
+    "bullets": [
+      "40 Fuß",
+      "Länge 12,20m",
+      "Breite 2,4 m"
+    ],
+    "shortDescription": "Neuer 40 Fuß Container in eleganter weißer Lackierung. Ideal für Branding-Projekte, Pop-up-Stores oder repräsentative Lagerlösungen.",
+    "image": "/images/container/40-fuss-weisser-container-neu.jpg",
+    "price": "1.890,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/5x2-20-buerocontainer-mit-toilette",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "WC-Container",
+    "name": "5x2,20 Bürocontainer mit Toilette",
+    "slug": "5x2-20-buerocontainer-mit-toilette",
+    "bullets": [
+      "Toilette",
+      "Innenarchitektur: Schreibtische, Stauraum, Schränke usw",
+      "Ausstattung: Strom, Heizung, Klimaanlage, Beleuchtung"
+    ],
+    "shortDescription": "Kompakter Bürocontainer 5 x 2,20 m mit integrierter Toilette. Praktische Komplettlösung für Baustellen, temporäre Büros oder Veranstaltungen.",
+    "image": "/images/container/5x2-20-buerocontainer-mit-toilette.jpg",
+    "price": "2.855,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/6x3-buerocontainer",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "6x3 Bürocontainer",
+    "slug": "6x3-buerocontainer",
+    "bullets": [
+      "1x Außentür 875 x 2.000mm, Profilzylinderschloss",
+      "1x D/K Fenster 2.050 x 1.240mm Isoglas / Rollo",
+      "2x Fenster D/K 900 x 1.200mm Isoglas / Rollo"
+    ],
+    "shortDescription": "Geräumiger Bürocontainer 6 x 3 m für komfortables Arbeiten. Helle Innenausstattung, isoliert und bereit für den sofortigen Einsatz.",
+    "image": "/images/container/6x3-buerocontainer.jpg",
+    "price": "2.991,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-6-x-2-40-holzfarbe",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 6 x 2,40 – Holzfarbe",
+    "slug": "buerocontainer-6-x-2-40-holzfarbe",
+    "bullets": [
+      "Holzfassade: eine natürliche und warme Optik",
+      "Sandwichpaneele für Wände und Dächer, 7,5 cm Dämmung",
+      "230 V Steckdosen"
+    ],
+    "shortDescription": "Bürocontainer 6 x 2,40 m in attraktiver Holzoptik. Verbindet funktionales Arbeiten mit ansprechendem Design – ideal für stilvolle temporäre Büros.",
+    "image": "/images/container/buerocontainer-6-x-2-40-holzfarbe.jpg",
+    "price": "2.850,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-6-00-x-2-40-m-mit-toilette-dusche-und-kueche",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Duschcontainer",
+    "name": "Bürocontainer 6,00 x 2,40 m mit Toilette, Dusche und Küche",
+    "slug": "buerocontainer-6-00-x-2-40-m-mit-toilette-dusche-und-kueche",
+    "bullets": [
+      "6,00 × 2,40 m",
+      "it Toilette, Dusche und Küche",
+      "Toilette"
+    ],
+    "shortDescription": "Voll ausgestatteter Bürocontainer 6,00 x 2,40 m mit Toilette, Dusche und Küche. Komplettlösung für längere Projekte – wohnen und arbeiten in einem.",
+    "image": "/images/container/buerocontainer-6-00-x-2-40-m-mit-toilette-dusche-und-kueche.jpg",
+    "price": "3.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-mit-jalousien-6-x-2-4-m",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer mit Jalousien 6 x 2,4 m",
+    "slug": "buerocontainer-mit-jalousien-6-x-2-4-m",
+    "bullets": [
+      "Jalousien 6 x 2",
+      "Wand- und Deckendämmung mit 7,5 cm Sandwichpaneelen",
+      "230V Steckdosen"
+    ],
+    "shortDescription": "Bürocontainer 6 x 2,4 m mit hochwertigen Jalousien für optimalen Sicht- und Sonnenschutz. Modern, funktional und sofort einsatzbereit.",
+    "image": "/images/container/buerocontainer-mit-jalousien-6-x-2-4-m.jpg",
+    "price": "2.900,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/modifizierter-10-fuss-container",
+    "categoryId": "container/sondercontainer",
+    "brand": "Seecontainer",
+    "name": "Modifizierter 10 Fuß Container",
+    "slug": "modifizierter-10-fuss-container",
+    "bullets": [
+      "10 Fuß"
+    ],
+    "shortDescription": "Die Abmessungen dieses Containers werden üblicherweise nach dem angelsächsischen System gemessen, wobei ein Fuß 30,48 Zentimetern entspricht. Mit dieser Umrechnung betragen die Außen- und Innenmaße eines 10-Fuß-Containers:",
+    "image": "/images/container/modifizierter-10-fuss-container.jpg",
+    "price": "1.299,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/standard-buerocontainer-6-00-x-2-43-m",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Standard Bürocontainer 6,00 x 2,43 m",
+    "slug": "standard-buerocontainer-6-00-x-2-43-m",
+    "bullets": [
+      "6,00 × 2,43 m",
+      "Dämmung: 100 mm Mineralwolle, 0,2 mm Dampfsperre",
+      "Zulässige Erdlast: 3,8 kn/m"
+    ],
+    "shortDescription": "Standard-Bürocontainer mit Maßen 6,00 x 2,43 m. Bewährte Lösung für Büro- und Aufenthaltsräume auf Baustellen, in der Industrie oder bei Events.",
+    "image": "/images/container/standard-buerocontainer-6-00-x-2-43-m.jpg",
+    "price": "2.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/premium-tiny-house-wochenendhaus-l-form",
+    "categoryId": "container/wohncontainer",
+    "brand": "Tiny House",
+    "name": "Premium Tiny House / Wochenendhaus L-Form",
+    "slug": "premium-tiny-house-wochenendhaus-l-form",
+    "bullets": [
+      "Premium-Ausführung"
+    ],
+    "shortDescription": "Wohneinheit aus unserem Bestand: Premium Tiny House / Wochenendhaus L-Form. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/premium-tiny-house-wochenendhaus-l-form.jpg",
+    "price": "58.815,13 €",
+    "inStock": true
+  },
+  {
+    "id": "container/imbisscontainer-5-00-x-8-00-sofort-lieferbar",
+    "categoryId": "container/sondercontainer",
+    "brand": "Imbisscontainer",
+    "name": "Imbisscontainer 5,00 x 8,00 sofort lieferbar",
+    "slug": "imbisscontainer-5-00-x-8-00-sofort-lieferbar",
+    "bullets": [
+      "5,00 × 8,00 m",
+      "sofort lieferbar",
+      "Sofort lieferbar"
+    ],
+    "shortDescription": "Sonderausführung aus unserem Bestand: Imbisscontainer 5,00 x 8,00 sofort lieferbar. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/imbisscontainer-5-00-x-8-00-sofort-lieferbar.jpg",
+    "price": "42.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/schluesselfertiges-tiny-house-10-90-x-2-90-m",
+    "categoryId": "container/wohncontainer",
+    "brand": "Tiny House",
+    "name": "Schlüsselfertiges Tiny House 10,90 x 2,90 m",
+    "slug": "schluesselfertiges-tiny-house-10-90-x-2-90-m",
+    "bullets": [
+      "10,90 × 2,90 m"
+    ],
+    "shortDescription": "Wohneinheit aus unserem Bestand: Schlüsselfertiges Tiny House 10,90 x 2,90 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/schluesselfertiges-tiny-house-10-90-x-2-90-m.jpg",
+    "oldPrice": "62.990,00 €",
+    "price": "49.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/tiny-house-ferienwohnung-10-00-x-3-00-m",
+    "categoryId": "container/wohncontainer",
+    "brand": "Tiny House",
+    "name": "Tiny House / Ferienwohnung 10,00 x 3,00 m",
+    "slug": "tiny-house-ferienwohnung-10-00-x-3-00-m",
+    "bullets": [
+      "10,00 × 3,00 m"
+    ],
+    "shortDescription": "Wohneinheit aus unserem Bestand: Tiny House / Ferienwohnung 10,00 x 3,00 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/tiny-house-ferienwohnung-10-00-x-3-00-m.jpg",
+    "oldPrice": "61.990,00 €",
+    "price": "49.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-12-00-x-6-00-m-typ-lissabon",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 12,00 x 6,00 m Typ Lissabon",
+    "slug": "buerocontainer-12-00-x-6-00-m-typ-lissabon",
+    "bullets": [
+      "12,00 × 6,00 m",
+      "Typ Lissabon"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 12,00 x 6,00 m Typ Lissabon. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-12-00-x-6-00-m-typ-lissabon.jpg",
+    "price": "65.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-6-00-x-2-90-m",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 6,00 x 2,90 m",
+    "slug": "buerocontainer-6-00-x-2-90-m",
+    "bullets": [
+      "6,00 × 2,90 m"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 6,00 x 2,90 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-6-00-x-2-90-m.jpg",
+    "price": "13.290,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-6-00-x-5-00-m-typ-london",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 6,00 x 5,00 m Typ London",
+    "slug": "buerocontainer-6-00-x-5-00-m-typ-london",
+    "bullets": [
+      "6,00 × 5,00 m",
+      "Typ London"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 6,00 x 5,00 m Typ London. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-6-00-x-5-00-m-typ-london.jpg",
+    "price": "29.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-10-00-x-6-00-m-typ-dublin",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 10,00 x 6,00 m Typ Dublin",
+    "slug": "buerocontainer-10-00-x-6-00-m-typ-dublin",
+    "bullets": [
+      "10,00 × 6,00 m",
+      "Typ Dublin"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 10,00 x 6,00 m Typ Dublin. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-10-00-x-6-00-m-typ-dublin.jpg",
+    "price": "64.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/wohncontainer-6-00-x-3-00-m-mit-kuechenzeile-toilette-und-dusche",
+    "categoryId": "container/wohncontainer",
+    "brand": "Wohncontainer",
+    "name": "Wohncontainer 6,00 x 3,00 m mit Küchenzeile, Toilette und Dusche",
+    "slug": "wohncontainer-6-00-x-3-00-m-mit-kuechenzeile-toilette-und-dusche",
+    "bullets": [
+      "6,00 × 3,00 m",
+      "it Küchenzeile, Toilette und Dusche",
+      "Küchenzeile"
+    ],
+    "shortDescription": "Wohneinheit aus unserem Bestand: Wohncontainer 6,00 x 3,00 m mit Küchenzeile, Toilette und Dusche. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/wohncontainer-6-00-x-3-00-m-mit-kuechenzeile-toilette-und-dusche.jpg",
+    "price": "18.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/wohncontainer-6-00-x-2-44-mit-kuechenzeile-toilette-und-dusche",
+    "categoryId": "container/wohncontainer",
+    "brand": "Wohncontainer",
+    "name": "Wohncontainer 6,00 x 2,44 mit Küchenzeile, Toilette und Dusche",
+    "slug": "wohncontainer-6-00-x-2-44-mit-kuechenzeile-toilette-und-dusche",
+    "bullets": [
+      "6,00 × 2,44 m",
+      "it Küchenzeile, Toilette und Dusche",
+      "Küchenzeile"
+    ],
+    "shortDescription": "Wohneinheit aus unserem Bestand: Wohncontainer 6,00 x 2,44 mit Küchenzeile, Toilette und Dusche. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/wohncontainer-6-00-x-2-44-mit-kuechenzeile-toilette-und-dusche.jpg",
+    "price": "16.390,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/premium-wohncontainer-8-00-x-2-90-m-mit-kuechenzeile-toilette-und-dusc",
+    "categoryId": "container/wohncontainer",
+    "brand": "Wohncontainer",
+    "name": "Premium Wohncontainer 8,00 x 2,90 m mit Küchenzeile, Toilette und Dusche",
+    "slug": "premium-wohncontainer-8-00-x-2-90-m-mit-kuechenzeile-toilette-und-dusc",
+    "bullets": [
+      "8,00 × 2,90 m",
+      "it Küchenzeile, Toilette und Dusche",
+      "Küchenzeile"
+    ],
+    "shortDescription": "Wohneinheit aus unserem Bestand: Premium Wohncontainer 8,00 x 2,90 m mit Küchenzeile, Toilette und Dusche. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/premium-wohncontainer-8-00-x-2-90-m-mit-kuechenzeile-toilette-und-dusc.jpg",
+    "price": "26.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/ferienwohnung-troms-8-00-x-3-00-m",
+    "categoryId": "container/wohncontainer",
+    "brand": "Ferienwohnung",
+    "name": "Ferienwohnung \"Tromsø\" 8,00 x 3,00 m",
+    "slug": "ferienwohnung-troms-8-00-x-3-00-m",
+    "bullets": [
+      "8,00 × 3,00 m"
+    ],
+    "shortDescription": "Wohneinheit aus unserem Bestand: Ferienwohnung \"Tromsø\" 8,00 x 3,00 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/ferienwohnung-troms-8-00-x-3-00-m.jpg",
+    "price": "29.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-3-20-x-2-10-m",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 3,20 x 2,10 m",
+    "slug": "buerocontainer-3-20-x-2-10-m",
+    "bullets": [
+      "3,20 × 2,10 m"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 3,20 x 2,10 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-3-20-x-2-10-m.jpg",
+    "price": "8.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-6-00-x-2-80-m",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 6,00 x 2,80 m",
+    "slug": "buerocontainer-6-00-x-2-80-m",
+    "bullets": [
+      "6,00 × 2,80 m"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 6,00 x 2,80 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-6-00-x-2-80-m.jpg",
+    "price": "12.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/imbisscontainer-18-60-x-6-50-m",
+    "categoryId": "container/sondercontainer",
+    "brand": "Imbisscontainer",
+    "name": "Imbisscontainer 18,60 x 6,50 m",
+    "slug": "imbisscontainer-18-60-x-6-50-m",
+    "bullets": [
+      "18,60 × 6,50 m"
+    ],
+    "shortDescription": "Sonderausführung aus unserem Bestand: Imbisscontainer 18,60 x 6,50 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/imbisscontainer-18-60-x-6-50-m.jpg",
+    "price": "139.900,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/premium-buerocontainer-6-00-x-2-44-tuer-stirnseitig",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Premium Bürocontainer 6,00 x 2,44 Tür Stirnseitig",
+    "slug": "premium-buerocontainer-6-00-x-2-44-tuer-stirnseitig",
+    "bullets": [
+      "6,00 × 2,44 m",
+      "Tür Stirnseitig",
+      "Premium-Ausführung"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Premium Bürocontainer 6,00 x 2,44 Tür Stirnseitig. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/premium-buerocontainer-6-00-x-2-44-tuer-stirnseitig.jpg",
+    "price": "10.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/lagercontainer-6-00-x-2-44-mit-zweifluegeliger-tuer",
+    "categoryId": "container/lagercontainer",
+    "brand": "Lagercontainer",
+    "name": "Lagercontainer 6,00 x 2,44 mit zweiflügeliger Tür",
+    "slug": "lagercontainer-6-00-x-2-44-mit-zweifluegeliger-tuer",
+    "bullets": [
+      "6,00 × 2,44 m",
+      "it zweiflügeliger Tür",
+      "zweiflügeliger Tür"
+    ],
+    "shortDescription": "Lagercontainer aus unserem Bestand: Lagercontainer 6,00 x 2,44 mit zweiflügeliger Tür. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/lagercontainer-6-00-x-2-44-mit-zweifluegeliger-tuer.jpg",
+    "price": "11.390,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/garagencontainer-6-00-x-3-00-mit-tor",
+    "categoryId": "container/lagercontainer",
+    "brand": "Garagencontainer",
+    "name": "Garagencontainer 6,00 x 3,00 mit Tor",
+    "slug": "garagencontainer-6-00-x-3-00-mit-tor",
+    "bullets": [
+      "6,00 × 3,00 m",
+      "it Tor"
+    ],
+    "shortDescription": "Lagercontainer aus unserem Bestand: Garagencontainer 6,00 x 3,00 mit Tor. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/garagencontainer-6-00-x-3-00-mit-tor.jpg",
+    "price": "16.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/imbisscontainer-ideal-fuer-doener",
+    "categoryId": "container/sondercontainer",
+    "brand": "Imbisscontainer",
+    "name": "Imbisscontainer - ideal für Döner",
+    "slug": "imbisscontainer-ideal-fuer-doener",
+    "bullets": [],
+    "shortDescription": "Sonderausführung aus unserem Bestand: Imbisscontainer - ideal für Döner. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/imbisscontainer-ideal-fuer-doener.jpg",
+    "price": "9.900,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/lagercontainer-3-00-x-2-00-m",
+    "categoryId": "container/lagercontainer",
+    "brand": "Lagercontainer",
+    "name": "Lagercontainer 3,00 x 2,00 m",
+    "slug": "lagercontainer-3-00-x-2-00-m",
+    "bullets": [
+      "3,00 × 2,00 m"
+    ],
+    "shortDescription": "Lagercontainer aus unserem Bestand: Lagercontainer 3,00 x 2,00 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/lagercontainer-3-00-x-2-00-m.jpg",
+    "price": "5.790,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/lagercontainer-2-60-x-2-00-m",
+    "categoryId": "container/lagercontainer",
+    "brand": "Lagercontainer",
+    "name": "Lagercontainer 2,60 x 2,00 m",
+    "slug": "lagercontainer-2-60-x-2-00-m",
+    "bullets": [
+      "2,60 × 2,00 m"
+    ],
+    "shortDescription": "Lagercontainer aus unserem Bestand: Lagercontainer 2,60 x 2,00 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/lagercontainer-2-60-x-2-00-m.jpg",
+    "price": "5.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-6-00-x-2-44-tuer-laengsseitig",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 6,00 x 2,44 Tür Längsseitig",
+    "slug": "buerocontainer-6-00-x-2-44-tuer-laengsseitig",
+    "bullets": [
+      "6,00 × 2,44 m",
+      "Tür Längsseitig"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 6,00 x 2,44 Tür Längsseitig. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-6-00-x-2-44-tuer-laengsseitig.jpg",
+    "price": "11.390,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-6-00-x-2-44-glastuer-mit-rollladen",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 6,00 x 2,44 Glastür mit Rollladen",
+    "slug": "buerocontainer-6-00-x-2-44-glastuer-mit-rollladen",
+    "bullets": [
+      "6,00 × 2,44 m",
+      "Glastür mit Rollladen",
+      "Rollladen"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 6,00 x 2,44 Glastür mit Rollladen. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-6-00-x-2-44-glastuer-mit-rollladen.jpg",
+    "price": "12.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/doppelcontainer-6-00-x-4-88-m",
+    "categoryId": "container/buerocontainer",
+    "brand": "Doppelcontainer",
+    "name": "Doppelcontainer 6,00 x 4,88 m",
+    "slug": "doppelcontainer-6-00-x-4-88-m",
+    "bullets": [
+      "6,00 × 4,88 m"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Doppelcontainer 6,00 x 4,88 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/doppelcontainer-6-00-x-4-88-m.jpg",
+    "price": "23.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/sanitaercontainer-6-00-x-2-00-damen-herren-und-rollstuhl-abteil",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Sanitärcontainer",
+    "name": "Sanitärcontainer 6,00 x 2,00 Damen- /Herren- und Rollstuhl-Abteil",
+    "slug": "sanitaercontainer-6-00-x-2-00-damen-herren-und-rollstuhl-abteil",
+    "bullets": [
+      "6,00 × 2,00 m",
+      "Damen- /Herren- und Rollstuhl-Abteil"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: Sanitärcontainer 6,00 x 2,00 Damen- /Herren- und Rollstuhl-Abteil. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/sanitaercontainer-6-00-x-2-00-damen-herren-und-rollstuhl-abteil.jpg",
+    "price": "23.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/autarker-wc-anhaenger-damen-herren-mit-1000l-tank",
+    "categoryId": "container/anhaenger",
+    "brand": "WC-Anhänger",
+    "name": "Autarker WC-Anhänger Damen/Herren mit 1000L Tank",
+    "slug": "autarker-wc-anhaenger-damen-herren-mit-1000l-tank",
+    "bullets": [
+      "1000L Tank",
+      "Autarker Betrieb"
+    ],
+    "shortDescription": "Anhänger aus unserem Bestand: Autarker WC-Anhänger Damen/Herren mit 1000L Tank. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/autarker-wc-anhaenger-damen-herren-mit-1000l-tank.jpg",
+    "price": "21.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/autarker-wc-anhaenger-damen-herren-mit-toilette",
+    "categoryId": "container/anhaenger",
+    "brand": "WC-Anhänger",
+    "name": "Autarker WC-Anhänger Damen/Herren mit Toilette",
+    "slug": "autarker-wc-anhaenger-damen-herren-mit-toilette",
+    "bullets": [
+      "Toilette",
+      "Autarker Betrieb"
+    ],
+    "shortDescription": "Anhänger aus unserem Bestand: Autarker WC-Anhänger Damen/Herren mit Toilette. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/autarker-wc-anhaenger-damen-herren-mit-toilette.jpg",
+    "price": "16.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/wc-anhaenger-damen-herren-mit-toilette",
+    "categoryId": "container/anhaenger",
+    "brand": "WC-Anhänger",
+    "name": "WC-Anhänger Damen/Herren mit Toilette",
+    "slug": "wc-anhaenger-damen-herren-mit-toilette",
+    "bullets": [
+      "Toilette"
+    ],
+    "shortDescription": "Anhänger aus unserem Bestand: WC-Anhänger Damen/Herren mit Toilette. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/wc-anhaenger-damen-herren-mit-toilette.jpg",
+    "price": "12.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/6-00-m-wc-anhaenger-damen-herren-mit-5x-toiletten-und-3x-urinale",
+    "categoryId": "container/anhaenger",
+    "brand": "WC-Anhänger",
+    "name": "6,00 - m WC-Anhänger Damen/Herren mit 5x Toiletten und 3x Urinale",
+    "slug": "6-00-m-wc-anhaenger-damen-herren-mit-5x-toiletten-und-3x-urinale",
+    "bullets": [
+      "5x Toiletten und 3x Urinale"
+    ],
+    "shortDescription": "Anhänger aus unserem Bestand: 6,00 - m WC-Anhänger Damen/Herren mit 5x Toiletten und 3x Urinale. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/6-00-m-wc-anhaenger-damen-herren-mit-5x-toiletten-und-3x-urinale.jpg",
+    "price": "22.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/6-00-m-buero-anhaenger-mit-kuechenzeile-und-wc",
+    "categoryId": "container/anhaenger",
+    "brand": "Büro-Anhänger",
+    "name": "6,00 - m Büro-Anhänger mit Küchenzeile und WC",
+    "slug": "6-00-m-buero-anhaenger-mit-kuechenzeile-und-wc",
+    "bullets": [
+      "Küchenzeile und WC"
+    ],
+    "shortDescription": "Anhänger aus unserem Bestand: 6,00 - m Büro-Anhänger mit Küchenzeile und WC. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/6-00-m-buero-anhaenger-mit-kuechenzeile-und-wc.jpg",
+    "price": "20.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/wc-anhaenger-damen-herren-mit-3x-wc-und-2x-urinal",
+    "categoryId": "container/anhaenger",
+    "brand": "WC-Anhänger",
+    "name": "WC-Anhänger Damen/Herren mit 3x WC und 2x Urinal",
+    "slug": "wc-anhaenger-damen-herren-mit-3x-wc-und-2x-urinal",
+    "bullets": [
+      "3x WC und 2x Urinal"
+    ],
+    "shortDescription": "Anhänger aus unserem Bestand: WC-Anhänger Damen/Herren mit 3x WC und 2x Urinal. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/wc-anhaenger-damen-herren-mit-3x-wc-und-2x-urinal.jpg",
+    "price": "18.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/wc-anhaenger-damen-herren-mit-toilette-und-dusche",
+    "categoryId": "container/anhaenger",
+    "brand": "WC-Anhänger",
+    "name": "WC-Anhänger Damen/Herren mit Toilette und Dusche",
+    "slug": "wc-anhaenger-damen-herren-mit-toilette-und-dusche",
+    "bullets": [
+      "Toilette und Dusche"
+    ],
+    "shortDescription": "Anhänger aus unserem Bestand: WC-Anhänger Damen/Herren mit Toilette und Dusche. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/wc-anhaenger-damen-herren-mit-toilette-und-dusche.jpg",
+    "price": "13.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/20-fuss-lagercontainer-seecontainer-6-00-x-2-44-m",
+    "categoryId": "container/seecontainer",
+    "brand": "Lagercontainer",
+    "name": "20 Fuß Lagercontainer / Seecontainer 6,00 x 2,44 m",
+    "slug": "20-fuss-lagercontainer-seecontainer-6-00-x-2-44-m",
+    "bullets": [
+      "6,00 × 2,44 m"
+    ],
+    "shortDescription": "Seecontainer aus unserem Bestand: 20 Fuß Lagercontainer / Seecontainer 6,00 x 2,44 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/20-fuss-lagercontainer-seecontainer-6-00-x-2-44-m.jpg",
+    "price": "3.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/8-fuss-lagercontainer-seecontainer-2-44-x-2-20-m",
+    "categoryId": "container/seecontainer",
+    "brand": "Lagercontainer",
+    "name": "8 Fuß Lagercontainer / Seecontainer 2,44 x 2,20 m",
+    "slug": "8-fuss-lagercontainer-seecontainer-2-44-x-2-20-m",
+    "bullets": [
+      "2,44 × 2,20 m"
+    ],
+    "shortDescription": "Seecontainer aus unserem Bestand: 8 Fuß Lagercontainer / Seecontainer 2,44 x 2,20 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/8-fuss-lagercontainer-seecontainer-2-44-x-2-20-m.jpg",
+    "price": "2.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/gebrauchter-40-fuss-lagercontainer-seecontainer-12-00-x-2-44-m",
+    "categoryId": "container/seecontainer",
+    "brand": "Lagercontainer",
+    "name": "Gebrauchter 40 Fuß Lagercontainer / Seecontainer 12,00 x 2,44 m",
+    "slug": "gebrauchter-40-fuss-lagercontainer-seecontainer-12-00-x-2-44-m",
+    "bullets": [
+      "12,00 × 2,44 m"
+    ],
+    "shortDescription": "Seecontainer aus unserem Bestand: Gebrauchter 40 Fuß Lagercontainer / Seecontainer 12,00 x 2,44 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/gebrauchter-40-fuss-lagercontainer-seecontainer-12-00-x-2-44-m.jpg",
+    "price": "2.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/40-fuss-lagercontainer-seecontainer-12-00-x-2-44-m",
+    "categoryId": "container/seecontainer",
+    "brand": "Lagercontainer",
+    "name": "40 Fuß Lagercontainer / Seecontainer 12,00 x 2,44 m",
+    "slug": "40-fuss-lagercontainer-seecontainer-12-00-x-2-44-m",
+    "bullets": [
+      "12,00 × 2,44 m"
+    ],
+    "shortDescription": "Seecontainer aus unserem Bestand: 40 Fuß Lagercontainer / Seecontainer 12,00 x 2,44 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/40-fuss-lagercontainer-seecontainer-12-00-x-2-44-m.jpg",
+    "price": "6.190,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/15-fuss-lagercontainer-seecontainer-4-50-x-2-44-m",
+    "categoryId": "container/seecontainer",
+    "brand": "Lagercontainer",
+    "name": "15 Fuß Lagercontainer / Seecontainer 4,50 x 2,44 m",
+    "slug": "15-fuss-lagercontainer-seecontainer-4-50-x-2-44-m",
+    "bullets": [
+      "4,50 × 2,44 m"
+    ],
+    "shortDescription": "Seecontainer aus unserem Bestand: 15 Fuß Lagercontainer / Seecontainer 4,50 x 2,44 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/15-fuss-lagercontainer-seecontainer-4-50-x-2-44-m.jpg",
+    "price": "5.600,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/premium-buerocontainer-6-00-x-2-44",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Premium Bürocontainer 6,00 x 2,44",
+    "slug": "premium-buerocontainer-6-00-x-2-44",
+    "bullets": [
+      "6,00 × 2,44 m",
+      "Premium-Ausführung"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Premium Bürocontainer 6,00 x 2,44. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/premium-buerocontainer-6-00-x-2-44.jpg",
+    "price": "12.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-6-00-x-2-44-tuer-stirnseitig",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 6,00 x 2,44 Tür Stirnseitig",
+    "slug": "buerocontainer-6-00-x-2-44-tuer-stirnseitig",
+    "bullets": [
+      "6,00 × 2,44 m",
+      "Tür Stirnseitig"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 6,00 x 2,44 Tür Stirnseitig. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-6-00-x-2-44-tuer-stirnseitig.jpg",
+    "price": "11.390,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-3-00-x-2-44",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 3,00 x 2,44",
+    "slug": "buerocontainer-3-00-x-2-44",
+    "bullets": [
+      "3,00 × 2,44 m"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 3,00 x 2,44. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-3-00-x-2-44.jpg",
+    "price": "6.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-pfoertnerhaus-2-60-x-2-40-m",
+    "categoryId": "container/buerocontainer",
+    "brand": "Pförtnerhaus",
+    "name": "Bürocontainer / Pförtnerhaus 2,60 x 2,40 m",
+    "slug": "buerocontainer-pfoertnerhaus-2-60-x-2-40-m",
+    "bullets": [
+      "2,60 × 2,40 m"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer / Pförtnerhaus 2,60 x 2,40 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-pfoertnerhaus-2-60-x-2-40-m.jpg",
+    "price": "6.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-3-50-x-2-20-m",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 3,50 x 2,20 m",
+    "slug": "buerocontainer-3-50-x-2-20-m",
+    "bullets": [
+      "3,50 × 2,20 m"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 3,50 x 2,20 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-3-50-x-2-20-m.jpg",
+    "price": "6.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-2-00-x-1-50-m",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 2,00 x 1,50 m",
+    "slug": "buerocontainer-2-00-x-1-50-m",
+    "bullets": [
+      "2,00 × 1,50 m"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 2,00 x 1,50 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-2-00-x-1-50-m.jpg",
+    "price": "4.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-2-00-x-2-00-m",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 2,00 x 2,00 m",
+    "slug": "buerocontainer-2-00-x-2-00-m",
+    "bullets": [
+      "2,00 × 2,00 m"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 2,00 x 2,00 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-2-00-x-2-00-m.jpg",
+    "price": "4.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-3-00-x-2-00-m",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 3,00 x 2,00 m",
+    "slug": "buerocontainer-3-00-x-2-00-m",
+    "bullets": [
+      "3,00 × 2,00 m"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 3,00 x 2,00 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-3-00-x-2-00-m.jpg",
+    "oldPrice": "5.490,00 €",
+    "price": "5.290,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-3-00-x-2-00-m-2",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 3,00 x 2,00 m",
+    "slug": "buerocontainer-3-00-x-2-00-m-2",
+    "bullets": [
+      "3,00 × 2,00 m"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 3,00 x 2,00 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-3-00-x-2-00-m-2.jpg",
+    "price": "6.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/saunacontainer-saunakabine-4-00-x-2-20-m",
+    "categoryId": "container/sondercontainer",
+    "brand": "Saunacontainer",
+    "name": "Saunacontainer / Saunakabine 4,00 x 2,20 m",
+    "slug": "saunacontainer-saunakabine-4-00-x-2-20-m",
+    "bullets": [
+      "4,00 × 2,20 m"
+    ],
+    "shortDescription": "Sonderausführung aus unserem Bestand: Saunacontainer / Saunakabine 4,00 x 2,20 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/saunacontainer-saunakabine-4-00-x-2-20-m.jpg",
+    "price": "12.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-3-50-x-2-20-m-2",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 3,50 x 2,20 m",
+    "slug": "buerocontainer-3-50-x-2-20-m-2",
+    "bullets": [
+      "3,50 × 2,20 m"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 3,50 x 2,20 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-3-50-x-2-20-m-2.jpg",
+    "price": "7.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-4-00-x-2-20-m",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 4,00 x 2,20 m",
+    "slug": "buerocontainer-4-00-x-2-20-m",
+    "bullets": [
+      "4,00 × 2,20 m"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 4,00 x 2,20 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-4-00-x-2-20-m.jpg",
+    "price": "7.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-4-00-x-2-40-m",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 4,00 x 2,40 m",
+    "slug": "buerocontainer-4-00-x-2-40-m",
+    "bullets": [
+      "4,00 × 2,40 m"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 4,00 x 2,40 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-4-00-x-2-40-m.jpg",
+    "price": "8.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-5-00-x-2-40-m",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 5,00 x 2,40 m",
+    "slug": "buerocontainer-5-00-x-2-40-m",
+    "bullets": [
+      "5,00 × 2,40 m"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 5,00 x 2,40 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-5-00-x-2-40-m.jpg",
+    "price": "9.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/3-00-x-2-44-m-buerocontainer-pfoertnerhaus",
+    "categoryId": "container/buerocontainer",
+    "brand": "Pförtnerhaus",
+    "name": "3,00 x 2,44 m Bürocontainer / Pförtnerhaus",
+    "slug": "3-00-x-2-44-m-buerocontainer-pfoertnerhaus",
+    "bullets": [
+      "3,00 × 2,44 m",
+      "Bürocontainer / Pförtnerhaus"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: 3,00 x 2,44 m Bürocontainer / Pförtnerhaus. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/3-00-x-2-44-m-buerocontainer-pfoertnerhaus.jpg",
+    "price": "7.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/buerocontainer-6-00-x-2-44-tuer-stirnseitig-2",
+    "categoryId": "container/buerocontainer",
+    "brand": "Bürocontainer",
+    "name": "Bürocontainer 6,00 x 2,44 Tür Stirnseitig",
+    "slug": "buerocontainer-6-00-x-2-44-tuer-stirnseitig-2",
+    "bullets": [
+      "6,00 × 2,44 m",
+      "Tür Stirnseitig"
+    ],
+    "shortDescription": "Bürocontainer aus unserem Bestand: Bürocontainer 6,00 x 2,44 Tür Stirnseitig. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/buerocontainer-6-00-x-2-44-tuer-stirnseitig-2.jpg",
+    "price": "9.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/sanitaercontainer-2-00-x-2-00-m-mit-toilette-dusche-warmwasserboiler-2",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Duschcontainer",
+    "name": "Sanitärcontainer 2,00 x 2,00 m - mit Toilette & Dusche (Warmwasserboiler 230V)",
+    "slug": "sanitaercontainer-2-00-x-2-00-m-mit-toilette-dusche-warmwasserboiler-2",
+    "bullets": [
+      "2,00 × 2,00 m",
+      "it Toilette & Dusche (Warmwasserboiler 230V)",
+      "Toilette & Dusche"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: Sanitärcontainer 2,00 x 2,00 m - mit Toilette & Dusche (Warmwasserboiler 230V). Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/sanitaercontainer-2-00-x-2-00-m-mit-toilette-dusche-warmwasserboiler-2.jpg",
+    "price": "6.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/sanitaercontainer-2-00-x-2-00-m-mit-toilette-urinal",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "WC-Container",
+    "name": "Sanitärcontainer 2,00 x 2,00 m - mit Toilette & Urinal",
+    "slug": "sanitaercontainer-2-00-x-2-00-m-mit-toilette-urinal",
+    "bullets": [
+      "2,00 × 2,00 m",
+      "it Toilette & Urinal",
+      "Toilette & Urinal"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: Sanitärcontainer 2,00 x 2,00 m - mit Toilette & Urinal. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/sanitaercontainer-2-00-x-2-00-m-mit-toilette-urinal.jpg",
+    "price": "6.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/sanitaercontainer-2-00-x-2-00-m-mit-toilette-dusche-durchlauferhitzer",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Duschcontainer",
+    "name": "Sanitärcontainer 2,00 x 2,00 m - mit Toilette & Dusche (Durchlauferhitzer 380V)",
+    "slug": "sanitaercontainer-2-00-x-2-00-m-mit-toilette-dusche-durchlauferhitzer",
+    "bullets": [
+      "2,00 × 2,00 m",
+      "it Toilette & Dusche (Durchlauferhitzer 380V)",
+      "Toilette & Dusche"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: Sanitärcontainer 2,00 x 2,00 m - mit Toilette & Dusche (Durchlauferhitzer 380V). Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/sanitaercontainer-2-00-x-2-00-m-mit-toilette-dusche-durchlauferhitzer.jpg",
+    "price": "6.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/sanitaercontainer-2-00-x-1-15-m",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Sanitärcontainer",
+    "name": "Sanitärcontainer 2,00 x 1,15 m",
+    "slug": "sanitaercontainer-2-00-x-1-15-m",
+    "bullets": [
+      "2,00 × 1,15 m"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: Sanitärcontainer 2,00 x 1,15 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/sanitaercontainer-2-00-x-1-15-m.jpg",
+    "price": "6.290,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/sanitaercontainer-1-20-x-1-15-m",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Sanitärcontainer",
+    "name": "Sanitärcontainer 1,20 x 1,15 m",
+    "slug": "sanitaercontainer-1-20-x-1-15-m",
+    "bullets": [
+      "1,20 × 1,15 m"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: Sanitärcontainer 1,20 x 1,15 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/sanitaercontainer-1-20-x-1-15-m.jpg",
+    "price": "3.290,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/sanitaercontainer-1-30-x-2-05-m-mit-doppel-wc",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "WC-Container",
+    "name": "Sanitärcontainer 1,30 x 2,05 m - mit Doppel-WC",
+    "slug": "sanitaercontainer-1-30-x-2-05-m-mit-doppel-wc",
+    "bullets": [
+      "1,30 × 2,05 m",
+      "it Doppel-WC",
+      "Doppel-WC"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: Sanitärcontainer 1,30 x 2,05 m - mit Doppel-WC. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/sanitaercontainer-1-30-x-2-05-m-mit-doppel-wc.jpg",
+    "price": "3.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/sanitaercontainer-mit-doppel-wc-2-20-x-1-30-m",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "WC-Container",
+    "name": "Sanitärcontainer mit Doppel-WC 2,20 x 1,30 m",
+    "slug": "sanitaercontainer-mit-doppel-wc-2-20-x-1-30-m",
+    "bullets": [
+      "2,20 × 1,30 m",
+      "Doppel-WC 2"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: Sanitärcontainer mit Doppel-WC 2,20 x 1,30 m. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/sanitaercontainer-mit-doppel-wc-2-20-x-1-30-m.jpg",
+    "price": "4.590,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/sanitaercontainer-1-30-x-2-05-m-mit-doppel-dusche",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Duschcontainer",
+    "name": "Sanitärcontainer 1,30 x 2,05 m - mit Doppel-Dusche",
+    "slug": "sanitaercontainer-1-30-x-2-05-m-mit-doppel-dusche",
+    "bullets": [
+      "1,30 × 2,05 m",
+      "it Doppel-Dusche",
+      "Doppel-Dusche"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: Sanitärcontainer 1,30 x 2,05 m - mit Doppel-Dusche. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/sanitaercontainer-1-30-x-2-05-m-mit-doppel-dusche.jpg",
+    "price": "3.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/sanitaercontainer-1-30-x-2-05-m-mit-toilette-dusche",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Duschcontainer",
+    "name": "Sanitärcontainer 1,30 x 2,05 m - mit Toilette & Dusche",
+    "slug": "sanitaercontainer-1-30-x-2-05-m-mit-toilette-dusche",
+    "bullets": [
+      "1,30 × 2,05 m",
+      "it Toilette & Dusche",
+      "Toilette & Dusche"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: Sanitärcontainer 1,30 x 2,05 m - mit Toilette & Dusche. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/sanitaercontainer-1-30-x-2-05-m-mit-toilette-dusche.jpg",
+    "price": "3.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/2-00-x-2-00-m-wc-container-mit-dusche-und-tank",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Duschcontainer",
+    "name": "2,00 x 2,00 m WC Container mit Dusche und Tank",
+    "slug": "2-00-x-2-00-m-wc-container-mit-dusche-und-tank",
+    "bullets": [
+      "2,00 × 2,00 m",
+      "WC Container mit Dusche und Tank",
+      "Dusche und Tank"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: 2,00 x 2,00 m WC Container mit Dusche und Tank. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/2-00-x-2-00-m-wc-container-mit-dusche-und-tank.jpg",
+    "price": "10.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/2-00-x-2-00-m-wc-container-mit-tank",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "WC-Container",
+    "name": "2,00 x 2,00 m WC Container mit Tank",
+    "slug": "2-00-x-2-00-m-wc-container-mit-tank",
+    "bullets": [
+      "2,00 × 2,00 m",
+      "WC Container mit Tank",
+      "Tank"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: 2,00 x 2,00 m WC Container mit Tank. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/2-00-x-2-00-m-wc-container-mit-tank.jpg",
+    "price": "9.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/4-00-x-2-00-m-doppel-wc-container-mit-duschen-und-tank",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Duschcontainer",
+    "name": "4,00 x 2,00 m Doppel-WC Container mit Duschen und Tank",
+    "slug": "4-00-x-2-00-m-doppel-wc-container-mit-duschen-und-tank",
+    "bullets": [
+      "4,00 × 2,00 m",
+      "Doppel-WC Container mit Duschen und Tank",
+      "Duschen und Tank"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: 4,00 x 2,00 m Doppel-WC Container mit Duschen und Tank. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/4-00-x-2-00-m-doppel-wc-container-mit-duschen-und-tank.jpg",
+    "price": "14.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/3-00-x-2-00-m-doppel-wc-container-mit-faekalientank",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "WC-Container",
+    "name": "3,00 x 2,00 m Doppel-WC Container mit Fäkalientank",
+    "slug": "3-00-x-2-00-m-doppel-wc-container-mit-faekalientank",
+    "bullets": [
+      "3,00 × 2,00 m",
+      "Doppel-WC Container mit Fäkalientank",
+      "Fäkalientank"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: 3,00 x 2,00 m Doppel-WC Container mit Fäkalientank. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/3-00-x-2-00-m-doppel-wc-container-mit-faekalientank.jpg",
+    "price": "11.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/6-00-x-2-40-wc-container-mit-faekalientank",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "WC-Container",
+    "name": "6,00 x 2,40 WC Container mit Fäkalientank",
+    "slug": "6-00-x-2-40-wc-container-mit-faekalientank",
+    "bullets": [
+      "6,00 × 2,40 m",
+      "WC Container mit Fäkalientank",
+      "Fäkalientank"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: 6,00 x 2,40 WC Container mit Fäkalientank. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/6-00-x-2-40-wc-container-mit-faekalientank.jpg",
+    "oldPrice": "25.990,00 €",
+    "price": "19.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/premium-3-00-x-2-00-m-doppel-wc-container-in-holzoptik",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "WC-Container",
+    "name": "Premium 3,00 x 2,00 m Doppel-WC Container in Holzoptik",
+    "slug": "premium-3-00-x-2-00-m-doppel-wc-container-in-holzoptik",
+    "bullets": [
+      "3,00 × 2,00 m",
+      "Doppel-WC Container in Holzoptik",
+      "Premium-Ausführung"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: Premium 3,00 x 2,00 m Doppel-WC Container in Holzoptik. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/premium-3-00-x-2-00-m-doppel-wc-container-in-holzoptik.jpg",
+    "price": "10.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/3-00-x-2-00-m-doppel-wc-container",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "WC-Container",
+    "name": "3,00 x 2,00 m Doppel-WC Container",
+    "slug": "3-00-x-2-00-m-doppel-wc-container",
+    "bullets": [
+      "3,00 × 2,00 m",
+      "Doppel-WC Container"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: 3,00 x 2,00 m Doppel-WC Container. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/3-00-x-2-00-m-doppel-wc-container.jpg",
+    "price": "9.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/premium-4-00-x-2-00-m-doppel-wc-und-duschcontainer-in-holzoptik",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Duschcontainer",
+    "name": "Premium 4,00 x 2,00 m Doppel-WC und Duschcontainer in Holzoptik",
+    "slug": "premium-4-00-x-2-00-m-doppel-wc-und-duschcontainer-in-holzoptik",
+    "bullets": [
+      "4,00 × 2,00 m",
+      "Doppel-WC und Duschcontainer in Holzoptik",
+      "Premium-Ausführung"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: Premium 4,00 x 2,00 m Doppel-WC und Duschcontainer in Holzoptik. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/premium-4-00-x-2-00-m-doppel-wc-und-duschcontainer-in-holzoptik.jpg",
+    "price": "12.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/3-50-x-2-00-m-doppel-wc-und-duschcontainer",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Duschcontainer",
+    "name": "3,50 x 2,00 m Doppel-WC und Duschcontainer",
+    "slug": "3-50-x-2-00-m-doppel-wc-und-duschcontainer",
+    "bullets": [
+      "3,50 × 2,00 m",
+      "Doppel-WC und Duschcontainer"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: 3,50 x 2,00 m Doppel-WC und Duschcontainer. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/3-50-x-2-00-m-doppel-wc-und-duschcontainer.jpg",
+    "price": "10.790,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/4-00-x-2-00-m-doppel-wc-und-duschcontainer",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Duschcontainer",
+    "name": "4,00 x 2,00 m Doppel-WC und Duschcontainer",
+    "slug": "4-00-x-2-00-m-doppel-wc-und-duschcontainer",
+    "bullets": [
+      "4,00 × 2,00 m",
+      "Doppel-WC und Duschcontainer"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: 4,00 x 2,00 m Doppel-WC und Duschcontainer. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/4-00-x-2-00-m-doppel-wc-und-duschcontainer.jpg",
+    "price": "11.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/3-00-x-2-00-m-doppel-wc-container-2",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "WC-Container",
+    "name": "3,00 x 2,00 m Doppel-WC Container",
+    "slug": "3-00-x-2-00-m-doppel-wc-container-2",
+    "bullets": [
+      "3,00 × 2,00 m",
+      "Doppel-WC Container"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: 3,00 x 2,00 m Doppel-WC Container. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/3-00-x-2-00-m-doppel-wc-container-2.jpg",
+    "price": "8.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/4-00-x-2-00-m-doppel-wc-und-duschcontainer-warmwasserboiler",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Duschcontainer",
+    "name": "4,00 x 2,00 m Doppel-WC und Duschcontainer (Warmwasserboiler)",
+    "slug": "4-00-x-2-00-m-doppel-wc-und-duschcontainer-warmwasserboiler",
+    "bullets": [
+      "4,00 × 2,00 m",
+      "Doppel-WC und Duschcontainer (Warmwasserboiler)"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: 4,00 x 2,00 m Doppel-WC und Duschcontainer (Warmwasserboiler). Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/4-00-x-2-00-m-doppel-wc-und-duschcontainer-warmwasserboiler.jpg",
+    "price": "10.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/6-00-x-2-40-m-duschcontainer-mit-6-duschen",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Duschcontainer",
+    "name": "6,00 x 2,40 m Duschcontainer mit 6 Duschen",
+    "slug": "6-00-x-2-40-m-duschcontainer-mit-6-duschen",
+    "bullets": [
+      "6,00 × 2,40 m",
+      "Duschcontainer mit 6 Duschen",
+      "6 Duschen"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: 6,00 x 2,40 m Duschcontainer mit 6 Duschen. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/6-00-x-2-40-m-duschcontainer-mit-6-duschen.jpg",
+    "price": "23.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/6-00-x-2-44-m-duschcontainer-mit-6-duschen-ral9010",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "Duschcontainer",
+    "name": "6,00 x 2,44 m Duschcontainer mit 6 Duschen RAL9010",
+    "slug": "6-00-x-2-44-m-duschcontainer-mit-6-duschen-ral9010",
+    "bullets": [
+      "6,00 × 2,44 m",
+      "Duschcontainer mit 6 Duschen RAL9010",
+      "6 Duschen RAL9010"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: 6,00 x 2,44 m Duschcontainer mit 6 Duschen RAL9010. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/6-00-x-2-44-m-duschcontainer-mit-6-duschen-ral9010.jpg",
+    "price": "23.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/6-00-x-2-44-m-wc-container-mit-5-toiletten-ral9010",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "WC-Container",
+    "name": "6,00 x 2,44 m WC-Container mit 5 Toiletten RAL9010",
+    "slug": "6-00-x-2-44-m-wc-container-mit-5-toiletten-ral9010",
+    "bullets": [
+      "6,00 × 2,44 m",
+      "WC-Container mit 5 Toiletten RAL9010",
+      "5 Toiletten RAL9010"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: 6,00 x 2,44 m WC-Container mit 5 Toiletten RAL9010. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/6-00-x-2-44-m-wc-container-mit-5-toiletten-ral9010.jpg",
+    "price": "23.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/premium-3-00-x-2-00-m-doppel-wc-container-tank-in-holzoptik",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "WC-Container",
+    "name": "Premium 3,00 x 2,00 m Doppel-WC Container Tank in Holzoptik",
+    "slug": "premium-3-00-x-2-00-m-doppel-wc-container-tank-in-holzoptik",
+    "bullets": [
+      "3,00 × 2,00 m",
+      "Doppel-WC Container Tank in Holzoptik",
+      "Premium-Ausführung"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: Premium 3,00 x 2,00 m Doppel-WC Container Tank in Holzoptik. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/premium-3-00-x-2-00-m-doppel-wc-container-tank-in-holzoptik.jpg",
+    "price": "12.490,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/2-50-x-2-00-m-wc-container-behindertengerecht",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "WC-Container",
+    "name": "2,50 x 2,00 m WC-Container behindertengerecht",
+    "slug": "2-50-x-2-00-m-wc-container-behindertengerecht",
+    "bullets": [
+      "2,50 × 2,00 m",
+      "WC-Container behindertengerecht",
+      "Behindertengerecht"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: 2,50 x 2,00 m WC-Container behindertengerecht. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/2-50-x-2-00-m-wc-container-behindertengerecht.jpg",
+    "price": "10.990,00 €",
+    "inStock": true
+  },
+  {
+    "id": "container/4-00-x-2-00-m-wc-container-behindertengerecht",
+    "categoryId": "container/sanitaercontainer",
+    "brand": "WC-Container",
+    "name": "4,00 x 2,00 m WC-Container behindertengerecht",
+    "slug": "4-00-x-2-00-m-wc-container-behindertengerecht",
+    "bullets": [
+      "4,00 × 2,00 m",
+      "WC-Container behindertengerecht",
+      "Behindertengerecht"
+    ],
+    "shortDescription": "Sanitäreinheit aus unserem Bestand: 4,00 x 2,00 m WC-Container behindertengerecht. Maße, Zustand und Liefertermin auf Anfrage.",
+    "image": "/images/container/4-00-x-2-00-m-wc-container-behindertengerecht.jpg",
+    "price": "11.990,00 €",
+    "inStock": true
   }
 ]

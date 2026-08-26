@@ -30,6 +30,20 @@ describe("PRODUCT_SHELL_TOKENS", () => {
 });
 
 describe("PRODUCT_HERO_TOKENS", () => {
+  it("inverse les deux colonnes sans toucher a l'ordre du balisage", () => {
+    // La galerie est premiere dans le HTML et le reste : en une seule colonne,
+    // elle doit s'afficher avant le prix. L'echange se fait par `order`, donc
+    // seulement a partir de lg.
+    assert.match(PRODUCT_SHELL_TOKENS.heroGallery, /\blg:order-2\b/);
+    assert.match(PRODUCT_HERO_TOKENS.buyColumn, /\blg:order-1\b/);
+    assert.doesNotMatch(PRODUCT_SHELL_TOKENS.heroGallery, /(?<!lg:)\border-\d\b/);
+  });
+
+  it("laisse la part large a la galerie, passee a droite", () => {
+    // Colonne d'achat etroite en premier, galerie large ensuite.
+    assert.match(PRODUCT_SHELL_TOKENS.heroGrid, /lg:grid-cols-\[minmax\(0,0\.85fr\)_minmax\(0,1\.15fr\)\]/);
+  });
+
   it("fait suivre la colonne d'achat au defilement", () => {
     assert.match(PRODUCT_HERO_TOKENS.buyColumn, /lg:sticky/);
     assert.match(PRODUCT_HERO_TOKENS.buyColumn, /lg:self-start/);

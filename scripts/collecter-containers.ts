@@ -126,6 +126,9 @@ const MOTS_ENTETE = new Set([
   "eigenschaften", "spezifikationen", "beschreibung", "produktübersicht",
   "produktubersicht", "lieferung", "lieferumfang", "vorteile", "anwendungen",
   "einsatzbereiche", "einsatzgebiete", "details", "übersicht", "ubersicht",
+  "weitere", "informationen", "containerabmessungen", "containermaße",
+  "containermasse", "ausland", "zubehör", "zubehor", "optionen", "hinweis",
+  "hinweise", "allgemeine", "allgemein",
   "und", "&", "/", "der", "die", "das", "des", "im", "in",
 ]);
 
@@ -195,7 +198,10 @@ function decouper(bodyHtml: string): { paragraphes: string[]; puces: string[] } 
     else if (texte.length <= 160) puces.push(texte);
   }
 
-  return { paragraphes, puces };
+  // La source répète parfois une ligne d'une section à l'autre : cette fiche-ci
+  // donne les mêmes cotes en « Außenmaße » et en « Innenmaße ». Deux lignes
+  // identiques sous un titre ne renseignent pas deux fois.
+  return { paragraphes, puces: [...new Set(puces)] };
 }
 
 /**
@@ -248,12 +254,22 @@ function etatDepuisTitre(titre: string): "new" | "used" {
 /**
  * Le résumé sous le titre veut une phrase, pas une caractéristique isolée :
  * « Rauchmelder. » ne dit rien d'un conteneur de bureau. La première vraie
- * phrase est donc préférée ; à défaut, les premières caractéristiques sont
- * enchaînées, ce qui reste factuel et lisible.
+ * phrase est donc préférée.
+ *
+ * À défaut, une caractéristique rédigée comme une phrase fait l'affaire — mais
+ * elle sort alors de la liste : la fiche produit affiche le résumé puis les
+ * caractéristiques, et la même ligne s'y lisait deux fois de suite. En dernier
+ * recours les premières caractéristiques sont enchaînées.
  */
-function resume(phrases: string[], puces: string[]): string {
-  if (phrases.length > 0) return phrases[0];
-  return puces.slice(0, 3).join(" · ");
+function resume(phrases: string[], puces: string[]): { texte: string; puceReprise: number } {
+  if (phrases.length > 0) return { texte: phrases[0], puceReprise: -1 };
+
+  const index = puces.findIndex((puce) => puce.length >= 40 && /[.!?]$/.test(puce));
+  // Deux caractéristiques au moins doivent rester sous le titre, sans quoi la
+  // carte produit se retrouve presque nue pour avoir gagné un résumé.
+  if (index >= 0 && puces.length >= 3) return { texte: puces[index], puceReprise: index };
+
+  return { texte: puces.slice(0, 3).join(" · "), puceReprise: -1 };
 }
 
 /** Coupe proprement à la limite de 200 caractères imposée au champ court. */
@@ -318,6 +334,9 @@ async function main() {
       continue;
     }
 
+    const { texte, puceReprise } = resume(phrases, puces);
+    const caracteristiques = puces.filter((_, index) => index !== puceReprise);
+
     compteurs[categorie] = (compteurs[categorie] ?? 0) + 1;
     const rang = String(compteurs[categorie]).padStart(3, "0");
 
@@ -328,11 +347,11 @@ async function main() {
       sku: `BBC-${CODE_CATEGORIE[categorie]}-${rang}`,
       priceCents: Math.round(prix * 100),
       condition: etatDepuisTitre(produit.title),
-      shortDescription: resumer(resume(phrases, puces)),
+      shortDescription: resumer(texte),
       description: phrases.join("\n\n"),
       // La fiche produit affiche huit puces au plus : au-delà, la liste se lit
       // comme un tableau technique et personne ne la parcourt.
-      bullets: (puces.length > 0 ? puces : normesDuType(produit.title)).slice(0, 8),
+      bullets: (caracteristiques.length > 0 ? caracteristiques : normesDuType(produit.title)).slice(0, 8),
       // Une vignette plus sept vues : la galerie de la fiche est bornée à huit.
       images: produit.images
         .slice()

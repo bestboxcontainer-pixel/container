@@ -35,8 +35,21 @@ export const PRODUCT_SHELL_TOKENS = {
    * à 1,25 contre 0,75, la carte d'achat devenait trop étroite pour que le prix
    * et le bouton respirent une fois la carte passée en 3xl.
    */
+  /**
+   * Colonne d'achat à gauche, galerie à droite au-delà de lg.
+   *
+   * L'inversion est faite par `order`, pas dans le balisage : en une seule
+   * colonne, la galerie doit rester la première chose qu'on voit. Placer le
+   * bloc d'achat avant elle dans le HTML aurait mis le prix au-dessus de la
+   * photo sur mobile, et donné le même ordre aux moteurs.
+   *
+   * La galerie garde la part large : le visuel d'un conteneur est ce sur quoi
+   * l'acheteur juge la finition.
+   */
   heroGrid:
-    "grid grid-cols-1 gap-7 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-9",
+    "grid grid-cols-1 gap-7 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-9",
+  /** Deuxième colonne au-delà de lg, première dans le balisage. */
+  heroGallery: "lg:order-2",
   detailBand: "border-t border-border bg-gradient-to-b from-muted via-muted to-white",
   detailInner: "mx-auto max-w-screen-xl px-4 py-9 sm:px-6 lg:py-11",
   reviewBand: "border-t border-border bg-white",
@@ -52,7 +65,7 @@ export const PRODUCT_HERO_TOKENS = {
    * vignettes sont longues, et le prix sortait de l'écran avant que le visiteur
    * n'ait fini de regarder les visuels.
    */
-  buyColumn: "flex flex-col gap-4 lg:sticky lg:top-24 lg:self-start",
+  buyColumn: "flex flex-col gap-4 lg:order-1 lg:sticky lg:top-24 lg:self-start",
   /** La marque en pastille, au lieu d'une ligne capitale posée sur le fond. */
   brandPill:
     "inline-flex items-center rounded-full border border-border bg-muted px-3 py-1 text-[0.7rem] font-black uppercase tracking-[0.16em] text-muted-foreground",

@@ -108,6 +108,24 @@ describe("catalogue des conteneurs", () => {
     }
   });
 
+  it("ne liste jamais deux fois la meme caracteristique", () => {
+    // La source donne parfois les memes cotes en « Außenmaße » et en
+    // « Innenmaße » : la ligne sortait deux fois sous le titre.
+    for (const fiche of fiches) {
+      assert.equal(new Set(fiche.bullets).size, fiche.bullets.length, fiche.slug);
+    }
+  });
+
+  it("ne repete pas le resume dans les caracteristiques", () => {
+    // La fiche produit affiche le resume sous le titre, puis les
+    // caracteristiques : une ligne reprise a l'identique s'y lisait deux fois.
+    for (const fiche of fiches) {
+      for (const puce of fiche.bullets) {
+        assert.notEqual(puce.trim(), fiche.shortDescription.trim(), fiche.slug);
+      }
+    }
+  });
+
   it("ne garde aucun intitule de section parmi les caracteristiques", () => {
     const intitules = /^(technische daten|abmessungen und gewicht|ausstattung|innenausstattung|elektroinstallation|produkt[üu]bersicht)$/i;
     for (const fiche of fiches) {

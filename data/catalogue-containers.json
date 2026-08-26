@@ -199,7 +199,7 @@
     "sku": "BBC-BUE-008",
     "priceCents": 410000,
     "condition": "new",
-    "shortDescription": "Abmessungen (L x B x H): 8 m x 3 m x 3 m · Hochisolierend · Kunststofffenster mit Doppelverglasung",
+    "shortDescription": "Einfach montieren, anschließen und sofort einziehen!",
     "description": "",
     "bullets": [
       "Abmessungen (L x B x H): 8 m x 3 m x 3 m",
@@ -230,17 +230,17 @@
     "sku": "BBC-BUE-009",
     "priceCents": 129900,
     "condition": "new",
-    "shortDescription": "Neuer Bürocontainer mit den Maßen 3,50 x 2,20 m und einer Höhe von 2,70 m. · Wände und Dach mit 7,5 cm dicken Sandwichpaneelen isoliert. · Zwei Dreh-Kipp-Fenster (Doppelverglasung).",
+    "shortDescription": "Neuer Bürocontainer mit den Maßen 3,50 x 2,20 m und einer Höhe von 2,70 m.",
     "description": "",
     "bullets": [
-      "Neuer Bürocontainer mit den Maßen 3,50 x 2,20 m und einer Höhe von 2,70 m.",
       "Wände und Dach mit 7,5 cm dicken Sandwichpaneelen isoliert.",
       "Zwei Dreh-Kipp-Fenster (Doppelverglasung).",
       "Sandwichprofil mit Wärmedämmung für geringe Energieverluste.",
       "Außentür aus Hörmann-Stahlblech.",
       "Komplette Elektroinstallation gemäß CE-Richtlinien.",
       "230-V-Steckdosen.",
-      "Deckenleuchte."
+      "Deckenleuchte.",
+      "Laminatboden – robust und pflegeleicht."
     ],
     "images": [
       "https://cdn.shopify.com/s/files/1/0774/6161/8876/files/rn-image_picker_lib_temp_c2146a41-afbd-487c-bfa9-c6b1a456d400.webp?v=1783984505",
@@ -299,9 +299,9 @@
       "Hygienisch: Hergestellt aus leicht zu reinigenden Materialien.",
       "Standalone: Funktioniert unabhängig von bestehenden Netzwerken.",
       "Anpassbar: An Ihre spezifischen Bedürfnisse anpassbar.",
-      "Weitere Informationen",
       "Außenhöhe: 256 cm Innenhöhe: 220 cm Breite: 118 cm",
-      "Tiefe: 118 cm"
+      "Tiefe: 118 cm",
+      "Struktur: wasserabweisende Spanplatte Dicke: 18 mm Beschichtung: PVC"
     ],
     "images": [
       "https://cdn.shopify.com/s/files/1/0774/6161/8876/files/rn-image_picker_lib_temp_25a6741d-1288-47e1-9cfa-1ba7af83323d.jpg?v=1779530600",
@@ -317,17 +317,17 @@
     "sku": "BBC-SAN-002",
     "priceCents": 260000,
     "condition": "new",
-    "shortDescription": "Neuer Toilettencontainer mit Fäkalientank, Toilettenbox, Sanitärcontainer für Camping · Einfach Strom, Wasser und Abwasser anschließen, sofort einsatzbereit. · Doppelkabine WC 3x2 Meter mit…",
+    "shortDescription": "Einfach Strom, Wasser und Abwasser anschließen, sofort einsatzbereit.",
     "description": "",
     "bullets": [
       "Neuer Toilettencontainer mit Fäkalientank, Toilettenbox, Sanitärcontainer für Camping",
-      "Einfach Strom, Wasser und Abwasser anschließen, sofort einsatzbereit.",
       "Doppelkabine WC 3x2 Meter mit Abwassertank",
       "mit Herren- und Damentoiletten",
       "2 Fenster",
       "75 mm wärmegedämmtes Sandwichprofil für geringen Energieverlust",
       "Außentür aus verzinktem Stahlblech Hörmann",
-      "Urinale"
+      "Urinale",
+      "Komplette Elektroinstallation nach EG-Richtlinien"
     ],
     "images": [
       "https://cdn.shopify.com/s/files/1/0774/6161/8876/files/rn-image_picker_lib_temp_8d9f3b3e-8a2d-4196-b8cc-cab711843b07.webp?v=1779530258",
@@ -371,17 +371,17 @@
     "sku": "BBC-SAN-004",
     "priceCents": 195000,
     "condition": "new",
-    "shortDescription": "Badezimmer · Urinale · Waschbecken mit Unterschrank",
+    "shortDescription": "230V Elektroinstallation mit Steckdosen.",
     "description": "",
     "bullets": [
       "Badezimmer",
       "Urinale",
       "Waschbecken mit Unterschrank",
       "LED-Deckenbeleuchtung",
-      "230V Elektroinstallation mit Steckdosen.",
       "2000W elektrischer Wandheizkörper",
       "PVC-Böden",
-      "Höhe 2,50m"
+      "Höhe 2,50m",
+      "Dachfenster"
     ],
     "images": [
       "https://cdn.shopify.com/s/files/1/0774/6161/8876/files/rn-image_picker_lib_temp_cf4e51a5-6440-4031-9c2e-2daf5894e246.webp?v=1779529692",
@@ -421,17 +421,17 @@
     "sku": "BBC-SAN-006",
     "priceCents": 260000,
     "condition": "new",
-    "shortDescription": "Premiummodell im Holzdesign · Einfach Strom, Wasser und Abwasser anschließen, sofort einsatzbereit. · Doppelkabine WC 3x2 Meter mit Abwassertank",
+    "shortDescription": "Einfach Strom, Wasser und Abwasser anschließen, sofort einsatzbereit.",
     "description": "",
     "bullets": [
       "Premiummodell im Holzdesign",
-      "Einfach Strom, Wasser und Abwasser anschließen, sofort einsatzbereit.",
       "Doppelkabine WC 3x2 Meter mit Abwassertank",
       "mit Herren- und Damentoiletten",
       "2 Fenster",
       "75 mm wärmegedämmtes Sandwichprofil für geringen Energieverlust",
       "Außentür aus verzinktem Stahlblech Hörmann",
-      "Urinale"
+      "Urinale",
+      "Komplette Elektroinstallation nach EG-Richtlinien"
     ],
     "images": [
       "https://cdn.shopify.com/s/files/1/0774/6161/8876/files/rn-image_picker_lib_temp_4c526fa1-96c6-4ce5-bcd0-d18c5bd2f180.webp?v=1779529073",
@@ -914,7 +914,6 @@
     "description": "Der Container besteht aus korrosionsbeständigem CORTEN-Stahl, der eine bessere Rostbeständigkeit als herkömmlicher Stahl aufweist, was seine Lebensdauer verlängert und seine strukturelle Integrität verbessert. Die Böden bestehen aus 19-lagigem Keruing-Apitong-Sperrholz in Marinequalität, das die Qualität von herkömmlichem Sperrholz übertrifft. Diese Böden sind speziell darauf ausgelegt, den Feuchtigkeitsgehalt zu reduzieren und so Pilzwachstum und schädlichen Termitenbefall zu verhindern.",
     "bullets": [
       "Gebrauchter 20 Fuß Open Top Container für übergroße Ladung und Krankranbeladung von oben.",
-      "Containerabmessungen",
       "Außenmaße: 20'L x 8'B x 8'6\"H",
       "Innenmaße: 6,9 m L x 2,3 m B x 2,3 m H",
       "Türöffnung: 2,21 m B x 2,27 m H",
@@ -938,17 +937,17 @@
     "sku": "BBC-SEE-012",
     "priceCents": 160000,
     "condition": "new",
-    "shortDescription": "20 Fuß Versandcontainer, sofort lieferbar. Zertifiziert für See- und Landtransport. · Außenlänge: 20 Fuß (6.058 mm) · Außenbreite: 8 Fuß (2.438 mm)",
+    "shortDescription": "20 Fuß Versandcontainer, sofort lieferbar. Zertifiziert für See- und Landtransport.",
     "description": "",
     "bullets": [
-      "20 Fuß Versandcontainer, sofort lieferbar. Zertifiziert für See- und Landtransport.",
       "Außenlänge: 20 Fuß (6.058 mm)",
       "Außenbreite: 8 Fuß (2.438 mm)",
       "Außenhöhe: 8 Fuß 6 Zoll (2.591 mm)",
       "Innenlänge: 19 Fuß 4,2 Zoll (5.898 mm)",
       "Innenbreite: 7 Fuß 8,6 Zoll (2.352 mm)",
       "Innenhöhe: 7 Fuß 10,1 Zoll (2.393 mm)",
-      "Hubraum: 33,2 m³"
+      "Hubraum: 33,2 m³",
+      "Leergewicht: 2.200 kg (4.850 lbs)"
     ],
     "images": [
       "https://cdn.shopify.com/s/files/1/0774/6161/8876/files/958104421d29.jpg?v=1779407310",
@@ -990,17 +989,17 @@
     "sku": "BBC-SON-006",
     "priceCents": 178500,
     "condition": "new",
-    "shortDescription": "20 Fuß Versandcontainer mit komplett offener Seite – maximaler Zugang für sperrige Güter. · Im Ausland · Länge 6.058 mm",
+    "shortDescription": "20 Fuß Versandcontainer mit komplett offener Seite – maximaler Zugang für sperrige Güter.",
     "description": "",
     "bullets": [
-      "20 Fuß Versandcontainer mit komplett offener Seite – maximaler Zugang für sperrige Güter.",
-      "Im Ausland",
       "Länge 6.058 mm",
       "Breite 2438 mm",
       "Höhe 2.591 mm",
       "Innen",
       "Länge 5.898 mm",
-      "Breite 2.224 mm"
+      "Breite 2.224 mm",
+      "Höhe 2.302 mm",
+      "Abmessungen der hinteren Türöffnung"
     ],
     "images": [
       "https://cdn.shopify.com/s/files/1/0774/6161/8876/files/b7e72c2dcf7d.jpg?v=1779407308",
@@ -1018,7 +1017,7 @@
     "sku": "BBC-SON-007",
     "priceCents": 170000,
     "condition": "used",
-    "shortDescription": "Typ: Gebrauchter Seecontainer mit vollständiger Seitenöffnung · Außenmaße: Länge 6,06 m × Breite 2,44 m × Höhe 2,59 m · Fassungsvermögen ca.: 33 m³",
+    "shortDescription": "Gebrauchter 20 Fuß Versandcontainer mit seitlicher Öffnung – flexibel be- und entladen.",
     "description": "",
     "bullets": [
       "Typ: Gebrauchter Seecontainer mit vollständiger Seitenöffnung",
@@ -1045,17 +1044,17 @@
     "sku": "BBC-SEE-014",
     "priceCents": 165500,
     "condition": "new",
-    "shortDescription": "Neuer 20 Fuß Versandcontainer – One-Trip-Container in Top-Zustand mit Werksgarantie. · Außenlänge: 20 Fuß (6.058 mm) · Außenbreite: 8 Fuß (2.438 mm)",
+    "shortDescription": "Neuer 20 Fuß Versandcontainer – One-Trip-Container in Top-Zustand mit Werksgarantie.",
     "description": "",
     "bullets": [
-      "Neuer 20 Fuß Versandcontainer – One-Trip-Container in Top-Zustand mit Werksgarantie.",
       "Außenlänge: 20 Fuß (6.058 mm)",
       "Außenbreite: 8 Fuß (2.438 mm)",
       "Außenhöhe: 8 Fuß 6 Zoll (2.591 mm)",
       "Innenlänge: 19 Fuß 4,2 Zoll (5.898 mm)",
       "Innenbreite: 7 Fuß 8,6 Zoll (2.352 mm)",
       "Innenhöhe: 7 Fuß 10,1 Zoll (2.393 mm)",
-      "Hubraum: 33,2 m³"
+      "Hubraum: 33,2 m³",
+      "Leergewicht: 2.200 kg (4.850 lbs)"
     ],
     "images": [
       "https://cdn.shopify.com/s/files/1/0774/6161/8876/files/3ae2df855cf2.jpg?v=1779407306",
@@ -1147,7 +1146,6 @@
     "shortDescription": "Gebrauchter 40 Fuß High Cube Container mit 4 praktischen Seitentüren für einfachen Zugang von allen Seiten. Ideal für Lager, Werkstatt oder spezielle Logistikanwendungen.",
     "description": "Gebrauchter 40 Fuß High Cube Container mit 4 praktischen Seitentüren für einfachen Zugang von allen Seiten. Ideal für Lager, Werkstatt oder spezielle Logistikanwendungen.\n\nHigh Cube Container sind 300 mm höher als Standardcontainer und bieten somit deutlich mehr Nutzfläche.",
     "bullets": [
-      "Weitere Informationen",
       "Innenhöhe: 2695 mm",
       "Innenlänge: 12035 mm",
       "Innenbreite: 2352 mm",
@@ -1475,11 +1473,9 @@
     "sku": "BBC-SON-013",
     "priceCents": 129900,
     "condition": "new",
-    "shortDescription": "2,98 Meter lang, 2,44 Meter breit und 2,50 Meter hoch. · 2,98 Meter lang, 2,44 Meter breit und 2,50 Meter hoch. · 2,83 Meter lang, 2,32 Meter breit und 2,41 Meter hoch.",
+    "shortDescription": "2,98 Meter lang, 2,44 Meter breit und 2,50 Meter hoch.",
     "description": "",
     "bullets": [
-      "2,98 Meter lang, 2,44 Meter breit und 2,50 Meter hoch.",
-      "2,98 Meter lang, 2,44 Meter breit und 2,50 Meter hoch.",
       "2,83 Meter lang, 2,32 Meter breit und 2,41 Meter hoch.",
       "Das Durchschnittsgewicht eines 10-Fuß-Containers beträgt 825 Kilo.",
       "Luftdicht",
@@ -1507,10 +1503,10 @@
       "Mobilität: Verlegen Sie Ihr Büro mit unseren Transportlösungen, wohin Sie möchten.",
       "Wirtschaftlichkeit: Eine wirtschaftliche und flexible Lösung für alle Ihre Arbeitsplatzanforderungen.",
       "Respekt für die Umwelt: Unsere Behälter werden aus recycelbaren Materialien hergestellt und sind auf Langlebigkeit ausgelegt.",
-      "Weitere Informationen",
       "Blindboden: 0,5 mm T14 Trapezblech, mit den Bodentraversen vernietet",
       "Dämmung: 100 mm Mineralwolle, 0,2 mm Dampfsperre",
-      "Grundplatte: OSB-Platten, verschraubt auf Profilstahlträger"
+      "Grundplatte: OSB-Platten, verschraubt auf Profilstahlträger",
+      "Bodenbelag: 2 mm PVC mit Sockelleiste, vollflächig verklebt, Muster grau meliert."
     ],
     "images": [
       "https://cdn.shopify.com/s/files/1/0774/6161/8876/files/6284616f8f90.jpg?v=1779407285",

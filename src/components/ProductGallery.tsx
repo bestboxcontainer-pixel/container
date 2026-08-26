@@ -16,10 +16,13 @@ export function ProductGallery({
   image,
   images = [],
   alt,
+  className,
 }: {
   image: string;
   images?: string[];
   alt: string;
+  /** Placement dans la grille de la fiche : la galerie passe à droite au-delà de lg. */
+  className?: string;
 }) {
   const t = useTranslations("product");
 
@@ -30,7 +33,7 @@ export function ProductGallery({
   const current = views[active] ?? image;
 
   return (
-    <div>
+    <div className={className}>
       {/* Zoom au survol, comme sur les cartes produit. Le grossissement est plus
           léger ici (105 % contre 110 %) : sur une image de cette taille, le même
           rapport déplacerait beaucoup plus de pixels et le geste deviendrait

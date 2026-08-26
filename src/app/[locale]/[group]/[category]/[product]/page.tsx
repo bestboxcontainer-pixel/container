@@ -170,14 +170,17 @@ export default async function ProductPage({ params }: { params: ProductPageParam
 
         <div className={PRODUCT_SHELL_TOKENS.heroBand}>
           <div className={PRODUCT_SHELL_TOKENS.heroInner}>
-            {/* La galerie prend un peu plus de place que la colonne d'achat : à
-                parts égales, le visuel d'un conteneur devenait trop petit pour
-                qu'on juge de la finition, qui est ce que l'acheteur regarde. */}
+            {/* Bloc d'achat à gauche, galerie à droite, et la galerie garde la
+                part large : à parts égales, le visuel d'un conteneur devenait
+                trop petit pour qu'on juge de la finition, qui est ce que
+                l'acheteur regarde. L'ordre du balisage ne bouge pas, voir
+                `heroGrid`. */}
             <div className={PRODUCT_SHELL_TOKENS.heroGrid}>
               <ProductGallery
                 image={productData.image}
                 images={productData.images}
                 alt={productData.alt}
+                className={PRODUCT_SHELL_TOKENS.heroGallery}
               />
 
               <div className={PRODUCT_HERO_TOKENS.buyColumn}>

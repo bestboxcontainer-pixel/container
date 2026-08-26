@@ -2,11 +2,12 @@
 
 import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { SlidersHorizontal, X } from "lucide-react";
-import { CategoryFilters, PRICE_RANGES } from "@/components/CategoryFilters";
+import { X } from "lucide-react";
+import { CategoryFilterBar } from "@/components/CategoryFilterBar";
+import { PRICE_RANGES } from "@/lib/categoryFilters";
 import { ProductCard } from "@/components/ProductCard";
 import { Reveal } from "@/components/Reveal";
-import { CATEGORY_GRID_TOKENS } from "@/lib/categoryLayoutTokens";
+import { CATEGORY_BAR_TOKENS, CATEGORY_GRID_TOKENS } from "@/lib/categoryLayoutTokens";
 import { parsePrice } from "@/lib/price";
 import type { Product } from "@/types/home";
 
@@ -70,15 +71,6 @@ export function CategoryProductBrowser({ products }: { products: Product[] }) {
     return sorted;
   }, [products, selectedBrands, activePriceRange, minRatings, inStockOnly, sortBy]);
 
-  const hasActiveFilters = selectedBrands.length > 0 || priceRange !== null || minRatings.length > 0 || inStockOnly;
-
-  // Repris sur le bouton d'ouverture : panneau fermé, rien n'indiquerait
-  // autrement que la grille est déjà filtrée.
-  const activeFilterCount =
-    selectedBrands.length + minRatings.length + (priceRange ? 1 : 0) + (inStockOnly ? 1 : 0);
-
-  const [filtersOpen, setFiltersOpen] = useState(false);
-
   function toggleBrand(brand: string) {
     setSelectedBrands((current) =>
       current.includes(brand) ? current.filter((item) => item !== brand) : [...current, brand],
@@ -99,9 +91,9 @@ export function CategoryProductBrowser({ products }: { products: Product[] }) {
   }
 
   /**
-   * Filtres actifs rappelés au-dessus de la grille. Sur grand écran la colonne
-   * est visible, mais elle défile : passé quelques marques, on ne sait plus ce
-   * qui reste coché plus haut.
+   * Filtres actifs rappelés sous la barre. Les menus sont refermés une fois le
+   * choix fait : sans ce rappel, rien n'expliquerait pourquoi la grille s'est
+   * vidée.
    */
   const activeChips: { key: string; label: string; onRemove: () => void }[] = [
     ...selectedBrands.map((brand) => ({
@@ -127,30 +119,10 @@ export function CategoryProductBrowser({ products }: { products: Product[] }) {
   ];
 
   return (
-    <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
-      <CategoryFilters
-        brandOptions={brandOptions}
-        selectedBrands={selectedBrands}
-        onToggleBrand={toggleBrand}
-        priceRange={priceRange}
-        onSelectPriceRange={setPriceRange}
-        minRatings={minRatings}
-        onToggleMinRating={toggleMinRating}
-        inStockOnly={inStockOnly}
-        onToggleInStockOnly={() => setInStockOnly((current) => !current)}
-        onReset={resetFilters}
-        hasActiveFilters={hasActiveFilters}
-        open={filtersOpen}
-        onClose={() => setFiltersOpen(false)}
-        resultCount={filteredProducts.length}
-      />
-
-      <div className="min-w-0 flex-1">
-        <div className={CATEGORY_GRID_TOKENS.toolbar}>
-          {/* Sur petit écran, le décompte laisse sa place au bouton de filtres :
-              les deux ensemble ne tiennent pas sur une ligne, et c'est le
-              bouton qui sert. */}
-          <p className="hidden text-sm text-muted-foreground sm:block">
+    <div className="flex flex-col">
+      <div className={CATEGORY_BAR_TOKENS.bar}>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
+          <p className={CATEGORY_GRID_TOKENS.toolbarCount}>
             {t.rich("productsCount", {
               filtered: filteredProducts.length,
               total: products.length,
@@ -158,39 +130,37 @@ export function CategoryProductBrowser({ products }: { products: Product[] }) {
             })}
           </p>
 
-          {/* Ouverture des filtres, à hauteur des produits plutôt qu'au-dessus.
-              Empilée avant la grille, la colonne de filtres imposait de faire
-              défiler tout un écran de cases à cocher avant d'atteindre la
-              première fiche. */}
-          <button
-            type="button"
-            onClick={() => setFiltersOpen(true)}
-            aria-expanded={filtersOpen}
-            className="flex items-center gap-2 rounded-xl border border-border px-3 py-1.5 text-sm font-semibold text-foreground hover:bg-muted lg:hidden"
-          >
-            <SlidersHorizontal className="h-4 w-4" aria-hidden />
-            {activeFilterCount > 0
-              ? t("filtersOpenWithCount", { count: activeFilterCount })
-              : t("filtersOpen")}
-          </button>
-
-          <label className="flex items-center gap-2 text-sm">
-            <span className="hidden text-muted-foreground sm:inline">{t("sortBy")}</span>
-            <select
-              aria-label={t("sortBy")}
-              value={sortBy}
-              onChange={(event) => setSortBy(event.target.value as SortOption)}
-              className={CATEGORY_GRID_TOKENS.select}
-            >
-              {SORT_OPTIONS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {t(option.labelKey)}
-                </option>
-              ))}
-            </select>
-          </label>
+          <CategoryFilterBar
+            brandOptions={brandOptions}
+            selectedBrands={selectedBrands}
+            onToggleBrand={toggleBrand}
+            priceRange={priceRange}
+            onSelectPriceRange={setPriceRange}
+            minRatings={minRatings}
+            onToggleMinRating={toggleMinRating}
+            inStockOnly={inStockOnly}
+            onToggleInStockOnly={() => setInStockOnly((current) => !current)}
+          />
         </div>
 
+        <label className="flex items-center gap-2 text-sm">
+          <span className="hidden text-muted-foreground sm:inline">{t("sortBy")}</span>
+          <select
+            aria-label={t("sortBy")}
+            value={sortBy}
+            onChange={(event) => setSortBy(event.target.value as SortOption)}
+            className={CATEGORY_GRID_TOKENS.select}
+          >
+            {SORT_OPTIONS.map((option) => (
+              <option key={option.value} value={option.value}>
+                {t(option.labelKey)}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <div className="min-w-0">
         {activeChips.length > 0 && (
           <div className={CATEGORY_GRID_TOKENS.chipRow}>
             {activeChips.map((chip) => (

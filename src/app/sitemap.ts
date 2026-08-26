@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
+import { getCategoryPages } from "@/server/store";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestbox-containerhandel.de";
 
@@ -16,7 +17,6 @@ function alternates(): Record<string, string> {
 
 /** Chemins publics du site vitrine marketing (hors racine, ajoutée séparément). */
 const PATHS = [
-  "sortiment",
   "vermietung",
   "ueber-uns",
   "kontakt",
@@ -25,7 +25,45 @@ const PATHS = [
   "agb",
 ] as const;
 
-export default function sitemap(): MetadataRoute.Sitemap {
+/**
+ * Le catalogue n'y figurait pas : le plan de site ne déclarait que les pages
+ * vitrine, laissant les catégories et les fiches produit à la seule découverte
+ * par les liens. Elles sont lues en base, donc toujours à jour.
+ *
+ * Une base injoignable ne doit pas faire tomber le plan de site : les pages
+ * vitrine restent servies, sans le catalogue.
+ */
+async function urlsDuCatalogue(now: Date): Promise<MetadataRoute.Sitemap> {
+  let pages: Awaited<ReturnType<typeof getCategoryPages>>;
+  try {
+    pages = await getCategoryPages();
+  } catch (error) {
+    console.error("[sitemap] catalogue illisible, seules les pages vitrine sont déclarées", error);
+    return [];
+  }
+
+  const groupes = [...new Set(pages.map((page) => page.group))];
+
+  const entrees = (chemin: string, priority: number, changeFrequency: "weekly" | "monthly") =>
+    routing.locales.map((locale) => ({
+      url: `${urlFor(locale)}${chemin}`,
+      lastModified: now,
+      changeFrequency,
+      priority,
+    }));
+
+  return [
+    ...groupes.flatMap((groupe) => entrees(`/${groupe}`, 0.9, "weekly")),
+    ...pages.flatMap((page) => entrees(`/${page.group}/${page.slug}`, 0.8, "weekly")),
+    ...pages.flatMap((page) =>
+      page.products.flatMap((produit) =>
+        entrees(`/${page.group}/${page.slug}/${produit.slug}`, 0.6, "monthly"),
+      ),
+    ),
+  ];
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const home = routing.locales.map((locale) => ({
@@ -45,5 +83,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
-  return [...home, ...pages];
+  return [...home, ...pages, ...(await urlsDuCatalogue(now))];
 }

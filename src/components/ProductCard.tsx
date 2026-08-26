@@ -89,6 +89,9 @@ export function ProductCard({ product }: { product: Product }) {
             </p>
           )}
 
+          {/* Rien à lister : la liste ne sort pas du tout, plutôt qu'un bloc
+              vide qui écarte le prix du titre sans rien dire. */}
+          {product.bullets.length > 0 && (
           <ul className="mt-3 space-y-1.5 text-xs leading-relaxed text-muted-foreground">
             {product.bullets.slice(0, BULLETS_AFFICHES).map((bullet) => (
               <li key={bullet} className="flex gap-2">
@@ -100,6 +103,7 @@ export function ProductCard({ product }: { product: Product }) {
               </li>
             ))}
           </ul>
+          )}
 
           <div className="mt-auto flex items-end justify-between gap-2 border-t border-border pt-3.5">
             <div className="flex items-baseline gap-2">

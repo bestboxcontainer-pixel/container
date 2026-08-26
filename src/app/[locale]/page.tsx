@@ -6,11 +6,9 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { type PhotoSlide } from "@/components/PhotoHeroCarousel";
 import { ProductCard } from "@/components/ProductCard";
-import { SizeItem } from "@/components/SizeItem";
-import { HOME_CATEGORY_CARDS } from "@/lib/homeCategoryCards";
-import { HOME_SIZE_SECTION_TOKENS } from "@/lib/homeLayoutTokens";
-import { HOME_FAQS, HOME_SIZE_GROUPS } from "@/lib/homeSections";
-import { getCategoryPages } from "@/server/store";
+import { SizeSection } from "@/components/SizeSection";
+import { HOME_FAQS } from "@/lib/homeSections";
+import { getCategoryPages, type CategoryPageView } from "@/server/store";
 import type { Product } from "@/types/home";
 
 export const metadata: Metadata = {
@@ -85,6 +83,24 @@ const STEPS = [
 ] as const;
 
 /**
+ * Les cinq catégories, telles qu'elles sont enregistrées en base.
+ *
+ * Elles étaient écrites en dur dans `homeCategoryCards.ts`, avec leur visuel
+ * pris dans `/public`. Libellé, texte et image sortent maintenant du
+ * back-office : ce qu'un administrateur y change se voit sur l'accueil sans
+ * qu'une ligne de code bouge.
+ */
+async function categoriesDeLAccueil(): Promise<CategoryPageView[]> {
+  try {
+    const pages = await getCategoryPages();
+    return pages.filter((page) => page.group === "container");
+  } catch (error) {
+    console.error("[accueil] catégories illisibles, section masquée", error);
+    return [];
+  }
+}
+
+/**
  * Extrait du catalogue pour la page d'accueil.
  *
  * Prélèvement à tour de rôle plutôt que les huit premiers : le catalogue est
@@ -118,8 +134,7 @@ async function extraitDuCatalogue(maximum = 8): Promise<Product[]> {
 }
 
 export default async function HomePage() {
-  const produits = await extraitDuCatalogue();
-  const [lengthGroup, widthGroup, heightGroup] = HOME_SIZE_GROUPS;
+  const [produits, categories] = await Promise.all([extraitDuCatalogue(), categoriesDeLAccueil()]);
 
   return (
     <>
@@ -168,7 +183,7 @@ export default async function HomePage() {
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
-                  href="/sortiment"
+                  href="/container"
                   className="inline-flex items-center gap-2 rounded-full bg-signal px-5 py-3 text-sm font-bold text-signal-foreground shadow-sm transition-colors hover:bg-signal/90"
                 >
                   Sortiment ansehen
@@ -217,7 +232,7 @@ export default async function HomePage() {
               </h2>
             </div>
             <Link
-              href="/sortiment"
+              href="/container"
               className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline"
             >
               Ganzes Sortiment
@@ -227,29 +242,28 @@ export default async function HomePage() {
 
           <p className="mt-4 max-w-2xl text-foreground/70">
             Von Seecontainer bis Sondercontainer: diese fünf Bereiche bilden die stärksten
-            Anfragen im Tagesgeschäft ab und führen direkt zu den passenden Abschnitten im
-            Sortiment.
+            Anfragen im Tagesgeschäft ab und führen direkt zu den verfügbaren Containern.
           </p>
 
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
-            {HOME_CATEGORY_CARDS.map((card) => (
+            {categories.map((card) => (
               <Link
-                key={card.id}
-                href={`/sortiment#${card.id}`}
+                key={card.slug}
+                href={`/${card.group}/${card.slug}`}
                 className="group overflow-hidden rounded-[1.75rem] border border-[#d8e1f0] bg-white shadow-[0_24px_80px_-48px_rgba(22,43,95,0.45)] transition-transform duration-300 hover:-translate-y-1"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-[#f5f8fd]">
                   <Image
-                    src={card.imageSrc}
-                    alt={card.imageAlt}
+                    src={card.image}
+                    alt={card.label}
                     fill
                     sizes="(min-width: 1280px) 20vw, (min-width: 768px) 50vw, 100vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
                 </div>
                 <div className="p-5">
-                  <h3 className="text-lg font-black text-foreground">{card.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-foreground/70">{card.text}</p>
+                  <h3 className="text-lg font-black text-foreground">{card.label}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-foreground/70">{card.description}</p>
                   <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">
                     Kategorie ansehen
                     <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
@@ -260,82 +274,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* Größen : bandeau sombre, containers posés sur une ligne de sol.
-            Les visuels sont blancs sur fond transparent : sur le navy ils
-            ressortent, et sans cadre autour c'est bien le container qu'on
-            regarde. */}
-        <section className={HOME_SIZE_SECTION_TOKENS.section}>
-          <span className={HOME_SIZE_SECTION_TOKENS.glow} aria-hidden />
-          <span className={HOME_SIZE_SECTION_TOKENS.glowSoft} aria-hidden />
-
-          <div className={HOME_SIZE_SECTION_TOKENS.container}>
-            <header className={HOME_SIZE_SECTION_TOKENS.header}>
-              <div className="max-w-2xl">
-                <p className={HOME_SIZE_SECTION_TOKENS.eyebrow}>Größenvielfalt</p>
-                <h2 className="mt-3 text-2xl font-black tracking-[-0.02em] sm:text-3xl">
-                  Verschiedene Größen – flexibel kombinierbar
-                </h2>
-                <p className="mt-3 text-sm leading-relaxed text-white/60 sm:text-base">
-                  Längen, Breiten und Höhen modular kombinieren – für jedes Projekt die passende
-                  Dimension.
-                </p>
-              </div>
-
-              <dl className={HOME_SIZE_SECTION_TOKENS.counterRow}>
-                {HOME_SIZE_GROUPS.map((group) => (
-                  <div key={group.id}>
-                    <dt className="sr-only">{group.title}</dt>
-                    <dd>
-                      <span className={HOME_SIZE_SECTION_TOKENS.counterValue}>
-                        {group.options.length}
-                      </span>
-                      <span className={HOME_SIZE_SECTION_TOKENS.counterLabel}>{group.title}</span>
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </header>
-
-            <div className={HOME_SIZE_SECTION_TOKENS.groupStack}>
-              <div className={HOME_SIZE_SECTION_TOKENS.groupPanel}>
-                <div className={HOME_SIZE_SECTION_TOKENS.groupHead}>
-                  <h3 className={HOME_SIZE_SECTION_TOKENS.groupTitle}>{lengthGroup.title}</h3>
-                  <span className={HOME_SIZE_SECTION_TOKENS.groupRange}>{lengthGroup.subtitle}</span>
-                </div>
-
-                <ul className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-                  {lengthGroup.options.map((option) => (
-                    <SizeItem key={`laengen-${option.label}`} option={option} />
-                  ))}
-                </ul>
-              </div>
-
-              {/* Deux panneaux distincts : alignés à même le fond, les deux
-                  valeurs de largeur et les trois de hauteur se lisaient comme
-                  une seule rangée de cinq. */}
-              <div className={HOME_SIZE_SECTION_TOKENS.specRow}>
-                {[widthGroup, heightGroup].map((group) => (
-                  <div key={group.id} className={HOME_SIZE_SECTION_TOKENS.groupPanel}>
-                    <div className={HOME_SIZE_SECTION_TOKENS.groupHead}>
-                      <h3 className={HOME_SIZE_SECTION_TOKENS.groupTitle}>{group.title}</h3>
-                      <span className={HOME_SIZE_SECTION_TOKENS.groupRange}>{group.subtitle}</span>
-                    </div>
-
-                    <ul
-                      className={`mt-5 grid gap-3 ${
-                        group.options.length === 2 ? "grid-cols-2" : "grid-cols-3"
-                      }`}
-                    >
-                      {group.options.map((option) => (
-                        <SizeItem key={`${group.id}-${option.label}`} option={option} />
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <SizeSection />
 
         {/* Verfügbare Container : extrait du stock réellement proposé, avec
             cotes, équipement et prix repris des catalogues existants. La
@@ -356,7 +295,7 @@ export default async function HomePage() {
                 </p>
               </div>
               <Link
-                href="/sortiment"
+                href="/container"
                 className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline"
               >
                 Ganzes Sortiment

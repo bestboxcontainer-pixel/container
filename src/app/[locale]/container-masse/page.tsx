@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { ArrowRight, Ruler, Scale, Warehouse } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Header } from "@/components/Header";
+import { SizeSection } from "@/components/SizeSection";
 import { Footer } from "@/components/Footer";
+import { CONTAINER_TYPEN } from "@/lib/containerMasse";
 
 export const metadata: Metadata = {
   title: "Container Maße & Typen | BBC Best Box Containerhandel e.K.",
@@ -10,74 +12,6 @@ export const metadata: Metadata = {
     "Alle Maße auf einen Blick: 10, 20, 40 Fuß und High Cube. Außen- und Innenmaße, Türöffnung, Leergewicht, Nutzlast und Volumen im Vergleich.",
 };
 
-/**
- * Normmaße nach ISO 668 (Baureihe 1). Es sind Nennwerte: Wandstärke,
- * Bodenaufbau und Fertigungstoleranz lassen die Innenmaße je nach Hersteller
- * um wenige Millimeter abweichen. Verbindlich sind immer die Werte im
- * konkreten Angebot, deshalb steht der Hinweis unter der Tabelle.
- */
-const TYPEN = [
-  {
-    id: "10-fuss",
-    name: "10 Fuß",
-    kurz: "Der Kompakte",
-    aussen: "2.991 × 2.438 × 2.591",
-    innen: "2.831 × 2.352 × 2.393",
-    tuer: "2.336 × 2.280",
-    leer: "ca. 1.300 kg",
-    nutzlast: "ca. 8.700 kg",
-    volumen: "ca. 16 m³",
-    einsatz: "Kleine Grundstücke, Werkzeuglager, beengte Baustellen.",
-  },
-  {
-    id: "20-fuss",
-    name: "20 Fuß Standard",
-    kurz: "Der Klassiker",
-    aussen: "6.058 × 2.438 × 2.591",
-    innen: "5.898 × 2.352 × 2.393",
-    tuer: "2.336 × 2.280",
-    leer: "ca. 2.250 kg",
-    nutzlast: "ca. 28.230 kg",
-    volumen: "ca. 33 m³",
-    einsatz: "Der meistgefragte Typ: Lagerung, Transport, Umbau zum Büro.",
-  },
-  {
-    id: "40-fuss",
-    name: "40 Fuß Standard",
-    kurz: "Der Große",
-    aussen: "12.192 × 2.438 × 2.591",
-    innen: "12.032 × 2.352 × 2.393",
-    tuer: "2.336 × 2.280",
-    leer: "ca. 3.780 kg",
-    nutzlast: "ca. 26.700 kg",
-    volumen: "ca. 67 m³",
-    einsatz: "Große Lagerflächen, Umzüge, mehrgeschossige Modulbauten.",
-  },
-  {
-    id: "40-fuss-hc",
-    name: "40 Fuß High Cube",
-    kurz: "Der Hohe",
-    aussen: "12.192 × 2.438 × 2.896",
-    innen: "12.032 × 2.352 × 2.698",
-    tuer: "2.336 × 2.585",
-    leer: "ca. 3.940 kg",
-    nutzlast: "ca. 26.520 kg",
-    volumen: "ca. 76 m³",
-    einsatz: "Sperrige Güter und alle Ausbauten, bei denen Deckenhöhe zählt.",
-  },
-  {
-    id: "45-fuss-hc",
-    name: "45 Fuß High Cube",
-    kurz: "Der Längste",
-    aussen: "13.716 × 2.438 × 2.896",
-    innen: "13.556 × 2.352 × 2.698",
-    tuer: "2.336 × 2.585",
-    leer: "ca. 4.800 kg",
-    nutzlast: "ca. 25.600 kg",
-    volumen: "ca. 86 m³",
-    einsatz: "Maximale Fläche am Stück, sofern die Zufahrt es hergibt.",
-  },
-] as const;
 
 const HINWEISE = [
   {
@@ -136,7 +70,7 @@ export default function ContainerMassePage() {
                 </tr>
               </thead>
               <tbody>
-                {TYPEN.map((typ) => (
+                {CONTAINER_TYPEN.map((typ) => (
                   <tr key={typ.id} className="border-b border-border align-top">
                     <td className="py-4 pr-4">
                       <span className="block font-bold text-foreground">{typ.name}</span>
@@ -160,6 +94,8 @@ export default function ContainerMassePage() {
             wenigen Millimetern. Verbindlich sind die Maße im konkreten Angebot.
           </p>
         </section>
+
+        <SizeSection />
 
         <section className="bg-muted">
           <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">

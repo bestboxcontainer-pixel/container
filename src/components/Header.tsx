@@ -8,18 +8,16 @@ import { CartIndicator } from "@/components/cart/CartIndicator";
 import { HEADER_LAYOUT_TOKENS } from "@/lib/headerLayoutTokens";
 
 /**
- * Navigation principale, réduite à cinq entrées pour tenir sur une seule ligne
- * à côté de la marque et des actions.
+ * Navigation principale, réduite à quatre entrées pour tenir sur une seule
+ * ligne à côté de la marque et des actions.
  *
  * Les pages de conseil écartées d'ici (Zustandsklassen, Lieferung, FAQ) restent
  * atteignables depuis le pied de page : elles captent la recherche organique et
  * l'internaute y arrive le plus souvent par un moteur, pas par le menu.
  */
 const NAV_LINKS: readonly HeaderNavLink[] = [
-  { href: "/sortiment", label: "Sortiment" },
-  { href: "/vermietung", label: "Vermietung" },
+  { href: "/container", label: "Sortiment" },
   { href: "/container-masse", label: "Maße & Typen" },
-  { href: "/ueber-uns", label: "Über uns" },
   { href: "/kontakt", label: "Kontakt" },
 ] as const;
 

@@ -56,6 +56,11 @@ const nextConfig: NextConfig = {
     // Anciennes adresses citées dans le pied de page et le tunnel d'achat :
     // on les conserve en redirection permanente vers les pages réelles.
     const pairs = [
+      // « /sortiment » présentait les cinq familles sous forme d'ancres sur une
+      // page de texte, sans un seul conteneur à cliquer. Les pages de catégorie
+      // font le travail. L'ancre n'atteint jamais le serveur : un ancien lien
+      // « /sortiment#seecontainer » arrive donc sur la grille des catégories.
+      ["/sortiment", "/container"],
       ["/widerrufsrecht", "/widerruf"],
       ["/ruecksendung", "/retoure"],
       ["/jobs", "/ueber-uns"],

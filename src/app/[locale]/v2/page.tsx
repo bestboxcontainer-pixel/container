@@ -98,7 +98,7 @@ export default function HomePageV2() {
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
-                href="/sortiment"
+                href="/container"
                 className="inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-primary to-[#a8420f] px-6 py-3 text-sm font-bold text-primary-foreground shadow-sm hover:shadow-md"
               >
                 Sortiment entdecken
@@ -167,7 +167,7 @@ export default function HomePageV2() {
               {CATEGORIES.map((category) => (
                 <Link
                   key={category.id}
-                  href={`/sortiment#${category.id === "seecontainer" ? "" : category.id}`}
+                  href={`/container/${category.id}`}
                   className="flex flex-col items-center gap-3 rounded-2xl border border-border bg-white p-5 text-center shadow-sm transition-shadow hover:shadow-md"
                 >
                   <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-secondary">

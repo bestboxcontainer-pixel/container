@@ -18,13 +18,16 @@ import { COMPANY } from "@/content/legal";
  * redistribuées, pas supprimées.
  */
 
+// Les trois entrées de catégorie visaient des ancres sur une page de texte.
+// Elles mènent désormais aux pages de catégorie, qui listent les conteneurs
+// réellement disponibles.
 const CONTAINER_LINKS = [
-  { href: "/sortiment", label: "Sortiment" },
+  { href: "/container", label: "Sortiment" },
   { href: "/vermietung", label: "Vermietung" },
   { href: "/ankauf", label: "Container-Ankauf" },
-  { href: "/sortiment#lagercontainer", label: "Lagercontainer" },
-  { href: "/sortiment#buerocontainer", label: "Bürocontainer" },
-  { href: "/sortiment#seecontainer", label: "Seecontainer" },
+  { href: "/container/lagercontainer", label: "Lagercontainer" },
+  { href: "/container/buerocontainer", label: "Bürocontainer" },
+  { href: "/container/seecontainer", label: "Seecontainer" },
   { href: "/container-masse", label: "Maße & Typen" },
 ] as const;
 

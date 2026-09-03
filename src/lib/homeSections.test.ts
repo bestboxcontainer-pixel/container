@@ -21,7 +21,7 @@ describe("HOME_SIZE_GROUPS", () => {
     );
     assert.deepEqual(
       HOME_SIZE_GROUPS.map((group) => group.options.length),
-      [10, 2, 3],
+      [3, 2, 3],
     );
   });
 
@@ -34,24 +34,13 @@ describe("HOME_SIZE_GROUPS", () => {
     }
   });
 
-  it("mappe les longueurs sur les dix PNG transparents dédiés", () => {
+  it("mappe les longueurs sur les PNG transparents des tailles réellement en stock", () => {
     const lengthGroup = HOME_SIZE_GROUPS.find((group) => group.id === "laengen");
 
     assert.ok(lengthGroup);
     assert.deepEqual(
       lengthGroup.options.map((option) => option.imageSrc),
-      [
-        "/images/sizes/3m.png",
-        "/images/sizes/4m.png",
-        "/images/sizes/5m.png",
-        "/images/sizes/6m.png",
-        "/images/sizes/7m.png",
-        "/images/sizes/8m.png",
-        "/images/sizes/9m.png",
-        "/images/sizes/10m.png",
-        "/images/sizes/11m.png",
-        "/images/sizes/12m.png",
-      ],
+      ["/images/sizes/3m.png", "/images/sizes/6m.png", "/images/sizes/12m.png"],
     );
   });
 });

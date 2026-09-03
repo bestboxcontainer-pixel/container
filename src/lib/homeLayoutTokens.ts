@@ -34,8 +34,8 @@ export const HOME_SIZE_SECTION_TOKENS = {
    * Höhen côte à côte se lisaient comme une seule rangée de cinq visuels : rien
    * ne disait où finissait un groupe et où commençait l'autre.
    */
-  groupPanel: "rounded-3xl bg-white/[0.035] p-5 ring-1 ring-inset ring-white/[0.07] sm:p-6",
-  groupStack: "mt-10 space-y-6",
+  groupPanel: "rounded-3xl bg-white/[0.035] p-4 ring-1 ring-inset ring-white/[0.07] sm:p-5",
+  groupStack: "mt-8 space-y-6",
 } as const;
 
 export const HOME_SIZE_CARD_TOKENS = {

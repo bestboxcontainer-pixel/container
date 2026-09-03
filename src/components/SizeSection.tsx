@@ -69,7 +69,7 @@ export async function SizeSection() {
               <span className={HOME_SIZE_SECTION_TOKENS.groupRange}>{lengthGroup.subtitle}</span>
             </div>
 
-            <ul className="mt-5 grid grid-cols-3 gap-6 sm:gap-10">
+            <ul className="mt-4 grid grid-cols-3 gap-6 sm:gap-10">
               {lengthGroup.options.map((option) => (
                 <SizeItem
                   key={`laengen-${option.label}`}

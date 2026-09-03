@@ -4,12 +4,13 @@ import { ArrowRight, Clock, MapPin, ShieldCheck } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { type PhotoSlide } from "@/components/PhotoHeroCarousel";
+import { PhotoHeroCarousel, type PhotoSlide } from "@/components/PhotoHeroCarousel";
 import { ProductCard } from "@/components/ProductCard";
 import { SizeSection } from "@/components/SizeSection";
+import { StatsBar } from "@/components/StatsBar";
+import { RatgeberTeaser } from "@/components/RatgeberTeaser";
 import { HOME_FAQS } from "@/lib/homeSections";
-import { getCategoryPages, type CategoryPageView } from "@/server/store";
-import type { Product } from "@/types/home";
+import { categoriesDeLAccueil, extraitDuCatalogue } from "@/server/homeData";
 
 export const metadata: Metadata = {
   title: "BBC Best Box Containerhandel e.K. | Container kaufen & mieten",
@@ -33,12 +34,9 @@ const TRUST_FACTS = [
  * siehe Bildnachweis auf der Impressum-Seite für Quelle/Lizenz je Bild.
  */
 /**
- * Visuels du hero.
- *
- * Le diaporama est désactivé : le hero porte une seule photo, la première de
- * cette liste. Les deux autres restent déclarées ici plutôt que supprimées,
- * pour qu'on puisse changer de visuel ou remettre la rotation sans avoir à
- * retrouver les adresses.
+ * Visuels du hero, en rotation (fondu enchaîné, voir PhotoHeroCarousel).
+ * Deux photos : la vue au sol d'origine, puis la vue aérienne du terminal de
+ * Hambourg.
  */
 const HERO_PHOTOS: readonly PhotoSlide[] = [
   {
@@ -46,17 +44,18 @@ const HERO_PHOTOS: readonly PhotoSlide[] = [
     alt: "Stapel von Frachtcontainern im Hafen",
   },
   {
-    src: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403201/bbc-best-box/site/hero-rotterdam-2-vnmxx4.jpg",
-    alt: "Containerstapel im Hafen Rotterdam",
-  },
-  {
     src: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403212/bbc-best-box/site/hero-hamburg-3-xgx1wi.jpg",
     alt: "Luftaufnahme des Container-Terminals im Hafen Hamburg",
   },
 ] as const;
 
-/** Photo effectivement affichée. Changer d'index suffit à changer de visuel. */
-const HERO_PHOTO = HERO_PHOTOS[0];
+/** Faits vérifiables affichés juste sous le hero (voir COMPANY.registeredSince et le catalogue réel). */
+const STATS = [
+  { value: "2006", label: "Gegründet" },
+  { value: "500+", label: "Container im Bestand" },
+  { value: "5", label: "Kategorien" },
+  { value: "DE", label: "Lieferung deutschlandweit" },
+] as const;
 
 const BENEFITS = [
   {
@@ -82,57 +81,6 @@ const STEPS = [
   { step: "3", title: "Liefern lassen", text: "Nach Zusage liefern wir termingerecht und stellen den Container bei Ihnen auf." },
 ] as const;
 
-/**
- * Les cinq catégories, telles qu'elles sont enregistrées en base.
- *
- * Elles étaient écrites en dur dans `homeCategoryCards.ts`, avec leur visuel
- * pris dans `/public`. Libellé, texte et image sortent maintenant du
- * back-office : ce qu'un administrateur y change se voit sur l'accueil sans
- * qu'une ligne de code bouge.
- */
-async function categoriesDeLAccueil(): Promise<CategoryPageView[]> {
-  try {
-    const pages = await getCategoryPages();
-    return pages.filter((page) => page.group === "container");
-  } catch (error) {
-    console.error("[accueil] catégories illisibles, section masquée", error);
-    return [];
-  }
-}
-
-/**
- * Extrait du catalogue pour la page d'accueil.
- *
- * Prélèvement à tour de rôle plutôt que les huit premiers : le catalogue est
- * trié par famille, et une simple troncature ne montrerait que des
- * Seecontainer. On fait donc un tour par famille avant d'en reprendre une.
- */
-async function extraitDuCatalogue(maximum = 8): Promise<Product[]> {
-  // Le reste de la page est statique : une base injoignable doit faire
-  // disparaître la seule section qui en dépend, pas toute la page d'accueil.
-  let pages: Awaited<ReturnType<typeof getCategoryPages>>;
-  try {
-    pages = await getCategoryPages();
-  } catch (error) {
-    console.error("[accueil] catalogue illisible, section produits masquée", error);
-    return [];
-  }
-
-  const files = pages.map((page) => [...page.products]).filter((file) => file.length > 0);
-
-  const extrait: Product[] = [];
-  for (let rang = 0; extrait.length < maximum; rang += 1) {
-    const restantes = files.filter((file) => file.length > rang);
-    if (restantes.length === 0) break;
-    for (const file of restantes) {
-      if (extrait.length >= maximum) break;
-      extrait.push(file[rang]);
-    }
-  }
-
-  return extrait;
-}
-
 export default async function HomePage() {
   const [produits, categories] = await Promise.all([extraitDuCatalogue(), categoriesDeLAccueil()]);
 
@@ -142,21 +90,7 @@ export default async function HomePage() {
       <main className="flex-1">
         {/* Hero */}
         <section className="relative isolate overflow-hidden bg-secondary pt-[var(--header-height)] text-secondary-foreground">
-          {/* Photo unique, rendue côté serveur. Le diaporama qui occupait cette
-              place était un composant client : il chargeait les trois visuels,
-              tenait un intervalle et un état de rotation, pour un fond que le
-              voile couvre en grande partie. Une seule image, en `priority`,
-              arrive plus tôt et ne coûte plus de JavaScript à la page. */}
-          <div className="absolute inset-0 overflow-hidden">
-            <Image
-              src={HERO_PHOTO.src}
-              alt={HERO_PHOTO.alt}
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover"
-            />
-          </div>
+          <PhotoHeroCarousel slides={HERO_PHOTOS} />
           {/* Voile de lisibilité posé sur la photo. Ses opacités étaient
               calibrées sur l'ancien marine #0b2239 ; le marine assombri les a
               rendues presque opaques, et la photo ne passait plus du tout.
@@ -201,8 +135,15 @@ export default async function HomePage() {
           </div>
         </section>
 
+        {/* Zahlenleiste : direkt unter dem Hero, bevor der Ticker läuft */}
+        <section className="border-y border-white/10 bg-secondary">
+          <div className="mx-auto max-w-screen-xl px-4 py-10 sm:px-6">
+            <StatsBar items={STATS} />
+          </div>
+        </section>
+
         {/* Bandeau de confiance défilant : faits vérifiables sur l'entreprise */}
-        <section className="overflow-hidden border-y border-white/10 bg-secondary py-4">
+        <section className="overflow-hidden border-b border-white/10 bg-secondary py-4">
           <div className="flex w-max animate-[defilement_28s_linear_infinite]">
             {[0, 1].map((copy) => (
               <div key={copy} className="flex shrink-0 items-center gap-10 pr-10">
@@ -245,7 +186,7 @@ export default async function HomePage() {
             Anfragen im Tagesgeschäft ab und führen direkt zu den verfügbaren Containern.
           </p>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {categories.map((card) => (
               <Link
                 key={card.slug}
@@ -276,6 +217,10 @@ export default async function HomePage() {
 
         <SizeSection />
 
+        {/* Ratgeber : bündelt vier bereits bestehende Seiten, die bisher nur
+            im Footer standen */}
+        <RatgeberTeaser />
+
         {/* Verfügbare Container : extrait du stock réellement proposé, avec
             cotes, équipement et prix repris des catalogues existants. La
             section lisait jusqu'ici le catalogue de démonstration hérité de
@@ -303,7 +248,7 @@ export default async function HomePage() {
               </Link>
             </div>
 
-            <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            <div className="mt-10 grid grid-cols-1 gap-4 min-[420px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
               {produits.map((produit) => (
                 <ProductCard key={produit.slug ?? produit.name} product={produit} />
               ))}

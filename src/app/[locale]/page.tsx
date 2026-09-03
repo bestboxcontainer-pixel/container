@@ -218,8 +218,11 @@ export default async function HomePage() {
         <SizeSection />
 
         {/* Ratgeber : bündelt vier bereits bestehende Seiten, die bisher nur
-            im Footer standen */}
-        <RatgeberTeaser />
+            im Footer standen. Blasser Terracotta-Schimmer (--primary bei 6 %),
+            damit der Abschnitt nicht mit den weißen Nachbarn verschwimmt. */}
+        <div style={{ backgroundColor: "color-mix(in oklab, var(--primary) 6%, var(--background))" }}>
+          <RatgeberTeaser />
+        </div>
 
         {/* Verfügbare Container : extrait du stock réellement proposé, avec
             cotes, équipement et prix repris des catalogues existants. La
@@ -258,40 +261,42 @@ export default async function HomePage() {
         )}
 
         {/* FAQ */}
-        <section className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
-          <div className="max-w-3xl">
-            <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">FAQ</p>
-            <h2 className="mt-3 text-2xl font-black text-foreground sm:text-3xl">
-              Häufige Fragen zu unseren Containern
-            </h2>
-            <p className="mt-3 text-foreground/70">
-              Die wichtigsten Punkte zu Verfügbarkeit, Größen, Lieferung und Sonderausbau auf
-              einen Blick.
-            </p>
-          </div>
+        <section className="bg-muted">
+          <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
+            <div className="max-w-3xl">
+              <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">FAQ</p>
+              <h2 className="mt-3 text-2xl font-black text-foreground sm:text-3xl">
+                Häufige Fragen zu unseren Containern
+              </h2>
+              <p className="mt-3 text-foreground/70">
+                Die wichtigsten Punkte zu Verfügbarkeit, Größen, Lieferung und Sonderausbau auf
+                einen Blick.
+              </p>
+            </div>
 
-          <div className="mt-8 space-y-4">
-            {HOME_FAQS.map((item) => (
-              <details
-                key={item.question}
-                className="group rounded-[1.5rem] border border-[#d8e1f0] bg-white shadow-[0_20px_70px_-52px_rgba(22,43,95,0.42)]"
-              >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left text-base font-black text-foreground sm:px-6 sm:py-5 sm:text-lg">
-                  <span>{item.question}</span>
-                  <span className="text-2xl leading-none text-primary transition-transform duration-300 group-open:rotate-45">
-                    +
-                  </span>
-                </summary>
-                <div className="px-5 pb-5 text-sm leading-relaxed text-foreground/70 sm:px-6 sm:pb-6 sm:text-base">
-                  <p>{item.answer}</p>
-                </div>
-              </details>
-            ))}
+            <div className="mt-8 space-y-4">
+              {HOME_FAQS.map((item) => (
+                <details
+                  key={item.question}
+                  className="group rounded-[1.5rem] border border-[#d8e1f0] bg-white shadow-[0_20px_70px_-52px_rgba(22,43,95,0.42)]"
+                >
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left text-base font-black text-foreground sm:px-6 sm:py-5 sm:text-lg">
+                    <span>{item.question}</span>
+                    <span className="text-2xl leading-none text-primary transition-transform duration-300 group-open:rotate-45">
+                      +
+                    </span>
+                  </summary>
+                  <div className="px-5 pb-5 text-sm leading-relaxed text-foreground/70 sm:px-6 sm:pb-6 sm:text-base">
+                    <p>{item.answer}</p>
+                  </div>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* Ablauf */}
-        <section className="bg-muted">
+        <section className="bg-accent">
           <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6">
             <h2 className="text-2xl font-black text-foreground sm:text-3xl">Wie läuft die Lieferung ab?</h2>
             <div className="mt-10 grid gap-8 sm:grid-cols-3">

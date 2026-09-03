@@ -36,7 +36,7 @@ export const COMPANY = {
   locality: "Großensee",
   country: "Deutschland",
   email: "kontakt@bestbox-containerhandel.de",
-  phone: "+49 4154 000000",
+  phone: "+49 1525 9026450",
   owner: "Peer Kunz",
   registeredSince: "20. April 2006",
   // Ein eingetragener Kaufmann (e.K.) wird als Einzelkaufmann in Abteilung A

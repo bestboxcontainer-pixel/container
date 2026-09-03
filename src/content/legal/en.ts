@@ -26,7 +26,7 @@ const COMPANY = {
   city: "22946 Großensee",
   country: "Germany",
   email: "kontakt@bestbox-containerhandel.de",
-  phone: "+49 4154 000000",
+  phone: "+49 1525 9026450",
   owner: "Peer Kunz",
   registeredSince: "20 April 2006",
   register: "Amtsgericht Lübeck (Local Court of Lübeck), HRA 3471",

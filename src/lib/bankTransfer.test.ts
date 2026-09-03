@@ -171,7 +171,7 @@ describe("Rendu de l'instruction", () => {
 
   it("remplace toutes les occurrences d'un même repère", () => {
     const text = renderBankInstructions("{orderNumber}, Referenz: {orderNumber}", values);
-    assert.equal(text, "HP-2026-000042: Referenz: HP-2026-000042");
+    assert.equal(text, "HP-2026-000042, Referenz: HP-2026-000042");
   });
 
   it("laisse intact un repère inconnu", () => {

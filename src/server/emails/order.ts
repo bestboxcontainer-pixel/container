@@ -34,7 +34,7 @@ const LOGO_WIDTH = 220;
 const LOGO_HEIGHT = Math.round((LOGO_WIDTH * 406) / 1242);
 
 function siteUrl(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/+$/, "");
+  return (process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestbox-containerhandel.de").replace(/\/+$/, "");
 }
 
 function escapeHtml(value: string): string {

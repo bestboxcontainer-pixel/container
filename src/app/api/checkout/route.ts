@@ -27,7 +27,7 @@ import { checkCouponRate, identifiantAppelant } from "@/server/couponRate";
 
 /** Adresse publique du site, sans barre finale. */
 function siteUrl(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/+$/, "");
+  return (process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestbox-containerhandel.de").replace(/\/+$/, "");
 }
 
 /** Page de confirmation d'une commande, jeton compris. */

@@ -35,7 +35,7 @@ est limitée : voir « Build sur une machine limitée » plus bas.
   exactement dans le trou. Le correctif est dans hPanel : **Avancé → Node.js →
   Node.js version → 22**, puis relancer le déploiement. Le `.nvmrc` du dépôt
   demande la même version pour les outils qui savent le lire.
-- L'URL de la base **PostgreSQL Neon** (chaîne « pooled », avec `sslmode=require`).
+- L'URL de la base **PostgreSQL Neon** (chaîne « pooled », avec `sslmode=verify-full`).
 - Les trois clés **Cloudinary** : sans elles, l'envoi d'images est refusé en
   production, et c'est par là que passeront toutes les photos produits.
 - Les identifiants **SMTP Hostinger** de `kontakt@hausgeratepfeffer.de`.

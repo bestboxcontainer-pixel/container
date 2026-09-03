@@ -2,7 +2,7 @@ import { PrismaClient } from "@/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 // La connexion dépend uniquement de DATABASE_URL :
-//   postgresql://user:pw@host/db?sslmode=require  -> PostgreSQL (Neon)
+//   postgresql://user:pw@host/db?sslmode=verify-full  -> PostgreSQL (Neon)
 // Le schéma Prisma est figé sur le provider « postgresql » : changer de moteur
 // demanderait de le régénérer, pas seulement de changer cette variable.
 function createClient(): PrismaClient {

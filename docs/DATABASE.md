@@ -13,7 +13,7 @@ l'est directement en ligne.
 La connexion passe par `DATABASE_URL`, lue dans `.env.local` :
 
 ```
-DATABASE_URL="postgresql://utilisateur:motdepasse@hote.neon.tech/neondb?sslmode=require"
+DATABASE_URL="postgresql://utilisateur:motdepasse@hote.neon.tech/neondb?sslmode=verify-full"
 ```
 
 L'adaptateur Prisma est `@prisma/adapter-pg`, câblé dans `src/server/prisma.ts`.

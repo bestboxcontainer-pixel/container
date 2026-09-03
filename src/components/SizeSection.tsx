@@ -34,10 +34,10 @@ export async function SizeSection() {
   // autour c'est bien le container qu'on regarde.
   return (
     <section className={HOME_SIZE_SECTION_TOKENS.section}>
-      <span className={HOME_SIZE_SECTION_TOKENS.glow} aria-hidden />
-      <span className={HOME_SIZE_SECTION_TOKENS.glowSoft} aria-hidden />
-
       <div className={HOME_SIZE_SECTION_TOKENS.container}>
+        <span className={HOME_SIZE_SECTION_TOKENS.glow} aria-hidden />
+        <span className={HOME_SIZE_SECTION_TOKENS.glowSoft} aria-hidden />
+
         <header className={HOME_SIZE_SECTION_TOKENS.header}>
           <div className="max-w-2xl">
             <p className={HOME_SIZE_SECTION_TOKENS.eyebrow}>Größenvielfalt</p>

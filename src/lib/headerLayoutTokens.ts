@@ -23,11 +23,11 @@
 
 export const HEADER_LAYOUT_TOKENS = {
   /** Rangée unique de la barre, resserrée sur petit écran. */
-  row: "mx-auto flex max-w-[1400px] items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6 lg:gap-8",
+  row: "mx-auto flex max-w-[1500px] items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6 lg:gap-8",
   brand: "flex shrink-0 items-center gap-2.5 whitespace-nowrap",
   /** Navigation en ligne : réservée aux écrans qui ont la place de la porter. */
   deskNav:
-    "hidden min-w-0 flex-1 items-center gap-5 text-[13px] font-semibold whitespace-nowrap lg:flex lg:gap-7",
+    "hidden min-w-0 flex-1 items-center gap-5 text-sm font-semibold whitespace-nowrap lg:flex lg:gap-7",
   deskLink:
     "border-b-2 border-transparent py-1 text-white/75 transition-colors hover:border-signal hover:text-white",
   /** Sous `lg`, la navigation quitte la rangée : ce vide pousse les actions à droite. */

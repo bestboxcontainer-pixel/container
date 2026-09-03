@@ -12,13 +12,19 @@
 export const HOME_SIZE_ACCENT = "#e8813a";
 
 export const HOME_SIZE_SECTION_TOKENS = {
-  section: "relative isolate overflow-hidden bg-secondary text-white",
+  /** Habillage de page : marge latérale minimale pour que le bandeau ne touche pas les bords sur mobile. */
+  section: "relative px-4 sm:px-6",
+  /**
+   * Le bandeau navy proprement dit : moins large que l'écran (encarté),
+   * hauteur inchangée par rapport à la version pleine largeur.
+   */
+  container:
+    "relative isolate mx-auto max-w-4xl overflow-hidden rounded-[2rem] bg-secondary px-6 py-14 text-white sm:px-8 lg:py-16",
   /** Halo terracotta diffus, seule décoration de fond : aucune trame ni damier. */
   glow: "pointer-events-none absolute -right-40 -top-48 h-[34rem] w-[34rem] rounded-full bg-[#e8813a]/20 blur-[140px]",
   /** Second halo froid en bas à gauche, évite un aplat de navy trop plat. */
   glowSoft:
     "pointer-events-none absolute -bottom-56 -left-40 h-[32rem] w-[32rem] rounded-full bg-[#2b6fa8]/25 blur-[150px]",
-  container: "relative mx-auto max-w-screen-xl px-4 py-14 sm:px-6 lg:py-16",
   /** Titre à gauche, compteurs à droite : une seule ligne au lieu de deux blocs. */
   header: "flex flex-wrap items-end justify-between gap-x-10 gap-y-6",
   eyebrow: "text-xs font-black uppercase tracking-[0.28em] text-[#e8813a]",

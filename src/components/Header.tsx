@@ -63,10 +63,10 @@ export function Header({ variant = "solid" }: { variant?: "solid" | "overlay" })
             className="h-9 w-9 shrink-0"
           />
           <span className="flex flex-col leading-none">
-            <span className="text-[15px] font-black tracking-tight text-white sm:text-base">
+            <span className="text-base font-black tracking-tight text-white sm:text-lg">
               BBC <span className="text-signal">Best Box</span>
             </span>
-            <span className="mt-1 hidden text-[9px] font-bold uppercase tracking-[0.16em] text-white/50 sm:inline">
+            <span className="mt-1 hidden text-[10px] font-bold uppercase tracking-[0.16em] text-white/50 sm:inline">
               Containerhandel e.K.
             </span>
           </span>
@@ -79,7 +79,7 @@ export function Header({ variant = "solid" }: { variant?: "solid" | "overlay" })
             <a
               href={`tel:${telephone}`}
               aria-label={`Anrufen: ${COMPANY.phone}`}
-              className="hidden items-center gap-2 text-sm font-semibold text-white/85 transition-colors hover:text-signal xl:flex"
+              className="hidden items-center gap-2 text-[15px] font-semibold text-white/85 transition-colors hover:text-signal xl:flex"
             >
               <Phone className="h-4 w-4" aria-hidden />
               {COMPANY.phone}
@@ -100,7 +100,7 @@ export function Header({ variant = "solid" }: { variant?: "solid" | "overlay" })
                 largeur de la carte au lieu d'un timbre coincé près du menu. */}
             <Link
               href={CTA_HREF}
-              className="hidden rounded-full bg-signal px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-signal-foreground shadow-sm transition-colors hover:bg-signal/90 lg:inline-block"
+              className="hidden rounded-full bg-signal px-5 py-2.5 text-[15px] font-bold uppercase tracking-wide text-signal-foreground shadow-sm transition-colors hover:bg-signal/90 lg:inline-block"
             >
               {CTA_LABEL}
             </Link>

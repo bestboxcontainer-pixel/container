@@ -63,7 +63,7 @@ export async function SizeSection() {
         </header>
 
         <div className={HOME_SIZE_SECTION_TOKENS.groupStack}>
-          <div className={`mx-auto max-w-3xl ${HOME_SIZE_SECTION_TOKENS.groupPanel}`}>
+          <div className={HOME_SIZE_SECTION_TOKENS.groupPanel}>
             <div className={HOME_SIZE_SECTION_TOKENS.groupHead}>
               <h3 className={HOME_SIZE_SECTION_TOKENS.groupTitle}>{lengthGroup.title}</h3>
               <span className={HOME_SIZE_SECTION_TOKENS.groupRange}>{lengthGroup.subtitle}</span>

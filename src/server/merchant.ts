@@ -670,9 +670,10 @@ export function auditMerchantProduct(
 
   // Un MPN qui figure dans le nom du produit n'a rien d'anormal : les
   // fabricants placent leur référence dans la désignation commerciale, et
-  // « LG F4WR703Y Waschmaschine » porte bien le vrai MPN. Signaler ce seul
-  // recoupement marquait deux cents articles sur trois cent quatre-vingt-douze
-  // et noyait les avertissements qui, eux, demandaient une action.
+  // « BBC-LAG-003 20-Fuß Container mit 16 Rolltoren » porte bien le vrai MPN.
+  // Signaler ce seul recoupement marquait deux cents articles sur trois cent
+  // quatre-vingt-douze et noyait les avertissements qui, eux, demandaient une
+  // action.
   //
   // Ce qui trahit une référence recopiée du nom faute de mieux, c'est
   // l'absence de chiffre : une référence fabricant en comporte pratiquement
@@ -750,7 +751,7 @@ export function auditMerchantProduct(
     });
   }
 
-  // -- Apparel-Pflichtfelder (Smartwatches liegen in der Taxonomie unter Schmuck) --
+  // -- Champs obligatoires « Vêtements et accessoires » (aucune de nos catégories n'en relève aujourd'hui) --
   if (record.ageGroup) {
     issues.push({
       level: "warning",

@@ -2,20 +2,24 @@
  * Contenu légal et informatif en ALLEMAND : BBC Best Box Containerhandel e.K.
  *
  * ATTENTION : toutes les données d'entreprise sont des PLACEHOLDERS
- * (adresse, HRB, USt-IdNr., WEEE, tarifs). Voir docs/LEGAL.md pour la liste
+ * (adresse, HRB, USt-IdNr., tarifs). Voir docs/LEGAL.md pour la liste
  * exhaustive des éléments à remplacer avant mise en ligne.
  *
  * État du droit retenu : juillet 2026 (§ 5 DDG, § 356a BGB / Widerrufsbutton
- * depuis le 19.06.2026, ElektroG avec § 18a à partir du 01.07.2026, BattDG,
- * PAngV, DSGVO/TDDDG, VSBG § 36 : plateforme ODR fermée depuis le 20.07.2025).
+ * depuis le 19.06.2026, PAngV, DSGVO/TDDDG, VSBG § 36 : plateforme ODR fermée
+ * depuis le 20.07.2025).
  *
- * NOTE DE REBRANDING : le corps rédactionnel de ces pages (Impressum, AGB,
- * FAQ, Über uns, etc.) décrit toujours une activité de vente au détail
- * d'appareils électroménagers/multimédia : reliquat du gabarit d'origine.
- * L'identité de l'entreprise a été mise à jour, mais ce contenu narratif
- * n'a pas été réécrit pour coller à une activité de négoce de conteneurs ;
- * il faudra le refaire si ces pages sont un jour réaffichées publiquement
- * (la vitrine qui les exposait est retirée dans le cadre de ce même chantier).
+ * ElektroG / BattDG (électroménager et électronique) volontairement absents :
+ * BBC Best Box Containerhandel e.K. vend des containers, pas des équipements
+ * électriques, et n'entre donc pas dans le champ de ces textes.
+ *
+ * NOTE DE REBRANDING (2026-09) : le corps rédactionnel de ces pages (Impressum,
+ * AGB, FAQ, Über uns, etc.) a été réécrit pour décrire une activité de négoce
+ * de conteneurs, à la place du gabarit d'origine (vente au détail d'appareils
+ * électroménagers/multimédia). La page dédiée ElektroG/BattDG a été retirée
+ * (hors champ), de même que les clauses de reprise d'appareils usagés.
+ * Reste un gabarit à faire valider par un juriste avant mise en ligne réelle
+ * (voir l'avertissement DISCLAIMER en tête de chaque page juridique).
  */
 
 import type { LegalPageMap } from "./types";
@@ -47,9 +51,6 @@ export const COMPANY = {
   // UStG). Tant que cette valeur reste un gabarit, chaque facture émise est
   // incomplète.
   vatId: "DE000000000",
-  // À RENSEIGNER : numéro d'enregistrement auprès de la fondation EAR, exigé
-  // de tout distributeur d'équipements électriques (§ 6 ElektroG).
-  weee: "WEEE-Reg.-Nr. DE00000000",
   domain: "www.bestbox-containerhandel.de",
 } as const;
 
@@ -58,7 +59,7 @@ const RETURN_ADDRESS = `${COMPANY.name}, Retourenannahme, ${COMPANY.street}, ${C
 
 /** Avertissement placé en tête de chaque page juridique. */
 const DISCLAIMER =
-  "Rechtlicher Hinweis: Dieser Text ist eine sorgfältig erstellte Vorlage für den Onlineshop BBC Best Box Containerhandel e.K. Sämtliche Unternehmensangaben (Anschrift, Handelsregister, Umsatzsteuer-Identifikationsnummer, WEEE-Registrierungsnummer, Versandkosten, Dienstleister) sind Platzhalter und müssen vor der Veröffentlichung durch die tatsächlichen Daten ersetzt werden. Lassen Sie den Text anschließend anwaltlich prüfen, erst dann ist er rechtssicher verwendbar.";
+  "Rechtlicher Hinweis: Dieser Text ist eine sorgfältig erstellte Vorlage für den Onlineshop BBC Best Box Containerhandel e.K. Sämtliche Unternehmensangaben (Anschrift, Handelsregister, Umsatzsteuer-Identifikationsnummer, Versandkosten, Dienstleister) sind Platzhalter und müssen vor der Veröffentlichung durch die tatsächlichen Daten ersetzt werden. Lassen Sie den Text anschließend anwaltlich prüfen, erst dann ist er rechtssicher verwendbar.";
 
 /** Assemble le chapeau : avertissement puis texte d'introduction. */
 function intro(lead: string): string {
@@ -109,11 +110,9 @@ export const deLegalPages: LegalPageMap = {
         body: `Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz: ${COMPANY.vatId}`,
       },
       {
-        heading: "Registrierung nach ElektroG und Batterierecht",
-        body: "Als Vertreiber von Elektro- und Elektronikgeräten sowie von Batterien und Akkus sind wir bei den zuständigen Registern gemeldet:",
+        heading: "Registrierung nach dem Verpackungsgesetz",
+        body: "Als Vertreiber verpackter Waren sind wir im Verpackungsregister LUCID gemeldet:",
         list: [
-          `${COMPANY.weee} (Stiftung Elektro-Altgeräte Register, ear)`,
-          "Batterieregister-Nummer nach BattDG: DE00000000 (Platzhalter)",
           "Verpackungsregister LUCID: DE0000000000000 (Platzhalter)",
         ],
       },
@@ -207,7 +206,7 @@ export const deLegalPages: LegalPageMap = {
       {
         heading: "§ 5 Lieferung und Lieferzeit",
         body:
-          "Wir liefern innerhalb Deutschlands. Lieferungen an Packstationen sind nur bei Paketversand möglich; Großgeräte liefern wir ausschließlich per Spedition an eine Adresse.\n\n" +
+          "Wir liefern innerhalb Deutschlands. Lieferungen an Packstationen sind nur bei Paketversand möglich; Container liefern wir ausschließlich per Spedition an eine Adresse.\n\n" +
           "Vorrätige Artikel versenden wir in der Regel innerhalb von einem bis drei Werktagen nach Vertragsschluss, bei Vorkasse ab dem Tag des Zahlungseingangs. Bei Artikeln mit dem Hinweis „Auf Anfrage“ nennen wir die voraussichtliche Lieferzeit auf der Produktseite; sie beträgt typischerweise zwei bis vier Wochen.\n\n" +
           "Ist ein Artikel nicht verfügbar, weil uns unser Zulieferer trotz vertraglicher Verpflichtung nicht beliefert hat (kongruentes Deckungsgeschäft), können wir vom Vertrag zurücktreten. Wir informieren Sie unverzüglich und erstatten bereits geleistete Zahlungen sofort. Ihre gesetzlichen Rechte bleiben unberührt.\n\n" +
           "Teillieferungen sind zulässig, soweit sie für Sie zumutbar sind. Zusätzliche Versandkosten entstehen Ihnen dadurch nicht.",
@@ -236,13 +235,12 @@ export const deLegalPages: LegalPageMap = {
         heading: "§ 9 Mängelhaftung (Gewährleistung)",
         body:
           "Es gilt das gesetzliche Mängelhaftungsrecht. Für neue Waren beträgt die Verjährungsfrist für Mängelansprüche von Verbrauchern zwei Jahre ab Ablieferung der Ware. Zeigt sich innerhalb eines Jahres seit Ablieferung ein Mangel, wird vermutet, dass die Ware bereits bei Übergabe mangelhaft war.\n\n" +
-          "Bei Waren mit digitalen Elementen, etwa Smart-TVs, Smartwatches oder vernetzten Haushaltsgeräten, stellen wir sicher, dass Sie über Aktualisierungen informiert werden, die für den Erhalt der Vertragsmäßigkeit erforderlich sind, und diese während des maßgeblichen Zeitraums erhalten (§§ 475b, 475c BGB).\n\n" +
           "Gegenüber Unternehmern beträgt die Verjährungsfrist für Mängelansprüche bei neuen Waren ein Jahr ab Gefahrübergang. Die gesetzlichen Regelungen zum Lieferantenregress bleiben unberührt.\n\n" +
-          "Bitte melden Sie Mängel unserem Kundenservice, bevor Sie ein Gerät zurücksenden. So können wir häufig direkt einen Techniker oder den Herstellerservice beauftragen, was für Sie deutlich schneller ist.",
+          "Bitte melden Sie Mängel unserem Kundenservice, möglichst mit Fotos des Schadens, bevor Sie weitere Schritte veranlassen. So können wir die Ursache meist schon vorab einschätzen und, falls nötig, eine Besichtigung vor Ort oder eine Nachbesserung durch unseren Aufbauservice organisieren.",
       },
       {
         heading: "§ 10 Herstellergarantien",
-        body: "Neben der gesetzlichen Mängelhaftung gewähren viele Hersteller eigene Garantien, etwa auf Motoren, Kompressoren oder Displays. Diese Garantien sind freiwillige Zusatzleistungen des jeweiligen Herstellers und lassen die gesetzlichen Rechte unberührt. Die genauen Garantiebedingungen finden Sie in den Unterlagen des Geräts sowie, soweit vorhanden, auf der jeweiligen Produktseite.",
+        body: "Neben der gesetzlichen Mängelhaftung gewähren manche Hersteller eigene Garantien, etwa auf die Korrosionsschutzbeschichtung, die Dichtigkeit der Schweißnähte oder die Mechanik von Rolltoren und Türen. Diese Garantien sind freiwillige Zusatzleistungen des jeweiligen Herstellers und lassen die gesetzlichen Rechte unberührt. Die genauen Garantiebedingungen finden Sie in den Unterlagen des Containers sowie, soweit vorhanden, auf der jeweiligen Produktseite.",
       },
       {
         heading: "§ 11 Transportschäden",
@@ -251,27 +249,23 @@ export const deLegalPages: LegalPageMap = {
           "Die Versäumung einer Reklamation oder Kontaktaufnahme hat für Ihre gesetzlichen Ansprüche und deren Durchsetzung, insbesondere für Ihre Gewährleistungsrechte, keinerlei Folgen. Sie helfen uns aber, unsere eigenen Ansprüche gegenüber dem Frachtführer geltend zu machen.",
       },
       {
-        heading: "§ 12 Rücknahme von Altgeräten und Batterien",
-        body: "Als Vertreiber von Elektro- und Elektronikgeräten nehmen wir Altgeräte im gesetzlich vorgeschriebenen Umfang unentgeltlich zurück und beteiligen uns an der Rücknahme von Altbatterien. Die Einzelheiten, einschließlich der 1:1- und 0:1-Rücknahme, der Abholung bei Lieferung und der Rücksendung kleiner Altgeräte, finden Sie auf der Seite „Elektroaltgeräte & Batterien“.",
-      },
-      {
-        heading: "§ 13 Aufrechnung und Zurückbehaltungsrecht",
+        heading: "§ 12 Aufrechnung und Zurückbehaltungsrecht",
         body: "Ein Recht zur Aufrechnung steht Ihnen nur zu, wenn Ihre Gegenansprüche rechtskräftig festgestellt, unbestritten oder von uns anerkannt sind. Ein Zurückbehaltungsrecht können Sie nur ausüben, wenn die Ansprüche aus demselben Vertragsverhältnis resultieren.",
       },
       {
-        heading: "§ 14 Haftung",
+        heading: "§ 13 Haftung",
         body:
           "Für Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit sowie bei Vorsatz und grober Fahrlässigkeit haften wir unbeschränkt nach den gesetzlichen Vorschriften. Gleiches gilt bei arglistigem Verschweigen eines Mangels, bei Übernahme einer Garantie und im Anwendungsbereich des Produkthaftungsgesetzes.\n\n" +
           "Bei einfacher Fahrlässigkeit haften wir nur bei Verletzung einer wesentlichen Vertragspflicht, deren Erfüllung die ordnungsgemäße Durchführung des Vertrags überhaupt erst ermöglicht und auf deren Einhaltung Sie regelmäßig vertrauen dürfen. In diesem Fall ist die Haftung auf den vertragstypischen, vorhersehbaren Schaden begrenzt. Eine weitergehende Haftung ist ausgeschlossen.",
       },
       {
-        heading: "§ 15 Streitbeilegung",
+        heading: "§ 14 Streitbeilegung",
         body:
           "Wir sind weder bereit noch verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle im Sinne des Verbraucherstreitbeilegungsgesetzes teilzunehmen.\n\n" +
           "Die Online-Streitbeilegungsplattform der Europäischen Kommission wurde zum 20. Juli 2025 eingestellt und steht nicht mehr zur Verfügung. Bitte wenden Sie sich bei Beschwerden direkt an unseren Kundenservice.",
       },
       {
-        heading: "§ 16 Anwendbares Recht, Gerichtsstand und Schlussbestimmungen",
+        heading: "§ 15 Anwendbares Recht, Gerichtsstand und Schlussbestimmungen",
         body:
           "Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts. Gegenüber Verbrauchern gilt diese Rechtswahl nur insoweit, als dadurch der Schutz nicht entzogen wird, der durch zwingende Bestimmungen des Rechts des Staates gewährt wird, in dem der Verbraucher seinen gewöhnlichen Aufenthalt hat.\n\n" +
           "Ist der Kunde Kaufmann, juristische Person des öffentlichen Rechts oder öffentlich-rechtliches Sondervermögen, ist ausschließlicher Gerichtsstand für alle Streitigkeiten aus diesem Vertrag unser Geschäftssitz in Großensee.\n\n" +
@@ -458,7 +452,7 @@ export const deLegalPages: LegalPageMap = {
         heading: "Fristbeginn bei mehreren Waren und Teillieferungen",
         body:
           "Umfasst Ihre Bestellung mehrere Waren, die Sie in einer einheitlichen Bestellung bestellt haben und die getrennt geliefert werden, beginnt die Widerrufsfrist an dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die letzte Ware in Besitz genommen haben bzw. hat.\n\n" +
-          "Wird eine Ware in mehreren Teilsendungen oder Stücken geliefert (etwa eine Einbauküche oder ein Gerät mit separatem Zubehör), beginnt die Frist an dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die letzte Teilsendung oder das letzte Stück in Besitz genommen haben bzw. hat.",
+          "Wird eine Ware in mehreren Teilsendungen oder Stücken geliefert (etwa ein mehrteiliger, zusammensetzbarer Container), beginnt die Frist an dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die letzte Teilsendung oder das letzte Stück in Besitz genommen haben bzw. hat.",
       },
       {
         heading: "Widerruf in Textform",
@@ -487,7 +481,7 @@ export const deLegalPages: LegalPageMap = {
         heading: "Ausschluss und vorzeitiges Erlöschen des Widerrufsrechts",
         body: "Das Widerrufsrecht besteht nach § 312g Absatz 2 BGB unter anderem nicht bei folgenden Verträgen:",
         list: [
-          "Waren, die nicht vorgefertigt sind und für deren Herstellung eine individuelle Auswahl oder Bestimmung durch Sie maßgeblich ist oder die eindeutig auf Ihre persönlichen Bedürfnisse zugeschnitten sind (zum Beispiel maßgefertigte Einbaublenden)",
+          "Waren, die nicht vorgefertigt sind und für deren Herstellung eine individuelle Auswahl oder Bestimmung durch Sie maßgeblich ist oder die eindeutig auf Ihre persönlichen Bedürfnisse zugeschnitten sind (zum Beispiel Container mit individuellem Zuschnitt für Türen und Fenster)",
           "versiegelte Waren, die aus Gründen des Gesundheitsschutzes oder der Hygiene nicht zur Rückgabe geeignet sind, wenn die Versiegelung nach der Lieferung entfernt wurde (zum Beispiel Rasierer, Epiliergeräte, In-Ear-Kopfhörer, Wasserfilterkartuschen)",
           "Ton- oder Videoaufnahmen sowie Computersoftware in einer versiegelten Packung, wenn die Versiegelung nach der Lieferung entfernt wurde (zum Beispiel Spiele-Discs und Software)",
           "Waren, die nach der Lieferung aufgrund ihrer Beschaffenheit untrennbar mit anderen Gütern vermischt wurden",
@@ -511,7 +505,7 @@ export const deLegalPages: LegalPageMap = {
     slug: "versand",
     title: "Versand und Lieferung",
     intro: intro(
-      "Hier finden Sie alle Informationen zu Versandkosten, Lieferzeiten, Speditionslieferung, Anschluss- und Montageservice sowie zur Mitnahme Ihres Altgeräts.",
+      "Hier finden Sie alle Informationen zu Versandkosten, Lieferzeiten, Speditionslieferung sowie zum Aufstellservice vor Ort.",
     ),
     updatedAt: UPDATED_AT,
     sections: [
@@ -536,35 +530,26 @@ export const deLegalPages: LegalPageMap = {
         body: "Wir liefern innerhalb Deutschlands, einschließlich der Nordsee- und Ostseeinseln. Lieferungen ins europäische Ausland sind derzeit nur nach vorheriger Absprache mit unserem Kundenservice möglich. Paketsendungen können auf Wunsch an eine Packstation gehen; Speditionslieferungen benötigen eine Straßenanschrift und eine erreichbare Telefonnummer.",
       },
       {
-        heading: "Speditionslieferung von Großgeräten",
+        heading: "Speditionslieferung von Containern",
         body:
-          "Großgeräte liefern wir mit einer Zwei-Mann-Spedition. Die Spedition meldet sich vorab telefonisch oder per SMS und vereinbart mit Ihnen ein Zeitfenster.\n\n" +
-          "Standardmäßig erfolgt die Lieferung frei Bordsteinkante. Gegen Aufpreis bringen wir das Gerät bis an den Aufstellort in Ihrer Wohnung, auch in obere Etagen. Diese Zusatzleistungen sind nicht Teil des Warenkorbs: Sprechen Sie uns vor oder unmittelbar nach der Bestellung an, dann stimmen wir sie mit der Spedition ab. Bitte prüfen Sie vorher, ob Treppenhaus, Türen und Aufzug ausreichend dimensioniert sind.",
+          "Container liefern wir per Hakenlift-Spedition (Absetzkipper) oder, je nach Zufahrt und Größe, mit Kranfahrzeug. Die Spedition meldet sich vorab telefonisch oder per SMS und vereinbart mit Ihnen ein Zeitfenster.\n\n" +
+          "Standardmäßig setzen wir den Container an der von Ihnen angegebenen, frei zugänglichen Stellfläche ab. Zufahrt, Untergrund und eventuell nötiges Hebegerät klären wir vorab mit Ihnen: Bitte prüfen Sie, dass die Zufahrt für ein Fahrzeug mit Absetzkipper (in der Regel bis 12 m Länge) befahrbar ist und der Untergrund tragfähig sowie eben ist.",
         list: [
-          "Lieferung frei Bordsteinkante: im Speditionsversand enthalten",
-          "Lieferung bis zum Aufstellort (inklusive Etagen): 29,00 Euro, auf Anfrage",
-          "Auspacken und Entsorgung der Transportverpackung: 9,00 Euro, auf Anfrage",
+          "Absetzen an der vereinbarten Stellfläche: im Speditionsversand enthalten",
+          "Kranentladung bei eingeschränkter Zufahrt oder besonderer Positionierung: Angebot nach Aufmaß, auf Anfrage",
+          "Ausrichten und Unterbauen des Containers: 29,00 Euro, auf Anfrage",
         ],
       },
       {
-        heading: "Anschluss- und Montageservice",
+        heading: "Aufbauservice vor Ort",
         body:
-          "Auf Wunsch schließen unsere Servicepartner Ihr neues Gerät fachgerecht an und nehmen es in Betrieb. Die Leistung buchen Sie nicht im Warenkorb, sondern telefonisch oder per E-Mail, am besten vor der Bestellung, damit wir sie mit der Lieferung zusammen einplanen können.\n\n" +
-          "Voraussetzung ist, dass alle bauseitigen Anschlüsse (Strom, Wasser, Abwasser, Abluft, Antennen- oder Netzwerkanschluss) vorhanden, frei zugänglich und normgerecht sind. Elektroarbeiten an der Hausinstallation dürfen wir nicht ausführen.",
+          "Auf Wunsch übernehmen unsere Servicepartner das Verbinden mehrteiliger Container, das Einstellen der Türen und Rolltore sowie die Kontrolle der Dichtungen nach dem Aufstellen. Die Leistung buchen Sie nicht im Warenkorb, sondern telefonisch oder per E-Mail, am besten vor der Bestellung, damit wir sie mit der Lieferung zusammen einplanen können.\n\n" +
+          "Voraussetzung ist ein ebener, tragfähiger und frei zugänglicher Untergrund. Elektro- und Sanitäranschlüsse an bauseitige Leitungen dürfen wir nur durch zugelassene Fachbetriebe ausführen lassen und vermitteln diese auf Wunsch.",
         list: [
-          "Anschluss einer Waschmaschine, eines Trockners oder eines Geschirrspülers: 49,00 Euro",
-          "Aufstellen und Inbetriebnahme eines freistehenden Kühl- oder Gefriergeräts: 39,00 Euro",
-          "Einbau eines Einbaugeräts in eine vorbereitete Nische: 89,00 Euro",
-          "Wandmontage eines Fernsehers inklusive Erstinstallation: 99,00 Euro (Halterung nicht enthalten)",
-          "Montage von Klimageräten mit fest installierter Außeneinheit: Angebot nach Aufmaß",
+          "Verbinden und Ausrichten zusammensetzbarer Container (z. B. 2 × 4 × 2 m zu 8 × 2 m): 89,00 Euro",
+          "Einstellen von Türen, Rolltoren und Verriegelungen: 49,00 Euro",
+          "Vermittlung eines Fachbetriebs für Strom- oder Sanitäranschluss: Angebot nach Aufmaß",
         ],
-      },
-      {
-        heading: "Mitnahme des Altgeräts",
-        body:
-          "Bei der Lieferung eines neuen Elektrogeräts nehmen wir Ihr gleichartiges Altgerät auf Wunsch unentgeltlich mit (1:1-Rücknahme). Melden Sie den Wunsch bitte telefonisch oder per E-Mail an, sobald Sie bestellt haben (gern auch schon davor), damit die Spedition die Rücknahme einplanen kann. Sie können den Hinweis auch im Anmerkungsfeld der Bestellung hinterlassen.\n\n" +
-          "Das Altgerät muss abgeklemmt, entleert, gereinigt und frei zugänglich am Ort der Anlieferung bereitstehen. Die Demontage eines fest eingebauten Altgeräts ist nicht Bestandteil der kostenlosen Mitnahme, kann aber als kostenpflichtige Zusatzleistung gebucht werden.\n\n" +
-          "Alle weiteren Rücknahmemöglichkeiten, insbesondere für kleine Altgeräte ohne Neukauf, beschreiben wir auf der Seite „Elektroaltgeräte & Batterien“.",
       },
       {
         heading: "Teillieferungen",
@@ -668,12 +653,12 @@ export const deLegalPages: LegalPageMap = {
           "Großgeräte, die per Spedition geliefert wurden, holen wir bei Ihnen ab. Bitte vereinbaren Sie dafür einen Termin mit unserem Kundenservice; bitte klemmen Sie das Gerät vorher ab und entleeren Sie es.",
       },
       {
-        heading: "Verpackung und Zubehör",
-        body: "Verwenden Sie nach Möglichkeit den Originalkarton mit den Transportsicherungen. Gerade bei Waschmaschinen und Fernsehern schützt das vor Schäden. Legen Sie sämtliches Zubehör, Fernbedienungen, Kabel, Handbücher und beigelegte Gutscheine bei. Fehlen Teile, können wir den Wertersatz nur anteilig erstatten.",
+        heading: "Zubehör und Zustand",
+        body: "Legen Sie bitte sämtliches mitgeliefertes Zubehör bei, etwa Schlüssel, Verriegelungsbolzen und Dokumentation. Fehlen Teile, können wir den Wertersatz nur anteilig erstatten.",
       },
       {
         heading: "Prüfung der Ware und Wertersatz",
-        body: "Sie dürfen die Ware prüfen, wie es Ihnen auch im Ladengeschäft möglich wäre, also auspacken, ansehen und die Funktionen testen. Für einen Wertverlust, der über diese Prüfung hinausgeht (zum Beispiel eine bereits eingebaute Dunstabzugshaube mit Bohrspuren oder eine intensiv genutzte Kaffeemaschine mit Kalkrückständen), können wir Wertersatz verlangen.",
+        body: "Sie dürfen die Ware prüfen, wie es Ihnen auch vor Ort beim Händler möglich wäre, also besichtigen, öffnen und Türen sowie Rolltore probeweise bedienen. Für einen Wertverlust, der über diese Prüfung hinausgeht (zum Beispiel Bohrungen, Anschweißungen oder sonstige bauliche Veränderungen am Container), können wir Wertersatz verlangen.",
       },
       {
         heading: "Rückerstattung",
@@ -682,105 +667,20 @@ export const deLegalPages: LegalPageMap = {
       {
         heading: "Reklamation eines Mangels",
         body:
-          "Für neue Geräte gilt die gesetzliche Mängelhaftung von zwei Jahren ab Ablieferung. Zeigt sich innerhalb der ersten zwölf Monate ein Mangel, wird vermutet, dass er bereits bei Übergabe vorlag. Sie müssen also nichts beweisen.\n\n" +
-          "Melden Sie den Mangel bitte zuerst unserem Kundenservice und halten Sie Bestellnummer, Seriennummer und eine kurze Fehlerbeschreibung bereit. Bei Großgeräten beauftragen wir in der Regel einen Techniker vor Ort, statt das Gerät zu transportieren, das ist schneller und schont das Gerät.",
+          "Für neue Container gilt die gesetzliche Mängelhaftung von zwei Jahren ab Ablieferung. Zeigt sich innerhalb der ersten zwölf Monate ein Mangel, wird vermutet, dass er bereits bei Übergabe vorlag. Sie müssen also nichts beweisen.\n\n" +
+          "Melden Sie den Mangel bitte zuerst unserem Kundenservice und halten Sie Bestellnummer, Containernummer und eine kurze Fehlerbeschreibung samt Fotos bereit. Wir vereinbaren dann meist eine Besichtigung vor Ort, statt den Container zu transportieren, das ist schneller und schont die Ware.",
       },
       {
         heading: "Garantie zusätzlich zur Gewährleistung",
-        body: "Viele Hersteller gewähren freiwillige Garantien, etwa zehn Jahre auf Motoren oder fünf Jahre auf Kompressoren. Diese Garantien treten neben die gesetzliche Mängelhaftung und schränken sie nicht ein. Wir unterstützen Sie gern bei der Abwicklung mit dem Hersteller.",
+        body: "Manche Hersteller gewähren freiwillige Garantien, etwa auf die Korrosionsschutzbeschichtung oder die Dichtigkeit der Schweißnähte. Diese Garantien treten neben die gesetzliche Mängelhaftung und schränken sie nicht ein. Wir unterstützen Sie gern bei der Abwicklung mit dem Hersteller.",
       },
       {
         heading: "Transportschaden",
-        body: "Ist die Ware beschädigt angekommen, melden Sie sich bitte innerhalb weniger Tage bei uns und senden Sie nach Möglichkeit Fotos von Verpackung und Gerät. Wir organisieren dann Ersatz oder Abholung. Eine verspätete Meldung schadet Ihren gesetzlichen Rechten nicht, erleichtert uns aber die Klärung mit dem Frachtführer.",
+        body: "Ist die Ware beschädigt angekommen, melden Sie sich bitte innerhalb weniger Tage bei uns und senden Sie nach Möglichkeit Fotos des Schadens. Wir organisieren dann Ersatz oder Nachbesserung. Eine verspätete Meldung schadet Ihren gesetzlichen Rechten nicht, erleichtert uns aber die Klärung mit dem Frachtführer.",
       },
       {
         heading: "Nicht zurückgenommene Artikel",
         body: "Vom Widerrufs- und Rückgaberecht ausgeschlossen sind unter anderem maßgefertigte Artikel sowie entsiegelte Hygieneartikel, Software und Datenträger. Die vollständige Aufzählung finden Sie auf der Seite „Widerrufsrecht“.",
-      },
-    ],
-  },
-
-  /* ------------------------------------------------------------------ */
-  /* Elektroaltgeräte & Batterien: ElektroG / BattDG                    */
-  /* ------------------------------------------------------------------ */
-  elektroaltgeraete: {
-    slug: "elektroaltgeraete",
-    title: "Elektroaltgeräte und Batterien",
-    intro: intro(
-      "Informationen nach dem Elektro- und Elektronikgerätegesetz (ElektroG) und dem Batterierecht-Durchführungsgesetz (BattDG): So geben Sie Altgeräte, Altbatterien und Akkus kostenlos bei uns zurück. Ob und in welchem Umfang eine Rücknahmepflicht besteht, hängt von der tatsächlichen Lager- und Versandfläche ab und ist vor der Veröffentlichung zu prüfen.",
-    ),
-    updatedAt: UPDATED_AT,
-    sections: [
-      {
-        heading: "Warum Altgeräte nicht in den Hausmüll gehören",
-        body: "Elektro- und Elektronikaltgeräte enthalten wertvolle Rohstoffe wie Kupfer, Aluminium und Seltene Erden, aber auch Schadstoffe wie Kältemittel, Quecksilber oder Lithium-Akkus. Wer Altgeräte getrennt entsorgt, sorgt dafür, dass diese Stoffe fachgerecht behandelt und Rohstoffe zurückgewonnen werden. Die Entsorgung über den Hausmüll ist gesetzlich untersagt und kann als Ordnungswidrigkeit geahndet werden.",
-      },
-      {
-        heading: "Das Symbol der durchgestrichenen Mülltonne",
-        body: "Geräte, die nach dem Ende ihrer Nutzung getrennt vom Hausmüll erfasst werden müssen, tragen das Symbol einer durchgestrichenen Abfalltonne auf Rädern. Das Symbol befindet sich auf dem Gerät, der Verpackung oder der Gebrauchsanweisung. Seit dem 1. Juli 2026 weisen rücknahmepflichtige Vertreiber dieses Symbol nach § 18a ElektroG zusätzlich gut sichtbar auf den Produktseiten im Onlineshop beziehungsweise im Bestellprozess aus und informieren dort über den Ablauf von Abholung und Rücknahme.",
-      },
-      {
-        heading: "Unsere Rücknahme: 1:1 beim Kauf eines neuen Geräts",
-        body:
-          "Kaufen Sie bei uns ein neues Elektrogerät, nehmen wir ein Altgerät derselben Geräteart, das im Wesentlichen dieselben Funktionen erfüllt, unentgeltlich zurück (§ 17 Absatz 1 Satz 1 Nummer 1 ElektroG).\n\n" +
-          "Bei Großgeräten fragen wir Sie im Bestellprozess ausdrücklich, ob Sie die Rücknahme wünschen. Die Spedition nimmt das Altgerät dann bei der Anlieferung des Neugeräts am Ort der Übergabe mit. Bitte klemmen Sie das Altgerät vorher ab, entleeren und reinigen Sie es und stellen Sie es frei zugänglich bereit.",
-      },
-      {
-        heading: "Unsere Rücknahme: 0:1 für kleine Altgeräte",
-        body:
-          "Kleine Altgeräte, bei denen keine äußere Abmessung mehr als 25 Zentimeter beträgt, nehmen wir auch ohne Neukauf zurück, auf haushaltsübliche Mengen von bis zu drei Geräten je Geräteart beschränkt (§ 17 Absatz 1 Satz 1 Nummer 2 ElektroG).\n\n" +
-          "Beispiele sind Rasierer, elektrische Zahnbürsten, Küchenwaagen, Kopfhörer, Kabel, Netzteile, Fernbedienungen und kleine Bluetooth-Lautsprecher.",
-      },
-      {
-        heading: "So geben Sie Altgeräte bei uns zurück",
-        body: "Als Versandhändler bieten wir Ihnen zumutbare, kostenfreie Rückgabemöglichkeiten an:",
-        list: [
-          `Rücksendung kleiner Altgeräte an: ${COMPANY.name}, Altgeräterücknahme, ${COMPANY.street}, ${COMPANY.city}. Ein kostenloses Versandlabel erhalten Sie über unseren Kundenservice.`,
-          "Abholung von Großgeräten bei der Anlieferung des Neugeräts, bitte bereits bei der Bestellung angeben",
-          "Nachträgliche Abholung eines Großgeräts nach Terminabsprache mit unserem Kundenservice",
-          `Fragen zur Rücknahme: ${COMPANY.email} oder ${COMPANY.phone}`,
-        ],
-      },
-      {
-        heading: "Bitte vor der Rückgabe: Daten löschen",
-        body: "Auf Altgeräten wie Smartphones, Smartwatches, Computern, Fernsehern und modernen Haushaltsgeräten können personenbezogene Daten gespeichert sein. Für das Löschen dieser Daten sind Sie selbst verantwortlich (§ 10 Absatz 1 ElektroG). Führen Sie deshalb vor der Rückgabe eine Rücksetzung auf Werkseinstellungen durch, entfernen Sie Speicherkarten und SIM-Karten und melden Sie Konten ab.",
-      },
-      {
-        heading: "Batterien und Lampen vorher entnehmen",
-        body: "Altbatterien und Altakkumulatoren sowie Lampen, die zerstörungsfrei aus dem Altgerät entnommen werden können, müssen vor der Rückgabe entnommen und getrennt entsorgt werden. Ist die Entnahme nur mit Werkzeug oder unter Zerstörung möglich, geben Sie das Gerät bitte vollständig zurück.",
-      },
-      {
-        heading: "Rücknahme von Altbatterien und Akkus",
-        body:
-          "Batterien und Akkus dürfen nicht in den Hausmüll. Sie sind gesetzlich verpflichtet, Altbatterien einer getrennten Sammlung zuzuführen.\n\n" +
-          "Sie können Altbatterien und Altakkus, die wir als Neubatterien im Sortiment führen oder geführt haben, unentgeltlich an unsere Versandadresse zurückgeben. Alternativ nutzen Sie die Sammelboxen im Handel oder die kommunalen Sammelstellen. Die Rückgabe ist für Sie kostenlos.\n\n" +
-          `Rücksendeadresse für Altbatterien: ${COMPANY.name}, Batterierücknahme, ${COMPANY.street}, ${COMPANY.city}.`,
-      },
-      {
-        heading: "Bedeutung der Batteriesymbole",
-        body: "Batterien und Akkus tragen ebenfalls das Symbol der durchgestrichenen Mülltonne. Enthalten sie bestimmte Schadstoffe, steht darunter zusätzlich ein chemisches Kürzel:",
-        list: [
-          "Pb: die Batterie enthält mehr als 0,004 Masseprozent Blei",
-          "Cd: die Batterie enthält mehr als 0,002 Masseprozent Cadmium",
-          "Hg: die Batterie enthält mehr als 0,0005 Masseprozent Quecksilber",
-        ],
-      },
-      {
-        heading: "Sicherheitshinweis zu Lithium-Akkus",
-        body: "Lithium-Ionen-Akkus können bei Beschädigung, Kurzschluss oder unsachgemäßer Lagerung in Brand geraten. Kleben Sie deshalb vor der Rückgabe die Pole mit Klebeband ab und geben Sie beschädigte oder aufgeblähte Akkus nicht in den Postversand, sondern ausschließlich bei einer kommunalen Sammelstelle ab. Bei Fragen hilft Ihnen unser Kundenservice weiter.",
-      },
-      {
-        heading: "Kommunale Sammelstellen",
-        body: "Unabhängig von unserer Rücknahme können Sie Altgeräte und Altbatterien kostenlos bei den Sammelstellen der öffentlich-rechtlichen Entsorgungsträger abgeben, etwa auf Wertstoffhöfen oder über Schadstoffmobile. Die Standorte finden Sie auf der Website Ihrer Stadt oder Ihres Landkreises.",
-      },
-      {
-        heading: "Unsere Registrierungen",
-        body: "Wir sind bei den zuständigen Registern gemeldet:",
-        list: [
-          `${COMPANY.weee} (Stiftung Elektro-Altgeräte Register)`,
-          "Batterieregister nach BattDG: DE00000000 (Platzhalter)",
-          "Verpackungsregister LUCID: DE0000000000000 (Platzhalter)",
-        ],
       },
     ],
   },
@@ -792,12 +692,12 @@ export const deLegalPages: LegalPageMap = {
     slug: "faq",
     title: "Häufige Fragen",
     intro:
-      "Von der Lieferzeit über den Montageservice bis zur Drohnenregistrierung: Hier finden Sie Antworten auf die Fragen, die uns am häufigsten erreichen. Ist Ihre Frage nicht dabei, rufen Sie uns an oder schreiben Sie uns, montags bis samstags von 8 bis 20 Uhr.",
+      "Von der Lieferzeit über den Aufbauservice bis zur Zahlung: Hier finden Sie Antworten auf die Fragen, die uns am häufigsten erreichen. Ist Ihre Frage nicht dabei, rufen Sie uns an oder schreiben Sie uns, montags bis samstags von 8 bis 20 Uhr.",
     updatedAt: UPDATED_AT,
     sections: [
       {
         heading: "Wie lange dauert die Lieferung?",
-        body: "Vorrätige Artikel sind im Standardversand innerhalb von drei bis fünf Werktagen bei Ihnen, im Expressversand innerhalb von 24 bis 48 Stunden. Bei Speditionsware für Großgeräte meldet sich die Spedition vorab telefonisch und vereinbart ein Zeitfenster mit Ihnen. Artikel mit dem Hinweis „Auf Anfrage“ bestellen wir beim Hersteller; hier dauert es meist zwei bis vier Wochen.",
+        body: "Vorrätige Artikel sind im Standardversand innerhalb von drei bis fünf Werktagen bei Ihnen, im Expressversand innerhalb von 24 bis 48 Stunden. Bei Containern meldet sich die Spedition vorab telefonisch und vereinbart ein Zeitfenster mit Ihnen. Artikel mit dem Hinweis „Auf Anfrage“ bestellen wir beim Hersteller; hier dauert es meist zwei bis vier Wochen.",
       },
       {
         heading: "Was kostet der Versand?",
@@ -808,16 +708,16 @@ export const deLegalPages: LegalPageMap = {
         body: "Standardmäßig liefern wir innerhalb Deutschlands, einschließlich der Inseln. Lieferungen ins europäische Ausland sind nach Absprache möglich. Schreiben Sie uns vor der Bestellung, dann prüfen wir Machbarkeit und Kosten für Ihre Adresse.",
       },
       {
-        heading: "Wird das Gerät bis in die Wohnung gebracht?",
-        body: "Der Speditionsversand endet standardmäßig an der Bordsteinkante. Für 29,00 Euro bringen unsere Speditionspartner das Gerät bis an den gewünschten Aufstellort, auch in obere Etagen; das Auspacken und die Entsorgung der Transportverpackung kosten zusätzlich 9,00 Euro. Diese beiden Leistungen buchen Sie nicht im Warenkorb, rufen Sie uns an oder schreiben Sie uns, dann stimmen wir sie mit der Spedition ab. Bitte messen Sie vorher Treppenhaus, Türen und Aufzug aus.",
+        heading: "Wird der Container bis auf mein Grundstück gebracht?",
+        body: "Die Spedition setzt den Container standardmäßig an der von Ihnen angegebenen, frei zugänglichen Stellfläche ab. Ist die Zufahrt eingeschränkt oder ist eine besondere Positionierung nötig, organisieren wir eine Kranentladung; das Angebot dafür richtet sich nach Aufmaß. Rufen Sie uns an oder schreiben Sie uns vor der Bestellung, dann prüfen wir gemeinsam Zufahrt, Untergrund und Platzbedarf.",
       },
       {
-        heading: "Bieten Sie Anschluss und Montage an?",
-        body: "Ja: 49 Euro für Waschmaschine, Trockner oder Geschirrspüler, 39 Euro für freistehende Kühlgeräte, 89 Euro für den Einbau in eine vorbereitete Nische und 99 Euro für die Wandmontage eines Fernsehers. Den Service vereinbaren Sie telefonisch oder per E-Mail, am besten vor der Bestellung, im Warenkorb lässt er sich nicht mitbestellen. Voraussetzung sind vorhandene, frei zugängliche und normgerechte Anschlüsse. Arbeiten an der Hauselektrik dürfen wir nicht ausführen.",
+        heading: "Bieten Sie einen Aufbauservice an?",
+        body: "Ja: 89 Euro für das Verbinden und Ausrichten zusammensetzbarer Container, 49 Euro für das Einstellen von Türen, Rolltoren und Verriegelungen. Den Service vereinbaren Sie telefonisch oder per E-Mail, am besten vor der Bestellung, im Warenkorb lässt er sich nicht mitbestellen. Voraussetzung ist ein ebener, tragfähiger und frei zugänglicher Untergrund. Elektro- und Sanitärarbeiten dürfen wir nur durch zugelassene Fachbetriebe ausführen lassen.",
       },
       {
-        heading: "Nehmen Sie mein altes Gerät mit?",
-        body: "Ja, und zwar kostenlos. Beim Kauf eines neuen Geräts nehmen wir ein gleichartiges Altgerät bei der Anlieferung mit. Sagen Sie uns rechtzeitig Bescheid (telefonisch, per E-Mail oder über das Anmerkungsfeld der Bestellung), damit die Spedition die Rücknahme einplanen kann. Das Altgerät sollte abgeklemmt, entleert, gereinigt und frei zugänglich bereitstehen. Kleine Altgeräte, bei denen keine äußere Abmessung 25 Zentimeter überschreitet, nehmen wir sogar ohne Neukauf zurück, bis zu drei Stück je Geräteart. Alle weiteren Rücknahmewege stehen auf der Seite „Elektroaltgeräte & Batterien“.",
+        heading: "Nehmen Sie meinen gebrauchten Container in Zahlung?",
+        body: "Häufig ja. Beschreiben Sie uns Zustand, Baujahr und Maße Ihres Containers, gern mit Fotos, wir machen Ihnen dann ein Ankaufsangebot. Details und Kontaktmöglichkeiten finden Sie auf unserer Ankaufsseite.",
       },
       {
         heading: "Welche Zahlungsarten kann ich nutzen?",
@@ -829,11 +729,11 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Wie lange habe ich Garantie?",
-        body: "Auf alle Neugeräte gilt die gesetzliche Mängelhaftung von zwei Jahren ab Ablieferung. Tritt in den ersten zwölf Monaten ein Defekt auf, wird vermutet, dass er von Anfang an vorlag. Sie müssen also nichts beweisen. Viele Hersteller gewähren zusätzlich freiwillige Garantien, etwa auf Motoren oder Kompressoren.",
+        body: "Auf alle neuen Container gilt die gesetzliche Mängelhaftung von zwei Jahren ab Ablieferung. Tritt in den ersten zwölf Monaten ein Defekt auf, wird vermutet, dass er von Anfang an vorlag. Sie müssen also nichts beweisen. Manche Hersteller gewähren zusätzlich freiwillige Garantien, etwa auf die Korrosionsschutzbeschichtung.",
       },
       {
         heading: "Was ist der Unterschied zwischen Garantie und Gewährleistung?",
-        body: "Die Gewährleistung ist Ihr gesetzliches Recht uns gegenüber und dauert zwei Jahre. Eine Garantie ist eine freiwillige Zusage des Herstellers, die darüber hinausgehen kann, etwa zehn Jahre auf den Motor einer Waschmaschine. Die Garantie ersetzt die Gewährleistung nicht, sondern kommt zusätzlich hinzu. Sie entscheiden, welchen Weg Sie nutzen.",
+        body: "Die Gewährleistung ist Ihr gesetzliches Recht uns gegenüber und dauert zwei Jahre. Eine Garantie ist eine freiwillige Zusage des Herstellers, die darüber hinausgehen kann, etwa auf die Dichtigkeit der Schweißnähte. Die Garantie ersetzt die Gewährleistung nicht, sondern kommt zusätzlich hinzu. Sie entscheiden, welchen Weg Sie nutzen.",
       },
       {
         heading: "Wie lange kann ich einen Artikel zurückgeben?",
@@ -841,7 +741,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Wie schicke ich etwas zurück?",
-        body: `Melden Sie die Rücksendung vorab an, per E-Mail an ${COMPANY.email} oder telefonisch unter ${COMPANY.phone}. Das Muster-Widerrufsformular finden Sie auf der Seite „Widerrufsrecht“; Sie müssen es aber nicht verwenden, eine formlose eindeutige Erklärung genügt. Für Pakete erhalten Sie ein kostenloses Rücksendeetikett. Großgeräte holen wir nach Terminabsprache bei Ihnen ab; bitte klemmen Sie das Gerät vorher ab und entleeren Sie es. Legen Sie sämtliches Zubehör bei und verwenden Sie möglichst den Originalkarton mit den Transportsicherungen.`,
+        body: `Melden Sie die Rücksendung vorab an, per E-Mail an ${COMPANY.email} oder telefonisch unter ${COMPANY.phone}. Das Muster-Widerrufsformular finden Sie auf der Seite „Widerrufsrecht“; Sie müssen es aber nicht verwenden, eine formlose eindeutige Erklärung genügt. Container holen wir nach Terminabsprache bei Ihnen ab. Legen Sie bitte sämtliches Zubehör bei, etwa Schlüssel und Verriegelungsbolzen.`,
       },
       {
         heading: "Was kostet die Rücksendung?",
@@ -856,28 +756,16 @@ export const deLegalPages: LegalPageMap = {
         body: "Der Artikel ist aktuell nicht auf Lager, aber lieferbar. Wir bestellen ihn nach Ihrem Auftrag beim Hersteller; die Lieferzeit beträgt üblicherweise zwei bis vier Wochen. Sie können solche Artikel ganz normal bestellen und erhalten von uns eine Rückmeldung, sobald ein konkreter Termin feststeht.",
       },
       {
-        heading: "Woher weiß ich, ob ein Einbaugerät in meine Küche passt?",
-        body: "Entscheidend sind die Nischenmaße in Höhe, Breite und Tiefe sowie die Position der Anschlüsse. Alle Geräte- und Nischenmaße finden Sie in den technischen Daten auf der Produktseite. Messen Sie im Zweifel nach oder rufen Sie uns an, unsere Beratung prüft mit Ihnen gemeinsam, ob das Gerät passt, und schlägt Alternativen vor.",
-      },
-      {
-        heading: "Wo finde ich die Energieeffizienzklasse eines Geräts?",
-        body: "Auf jeder Produktseite zeigen wir das EU-Energielabel mit der Effizienzklasse sowie das offizielle Produktdatenblatt. Dort stehen auch Verbrauchswerte, Geräuschemissionen und, bei Waschmaschinen und Geschirrspülern, Wasserverbrauch je Programm. Achten Sie beim Vergleich unbedingt auf dieselbe Programm- und Beladungsangabe.",
-      },
-      {
-        heading: "Was muss ich beim Kauf einer Drohne beachten?",
-        body: "In Deutschland gilt die EU-Drohnenverordnung. Als Fernpilot müssen Sie sich beim Luftfahrt-Bundesamt registrieren und erhalten eine elektronische Registrierungsnummer (e-ID), die Sie gut sichtbar an der Drohne anbringen. Außerdem ist eine Halterhaftpflichtversicherung nach § 43 Luftverkehrsgesetz gesetzlich vorgeschrieben, auch für sehr leichte Modelle. Fliegen dürfen Sie in der offenen Kategorie bis 120 Meter Höhe, stets in Sichtweite und nicht über Menschenansammlungen; Flugverbotszonen wie Flughäfen, Krankenhäuser, Bundesfernstraßen und Naturschutzgebiete sind tabu.",
-      },
-      {
-        heading: "Brauche ich für eine Drohne unter 250 Gramm einen Drohnenführerschein?",
-        body: "Nein. Für Drohnen unter 250 Gramm beziehungsweise der Klasse C0 ist weder der EU-Kompetenznachweis A1/A3 noch das EU-Fernpilotenzeugnis A2 erforderlich. Registrierung und Versicherung sind trotzdem Pflicht, sobald die Drohne, wie fast alle Kameramodelle, einen Sensor zur Erfassung personenbezogener Daten besitzt. Die Bildaufnahme über Privatgrundstücken bleibt zudem durch Persönlichkeitsrechte und Datenschutz begrenzt.",
+        heading: "Woher weiß ich, ob die Zufahrt für die Lieferung geeignet ist?",
+        body: "Entscheidend sind die Breite und Höhe der Zufahrt, die Tragfähigkeit des Untergrunds und ausreichend Platz zum Rangieren für ein Fahrzeug mit Absetzkipper. Ein Richtwert: Der Lkw benötigt in der Regel so viel Länge wie der Container plus etwa 15 Meter zum Absetzen. Messen Sie im Zweifel nach oder rufen Sie uns an, unsere Beratung prüft mit Ihnen gemeinsam, ob die Zufahrt reicht, und schlägt bei Bedarf eine Kranentladung vor.",
       },
       {
         heading: "Kann ich als Firma bestellen und eine Rechnung mit Umsatzsteuerausweis erhalten?",
         body: "Ja. Tragen Sie im Bestellprozess Ihren Firmennamen in das Feld „Firma“ ein. Die Rechnung liegt der Bestellbestätigung als PDF bei und weist die enthaltene Umsatzsteuer aus. Benötigen Sie Ihre Umsatzsteuer-Identifikationsnummer auf der Rechnung, schreiben Sie sie bitte in das Anmerkungsfeld der Bestellung oder senden Sie sie uns nach; ein eigenes Feld dafür gibt es im Bestellprozess noch nicht. Bitte beachten Sie zwei Unterschiede zum Verbraucherkauf: Unternehmen haben kein gesetzliches Widerrufsrecht, und die Verjährungsfrist für Mängelansprüche beträgt bei neuen Waren ein Jahr ab Gefahrübergang statt zwei Jahre. Unser freiwilliges 30-tägiges Rückgaberecht gilt auch für Sie.",
       },
       {
-        heading: "Was mache ich, wenn ein Gerät nach Ablauf der zwei Jahre defekt ist?",
-        body: "Melden Sie sich trotzdem bei uns. Häufig greift noch eine Herstellergarantie auf einzelne Bauteile, oder eine Reparatur ist deutlich günstiger als ein Neukauf. Wir vermitteln Ihnen einen autorisierten Servicepartner und prüfen die Ersatzteilverfügbarkeit für Ihr Modell.",
+        heading: "Was mache ich, wenn mein Container nach Ablauf der zwei Jahre einen Schaden hat?",
+        body: "Melden Sie sich trotzdem bei uns. Häufig greift noch eine Herstellergarantie auf einzelne Bauteile, oder eine Reparatur vor Ort ist deutlich günstiger als ein Neukauf. Wir vermitteln Ihnen einen autorisierten Servicepartner und prüfen die Ersatzteilverfügbarkeit für Ihr Modell.",
       },
     ],
   },
@@ -889,32 +777,32 @@ export const deLegalPages: LegalPageMap = {
     slug: "ueber-uns",
     title: "Über uns",
     intro:
-      "BBC Best Box Containerhandel e.K. ist ein Fachhändler für Haushaltsgeräte und Multimedia mit Sitz in Großensee. Wir verkaufen keine Geräte von der Stange, sondern beraten dazu, vom passenden Nischenmaß bis zur richtigen Bildwiederholrate.",
+      "BBC Best Box Containerhandel e.K. ist ein Fachhändler für See-, Lager-, Büro-, Sanitär- und Sondercontainer mit Sitz in Großensee. Wir verkaufen keine Container von der Stange, sondern beraten dazu, vom passenden Format bis zur richtigen Aufstelllösung.",
     updatedAt: UPDATED_AT,
     sections: [
       {
         heading: "Wer wir sind",
-        body: "Was als kleiner Elektrofachbetrieb begann, ist heute ein Onlineshop mit angeschlossenem Lager und eigenem Serviceteam. Der Name steht für das, was uns wichtig ist: ehrliche Beratung, faire Preise und ein Ansprechpartner, der auch nach dem Kauf noch da ist. Geführt wird das Unternehmen von Peer Kunz.",
+        body: `Als eingetragener Kaufmann seit ${COMPANY.registeredSince} handeln wir mit neuen und gebrauchten Containern für Lagerung, Büro, Sanitär und Sonderanwendungen. Der Name steht für das, was uns wichtig ist: ehrliche Beratung, faire Preise und ein Ansprechpartner, der auch nach dem Kauf noch da ist. Geführt wird das Unternehmen von ${COMPANY.owner}.`,
       },
       {
         heading: "Unser Sortiment",
-        body: "Wir konzentrieren uns auf zwei Welten: Haushalt und Multimedia. Im Haushaltsbereich finden Sie Waschmaschinen, Geschirrspüler, Kühl- und Gefriergeräte, Backöfen und Herde, Staubsauger, Küchenmaschinen, Kaffeevollautomaten und Klimageräte. Im Multimediabereich Fernseher, Smartphones, Computer, Smartwatches, Videospiele und Drohnen. Statt eines endlosen Katalogs führen wir eine kuratierte Auswahl von Marken, die wir selbst kennen und deren Serviceabwicklung funktioniert.",
+        body: "Wir konzentrieren uns auf Container: Seecontainer in Standardgrößen, abschließbare Lagercontainer, ausgebaute Bürocontainer, Sanitärcontainer sowie individuelle Sonderanfertigungen. Statt eines endlosen Katalogs führen wir eine kuratierte Auswahl von Herstellern, die wir selbst kennen und deren Qualität und Serviceabwicklung funktioniert.",
       },
       {
         heading: "Beratung statt Bestellformular",
-        body: "Ein Kühlschrank, der nicht in die Nische passt, oder ein Fernseher, der im hellen Wohnzimmer zu dunkel ist, ärgert lange. Deshalb ist unsere Beratung montags bis samstags von 8 bis 20 Uhr unter +49 176 14111374 erreichbar. Wir fragen nach Nischenmaßen, Anschlüssen, Wasserhärte oder Raumgröße, und sagen auch, wenn das günstigere Modell für Ihren Fall das bessere ist.",
+        body: `Ein Container, der nicht durch die Zufahrt passt, oder ein Format, das für den geplanten Zweck zu knapp bemessen ist, ärgert lange. Deshalb ist unsere Beratung montags bis samstags von 8 bis 20 Uhr unter ${COMPANY.phone} erreichbar. Wir fragen nach Zufahrt, Stellfläche, Untergrund und Nutzungszweck, und sagen auch, wenn das günstigere Modell für Ihren Fall das bessere ist.`,
       },
       {
-        heading: "Service und Montage",
-        body: "Unsere Servicepartner schließen Waschmaschinen an, bauen Geräte in vorbereitete Nischen ein und montieren Fernseher an der Wand. Bei einem Defekt schicken wir bevorzugt einen Techniker zu Ihnen, statt ein Großgerät quer durch Deutschland zu transportieren. Das ist schneller für Sie und schont das Gerät.",
+        heading: "Service und Aufbau",
+        body: "Unsere Servicepartner verbinden mehrteilige Container, stellen Türen und Rolltore ein und richten den Aufbau vor Ort aus. Bei einem Schaden schicken wir bevorzugt einen Techniker zu Ihnen, statt den Container quer durch Deutschland zu transportieren. Das ist schneller für Sie und schont die Ware.",
       },
       {
-        heading: "Nachhaltigkeit und Altgeräte",
-        body: "Wir nehmen Ihr Altgerät bei der Lieferung kostenlos mit und führen es der fachgerechten Verwertung zu. Kleine Altgeräte und Altbatterien nehmen wir auch ohne Neukauf zurück. Bei der Sortimentsauswahl achten wir auf Reparierbarkeit, Ersatzteilverfügbarkeit und lange Update-Zusagen bei vernetzten Geräten, Kriterien, die im Datenblatt selten stehen, im Alltag aber den Unterschied machen.",
+        heading: "Nachhaltigkeit und gebrauchte Container",
+        body: "Container sind von Natur aus ein langlebiges, wiederverwendbares Produkt: Wir kaufen gebrauchte Container an, prüfen sie auf Dichtigkeit und Statik und bereiten sie für den Weiterverkauf auf, statt sie verschrotten zu lassen. Bei der Sortimentsauswahl achten wir auf Korrosionsschutz, Reparierbarkeit und Ersatzteilverfügbarkeit, Kriterien, die im Datenblatt selten stehen, im Alltag aber den Unterschied machen.",
       },
       {
         heading: "Standort und Logistik",
-        body: "Unser Sitz ist Großensee, von dort steuern wir Einkauf, Kundenservice und Retourenabwicklung. Der Versand erfolgt über Paketdienste und spezialisierte Zwei-Mann-Speditionen für Großgeräte, damit auch ein 90 Kilogramm schwerer Kühlschrank sicher an seinem Platz ankommt.",
+        body: "Unser Sitz ist Großensee, von dort steuern wir Einkauf, Kundenservice und Auftragsabwicklung. Der Versand erfolgt über spezialisierte Speditionen mit Absetzkipper oder Kranfahrzeug, damit auch ein mehrere Tonnen schwerer Container sicher an seinem Platz ankommt.",
       },
       {
         heading: "Arbeiten bei BBC Best Box Containerhandel e.K.",
@@ -949,17 +837,13 @@ export const deLegalPages: LegalPageMap = {
         list: [COMPANY.name, COMPANY.street, COMPANY.city, COMPANY.country],
       },
       {
-        heading: "Retouren und Altgeräte",
-        body: "Bitte senden Sie Retouren und kleine Altgeräte nicht unangekündigt zurück, sondern melden Sie sie vorab an, so ordnen wir Ihre Sendung sofort zu.",
-        list: [
-          `Retourenannahme: ${RETURN_ADDRESS}`,
-          `Altgeräterücknahme: ${COMPANY.name}, Altgeräterücknahme, ${COMPANY.street}, ${COMPANY.city}`,
-          `Batterierücknahme: ${COMPANY.name}, Batterierücknahme, ${COMPANY.street}, ${COMPANY.city}`,
-        ],
+        heading: "Retouren",
+        body: "Bitte senden Sie Retouren nicht unangekündigt zurück, sondern melden Sie sie vorab an, so ordnen wir Ihre Sendung sofort zu.",
+        list: [`Retourenannahme: ${RETURN_ADDRESS}`],
       },
       {
-        heading: "Technischer Service und Montage",
-        body: `Für Termine zu Anschluss, Montage oder einem Technikereinsatz erreichen Sie unsere Serviceplanung unter ${COMPANY.phone}. Halten Sie bitte Modellbezeichnung und Seriennummer des Geräts bereit; beides finden Sie auf dem Typenschild.`,
+        heading: "Technischer Service und Aufbau",
+        body: `Für Termine zum Aufbauservice oder einem Technikereinsatz erreichen Sie unsere Serviceplanung unter ${COMPANY.phone}. Halten Sie bitte Bestellnummer und Containernummer bereit; Letztere finden Sie auf dem CSC-Plate des Containers.`,
       },
       {
         heading: "Datenschutzanfragen",
@@ -971,7 +855,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Rechtliche Angaben",
-        body: `${COMPANY.name}, vertreten durch den Inhaber ${COMPANY.owner}. Registergericht: ${COMPANY.register}. Umsatzsteuer-Identifikationsnummer: ${COMPANY.vatId}. ${COMPANY.weee}. Vollständige Angaben finden Sie im Impressum.`,
+        body: `${COMPANY.name}, vertreten durch den Inhaber ${COMPANY.owner}. Registergericht: ${COMPANY.register}. Umsatzsteuer-Identifikationsnummer: ${COMPANY.vatId}. Vollständige Angaben finden Sie im Impressum.`,
       },
     ],
   },

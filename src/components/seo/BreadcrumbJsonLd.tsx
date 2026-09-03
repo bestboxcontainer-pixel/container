@@ -7,7 +7,7 @@ import { absoluteUrl } from "@/server/merchant";
 
 export interface BreadcrumbJsonLdItem {
   label: string;
-  /** Chemin interne ("/haushalt/waschmaschinen") ou URL absolue. */
+  /** Chemin interne ("/container/lagercontainer") ou URL absolue. */
   href?: string;
 }
 

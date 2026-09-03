@@ -1,6 +1,6 @@
 # Mise en ligne : Hostinger
 
-Procédure de déploiement de Hausgeräte Pfeffer sur Hostinger, en Node.js.
+Procédure de déploiement de BBC Best Box Containerhandel e.K. sur Hostinger, en Node.js.
 
 Deux hébergements Hostinger permettent de faire tourner ce site. Ils ne se
 déploient pas de la même façon :
@@ -38,10 +38,10 @@ est limitée : voir « Build sur une machine limitée » plus bas.
 - L'URL de la base **PostgreSQL Neon** (chaîne « pooled », avec `sslmode=verify-full`).
 - Les trois clés **Cloudinary** : sans elles, l'envoi d'images est refusé en
   production, et c'est par là que passeront toutes les photos produits.
-- Les identifiants **SMTP Hostinger** de `kontakt@hausgeratepfeffer.de`.
+- Les identifiants **SMTP Hostinger** de `kontakt@bestbox-containerhandel.de`.
   Sans eux, plus personne n'entre dans le back-office : le code de connexion à
   six chiffres part par e-mail et le repli console n'existe qu'en développement.
-- Le domaine **hausgeratepfeffer.de** pointé sur l'hébergement.
+- Le domaine **bestbox-containerhandel.de** pointé sur l'hébergement.
 
 ## 2. Variables d'environnement
 
@@ -68,7 +68,7 @@ illisibles les clés d'intégration déjà enregistrées en base. Elle se fixe
 
 Ne pas oublier non plus :
 
-- `NEXT_PUBLIC_SITE_URL=https://hausgeratepfeffer.de`, sans barre finale. Cette
+- `NEXT_PUBLIC_SITE_URL=https://bestbox-containerhandel.de`, sans barre finale. Cette
   variable est lue **au moment du build**, pas au démarrage : la changer impose
   de reconstruire. Elle alimente les URL canoniques, le sitemap, le flux Google
   Merchant et tous les liens contenus dans les e-mails.
@@ -105,25 +105,25 @@ curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
 sudo apt install -y nodejs
 sudo npm install -g pm2
 
-git clone https://github.com/hausgeratepfeffer/electro.git /var/www/hausgeraete
-cd /var/www/hausgeraete
+git clone https://github.com/bestboxcontainer-pixel/container.git /var/www/bestbox
+cd /var/www/bestbox
 ```
 
-Créer `/var/www/hausgeraete/.env.local` avec les variables de l'étape 2, puis :
+Créer `/var/www/bestbox/.env.local` avec les variables de l'étape 2, puis :
 
 ```bash
 npm ci                 # installe et lance `prisma generate` (postinstall)
 npx prisma migrate deploy   # applique les migrations à la base Neon
 npm run build
-pm2 start npm --name hausgeraete -- start
+pm2 start npm --name bestbox -- start
 pm2 save && pm2 startup     # relance automatique au redémarrage du serveur
 ```
 
-Nginx en frontal, dans `/etc/nginx/sites-available/hausgeraete` :
+Nginx en frontal, dans `/etc/nginx/sites-available/bestbox` :
 
 ```nginx
 server {
-    server_name hausgeratepfeffer.de www.hausgeratepfeffer.de;
+    server_name bestbox-containerhandel.de www.bestbox-containerhandel.de;
 
     location / {
         proxy_pass http://127.0.0.1:3000;
@@ -146,9 +146,9 @@ server {
 Puis activer le site et poser le certificat :
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/hausgeraete /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/bestbox /etc/nginx/sites-enabled/
 sudo nginx -t && sudo systemctl reload nginx
-sudo certbot --nginx -d hausgeratepfeffer.de -d www.hausgeratepfeffer.de
+sudo certbot --nginx -d bestbox-containerhandel.de -d www.bestbox-containerhandel.de
 ```
 
 `X-Forwarded-Proto` n'est pas décoratif : sans lui, l'application se croit en
@@ -162,7 +162,7 @@ connexion au back-office tourne alors en boucle.
      20.19 fait échouer l'installation de Prisma)
    - Racine de l'application : le dossier du site
    - Fichier de démarrage : **`server.js`** (fourni à la racine du dépôt)
-2. Déposer le code : `git clone https://github.com/hausgeratepfeffer/electro.git`
+2. Déposer le code : `git clone https://github.com/bestboxcontainer-pixel/container.git`
    depuis le terminal SSH, ou l'onglet Git de hPanel.
 3. **Créer `.env.local` à la racine de l'application**, avec les variables de
    l'étape 2.
@@ -306,7 +306,7 @@ sans être passé par le mot de passe **et** le code à six chiffres.
 Sans elle, les campagnes programmées ne partent jamais. Toutes les minutes :
 
 ```
-* * * * * curl -fsS -X POST -H "Authorization: Bearer LE_CRON_SECRET" https://hausgeratepfeffer.de/api/cron/campaigns > /dev/null
+* * * * * curl -fsS -X POST -H "Authorization: Bearer LE_CRON_SECRET" https://bestbox-containerhandel.de/api/cron/campaigns > /dev/null
 ```
 
 Sur VPS : `crontab -e`. Sur hébergement web : hPanel → **Cron Jobs**.
@@ -357,7 +357,7 @@ et c'est exactement ce qui est demandé : mais ce n'est pas ce que voit un
 visiteur.
 
 ```bash
-curl -s -o /dev/null -w "%{http_code}\n" https://hausgeratepfeffer.de/
+curl -s -o /dev/null -w "%{http_code}\n" https://bestbox-containerhandel.de/
 # 503 attendu
 ```
 
@@ -369,10 +369,10 @@ pas ce jour-là. Contrepartie assumée : il faut un redémarrage.
 ## 8. Vérifications après mise en ligne
 
 ```bash
-curl -I https://hausgeratepfeffer.de/                    # 200
-curl -s https://hausgeratepfeffer.de/sitemap.xml | head  # XML des pages
-curl -s https://hausgeratepfeffer.de/robots.txt          # autorise l'indexation
-curl -s "https://hausgeratepfeffer.de/feed/google" | head -20   # flux Merchant
+curl -I https://bestbox-containerhandel.de/                    # 200
+curl -s https://bestbox-containerhandel.de/sitemap.xml | head  # XML des pages
+curl -s https://bestbox-containerhandel.de/robots.txt          # autorise l'indexation
+curl -s "https://bestbox-containerhandel.de/feed/google" | head -20   # flux Merchant
 ```
 
 Puis, dans le navigateur :

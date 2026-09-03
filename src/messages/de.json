@@ -33,104 +33,17 @@
     "logoAlt": "BBC Best Box Containerhandel e.K.",
     "search": "Suchen"
   },
-  "hero": {
-    "ariaLabel": "Aktionen und Highlights",
-    "previous": "Vorheriger Slide",
-    "next": "Nächster Slide",
-    "slideLabel": "Slide {index}: {title}",
-    "slides": {
-      "summer": {
-        "eyebrow": "SOMMER SALE",
-        "title": "Bis zu 10% auf Haushaltsgeräte",
-        "subtitle": "Kühlen, Waschen, Kochen & Multimedia, jetzt zu Bestpreisen sichern.",
-        "cta": "Jetzt shoppen",
-        "alt": "Moderne Küche mit hochwertigen Einbaugeräten"
-      },
-      "cinema": {
-        "eyebrow": "HEIMKINO-WOCHEN",
-        "title": "4K-Fernseher ab 449 €",
-        "subtitle": "OLED, QLED und Ambilight, großes Kino für Ihr Wohnzimmer.",
-        "cta": "Fernseher entdecken",
-        "alt": "Großer Fernseher mit Ambient-Beleuchtung im abgedunkelten Wohnzimmer"
-      },
-      "drones": {
-        "eyebrow": "NEU IM SORTIMENT",
-        "title": "Drohnen für jeden Flugstil",
-        "subtitle": "Kameradrohnen unter 249 g, startklar ohne Führerschein, ab 199 €.",
-        "cta": "Drohnen ansehen",
-        "alt": "Kameradrohne im Flug über einem Wald"
-      },
-      "laundry": {
-        "eyebrow": "WASCHTAG-DEALS",
-        "title": "Waschmaschinen ab 429 €",
-        "subtitle": "Frontlader mit 1400 U/Min, Mengenautomatik und Aquastop, inklusive Anschluss-Service.",
-        "cta": "Waschmaschinen ansehen",
-        "alt": "Waschmaschine in einem hellen Hauswirtschaftsraum"
-      },
-      "coffee": {
-        "eyebrow": "KAFFEE-WOCHEN",
-        "title": "Kaffeevollautomaten ab 219 €",
-        "subtitle": "Frisch gemahlen statt aufgewärmt, Modelle von De'Longhi, Siemens und Jura.",
-        "cta": "Kaffeemaschinen ansehen",
-        "alt": "Espresso mit frischer Crema in einer Tasse"
-      }
-    }
-  },
-  "home": {
-    "highlights": "Highlights",
-    "highlightsCta": "Alle Highlights anzeigen",
-    "deals": "Aktuelle Deals",
-    "dealsCta": "Alle Angebote anzeigen",
-    "brands": "Top-Marken",
-    "brandsNote": "Über 40 Hersteller im Sortiment",
-    "brandItems": "{count} Artikel",
-    "metaTitle": "BBC Best Box Containerhandel e.K. | Elektrogeräte & Multimedia online kaufen",
-    "metaDescription": "Große Auswahl an Haushaltsgeräten, Küchengeräten, TV & Audio und Smart Home Produkten zu günstigen Preisen. Standardversand kostenlos, 14 Tage Rückgaberecht.",
-    "promoTitle": "Topaktuell",
-    "promo": {
-      "klimageraete": {
-        "title": "Klimageräte Sale",
-        "subtitle": "Bis zu 30% sparen",
-        "alt": "Klimagerät an einer Wand"
-      },
-      "geschirrspueler": {
-        "title": "Geschirrspüler Aktion",
-        "alt": "Geschirrspüler in der Küche"
-      },
-      "smartwatches": {
-        "title": "Smartwatch Deals",
-        "alt": "Smartwatch am Handgelenk"
-      },
-      "waschmaschinen": {
-        "title": "Waschmaschinen Aktion",
-        "alt": "Waschmaschine"
-      },
-      "fernseher": {
-        "title": "TV Highlights",
-        "alt": "Fernseher im Wohnzimmer"
-      }
-    },
-    "deal": {
-      "badge": "DEAL DES TAGES",
-      "saving": "Sie sparen {amount}",
-      "stockLeft": "Noch {left} von {total} Stück zu diesem Preis",
-      "hours": "Std",
-      "minutes": "Min",
-      "seconds": "Sek",
-      "cta": "Zum Angebot"
-    }
-  },
   "trust": {
     "shippingTitle": "Standardversand: kostenlos (3-5 Tage)",
     "shippingDetail": "Expressversand: 70 € (24-48 Stunden)",
     "returnTitle": "14 Tage Rückgaberecht",
     "returnDetail": "Ohne Angabe von Gründen",
-    "serviceTitle": "Anschluss- & Montageservice",
-    "serviceDetail": "Altgeräte-Mitnahme auf Wunsch"
+    "serviceTitle": "Aufbauservice vor Ort",
+    "serviceDetail": "Auf Wunsch, gegen Aufpreis"
   },
   "group": {
-    "metaTitle": "{label}: Geräte und Zubehör | BBC Best Box Containerhandel e.K.",
-    "metaDescription": "Alle Kategorien aus dem Bereich {label} bei BBC Best Box Containerhandel e.K.: geprüfte Marken, faire Preise und schnelle Lieferung.",
+    "metaTitle": "{label}: Container und Zubehör | BBC Best Box Containerhandel e.K.",
+    "metaDescription": "Alle Kategorien aus dem Bereich {label} bei BBC Best Box Containerhandel e.K.: geprüfte Qualität, faire Preise und schnelle Lieferung.",
     "intro": "Alle Kategorien aus dem Bereich {label} auf einen Blick.",
     "productCount": "{count, plural, =0 {Noch keine Artikel} one {# Artikel} other {# Artikel}}"
   },
@@ -303,7 +216,7 @@
     "indicatorWithItems": "Warenkorb: {count, plural, one {# Artikel} other {# Artikel}}, {total}",
     "itemCount": "{count, plural, one {# Artikel} other {# Artikel}}",
     "emptyTitle": "Ihr Warenkorb ist leer",
-    "emptyText": "Stöbern Sie durch unsere Haushalts- und Multimedia-Geräte und legen Sie Ihre Favoriten hier ab.",
+    "emptyText": "Stöbern Sie durch unser Container-Sortiment und legen Sie Ihre Favoriten hier ab.",
     "emptyCta": "Zum Sortiment",
     "columnProduct": "Artikel",
     "columnUnitPrice": "Einzelpreis",

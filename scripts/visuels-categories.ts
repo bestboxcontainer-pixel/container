@@ -1,26 +1,16 @@
 /**
- * Aligne les vignettes de catégorie sur de vrais produits du catalogue.
+ * Aligne le visuel d'en-tête de chaque page de rayon sur un vrai produit du
+ * catalogue, plutôt que sur une photo d'ambiance générique.
  *
- * Les visuels d'origine étaient des photos d'ambiance : une cuisine pour le
- * rayon lave-vaisselle, un comptoir de café pour les machines à café. Elles ne
- * montraient donc pas ce qui est réellement vendu. On leur substitue le
- * packshot du produit le plus représentatif de chaque rayon, déjà hébergé sur
- * le CDN.
- *
- * Deux fichiers sont mis à jour, pour que la navigation et les pages de
- * catégorie racontent la même chose :
- *   - `src/data/categoryNav.ts` : les vignettes rondes de l'accueil ;
- *   - la colonne `image` de la table Category : l'en-tête des pages de rayon.
+ * Met à jour la colonne `image` de la table Category avec le packshot du
+ * produit le plus représentatif de chaque rayon, déjà hébergé sur le CDN.
  *
  * Lancement : npx tsx --env-file=.env.local scripts/visuels-categories.ts
  *   --ecrire  applique les changements (sinon simulation)
  */
-import { readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
 import { prisma } from "../src/server/prisma";
 
 const ECRIRE = process.argv.includes("--ecrire");
-const FICHIER_NAV = path.join(process.cwd(), "src", "data", "categoryNav.ts");
 
 async function main(): Promise<void> {
   const categories = await prisma.category.findMany({
@@ -28,7 +18,6 @@ async function main(): Promise<void> {
     orderBy: [{ group: { position: "asc" } }, { position: "asc" }],
   });
 
-  let source = await readFile(FICHIER_NAV, "utf-8");
   const journal: string[] = [];
   let remplacees = 0;
 
@@ -46,15 +35,8 @@ async function main(): Promise<void> {
       continue;
     }
 
-    // Remplacement ciblé sur la ligne du slug, pour ne pas toucher au reste.
-    const motif = new RegExp(`(\\{\\s*slug:\\s*"${categorie.slug}",[^}]*image:\\s*)"[^"]*"`);
-    if (motif.test(source)) {
-      source = source.replace(motif, `$1"${vedette.image}"`);
-      remplacees += 1;
-      journal.push(`  ${categorie.slug.padEnd(18)} → ${vedette.brand} ${vedette.name.slice(0, 34)}`);
-    } else {
-      journal.push(`  ${categorie.slug.padEnd(18)} absent de la navigation`);
-    }
+    remplacees += 1;
+    journal.push(`  ${categorie.slug.padEnd(18)} → ${vedette.brand} ${vedette.name.slice(0, 34)}`);
 
     if (ECRIRE) {
       await prisma.category.update({
@@ -64,11 +46,9 @@ async function main(): Promise<void> {
     }
   }
 
-  if (ECRIRE) await writeFile(FICHIER_NAV, source);
-
   console.log(ECRIRE ? "Mode écriture." : "Simulation, relancer avec --ecrire pour appliquer.");
   console.log(journal.join("\n"));
-  console.log(`\n${remplacees}/${categories.length} vignettes alignées sur un produit réel.`);
+  console.log(`\n${remplacees}/${categories.length} visuels alignés sur un produit réel.`);
 }
 
 main()

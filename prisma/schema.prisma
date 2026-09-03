@@ -1,4 +1,4 @@
-// Modèle de données de la boutique Hausgeräte Pfeffer.
+// Modèle de données de la boutique BBC Best Box Containerhandel e.K.
 // Base de production et de développement : PostgreSQL (Neon), via la seule
 // variable DATABASE_URL : voir docs/DATABASE.md.
 // Contrainte volontaire : ni enum Prisma ni liste scalaire, pour que le même

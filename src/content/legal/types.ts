@@ -19,7 +19,6 @@ export type LegalSlug =
   | "versand"
   | "zahlungsarten"
   | "retoure"
-  | "elektroaltgeraete"
   | "faq"
   | "ueber-uns"
   | "kontakt";

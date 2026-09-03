@@ -33,104 +33,17 @@
     "logoAlt": "BBC Best Box Containerhandel e.K.",
     "search": "Search"
   },
-  "hero": {
-    "ariaLabel": "Promotions and highlights",
-    "previous": "Previous slide",
-    "next": "Next slide",
-    "slideLabel": "Slide {index}: {title}",
-    "slides": {
-      "summer": {
-        "eyebrow": "SUMMER SALE",
-        "title": "Up to 10% off home appliances",
-        "subtitle": "Cooling, laundry, cooking and multimedia, grab our best prices now.",
-        "cta": "Shop now",
-        "alt": "Modern kitchen with premium built-in appliances"
-      },
-      "cinema": {
-        "eyebrow": "HOME CINEMA WEEKS",
-        "title": "4K TVs from €449",
-        "subtitle": "OLED, QLED and Ambilight, big-screen cinema for your living room.",
-        "cta": "Discover TVs",
-        "alt": "Large TV with ambient lighting in a darkened living room"
-      },
-      "drones": {
-        "eyebrow": "NEW ARRIVALS",
-        "title": "Drones for every flying style",
-        "subtitle": "Camera drones under 249 g, ready to fly without a licence, from €199.",
-        "cta": "View drones",
-        "alt": "Camera drone flying above a forest"
-      },
-      "laundry": {
-        "eyebrow": "LAUNDRY DAY DEALS",
-        "title": "Washing machines from €429",
-        "subtitle": "Front loaders with 1,400 rpm, automatic load sensing and Aquastop, installation service included.",
-        "cta": "View washing machines",
-        "alt": "Washing machine in a bright utility room"
-      },
-      "coffee": {
-        "eyebrow": "COFFEE WEEKS",
-        "title": "Bean-to-cup machines from €219",
-        "subtitle": "Freshly ground instead of reheated, models by De'Longhi, Siemens and Jura.",
-        "cta": "View coffee machines",
-        "alt": "Espresso with fresh crema in a cup"
-      }
-    }
-  },
-  "home": {
-    "highlights": "Highlights",
-    "highlightsCta": "View all highlights",
-    "deals": "Current deals",
-    "dealsCta": "View all offers",
-    "brands": "Top brands",
-    "brandsNote": "More than 40 manufacturers in stock",
-    "brandItems": "{count} items",
-    "metaTitle": "BBC Best Box Containerhandel e.K. | Home appliances & multimedia online",
-    "metaDescription": "A wide range of home appliances, kitchen appliances, TV & audio and smart home products at fair prices. Free standard delivery, 14-day returns.",
-    "promoTitle": "Trending now",
-    "promo": {
-      "klimageraete": {
-        "title": "Air conditioner sale",
-        "subtitle": "Save up to 30%",
-        "alt": "Air conditioning unit mounted on a wall"
-      },
-      "geschirrspueler": {
-        "title": "Dishwasher offers",
-        "alt": "Dishwasher in a kitchen"
-      },
-      "smartwatches": {
-        "title": "Smartwatch deals",
-        "alt": "Smartwatch on a wrist"
-      },
-      "waschmaschinen": {
-        "title": "Washing machine offers",
-        "alt": "Washing machine"
-      },
-      "fernseher": {
-        "title": "TV highlights",
-        "alt": "Television in a living room"
-      }
-    },
-    "deal": {
-      "badge": "DEAL OF THE DAY",
-      "saving": "You save {amount}",
-      "stockLeft": "Only {left} of {total} units left at this price",
-      "hours": "Hrs",
-      "minutes": "Min",
-      "seconds": "Sec",
-      "cta": "View offer"
-    }
-  },
   "trust": {
     "shippingTitle": "Standard delivery: free (3-5 days)",
     "shippingDetail": "Express delivery: €70 (24-48 hours)",
     "returnTitle": "14-day return policy",
     "returnDetail": "No reason required",
-    "serviceTitle": "Installation & assembly service",
-    "serviceDetail": "Old appliance taken away on request"
+    "serviceTitle": "On-site installation service",
+    "serviceDetail": "On request, extra charge applies"
   },
   "group": {
-    "metaTitle": "{label}: appliances and accessories | BBC Best Box Containerhandel e.K.",
-    "metaDescription": "Every category in {label} at BBC Best Box Containerhandel e.K.: trusted brands, fair prices and fast delivery.",
+    "metaTitle": "{label}: containers and accessories | BBC Best Box Containerhandel e.K.",
+    "metaDescription": "Every category in {label} at BBC Best Box Containerhandel e.K.: trusted quality, fair prices and fast delivery.",
     "intro": "Every category in {label} at a glance.",
     "productCount": "{count, plural, =0 {No items yet} one {# item} other {# items}}"
   },
@@ -303,7 +216,7 @@
     "indicatorWithItems": "Cart: {count, plural, one {# item} other {# items}}, {total}",
     "itemCount": "{count, plural, one {# item} other {# items}}",
     "emptyTitle": "Your cart is empty",
-    "emptyText": "Browse our home appliances and multimedia devices and add your favourites here.",
+    "emptyText": "Browse our container range and add your favourites here.",
     "emptyCta": "Browse the range",
     "columnProduct": "Item",
     "columnUnitPrice": "Unit price",

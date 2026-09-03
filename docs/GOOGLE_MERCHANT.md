@@ -215,7 +215,7 @@ Fernseher »…
 
 1. **Créer et vérifier le compte** sur `merchants.google.com` : raison sociale, adresse,
    numéro de TVA intracommunautaire.
-2. **Revendiquer le domaine** `hausgeratepfeffer.de` (Search Console ou balise HTML).
+2. **Revendiquer le domaine** `bestbox-containerhandel.de` (Search Console ou balise HTML).
 3. **Renseigner les informations d'entreprise** : Impressum, CGV, politique de retour,
    politique de confidentialité : toutes accessibles depuis le pied de page.
 4. **Configurer les règles de livraison** pour l'Allemagne, en euros. Elles s'appliquent
@@ -224,8 +224,8 @@ Fernseher »…
    au niveau du compte.
 6. **Ajouter la source de données** : *Produktdatenquellen → Datenquelle hinzufügen →
    Datei planen*, puis l'une des deux URL :
-   - `https://hausgeratepfeffer.de/feed/google` (XML, recommandé)
-   - `https://hausgeratepfeffer.de/feed/google-csv` (TSV)
+   - `https://bestbox-containerhandel.de/feed/google` (XML, recommandé)
+   - `https://bestbox-containerhandel.de/feed/google-csv` (TSV)
    Fréquence : quotidienne. Pays : Allemagne. Langue : allemand.
 7. **Attendre le premier traitement** (jusqu'à 72 h), puis lire l'onglet *Diagnose*.
 8. **Vérifier le balisage** avec le [Rich Results Test](https://search.google.com/test/rich-results)
@@ -272,7 +272,7 @@ Aucune de ces informations ne peut être déduite du code sans mentir à Google.
 
 ```bash
 # Domaine public : conditionne toutes les URL absolues du flux et du JSON-LD
-NEXT_PUBLIC_SITE_URL="https://hausgeratepfeffer.de"
+NEXT_PUBLIC_SITE_URL="https://bestbox-containerhandel.de"
 ```
 
 En local, `.env` pointe sur `http://localhost:3000`. **Le flux mis en ligne doit toujours

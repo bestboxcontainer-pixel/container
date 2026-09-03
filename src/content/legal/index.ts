@@ -47,7 +47,6 @@ export const LEGAL_SLUGS: readonly LegalSlug[] = [
   "versand",
   "zahlungsarten",
   "retoure",
-  "elektroaltgeraete",
   "faq",
   "ueber-uns",
   "kontakt",
@@ -62,7 +61,6 @@ export const LEGAL_SLUG_LABELS: Readonly<Record<LegalSlug, string>> = {
   versand: "Versand & Lieferung",
   zahlungsarten: "Zahlungsarten",
   retoure: "Retoure & Rücksendung",
-  elektroaltgeraete: "Elektroaltgeräte",
   faq: "FAQ",
   "ueber-uns": "Über uns",
   kontakt: "Kontakt",
@@ -106,10 +104,10 @@ export const FOOTER_GROUP_IDS = ["service", "legal", "company"] as const;
 /**
  * Répartition des slugs par colonne du pied de page.
  *
- * « widerruf » et « elektroaltgeraete » n'y figurent pas : les pages existent
- * toujours et restent servies à leur adresse, elles ne sont simplement plus
- * listées ici. Les liens qui y mènent depuis le tunnel de commande et depuis le
- * suivi de commande restent la voie d'accès.
+ * « widerruf » n'y figure pas : la page existe toujours et reste servie à son
+ * adresse, elle n'est simplement plus listée ici. Les liens qui y mènent
+ * depuis le tunnel de commande et depuis le suivi de commande restent la voie
+ * d'accès.
  */
 export const FOOTER_GROUP_SLUGS: Readonly<Record<LegalFooterGroup["id"], readonly LegalSlug[]>> = {
   service: ["versand", "zahlungsarten", "retoure", "faq"],

@@ -1,4 +1,4 @@
-# Espace client `/konto` : Hausgeräte Pfeffer
+# Espace client `/konto` : BBC Best Box Containerhandel e.K.
 
 Ce document décrit l'espace client livré dans `src/app/[locale]/konto/`, les décisions de
 sécurité qui le sous-tendent, ce qui est couvert au regard du droit allemand et du RGPD,
@@ -350,7 +350,7 @@ page, exactement comme le code de connexion du back-office. Le garde-fou porte s
 Un seul compte de test subsiste, volontairement identifiable :
 
 ```
-testkonto+claude@hausgeratepfeffer.de   /   WiederEinNeuesPasswort26
+testkonto+claude@bestbox-containerhandel.de   /   WiederEinNeuesPasswort26
 ```
 
 Il porte la commande `HP-2026-000004`. À supprimer avant toute mise en production, depuis

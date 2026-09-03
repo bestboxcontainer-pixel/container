@@ -211,7 +211,7 @@ export function AnnouncementManager({ announcements }: { announcements: Announce
                 value={edite.linkUrl}
                 onChange={(e) => setEdite({ ...edite, linkUrl: e.target.value })}
                 className={CHAMP}
-                placeholder="/haushalt/waschmaschinen"
+                placeholder="/container/lagercontainer"
               />
             </div>
             <div>

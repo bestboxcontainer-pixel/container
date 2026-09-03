@@ -42,8 +42,8 @@ const CSV_HEADER =
 function buildExample(categoryId: string): string {
   return [
     CSV_HEADER,
-    `${categoryId};Bosch;Serie 6 WAU28T40;649,00 €;799,00 €;-18%;9 kg Fassungsvermögen|EcoSilence Drive|AquaStop;Sparsame Waschmaschine für Familien mit langer Garantie auf den Motor.;12`,
-    `${categoryId};Siemens;iQ500 WM14N123;579,00 €;;Neu;8 kg Fassungsvermögen|iQdrive Motor|speedPack L;Leise Waschmaschine mit Kurzprogrammen für den Alltag.;6`,
+    `${categoryId};BBC Best Box;20-Fuß Standardcontainer;1.670,00 €;1.890,00 €;-12%;20' Länge|Wind- und wasserdicht|Gabelstaplertaschen;Neuer Seecontainer mit CSC-Zulassung, sofort einsatzbereit.;12`,
+    `${categoryId};BBC Best Box;40-Fuß High Cube;2.980,00 €;;Neu;40' Länge|2,70 m Innenhöhe|Verzinkter Stahl;Geräumiger High-Cube-Container für Lagerung und Umbauten.;6`,
   ].join("\n");
 }
 
@@ -57,7 +57,7 @@ export function ProductImportForm({ categories }: { categories: CategoryOption[]
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
-  const exampleCategoryId = categories[0]?.id ?? "haushalt/waschmaschinen";
+  const exampleCategoryId = categories[0]?.id ?? "container/seecontainer";
 
   async function run(dryRun: boolean) {
     setPending(true);

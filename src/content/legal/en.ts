@@ -8,10 +8,12 @@
  * ATTENTION : toutes les données d'entreprise sont des PLACEHOLDERS.
  * Voir docs/LEGAL.md.
  *
- * NOTE DE REBRANDING : voir de.ts, le corps rédactionnel de ces pages décrit
- * toujours une activité de vente au détail d'appareils électroménagers, non
- * réécrit pour une activité de négoce de conteneurs (la vitrine qui les
- * exposait a été retirée dans le cadre de ce même chantier).
+ * ElektroG / BattDG (électroménager et électronique) volontairement absents,
+ * pour la même raison que dans de.ts : hors du champ d'activité de
+ * BBC Best Box Containerhandel e.K.
+ *
+ * NOTE DE REBRANDING (2026-09) : voir de.ts, le corps rédactionnel de ces
+ * pages a été réécrit pour décrire une activité de négoce de conteneurs.
  */
 
 import type { LegalPageMap } from "./types";
@@ -31,7 +33,6 @@ const COMPANY = {
   registeredSince: "20 April 2006",
   register: "Amtsgericht Lübeck (Local Court of Lübeck), HRA 3471",
   vatId: "DE000000000",
-  weee: "WEEE reg. no. DE00000000",
   domain: "www.bestbox-containerhandel.de",
 } as const;
 
@@ -40,7 +41,7 @@ const RETURN_ADDRESS = `${COMPANY.name}, Returns Department, ${COMPANY.street}, 
 
 /** Avertissement placé en tête de chaque page juridique. */
 const DISCLAIMER =
-  "Legal notice: This text is a carefully prepared template for the BBC Best Box Containerhandel e.K. online shop. All company details (address, commercial register, VAT identification number, WEEE registration number, shipping rates, service providers) are placeholders and must be replaced with the actual data before publication. Have the text reviewed by a qualified lawyer afterwards, only then is it fit for live use.";
+  "Legal notice: This text is a carefully prepared template for the BBC Best Box Containerhandel e.K. online shop. All company details (address, commercial register, VAT identification number, shipping rates, service providers) are placeholders and must be replaced with the actual data before publication. Have the text reviewed by a qualified lawyer afterwards, only then is it fit for live use.";
 
 /** Mention indiquant que la version allemande prévaut. */
 const GERMAN_PREVAILS =
@@ -90,13 +91,9 @@ export const enLegalPages: LegalPageMap = {
         body: `VAT identification number pursuant to section 27a of the German VAT Act (Umsatzsteuergesetz): ${COMPANY.vatId}`,
       },
       {
-        heading: "Registrations under the ElektroG and battery legislation",
-        body: "As a distributor of electrical and electronic equipment as well as batteries and rechargeable batteries, we are registered with the competent authorities:",
-        list: [
-          `${COMPANY.weee} (Stiftung Elektro-Altgeräte Register, "stiftung ear")`,
-          "Battery register number under the BattDG: DE00000000 (placeholder)",
-          "Packaging register LUCID: DE0000000000000 (placeholder)",
-        ],
+        heading: "Registration under the Packaging Act",
+        body: "As a distributor of packaged goods, we are registered with the packaging register:",
+        list: ["Packaging register LUCID: DE0000000000000 (placeholder)"],
       },
       {
         heading: "Responsible for editorial content",
@@ -188,7 +185,7 @@ export const enLegalPages: LegalPageMap = {
       {
         heading: "Section 5 Delivery and delivery times",
         body:
-          "We deliver within Germany. Delivery to parcel lockers is possible for parcel shipments only; large appliances are delivered exclusively by freight forwarder to a street address.\n\n" +
+          "We deliver within Germany. Delivery to parcel lockers is possible for parcel shipments only; containers are delivered exclusively by freight forwarder to a street address.\n\n" +
           "Items in stock are usually dispatched within one to three working days of the conclusion of the contract, or from the date of receipt of payment in the case of advance payment. For items marked \"On request\" we state the expected delivery time on the product page; it is typically two to four weeks.\n\n" +
           "If an item is unavailable because our supplier failed to deliver to us despite a corresponding contractual obligation (congruent hedging transaction), we may withdraw from the contract. We will inform you without delay and immediately refund any payments already made. Your statutory rights remain unaffected.\n\n" +
           "Partial deliveries are permitted where reasonable for you. You will not incur any additional shipping costs as a result.",
@@ -217,13 +214,12 @@ export const enLegalPages: LegalPageMap = {
         heading: "Section 9 Liability for defects (statutory warranty)",
         body:
           "The statutory law on liability for defects applies. For new goods, consumers' claims for defects become time-barred two years after delivery of the goods. If a defect becomes apparent within one year of delivery, it is presumed that the goods were already defective at the time of handover.\n\n" +
-          "For goods with digital elements, such as smart TVs, smartwatches or connected household appliances, we ensure that you are informed of, and receive, the updates required to maintain conformity with the contract during the relevant period (sections 475b and 475c BGB).\n\n" +
           "Vis-à-vis business customers, claims for defects in new goods become time-barred one year after the transfer of risk. Statutory provisions on supplier recourse remain unaffected.\n\n" +
-          "Please report defects to our customer service team before returning an appliance. In many cases we can arrange for a technician or the manufacturer's service directly, which is considerably faster for you.",
+          "Please report defects to our customer service team, ideally with photos of the damage, before taking any further steps. In many cases we can assess the cause in advance and, if necessary, arrange an on-site inspection or a repair through our installation service.",
       },
       {
         heading: "Section 10 Manufacturer guarantees",
-        body: "In addition to the statutory liability for defects, many manufacturers grant their own guarantees, for example on motors, compressors or displays. These guarantees are voluntary additional services provided by the respective manufacturer and do not affect your statutory rights. The exact guarantee conditions can be found in the appliance documentation and, where available, on the relevant product page.",
+        body: "In addition to the statutory liability for defects, some manufacturers grant their own guarantees, for example on the anti-corrosion coating, weld seam tightness or the mechanism of roll-up doors and doors. These guarantees are voluntary additional services provided by the respective manufacturer and do not affect your statutory rights. The exact guarantee conditions can be found in the container documentation and, where available, on the relevant product page.",
       },
       {
         heading: "Section 11 Transport damage",
@@ -232,27 +228,23 @@ export const enLegalPages: LegalPageMap = {
           "Failure to make such a complaint or to contact us has no consequences whatsoever for your statutory rights or their enforcement, in particular your rights in respect of defects. However, it helps us to assert our own claims against the carrier.",
       },
       {
-        heading: "Section 12 Take-back of waste equipment and batteries",
-        body: "As a distributor of electrical and electronic equipment we take back waste equipment free of charge to the extent required by law and participate in the take-back of waste batteries. Full details, including 1:1 and 0:1 take-back, collection on delivery and returning small waste appliances, can be found on our \"Waste electrical equipment & batteries\" page.",
-      },
-      {
-        heading: "Section 13 Set-off and right of retention",
+        heading: "Section 12 Set-off and right of retention",
         body: "You are only entitled to set-off if your counterclaims have been legally established, are undisputed or have been acknowledged by us. You may only exercise a right of retention if the claims arise from the same contractual relationship.",
       },
       {
-        heading: "Section 14 Liability",
+        heading: "Section 13 Liability",
         body:
           "We are liable without limitation in accordance with statutory provisions for damage arising from injury to life, body or health as well as in cases of intent and gross negligence. The same applies in the event of fraudulent concealment of a defect, the assumption of a guarantee and within the scope of the German Product Liability Act.\n\n" +
           "In cases of ordinary negligence we are liable only for breach of a material contractual obligation, that is an obligation the fulfilment of which is essential for the proper performance of the contract and on the observance of which you may regularly rely. In such cases liability is limited to the foreseeable damage typical for this type of contract. Any further liability is excluded.",
       },
       {
-        heading: "Section 15 Dispute resolution",
+        heading: "Section 14 Dispute resolution",
         body:
           "We are neither willing nor obliged to participate in dispute resolution proceedings before a consumer arbitration board within the meaning of the German Consumer Dispute Resolution Act.\n\n" +
           "The European Commission's Online Dispute Resolution platform was discontinued on 20 July 2025 and is no longer available. Please address any complaints directly to our customer service team.",
       },
       {
-        heading: "Section 16 Applicable law, place of jurisdiction and final provisions",
+        heading: "Section 15 Applicable law, place of jurisdiction and final provisions",
         body:
           "German law applies, excluding the UN Convention on Contracts for the International Sale of Goods. In relation to consumers, this choice of law applies only insofar as it does not deprive the consumer of the protection afforded by mandatory provisions of the law of the country in which the consumer has their habitual residence.\n\n" +
           "If the customer is a merchant, a legal entity under public law or a special fund under public law, the exclusive place of jurisdiction for all disputes arising from this contract is our registered office in Großensee.\n\n" +
@@ -437,7 +429,7 @@ export const enLegalPages: LegalPageMap = {
         heading: "Start of the period for multiple goods and partial deliveries",
         body:
           "If your order comprises several goods ordered in one order and delivered separately, the withdrawal period expires fourteen days from the day on which you acquire, or a third party other than the carrier and indicated by you acquires, physical possession of the last item.\n\n" +
-          "If goods are delivered in several lots or pieces, for example a fitted kitchen or an appliance with separate accessories, the period runs from the day on which you acquire, or a third party other than the carrier and indicated by you acquires, physical possession of the last lot or piece.",
+          "If goods are delivered in several lots or pieces, for example a multi-part, assembled container, the period runs from the day on which you acquire, or a third party other than the carrier and indicated by you acquires, physical possession of the last lot or piece.",
       },
       {
         heading: "Withdrawal in text form",
@@ -466,7 +458,7 @@ export const enLegalPages: LegalPageMap = {
         heading: "Exclusion and early expiry of the right of withdrawal",
         body: "Pursuant to section 312g(2) BGB, the right of withdrawal does not apply, among others, to the following contracts:",
         list: [
-          "goods that are not prefabricated and for the manufacture of which an individual choice or decision by you is decisive, or goods that are clearly tailored to your personal requirements (for example custom-made appliance fascia panels)",
+          "goods that are not prefabricated and for the manufacture of which an individual choice or decision by you is decisive, or goods that are clearly tailored to your personal requirements (for example containers custom-cut for doors and windows)",
           "sealed goods which are not suitable for return for reasons of health protection or hygiene and which were unsealed after delivery (for example shavers, epilators, in-ear headphones, water filter cartridges)",
           "sound or video recordings or computer software in sealed packaging where the seal was removed after delivery (for example game discs and software)",
           "goods which, after delivery, are inseparably mixed with other items due to their nature",
@@ -490,7 +482,7 @@ export const enLegalPages: LegalPageMap = {
     slug: "versand",
     title: "Shipping and Delivery",
     intro: intro(
-      "Here you will find everything about shipping costs, delivery times, freight forwarder delivery, connection and installation services and the collection of your old appliance.",
+      "Here you will find everything about shipping costs, delivery times, freight forwarder delivery and our on-site installation service.",
     ),
     updatedAt: UPDATED_AT,
     sections: [
@@ -515,35 +507,26 @@ export const enLegalPages: LegalPageMap = {
         body: "We deliver within Germany, including the North Sea and Baltic Sea islands. Deliveries to other European countries are currently possible only by prior arrangement with our customer service team. Parcels can be sent to a parcel locker on request; freight forwarder deliveries require a street address and a contactable telephone number.",
       },
       {
-        heading: "Freight forwarder delivery of large appliances",
+        heading: "Freight forwarder delivery of containers",
         body:
-          "Large appliances are delivered by a two-person freight service. The carrier contacts you in advance by telephone or SMS to agree a delivery window.\n\n" +
-          "By default, delivery is to the kerbside. For an additional charge we will bring the appliance to the installation location inside your home, including upper floors. These extras are not part of the shopping basket: call or email us before or just after ordering and we will arrange them with the carrier. Please check beforehand that the stairwell, doorways and lift are large enough.",
+          "Containers are delivered by hook-lift freight service (roll-off truck) or, depending on access and size, by crane vehicle. The carrier contacts you in advance by telephone or SMS to agree a delivery window.\n\n" +
+          "By default, we set the container down at the freely accessible site you specify. We clarify access, ground conditions and any lifting equipment needed with you in advance: please check that the access route is suitable for a roll-off truck (typically up to 12 m long) and that the ground is level and load-bearing.",
         list: [
-          "Kerbside delivery: included in the freight delivery charge",
-          "Delivery to the installation location (including upper floors): 29.00 euros, on request",
-          "Unpacking and disposal of transport packaging: 9.00 euros, on request",
+          "Setting down at the agreed site: included in the freight delivery charge",
+          "Crane unloading for restricted access or special positioning: quotation after site survey, on request",
+          "Levelling and underpinning the container: 29.00 euros, on request",
         ],
       },
       {
-        heading: "Connection and installation service",
+        heading: "On-site installation service",
         body:
-          "On request, our service partners will connect your new appliance professionally and put it into operation. You do not book this service in the basket but by telephone or email, ideally before ordering, so that we can schedule it together with the delivery.\n\n" +
-          "This requires all on-site connections (electricity, water, waste water, exhaust air, aerial or network connection) to be present, freely accessible and compliant with applicable standards. We are not permitted to carry out electrical work on your building installation.",
+          "On request, our service partners will join multi-part containers, adjust doors and roll-up doors, and check the seals after set-up. You do not book this service in the basket but by telephone or email, ideally before ordering, so that we can schedule it together with the delivery.\n\n" +
+          "This requires level, load-bearing and freely accessible ground. Electrical and plumbing connections to on-site utilities may only be carried out by licensed trade partners, which we can arrange on request.",
         list: [
-          "Connecting a washing machine, tumble dryer or dishwasher: 49.00 euros",
-          "Positioning and commissioning a free-standing refrigerator or freezer: 39.00 euros",
-          "Installing a built-in appliance in a prepared recess: 89.00 euros",
-          "Wall mounting a television including initial set-up: 99.00 euros (bracket not included)",
-          "Installation of air conditioners with a fixed outdoor unit: quotation after site survey",
+          "Joining and levelling assemblable containers (e.g. 2 × 4 × 2 m into 8 × 2 m): 89.00 euros",
+          "Adjusting doors, roll-up doors and locks: 49.00 euros",
+          "Referral to a trade partner for electrical or plumbing connection: quotation after site survey",
         ],
-      },
-      {
-        heading: "Collection of your old appliance",
-        body:
-          "When we deliver a new electrical appliance, we will collect your equivalent old appliance free of charge on request (1:1 take-back). Please tell us in good time, by telephone, by email, or in the comments field of your order, so that the carrier can plan the collection.\n\n" +
-          "The old appliance must be disconnected, emptied, cleaned and freely accessible at the place of delivery. Dismantling a built-in old appliance is not part of the free collection service but can be booked as a chargeable extra.\n\n" +
-          "All other take-back options, in particular for small waste appliances without a new purchase, are described on our \"Waste electrical equipment & batteries\" page.",
       },
       {
         heading: "Partial deliveries",
@@ -644,15 +627,15 @@ export const enLegalPages: LegalPageMap = {
         heading: "Return shipping costs",
         body:
           "We bear the cost of returning the goods. For parcel shipments we provide a free return label.\n\n" +
-          "Large appliances delivered by freight forwarder are collected from you. Please arrange an appointment with our customer service team and disconnect and empty the appliance beforehand.",
+          "Containers delivered by freight forwarder are collected from you. Please arrange an appointment with our customer service team.",
       },
       {
-        heading: "Packaging and accessories",
-        body: "Where possible, use the original box with the transport locks, this is particularly important for washing machines and televisions. Please enclose all accessories, remote controls, cables, manuals and any vouchers supplied. If parts are missing, we can only refund part of the value.",
+        heading: "Accessories and condition",
+        body: "Please enclose all accessories supplied, such as keys, locking bolts and documentation. If parts are missing, we can only refund part of the value.",
       },
       {
         heading: "Inspecting the goods and diminished value",
-        body: "You may examine the goods just as you would be able to in a shop, unpack them, look at them and test their functions. For any diminished value that goes beyond such inspection (for example an extractor hood that has already been installed and shows drill marks, or a heavily used coffee machine with limescale residue), we may claim compensation.",
+        body: "You may examine the goods just as you would be able to at the dealer's premises, that is, inspect them, open them and test doors and roll-up doors. For any diminished value that goes beyond such inspection (for example drilling, welding or other structural alterations to the container), we may claim compensation.",
       },
       {
         heading: "Refunds",
@@ -661,105 +644,20 @@ export const enLegalPages: LegalPageMap = {
       {
         heading: "Reporting a defect",
         body:
-          "New appliances are covered by the statutory liability for defects for two years from delivery. If a defect becomes apparent within the first twelve months, it is presumed to have existed at the time of handover, so you do not have to prove anything.\n\n" +
-          "Please report the defect to our customer service team first and have your order number, the serial number and a brief fault description to hand. For large appliances we usually send a technician to you rather than transporting the appliance, this is faster and gentler on the equipment.",
+          "New containers are covered by the statutory liability for defects for two years from delivery. If a defect becomes apparent within the first twelve months, it is presumed to have existed at the time of handover, so you do not have to prove anything.\n\n" +
+          "Please report the defect to our customer service team first and have your order number, the container number and a brief fault description with photos to hand. We usually arrange an on-site inspection rather than transporting the container, this is faster and gentler on the goods.",
       },
       {
         heading: "Guarantees in addition to statutory rights",
-        body: "Many manufacturers grant voluntary guarantees, for example ten years on motors or five years on compressors. These guarantees exist alongside the statutory liability for defects and do not restrict it. We are happy to help you deal with the manufacturer.",
+        body: "Some manufacturers grant voluntary guarantees, for example on the anti-corrosion coating or weld seam tightness. These guarantees exist alongside the statutory liability for defects and do not restrict it. We are happy to help you deal with the manufacturer.",
       },
       {
         heading: "Transport damage",
-        body: "If the goods arrived damaged, please contact us within a few days and, where possible, send photos of the packaging and the appliance. We will then arrange a replacement or collection. Reporting late does not harm your statutory rights but does make it easier for us to settle matters with the carrier.",
+        body: "If the goods arrived damaged, please contact us within a few days and, where possible, send photos of the damage. We will then arrange a replacement or repair. Reporting late does not harm your statutory rights but does make it easier for us to settle matters with the carrier.",
       },
       {
         heading: "Items excluded from return",
         body: "Custom-made items as well as unsealed hygiene products, software and data carriers are among the items excluded from the right of withdrawal and the voluntary return policy. The full list can be found on our \"Right of withdrawal\" page.",
-      },
-    ],
-  },
-
-  /* ------------------------------------------------------------------ */
-  /* Waste electrical equipment and batteries                            */
-  /* ------------------------------------------------------------------ */
-  elektroaltgeraete: {
-    slug: "elektroaltgeraete",
-    title: "Waste Electrical Equipment and Batteries",
-    intro: intro(
-      "Information under the German Electrical and Electronic Equipment Act (ElektroG) and the German Battery Law Implementation Act (BattDG): how to return waste appliances, waste batteries and rechargeable batteries to us free of charge. Whether and to what extent a take-back obligation applies depends on the actual warehouse and dispatch floor space and must be verified before publication.",
-    ),
-    updatedAt: UPDATED_AT,
-    sections: [
-      {
-        heading: "Why waste appliances do not belong in household waste",
-        body: "Waste electrical and electronic equipment contains valuable raw materials such as copper, aluminium and rare earths, but also hazardous substances such as refrigerants, mercury and lithium batteries. Separate disposal ensures that these substances are treated properly and that raw materials are recovered. Disposal via household waste is prohibited by law and may be prosecuted as an administrative offence.",
-      },
-      {
-        heading: "The crossed-out wheeled bin symbol",
-        body: "Appliances that must be collected separately from household waste at the end of their life bear the symbol of a crossed-out wheeled bin. The symbol appears on the appliance, its packaging or the instructions for use. Since 1 July 2026, distributors subject to take-back obligations have additionally displayed this symbol clearly on product pages or during the ordering process in accordance with section 18a ElektroG, together with information on how collection and take-back work.",
-      },
-      {
-        heading: "Our take-back: 1:1 when you buy a new appliance",
-        body:
-          "When you buy a new electrical appliance from us, we take back one old appliance of the same type that performs essentially the same functions free of charge (section 17(1) sentence 1 no. 1 ElektroG).\n\n" +
-          "For large appliances we ask you explicitly during the order process whether you would like to use the take-back service. The carrier then collects the old appliance at the place of handover when the new appliance is delivered. Please disconnect, empty and clean the old appliance beforehand and make it freely accessible.",
-      },
-      {
-        heading: "Our take-back: 0:1 for small waste appliances",
-        body:
-          "Small waste appliances with no external dimension exceeding 25 centimetres are taken back even without a new purchase, limited to household quantities of up to three appliances per equipment type (section 17(1) sentence 1 no. 2 ElektroG).\n\n" +
-          "Examples include shavers, electric toothbrushes, kitchen scales, headphones, cables, power supplies, remote controls and small Bluetooth speakers.",
-      },
-      {
-        heading: "How to return waste appliances to us",
-        body: "As a distance seller we offer you reasonable, free return options:",
-        list: [
-          `Send small waste appliances to: ${COMPANY.name}, Waste Appliance Returns, ${COMPANY.street}, ${COMPANY.city}, ${COMPANY.country}. Our customer service team will provide a free shipping label.`,
-          "Collection of large appliances when your new appliance is delivered, please indicate this when ordering",
-          "Subsequent collection of a large appliance by appointment with our customer service team",
-          `Questions about take-back: ${COMPANY.email} or ${COMPANY.phone}`,
-        ],
-      },
-      {
-        heading: "Before returning: delete your data",
-        body: "Waste appliances such as smartphones, smartwatches, computers, televisions and modern household appliances may contain personal data. You are responsible for deleting this data yourself (section 10(1) ElektroG). Please perform a factory reset before returning the appliance, remove memory cards and SIM cards and log out of any accounts.",
-      },
-      {
-        heading: "Remove batteries and lamps first",
-        body: "Waste batteries, waste rechargeable batteries and lamps that can be removed from the waste appliance without destroying it must be taken out before return and disposed of separately. If removal is only possible using tools or by destroying the appliance, please return the appliance complete.",
-      },
-      {
-        heading: "Take-back of waste batteries and rechargeable batteries",
-        body:
-          "Batteries and rechargeable batteries must not be placed in household waste. You are legally obliged to hand waste batteries over for separate collection.\n\n" +
-          "You can return waste batteries and rechargeable batteries of the types we carry, or have carried, in our range free of charge to our dispatch address. Alternatively, use the collection boxes available in retail outlets or your municipal collection points. Returning them is free of charge for you.\n\n" +
-          `Return address for waste batteries: ${COMPANY.name}, Battery Returns, ${COMPANY.street}, ${COMPANY.city}, ${COMPANY.country}.`,
-      },
-      {
-        heading: "Meaning of the battery symbols",
-        body: "Batteries and rechargeable batteries also bear the crossed-out wheeled bin symbol. If they contain certain hazardous substances, a chemical abbreviation appears underneath:",
-        list: [
-          "Pb: the battery contains more than 0.004 per cent lead by mass",
-          "Cd: the battery contains more than 0.002 per cent cadmium by mass",
-          "Hg: the battery contains more than 0.0005 per cent mercury by mass",
-        ],
-      },
-      {
-        heading: "Safety notice for lithium batteries",
-        body: "Lithium-ion batteries can catch fire if damaged, short-circuited or stored improperly. Please tape over the terminals before returning them, and do not send damaged or swollen batteries by post, hand these in at a municipal collection point instead. Our customer service team will be happy to advise you.",
-      },
-      {
-        heading: "Municipal collection points",
-        body: "Regardless of our take-back service, you can hand in waste appliances and waste batteries free of charge at the collection points of your public waste management authority, such as recycling centres or hazardous waste collection vehicles. Locations can be found on your city or district website.",
-      },
-      {
-        heading: "Our registrations",
-        body: "We are registered with the competent authorities:",
-        list: [
-          `${COMPANY.weee} (Stiftung Elektro-Altgeräte Register)`,
-          "Battery register under the BattDG: DE00000000 (placeholder)",
-          "Packaging register LUCID: DE0000000000000 (placeholder)",
-        ],
       },
     ],
   },
@@ -771,12 +669,12 @@ export const enLegalPages: LegalPageMap = {
     slug: "faq",
     title: "Frequently Asked Questions",
     intro:
-      "From delivery times and installation services to drone registration: here are the answers to the questions we are asked most often. If yours isn't covered, call us or send us an email, we are available Monday to Saturday, 8 a.m. to 8 p.m.",
+      "From delivery times and our installation service to payment: here are the answers to the questions we are asked most often. If yours isn't covered, call us or send us an email, we are available Monday to Saturday, 8 a.m. to 8 p.m.",
     updatedAt: UPDATED_AT,
     sections: [
       {
         heading: "How long does delivery take?",
-        body: "Items in stock reach you within three to five working days with standard delivery, or within 24 to 48 hours with express delivery. For large appliances shipped by freight forwarder, the carrier contacts you in advance by phone to agree a delivery window. Items marked \"On request\" are ordered from the manufacturer and normally take two to four weeks.",
+        body: "Items in stock reach you within three to five working days with standard delivery, or within 24 to 48 hours with express delivery. For containers, the carrier contacts you in advance by phone to agree a delivery window. Items marked \"On request\" are ordered from the manufacturer and normally take two to four weeks.",
       },
       {
         heading: "How much does shipping cost?",
@@ -787,16 +685,16 @@ export const enLegalPages: LegalPageMap = {
         body: "As standard we deliver within Germany, including the islands. Deliveries to other European countries are possible by arrangement, write to us before ordering and we will check feasibility and costs for your address.",
       },
       {
-        heading: "Will the appliance be carried into my home?",
-        body: "Freight delivery ends at the kerbside by default. For 29.00 euros our carriers will bring the appliance to the desired installation location, including upper floors; unpacking and disposal of the transport packaging costs a further 9.00 euros. You cannot add these two services in the basket, call or email us and we will arrange them with the carrier. Please measure your stairwell, doorways and lift beforehand.",
+        heading: "Will the container be brought onto my property?",
+        body: "The carrier sets the container down by default at the freely accessible site you specify. If access is restricted or special positioning is needed, we arrange crane unloading; that quotation depends on a site survey. Call or email us before ordering so we can check access, ground conditions and space together.",
       },
       {
-        heading: "Do you offer connection and installation?",
-        body: "Yes: 49 euros for a washing machine, tumble dryer or dishwasher, 39 euros for a free-standing refrigerator, 89 euros for installation in a prepared recess and 99 euros for wall-mounting a television. You arrange the service by telephone or email, ideally before ordering, it cannot be added in the basket. All connections must be present, freely accessible and compliant with standards. We are not permitted to work on your building's electrical installation.",
+        heading: "Do you offer an installation service?",
+        body: "Yes: 89 euros for joining and levelling assemblable containers, 49 euros for adjusting doors, roll-up doors and locks. You arrange the service by telephone or email, ideally before ordering, it cannot be added in the basket. This requires level, load-bearing and freely accessible ground. Electrical and plumbing work may only be carried out by licensed trade partners.",
       },
       {
-        heading: "Will you take my old appliance away?",
-        body: "Yes, free of charge. When you buy a new appliance we collect one equivalent old appliance on delivery. Let us know in good time, by phone, by email or in the comments field of your order, so that the carrier can plan the collection. The old appliance should be disconnected, emptied, cleaned and freely accessible. Small waste appliances with no external dimension exceeding 25 centimetres are taken back even without a new purchase, up to three per equipment type. All other take-back options are set out on the \"Waste Electrical Equipment and Batteries\" page.",
+        heading: "Do you take my used container in part exchange?",
+        body: "Often, yes. Describe the condition, year and dimensions of your container to us, ideally with photos, and we will make you a purchase offer. Details and contact options are on our purchasing (Ankauf) page.",
       },
       {
         heading: "Which payment methods can I use?",
@@ -808,11 +706,11 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "How long is the warranty?",
-        body: "All new appliances are covered by the statutory liability for defects for two years from delivery. If a fault occurs within the first twelve months, it is presumed to have existed from the outset, so you do not have to prove anything. Many manufacturers also grant voluntary guarantees, for example on motors or compressors.",
+        body: "All new containers are covered by the statutory liability for defects for two years from delivery. If a fault occurs within the first twelve months, it is presumed to have existed from the outset, so you do not have to prove anything. Some manufacturers also grant voluntary guarantees, for example on the anti-corrosion coating.",
       },
       {
         heading: "What is the difference between a guarantee and statutory warranty rights?",
-        body: "Statutory warranty rights are your legal rights against us and last two years. A guarantee is a voluntary manufacturer promise that may go further, ten years on a washing machine motor, for instance. A guarantee does not replace your statutory rights; it comes on top of them, and you decide which route to use.",
+        body: "Statutory warranty rights are your legal rights against us and last two years. A guarantee is a voluntary manufacturer promise that may go further, for instance on weld seam tightness. A guarantee does not replace your statutory rights; it comes on top of them, and you decide which route to use.",
       },
       {
         heading: "How long do I have to return an item?",
@@ -820,11 +718,11 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "How do I send something back?",
-        body: `Register the return in advance, by email to ${COMPANY.email} or by phone on ${COMPANY.phone}. The model withdrawal form is on our "Right of withdrawal" page, though you need not use it: an unequivocal statement is enough. For parcels you receive a free return label. Large appliances are collected from you by appointment; please disconnect and empty the appliance beforehand. Enclose all accessories and use the original box with its transport locks if you can.`,
+        body: `Register the return in advance, by email to ${COMPANY.email} or by phone on ${COMPANY.phone}. The model withdrawal form is on our "Right of withdrawal" page, though you need not use it: an unequivocal statement is enough. Containers are collected from you by appointment. Please enclose all accessories, such as keys and locking bolts.`,
       },
       {
         heading: "What does a return cost?",
-        body: "Nothing. We bear the return costs, both for parcels and for the collection of large appliances by the freight forwarder.",
+        body: "Nothing. We bear the return costs, both for parcels and for the collection of containers by the freight forwarder.",
       },
       {
         heading: "When will I get my money back?",
@@ -835,28 +733,16 @@ export const enLegalPages: LegalPageMap = {
         body: "The item is not currently in stock but is available. We order it from the manufacturer once you place your order; delivery usually takes two to four weeks. You can order such items as normal and we will get back to you as soon as a firm date is confirmed.",
       },
       {
-        heading: "How do I know whether a built-in appliance fits my kitchen?",
-        body: "What matters are the recess dimensions in height, width and depth and the position of the connections. All appliance and recess dimensions are listed in the technical data on the product page. If in doubt, measure again or call us, our advisers will check the fit with you and suggest alternatives.",
-      },
-      {
-        heading: "Where do I find an appliance's energy efficiency class?",
-        body: "Every product page shows the EU energy label with the efficiency class as well as the official product information sheet. It also lists consumption figures, noise emissions and, for washing machines and dishwashers, water consumption per programme. When comparing, always make sure the programme and load settings are the same.",
-      },
-      {
-        heading: "What do I need to know before buying a drone?",
-        body: "The EU drone regulation applies in Germany. As a remote pilot you must register with the Federal Aviation Office (Luftfahrt-Bundesamt) and receive an electronic registration number (e-ID) that you must attach visibly to the drone. Third-party liability insurance is also a legal requirement under section 43 of the German Aviation Act, even for very light models. In the open category you may fly up to 120 metres, always within visual line of sight and never over crowds; no-fly zones such as airports, hospitals, federal motorways and nature reserves are off limits.",
-      },
-      {
-        heading: "Do I need a drone licence for a drone under 250 grams?",
-        body: "No. For drones under 250 grams or in class C0 neither the EU A1/A3 proof of competency nor the A2 remote pilot certificate is required. Registration and insurance are still mandatory as soon as the drone has a sensor capable of capturing personal data, which applies to virtually all camera models. Filming over private property also remains limited by personality rights and data protection law.",
+        heading: "How do I know whether the access route suits delivery?",
+        body: "What matters are the width and height of the access route, the load-bearing capacity of the ground and enough space to manoeuvre for a roll-off truck. As a rule of thumb, the truck typically needs the length of the container plus about 15 metres to set it down. If in doubt, measure again or call us, our advisers will check with you whether the access route is sufficient and suggest crane unloading if needed.",
       },
       {
         heading: "Can I order as a business and receive a VAT invoice?",
         body: "Yes. Enter your company name in the \"Company\" field during the order process. The invoice is attached to your order confirmation as a PDF and shows the VAT included. If you need your VAT identification number on the invoice, please add it to the comments field of your order or send it to us afterwards, there is no dedicated field for it in the order process yet. Please note two differences from consumer purchases: businesses have no statutory right of withdrawal, and the limitation period for defect claims on new goods is one year from the passing of risk rather than two. Our voluntary 30-day return right does apply to you as well.",
       },
       {
-        heading: "What if an appliance fails after the two years are up?",
-        body: "Contact us anyway. A manufacturer guarantee often still covers individual components, or a repair works out considerably cheaper than a new purchase. We will put you in touch with an authorised service partner and check spare part availability for your model.",
+        heading: "What if my container is damaged after the two years are up?",
+        body: "Contact us anyway. A manufacturer guarantee often still covers individual components, or an on-site repair works out considerably cheaper than a new purchase. We will put you in touch with an authorised service partner and check spare part availability for your model.",
       },
     ],
   },
@@ -868,32 +754,32 @@ export const enLegalPages: LegalPageMap = {
     slug: "ueber-uns",
     title: "About Us",
     intro:
-      "BBC Best Box Containerhandel e.K. is a specialist retailer for household appliances and consumer electronics based in Großensee. We don't just sell appliances off the shelf, we advise on them, from the right recess dimensions to the right refresh rate.",
+      "BBC Best Box Containerhandel e.K. is a specialist retailer for shipping, storage, office, sanitary and special-purpose containers based in Großensee. We don't just sell containers off the shelf, we advise on them, from the right format to the right on-site setup.",
     updatedAt: UPDATED_AT,
     sections: [
       {
         heading: "Who we are",
-        body: "What began as a small electrical retailer is today an online shop with its own warehouse and in-house service team. The name stands for what matters to us: honest advice, fair prices and a contact person who is still there after the sale. The company is led by Peer Kunz.",
+        body: `As a registered merchant (eingetragener Kaufmann) since ${COMPANY.registeredSince}, we trade in new and used containers for storage, office, sanitary and special-purpose use. The name stands for what matters to us: honest advice, fair prices and a contact person who is still there after the sale. The company is led by ${COMPANY.owner}.`,
       },
       {
         heading: "Our range",
-        body: "We focus on two worlds: household and multimedia. In the household segment you will find washing machines, dishwashers, refrigerators and freezers, ovens and cookers, vacuum cleaners, food processors, bean-to-cup coffee machines and air conditioners. In multimedia: televisions, smartphones, computers, smartwatches, video games and drones. Instead of an endless catalogue we carry a curated selection of brands we know ourselves and whose after-sales service actually works.",
+        body: "We focus on containers: shipping containers in standard sizes, lockable storage containers, fitted-out office containers, sanitary containers and individual special-purpose conversions. Instead of an endless catalogue we carry a curated selection of manufacturers we know ourselves, for their quality and their after-sales service.",
       },
       {
         heading: "Advice rather than an order form",
-        body: "A fridge that doesn't fit the recess, or a television that looks too dark in a bright living room, is an annoyance that lasts. That is why our advisers are available Monday to Saturday, 8 a.m. to 8 p.m., on +49 176 14111374. We ask about recess dimensions, connections, water hardness and room size, and we will say so when the cheaper model is the better choice for your situation.",
+        body: `A container that doesn't fit through the access route, or a format that turns out too small for its intended use, is an annoyance that lasts. That is why our advisers are available Monday to Saturday, 8 a.m. to 8 p.m., on ${COMPANY.phone}. We ask about access, site conditions, ground and intended use, and we will say so when the cheaper model is the better choice for your situation.`,
       },
       {
         heading: "Service and installation",
-        body: "Our service partners connect washing machines, install appliances in prepared recesses and mount televisions on the wall. If something breaks, we prefer to send a technician to you rather than transporting a large appliance across the country. That is faster for you and gentler on the appliance.",
+        body: "Our service partners join multi-part containers, adjust doors and roll-up doors, and level the installation on site. If something is damaged, we prefer to send a technician to you rather than transporting the container across the country. That is faster for you and gentler on the goods.",
       },
       {
-        heading: "Sustainability and old appliances",
-        body: "We collect your old appliance free of charge on delivery and pass it on for proper recycling. Small waste appliances and waste batteries are taken back even without a new purchase. When selecting our range we look at repairability, spare part availability and long update commitments for connected devices, criteria that rarely appear on a spec sheet but make all the difference in everyday use.",
+        heading: "Sustainability and used containers",
+        body: "Containers are by nature a durable, reusable product: we buy back used containers, inspect them for water-tightness and structural soundness, and prepare them for resale instead of having them scrapped. When selecting our range we look at corrosion protection, repairability and spare part availability, criteria that rarely appear on a spec sheet but make all the difference in everyday use.",
       },
       {
         heading: "Location and logistics",
-        body: "We are based in Großensee, from where we manage purchasing, customer service and returns. Shipping is handled by parcel services and specialist two-person freight carriers for large appliances, so that even a 90-kilogram refrigerator arrives safely in its place.",
+        body: "We are based in Großensee, from where we manage purchasing, customer service and order handling. Shipping is handled by specialist freight carriers with roll-off trucks or crane vehicles, so that even a container weighing several tonnes arrives safely in its place.",
       },
       {
         heading: "Working at BBC Best Box Containerhandel e.K.",
@@ -928,17 +814,13 @@ export const enLegalPages: LegalPageMap = {
         list: [COMPANY.name, COMPANY.street, COMPANY.city, COMPANY.country],
       },
       {
-        heading: "Returns and waste appliances",
-        body: "Please do not send returns or small waste appliances back unannounced, register them in advance so that we can allocate your shipment immediately.",
-        list: [
-          `Returns department: ${RETURN_ADDRESS}`,
-          `Waste appliance returns: ${COMPANY.name}, Waste Appliance Returns, ${COMPANY.street}, ${COMPANY.city}, ${COMPANY.country}`,
-          `Battery returns: ${COMPANY.name}, Battery Returns, ${COMPANY.street}, ${COMPANY.city}, ${COMPANY.country}`,
-        ],
+        heading: "Returns",
+        body: "Please do not send returns back unannounced, register them in advance so that we can allocate your shipment immediately.",
+        list: [`Returns department: ${RETURN_ADDRESS}`],
       },
       {
         heading: "Technical service and installation",
-        body: `To arrange connection, installation or a technician visit, contact our service scheduling team on ${COMPANY.phone}. Please have the model designation and serial number ready; both are shown on the rating plate.`,
+        body: `To arrange an installation appointment or a technician visit, contact our service scheduling team on ${COMPANY.phone}. Please have your order number and the container number ready; the latter is shown on the container's CSC plate.`,
       },
       {
         heading: "Data protection requests",
@@ -950,7 +832,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Company details",
-        body: `${COMPANY.name}, represented by the owner, ${COMPANY.owner}. Registering court: ${COMPANY.register}. VAT identification number: ${COMPANY.vatId}. ${COMPANY.weee}. Full details can be found in our legal notice (Impressum).`,
+        body: `${COMPANY.name}, represented by the owner, ${COMPANY.owner}. Registering court: ${COMPANY.register}. VAT identification number: ${COMPANY.vatId}. Full details can be found in our legal notice (Impressum).`,
       },
     ],
   },

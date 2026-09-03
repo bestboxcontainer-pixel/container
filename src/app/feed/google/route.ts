@@ -113,7 +113,7 @@ export async function GET(): Promise<Response> {
     tag("link", base, "  ") +
     tag(
       "description",
-      "Vollständiger Produktdatenfeed für Google Merchant Center: Elektrogroßgeräte, Küchengeräte und Multimedia.",
+      "Vollständiger Produktdatenfeed für Google Merchant Center: See-, Lager-, Büro-, Sanitär- und Sondercontainer.",
       "  ",
     ) +
     tag("language", MERCHANT_LANGUAGE, "  ");

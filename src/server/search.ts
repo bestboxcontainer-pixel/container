@@ -68,8 +68,8 @@ export async function searchProducts(query: string, locale: Locale): Promise<Sea
         ),
       };
 
-      // Tous les termes doivent correspondre : « bosch waschmaschine » ne doit
-      // pas ramener toute la marque, ni tous les lave-linge.
+      // Tous les termes doivent correspondre : « seecontainer 20 fuss » ne doit
+      // pas ramener toute la catégorie, ni tous les containers 20 pieds.
       let points = 0;
       for (const terme of termes) {
         const gagnes = score(champs, terme);

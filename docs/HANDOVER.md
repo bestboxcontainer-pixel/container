@@ -42,7 +42,7 @@ Integration, StockMovement, AdminUser, Setting, et les modèles de commande.
   qu'ils sont utilisés, expirés ou épuisés.
 
 Envoi des codes : SMTP de la boîte Hostinger de la boutique
-(`kontakt@hausgeratepfeffer.de`, `smtp.hostinger.com:465`), via nodemailer. À
+(`kontakt@bestbox-containerhandel.de`, `smtp.hostinger.com:465`), via nodemailer. À
 renseigner dans `.env.local` : `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`,
 `SMTP_PASSWORD`, `MAIL_FROM` et `MAIL_FROM_NAME`. En développement, si ces
 variables manquent, le code s'affiche dans la console du serveur et sur la page

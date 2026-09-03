@@ -54,7 +54,6 @@ const LEGAL_LINKS = [
   { href: "/datenschutz", label: "Datenschutz" },
   { href: "/agb", label: "AGB" },
   { href: "/widerruf", label: "Widerrufsbelehrung" },
-  { href: "/elektroaltgeraete", label: "Elektroaltgeräte" },
 ] as const;
 
 export function Footer() {

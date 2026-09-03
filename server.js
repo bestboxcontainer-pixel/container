@@ -29,6 +29,6 @@ app.prepare().then(() => {
   createServer((req, res) => {
     handle(req, res);
   }).listen(port, () => {
-    console.log(`Hausgeräte Pfeffer écoute sur le port ${port} (${dev ? "développement" : "production"})`);
+    console.log(`BBC Best Box Containerhandel écoute sur le port ${port} (${dev ? "développement" : "production"})`);
   });
 });

@@ -1,5 +1,5 @@
 // Correspondance entre les catégories de la boutique et la taxonomie officielle
-// Google (version 2021-09-21, fichier taxonomy-with-ids.de-DE.txt).
+// Google (version 2021-09-21, fichier taxonomy-with-ids.fr-FR.txt).
 //
 // Ce module ne dépend ni de Prisma ni du serveur : il est utilisable aussi bien
 // dans le flux produits que dans les composants du back-office.
@@ -11,59 +11,22 @@ export interface GoogleCategory {
   path: string;
 }
 
+/**
+ * Google ne propose aucune sous-catégorie dédiée par usage de container
+ * (bureau, sanitaire, stockage…) : toutes nos catégories pointent donc vers
+ * la même entrée officielle, la plus proche de notre activité réelle.
+ */
+const SHIPPING_CONTAINERS: GoogleCategory = {
+  id: "5831",
+  path: "Entreprise et industrie > Stockage industriel > Conteneurs",
+};
+
 export const GOOGLE_CATEGORY_BY_SLUG: Record<string, GoogleCategory> = {
-  kaffeemaschinen: {
-    id: "736",
-    path: "Maison et jardin > Cuisine et salle à manger > Appareils de cuisine > Machines à café et à expresso",
-  },
-  waschmaschinen: {
-    id: "2549",
-    path: "Maison et jardin > Électroménager > Lavage et séchage > Lave-linge",
-  },
-  geschirrspueler: {
-    id: "680",
-    path: "Maison et jardin > Cuisine et salle à manger > Appareils de cuisine > Lave-vaisselle",
-  },
-  staubsauger: {
-    id: "619",
-    path: "Maison et jardin > Électroménager > Aspirateurs",
-  },
-  "backoefen-herde": {
-    id: "683",
-    path: "Maison et jardin > Cuisine et salle à manger > Appareils de cuisine > Fours",
-  },
-  kuechenmaschinen: {
-    id: "505666",
-    path: "Maison et jardin > Cuisine et salle à manger > Appareils de cuisine > Mixeurs et mixeurs plongeants",
-  },
-  klimageraete: {
-    id: "605",
-    path: "Maison et jardin > Électroménager > Climatisation > Climatiseurs",
-  },
-  smartphones: {
-    id: "267",
-    path: "Électronique > Appareils de communication > Téléphones > Téléphones mobiles",
-  },
-  fernseher: {
-    id: "404",
-    path: "Elektronik > Video > Fernseher",
-  },
-  computer: {
-    id: "278",
-    path: "Elektronik > Computer",
-  },
-  videospiele: {
-    id: "1279",
-    path: "Software > PC- & Videospiele",
-  },
-  smartwatches: {
-    id: "201",
-    path: "Bekleidung & Accessoires > Schmuck > Armbanduhren & Taschenuhren",
-  },
-  drohnen: {
-    id: "2546",
-    path: "Spielzeuge & Spiele > Spielzeuge > Ferngesteuertes Spielzeug",
-  },
+  seecontainer: SHIPPING_CONTAINERS,
+  lagercontainer: SHIPPING_CONTAINERS,
+  buerocontainer: SHIPPING_CONTAINERS,
+  sanitaercontainer: SHIPPING_CONTAINERS,
+  sondercontainer: SHIPPING_CONTAINERS,
 };
 
 /** Retrouve le chemin lisible d'un identifiant de catégorie Google. */
@@ -73,19 +36,14 @@ export function googleCategoryPath(id: string): string | undefined {
 
 /**
  * Catégories rattachées à « Bekleidung & Accessoires » : Google y exige
- * age_group, gender, color et size pour l'Allemagne.
+ * age_group, gender, color et size pour l'Allemagne. Aucune de nos catégories
+ * de containers n'en relève.
  */
-export const APPAREL_CATEGORY_IDS = new Set(["201"]);
+export const APPAREL_CATEGORY_IDS = new Set<string>([]);
 
 /**
- * Catégories soumises à l'étiquette énergie européenne. Depuis avril 2025,
- * l'attribut energy_efficiency_class ne vaut plus que pour CH/NO/UK ; dans l'UE,
- * Google attend l'attribut certification (EC / EPREL / numéro d'enregistrement).
+ * Catégories soumises à l'étiquette énergie européenne (electroménager,
+ * climatiseurs, téléviseurs…). Un container n'est pas un appareil couvert par
+ * le règlement énergie UE : aucune de nos catégories n'y figure.
  */
-export const EU_ENERGY_LABEL_SLUGS = new Set([
-  "waschmaschinen",
-  "geschirrspueler",
-  "backoefen-herde",
-  "klimageraete",
-  "fernseher",
-]);
+export const EU_ENERGY_LABEL_SLUGS = new Set<string>([]);

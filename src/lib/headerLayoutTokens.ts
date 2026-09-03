@@ -23,7 +23,7 @@
 
 export const HEADER_LAYOUT_TOKENS = {
   /** Rangée unique de la barre, resserrée sur petit écran. */
-  row: "mx-auto flex max-w-screen-xl items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6 lg:gap-8",
+  row: "mx-auto flex max-w-[1400px] items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6 lg:gap-8",
   brand: "flex shrink-0 items-center gap-2.5 whitespace-nowrap",
   /** Navigation en ligne : réservée aux écrans qui ont la place de la porter. */
   deskNav:

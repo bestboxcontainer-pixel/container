@@ -15,6 +15,7 @@ import {
   EU_ENERGY_LABEL_SLUGS,
   GOOGLE_CATEGORY_BY_SLUG,
 } from "@/lib/googleTaxonomy";
+import { COMPANY } from "@/content/legal";
 
 export { GOOGLE_CATEGORY_BY_SLUG, googleCategoryPath } from "@/lib/googleTaxonomy";
 export type { GoogleCategory } from "@/lib/googleTaxonomy";
@@ -41,7 +42,7 @@ export const MERCHANT_LANGUAGE = "de";
 export const MERCHANT_VAT_RATE = 0.19;
 
 export const SHOP_NAME = "BBC Best Box Containerhandel e.K.";
-export const SHOP_PHONE = "+49 176 14111374";
+export const SHOP_PHONE = COMPANY.phone;
 
 /**
  * URL publique de la boutique. Toutes les URL du flux doivent être absolues et

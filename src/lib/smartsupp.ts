@@ -22,6 +22,10 @@
  * redémarrer ne change rien tant que le site n'est pas reconstruit, et l'on
  * cherche l'erreur là où elle n'est plus.
  *
+ * DÉSACTIVÉ le 3 septembre 2026 : la clé précédente appartenait au compte
+ * Smartsupp du site d'origine (Hausgeräte Pfeffer), pas à BBC Best Box
+ * Containerhandel. En attente de la vraie clé du client avant de la remettre.
+ *
  * Changer de compte se fait donc en changeant cette constante, sous revue, avec
  * la vérification ci-dessus. C'est une ligne de code pour un événement rare,
  * contre un mode de panne silencieux à chaque déploiement.
@@ -33,7 +37,7 @@
  * composant `SmartsuppChat` est un composant serveur : l'importer depuis le
  * bandeau, qui vit dans le navigateur, embarquerait `next-intl/server` avec lui.
  */
-export const CLE_SMARTSUPP = "68f9f508d7291022372070e0ba6f68bb963ad5f6";
+export const CLE_SMARTSUPP = "";
 
 /** Vrai si un chat est joignable : décide du bandeau et du lien de réglages. */
 export const CHAT_CONFIGURE = CLE_SMARTSUPP.length > 0;

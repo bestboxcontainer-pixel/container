@@ -34,10 +34,6 @@ describe("HOME_SIZE_SECTION_TOKENS", () => {
     assert.match(HOME_SIZE_SECTION_TOKENS.counterRow, /\bshrink-0\b/);
   });
 
-  it("met Breiten et Hoehen cote a cote sur une trame 2fr/3fr", () => {
-    assert.match(HOME_SIZE_SECTION_TOKENS.specRow, /lg:grid-cols-\[2fr_3fr\]/);
-  });
-
   it("donne a chaque groupe son propre panneau", () => {
     assert.match(HOME_SIZE_SECTION_TOKENS.groupPanel, /\brounded-3xl\b/);
     assert.match(HOME_SIZE_SECTION_TOKENS.groupPanel, /bg-white\/\[0\.035\]/);

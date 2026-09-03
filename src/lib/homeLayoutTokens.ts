@@ -36,11 +36,6 @@ export const HOME_SIZE_SECTION_TOKENS = {
    */
   groupPanel: "rounded-3xl bg-white/[0.035] p-5 ring-1 ring-inset ring-white/[0.07] sm:p-6",
   groupStack: "mt-10 space-y-6",
-  /**
-   * Breiten (2 valeurs) et Höhen (3 valeurs) partagent une trame 2fr/3fr : les
-   * visuels y gardent la même largeur que dans la grille des longueurs.
-   */
-  specRow: "grid gap-6 lg:grid-cols-[2fr_3fr]",
 } as const;
 
 export const HOME_SIZE_CARD_TOKENS = {
@@ -50,7 +45,7 @@ export const HOME_SIZE_CARD_TOKENS = {
    * container qu'elles encadraient.
    */
   item:
-    "group flex flex-col rounded-2xl bg-white/[0.07] p-3 transition-colors duration-300 hover:bg-white/[0.12]",
+    "group flex flex-col rounded-2xl bg-white/[0.07] p-4 transition-colors duration-300 hover:bg-white/[0.12] sm:p-5",
   /**
    * Bandeau de badge de hauteur fixe, présent sur tous les éléments même vide :
    * il réserve la place du « Top-Maß » sans que celui-ci chevauche le visuel,

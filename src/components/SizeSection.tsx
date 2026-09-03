@@ -13,7 +13,7 @@ import { getCategoryPages } from "@/server/store";
  * dimensions.
  */
 export async function SizeSection() {
-  const [lengthGroup, widthGroup, heightGroup] = HOME_SIZE_GROUPS;
+  const [lengthGroup] = HOME_SIZE_GROUPS;
 
   // Nombre de containers derrière chaque longueur. Une base injoignable rend
   // la section muette plutôt qu'elle ne la fait disparaître : les cotes restent
@@ -42,26 +42,23 @@ export async function SizeSection() {
           <div className="max-w-2xl">
             <p className={HOME_SIZE_SECTION_TOKENS.eyebrow}>Größenvielfalt</p>
             <h2 className="mt-3 text-2xl font-black tracking-[-0.02em] sm:text-3xl">
-              Verschiedene Größen – flexibel kombinierbar
+              Verschiedene Längen – flexibel kombinierbar
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-white/60 sm:text-base">
-              Längen, Breiten und Höhen modular kombinieren – für jedes Projekt die passende
-              Dimension.
+              Drei Längen ab Lager – für jedes Projekt die passende Dimension.
             </p>
           </div>
 
           <dl className={HOME_SIZE_SECTION_TOKENS.counterRow}>
-            {HOME_SIZE_GROUPS.map((group) => (
-              <div key={group.id}>
-                <dt className="sr-only">{group.title}</dt>
-                <dd>
-                  <span className={HOME_SIZE_SECTION_TOKENS.counterValue}>
-                    {group.options.length}
-                  </span>
-                  <span className={HOME_SIZE_SECTION_TOKENS.counterLabel}>{group.title}</span>
-                </dd>
-              </div>
-            ))}
+            <div>
+              <dt className="sr-only">{lengthGroup.title}</dt>
+              <dd>
+                <span className={HOME_SIZE_SECTION_TOKENS.counterValue}>
+                  {lengthGroup.options.length}
+                </span>
+                <span className={HOME_SIZE_SECTION_TOKENS.counterLabel}>{lengthGroup.title}</span>
+              </dd>
+            </div>
           </dl>
         </header>
 
@@ -72,7 +69,7 @@ export async function SizeSection() {
               <span className={HOME_SIZE_SECTION_TOKENS.groupRange}>{lengthGroup.subtitle}</span>
             </div>
 
-            <ul className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+            <ul className="mx-auto mt-5 grid max-w-2xl grid-cols-3 gap-5 sm:gap-8">
               {lengthGroup.options.map((option) => (
                 <SizeItem
                   key={`laengen-${option.label}`}
@@ -87,30 +84,6 @@ export async function SizeSection() {
                 />
               ))}
             </ul>
-          </div>
-
-          {/* Deux panneaux distincts : alignés à même le fond, les deux
-              valeurs de largeur et les trois de hauteur se lisaient comme
-              une seule rangée de cinq. */}
-          <div className={HOME_SIZE_SECTION_TOKENS.specRow}>
-            {[widthGroup, heightGroup].map((group) => (
-              <div key={group.id} className={HOME_SIZE_SECTION_TOKENS.groupPanel}>
-                <div className={HOME_SIZE_SECTION_TOKENS.groupHead}>
-                  <h3 className={HOME_SIZE_SECTION_TOKENS.groupTitle}>{group.title}</h3>
-                  <span className={HOME_SIZE_SECTION_TOKENS.groupRange}>{group.subtitle}</span>
-                </div>
-
-                <ul
-                  className={`mt-5 grid gap-3 ${
-                    group.options.length === 2 ? "grid-cols-2" : "grid-cols-3"
-                  }`}
-                >
-                  {group.options.map((option) => (
-                    <SizeItem key={`${group.id}-${option.label}`} option={option} />
-                  ))}
-                </ul>
-              </div>
-            ))}
           </div>
         </div>
       </div>

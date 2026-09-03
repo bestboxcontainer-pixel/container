@@ -45,7 +45,7 @@ export const HOME_SIZE_CARD_TOKENS = {
    * container qu'elles encadraient.
    */
   item:
-    "group flex flex-col rounded-2xl bg-white/[0.07] p-4 transition-colors duration-300 hover:bg-white/[0.12] sm:p-5",
+    "group flex flex-col rounded-2xl bg-white/[0.07] p-5 transition-colors duration-300 hover:bg-white/[0.12] sm:p-8",
   /**
    * Bandeau de badge de hauteur fixe, présent sur tous les éléments même vide :
    * il réserve la place du « Top-Maß » sans que celui-ci chevauche le visuel,

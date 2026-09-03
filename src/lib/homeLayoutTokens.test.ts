@@ -7,12 +7,13 @@ import {
 } from "./homeLayoutTokens";
 
 describe("HOME_SIZE_SECTION_TOKENS", () => {
-  it("pose un bandeau sombre encarte, moins large que l'ecran, sans surface blanche imbriquee", () => {
-    assert.match(HOME_SIZE_SECTION_TOKENS.container, /\bbg-secondary\b/);
-    assert.match(HOME_SIZE_SECTION_TOKENS.container, /\btext-white\b/);
-    assert.match(HOME_SIZE_SECTION_TOKENS.container, /\bmx-auto\b/);
-    assert.match(HOME_SIZE_SECTION_TOKENS.container, /\bmax-w-/);
-    assert.doesNotMatch(HOME_SIZE_SECTION_TOKENS.section, /\bbg-white\b/);
+  it("pose un bandeau sombre pleine largeur, aux memes dimensions que la section Ablauf", () => {
+    assert.match(HOME_SIZE_SECTION_TOKENS.section, /\bbg-secondary\b/);
+    assert.match(HOME_SIZE_SECTION_TOKENS.section, /\btext-white\b/);
+    // Memes classes de conteneur que « Wie läuft die Lieferung ab? » (Ablauf).
+    assert.match(HOME_SIZE_SECTION_TOKENS.container, /max-w-screen-xl/);
+    assert.match(HOME_SIZE_SECTION_TOKENS.container, /\bpy-8\b/);
+    assert.doesNotMatch(HOME_SIZE_SECTION_TOKENS.container, /\bbg-white\b/);
   });
 
   it("n'utilise aucune trame ni damier en fond", () => {

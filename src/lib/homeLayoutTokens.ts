@@ -12,14 +12,9 @@
 export const HOME_SIZE_ACCENT = "#e8813a";
 
 export const HOME_SIZE_SECTION_TOKENS = {
-  /** Habillage de page : marge latérale minimale pour que le bandeau ne touche pas les bords sur mobile. */
-  section: "relative px-4 sm:px-6",
-  /**
-   * Le bandeau navy proprement dit : moins large que l'écran (encarté),
-   * hauteur inchangée par rapport à la version pleine largeur.
-   */
-  container:
-    "relative isolate mx-auto max-w-4xl overflow-hidden rounded-[2rem] bg-secondary px-6 py-14 text-white sm:px-8 lg:py-16",
+  section: "relative isolate overflow-hidden bg-secondary text-white",
+  /** Mêmes dimensions que le conteneur de « Wie läuft die Lieferung ab? » (Ablauf). */
+  container: "relative mx-auto max-w-screen-xl px-4 py-8 sm:px-6",
   /** Halo terracotta diffus, seule décoration de fond : aucune trame ni damier. */
   glow: "pointer-events-none absolute -right-40 -top-48 h-[34rem] w-[34rem] rounded-full bg-[#e8813a]/20 blur-[140px]",
   /** Second halo froid en bas à gauche, évite un aplat de navy trop plat. */

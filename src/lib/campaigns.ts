@@ -348,7 +348,7 @@ export const CAMPAIGN_TYPES: readonly CampaignTypeDefinition[] = [
       bodyText:
         "Hallo {prenom},\n\n" +
         "{marque} {produit} ist ab sofort bei uns erhältlich, zum Preis von {prix}.\n\n" +
-        "Wir haben das Gerät ausgewählt, weil es in seiner Klasse überzeugt. " +
+        "Wir haben den Container ausgewählt, weil er in seiner Klasse überzeugt. " +
         "Alle technischen Daten finden Sie auf der Produktseite.",
       ctaLabel: "Produkt ansehen",
     },
@@ -358,7 +358,7 @@ export const CAMPAIGN_TYPES: readonly CampaignTypeDefinition[] = [
       bodyText:
         "Hello {prenom},\n\n" +
         "the {marque} {produit} is now available from us, priced at {prix}.\n\n" +
-        "We picked this appliance because it stands out in its class. " +
+        "We picked this container because it stands out in its class. " +
         "Full specifications are on the product page.",
       ctaLabel: "View the product",
     },

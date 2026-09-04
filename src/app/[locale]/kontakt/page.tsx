@@ -56,7 +56,7 @@ export default function KontaktPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <Clock className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
-                  <span>Montag bis Freitag, 8 bis 17 Uhr</span>
+                  <span>Montag bis Samstag, 8 bis 20 Uhr</span>
                 </li>
               </ul>
             </div>

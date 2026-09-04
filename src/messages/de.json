@@ -129,9 +129,9 @@
     "resultsFor": "Suchergebnisse für „{query}“",
     "resultCount": "{count, plural, =0 {Kein Treffer} one {# Treffer} other {# Treffer}}",
     "emptyTitle": "Zu „{query}“ haben wir nichts gefunden",
-    "emptyHint": "Prüfen Sie die Schreibweise oder suchen Sie mit einem allgemeineren Begriff, etwa nach der Marke oder der Geräteart.",
+    "emptyHint": "Prüfen Sie die Schreibweise oder suchen Sie mit einem allgemeineren Begriff, etwa nach der Marke oder dem Containertyp.",
     "promptTitle": "Wonach suchen Sie?",
-    "promptHint": "Geben Sie mindestens zwei Zeichen ein: Marke, Modell oder Geräteart.",
+    "promptHint": "Geben Sie mindestens zwei Zeichen ein: Marke, Modell oder Containertyp.",
     "backToShop": "Zum Sortiment"
   },
   "reviews": {

@@ -237,7 +237,8 @@ export function ProductPreview({
               <Truck className="h-3.5 w-3.5 text-primary" /> Schnelle Lieferung in 1-3 Werktagen
             </p>
             <p className="flex items-center gap-2">
-              <ShieldCheck className="h-3.5 w-3.5 text-primary" /> 2 Jahre Garantie auf alle Geräte
+              <ShieldCheck className="h-3.5 w-3.5 text-primary" /> 14 Tage Rückgaberecht ohne Angabe von
+              Gründen
             </p>
           </div>
         </div>

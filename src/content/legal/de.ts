@@ -650,7 +650,7 @@ export const deLegalPages: LegalPageMap = {
         heading: "Rücksendekosten",
         body:
           "Die Kosten der Rücksendung tragen wir. Für Paketsendungen stellen wir Ihnen ein kostenloses Rücksendeetikett zur Verfügung.\n\n" +
-          "Großgeräte, die per Spedition geliefert wurden, holen wir bei Ihnen ab. Bitte vereinbaren Sie dafür einen Termin mit unserem Kundenservice; bitte klemmen Sie das Gerät vorher ab und entleeren Sie es.",
+          "Container, die per Spedition geliefert wurden, holen wir bei Ihnen ab. Bitte vereinbaren Sie dafür einen Termin mit unserem Kundenservice.",
       },
       {
         heading: "Zubehör und Zustand",
@@ -745,7 +745,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Was kostet die Rücksendung?",
-        body: "Nichts. Wir tragen die Kosten der Rücksendung, sowohl für Pakete als auch für die Abholung von Großgeräten durch die Spedition.",
+        body: "Nichts. Wir tragen die Kosten der Rücksendung, sowohl für Pakete als auch für die Abholung von Containern durch die Spedition.",
       },
       {
         heading: "Wann bekomme ich mein Geld zurück?",

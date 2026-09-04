@@ -120,12 +120,12 @@ function contentFor(rank: 1 | 2 | 3): MailContent {
   }
   if (rank === 2) {
     return {
-      subject: "Ihr Gerät ist noch für Sie verfügbar",
+      subject: "Ihr Container ist noch für Sie verfügbar",
       preheader: "Kostenloser Standardversand, ohne Mindestbestellwert.",
       heading: "Ihr Warenkorb ist noch da",
       paragraphs: [
         "Ihre Auswahl liegt weiterhin in Ihrem Warenkorb. Sie können die Bestellung mit einem Klick abschließen, ohne Ihre Daten erneut eingeben zu müssen.",
-        "Gut zu wissen: Der Standardversand ist bei uns immer kostenlos, ohne Mindestbestellwert. Wer es eilig hat, wählt den Expressversand für 70,00 €. Und Sie haben in jedem Fall 14 Tage Widerrufsrecht, passt das Gerät nicht, nehmen wir es zurück.",
+        "Gut zu wissen: Der Standardversand ist bei uns immer kostenlos, ohne Mindestbestellwert. Wer es eilig hat, wählt den Expressversand für 70,00 €. Und Sie haben in jedem Fall 14 Tage Widerrufsrecht, passt der Container nicht, nehmen wir ihn zurück.",
       ],
       actionLabel: "Jetzt abschließen",
       contactLead: "Unsicher bei der Auswahl? Wir beraten Sie gern.",
@@ -137,7 +137,7 @@ function contentFor(rank: 1 | 2 | 3): MailContent {
     preheader: `Nutzen Sie ${RECOVERY_COUPON_PERCENT} % Rabatt auf Ihre Bestellung ab ${RECOVERY_COUPON_MIN_SUBTOTAL_CENTS / 100} €.`,
     heading: "Ihr Warenkorb wird in Kürze gelöscht",
     paragraphs: [
-      "Ihr gespeicherter Warenkorb wird bald automatisch gelöscht. Das ist völlig in Ordnung, vielleicht war es nicht das passende Gerät.",
+      "Ihr gespeicherter Warenkorb wird bald automatisch gelöscht. Das ist völlig in Ordnung, vielleicht war es nicht der passende Container.",
       "Falls Sie sich noch entscheiden möchten, haben wir Ihnen einen Rabattcode mitgeschickt. Geben Sie ihn beim Bezahlen im Warenkorb ein.",
     ],
     actionLabel: "Bestellung fortsetzen",

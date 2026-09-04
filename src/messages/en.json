@@ -129,9 +129,9 @@
     "resultsFor": "Search results for “{query}”",
     "resultCount": "{count, plural, =0 {No results} one {# result} other {# results}}",
     "emptyTitle": "We found nothing for “{query}”",
-    "emptyHint": "Check the spelling, or try a broader term such as the brand or the type of appliance.",
+    "emptyHint": "Check the spelling, or try a broader term such as the brand or the container type.",
     "promptTitle": "What are you looking for?",
-    "promptHint": "Enter at least two characters: brand, model or type of appliance.",
+    "promptHint": "Enter at least two characters: brand, model or container type.",
     "backToShop": "Browse the range"
   },
   "reviews": {

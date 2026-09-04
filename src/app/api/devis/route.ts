@@ -133,8 +133,14 @@ export async function POST(request: Request) {
   if (city.length < 2 || city.length > 80) {
     return NextResponse.json({ error: "Bitte geben Sie einen Ort an." }, { status: 400 });
   }
-  if (message.length > 2000) {
-    return NextResponse.json({ error: "Ihre Nachricht darf höchstens 2000 Zeichen lang sein." }, { status: 400 });
+  // Obligatoire : si le client demande un devis plutôt que de payer
+  // directement, c'est justement parce qu'il a quelque chose à préciser ou
+  // modifier — un champ vide ou trop court n'apporte rien à traiter.
+  if (message.length < 10 || message.length > 2000) {
+    return NextResponse.json(
+      { error: "Bitte beschreiben Sie kurz, was Sie an diesem Container ändern oder ergänzen möchten." },
+      { status: 400 },
+    );
   }
 
   // Le produit est relu côté serveur à partir du chemin de sa fiche : le nom,
@@ -179,7 +185,7 @@ export async function POST(request: Request) {
     postalCode,
     city,
     country,
-    message: message || undefined,
+    message,
   });
   registerSubmission(rateKey);
 

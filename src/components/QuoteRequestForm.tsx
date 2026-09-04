@@ -58,7 +58,7 @@ export function QuoteRequestForm({ productHref }: { productHref: string }) {
         postalCode,
         city,
         country,
-        message: message || undefined,
+        message,
       }),
     });
 
@@ -248,8 +248,15 @@ export function QuoteRequestForm({ productHref }: { productHref: string }) {
       </fieldset>
 
       <label className="mb-4 block text-sm">
-        <span className="mb-1 block font-semibold text-foreground">{t("formMessage")}</span>
+        <span className="mb-1 block font-semibold text-foreground">
+          {t("formMessage")} <span aria-hidden>*</span>
+        </span>
+        {/* Obligatoire : c'est justement parce qu'il a quelque chose à
+            préciser ou modifier que le client choisit le devis plutôt que le
+            paiement direct. */}
         <textarea
+          required
+          minLength={10}
           rows={4}
           maxLength={2000}
           value={message}

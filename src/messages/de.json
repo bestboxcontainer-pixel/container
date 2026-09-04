@@ -188,6 +188,8 @@
     "formEmail": "E-Mail",
     "formPhone": "Telefon",
     "formPhoneHint": "Für die Terminabsprache zur Lieferung nötig.",
+    "formAddressHeading": "Lieferadresse",
+    "formAddressHint": "Der Preis hängt vom Lieferort ab (Transport, Zufahrt).",
     "formMessage": "Nachricht (optional)",
     "formMessagePlaceholder": "Fragen, gewünschte Menge, Liefertermin …",
     "formSubmit": "Anfrage absenden",

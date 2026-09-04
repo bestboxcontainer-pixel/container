@@ -26,6 +26,11 @@ export interface QuoteRequestRecord {
   name: string;
   email: string;
   phone?: string;
+  street: string;
+  postalCode: string;
+  city: string;
+  /** Code ISO 3166-1 alpha-2, ou chaîne vide si non renseigné. */
+  country: string;
   message: string;
   status: QuoteRequestStatus;
   createdAt: string;
@@ -44,6 +49,10 @@ interface QuoteRequestRow {
   name: string;
   email: string;
   phone: string | null;
+  street: string;
+  postalCode: string;
+  city: string;
+  country: string;
   message: string;
   status: string;
   createdAt: Date;
@@ -63,6 +72,10 @@ function toRecord(row: QuoteRequestRow): QuoteRequestRecord {
     name: row.name,
     email: row.email,
     phone: row.phone ?? undefined,
+    street: row.street,
+    postalCode: row.postalCode,
+    city: row.city,
+    country: row.country,
     message: row.message,
     // Un statut hors du trio connu est traité comme "new" : il reste visible
     // dans la file de travail plutôt que de disparaître silencieusement.
@@ -82,6 +95,10 @@ export interface CreateQuoteRequestInput {
   lastName: string;
   email: string;
   phone?: string;
+  street: string;
+  postalCode: string;
+  city: string;
+  country: string;
   message?: string;
 }
 
@@ -103,6 +120,10 @@ export async function createQuoteRequest(input: CreateQuoteRequestInput): Promis
       name: `${firstName} ${lastName}`.trim(),
       email: input.email,
       phone: input.phone ?? null,
+      street: input.street.trim(),
+      postalCode: input.postalCode.trim(),
+      city: input.city.trim(),
+      country: input.country.trim().toUpperCase(),
       message: input.message ?? "",
     },
   });

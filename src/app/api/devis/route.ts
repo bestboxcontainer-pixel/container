@@ -3,6 +3,7 @@ import { COMPANY } from "@/content/legal";
 import { isMailConfigured, sendMail } from "@/lib/mailer";
 import { buildQuoteRequestCustomerEmail, buildQuoteRequestShopEmail } from "@/server/emails/quoteRequest";
 import { createQuoteRequest, isQuoteRequestSalutation } from "@/server/quotes";
+import { isCountryCode, isValidPostalCode } from "@/lib/countries";
 import { getProductBySlug } from "@/server/store";
 
 // Anti-spam minimaliste, même principe que /api/reviews : un compteur en
@@ -64,6 +65,10 @@ async function notifierBoutique(input: {
   name: string;
   email: string;
   phone?: string;
+  street: string;
+  postalCode: string;
+  city: string;
+  country: string;
   message: string;
   adminUrl: string;
 }): Promise<void> {
@@ -96,6 +101,10 @@ export async function POST(request: Request) {
   const name = `${firstName} ${lastName}`.trim();
   const email = readString(payload.email);
   const phone = readString(payload.phone);
+  const street = readString(payload.street);
+  const postalCode = readString(payload.postalCode).toUpperCase();
+  const city = readString(payload.city);
+  const country = readString(payload.country).toUpperCase();
   const message = readString(payload.message);
 
   if (firstName.length < 2 || firstName.length > 80) {
@@ -109,6 +118,20 @@ export async function POST(request: Request) {
   }
   if (phone.length < 4 || phone.length > 40) {
     return NextResponse.json({ error: "Bitte geben Sie eine gültige Telefonnummer an." }, { status: 400 });
+  }
+  if (street.length < 4 || street.length > 160) {
+    return NextResponse.json({ error: "Bitte geben Sie Straße und Hausnummer an." }, { status: 400 });
+  }
+  if (!isCountryCode(country)) {
+    return NextResponse.json({ error: "Bitte wählen Sie ein Land aus." }, { status: 400 });
+  }
+  // Le format du code postal n'est vérifié que pour les pays dont on connaît la
+  // règle ; ailleurs, seul un champ vide est refusé.
+  if (!isValidPostalCode(country, postalCode) || postalCode.length > 12) {
+    return NextResponse.json({ error: "Bitte geben Sie eine gültige Postleitzahl an." }, { status: 400 });
+  }
+  if (city.length < 2 || city.length > 80) {
+    return NextResponse.json({ error: "Bitte geben Sie einen Ort an." }, { status: 400 });
   }
   if (message.length > 2000) {
     return NextResponse.json({ error: "Ihre Nachricht darf höchstens 2000 Zeichen lang sein." }, { status: 400 });
@@ -152,6 +175,10 @@ export async function POST(request: Request) {
     lastName,
     email,
     phone: phone || undefined,
+    street,
+    postalCode,
+    city,
+    country,
     message: message || undefined,
   });
   registerSubmission(rateKey);
@@ -166,6 +193,10 @@ export async function POST(request: Request) {
       name,
       email,
       phone: phone || undefined,
+      street,
+      postalCode,
+      city,
+      country,
       message,
       adminUrl,
     });

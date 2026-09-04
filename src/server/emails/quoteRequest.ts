@@ -9,6 +9,7 @@
  * reconstruits (et oubliés) à chaque nouveau message.
  */
 import { escapeHtml, layout } from "@/server/emails/customerAccount";
+import { countryName } from "@/lib/countries";
 import type { MailMessage } from "@/lib/mailer";
 
 /** Encadré gris, même traitement que le panneau adresse des confirmations de commande. */
@@ -39,6 +40,11 @@ export interface QuoteRequestShopEmailInput {
   name: string;
   email: string;
   phone?: string;
+  street: string;
+  postalCode: string;
+  city: string;
+  /** Code ISO 3166-1 alpha-2. */
+  country: string;
   message: string;
   adminUrl: string;
 }
@@ -55,6 +61,7 @@ export function buildQuoteRequestShopEmail(input: QuoteRequestShopEmailInput): O
   const heading = "Neue Angebotsanfrage";
   const anrede = salutationLabel(input.salutation);
   const nameZeile = anrede ? `${anrede} ${input.name}` : input.name;
+  const land = countryName(input.country, "de");
 
   const html = layout({
     locale: "de",
@@ -66,6 +73,11 @@ export function buildQuoteRequestShopEmail(input: QuoteRequestShopEmailInput): O
         escapeHtml(nameZeile),
         `<a href="mailto:${escapeHtml(input.email)}" style="color:#3f4854;">${escapeHtml(input.email)}</a>`,
         input.phone ? escapeHtml(input.phone) : "",
+      ]),
+      panel("Lieferadresse", [
+        escapeHtml(input.street),
+        escapeHtml(`${input.postalCode} ${input.city}`.trim()),
+        escapeHtml(land),
       ]),
       ...(input.message ? [panel("Nachricht", [escapeHtml(input.message).replace(/\n/g, "<br>")])] : []),
     ],
@@ -79,6 +91,7 @@ export function buildQuoteRequestShopEmail(input: QuoteRequestShopEmailInput): O
     `Name: ${input.name}`,
     `E-Mail: ${input.email}`,
     ...(input.phone ? [`Telefon: ${input.phone}`] : []),
+    `Lieferadresse: ${input.street}, ${input.postalCode} ${input.city}, ${land}`,
     ...(input.message ? [`Nachricht: ${input.message}`] : []),
     "",
     `Im Backoffice ansehen: ${input.adminUrl}`,

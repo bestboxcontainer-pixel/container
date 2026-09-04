@@ -5,6 +5,7 @@ import { QuoteStatusSelect } from "@/components/admin/QuoteStatusSelect";
 import { AdminPagination } from "@/components/admin/AdminPagination";
 import { paginate, parsePageParam } from "@/lib/pagination";
 import { formatCents } from "@/lib/cart";
+import { countryName } from "@/lib/countries";
 import type { QuoteRequestStatus } from "@/server/quotes";
 
 interface StatusTab {
@@ -149,6 +150,17 @@ export default async function AdminQuoteRequestsPage({
                       </>
                     )}
                   </p>
+                  {(request.street || request.city) && (
+                    <p className="text-muted-foreground sm:col-span-2">
+                      {[
+                        request.street,
+                        `${request.postalCode} ${request.city}`.trim(),
+                        request.country ? countryName(request.country, "de") : "",
+                      ]
+                        .filter(Boolean)
+                        .join(", ")}
+                    </p>
+                  )}
                 </div>
 
                 {request.message && (

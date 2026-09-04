@@ -188,6 +188,8 @@
     "formEmail": "Email",
     "formPhone": "Phone",
     "formPhoneHint": "Needed to arrange the delivery slot.",
+    "formAddressHeading": "Delivery address",
+    "formAddressHint": "The price depends on the delivery location (transport, access).",
     "formMessage": "Message (optional)",
     "formMessagePlaceholder": "Questions, desired quantity, delivery date …",
     "formSubmit": "Send request",

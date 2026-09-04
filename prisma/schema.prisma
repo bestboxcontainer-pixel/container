@@ -175,6 +175,12 @@ model QuoteRequest {
   name              String
   email             String
   phone             String?
+  // Adresse de livraison indicative : le devis d'un conteneur dépend fortement
+  // du lieu (transport, accès). `country` est un code ISO 3166-1 alpha-2.
+  street            String   @default("")
+  postalCode        String   @default("")
+  city              String   @default("")
+  country           String   @default("")
   message           String   @default("")
   // new | contacted | closed : en texte, pour rester portable
   status            String   @default("new")

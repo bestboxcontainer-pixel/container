@@ -469,15 +469,9 @@ export const deLegalPages: LegalPageMap = {
         heading: "Ausschluss und vorzeitiges Erlöschen des Widerrufsrechts",
         body: "Das Widerrufsrecht besteht nach § 312g Absatz 2 BGB unter anderem nicht bei folgenden Verträgen:",
         list: [
-          "Waren, die nicht vorgefertigt sind und für deren Herstellung eine individuelle Auswahl oder Bestimmung durch Sie maßgeblich ist oder die eindeutig auf Ihre persönlichen Bedürfnisse zugeschnitten sind (zum Beispiel Container mit individuellem Zuschnitt für Türen und Fenster)",
-          "versiegelte Waren, die aus Gründen des Gesundheitsschutzes oder der Hygiene nicht zur Rückgabe geeignet sind, wenn die Versiegelung nach der Lieferung entfernt wurde (zum Beispiel Rasierer, Epiliergeräte, In-Ear-Kopfhörer, Wasserfilterkartuschen)",
-          "Ton- oder Videoaufnahmen sowie Computersoftware in einer versiegelten Packung, wenn die Versiegelung nach der Lieferung entfernt wurde (zum Beispiel Spiele-Discs und Software)",
+          "Waren, die nicht vorgefertigt sind und für deren Herstellung eine individuelle Auswahl oder Bestimmung durch Sie maßgeblich ist oder die eindeutig auf Ihre persönlichen Bedürfnisse zugeschnitten sind (zum Beispiel Container mit individuellem Zuschnitt für Türen und Fenster, individueller Lackierung oder individuellem Innenausbau)",
           "Waren, die nach der Lieferung aufgrund ihrer Beschaffenheit untrennbar mit anderen Gütern vermischt wurden",
         ],
-      },
-      {
-        heading: "Digitale Inhalte",
-        body: "Bei Verträgen über die Lieferung von nicht auf einem körperlichen Datenträger befindlichen digitalen Inhalten, etwa Download-Codes für Spiele oder Software, erlischt Ihr Widerrufsrecht nach § 356 Absatz 5 BGB, wenn wir mit der Vertragserfüllung begonnen haben, nachdem Sie ausdrücklich zugestimmt haben, dass wir vor Ablauf der Widerrufsfrist beginnen, und Sie Ihre Kenntnis vom Erlöschen des Widerrufsrechts bestätigt haben. Wir bestätigen Ihnen dies zusätzlich auf einem dauerhaften Datenträger.",
       },
       {
         heading: "Freiwilliges 30-Tage-Rückgaberecht",
@@ -668,7 +662,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Nicht zurückgenommene Artikel",
-        body: "Vom Widerrufs- und Rückgaberecht ausgeschlossen sind unter anderem maßgefertigte Artikel sowie entsiegelte Hygieneartikel, Software und Datenträger. Die vollständige Aufzählung finden Sie auf der Seite „Widerrufsrecht“.",
+        body: "Vom Widerrufs- und Rückgaberecht ausgeschlossen sind maßgefertigte Container, etwa mit individuellem Zuschnitt für Türen und Fenster, individueller Lackierung oder individuellem Innenausbau. Die vollständige Aufzählung finden Sie auf der Seite „Widerrufsrecht“.",
       },
     ],
   },

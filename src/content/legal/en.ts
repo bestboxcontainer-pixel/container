@@ -451,15 +451,9 @@ export const enLegalPages: LegalPageMap = {
         heading: "Exclusion and early expiry of the right of withdrawal",
         body: "Pursuant to section 312g(2) BGB, the right of withdrawal does not apply, among others, to the following contracts:",
         list: [
-          "goods that are not prefabricated and for the manufacture of which an individual choice or decision by you is decisive, or goods that are clearly tailored to your personal requirements (for example containers custom-cut for doors and windows)",
-          "sealed goods which are not suitable for return for reasons of health protection or hygiene and which were unsealed after delivery (for example shavers, epilators, in-ear headphones, water filter cartridges)",
-          "sound or video recordings or computer software in sealed packaging where the seal was removed after delivery (for example game discs and software)",
+          "goods that are not prefabricated and for the manufacture of which an individual choice or decision by you is decisive, or goods that are clearly tailored to your personal requirements (for example containers custom-cut for doors and windows, custom paint finish, or a custom interior fit-out)",
           "goods which, after delivery, are inseparably mixed with other items due to their nature",
         ],
-      },
-      {
-        heading: "Digital content",
-        body: "For contracts concerning the supply of digital content not supplied on a tangible medium, such as download codes for games or software, your right of withdrawal expires under section 356(5) BGB once we have begun performance of the contract after you have expressly agreed that we may begin before the end of the withdrawal period and have acknowledged your awareness that your right of withdrawal thereby lapses. We additionally confirm this to you on a durable medium.",
       },
       {
         heading: "Voluntary 30-day return policy",
@@ -650,7 +644,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Items excluded from return",
-        body: "Custom-made items as well as unsealed hygiene products, software and data carriers are among the items excluded from the right of withdrawal and the voluntary return policy. The full list can be found on our \"Right of withdrawal\" page.",
+        body: "Custom-made containers, for example with custom-cut doors and windows, a custom paint finish or a custom interior fit-out, are excluded from the right of withdrawal and the voluntary return policy. The full list can be found on our \"Right of withdrawal\" page.",
       },
     ],
   },

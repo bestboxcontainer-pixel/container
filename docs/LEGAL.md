@@ -102,9 +102,12 @@ Les slugs de ce corpus sont `widerruf` et `retoure`. Il faut soit aligner le foo
 - **Widerrufsrecht** : belehrung conforme au modèle légal (Anlage 1 à l'art. 246a § 1 al. 2
   phrase 2 EGBGB) **dans sa version applicable depuis le 19 juin 2026**, incluant la phrase
   relative à l'exercice en ligne du droit de rétractation ; Muster-Widerrufsformular
-  (Anlage 2) ; variantes de départ du délai pour livraisons multiples/partielles ; exclusions
-  du § 312g al. 2 BGB pertinentes pour l'électroménager et le multimédia ; extinction du droit
-  pour les contenus numériques (§ 356 al. 5 BGB).
+  (Anlage 2) ; variantes de départ du délai pour livraisons multiples/partielles ; exclusion du
+  § 312g al. 2 BGB pertinente pour un conteneur (fabrication sur mesure : découpe de portes et
+  fenêtres, peinture, aménagement intérieur). Les exclusions du gabarit d'origine propres à
+  l'électroménager et au multimédia (biens scellés pour raisons d'hygiène, supports audio/vidéo
+  ou logiciels scellés, extinction du droit pour les contenus numériques § 356 al. 5 BGB) ont
+  été retirées en 2026-09 : aucun produit vendu ne relève de ces catégories.
 - **Widerrufsbutton / § 356a BGB** : obligatoire depuis le 19 juin 2026 pour tout contrat B2C
   conclu via une interface en ligne. Le contenu décrit la procédure en deux étapes et l'accusé
   de réception sur support durable. **La fonctionnalité technique reste à implémenter** (voir § 5).
@@ -179,18 +182,18 @@ diffère : `Deutschland` / `Germany`). Modifier les deux.
    sous-traitance art. 28 RGPD (`datenschutz` §4).
 5. **Transporteurs et partenaires de montage** : identifier les destinataires réels
    (`datenschutz` §8).
-6. **Outils d'analytics / marketing** : la section 13 de `datenschutz` est un cadre vide :
-   énumérer chaque outil, son fournisseur, les données traitées, la durée et les transferts
-   hors UE. Aucune page ne doit être publiée avec cette section laissée en l'état.
-7. **Autorité de contrôle** : actuellement la Berliner Beauftragte für Datenschutz und
-   Informationsfreiheit ; à ajuster au siège réel.
-8. **Délégué à la protection des données** : vérifier l'obligation de désignation
+6. **Outils d'analytics / marketing** : la section 14 de `datenschutz` (« Reichweitenmessung
+   und Marketing ») est un cadre vide : énumérer chaque outil, son fournisseur, les données
+   traitées, la durée et les transferts hors UE. Aucune page ne doit être publiée avec cette
+   section laissée en l'état. (La section 13, cookies et gestion du consentement, est déjà à
+   jour : Smartsupp et la carte Google du contact, seuls services concernés aujourd'hui.)
+7. **Délégué à la protection des données** : vérifier l'obligation de désignation
    (§ 38 BDSG) avant d'annoncer un DPO.
-9. **Position § 36 VSBG** : le corpus indique « ni disposés ni tenus » de participer à un
+8. **Position § 36 VSBG** : le corpus indique « ni disposés ni tenus » de participer à un
    règlement extrajudiciaire. Décision commerciale à confirmer ; l'obligation d'information ne
    s'applique pas aux entreprises de 10 salariés ou moins au 31 décembre de l'année précédente.
-10. **Mention de TVA** : si l'entreprise relève du régime des petites entreprises
-    (§ 19 UStG), toutes les mentions « inkl. gesetzl. MwSt. » doivent être remplacées.
+9. **Mention de TVA** : si l'entreprise relève du régime des petites entreprises
+   (§ 19 UStG), toutes les mentions « inkl. gesetzl. MwSt. » doivent être remplacées.
 
 ### 5.3 Données commerciales à confirmer
 
@@ -243,4 +246,3 @@ Recherche effectuée en juillet 2026. Sources officielles et cabinets spécialis
 - PAngV: [gesetze-im-internet.de, PAngV](https://www.gesetze-im-internet.de/pangv_2022/BJNR492110021.html), [IT-Recht Kanzlei, guide PAngV](https://www.it-recht-kanzlei.de/preisangabenverordnung.html)
 - Datenschutzerklärung / RGPD / § 25 TDDDG: [IHK Schleswig-Holstein](https://www.ihk.de/schleswig-holstein/recht/recht-im-internet/pflichtangaben-internet-datenschutzerklaerung-1359834), [eRecht24, RGPD pour boutiques en ligne](https://www.e-recht24.de/datenschutz/7902-datenschutzerklaerung-fuer-online-shops-was-shopbetreiber-wissen-muessen.html)
 - GPSR et nouveau ProdSG (19.02.2026): [Dr. Bahr, FAQ GPSR](https://www.dr-bahr.com/infos/rechts-faq/rechts-faq-produktsicherheitsverordnung-gpsr-pflichten-fuer-online-shop-betreiber.html), [Händlerbund](https://www.haendlerbund.de/de/ratgeber/recht/produktsicherheitsverordnung), [eRecht24](https://www.e-recht24.de/ecommerce/13370-produktsicherheitsverordnung-im-e-commerce.html)
-- Drones (FAQ): [drohnen.de, drones de moins de 250 g](https://www.drohnen.de/84616/drohne-unter-250g-registrieren-versichern/), [drohnen.de, enregistrement LBA](https://www.drohnen.de/84600/drohne-beim-luftfahrt-bundesamt-registrieren/), [drohnen.de, brevet de télépilote UE](https://www.drohnen.de/33450/eu-drohnenfuehrerschein/)

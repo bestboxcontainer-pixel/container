@@ -1,7 +1,4 @@
-"use client";
-
-import { ExternalLink, MapPin } from "lucide-react";
-import { ouvrirReglagesConsentement, useConsentement } from "@/lib/consent";
+import { ExternalLink } from "lucide-react";
 import { COMPANY } from "@/content/legal";
 
 const ADRESSE = `${COMPANY.street}, ${COMPANY.city}, ${COMPANY.country}`;
@@ -15,49 +12,8 @@ const LIEN_MAPS = `https://www.google.com/maps/search/?api=1&query=${encodeURICo
  */
 const SRC_CARTE = `https://www.google.com/maps?q=${encodeURIComponent(ADRESSE)}&output=embed`;
 
-/**
- * Carte d'accès de la page Contact.
- *
- * L'iframe charge des ressources Google dès l'affichage et transmet l'adresse
- * IP du visiteur, exactement comme le live-chat Smartsupp stocke une
- * identification : elle attend donc le même consentement (src/lib/consent.ts),
- * et le bandeau en parle désormais explicitement plutôt que de ne couvrir que
- * le chat. Sans consentement, un simple lien ouvre Google Maps dans un nouvel
- * onglet, sans établir la moindre connexion à Google depuis notre page.
- */
+/** Carte d'accès de la page Contact. */
 export function ContactMap() {
-  const { consentement } = useConsentement();
-
-  if (consentement !== "accepte") {
-    return (
-      <div className="flex flex-col items-center justify-center gap-3 rounded-sm border border-border bg-muted px-6 py-16 text-center">
-        <MapPin className="h-8 w-8 text-primary" aria-hidden />
-        <p className="max-w-sm text-sm text-muted-foreground">
-          Die Anfahrtskarte lädt Kartenmaterial von Google und startet erst mit Ihrer
-          Einwilligung.
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <button
-            type="button"
-            onClick={ouvrirReglagesConsentement}
-            className="rounded-sm bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:brightness-110"
-          >
-            Einwilligung erteilen
-          </button>
-          <a
-            href={LIEN_MAPS}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm font-bold text-primary hover:underline"
-          >
-            In Google Maps öffnen
-            <ExternalLink className="h-4 w-4" aria-hidden />
-          </a>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="relative overflow-hidden rounded-sm border border-border">
       <a

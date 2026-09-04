@@ -4,14 +4,11 @@ import { useSyncExternalStore } from "react";
 
 /**
  * Consentement du visiteur aux services qui déposent quelque chose sur son
- * appareil, ou transmettent son adresse IP à un tiers, sans être nécessaires
- * au fonctionnement de la boutique.
+ * appareil sans être nécessaires au fonctionnement de la boutique.
  *
- * DEUX SERVICES SONT CONCERNÉS AUJOURD'HUI : le chat Smartsupp (voir
- * SmartsuppLauncher.tsx), qui pose une identification de visiteur dès qu'il se
- * charge, et la carte Google intégrée à la page Contact (voir
- * ContactMap.tsx), qui transmet l'adresse IP à Google. Le panier, la session,
- * la langue et la sécurité restent hors de ce mécanisme, ils relèvent du § 25
+ * UN SEUL SERVICE EST CONCERNÉ AUJOURD'HUI : le chat Smartsupp, qui pose une
+ * identification de visiteur dès qu'il se charge. Le panier, la session, la
+ * langue et la sécurité restent hors de ce mécanisme, ils relèvent du § 25
  * Abs. 2 Nr. 2 TDDDG et ne se demandent pas.
  *
  * Le jour où un fragment posé depuis le back-office chargera une mesure

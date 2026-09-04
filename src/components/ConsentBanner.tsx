@@ -3,19 +3,14 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { repondreConsentement, useConsentement } from "@/lib/consent";
+import { CHAT_CONFIGURE } from "@/lib/smartsupp";
 
 /**
  * Bandeau de consentement, en bas de l'écran.
  *
- * Il ne demande que ce qui existe réellement, le chat en direct et la carte
- * de la page Contact, et le dit en toutes lettres. Un bandeau qui réclame
- * « tous les cookies » alors que la boutique n'en pose pas d'autres ne serait
- * pas une information, seulement un réflexe.
- *
- * Le bandeau ne dépend plus de CHAT_CONFIGURE (src/lib/smartsupp.ts) : tant
- * que le chat était le seul service concerné, l'absence de clé Smartsupp
- * suffisait à dire qu'il n'y avait rien à demander. La carte, elle, est
- * toujours présente sur /kontakt, donc le bandeau reste dû même chat éteint.
+ * Il ne demande qu'une chose, le chat en direct, et le dit en toutes lettres.
+ * Un bandeau qui réclame « tous les cookies » alors que la boutique n'en pose
+ * pas d'autres ne serait pas une information, seulement un réflexe.
  *
  * DEUX BOUTONS DE MÊME POIDS. Refuser doit être aussi simple qu'accepter :
  * même hauteur, même largeur, même graisse, côte à côte. Un « Ablehnen » réduit
@@ -30,6 +25,11 @@ import { repondreConsentement, useConsentement } from "@/lib/consent";
 export function ConsentBanner() {
   const t = useTranslations("consent");
   const { banniereVisible } = useConsentement();
+
+  // Pas de chat configuré, pas de bandeau : demander l'autorisation d'un
+  // service absent ferait perdre au visiteur le seul geste qui compte ici, et
+  // apprendrait à cliquer sans lire.
+  if (!CHAT_CONFIGURE) return null;
 
   // Rien avant la lecture du stockage : le bandeau ne doit pas paraître une
   // fraction de seconde chez ceux qui ont déjà répondu.

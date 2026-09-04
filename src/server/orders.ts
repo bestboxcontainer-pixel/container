@@ -324,12 +324,12 @@ export async function countOpenOrders(): Promise<number> {
 // ---- Numéro de commande ----
 
 /**
- * Numéro lisible « PFF-AAAA-NNNNNN », séquentiel par année civile.
+ * Numéro lisible « BBC-AAAA-NNNNN », séquentiel par année civile.
  * L'unicité réelle est garantie par la contrainte en base ; la boucle d'appel
  * réessaie en cas de collision entre deux commandes simultanées.
  */
 /** Préfixe en vigueur. Les commandes déjà passées gardent le leur. */
-const ORDER_PREFIX = "PFF";
+const ORDER_PREFIX = "BBC";
 
 /**
  * Préfixes utilisés avant celui d'aujourd'hui. Le compteur les relit pour
@@ -337,7 +337,7 @@ const ORDER_PREFIX = "PFF";
  * préfixe ferait recommencer la numérotation à zéro le jour du déploiement, et
  * la commande suivante porterait un rang inférieur à celui de la veille.
  */
-const LEGACY_ORDER_PREFIXES = ["HP"] as const;
+const LEGACY_ORDER_PREFIXES = ["HP", "PFF"] as const;
 /**
  * Rang de départ de la numérotation des commandes.
  *
@@ -354,7 +354,7 @@ const LEGACY_ORDER_PREFIXES = ["HP"] as const;
  * Ajustable par `ORDER_NUMBER_OFFSET`. Le changer ne réécrit aucune commande
  * déjà passée : le compteur ne fait que ne jamais descendre en dessous.
  */
-const ORDER_NUMBER_OFFSET = Number.parseInt(process.env.ORDER_NUMBER_OFFSET ?? "16100", 10);
+const ORDER_NUMBER_OFFSET = Number.parseInt(process.env.ORDER_NUMBER_OFFSET ?? "2430", 10);
 
 async function nextOrderNumber(): Promise<string> {
   const year = new Date().getFullYear();
@@ -382,7 +382,7 @@ async function nextOrderNumber(): Promise<string> {
   // le rang dépassé, c'est la suite naturelle qui reprend la main, sans trou.
   const plancher = Number.isFinite(ORDER_NUMBER_OFFSET) ? ORDER_NUMBER_OFFSET : 1;
   const next = Math.max(suivant, plancher);
-  return `${prefix}${String(next).padStart(6, "0")}`;
+  return `${prefix}${String(next).padStart(5, "0")}`;
 }
 
 // ---- Création ----

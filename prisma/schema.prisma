@@ -250,7 +250,7 @@ model Integration {
 
 model Order {
   id          String @id @default(cuid())
-  // Numéro lisible communiqué au client, par ex. « PFF-2026-000042 »
+  // Numéro lisible communiqué au client, par ex. « BBC-2026-02430 »
   orderNumber String @unique
 
   // Rattachement FACULTATIF à un compte client. La commande en tant qu'invité

@@ -14,6 +14,7 @@ import {
   Mail,
   MailWarning,
   Menu,
+  MessageSquare,
   Package,
   Plug,
   Receipt,
@@ -47,10 +48,12 @@ export function AdminSidebar({
   email,
   pendingReviews,
   pendingQuotes,
+  pendingContactMessages,
 }: {
   email: string;
   pendingReviews: number;
   pendingQuotes: number;
+  pendingContactMessages: number;
 }) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -82,6 +85,13 @@ export function AdminSidebar({
           icon: Mail,
           badge: pendingQuotes,
           badgeTitle: "demandes non traitées",
+        },
+        {
+          label: "Messages de contact",
+          href: "/admin/contact",
+          icon: MessageSquare,
+          badge: pendingContactMessages,
+          badgeTitle: "messages non traités",
         },
         { label: "Warenkorb-Erinnerungen", href: "/admin/warenkorb-erinnerungen", icon: MailWarning },
         {

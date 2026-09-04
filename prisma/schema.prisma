@@ -192,6 +192,25 @@ model QuoteRequest {
   @@index([status])
 }
 
+// ---- Messages du formulaire de contact ----
+//
+// Formulaire général de /kontakt, sans produit ni adresse rattachés : un
+// visiteur qui n'est pas encore sur une fiche précise. Même circuit que les
+// demandes de devis (stockage + notification e-mail), voir plus haut.
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  message   String
+  // new | contacted | closed : en texte, pour rester portable
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+
+  @@index([status])
+}
+
 // ---- Moyens de paiement et intégrations ----
 
 model PaymentMethod {

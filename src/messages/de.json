@@ -206,9 +206,9 @@
     "acceptedTitle": "Akzeptierte Zahlungsarten"
   },
   "consent": {
-    "title": "Live-Chat aktivieren?",
-    "body": "Für Warenkorb, Sitzung und Sprachwahl setzen wir technisch notwendige Cookies, dafür brauchen wir keine Einwilligung. Unser Live-Chat (Smartsupp s.r.o., Tschechische Republik) speichert zusätzlich eine Besucherkennung auf Ihrem Gerät. Nur so sehen wir, dass Sie da sind, und können Sie von uns aus ansprechen.",
-    "note": "Auch ohne Einwilligung erreichen Sie uns jederzeit über die Chat-Schaltfläche unten rechts. Ihre Wahl ändern Sie jederzeit im Fußbereich der Seite.",
+    "title": "Live-Chat und Karte aktivieren?",
+    "body": "Für Warenkorb, Sitzung und Sprachwahl setzen wir technisch notwendige Cookies, dafür brauchen wir keine Einwilligung. Unser Live-Chat (Smartsupp s.r.o., Tschechische Republik) speichert zusätzlich eine Besucherkennung auf Ihrem Gerät, und die Anfahrtskarte auf der Kontaktseite lädt Kartenmaterial von Google (Google Ireland Limited). Beides aktivieren wir nur mit Ihrer Einwilligung.",
+    "note": "Auch ohne Einwilligung erreichen Sie uns jederzeit über die Chat-Schaltfläche unten rechts oder den Link „In Google Maps öffnen“ auf der Kontaktseite. Ihre Wahl ändern Sie jederzeit im Fußbereich der Seite.",
     "privacyLink": "Datenschutzerklärung",
     "accept": "Akzeptieren",
     "decline": "Ablehnen"
@@ -322,7 +322,7 @@
     "city": "Ort",
     "country": "Land",
     "countryDE": "Deutschland",
-    "countryHint": "Wir liefern derzeit ausschließlich innerhalb Deutschlands.",
+    "countryHint": "Wir liefern deutschlandweit; in weitere EU-Länder auf Anfrage.",
     "countryPlaceholder": "Land suchen",
     "countryToggle": "Länderliste öffnen",
     "countryEmpty": "Kein Land gefunden.",
@@ -497,7 +497,7 @@
       "city": "Ort",
       "country": "Land",
       "countryDE": "Deutschland",
-      "countryHint": "Wir liefern derzeit ausschließlich innerhalb Deutschlands.",
+      "countryHint": "Wir liefern deutschlandweit; in weitere EU-Länder auf Anfrage.",
       "email": "E-Mail-Adresse",
       "phone": "Telefon",
       "phoneHint": "Nur für Rückfragen zur Lieferung.",

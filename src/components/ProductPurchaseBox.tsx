@@ -134,7 +134,7 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
           est identifié dans l'URL, le formulaire relit lui-même son nom, sa
           référence et son prix côté serveur. */}
       <div className="-mt-2 flex flex-col gap-1.5">
-        <p className="text-center text-xs text-muted-foreground">{t("customRequestHint")}</p>
+        <p className="text-center text-sm font-bold text-muted-foreground">{t("customRequestHint")}</p>
         <Link
           href={quoteHref}
           className="flex items-center justify-center gap-2 rounded-sm border border-primary px-5 py-3 text-sm font-bold text-primary transition-colors hover:bg-muted"

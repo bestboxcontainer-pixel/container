@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { COMPANY } from "@/content/legal";
 import { isMailConfigured, sendMail } from "@/lib/mailer";
+import { buildQuoteRequestCustomerEmail, buildQuoteRequestShopEmail } from "@/server/emails/quoteRequest";
 import { createQuoteRequest } from "@/server/quotes";
 import { getProductBySlug } from "@/server/store";
 
@@ -48,21 +49,12 @@ function siteUrl(): string {
   return (process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestbox-containerhandel.de").replace(/\/+$/, "");
 }
 
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
 /**
  * Avertit la boutique par e-mail, en plus de l'enregistrement en base.
  *
- * Le SMTP n'est pas configuré à ce jour (voir src/lib/mailer.ts) :
- * `isMailConfigured()` vaut alors false et cette fonction ne fait rien. La
- * demande reste malgré tout visible dans /admin/devis, qui est la source de
- * vérité, pas cet e-mail.
+ * Si Resend n'est pas configuré (voir src/lib/mailer.ts), `isMailConfigured()`
+ * vaut alors false et cette fonction ne fait rien. La demande reste malgré
+ * tout visible dans /admin/devis, qui est la source de vérité, pas cet e-mail.
  */
 async function notifierBoutique(input: {
   productName: string;
@@ -75,40 +67,18 @@ async function notifierBoutique(input: {
   adminUrl: string;
 }): Promise<void> {
   if (!isMailConfigured()) return;
-
-  const lignes = [
-    `Produit : ${input.productName}${input.productSku ? ` (${input.productSku})` : ""}`,
-    `Lien : ${input.productUrl}`,
-    `Client : ${input.name}`,
-    `E-mail : ${input.email}`,
-    ...(input.phone ? [`Téléphone : ${input.phone}`] : []),
-    ...(input.message ? [`Message : ${input.message}`] : []),
-  ];
-
-  await sendMail({
-    to: COMPANY.email,
-    subject: `Neue Angebotsanfrage: ${input.productName}`,
-    text: `${lignes.join("\n")}\n\nIm Backoffice ansehen: ${input.adminUrl}`,
-    html: `<p>${lignes.map(escapeHtml).join("<br>")}</p><p><a href="${input.adminUrl}">Im Backoffice ansehen</a></p>`,
-  });
+  await sendMail({ to: COMPANY.email, ...buildQuoteRequestShopEmail(input) });
 }
 
-/** Accuse réception auprès du client, dès que le SMTP est configuré. */
+/** Accuse réception auprès du client, dès que Resend est configuré. */
 async function confirmerAuClient(input: {
   to: string;
   name: string;
   productName: string;
+  productUrl: string;
 }): Promise<void> {
   if (!isMailConfigured()) return;
-
-  const nom = escapeHtml(input.name);
-  const produit = escapeHtml(input.productName);
-  await sendMail({
-    to: input.to,
-    subject: `Ihre Angebotsanfrage: ${input.productName}`,
-    text: `Hallo ${input.name},\n\nvielen Dank für Ihre Anfrage zu „${input.productName}“. Wir melden uns in Kürze mit einem Angebot.\n\n${COMPANY.name}`,
-    html: `<p>Hallo ${nom},</p><p>vielen Dank für Ihre Anfrage zu „${produit}“. Wir melden uns in Kürze mit einem Angebot.</p><p>${escapeHtml(COMPANY.name)}</p>`,
-  });
+  await sendMail({ to: input.to, ...buildQuoteRequestCustomerEmail(input) });
 }
 
 export async function POST(request: Request) {
@@ -188,7 +158,7 @@ export async function POST(request: Request) {
       message,
       adminUrl,
     });
-    await confirmerAuClient({ to: email, name, productName });
+    await confirmerAuClient({ to: email, name, productName, productUrl });
   } catch (error) {
     // L'enregistrement a déjà réussi : un e-mail qui échoue ne doit pas faire
     // perdre la demande, seulement se voir dans les journaux du serveur.

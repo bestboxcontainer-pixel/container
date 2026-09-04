@@ -17,17 +17,15 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
   const t = useTranslations("product");
   const inStock = product.inStock !== false;
 
-  // Le devis et la demande WhatsApp partent tous deux pré-remplis avec les
-  // mêmes informations produit : le client n'a rien à retaper, et nous
-  // savons d'emblée de quel article il s'agit, plutôt que de le déduire
-  // d'un message libre.
+  // La demande WhatsApp part pré-remplie avec les informations produit : le
+  // client n'a rien à retaper, et nous savons d'emblée de quel article il
+  // s'agit, plutôt que de le déduire d'un message libre. Le devis, lui, passe
+  // par un vrai formulaire (/angebot-anfragen) : voir ce composant plus bas.
   const productLabel = `${product.brand} ${product.name}`;
   const productUrl = `${SITE_URL}${product.href}`;
   const quoteVars = { product: productLabel, sku: product.sku ?? "—", price: product.price, url: productUrl };
 
-  const mailtoHref = `mailto:${COMPANY.email}?subject=${encodeURIComponent(
-    t("quoteEmailSubject", { product: productLabel }),
-  )}&body=${encodeURIComponent(t("quoteEmailBody", quoteVars))}`;
+  const quoteHref = `/angebot-anfragen?produkt=${encodeURIComponent(product.href)}`;
 
   const whatsappNumber = numeroWhatsApp(COMPANY.phone);
   const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
@@ -115,15 +113,15 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
 
       {/* La commande se valide par devis, pas par achat immédiat sur la
           fiche : ce bouton est donc l'action principale, avant même le
-          panier. Un simple lien mailto suffit, aucun formulaire à
-          maintenir côté serveur. */}
-      <a
-        href={mailtoHref}
+          panier. Le produit est identifié dans l'URL, le formulaire relit
+          lui-même son nom, sa référence et son prix côté serveur. */}
+      <Link
+        href={quoteHref}
         className="flex items-center justify-center gap-2 rounded-sm bg-primary px-5 py-3 text-sm font-black uppercase tracking-wide text-primary-foreground transition-colors hover:brightness-110"
       >
         <Mail className="h-4 w-4" aria-hidden />
         {t("requestQuote")}
-      </a>
+      </Link>
 
       <AddToCartButton
         productId={product.id ?? ""}

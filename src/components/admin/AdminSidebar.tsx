@@ -11,6 +11,7 @@ import {
   FileText,
   LayoutDashboard,
   Layers,
+  Mail,
   MailWarning,
   Menu,
   Package,
@@ -45,9 +46,11 @@ interface NavSection {
 export function AdminSidebar({
   email,
   pendingReviews,
+  pendingQuotes,
 }: {
   email: string;
   pendingReviews: number;
+  pendingQuotes: number;
 }) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -73,6 +76,13 @@ export function AdminSidebar({
         // téléphone, adresses de facturation et de livraison. Deux entrées de
         // menu pour la même information obligent à chercher où regarder.
         { label: "Commandes", href: "/admin/orders", icon: Receipt },
+        {
+          label: "Demandes de devis",
+          href: "/admin/devis",
+          icon: Mail,
+          badge: pendingQuotes,
+          badgeTitle: "demandes non traitées",
+        },
         { label: "Warenkorb-Erinnerungen", href: "/admin/warenkorb-erinnerungen", icon: MailWarning },
         {
           label: "Avis clients",

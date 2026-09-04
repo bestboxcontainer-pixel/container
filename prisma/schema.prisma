@@ -115,6 +115,7 @@ model Product {
   stockMovements StockMovement[]
   orderItems     OrderItem[]
   campaigns      CampaignProduct[]
+  quoteRequests  QuoteRequest[]
 
   @@index([categoryId])
   @@index([brand])
@@ -139,6 +140,39 @@ model Review {
   createdAt     DateTime  @default(now())
 
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@index([status])
+}
+
+// ---- Demandes de devis ----
+//
+// La commande se valide par devis, pas par achat immédiat sur la fiche : le
+// bouton « Angebot anfragen » de la fiche produit envoie ici plutôt que vers
+// la caisse. Stocké en base plutôt qu'envoyé par e-mail seul, le SMTP de la
+// boutique n'étant pas encore configuré (voir src/lib/mailer.ts) : la demande
+// reste visible dans le back-office même si aucun e-mail ne part.
+//
+// Les informations produit (nom, référence, prix, lien) sont dupliquées au
+// moment de la demande plutôt que relues depuis `product` à l'affichage : le
+// prix ou la fiche peuvent changer après coup, et le commercial qui rappelle
+// doit voir ce que le client a réellement demandé, pas le prix du jour.
+model QuoteRequest {
+  id                String   @id @default(cuid())
+  productId         String?
+  productName       String
+  productSku        String?
+  productPriceCents Int?
+  productUrl        String
+  name              String
+  email             String
+  phone             String?
+  message           String   @default("")
+  // new | contacted | closed : en texte, pour rester portable
+  status            String   @default("new")
+  createdAt         DateTime @default(now())
+
+  product Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
 
   @@index([productId])
   @@index([status])

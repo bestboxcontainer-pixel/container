@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { ContainerGlyph } from "@/components/ContainerGlyph";
+import Image from "next/image";
 
 interface Challenge {
   challengeId: string;
@@ -157,9 +157,14 @@ export default function AdminLoginPage() {
           {/* Marque centrée sur fond blanc. Le filet en dessous reprend la
               couleur primaire, comme celui de l'e-mail de code. */}
           <div className="flex flex-col items-center gap-2 bg-white px-6 pt-8 pb-6">
-            <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-white">
-              <ContainerGlyph className="h-6 w-6" />
-            </span>
+            <Image
+              src="/images/logo-badge.png"
+              alt="BBC Best Box Containerhandel e.K."
+              width={160}
+              height={160}
+              priority
+              className="h-14 w-14"
+            />
             <span className="text-lg font-black tracking-tight text-secondary">
               BBC <span className="text-primary">Best Box</span>
             </span>

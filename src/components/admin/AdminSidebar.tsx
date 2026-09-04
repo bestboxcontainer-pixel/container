@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -114,11 +115,20 @@ export function AdminSidebar({
         <Link
           href="/admin"
           onClick={() => setMobileOpen(false)}
-          className="block text-sm leading-tight font-black tracking-tight"
+          className="flex items-center gap-2.5"
         >
-          BBC Best Box Containerhandel e.K.
-          <span className="mt-0.5 block text-[11px] font-semibold tracking-widest text-primary uppercase">
-            Administration
+          <Image
+            src="/images/logo-badge.png"
+            alt=""
+            width={160}
+            height={160}
+            className="h-9 w-9 shrink-0"
+          />
+          <span className="text-sm leading-tight font-black tracking-tight">
+            BBC Best Box Containerhandel e.K.
+            <span className="mt-0.5 block text-[11px] font-semibold tracking-widest text-primary uppercase">
+              Administration
+            </span>
           </span>
         </Link>
       </div>
@@ -194,7 +204,14 @@ export function AdminSidebar({
 
       {/* Barre mobile : la même navigation, ouverte par-dessus le contenu */}
       <div className="sticky top-0 z-40 flex items-center justify-between border-b border-border bg-secondary px-4 py-3 text-secondary-foreground lg:hidden">
-        <Link href="/admin" className="text-sm font-black">
+        <Link href="/admin" className="flex items-center gap-2 text-sm font-black">
+          <Image
+            src="/images/logo-badge.png"
+            alt=""
+            width={160}
+            height={160}
+            className="h-7 w-7 shrink-0"
+          />
           BBC Best Box Containerhandel e.K., Admin
         </Link>
         <button

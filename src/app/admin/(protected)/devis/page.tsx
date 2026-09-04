@@ -2,6 +2,7 @@ import Link from "next/link";
 import { requireAdminSession } from "@/lib/dal";
 import { countQuoteRequestsByStatus, isQuoteRequestStatus, listQuoteRequests } from "@/server/quotes";
 import { QuoteStatusSelect } from "@/components/admin/QuoteStatusSelect";
+import { DeleteButton } from "@/components/admin/DeleteButton";
 import { AdminPagination } from "@/components/admin/AdminPagination";
 import { paginate, parsePageParam } from "@/lib/pagination";
 import { formatCents } from "@/lib/cart";
@@ -127,7 +128,13 @@ export default async function AdminQuoteRequestsPage({
                       {typeof request.productPriceCents === "number" && formatCents(request.productPriceCents)}
                     </p>
                   </div>
-                  <QuoteStatusSelect id={request.id} status={request.status} />
+                  <div className="flex items-center gap-2">
+                    <QuoteStatusSelect id={request.id} status={request.status} />
+                    <DeleteButton
+                      action={`/api/admin/devis/${request.id}`}
+                      confirmLabel={`Supprimer définitivement la demande de devis de « ${request.name} » ?`}
+                    />
+                  </div>
                 </div>
 
                 <div className="mt-3 grid gap-1 text-sm sm:grid-cols-2">

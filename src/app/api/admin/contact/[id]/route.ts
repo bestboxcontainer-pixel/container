@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { requireAdminApi } from "@/lib/adminApi";
-import { isContactMessageStatus, updateContactMessageStatus } from "@/server/contact";
+import { deleteContactMessage, isContactMessageStatus, updateContactMessageStatus } from "@/server/contact";
 
 type Params = Promise<{ id: string }>;
 
@@ -18,4 +18,15 @@ export async function PATCH(request: Request, { params }: { params: Params }) {
   if (!record) return NextResponse.json({ error: "Introuvable." }, { status: 404 });
 
   return NextResponse.json(record);
+}
+
+export async function DELETE(_request: Request, { params }: { params: Params }) {
+  const { unauthorized } = await requireAdminApi();
+  if (unauthorized) return unauthorized;
+
+  const { id } = await params;
+  const deleted = await deleteContactMessage(id);
+  if (!deleted) return NextResponse.json({ error: "Introuvable." }, { status: 404 });
+
+  return NextResponse.json({ success: true });
 }

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { requireAdminSession } from "@/lib/dal";
 import { countContactMessagesByStatus, isContactMessageStatus, listContactMessages } from "@/server/contact";
 import { ContactStatusSelect } from "@/components/admin/ContactStatusSelect";
+import { DeleteButton } from "@/components/admin/DeleteButton";
 import { AdminPagination } from "@/components/admin/AdminPagination";
 import { paginate, parsePageParam } from "@/lib/pagination";
 import type { ContactMessageStatus } from "@/server/contact";
@@ -114,7 +115,13 @@ export default async function AdminContactMessagesPage({
                       )}
                     </p>
                   </div>
-                  <ContactStatusSelect id={message.id} status={message.status} />
+                  <div className="flex items-center gap-2">
+                    <ContactStatusSelect id={message.id} status={message.status} />
+                    <DeleteButton
+                      action={`/api/admin/contact/${message.id}`}
+                      confirmLabel={`Supprimer définitivement le message de « ${message.name} » ?`}
+                    />
+                  </div>
                 </div>
 
                 <p className="mt-2 rounded-sm bg-muted p-3 text-sm text-foreground/80">{message.message}</p>

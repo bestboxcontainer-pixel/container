@@ -157,3 +157,12 @@ export async function updateQuoteRequestStatus(
   const row = await prisma.quoteRequest.update({ where: { id }, data: { status } });
   return toRecord(row);
 }
+
+/** Vrai si la demande existait et a été supprimée, faux si elle n'existait déjà plus. */
+export async function deleteQuoteRequest(id: string): Promise<boolean> {
+  const current = await prisma.quoteRequest.findUnique({ where: { id } });
+  if (!current) return false;
+
+  await prisma.quoteRequest.delete({ where: { id } });
+  return true;
+}

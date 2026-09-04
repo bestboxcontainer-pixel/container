@@ -86,3 +86,12 @@ export async function updateContactMessageStatus(
   const row = await prisma.contactMessage.update({ where: { id }, data: { status } });
   return toRecord(row);
 }
+
+/** Vrai si le message existait et a été supprimé, faux s'il n'existait déjà plus. */
+export async function deleteContactMessage(id: string): Promise<boolean> {
+  const current = await prisma.contactMessage.findUnique({ where: { id } });
+  if (!current) return false;
+
+  await prisma.contactMessage.delete({ where: { id } });
+  return true;
+}

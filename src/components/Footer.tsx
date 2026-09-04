@@ -148,11 +148,8 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-screen-xl px-4 py-5 sm:px-6">
-          {/* Raison sociale, gérant et registre sur une seule ligne : ce sont
-              des mentions d'identité, elles se lisent d'un bloc. */}
           <p className="text-xs leading-relaxed text-white/45">
-            © {new Date().getFullYear()} {COMPANY.name} · Inhaber: {COMPANY.owner} ·{" "}
-            {COMPANY.register}
+            © {new Date().getFullYear()} {COMPANY.name}
           </p>
         </div>
       </div>

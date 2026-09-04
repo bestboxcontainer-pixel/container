@@ -141,7 +141,7 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
         >
           <Mail className="h-4 w-4 shrink-0" aria-hidden />
           <span>
-            {t("requestQuote")}{" "}
+            <span className="text-base">{t("requestQuote")}</span>{" "}
             <span className="font-normal">({t("requestQuoteDetail")})</span>
           </span>
         </Link>

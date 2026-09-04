@@ -120,7 +120,7 @@
     "warranty": "14 Tage Rückgaberecht ohne Angabe von Gründen",
     "customRequestHint": "Andere Ausführung, Menge oder Sonderwunsch?",
     "requestQuote": "Angebot anfragen",
-    "requestQuoteDetail": "falls Sie diesen Container anpassen möchten",
+    "requestQuoteDetail": "um diesen Container anzupassen",
     "requestQuoteWhatsapp": "Anfrage per WhatsApp",
     "quoteWhatsappMessage": "Hallo, ich interessiere mich für folgendes Produkt und hätte gerne ein Angebot:\n\n{product}\nArt.-Nr.: {sku}\nPreis: {price}\n{url}",
     "vatOnly": "inkl. MwSt.",

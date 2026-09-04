@@ -32,7 +32,7 @@ const COMPANY = {
   owner: "Peer Kunz",
   registeredSince: "20 April 2006",
   register: "Amtsgericht Lübeck (Local Court of Lübeck), HRA 3471",
-  vatId: "DE000000000",
+  vatId: "DE814218818",
   domain: "www.bestboxcontainer.de",
 } as const;
 

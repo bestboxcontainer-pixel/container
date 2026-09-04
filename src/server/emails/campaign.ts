@@ -50,7 +50,7 @@ const IMPRESSUM = {
   country: "Deutschland",
   managingDirector: "Peer Kunz",
   register: "Amtsgericht Lübeck, HRA 3471",
-  vatId: "DE000000000",
+  vatId: "DE814218818",
 } as const;
 
 // ---- Entrées ----

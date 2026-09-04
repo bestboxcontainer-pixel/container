@@ -137,9 +137,8 @@ Les slugs de ce corpus sont `widerruf` et `retoure`. Il faut soit aligner le foo
 
 ### 5.1 Données d'entreprise (encore fictives sur certains points, voir ci-dessous)
 
-Mis à jour en 2026-09 avec l'identité réelle de l'entreprise. Restent des placeholders :
-le numéro de TVA intracommunautaire, le numéro WEEE et le numéro de registre d'emballages
-LUCID.
+Mis à jour en 2026-09 avec l'identité réelle de l'entreprise. Reste un placeholder :
+le numéro de registre d'emballages LUCID.
 
 | Élément | Valeur actuelle | Statut | Où |
 | --- | --- | --- | --- |
@@ -151,7 +150,7 @@ LUCID.
 | Inscrit depuis | `20 avril 2006` | réel | `COMPANY.registeredSince` |
 | E-mail | `kontakt@bestboxcontainer.de` | réel, domaine vérifié dans Resend | `COMPANY.email` |
 | Téléphone | `+49 1525 9026450` | réel | `COMPANY.phone` |
-| N° TVA intracommunautaire | `DE000000000` | **placeholder, bloquant** : chaque facture émise est incomplète tant que ce numéro n'est pas le vrai (§ 14 Abs. 4 Nr. 2 UStG) | `COMPANY.vatId` |
+| N° TVA intracommunautaire | `DE814218818` | réel | `COMPANY.vatId` (dupliqué dans `IMPRESSUM` de `campaign.ts`, voir le commentaire à cet endroit) |
 | N° registre emballages LUCID | `DE0000000000000` | placeholder, à compléter (la boutique expédie des colis et des palettes, donc soumise à la LUCID) | `impressum` |
 
 Les mentions WEEE (stiftung ear) et registre batteries (BattDG) du gabarit d'origine

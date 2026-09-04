@@ -50,7 +50,7 @@ export const COMPANY = {
   // À RENSEIGNER : la facture doit porter le numéro de TVA (§ 14 Abs. 4 Nr. 2
   // UStG). Tant que cette valeur reste un gabarit, chaque facture émise est
   // incomplète.
-  vatId: "DE000000000",
+  vatId: "DE814218818",
   domain: "www.bestboxcontainer.de",
 } as const;
 

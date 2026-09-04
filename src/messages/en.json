@@ -120,6 +120,7 @@
     "warranty": "14-day return policy, no reason required",
     "customRequestHint": "Different version, quantity or a special request?",
     "requestQuote": "Request a quote",
+    "requestQuoteDetail": "if you'd like to customize this container",
     "requestQuoteWhatsapp": "Ask via WhatsApp",
     "quoteWhatsappMessage": "Hello, I'm interested in the following product and would like a quote:\n\n{product}\nItem no.: {sku}\nPrice: {price}\n{url}",
     "vatOnly": "incl. VAT",

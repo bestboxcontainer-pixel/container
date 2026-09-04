@@ -137,10 +137,13 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
         <p className="text-center text-sm font-bold text-muted-foreground">{t("customRequestHint")}</p>
         <Link
           href={quoteHref}
-          className="flex items-center justify-center gap-2 rounded-sm border border-primary px-5 py-3 text-sm font-bold text-primary transition-colors hover:bg-muted"
+          className="flex items-center justify-center gap-2 rounded-sm border border-primary px-5 py-3 text-center text-sm font-bold text-primary transition-colors hover:bg-muted"
         >
-          <Mail className="h-4 w-4" aria-hidden />
-          {t("requestQuote")}
+          <Mail className="h-4 w-4 shrink-0" aria-hidden />
+          <span>
+            {t("requestQuote")}{" "}
+            <span className="font-normal">({t("requestQuoteDetail")})</span>
+          </span>
         </Link>
       </div>
 

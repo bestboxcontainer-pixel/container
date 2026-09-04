@@ -186,7 +186,7 @@ export default async function HomePage() {
             Anfragen im Tagesgeschäft ab und führen direkt zu den verfügbaren Containern.
           </p>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          <div className="mt-10 grid grid-cols-2 gap-5 lg:grid-cols-3 xl:grid-cols-5">
             {categories.map((card) => (
               <Link
                 key={card.slug}
@@ -251,7 +251,7 @@ export default async function HomePage() {
               </Link>
             </div>
 
-            <div className="mt-10 grid grid-cols-1 gap-4 min-[420px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+            <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
               {produits.map((produit) => (
                 <ProductCard key={produit.slug ?? produit.name} product={produit} />
               ))}

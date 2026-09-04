@@ -105,7 +105,7 @@ export default async function HomePage() {
               colonne de grille : la moitié droite n'a plus d'occupant depuis que
               le panneau de chiffres est parti, et une cellule vide aurait gardé
               la gouttière sans rien y mettre. */}
-          <div className="relative z-10 mx-auto flex min-h-[28rem] w-full max-w-screen-xl items-center px-4 py-16 sm:px-6 md:min-h-[34rem] md:py-24">
+          <div className="relative z-10 mx-auto flex min-h-[28rem] w-full max-w-screen-xl items-center px-5 py-16 sm:px-6 md:min-h-[34rem] md:py-24">
             <div className="max-w-xl">
               <h1 className="text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
                 Container kaufen und mieten: schnell, zuverlässig, deutschlandweit
@@ -137,7 +137,7 @@ export default async function HomePage() {
 
         {/* Zahlenleiste : direkt unter dem Hero, bevor der Ticker läuft */}
         <section className="border-y border-white/10 bg-secondary">
-          <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6">
+          <div className="mx-auto max-w-4xl px-5 py-6 sm:px-6">
             <StatsBar items={STATS} />
           </div>
         </section>
@@ -162,7 +162,7 @@ export default async function HomePage() {
         </section>
 
         {/* Unsere Container */}
-        <section className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
+        <section className="mx-auto max-w-screen-xl px-5 py-16 sm:px-6">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">
@@ -230,7 +230,7 @@ export default async function HomePage() {
             l'ancien projet, qui n'a rien à voir avec le métier. */}
         {produits.length > 0 && (
         <section className="border-t border-border">
-          <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
+          <div className="mx-auto max-w-screen-xl px-5 py-16 sm:px-6">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
                 <h2 className="text-2xl font-black text-foreground sm:text-3xl">
@@ -262,7 +262,7 @@ export default async function HomePage() {
 
         {/* FAQ */}
         <section className="bg-muted">
-          <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
+          <div className="mx-auto max-w-screen-xl px-5 py-16 sm:px-6">
             <div className="max-w-3xl">
               <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">FAQ</p>
               <h2 className="mt-3 text-2xl font-black text-foreground sm:text-3xl">
@@ -297,7 +297,7 @@ export default async function HomePage() {
 
         {/* Ablauf */}
         <section className="bg-accent">
-          <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6">
+          <div className="mx-auto max-w-screen-xl px-5 py-8 sm:px-6">
             <h2 className="text-2xl font-black text-foreground sm:text-3xl">Wie läuft die Lieferung ab?</h2>
             <div className="mt-10 grid gap-8 sm:grid-cols-3">
               {STEPS.map((item) => (
@@ -315,7 +315,7 @@ export default async function HomePage() {
 
         {/* CTA */}
         <section className="border-y border-white/10 bg-secondary text-secondary-foreground">
-          <div className="mx-auto flex max-w-screen-xl flex-col items-start gap-5 px-4 py-14 sm:px-6 md:flex-row md:items-center md:justify-between">
+          <div className="mx-auto flex max-w-screen-xl flex-col items-start gap-5 px-5 py-14 sm:px-6 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 className="text-2xl font-black text-white sm:text-3xl">
                 Bereit für Ihren Container?
@@ -335,7 +335,7 @@ export default async function HomePage() {
         </section>
 
         {/* Warum wir */}
-        <section className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6">
+        <section className="mx-auto max-w-screen-xl px-5 py-8 sm:px-6">
           <h2 className="text-2xl font-black text-foreground sm:text-3xl">Warum BBC Best Box</h2>
           <div className="mt-10 grid gap-6 sm:grid-cols-3">
             {BENEFITS.map((benefit) => (

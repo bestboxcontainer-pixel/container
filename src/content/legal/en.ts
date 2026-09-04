@@ -179,14 +179,14 @@ export const enLegalPages: LegalPageMap = {
         heading: "Section 4 Prices and shipping costs",
         body:
           "All prices stated are final prices in euros and include statutory VAT. They are exclusive of shipping costs unless stated otherwise on the product page.\n\n" +
-          "Standard delivery within Germany is free of charge, with no minimum order value. If you would like faster delivery, express shipping costs a flat 70.00 euros. Separate charges apply to optional additional services such as connection, installation or delivery to the installation location; you arrange these with our customer service team before or after placing your order. Shipping costs are shown in the shopping basket before you complete your order. Full details can be found on our \"Shipping & delivery\" page.\n\n" +
+          "Standard delivery within Germany is free of charge, with no minimum order value. If you would like faster delivery, express shipping costs a flat 199.00 euros. Separate charges apply to optional additional services such as connection, installation or delivery to the installation location; you arrange these with our customer service team before or after placing your order. Shipping costs are shown in the shopping basket before you complete your order. Full details can be found on our \"Shipping & delivery\" page.\n\n" +
           "For goods sold by weight, volume, length or area we also state the unit price in accordance with the German Price Indication Ordinance (Preisangabenverordnung). Where prices are reduced, we state the lowest total price we applied during the 30 days preceding the reduction.",
       },
       {
         heading: "Section 5 Delivery and delivery times",
         body:
           "We deliver within Germany. Delivery to parcel lockers is possible for parcel shipments only; containers are delivered exclusively by freight forwarder to a street address.\n\n" +
-          "Items in stock are usually dispatched within one to three working days of the conclusion of the contract, or from the date of receipt of payment in the case of advance payment. For items marked \"On request\" we state the expected delivery time on the product page; it is typically two to four weeks.\n\n" +
+          "Items in stock are usually delivered by standard shipping within 7 to 10 working days of the conclusion of the contract, or from the date of receipt of payment in the case of advance payment; express shipping delivers within a maximum of 5 working days for the surcharge shown in your order. For items marked \"On request\" (made to order) we state the expected delivery time on the product page; it is typically around three weeks.\n\n" +
           "If an item is unavailable because our supplier failed to deliver to us despite a corresponding contractual obligation (congruent hedging transaction), we may withdraw from the contract. We will inform you without delay and immediately refund any payments already made. Your statutory rights remain unaffected.\n\n" +
           "Partial deliveries are permitted where reasonable for you. You will not incur any additional shipping costs as a result.",
       },
@@ -489,16 +489,16 @@ export const enLegalPages: LegalPageMap = {
         body: "All prices include statutory VAT. The shipping costs applicable to your order are shown in the shopping basket before you complete your purchase.",
         list: [
           "Standard delivery within Germany: free of charge, with no minimum order value",
-          "Express delivery within Germany: 70.00 euros",
+          "Express delivery within Germany: 199.00 euros",
           "Additional services such as delivery to the installation location, connection or installation: by arrangement, see below",
         ],
       },
       {
         heading: "Delivery times",
         body:
-          "Items in stock reach you within three to five working days with standard delivery, or within 24 to 48 hours with express delivery. Working days are Monday to Saturday, excluding public holidays at the location of our warehouse.\n\n" +
+          "Items in stock reach you within 7 to 10 working days with standard delivery, or within a maximum of 5 working days with express delivery. Working days are Monday to Saturday, excluding public holidays at the location of our warehouse.\n\n" +
           "For advance payment, the delivery period begins on the day after the payment order is issued; for all other payment methods, on the day after the contract is concluded.\n\n" +
-          "Items marked \"On request\" are ordered from the manufacturer for you. Delivery in these cases usually takes two to four weeks; the specific lead time is stated on the product page.",
+          "Items marked \"On request\" are made-to-order containers, built specifically for you. Delivery in these cases usually takes around three weeks; the specific lead time is stated on the product page.",
       },
       {
         heading: "Delivery area",
@@ -556,7 +556,7 @@ export const enLegalPages: LegalPageMap = {
         heading: "Advance payment by bank transfer",
         body:
           "With the order confirmation you receive our bank details and the order number, which serves as the payment reference. The same details appear on the invoice attached to the confirmation as a PDF.\n\n" +
-          "We reserve the goods for seven calendar days. Once payment has arrived we dispatch the order within one to three working days. If payment does not reach us within the reservation period, we cancel the order and let you know.",
+          "We reserve the goods for seven calendar days. Once payment has arrived we agree a delivery date with you straight away. If payment does not reach us within the reservation period, we cancel the order and let you know.",
       },
       {
         heading: "Sofortüberweisung",
@@ -672,11 +672,11 @@ export const enLegalPages: LegalPageMap = {
     sections: [
       {
         heading: "How long does delivery take?",
-        body: "Items in stock reach you within three to five working days with standard delivery, or within 24 to 48 hours with express delivery. For containers, the carrier contacts you in advance by phone to agree a delivery window. Items marked \"On request\" are ordered from the manufacturer and normally take two to four weeks.",
+        body: "Items in stock reach you within 7 to 10 working days with standard delivery, or within a maximum of 5 working days with express delivery. The carrier contacts you in advance by phone to agree a delivery window. Items marked \"On request\" are made to order and normally take around three weeks.",
       },
       {
         heading: "How much does shipping cost?",
-        body: "Standard delivery within Germany is free, with no minimum order value, whatever the size or weight of the goods. If you want delivery within 24 to 48 hours, express shipping costs a flat 70.00 euros. There are no other surcharges. The costs for your order are always shown in the shopping basket before you buy.",
+        body: "Standard delivery within Germany is free, with no minimum order value, whatever the size or weight of the goods. If you want delivery within a maximum of 5 working days, express shipping costs a flat 199.00 euros. There are no other surcharges. The costs for your order are always shown in the shopping basket before you buy.",
       },
       {
         heading: "Do you ship outside Germany?",
@@ -700,7 +700,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "How does advance payment work?",
-        body: "With the order confirmation you receive our bank details and the order number to quote as the payment reference; both also appear on the invoice attached to the confirmation as a PDF. We reserve the goods for seven calendar days and dispatch them within one to three working days of payment arriving. If payment does not reach us in time, we cancel the order and contact you.",
+        body: "With the order confirmation you receive our bank details and the order number to quote as the payment reference; both also appear on the invoice attached to the confirmation as a PDF. We reserve the goods for seven calendar days and agree a delivery date with you as soon as payment arrives. If payment does not reach us in time, we cancel the order and contact you.",
       },
       {
         heading: "How long is the warranty?",
@@ -728,7 +728,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "An item is marked \"On request\", what does that mean?",
-        body: "The item is not currently in stock but is available. We order it from the manufacturer once you place your order; delivery usually takes two to four weeks. You can order such items as normal and we will get back to you as soon as a firm date is confirmed.",
+        body: "The item is a made-to-order container: we only have it built once you place your order. Delivery usually takes around three weeks. You can order such items as normal and we will get back to you as soon as a firm date is confirmed.",
       },
       {
         heading: "How do I know whether the access route suits delivery?",

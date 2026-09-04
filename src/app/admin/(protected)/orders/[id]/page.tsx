@@ -137,11 +137,11 @@ export default async function AdminOrderDetailPage({
                 <dt className="text-muted-foreground">
                   Frais de livraison
                   {/* Le mode retenu, pour ne pas avoir à deviner d'où viennent
-                      70 € de port sur une commande. */}
+                      199 € de port sur une commande. */}
                   <span className="mt-0.5 block text-xs">
                     {order.shippingMethodKey === "express"
-                      ? "Express : 24 à 48 h"
-                      : "Standard : 3 à 5 jours"}
+                      ? "Express : 5 jours maximum"
+                      : "Standard : 7 à 10 jours"}
                   </span>
                 </dt>
                 <dd className="font-semibold text-foreground">

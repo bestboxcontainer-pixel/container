@@ -34,8 +34,8 @@
     "search": "Search"
   },
   "trust": {
-    "shippingTitle": "Standard delivery: free (3-5 days)",
-    "shippingDetail": "Express delivery: €70 (24-48 hours)",
+    "shippingTitle": "Standard delivery: free (7-10 days)",
+    "shippingDetail": "Express delivery: €199 (max. 5 days)",
     "returnTitle": "14-day return policy",
     "returnDetail": "No reason required",
     "serviceTitle": "On-site installation service",
@@ -111,12 +111,12 @@
     "energyScale": "on a scale from {best} (most efficient) to {worst} (least efficient)",
     "energyDatasheet": "Product information sheet",
     "vatNote": "incl. VAT, plus service and shipping costs",
-    "inStock": "In stock, free standard delivery (3-5 days)",
-    "outOfStock": "On request, available in 2-4 weeks",
+    "inStock": "In stock, free standard delivery (7-10 days)",
+    "outOfStock": "Made to order, delivery in about 3 weeks",
     "decreaseQuantity": "Decrease quantity by 1",
     "increaseQuantity": "Increase quantity by 1",
     "addToCart": "Add to cart",
-    "fastDelivery": "Free standard delivery (3-5 days) · Express €70 (24-48 h)",
+    "fastDelivery": "Free standard delivery (7-10 days) · Express €199 (max. 5 days)",
     "warranty": "14-day return policy, no reason required",
     "customRequestHint": "Different version, quantity or a special request?",
     "requestQuote": "Request a quote",
@@ -216,8 +216,8 @@
   "footer": {
     "logoAlt": "BBC Best Box Containerhandel e.K.",
     "homeAriaLabel": "BBC Best Box Containerhandel e.K., home page",
-    "deliveryTitle": "Standard delivery: free (3-5 days)",
-    "deliveryDetail": "Express delivery: €70 (24-48 hours)",
+    "deliveryTitle": "Standard delivery: free (7-10 days)",
+    "deliveryDetail": "Express delivery: €199 (max. 5 days)",
     "warrantyTitle": "14-day return policy",
     "warrantyDetail": "No reason required",
     "paymentTitle": "Secure payment",
@@ -271,7 +271,7 @@
     "vatIncluded": "incl. {rate} % VAT ({amount})",
     "vatNote": "All prices include statutory VAT.",
     "shippingStandardHint": "Standard delivery is free, with no minimum order value.",
-    "shippingRule": "Standard delivery free (3-5 working days), express delivery 70.00 € (24-48 hours). You choose the shipping method at checkout.",
+    "shippingRule": "Standard delivery free (7-10 working days), express delivery 199.00 € (max. 5 working days). You choose the shipping method at checkout.",
     "deliveryTime": "Dispatch takes place after receipt of payment.",
     "withdrawalHint": "As a consumer you have a 14-day right of withdrawal (§ 355 BGB). See the withdrawal policy for details.",
     "toCheckout": "Proceed to checkout",
@@ -346,11 +346,11 @@
     "shippingMethods": {
       "standard": {
         "label": "Standard delivery",
-        "delay": "Delivered in 3-5 working days"
+        "delay": "Delivered in 7-10 working days"
       },
       "express": {
         "label": "Express delivery",
-        "delay": "Delivered within 24-48 hours"
+        "delay": "Delivered within 5 working days"
       }
     },
     "deliveryTitle": "Delivery",

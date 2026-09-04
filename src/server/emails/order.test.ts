@@ -199,21 +199,21 @@ describe("Confirmation à l'acheteur", () => {
 
   it("nomme le mode de livraison retenu, dans la langue du message", () => {
     const de = buildOrderConfirmationEmail(order());
-    assert.match(de.html, /Standardversand \(3-5 Werktage\)/);
-    assert.match(de.text, /Standardversand \(3-5 Werktage\)/);
+    assert.match(de.html, /Standardversand \(7-10 Werktage\)/);
+    assert.match(de.text, /Standardversand \(7-10 Werktage\)/);
 
     const express = order({
       shippingMethodKey: "express",
       shippingMethodLabel: "Expressversand",
-      shippingCents: 7_000,
-      totalCents: 96_900,
+      shippingCents: 19_900,
+      totalCents: 109_800,
       locale: "en",
     });
     const en = buildOrderConfirmationEmail(express);
-    assert.match(en.html, /Express delivery \(24-48 hours\)/);
+    assert.match(en.html, /Express delivery \(max\. 5 working days\)/);
     // Le supplément doit apparaître comme un montant, jamais comme « free ».
-    assert.match(en.html, /70,00 €/);
-    assert.doesNotMatch(en.text, /Shipping : Express delivery \(24-48 hours\): free/);
+    assert.match(en.html, /199,00 €/);
+    assert.doesNotMatch(en.text, /Shipping : Express delivery \(max\. 5 working days\): free/);
   });
 
   it("joint les coordonnées du virement à une commande en Vorkasse", () => {
@@ -311,13 +311,13 @@ describe("Notification au vendeur", () => {
 
   it("signale l'express en priorité de préparation", () => {
     const standard = buildOrderNotificationEmail(order());
-    assert.match(standard.html, /Livraison standard \(3 à 5 jours ouvrés\)/);
+    assert.match(standard.html, /Livraison standard \(7 à 10 jours ouvrés\)/);
     assert.doesNotMatch(standard.html, /priorité/);
 
     const express = buildOrderNotificationEmail(
-      order({ shippingMethodKey: "express", shippingCents: 7_000 }),
+      order({ shippingMethodKey: "express", shippingCents: 19_900 }),
     );
-    assert.match(express.html, /Livraison express \(24 à 48 heures\)/);
+    assert.match(express.html, /Livraison express \(5 jours ouvrés maximum\)/);
     assert.match(express.html, /à préparer en priorité/);
     assert.match(express.text, /Livraison : Livraison express/);
   });

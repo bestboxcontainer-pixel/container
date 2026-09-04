@@ -200,14 +200,14 @@ export const deLegalPages: LegalPageMap = {
         heading: "§ 4 Preise und Versandkosten",
         body:
           "Alle angegebenen Preise sind Endpreise in Euro und enthalten die gesetzliche Umsatzsteuer. Sie verstehen sich zuzüglich Versandkosten, sofern auf der Produktseite nichts anderes angegeben ist.\n\n" +
-          "Der Standardversand innerhalb Deutschlands ist kostenlos, ohne Mindestbestellwert. Wünschen Sie eine schnellere Zustellung, kostet der Expressversand pauschal 70,00 Euro. Für optionale Zusatzleistungen wie Anschluss, Montage oder die Lieferung bis zum Aufstellort gelten gesonderte Entgelte; diese Leistungen vereinbaren Sie vor oder nach der Bestellung mit unserem Kundenservice. Die Versandkosten werden vor Abschluss der Bestellung im Warenkorb ausgewiesen. Einzelheiten finden Sie auf der Seite „Versand & Lieferung“.\n\n" +
+          "Der Standardversand innerhalb Deutschlands ist kostenlos, ohne Mindestbestellwert. Wünschen Sie eine schnellere Zustellung, kostet der Expressversand pauschal 199,00 Euro. Für optionale Zusatzleistungen wie Anschluss, Montage oder die Lieferung bis zum Aufstellort gelten gesonderte Entgelte; diese Leistungen vereinbaren Sie vor oder nach der Bestellung mit unserem Kundenservice. Die Versandkosten werden vor Abschluss der Bestellung im Warenkorb ausgewiesen. Einzelheiten finden Sie auf der Seite „Versand & Lieferung“.\n\n" +
           "Bei Waren, die nach Gewicht, Volumen, Länge oder Fläche angeboten werden, weisen wir zusätzlich den Grundpreis gemäß Preisangabenverordnung aus. Bei Preisermäßigungen nennen wir den niedrigsten Gesamtpreis, den wir in den letzten 30 Tagen vor der Ermäßigung angewendet haben.",
       },
       {
         heading: "§ 5 Lieferung und Lieferzeit",
         body:
           "Wir liefern innerhalb Deutschlands. Lieferungen an Packstationen sind nur bei Paketversand möglich; Container liefern wir ausschließlich per Spedition an eine Adresse.\n\n" +
-          "Vorrätige Artikel versenden wir in der Regel innerhalb von einem bis drei Werktagen nach Vertragsschluss, bei Vorkasse ab dem Tag des Zahlungseingangs. Bei Artikeln mit dem Hinweis „Auf Anfrage“ nennen wir die voraussichtliche Lieferzeit auf der Produktseite; sie beträgt typischerweise zwei bis vier Wochen.\n\n" +
+          "Vorrätige Container liefern wir im Standardversand in der Regel innerhalb von 7 bis 10 Werktagen nach Vertragsschluss, bei Vorkasse ab dem Tag des Zahlungseingangs; im Expressversand innerhalb von maximal 5 Werktagen gegen den in der Bestellung ausgewiesenen Aufpreis. Bei Artikeln mit dem Hinweis „Auf Anfrage“ (Sonderanfertigung) nennen wir die voraussichtliche Lieferzeit auf der Produktseite; sie beträgt typischerweise rund drei Wochen.\n\n" +
           "Ist ein Artikel nicht verfügbar, weil uns unser Zulieferer trotz vertraglicher Verpflichtung nicht beliefert hat (kongruentes Deckungsgeschäft), können wir vom Vertrag zurücktreten. Wir informieren Sie unverzüglich und erstatten bereits geleistete Zahlungen sofort. Ihre gesetzlichen Rechte bleiben unberührt.\n\n" +
           "Teillieferungen sind zulässig, soweit sie für Sie zumutbar sind. Zusätzliche Versandkosten entstehen Ihnen dadurch nicht.",
       },
@@ -511,16 +511,16 @@ export const deLegalPages: LegalPageMap = {
         body: "Alle Preise verstehen sich inklusive der gesetzlichen Umsatzsteuer. Die für Ihre Bestellung geltenden Versandkosten werden Ihnen im Warenkorb ausgewiesen, bevor Sie die Bestellung abschließen.",
         list: [
           "Standardversand innerhalb Deutschlands: kostenlos, ohne Mindestbestellwert",
-          "Expressversand innerhalb Deutschlands: 70,00 Euro",
+          "Expressversand innerhalb Deutschlands: 199,00 Euro",
           "Zusatzleistungen wie Lieferung bis zum Aufstellort, Anschluss oder Montage: nach Vereinbarung, siehe unten",
         ],
       },
       {
         heading: "Lieferzeiten",
         body:
-          "Vorrätige Artikel erreichen Sie im Standardversand innerhalb von drei bis fünf Werktagen, im Expressversand innerhalb von 24 bis 48 Stunden. Werktage sind Montag bis Samstag, ausgenommen gesetzliche Feiertage am Sitz unseres Lagers.\n\n" +
+          "Vorrätige Container erreichen Sie im Standardversand innerhalb von 7 bis 10 Werktagen, im Expressversand innerhalb von maximal 5 Werktagen. Werktage sind Montag bis Samstag, ausgenommen gesetzliche Feiertage am Sitz unseres Lagers.\n\n" +
           "Bei Vorkasse beginnt die Lieferzeit am Tag nach Erteilung des Zahlungsauftrags, bei allen anderen Zahlungsarten am Tag nach Vertragsschluss.\n\n" +
-          "Artikel mit dem Hinweis „Auf Anfrage“ bestellen wir für Sie beim Hersteller. Die Lieferzeit beträgt in diesen Fällen üblicherweise zwei bis vier Wochen; die konkrete Angabe finden Sie auf der Produktseite.",
+          "Artikel mit dem Hinweis „Auf Anfrage“ sind Sonderanfertigungen, die wir eigens für Sie fertigen lassen. Die Lieferzeit beträgt in diesen Fällen üblicherweise rund drei Wochen; die konkrete Angabe finden Sie auf der Produktseite.",
       },
       {
         heading: "Liefergebiet",
@@ -578,7 +578,7 @@ export const deLegalPages: LegalPageMap = {
         heading: "Vorkasse per Überweisung",
         body:
           "Mit der Bestellbestätigung erhalten Sie unsere Bankverbindung und die Bestellnummer, die Sie bitte als Verwendungszweck angeben. Dieselben Angaben stehen auf der Rechnung, die der Bestätigung als PDF beiliegt.\n\n" +
-          "Wir reservieren die Ware sieben Kalendertage. Nach Eingang der Zahlung versenden wir die Bestellung innerhalb von einem bis drei Werktagen. Geht die Zahlung nicht innerhalb der Reservierungsfrist ein, stornieren wir die Bestellung und Sie erhalten eine Nachricht von uns.",
+          "Wir reservieren die Ware sieben Kalendertage. Nach Eingang der Zahlung stimmen wir umgehend den Liefertermin mit Ihnen ab. Geht die Zahlung nicht innerhalb der Reservierungsfrist ein, stornieren wir die Bestellung und Sie erhalten eine Nachricht von uns.",
       },
       {
         heading: "Sofortüberweisung",
@@ -694,11 +694,11 @@ export const deLegalPages: LegalPageMap = {
     sections: [
       {
         heading: "Wie lange dauert die Lieferung?",
-        body: "Vorrätige Artikel sind im Standardversand innerhalb von drei bis fünf Werktagen bei Ihnen, im Expressversand innerhalb von 24 bis 48 Stunden. Bei Containern meldet sich die Spedition vorab telefonisch und vereinbart ein Zeitfenster mit Ihnen. Artikel mit dem Hinweis „Auf Anfrage“ bestellen wir beim Hersteller; hier dauert es meist zwei bis vier Wochen.",
+        body: "Vorrätige Container sind im Standardversand innerhalb von 7 bis 10 Werktagen bei Ihnen, im Expressversand innerhalb von maximal 5 Werktagen. Die Spedition meldet sich vorab telefonisch und vereinbart ein Zeitfenster mit Ihnen. Artikel mit dem Hinweis „Auf Anfrage“ sind Sonderanfertigungen; hier dauert es üblicherweise rund drei Wochen.",
       },
       {
         heading: "Was kostet der Versand?",
-        body: "Der Standardversand innerhalb Deutschlands ist kostenlos, ohne Mindestbestellwert, unabhängig von Größe und Gewicht der Ware. Wünschen Sie die Lieferung innerhalb von 24 bis 48 Stunden, kostet der Expressversand pauschal 70,00 Euro. Andere Zuschläge gibt es nicht. Die für Ihre Bestellung geltenden Kosten sehen Sie immer im Warenkorb, bevor Sie bestellen.",
+        body: "Der Standardversand innerhalb Deutschlands ist kostenlos, ohne Mindestbestellwert, unabhängig von Größe und Gewicht der Ware. Wünschen Sie die Lieferung innerhalb von maximal 5 Werktagen, kostet der Expressversand pauschal 199,00 Euro. Andere Zuschläge gibt es nicht. Die für Ihre Bestellung geltenden Kosten sehen Sie immer im Warenkorb, bevor Sie bestellen.",
       },
       {
         heading: "Liefern Sie auch ins Ausland?",
@@ -722,7 +722,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Wie läuft die Zahlung per Vorkasse ab?",
-        body: "Mit der Bestellbestätigung erhalten Sie unsere Bankverbindung und die Bestellnummer, die als Verwendungszweck dient; beides steht auch auf der Rechnung, die der Bestätigung als PDF beiliegt. Wir reservieren die Ware sieben Kalendertage und versenden sie innerhalb von einem bis drei Werktagen nach Zahlungseingang. Kommt die Zahlung nicht rechtzeitig an, stornieren wir die Bestellung und melden uns bei Ihnen.",
+        body: "Mit der Bestellbestätigung erhalten Sie unsere Bankverbindung und die Bestellnummer, die als Verwendungszweck dient; beides steht auch auf der Rechnung, die der Bestätigung als PDF beiliegt. Wir reservieren die Ware sieben Kalendertage und stimmen nach Zahlungseingang umgehend den Liefertermin mit Ihnen ab. Kommt die Zahlung nicht rechtzeitig an, stornieren wir die Bestellung und melden uns bei Ihnen.",
       },
       {
         heading: "Wie lange habe ich Garantie?",
@@ -750,7 +750,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Ein Artikel ist „Auf Anfrage“, was bedeutet das?",
-        body: "Der Artikel ist aktuell nicht auf Lager, aber lieferbar. Wir bestellen ihn nach Ihrem Auftrag beim Hersteller; die Lieferzeit beträgt üblicherweise zwei bis vier Wochen. Sie können solche Artikel ganz normal bestellen und erhalten von uns eine Rückmeldung, sobald ein konkreter Termin feststeht.",
+        body: "Der Artikel ist eine Sonderanfertigung: Wir lassen ihn erst nach Ihrer Bestellung fertigen. Die Lieferzeit beträgt üblicherweise rund drei Wochen. Sie können solche Artikel ganz normal bestellen und erhalten von uns eine Rückmeldung, sobald ein konkreter Termin feststeht.",
       },
       {
         heading: "Woher weiß ich, ob die Zufahrt für die Lieferung geeignet ist?",

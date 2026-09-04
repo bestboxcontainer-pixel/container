@@ -149,7 +149,7 @@ function lignesAdresse(adresse: OrderAddress): string[] {
 
 /** Délai annoncé au client, repris du mode de livraison qu'il a choisi. */
 function delaiLivraison(order: OrderRecord): string {
-  return order.shippingMethodKey === "express" ? "(24-48 Stunden)" : "(3 bis 5 Werktage)";
+  return order.shippingMethodKey === "express" ? "(max. 5 Werktage)" : "(7 bis 10 Werktage)";
 }
 
 /**

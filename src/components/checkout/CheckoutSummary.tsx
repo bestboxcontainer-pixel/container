@@ -85,7 +85,7 @@ export function CheckoutSummary({
           </div>
         )}
 
-        {/* Le mode retenu est nommé sous le montant : « 70,00 € » sans mention
+        {/* Le mode retenu est nommé sous le montant : « 199,00 € » sans mention
             de l'express laisserait le client deviner d'où vient la somme. */}
         <div className="flex justify-between">
           <dt className="text-muted-foreground">

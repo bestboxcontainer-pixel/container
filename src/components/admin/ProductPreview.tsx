@@ -218,8 +218,8 @@ export function ProductPreview({
             }`}
           >
             {inStock
-              ? "✓ Vorrätig, Lieferung in 1-3 Werktagen"
-              : "Auf Anfrage, kommt in 2-4 Wochen"}
+              ? "✓ Vorrätig, Lieferung in 7-10 Werktagen"
+              : "Sonderanfertigung, Lieferzeit ca. 3 Wochen"}
           </p>
 
           <span

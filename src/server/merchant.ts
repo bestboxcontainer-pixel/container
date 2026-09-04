@@ -61,12 +61,12 @@ export function absoluteUrl(pathOrUrl: string): string {
 
 /**
  * Conditions de livraison annoncées sur la boutique (TrustBar :
- * « Standardversand: kostenlos (3-5 Tage) »). Ces valeurs DOIVENT rester
+ * « Standardversand: kostenlos (7-10 Tage) »). Ces valeurs DOIVENT rester
  * alignées sur ce qui est écrit sur le site : Google compare le flux et la page.
  *
- * Le mode express (70 €, 24-48 h) n'est volontairement pas déclaré ici : le flux
- * ne porte qu'une offre de livraison par produit, et c'est le mode par défaut
- * donc le standard : qui doit y figurer. L'express reste proposé au panier.
+ * Le mode express (199 €, max. 5 Werktage) n'est volontairement pas déclaré ici :
+ * le flux ne porte qu'une offre de livraison par produit, et c'est le mode par
+ * défaut donc le standard : qui doit y figurer. L'express reste proposé au panier.
  */
 export const MERCHANT_SHIPPING = {
   country: MERCHANT_COUNTRY,
@@ -76,11 +76,14 @@ export const MERCHANT_SHIPPING = {
    * annonce le standard gratuit sans montant minimum d'achat.
    */
   freeFromCents: 0,
-  /** Préparation en un jour ouvré, acheminement en deux à quatre : 3 à 5 jours. */
+  /**
+   * Préparation en un à deux jours ouvrés, transport spécial (plateau, grue si
+   * besoin) en six à huit : 7 à 10 jours au total, comme un conteneur l'exige.
+   */
   minHandlingDays: 1,
-  maxHandlingDays: 1,
-  minTransitDays: 2,
-  maxTransitDays: 4,
+  maxHandlingDays: 2,
+  minTransitDays: 6,
+  maxTransitDays: 8,
 } as const;
 
 /**
@@ -400,7 +403,7 @@ export interface MerchantShippingEntry {
  *
  * Une balise `g:shipping` sur un produit prend le pas sur les règles définies au
  * niveau du compte Merchant Center pour ce même produit. La boutique propose
- * deux modes (Standardversand gratuit, Express à 70 €), tous deux configurés
+ * deux modes (Standardversand gratuit, Express à 199 €), tous deux configurés
  * comme conditions de livraison du compte : un seul peut être porté par le
  * flux (une seule balise par article), ce qui masquerait l'autre. Ne rien
  * déclarer ici laisse Google appliquer les deux règles du compte pour chaque
@@ -716,7 +719,7 @@ export function auditMerchantProduct(
 
   // -- Versand --
   // Volontairement absent du flux pour chaque produit : voir merchantShipping().
-  // Les règles de livraison (Standard gratuit, Express 70 €) vivent au niveau du
+  // Les règles de livraison (Standard gratuit, Express 199 €) vivent au niveau du
   // compte Merchant Center, pas ici : rien à signaler produit par produit.
 
   if (!record.shippingWeight) {

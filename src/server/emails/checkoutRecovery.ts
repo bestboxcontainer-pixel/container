@@ -125,7 +125,7 @@ function contentFor(rank: 1 | 2 | 3): MailContent {
       heading: "Ihr Warenkorb ist noch da",
       paragraphs: [
         "Ihre Auswahl liegt weiterhin in Ihrem Warenkorb. Sie können die Bestellung mit einem Klick abschließen, ohne Ihre Daten erneut eingeben zu müssen.",
-        "Gut zu wissen: Der Standardversand ist bei uns immer kostenlos, ohne Mindestbestellwert. Wer es eilig hat, wählt den Expressversand für 70,00 €. Und Sie haben in jedem Fall 14 Tage Widerrufsrecht, passt der Container nicht, nehmen wir ihn zurück.",
+        "Gut zu wissen: Der Standardversand ist bei uns immer kostenlos, ohne Mindestbestellwert, und dauert bei vorrätigen Containern 7 bis 10 Werktage. Wer es eilig hat, wählt den Expressversand für 199,00 € (max. 5 Werktage). Und Sie haben in jedem Fall 14 Tage Widerrufsrecht, passt der Container nicht, nehmen wir ihn zurück.",
       ],
       actionLabel: "Jetzt abschließen",
       contactLead: "Unsicher bei der Auswahl? Wir beraten Sie gern.",

@@ -222,7 +222,7 @@ function itemsTable(
     total: string;
     subtotal: string;
     shipping: string;
-    /** Mode retenu, déjà traduit : « Expressversand (24-48 Stunden) ». */
+    /** Mode retenu, déjà traduit : « Expressversand (max. 5 Werktage) ». */
     shippingMethod: string;
     freeShipping: string;
     /** Étiquette de la remise ; le code y est déjà accolé s'il y en a un. */
@@ -246,7 +246,7 @@ function itemsTable(
 
   const shippingValue =
     order.shippingCents === 0 ? labels.freeShipping : formatCents(order.shippingCents);
-  // Le mode de livraison est nommé sur la ligne des frais : « 70,00 € » seul
+  // Le mode de livraison est nommé sur la ligne des frais : « 199,00 € » seul
   // laisserait le client chercher d'où vient la somme.
   const shippingLabel = `${labels.shipping} : ${labels.shippingMethod}`;
 
@@ -307,21 +307,21 @@ function discountLabel(order: OrderRecord, de: boolean): string {
  * Mode de livraison rendu dans la langue du message.
  *
  * Les délais sont écrits en clair plutôt que dérivés de `minDays`/`maxDays` :
- * l'express se dit « 24-48 heures », pas « 1-2 jours », et c'est bien cette
+ * l'express se dit « max. 5 Werktage », pas « 3-5 jours », et c'est bien cette
  * promesse-là qui a été faite au client dans le tunnel.
  */
 const SHIPPING_METHOD_TEXTS = {
   de: {
-    standard: "Standardversand (3-5 Werktage)",
-    express: "Expressversand (24-48 Stunden)",
+    standard: "Standardversand (7-10 Werktage)",
+    express: "Expressversand (max. 5 Werktage)",
   },
   en: {
-    standard: "Standard delivery (3-5 working days)",
-    express: "Express delivery (24-48 hours)",
+    standard: "Standard delivery (7-10 working days)",
+    express: "Express delivery (max. 5 working days)",
   },
   fr: {
-    standard: "Livraison standard (3 à 5 jours ouvrés)",
-    express: "Livraison express (24 à 48 heures)",
+    standard: "Livraison standard (7 à 10 jours ouvrés)",
+    express: "Livraison express (5 jours ouvrés maximum)",
   },
 } as const satisfies Record<string, Record<ShippingMethodKey, string>>;
 

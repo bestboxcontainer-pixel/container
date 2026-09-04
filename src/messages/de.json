@@ -34,8 +34,8 @@
     "search": "Suchen"
   },
   "trust": {
-    "shippingTitle": "Standardversand: kostenlos (3-5 Tage)",
-    "shippingDetail": "Expressversand: 70 € (24-48 Stunden)",
+    "shippingTitle": "Standardversand: kostenlos (7-10 Tage)",
+    "shippingDetail": "Expressversand: 199 € (max. 5 Tage)",
     "returnTitle": "14 Tage Rückgaberecht",
     "returnDetail": "Ohne Angabe von Gründen",
     "serviceTitle": "Aufbauservice vor Ort",
@@ -111,12 +111,12 @@
     "energyScale": "auf einer Skala von {best} (höchste Effizienz) bis {worst} (geringste Effizienz)",
     "energyDatasheet": "Produktdatenblatt",
     "vatNote": "inkl. MwSt., zzgl. Service & Versandkosten",
-    "inStock": "Vorrätig, Standardversand kostenlos (3-5 Tage)",
-    "outOfStock": "Auf Anfrage, kommt in 2-4 Wochen",
+    "inStock": "Vorrätig, Standardversand kostenlos (7-10 Tage)",
+    "outOfStock": "Sonderanfertigung, Lieferzeit ca. 3 Wochen",
     "decreaseQuantity": "Anzahl um 1 verringern",
     "increaseQuantity": "Anzahl um 1 erhöhen",
     "addToCart": "In den Warenkorb",
-    "fastDelivery": "Standardversand kostenlos (3-5 Tage) · Express 70 € (24-48 Std.)",
+    "fastDelivery": "Standardversand kostenlos (7-10 Tage) · Express 199 € (max. 5 Tage)",
     "warranty": "14 Tage Rückgaberecht ohne Angabe von Gründen",
     "customRequestHint": "Andere Ausführung, Menge oder Sonderwunsch?",
     "requestQuote": "Angebot anfragen",
@@ -216,8 +216,8 @@
   "footer": {
     "logoAlt": "BBC Best Box Containerhandel e.K.",
     "homeAriaLabel": "BBC Best Box Containerhandel e.K., Startseite",
-    "deliveryTitle": "Standardversand: kostenlos (3-5 Tage)",
-    "deliveryDetail": "Expressversand: 70 € (24-48 Stunden)",
+    "deliveryTitle": "Standardversand: kostenlos (7-10 Tage)",
+    "deliveryDetail": "Expressversand: 199 € (max. 5 Tage)",
     "warrantyTitle": "14 Tage Rückgaberecht",
     "warrantyDetail": "Ohne Angabe von Gründen",
     "paymentTitle": "Sichere Zahlung",
@@ -271,7 +271,7 @@
     "vatIncluded": "inkl. {rate} % MwSt. ({amount})",
     "vatNote": "Alle Preise inkl. gesetzlicher MwSt.",
     "shippingStandardHint": "Der Standardversand ist kostenlos, ohne Mindestbestellwert.",
-    "shippingRule": "Standardversand kostenlos (3-5 Werktage), Expressversand 70,00 € (24-48 Stunden). Die Versandart wählen Sie an der Kasse.",
+    "shippingRule": "Standardversand kostenlos (7-10 Werktage), Expressversand 199,00 € (max. 5 Werktage). Die Versandart wählen Sie an der Kasse.",
     "deliveryTime": "Der Versand erfolgt nach Zahlungseingang.",
     "withdrawalHint": "Als Verbraucher haben Sie ein 14-tägiges Widerrufsrecht (§ 355 BGB). Einzelheiten in der Widerrufsbelehrung.",
     "toCheckout": "Zur Kasse",
@@ -346,11 +346,11 @@
     "shippingMethods": {
       "standard": {
         "label": "Standardversand",
-        "delay": "Lieferung in 3-5 Werktagen"
+        "delay": "Lieferung in 7-10 Werktagen"
       },
       "express": {
         "label": "Expressversand",
-        "delay": "Lieferung in 24-48 Stunden"
+        "delay": "Lieferung in maximal 5 Werktagen"
       }
     },
     "deliveryTitle": "Lieferung",

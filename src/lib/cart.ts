@@ -30,17 +30,17 @@ export const SHIPPING_METHODS = [
     key: "standard",
     /** Gratuit, sans minimum d'achat. */
     cents: 0,
-    minDays: 3,
-    maxDays: 5,
+    minDays: 7,
+    maxDays: 10,
     /** Libellé archivé sur la commande, en allemand comme le moyen de paiement. */
     label: "Standardversand",
   },
   {
     key: "express",
-    /** 70,00 €, supplément de service, soumis à la TVA comme la marchandise. */
-    cents: 7_000,
-    minDays: 1,
-    maxDays: 2,
+    /** 199,00 €, supplément de service, soumis à la TVA comme la marchandise. */
+    cents: 19_900,
+    minDays: 3,
+    maxDays: 5,
     label: "Expressversand",
   },
 ] as const;
@@ -157,7 +157,7 @@ export interface TotalsOptions {
    *
    * N'a plus d'effet sur le montant depuis que le standard est gratuit sans
    * minimum d'achat, et ne couvre volontairement pas le supplément express :
-   * l'express est un service facturé 70 €, qu'une campagne promotionnelle
+   * l'express est un service facturé 199 €, qu'une campagne promotionnelle
    * n'offre pas. Le paramètre reste accepté pour que les campagnes en cours
    * continuent de fonctionner et de s'afficher.
    */

@@ -1,18 +1,38 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Check, ShieldCheck, Truck } from "lucide-react";
+import { Check, Mail, ShieldCheck, Truck } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { COMPANY } from "@/content/legal";
 import { classeCoherente, echelleEnergie } from "@/lib/energieskala";
 import { AddToCartButton } from "@/components/cart/AddToCartButton";
 import { CampaignCountdown } from "@/components/CampaignCountdown";
-import { WishlistButton } from "@/components/wishlist/WishlistButton";
+import { numeroWhatsApp, WhatsAppIcon } from "@/components/WhatsAppButton";
 import { PRODUCT_BUY_TOKENS } from "@/lib/productLayoutTokens";
 import type { Product } from "@/types/home";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestbox-containerhandel.de";
 
 export function ProductPurchaseBox({ product }: { product: Product }) {
   const t = useTranslations("product");
   const inStock = product.inStock !== false;
+
+  // Le devis et la demande WhatsApp partent tous deux pré-remplis avec les
+  // mêmes informations produit : le client n'a rien à retaper, et nous
+  // savons d'emblée de quel article il s'agit, plutôt que de le déduire
+  // d'un message libre.
+  const productLabel = `${product.brand} ${product.name}`;
+  const productUrl = `${SITE_URL}${product.href}`;
+  const quoteVars = { product: productLabel, sku: product.sku ?? "—", price: product.price, url: productUrl };
+
+  const mailtoHref = `mailto:${COMPANY.email}?subject=${encodeURIComponent(
+    t("quoteEmailSubject", { product: productLabel }),
+  )}&body=${encodeURIComponent(t("quoteEmailBody", quoteVars))}`;
+
+  const whatsappNumber = numeroWhatsApp(COMPANY.phone);
+  const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+    t("quoteWhatsappMessage", quoteVars),
+  )}`;
 
   // L'étiquette ne s'affiche que si les trois conditions sont réunies : une
   // classe renseignée, une famille effectivement soumise à étiquetage, et une
@@ -93,10 +113,18 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
         <p className={PRODUCT_BUY_TOKENS.stockOff}>{t("outOfStock")}</p>
       )}
 
-      {/* Achat direct, quantité et ajout au panier : le composant refuse de
-          dépasser le stock réel et désactive tout quand l'article est épuisé.
-          C'est ici, et seulement ici, que « acheter maintenant » a sa place :
-          la décision d'achat se prend sur la fiche, pas sur une vignette. */}
+      {/* La commande se valide par devis, pas par achat immédiat sur la
+          fiche : ce bouton est donc l'action principale, avant même le
+          panier. Un simple lien mailto suffit, aucun formulaire à
+          maintenir côté serveur. */}
+      <a
+        href={mailtoHref}
+        className="flex items-center justify-center gap-2 rounded-sm bg-primary px-5 py-3 text-sm font-black uppercase tracking-wide text-primary-foreground transition-colors hover:brightness-110"
+      >
+        <Mail className="h-4 w-4" aria-hidden />
+        {t("requestQuote")}
+      </a>
+
       <AddToCartButton
         productId={product.id ?? ""}
         slug={product.slug ?? ""}
@@ -106,23 +134,19 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
         path={product.href}
         priceCents={product.priceCents ?? 0}
         stock={product.stock ?? 0}
-        withBuyNow
       />
 
-      {product.id && (
-        <WishlistButton
-          variant="full"
-          item={{
-            productId: product.id,
-            slug: product.slug ?? "",
-            brand: product.brand,
-            name: product.name,
-            image: product.image,
-            path: product.href,
-            priceCents: product.priceCents ?? 0,
-          }}
-        />
-      )}
+      {/* Même logique que le devis, en canal alternatif : message pré-rempli,
+          rien à ressaisir pour le client qui préfère WhatsApp à l'e-mail. */}
+      <a
+        href={whatsappHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center gap-2 text-sm font-bold text-[#25d366] transition-colors hover:underline"
+      >
+        <WhatsAppIcon className="h-4 w-4" />
+        {t("requestQuoteWhatsapp")}
+      </a>
 
       <div className={PRODUCT_BUY_TOKENS.trust}>
         <p className="flex items-start gap-2">

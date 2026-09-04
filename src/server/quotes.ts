@@ -6,6 +6,13 @@ export function isQuoteRequestStatus(value: unknown): value is QuoteRequestStatu
   return value === "new" || value === "contacted" || value === "closed";
 }
 
+/** "herr" | "frau" ; absent = « keine Angabe ». */
+export type QuoteRequestSalutation = "herr" | "frau";
+
+export function isQuoteRequestSalutation(value: unknown): value is QuoteRequestSalutation {
+  return value === "herr" || value === "frau";
+}
+
 export interface QuoteRequestRecord {
   id: string;
   productId?: string;
@@ -13,6 +20,9 @@ export interface QuoteRequestRecord {
   productSku?: string;
   productPriceCents?: number;
   productUrl: string;
+  salutation?: QuoteRequestSalutation;
+  firstName: string;
+  lastName: string;
   name: string;
   email: string;
   phone?: string;
@@ -28,6 +38,9 @@ interface QuoteRequestRow {
   productSku: string | null;
   productPriceCents: number | null;
   productUrl: string;
+  salutation: string | null;
+  firstName: string;
+  lastName: string;
   name: string;
   email: string;
   phone: string | null;
@@ -44,6 +57,9 @@ function toRecord(row: QuoteRequestRow): QuoteRequestRecord {
     productSku: row.productSku ?? undefined,
     productPriceCents: row.productPriceCents ?? undefined,
     productUrl: row.productUrl,
+    salutation: isQuoteRequestSalutation(row.salutation) ? row.salutation : undefined,
+    firstName: row.firstName,
+    lastName: row.lastName,
     name: row.name,
     email: row.email,
     phone: row.phone ?? undefined,
@@ -61,13 +77,18 @@ export interface CreateQuoteRequestInput {
   productSku?: string;
   productPriceCents?: number;
   productUrl: string;
-  name: string;
+  salutation?: QuoteRequestSalutation;
+  firstName: string;
+  lastName: string;
   email: string;
   phone?: string;
   message?: string;
 }
 
 export async function createQuoteRequest(input: CreateQuoteRequestInput): Promise<QuoteRequestRecord> {
+  const firstName = input.firstName.trim();
+  const lastName = input.lastName.trim();
+
   const row = await prisma.quoteRequest.create({
     data: {
       productId: input.productId ?? null,
@@ -75,7 +96,11 @@ export async function createQuoteRequest(input: CreateQuoteRequestInput): Promis
       productSku: input.productSku ?? null,
       productPriceCents: input.productPriceCents ?? null,
       productUrl: input.productUrl,
-      name: input.name,
+      salutation: input.salutation ?? null,
+      firstName,
+      lastName,
+      // Nom complet dénormalisé, recomposé ici une bonne fois pour l'affichage.
+      name: `${firstName} ${lastName}`.trim(),
       email: input.email,
       phone: input.phone ?? null,
       message: input.message ?? "",

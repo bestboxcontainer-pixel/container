@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { COMPANY } from "@/content/legal";
 import { isMailConfigured, sendMail } from "@/lib/mailer";
 import { buildQuoteRequestCustomerEmail, buildQuoteRequestShopEmail } from "@/server/emails/quoteRequest";
-import { createQuoteRequest } from "@/server/quotes";
+import { createQuoteRequest, isQuoteRequestSalutation } from "@/server/quotes";
 import { getProductBySlug } from "@/server/store";
 
 // Anti-spam minimaliste, même principe que /api/reviews : un compteur en
@@ -60,6 +60,7 @@ async function notifierBoutique(input: {
   productName: string;
   productSku?: string;
   productUrl: string;
+  salutation?: "herr" | "frau";
   name: string;
   email: string;
   phone?: string;
@@ -88,19 +89,26 @@ export async function POST(request: Request) {
   }
 
   const productHref = readString(payload.productHref);
-  const name = readString(payload.name);
+  const rawSalutation = readString(payload.salutation).toLowerCase();
+  const salutation = isQuoteRequestSalutation(rawSalutation) ? rawSalutation : undefined;
+  const firstName = readString(payload.firstName);
+  const lastName = readString(payload.lastName);
+  const name = `${firstName} ${lastName}`.trim();
   const email = readString(payload.email);
   const phone = readString(payload.phone);
   const message = readString(payload.message);
 
-  if (name.length < 2 || name.length > 80) {
-    return NextResponse.json({ error: "Bitte geben Sie einen Namen mit 2 bis 80 Zeichen an." }, { status: 400 });
+  if (firstName.length < 2 || firstName.length > 80) {
+    return NextResponse.json({ error: "Bitte geben Sie einen Vornamen mit 2 bis 80 Zeichen an." }, { status: 400 });
+  }
+  if (lastName.length < 2 || lastName.length > 80) {
+    return NextResponse.json({ error: "Bitte geben Sie einen Nachnamen mit 2 bis 80 Zeichen an." }, { status: 400 });
   }
   if (!EMAIL_PATTERN.test(email)) {
     return NextResponse.json({ error: "Bitte geben Sie eine gültige E-Mail-Adresse an." }, { status: 400 });
   }
-  if (phone.length > 40) {
-    return NextResponse.json({ error: "Die Telefonnummer ist zu lang." }, { status: 400 });
+  if (phone.length < 4 || phone.length > 40) {
+    return NextResponse.json({ error: "Bitte geben Sie eine gültige Telefonnummer an." }, { status: 400 });
   }
   if (message.length > 2000) {
     return NextResponse.json({ error: "Ihre Nachricht darf höchstens 2000 Zeichen lang sein." }, { status: 400 });
@@ -139,7 +147,9 @@ export async function POST(request: Request) {
     productSku: product.sku,
     productPriceCents: product.priceCents,
     productUrl,
-    name,
+    salutation,
+    firstName,
+    lastName,
     email,
     phone: phone || undefined,
     message: message || undefined,
@@ -152,13 +162,14 @@ export async function POST(request: Request) {
       productName,
       productSku: product.sku,
       productUrl,
+      salutation,
       name,
       email,
       phone: phone || undefined,
       message,
       adminUrl,
     });
-    await confirmerAuClient({ to: email, name, productName, productUrl });
+    await confirmerAuClient({ to: email, name: firstName, productName, productUrl });
   } catch (error) {
     // L'enregistrement a déjà réussi : un e-mail qui échoue ne doit pas faire
     // perdre la demande, seulement se voir dans les journaux du serveur.

@@ -164,6 +164,14 @@ model QuoteRequest {
   productSku        String?
   productPriceCents Int?
   productUrl        String
+  // Civilité : "herr" | "frau" | null (« keine Angabe »). En texte plutôt
+  // qu'en enum Prisma, comme le reste du schéma, pour rester portable.
+  salutation        String?
+  firstName         String   @default("")
+  lastName          String   @default("")
+  // Nom complet dénormalisé (« Vorname Nachname »), écrit par l'API en même
+  // temps que les deux champs séparés : l'affichage back-office et les e-mails
+  // s'en servent tel quel, sans le recomposer à chaque fois.
   name              String
   email             String
   phone             String?

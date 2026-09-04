@@ -35,6 +35,7 @@ export interface QuoteRequestShopEmailInput {
   productName: string;
   productSku?: string;
   productUrl: string;
+  salutation?: "herr" | "frau";
   name: string;
   email: string;
   phone?: string;
@@ -42,18 +43,27 @@ export interface QuoteRequestShopEmailInput {
   adminUrl: string;
 }
 
+/** Libellé allemand de la civilité pour la notification interne. */
+function salutationLabel(salutation: "herr" | "frau" | undefined): string {
+  if (salutation === "herr") return "Herr";
+  if (salutation === "frau") return "Frau";
+  return "";
+}
+
 /** Notification interne : atterrit dans la boîte de la boutique, pas chez le client. */
 export function buildQuoteRequestShopEmail(input: QuoteRequestShopEmailInput): Omit<MailMessage, "to"> {
   const heading = "Neue Angebotsanfrage";
+  const anrede = salutationLabel(input.salutation);
+  const nameZeile = anrede ? `${anrede} ${input.name}` : input.name;
 
   const html = layout({
     locale: "de",
-    preheader: `${input.productName} — ${input.name}`,
+    preheader: `${input.productName} — ${nameZeile}`,
     heading,
     paragraphs: [
       `<strong>${escapeHtml(input.productName)}</strong>${input.productSku ? ` (${escapeHtml(input.productSku)})` : ""}`,
       panel("Kontakt", [
-        escapeHtml(input.name),
+        escapeHtml(nameZeile),
         `<a href="mailto:${escapeHtml(input.email)}" style="color:#3f4854;">${escapeHtml(input.email)}</a>`,
         input.phone ? escapeHtml(input.phone) : "",
       ]),
@@ -65,6 +75,7 @@ export function buildQuoteRequestShopEmail(input: QuoteRequestShopEmailInput): O
   const lignes = [
     `Produkt: ${input.productName}${input.productSku ? ` (${input.productSku})` : ""}`,
     `Link: ${input.productUrl}`,
+    ...(anrede ? [`Anrede: ${anrede}`] : []),
     `Name: ${input.name}`,
     `E-Mail: ${input.email}`,
     ...(input.phone ? [`Telefon: ${input.phone}`] : []),

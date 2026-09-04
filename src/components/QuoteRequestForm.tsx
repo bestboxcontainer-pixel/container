@@ -6,6 +6,9 @@ import { useLocale, useTranslations } from "next-intl";
 const INPUT_CLASSES =
   "w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary";
 
+/** Valeurs neutres envoyées à l'API ; l'affichage passe par les traductions. */
+type Salutation = "" | "herr" | "frau";
+
 /**
  * Formulaire de demande de devis, envoyé par « Angebot anfragen » sur la
  * fiche produit. Le produit n'est identifié que par le chemin de sa fiche :
@@ -16,7 +19,9 @@ export function QuoteRequestForm({ productHref }: { productHref: string }) {
   const t = useTranslations("quoteRequest");
   const locale = useLocale();
 
-  const [name, setName] = useState("");
+  const [salutation, setSalutation] = useState<Salutation>("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
@@ -32,7 +37,15 @@ export function QuoteRequestForm({ productHref }: { productHref: string }) {
     const response = await fetch("/api/devis", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ productHref, name, email, phone: phone || undefined, message: message || undefined }),
+      body: JSON.stringify({
+        productHref,
+        salutation: salutation || undefined,
+        firstName,
+        lastName,
+        email,
+        phone,
+        message: message || undefined,
+      }),
     });
 
     setPending(false);
@@ -61,46 +74,91 @@ export function QuoteRequestForm({ productHref }: { productHref: string }) {
   return (
     <form onSubmit={handleSubmit} className="rounded-sm border border-border bg-white p-5 sm:p-6">
       <label className="mb-4 block text-sm">
-        <span className="mb-1 block font-semibold text-foreground">
-          {t("formName")} <span aria-hidden>*</span>
-        </span>
-        <input
-          required
-          minLength={2}
-          maxLength={80}
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-          autoComplete="name"
+        <span className="mb-1 block font-semibold text-foreground">{t("formSalutation")}</span>
+        <select
+          value={salutation}
+          onChange={(event) => setSalutation(event.target.value as Salutation)}
+          autoComplete="honorific-prefix"
           className={INPUT_CLASSES}
-        />
+        >
+          <option value="">{t("formSalutationUnspecified")}</option>
+          <option value="herr">{t("formSalutationMr")}</option>
+          <option value="frau">{t("formSalutationMrs")}</option>
+        </select>
       </label>
 
-      <label className="mb-4 block text-sm">
-        <span className="mb-1 block font-semibold text-foreground">
-          {t("formEmail")} <span aria-hidden>*</span>
-        </span>
-        <input
-          type="email"
-          required
-          maxLength={160}
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          autoComplete="email"
-          className={INPUT_CLASSES}
-        />
-      </label>
+      <div className="mb-4 grid gap-4 sm:grid-cols-2">
+        <label className="block text-sm">
+          <span className="mb-1 block font-semibold text-foreground">
+            {t("formFirstName")} <span aria-hidden>*</span>
+          </span>
+          <input
+            required
+            minLength={2}
+            maxLength={80}
+            value={firstName}
+            onChange={(event) => setFirstName(event.target.value)}
+            autoComplete="given-name"
+            className={INPUT_CLASSES}
+          />
+        </label>
 
-      <label className="mb-4 block text-sm">
-        <span className="mb-1 block font-semibold text-foreground">{t("formPhone")}</span>
-        <input
-          type="tel"
-          maxLength={40}
-          value={phone}
-          onChange={(event) => setPhone(event.target.value)}
-          autoComplete="tel"
-          className={INPUT_CLASSES}
-        />
-      </label>
+        <label className="block text-sm">
+          <span className="mb-1 block font-semibold text-foreground">
+            {t("formLastName")} <span aria-hidden>*</span>
+          </span>
+          <input
+            required
+            minLength={2}
+            maxLength={80}
+            value={lastName}
+            onChange={(event) => setLastName(event.target.value)}
+            autoComplete="family-name"
+            className={INPUT_CLASSES}
+          />
+        </label>
+      </div>
+
+      {/* Bloc « Coordonnées » : c'est par là que la boutique recontacte le
+          client, l'e-mail et le téléphone sont donc tous deux obligatoires. */}
+      <fieldset className="mb-4 border-t border-border pt-4">
+        <legend className="font-black text-foreground">{t("formContactHeading")}</legend>
+        <p className="mb-3 text-sm text-muted-foreground">{t("formContactHint")}</p>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className="block text-sm">
+            <span className="mb-1 block font-semibold text-foreground">
+              {t("formEmail")} <span aria-hidden>*</span>
+            </span>
+            <input
+              type="email"
+              required
+              maxLength={160}
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              autoComplete="email"
+              className={INPUT_CLASSES}
+            />
+          </label>
+
+          <label className="block text-sm">
+            <span className="mb-1 block font-semibold text-foreground">
+              {t("formPhone")} <span aria-hidden>*</span>
+            </span>
+            <input
+              type="tel"
+              required
+              minLength={4}
+              maxLength={40}
+              value={phone}
+              onChange={(event) => setPhone(event.target.value)}
+              autoComplete="tel"
+              className={INPUT_CLASSES}
+            />
+            <span className="mt-1 block text-xs text-muted-foreground">{t("formPhoneHint")}</span>
+          </label>
+        </div>
+      </fieldset>
 
       <label className="mb-4 block text-sm">
         <span className="mb-1 block font-semibold text-foreground">{t("formMessage")}</span>

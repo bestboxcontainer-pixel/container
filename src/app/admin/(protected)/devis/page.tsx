@@ -13,6 +13,12 @@ interface StatusTab {
   href: string;
 }
 
+/** Civilité stockée en clé neutre, affichée en abrégé côté back-office (FR). */
+const SALUTATION_LABELS: Record<"herr" | "frau", string> = {
+  herr: "M.",
+  frau: "Mme",
+};
+
 const EMPTY_MESSAGES: Record<QuoteRequestStatus | "all", string> = {
   all: "Aucune demande de devis pour le moment.",
   new: "Aucune nouvelle demande, tout est traité.",
@@ -125,7 +131,10 @@ export default async function AdminQuoteRequestsPage({
 
                 <div className="mt-3 grid gap-1 text-sm sm:grid-cols-2">
                   <p>
-                    <span className="font-semibold text-foreground">{request.name}</span>
+                    <span className="font-semibold text-foreground">
+                      {request.salutation ? `${SALUTATION_LABELS[request.salutation]} ` : ""}
+                      {request.name}
+                    </span>
                   </p>
                   <p className="text-muted-foreground">
                     <a href={`mailto:${request.email}`} className="hover:text-primary hover:underline">

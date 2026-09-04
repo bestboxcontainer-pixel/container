@@ -350,7 +350,7 @@ page, exactement comme le code de connexion du back-office. Le garde-fou porte s
 Un seul compte de test subsiste, volontairement identifiable :
 
 ```
-testkonto+claude@bestbox-containerhandel.de   /   WiederEinNeuesPasswort26
+testkonto+claude@bestboxcontainer.de   /   WiederEinNeuesPasswort26
 ```
 
 Il porte la commande `HP-2026-000004`. À supprimer avant toute mise en production, depuis

@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { getCategoryPages } from "@/server/store";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestbox-containerhandel.de";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestboxcontainer.de";
 
 /** L'allemand vit à la racine, l'anglais sous /en, voir src/i18n/routing.ts. */
 function urlFor(locale: string): string {

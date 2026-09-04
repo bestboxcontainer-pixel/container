@@ -33,7 +33,7 @@ const COMPANY = {
   registeredSince: "20 April 2006",
   register: "Amtsgericht Lübeck (Local Court of Lübeck), HRA 3471",
   vatId: "DE000000000",
-  domain: "www.bestbox-containerhandel.de",
+  domain: "www.bestboxcontainer.de",
 } as const;
 
 /** Adresse de retour (identique au siège dans ce modèle). */

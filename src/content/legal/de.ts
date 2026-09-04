@@ -51,7 +51,7 @@ export const COMPANY = {
   // UStG). Tant que cette valeur reste un gabarit, chaque facture émise est
   // incomplète.
   vatId: "DE000000000",
-  domain: "www.bestbox-containerhandel.de",
+  domain: "www.bestboxcontainer.de",
 } as const;
 
 /** Adresse de retour (identique au siège dans ce modèle). */

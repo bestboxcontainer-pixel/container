@@ -299,7 +299,7 @@ export function CategoryForm({ mode, groups, initialData }: CategoryFormProps) {
         </button>
       </form>
 
-      <PreviewPanel url={`bestbox-containerhandel.de/${group || "gruppe"}/${slug || "kategorie"}`}>
+      <PreviewPanel url={`bestboxcontainer.de/${group || "gruppe"}/${slug || "kategorie"}`}>
         <CategoryPreview
           groupSlug={group}
           groupLabel={groupLabel}

@@ -9,7 +9,7 @@ import {
 // les valeurs répétées (product_highlight) contiennent souvent des virgules.
 //
 // À déclarer dans Merchant Center comme source de données planifiée :
-//   https://bestbox-containerhandel.de/feed/google-csv
+//   https://bestboxcontainer.de/feed/google-csv
 
 export const dynamic = "force-dynamic";
 

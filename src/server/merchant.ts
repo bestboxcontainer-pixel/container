@@ -49,7 +49,7 @@ export const SHOP_PHONE = COMPANY.phone;
  * pointer vers le domaine vérifié dans Merchant Center.
  */
 export function siteUrl(): string {
-  const raw = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestbox-containerhandel.de";
+  const raw = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestboxcontainer.de";
   return raw.replace(/\/+$/, "");
 }
 

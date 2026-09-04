@@ -47,7 +47,7 @@ function readString(value: unknown): string {
 }
 
 function siteUrl(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestbox-containerhandel.de").replace(/\/+$/, "");
+  return (process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestboxcontainer.de").replace(/\/+$/, "");
 }
 
 /**

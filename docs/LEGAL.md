@@ -137,8 +137,9 @@ Les slugs de ce corpus sont `widerruf` et `retoure`. Il faut soit aligner le foo
 
 ### 5.1 Données d'entreprise (encore fictives sur certains points, voir ci-dessous)
 
-Mis à jour en 2026-08 avec l'identité réelle de l'entreprise. Restent des placeholders :
-le numéro de TVA intracommunautaire, le numéro WEEE, l'e-mail et le téléphone.
+Mis à jour en 2026-09 avec l'identité réelle de l'entreprise. Restent des placeholders :
+le numéro de TVA intracommunautaire, le numéro WEEE et le numéro de registre d'emballages
+LUCID.
 
 | Élément | Valeur actuelle | Statut | Où |
 | --- | --- | --- | --- |
@@ -148,20 +149,23 @@ le numéro de TVA intracommunautaire, le numéro WEEE, l'e-mail et le téléphon
 | Inhaber (propriétaire) | `Peer Kunz` | réel | `COMPANY.owner` |
 | Registre du commerce | `Amtsgericht Lübeck, HRA 3471` | réel | idem |
 | Inscrit depuis | `20 avril 2006` | réel | `COMPANY.registeredSince` |
-| E-mail | `kontakt@bestbox-containerhandel.de` | placeholder | idem |
-| Téléphone | `+49 4154 000000` | placeholder | idem |
-| N° TVA intracommunautaire | `DE000000000` | placeholder | idem |
-| N° WEEE (stiftung ear) | `DE00000000` | placeholder | idem |
-| N° registre batteries (BattDG) | `DE00000000` | placeholder | `impressum`, `elektroaltgeraete` |
-| N° registre emballages LUCID | `DE0000000000000` | placeholder | `impressum`, `elektroaltgeraete` |
-| Adresse de retour | identique au siège | réel | `RETURN_ADDRESS` |
-| Domaine | `www.bestbox-containerhandel.de` | placeholder, à réserver | `COMPANY.domain` |
+| E-mail | `kontakt@bestboxcontainer.de` | réel, domaine vérifié dans Resend | `COMPANY.email` |
+| Téléphone | `+49 1525 9026450` | réel | `COMPANY.phone` |
+| N° TVA intracommunautaire | `DE000000000` | **placeholder, bloquant** : chaque facture émise est incomplète tant que ce numéro n'est pas le vrai (§ 14 Abs. 4 Nr. 2 UStG) | `COMPANY.vatId` |
+| N° registre emballages LUCID | `DE0000000000000` | placeholder, à compléter (la boutique expédie des colis et des palettes, donc soumise à la LUCID) | `impressum` |
 
-Par ailleurs, la vitrine publique qui exposait ces pages légales a été retirée (voir
-`README.md`) : seul le back-office `/admin` reste en service. Le contenu rédactionnel de
-ces pages (Impressum, AGB, FAQ, Über uns…) décrit toujours une activité de vente
-d'électroménager, non réécrite pour une activité de négoce de conteneurs, voir la note en
-tête de `de.ts` / `en.ts`.
+Les mentions WEEE (stiftung ear) et registre batteries (BattDG) du gabarit d'origine
+(vente d'électroménager) ont été retirées de l'Impressum : une boutique de conteneurs n'est
+soumise ni à l'ElektroG ni au BattDG. Pas de placeholder à suivre pour elles.
+| Adresse de retour | identique au siège | réel | `RETURN_ADDRESS` |
+| Domaine | `www.bestboxcontainer.de` | réel, domaine vérifié dans Resend pour l'envoi d'e-mails | `COMPANY.domain` |
+
+La vitrine publique bilingue (catalogue, devis, panier, back-office complet) est en
+service à `/` et `/en`, ce n'est plus un back-office isolé derrière une page vierge — voir
+`README.md`. Le contenu rédactionnel des pages légales (Impressum, AGB, FAQ, Über uns…) a
+été réécrit pour l'activité de négoce de conteneurs de BBC Best Box Containerhandel e.K.,
+et les mentions ElektroG/BattDG héritées du gabarit d'origine (vente d'électroménager) ont
+été retirées, voir la note en tête de `de.ts` / `en.ts`.
 
 Les constantes `COMPANY` de `de.ts` et `en.ts` sont **volontairement dupliquées** (le pays
 diffère : `Deutschland` / `Germany`). Modifier les deux.

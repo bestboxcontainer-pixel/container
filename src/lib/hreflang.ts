@@ -6,7 +6,7 @@ import { routing, type Locale } from "@/i18n/routing";
 // Google pour un site multilingue : chaque page doit désigner sa version
 // canonique et pointer vers ses équivalents dans les autres langues.
 
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestbox-containerhandel.de").replace(
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestboxcontainer.de").replace(
   /\/+$/,
   "",
 );

@@ -38,10 +38,11 @@ est limitée : voir « Build sur une machine limitée » plus bas.
 - L'URL de la base **PostgreSQL Neon** (chaîne « pooled », avec `sslmode=verify-full`).
 - Les trois clés **Cloudinary** : sans elles, l'envoi d'images est refusé en
   production, et c'est par là que passeront toutes les photos produits.
-- Les identifiants **SMTP Hostinger** de `kontakt@bestbox-containerhandel.de`.
-  Sans eux, plus personne n'entre dans le back-office : le code de connexion à
-  six chiffres part par e-mail et le repli console n'existe qu'en développement.
-- Le domaine **bestbox-containerhandel.de** pointé sur l'hébergement.
+- La clé **API Resend** (`RESEND_API_KEY`), avec `bestboxcontainer.de` vérifié
+  comme domaine d'envoi (SPF + DKIM publiés). Sans elle, plus personne n'entre
+  dans le back-office : le code de connexion à six chiffres part par e-mail et
+  le repli console n'existe qu'en développement (voir `src/lib/mailer.ts`).
+- Le domaine **bestboxcontainer.de** pointé sur l'hébergement.
 
 ## 2. Variables d'environnement
 
@@ -68,7 +69,7 @@ illisibles les clés d'intégration déjà enregistrées en base. Elle se fixe
 
 Ne pas oublier non plus :
 
-- `NEXT_PUBLIC_SITE_URL=https://bestbox-containerhandel.de`, sans barre finale. Cette
+- `NEXT_PUBLIC_SITE_URL=https://bestboxcontainer.de`, sans barre finale. Cette
   variable est lue **au moment du build**, pas au démarrage : la changer impose
   de reconstruire. Elle alimente les URL canoniques, le sitemap, le flux Google
   Merchant et tous les liens contenus dans les e-mails.
@@ -123,7 +124,7 @@ Nginx en frontal, dans `/etc/nginx/sites-available/bestbox` :
 
 ```nginx
 server {
-    server_name bestbox-containerhandel.de www.bestbox-containerhandel.de;
+    server_name bestboxcontainer.de www.bestboxcontainer.de;
 
     location / {
         proxy_pass http://127.0.0.1:3000;
@@ -148,7 +149,7 @@ Puis activer le site et poser le certificat :
 ```bash
 sudo ln -s /etc/nginx/sites-available/bestbox /etc/nginx/sites-enabled/
 sudo nginx -t && sudo systemctl reload nginx
-sudo certbot --nginx -d bestbox-containerhandel.de -d www.bestbox-containerhandel.de
+sudo certbot --nginx -d bestboxcontainer.de -d www.bestboxcontainer.de
 ```
 
 `X-Forwarded-Proto` n'est pas décoratif : sans lui, l'application se croit en
@@ -306,7 +307,7 @@ sans être passé par le mot de passe **et** le code à six chiffres.
 Sans elle, les campagnes programmées ne partent jamais. Toutes les minutes :
 
 ```
-* * * * * curl -fsS -X POST -H "Authorization: Bearer LE_CRON_SECRET" https://bestbox-containerhandel.de/api/cron/campaigns > /dev/null
+* * * * * curl -fsS -X POST -H "Authorization: Bearer LE_CRON_SECRET" https://bestboxcontainer.de/api/cron/campaigns > /dev/null
 ```
 
 Sur VPS : `crontab -e`. Sur hébergement web : hPanel → **Cron Jobs**.
@@ -357,7 +358,7 @@ et c'est exactement ce qui est demandé : mais ce n'est pas ce que voit un
 visiteur.
 
 ```bash
-curl -s -o /dev/null -w "%{http_code}\n" https://bestbox-containerhandel.de/
+curl -s -o /dev/null -w "%{http_code}\n" https://bestboxcontainer.de/
 # 503 attendu
 ```
 
@@ -369,10 +370,10 @@ pas ce jour-là. Contrepartie assumée : il faut un redémarrage.
 ## 8. Vérifications après mise en ligne
 
 ```bash
-curl -I https://bestbox-containerhandel.de/                    # 200
-curl -s https://bestbox-containerhandel.de/sitemap.xml | head  # XML des pages
-curl -s https://bestbox-containerhandel.de/robots.txt          # autorise l'indexation
-curl -s "https://bestbox-containerhandel.de/feed/google" | head -20   # flux Merchant
+curl -I https://bestboxcontainer.de/                    # 200
+curl -s https://bestboxcontainer.de/sitemap.xml | head  # XML des pages
+curl -s https://bestboxcontainer.de/robots.txt          # autorise l'indexation
+curl -s "https://bestboxcontainer.de/feed/google" | head -20   # flux Merchant
 ```
 
 Puis, dans le navigateur :

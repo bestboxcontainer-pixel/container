@@ -11,7 +11,7 @@ import { numeroWhatsApp, WhatsAppIcon } from "@/components/WhatsAppButton";
 import { PRODUCT_BUY_TOKENS } from "@/lib/productLayoutTokens";
 import type { Product } from "@/types/home";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestbox-containerhandel.de";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestboxcontainer.de";
 
 export function ProductPurchaseBox({ product }: { product: Product }) {
   const t = useTranslations("product");

@@ -444,7 +444,7 @@ export function ProductForm({
 
       {showPreview && (
         <PreviewPanel
-          url={`bestbox-containerhandel.de/${categoryId || "gruppe/kategorie"}/${productSlug}`}
+          url={`bestboxcontainer.de/${categoryId || "gruppe/kategorie"}/${productSlug}`}
           actions={
             <div className="flex rounded-sm border border-border bg-white text-xs font-bold">
               <button

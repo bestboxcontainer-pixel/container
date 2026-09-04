@@ -10,7 +10,7 @@ const lato = Lato({
 });
 
 const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestbox-containerhandel.de"
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestboxcontainer.de"
 ).replace(/\/+$/, "");
 
 const TITLE = "BBC Best Box Containerhandel e.K.";

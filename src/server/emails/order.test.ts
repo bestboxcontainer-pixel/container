@@ -17,7 +17,7 @@ import type { OrderRecord } from "@/server/orders";
 import type { BankTransferSettings } from "@/lib/bankTransfer";
 import { buildOrderConfirmationEmail, buildOrderNotificationEmail } from "./order";
 
-const SITE = "https://bestbox-containerhandel.de";
+const SITE = "https://bestboxcontainer.de";
 process.env.NEXT_PUBLIC_SITE_URL = SITE;
 
 function order(overrides: Partial<OrderRecord> = {}): OrderRecord {

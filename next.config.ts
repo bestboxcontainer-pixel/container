@@ -35,7 +35,7 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     /**
-     * Le site n'a qu'un hôte : bestbox-containerhandel.de.
+     * Le site n'a qu'un hôte : bestboxcontainer.de.
      *
      * Sans cette règle, « www » répond lui aussi en 200 et sert le catalogue
      * entier une seconde fois. Les balises canoniques limitent la casse pour
@@ -47,8 +47,8 @@ const nextConfig: NextConfig = {
     const hostCanonique = [
       {
         source: "/:path*",
-        has: [{ type: "host" as const, value: "www.bestbox-containerhandel.de" }],
-        destination: "https://bestbox-containerhandel.de/:path*",
+        has: [{ type: "host" as const, value: "www.bestboxcontainer.de" }],
+        destination: "https://bestboxcontainer.de/:path*",
         permanent: true,
       },
     ];

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { Eye, EyeOff } from "lucide-react";
 
 interface Challenge {
   challengeId: string;
@@ -26,6 +27,7 @@ export default function AdminLoginPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [code, setCode] = useState("");
   const [challenge, setChallenge] = useState<Challenge | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -62,6 +64,7 @@ export default function AdminLoginPage() {
     setChallenge(null);
     setCode("");
     setPassword("");
+    setShowPassword(false);
     setExpiresIn(0);
     setResendIn(0);
     setError(message ?? null);
@@ -266,17 +269,43 @@ export default function AdminLoginPage() {
                   />
                 </label>
 
-                <label className="mb-4 block text-sm">
-                  <span className="mb-1 block font-semibold text-foreground">Mot de passe</span>
-                  <input
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                    className="w-full rounded-sm border border-input px-3 py-2 text-sm outline-none focus:border-primary"
-                  />
-                </label>
+                <div className="mb-4 text-sm">
+                  <label
+                    htmlFor="admin-password"
+                    className="mb-1 block font-semibold text-foreground"
+                  >
+                    Mot de passe
+                  </label>
+                  <div className="relative">
+                    <input
+                      id="admin-password"
+                      type={showPassword ? "text" : "password"}
+                      autoComplete="current-password"
+                      required
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                      className="w-full rounded-sm border border-input py-2 pl-3 pr-10 text-sm outline-none focus:border-primary"
+                    />
+                    {/* Le clic ne doit pas voler le focus au champ : preventDefault
+                        sur mousedown garde le curseur dans la saisie. */}
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((value) => !value)}
+                      onMouseDown={(event) => event.preventDefault()}
+                      aria-label={
+                        showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"
+                      }
+                      aria-pressed={showPassword}
+                      className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground"
+                    >
+                      {showPassword ? (
+                        <EyeOff className="h-4 w-4" aria-hidden />
+                      ) : (
+                        <Eye className="h-4 w-4" aria-hidden />
+                      )}
+                    </button>
+                  </div>
+                </div>
 
                 {error && (
                   <p role="alert" className="mb-4 text-sm font-semibold text-destructive">

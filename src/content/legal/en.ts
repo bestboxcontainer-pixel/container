@@ -75,7 +75,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Contact",
-        body: "You can reach us quickly and directly through the following channels. Our customer service team is available Monday to Saturday, 8 a.m. to 8 p.m. (CET).",
+        body: "You can reach us quickly and directly through the following channels. Our customer service team is available Monday to Friday, 8 a.m. to 6 p.m. (CET).",
         list: [
           `Phone: ${COMPANY.phone}`,
           `Email: ${COMPANY.email}`,
@@ -185,7 +185,7 @@ export const enLegalPages: LegalPageMap = {
       {
         heading: "Section 5 Delivery and delivery times",
         body:
-          "We deliver within Germany. Delivery to parcel lockers is possible for parcel shipments only; containers are delivered exclusively by freight forwarder to a street address.\n\n" +
+          "We deliver throughout Germany; on request we also deliver to other member states of the European Union. Delivery to parcel lockers is possible for parcel shipments only; containers are delivered exclusively by freight forwarder to a street address.\n\n" +
           "Items in stock are usually delivered by standard shipping within 7 to 10 working days of the conclusion of the contract, or from the date of receipt of payment in the case of advance payment; express shipping delivers within a maximum of 5 working days for the surcharge shown in your order. For items marked \"On request\" (made to order) we state the expected delivery time on the product page; it is typically around three weeks.\n\n" +
           "If an item is unavailable because our supplier failed to deliver to us despite a corresponding contractual obligation (congruent hedging transaction), we may withdraw from the contract. We will inform you without delay and immediately refund any payments already made. Your statutory rights remain unaffected.\n\n" +
           "Partial deliveries are permitted where reasonable for you. You will not incur any additional shipping costs as a result.",
@@ -340,7 +340,7 @@ export const enLegalPages: LegalPageMap = {
         heading: "13. Cookies and consent management",
         body:
           "We use cookies and comparable technologies. Technically necessary cookies, for the shopping basket, session management and security, for example, are used on the basis of section 25(2) of the German Telecommunications Digital Services Data Protection Act (TDDDG) without consent; the associated data processing is based on Article 6(1)(f) GDPR.\n\n" +
-          "We do not currently use any service that requires consent, such as a live chat. As soon as that changes, we will describe it here in full before the service is loaded, and obtain your consent via a banner.\n\n" +
+          "We load two services only after you consent via the banner: our live chat (Smartsupp s.r.o., Czech Republic), which stores a visitor ID on your device, and the map on the contact page (Google Ireland Limited, Ireland; processing may also involve the parent company Google LLC, USA), which transmits your IP address to Google when it loads. In both cases the legal basis is your consent under Article 6(1)(a) GDPR and section 25(1) TDDDG. Without consent, chat and map stay disabled; the contact page then offers a plain link that opens Google Maps in a new tab without first connecting to Google. You can withdraw your consent at any time via the \"Cookie settings\" link in the site footer.\n\n" +
           "You can also delete or block cookies in your browser. Some shop functions may then no longer be fully available.",
       },
       {
@@ -349,7 +349,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "15. Recipients and transfers to third countries",
-        body: "Recipients of your data are exclusively service providers we have selected with care and who act for us as processors under Article 28 GDPR, as well as bodies to which we are legally required to transfer data (such as tax authorities). Transfers to countries outside the EU and the EEA take place only where an adequacy decision of the European Commission exists or appropriate safeguards within the meaning of Articles 44 et seq. GDPR, in particular standard contractual clauses, have been agreed.",
+        body: "Recipients of your data are exclusively service providers we have selected with care and who act for us as processors under Article 28 GDPR, as well as bodies to which we are legally required to transfer data (such as tax authorities). A transfer to countries outside the EU and the EEA only takes place if you consent to the map on the contact page: Google LLC, based in the USA, may then receive your IP address, based on the European Commission's standard contractual clauses under Article 46 GDPR. Without this consent, no such transfer takes place; should another one become necessary in future, it will only happen on the basis of an adequacy decision of the European Commission or appropriate safeguards within the meaning of Articles 44 et seq. GDPR.",
       },
       {
         heading: "16. Retention periods",
@@ -502,7 +502,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Delivery area",
-        body: "We deliver within Germany, including the North Sea and Baltic Sea islands. Deliveries to other European countries are currently possible only by prior arrangement with our customer service team. Parcels can be sent to a parcel locker on request; freight forwarder deliveries require a street address and a contactable telephone number.",
+        body: "We deliver throughout Germany, including the North Sea and Baltic Sea islands. On request we also deliver to other member states of the European Union; please arrange costs and delivery time with our customer service team in advance. Parcels can be sent to a parcel locker on request; freight forwarder deliveries require a street address and a contactable telephone number.",
       },
       {
         heading: "Freight forwarder delivery of containers",
@@ -618,7 +618,7 @@ export const enLegalPages: LegalPageMap = {
         list: [
           `Email to ${COMPANY.email} stating your order number and the item description`,
           "The model withdrawal form from our \"Right of withdrawal\" page, completed and sent by email or post, it is not obligatory",
-          `Phone: ${COMPANY.phone}, Monday to Saturday, 8 a.m. to 8 p.m.`,
+          `Phone: ${COMPANY.phone}, Monday to Friday, 8 a.m. to 6 p.m.`,
         ],
       },
       {
@@ -667,7 +667,7 @@ export const enLegalPages: LegalPageMap = {
     slug: "faq",
     title: "Frequently Asked Questions",
     intro:
-      "From delivery times and our installation service to payment: here are the answers to the questions we are asked most often. If yours isn't covered, call us or send us an email, we are available Monday to Saturday, 8 a.m. to 8 p.m.",
+      "From delivery times and our installation service to payment: here are the answers to the questions we are asked most often. If yours isn't covered, call us or send us an email, we are available Monday to Friday, 8 a.m. to 6 p.m.",
     updatedAt: UPDATED_AT,
     sections: [
       {
@@ -680,7 +680,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Do you ship outside Germany?",
-        body: "As standard we deliver within Germany, including the islands. Deliveries to other European countries are possible by arrangement, write to us before ordering and we will check feasibility and costs for your address.",
+        body: "We deliver throughout Germany, including the islands. We also deliver to other member states of the European Union on request. Write to us before ordering and we will let you know feasibility, cost and delivery time for your address.",
       },
       {
         heading: "Will the container be brought onto my property?",
@@ -765,7 +765,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Advice rather than an order form",
-        body: `A container that doesn't fit through the access route, or a format that turns out too small for its intended use, is an annoyance that lasts. That is why our advisers are available Monday to Saturday, 8 a.m. to 8 p.m., on ${COMPANY.phone}. We ask about access, site conditions, ground and intended use, and we will say so when the cheaper model is the better choice for your situation.`,
+        body: `A container that doesn't fit through the access route, or a format that turns out too small for its intended use, is an annoyance that lasts. That is why our advisers are available Monday to Friday, 8 a.m. to 6 p.m., on ${COMPANY.phone}. We ask about access, site conditions, ground and intended use, and we will say so when the cheaper model is the better choice for your situation.`,
       },
       {
         heading: "Service and installation",
@@ -793,7 +793,7 @@ export const enLegalPages: LegalPageMap = {
     slug: "kontakt",
     title: "Contact",
     intro:
-      "Whether you need advice before buying, have a question about a delivery or want to report a problem: we are here Monday to Saturday, 8 a.m. to 8 p.m. For questions about an order, please have your order number to hand, it speeds everything up.",
+      "Whether you need advice before buying, have a question about a delivery or want to report a problem: we are here Monday to Friday, 8 a.m. to 6 p.m. For questions about an order, please have your order number to hand, it speeds everything up.",
     updatedAt: UPDATED_AT,
     sections: [
       {
@@ -801,7 +801,7 @@ export const enLegalPages: LegalPageMap = {
         body: "Our team answers questions about products, availability, delivery dates and payments.",
         list: [
           `Phone: ${COMPANY.phone}`,
-          "Availability: Monday to Saturday, 8 a.m. to 8 p.m.",
+          "Availability: Monday to Friday, 8 a.m. to 6 p.m.",
           `Email: ${COMPANY.email}`,
           "Email response time: usually within one working day",
         ],

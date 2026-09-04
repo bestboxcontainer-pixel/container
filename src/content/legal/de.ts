@@ -94,7 +94,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Kontakt",
-        body: "Sie erreichen uns schnell und unmittelbar über die folgenden Wege. Unser Kundenservice ist montags bis samstags von 8 bis 20 Uhr besetzt.",
+        body: "Sie erreichen uns schnell und unmittelbar über die folgenden Wege. Unser Kundenservice ist montags bis freitags von 8 bis 18 Uhr besetzt.",
         list: [
           `Telefon: ${COMPANY.phone}`,
           `E-Mail: ${COMPANY.email}`,
@@ -206,7 +206,7 @@ export const deLegalPages: LegalPageMap = {
       {
         heading: "§ 5 Lieferung und Lieferzeit",
         body:
-          "Wir liefern innerhalb Deutschlands. Lieferungen an Packstationen sind nur bei Paketversand möglich; Container liefern wir ausschließlich per Spedition an eine Adresse.\n\n" +
+          "Wir liefern deutschlandweit; auf Anfrage liefern wir auch in weitere Mitgliedstaaten der Europäischen Union. Lieferungen an Packstationen sind nur bei Paketversand möglich; Container liefern wir ausschließlich per Spedition an eine Adresse.\n\n" +
           "Vorrätige Container liefern wir im Standardversand in der Regel innerhalb von 7 bis 10 Werktagen nach Vertragsschluss, bei Vorkasse ab dem Tag des Zahlungseingangs; im Expressversand innerhalb von maximal 5 Werktagen gegen den in der Bestellung ausgewiesenen Aufpreis. Bei Artikeln mit dem Hinweis „Auf Anfrage“ (Sonderanfertigung) nennen wir die voraussichtliche Lieferzeit auf der Produktseite; sie beträgt typischerweise rund drei Wochen.\n\n" +
           "Ist ein Artikel nicht verfügbar, weil uns unser Zulieferer trotz vertraglicher Verpflichtung nicht beliefert hat (kongruentes Deckungsgeschäft), können wir vom Vertrag zurücktreten. Wir informieren Sie unverzüglich und erstatten bereits geleistete Zahlungen sofort. Ihre gesetzlichen Rechte bleiben unberührt.\n\n" +
           "Teillieferungen sind zulässig, soweit sie für Sie zumutbar sind. Zusätzliche Versandkosten entstehen Ihnen dadurch nicht.",
@@ -361,7 +361,7 @@ export const deLegalPages: LegalPageMap = {
         heading: "13. Cookies und Einwilligungsverwaltung",
         body:
           "Der Betrieb dieses Shops beruht auf technisch notwendigen Cookies: Warenkorb, Sitzungsverwaltung, Sprachwahl und Sicherheit. Sie sind nach § 25 Absatz 2 Nummer 2 TDDDG einwilligungsfrei; die damit verbundene Datenverarbeitung stützt sich auf Artikel 6 Absatz 1 Buchstabe f DSGVO.\n\n" +
-          "Einwilligungspflichtige Dienste, etwa einen Live-Chat, setzen wir derzeit nicht ein. Sobald das der Fall ist, informieren wir an dieser Stelle vollständig darüber, bevor der Dienst geladen wird, und holen Ihre Einwilligung über ein Banner ein.\n\n" +
+          "Zwei Dienste laden wir erst nach Ihrer Einwilligung über das Banner: unseren Live-Chat (Smartsupp s.r.o., Tschechische Republik), der eine Besucherkennung auf Ihrem Gerät speichert, und die Anfahrtskarte auf der Kontaktseite (Google Ireland Limited, Irland; Datenverarbeitung gegebenenfalls auch durch die Muttergesellschaft Google LLC, USA), die beim Laden Ihre IP-Adresse an Google überträgt. Rechtsgrundlage ist in beiden Fällen Ihre Einwilligung nach Artikel 6 Absatz 1 Buchstabe a DSGVO und § 25 Absatz 1 TDDDG. Ohne Einwilligung bleiben Chat und Karte deaktiviert; die Kontaktseite bietet dann einen einfachen Link, der Google Maps in einem neuen Tab öffnet, ohne vorher eine Verbindung zu Google herzustellen. Ihre Einwilligung widerrufen Sie jederzeit über den Link „Cookie-Einstellungen“ im Seitenfuß.\n\n" +
           "Cookies zur Reichweitenmessung, zu Werbezwecken oder von sozialen Netzwerken setzen wir nicht.\n\n" +
           "Zusätzlich können Sie Cookies in Ihrem Browser löschen oder blockieren. Einige Funktionen des Shops stehen dann möglicherweise nicht mehr vollständig zur Verfügung.",
       },
@@ -371,7 +371,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "15. Empfänger und Übermittlung in Drittländer",
-        body: "Empfänger Ihrer Daten sind ausschließlich Dienstleister, die wir sorgfältig ausgewählt haben und die als Auftragsverarbeiter nach Artikel 28 DSGVO für uns tätig werden, sowie Stellen, an die wir aufgrund gesetzlicher Pflichten übermitteln müssen (etwa Finanzbehörden). Eine Übermittlung in Länder außerhalb der EU und des EWR findet derzeit nicht statt; sollte sie künftig erforderlich werden, geschieht dies nur auf Grundlage eines Angemessenheitsbeschlusses der Europäischen Kommission oder geeigneter Garantien im Sinne der Artikel 44 ff. DSGVO, insbesondere Standardvertragsklauseln.",
+        body: "Empfänger Ihrer Daten sind ausschließlich Dienstleister, die wir sorgfältig ausgewählt haben und die als Auftragsverarbeiter nach Artikel 28 DSGVO für uns tätig werden, sowie Stellen, an die wir aufgrund gesetzlicher Pflichten übermitteln müssen (etwa Finanzbehörden). Eine Übermittlung in Länder außerhalb der EU und des EWR findet nur statt, wenn Sie der Anfahrtskarte auf der Kontaktseite zustimmen: Dabei kann Google LLC mit Sitz in den USA Ihre IP-Adresse erhalten, gestützt auf die Standardvertragsklauseln der Europäischen Kommission gemäß Artikel 46 DSGVO. Ohne diese Einwilligung findet keine Übermittlung in ein Drittland statt; sollte künftig eine weitere erforderlich werden, geschieht dies nur auf Grundlage eines Angemessenheitsbeschlusses der Europäischen Kommission oder geeigneter Garantien im Sinne der Artikel 44 ff. DSGVO.",
       },
       {
         heading: "16. Speicherdauer",
@@ -524,7 +524,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Liefergebiet",
-        body: "Wir liefern innerhalb Deutschlands, einschließlich der Nordsee- und Ostseeinseln. Lieferungen ins europäische Ausland sind derzeit nur nach vorheriger Absprache mit unserem Kundenservice möglich. Paketsendungen können auf Wunsch an eine Packstation gehen; Speditionslieferungen benötigen eine Straßenanschrift und eine erreichbare Telefonnummer.",
+        body: "Wir liefern deutschlandweit, einschließlich der Nordsee- und Ostseeinseln. Auf Anfrage liefern wir außerdem in weitere Mitgliedstaaten der Europäischen Union; sprechen Sie Kosten und Lieferzeit vorab mit unserem Kundenservice ab. Paketsendungen können auf Wunsch an eine Packstation gehen; Speditionslieferungen benötigen eine Straßenanschrift und eine erreichbare Telefonnummer.",
       },
       {
         heading: "Speditionslieferung von Containern",
@@ -640,7 +640,7 @@ export const deLegalPages: LegalPageMap = {
         list: [
           `E-Mail an ${COMPANY.email} mit Bestellnummer und Artikelbezeichnung`,
           "Muster-Widerrufsformular von der Seite „Widerrufsrecht“, ausgefüllt per E-Mail oder Post, vorgeschrieben ist es nicht",
-          `Telefon: ${COMPANY.phone}, montags bis samstags von 8 bis 20 Uhr`,
+          `Telefon: ${COMPANY.phone}, montags bis freitags von 8 bis 18 Uhr`,
         ],
       },
       {
@@ -689,7 +689,7 @@ export const deLegalPages: LegalPageMap = {
     slug: "faq",
     title: "Häufige Fragen",
     intro:
-      "Von der Lieferzeit über den Aufbauservice bis zur Zahlung: Hier finden Sie Antworten auf die Fragen, die uns am häufigsten erreichen. Ist Ihre Frage nicht dabei, rufen Sie uns an oder schreiben Sie uns, montags bis samstags von 8 bis 20 Uhr.",
+      "Von der Lieferzeit über den Aufbauservice bis zur Zahlung: Hier finden Sie Antworten auf die Fragen, die uns am häufigsten erreichen. Ist Ihre Frage nicht dabei, rufen Sie uns an oder schreiben Sie uns, montags bis freitags von 8 bis 18 Uhr.",
     updatedAt: UPDATED_AT,
     sections: [
       {
@@ -702,7 +702,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Liefern Sie auch ins Ausland?",
-        body: "Standardmäßig liefern wir innerhalb Deutschlands, einschließlich der Inseln. Lieferungen ins europäische Ausland sind nach Absprache möglich. Schreiben Sie uns vor der Bestellung, dann prüfen wir Machbarkeit und Kosten für Ihre Adresse.",
+        body: "Wir liefern deutschlandweit, einschließlich der Inseln. In weitere Mitgliedstaaten der Europäischen Union liefern wir auf Anfrage. Schreiben Sie uns vor der Bestellung, dann nennen wir Ihnen Machbarkeit, Kosten und Lieferzeit für Ihre Adresse.",
       },
       {
         heading: "Wird der Container bis auf mein Grundstück gebracht?",
@@ -787,7 +787,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Beratung statt Bestellformular",
-        body: `Ein Container, der nicht durch die Zufahrt passt, oder ein Format, das für den geplanten Zweck zu knapp bemessen ist, ärgert lange. Deshalb ist unsere Beratung montags bis samstags von 8 bis 20 Uhr unter ${COMPANY.phone} erreichbar. Wir fragen nach Zufahrt, Stellfläche, Untergrund und Nutzungszweck, und sagen auch, wenn das günstigere Modell für Ihren Fall das bessere ist.`,
+        body: `Ein Container, der nicht durch die Zufahrt passt, oder ein Format, das für den geplanten Zweck zu knapp bemessen ist, ärgert lange. Deshalb ist unsere Beratung montags bis freitags von 8 bis 18 Uhr unter ${COMPANY.phone} erreichbar. Wir fragen nach Zufahrt, Stellfläche, Untergrund und Nutzungszweck, und sagen auch, wenn das günstigere Modell für Ihren Fall das bessere ist.`,
       },
       {
         heading: "Service und Aufbau",
@@ -815,7 +815,7 @@ export const deLegalPages: LegalPageMap = {
     slug: "kontakt",
     title: "Kontakt",
     intro:
-      "Ob Beratung vor dem Kauf, Frage zur Lieferung oder Reklamation: Wir sind montags bis samstags von 8 bis 20 Uhr für Sie da. Halten Sie bei Fragen zu einer Bestellung bitte Ihre Bestellnummer bereit, das beschleunigt alles.",
+      "Ob Beratung vor dem Kauf, Frage zur Lieferung oder Reklamation: Wir sind montags bis freitags von 8 bis 18 Uhr für Sie da. Halten Sie bei Fragen zu einer Bestellung bitte Ihre Bestellnummer bereit, das beschleunigt alles.",
     updatedAt: UPDATED_AT,
     sections: [
       {
@@ -823,7 +823,7 @@ export const deLegalPages: LegalPageMap = {
         body: "Unser Team beantwortet Fragen zu Produkten, Verfügbarkeit, Lieferterminen und Zahlungen.",
         list: [
           `Telefon: ${COMPANY.phone}`,
-          "Erreichbarkeit: Montag bis Samstag, 8 bis 20 Uhr",
+          "Erreichbarkeit: Montag bis Freitag, 8 bis 18 Uhr",
           `E-Mail: ${COMPANY.email}`,
           "Antwortzeit per E-Mail: in der Regel innerhalb eines Werktages",
         ],

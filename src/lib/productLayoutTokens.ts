@@ -131,6 +131,19 @@ export const PRODUCT_DETAIL_TOKENS = {
   specItem:
     "flex items-start gap-3 py-2.5 text-sm leading-relaxed text-white/85 first:pt-0 last:pb-0",
   specIcon: "mt-0.5 h-4 w-4 shrink-0 text-signal",
+  /**
+   * Tableau « Technische Daten » : les faits chiffrés (longueur, poids,
+   * couleur RAL...) se lisent mieux en paire libellé/valeur qu'en coche, la
+   * coche laissant croire à un simple avantage plutôt qu'à une mesure.
+   * Posé dans le même panneau marine que la liste de coches, séparé par un
+   * filet quand les deux cohabitent : un second panneau aurait ajouté une
+   * troisième profondeur d'ombre que le reste de la fiche s'interdit.
+   */
+  specTable: "relative mt-3 divide-y divide-white/10",
+  specTableRow: "flex items-baseline justify-between gap-4 py-2.5 text-sm first:pt-0 last:pb-0",
+  specTableKey: "text-white/60",
+  specTableValue: "text-right font-semibold text-white",
+  specDivider: "relative my-5 border-t border-white/10",
 } as const;
 
 export const PRODUCT_REVIEW_TOKENS = {

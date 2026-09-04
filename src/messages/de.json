@@ -95,6 +95,7 @@
   "product": {
     "details": "Produktdetails & Serviceinfos",
     "description": "Artikelbeschreibung",
+    "technicalData": "Technische Daten",
     "features": "Ausstattung & Merkmale",
     "related": "Ähnliche Produkte",
     "sku": "Art.-Nr.",

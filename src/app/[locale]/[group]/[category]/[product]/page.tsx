@@ -16,6 +16,7 @@ import { getProductBySlug, getRelatedProducts } from "@/server/store";
 import { listPublicReviews } from "@/server/reviews";
 import { loadCatalogTranslations, localizeCategoryPage } from "@/server/localizedContent";
 import { productLongText, productShortText, truncateAtWord } from "@/lib/productText";
+import { splitProductSpecs } from "@/lib/productSpecs";
 import { formatRating } from "@/lib/formatRating";
 import { alternatesFor, localizedUrl } from "@/lib/hreflang";
 import { buildSocialMetadata } from "@/lib/opengraph";
@@ -147,9 +148,13 @@ export default async function ProductPage({ params }: { params: ProductPageParam
   const noteMoyenne =
     avisPublies > 0 ? avis.reduce((somme, item) => somme + item.rating, 0) / avisPublies : undefined;
 
+  // Les faits chiffrés (longueur, poids, couleur RAL...) et les arguments
+  // rédigés en phrase se lisent différemment : les premiers en tableau
+  // libellé/valeur, les seconds en liste à coche. Voir productSpecs.ts.
+  const { specRows, features } = splitProductSpecs(productData.bullets);
   // Sans équipement listé, le panneau marine se réduirait à un titre posé sur un
   // aplat : la description reprend alors toute la largeur de la bande.
-  const aDesEquipements = productData.bullets.length > 0;
+  const aDesEquipements = specRows.length > 0 || features.length > 0;
 
   return (
     <>
@@ -242,15 +247,38 @@ export default async function ProductPage({ params }: { params: ProductPageParam
               {aDesEquipements && (
                 <div className={PRODUCT_DETAIL_TOKENS.specCard}>
                   <span className={PRODUCT_DETAIL_TOKENS.specHalo} aria-hidden />
-                  <h3 className={PRODUCT_DETAIL_TOKENS.specLabel}>{t("features")}</h3>
-                  <ul className={PRODUCT_DETAIL_TOKENS.specList}>
-                    {productData.bullets.map((bullet) => (
-                      <li key={bullet} className={PRODUCT_DETAIL_TOKENS.specItem}>
-                        <Check className={PRODUCT_DETAIL_TOKENS.specIcon} aria-hidden />
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
+
+                  {specRows.length > 0 && (
+                    <>
+                      <h3 className={PRODUCT_DETAIL_TOKENS.specLabel}>{t("technicalData")}</h3>
+                      <dl className={PRODUCT_DETAIL_TOKENS.specTable}>
+                        {specRows.map((row) => (
+                          <div key={row.label} className={PRODUCT_DETAIL_TOKENS.specTableRow}>
+                            <dt className={PRODUCT_DETAIL_TOKENS.specTableKey}>{row.label}</dt>
+                            <dd className={PRODUCT_DETAIL_TOKENS.specTableValue}>{row.value}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    </>
+                  )}
+
+                  {specRows.length > 0 && features.length > 0 && (
+                    <div className={PRODUCT_DETAIL_TOKENS.specDivider} aria-hidden />
+                  )}
+
+                  {features.length > 0 && (
+                    <>
+                      <h3 className={PRODUCT_DETAIL_TOKENS.specLabel}>{t("features")}</h3>
+                      <ul className={PRODUCT_DETAIL_TOKENS.specList}>
+                        {features.map((bullet) => (
+                          <li key={bullet} className={PRODUCT_DETAIL_TOKENS.specItem}>
+                            <Check className={PRODUCT_DETAIL_TOKENS.specIcon} aria-hidden />
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
                 </div>
               )}
             </div>

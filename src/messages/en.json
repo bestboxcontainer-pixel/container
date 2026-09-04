@@ -95,6 +95,7 @@
   "product": {
     "details": "Product details & service",
     "description": "Product description",
+    "technicalData": "Technical data",
     "features": "Features & specifications",
     "related": "Similar products",
     "sku": "Item no.",

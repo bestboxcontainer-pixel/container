@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { COMPANY } from "@/content/legal";
+import { ConsentSettingsLink } from "@/components/ConsentSettingsLink";
 
 /**
  * Pied de page.
@@ -126,6 +127,14 @@ export function Footer() {
                 </Link>
               </li>
             ))}
+            <li>
+              {/* Article 7 alinéa 3 RGPD : retirer son accord doit être aussi
+                  facile que de le donner, ce lien rouvre le bandeau. */}
+              <ConsentSettingsLink
+                label="Cookie-Einstellungen"
+                className="text-xs font-semibold text-white/70 transition-colors hover:text-white"
+              />
+            </li>
           </ul>
 
           {/* Raison sociale, gérant et registre sur une seule ligne : ce sont

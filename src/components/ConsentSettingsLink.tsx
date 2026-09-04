@@ -13,9 +13,15 @@ import { ouvrirReglagesConsentement } from "@/lib/consent";
  * Un bouton, pas un lien : il n'y a pas de page derrière, seulement une action.
  * Il prend l'allure des autres entrées du pied de page pour ne pas dénoter.
  */
-export function ConsentSettingsLink({ label }: { label: string }) {
+export function ConsentSettingsLink({
+  label,
+  className = "hover:underline",
+}: {
+  label: string;
+  className?: string;
+}) {
   return (
-    <button type="button" onClick={ouvrirReglagesConsentement} className="hover:underline">
+    <button type="button" onClick={ouvrirReglagesConsentement} className={className}>
       {label}
     </button>
   );

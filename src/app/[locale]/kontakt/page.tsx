@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { ContactForm } from "@/components/ContactForm";
+import { ContactMap } from "@/components/ContactMap";
 import { COMPANY } from "@/content/legal";
 
 export const metadata: Metadata = {
@@ -56,74 +58,21 @@ export default function KontaktPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <Clock className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
-                  <span>Montag bis Samstag, 8 bis 20 Uhr</span>
+                  <span>Montag bis Freitag, 8 bis 18 Uhr</span>
                 </li>
               </ul>
             </div>
 
-            <form className="rounded-sm border border-border p-6 sm:p-8">
-              <h2 className="text-xl font-black text-foreground">Anfrage senden</h2>
-              <p className="mt-1 text-sm text-foreground/60">
-                Dieses Formular ist aktuell nicht angebunden: Bitte kontaktieren Sie uns
-                vorerst per Telefon oder E-Mail.
-              </p>
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                <Field label="Name" name="name" />
-                <Field label="E-Mail" name="email" type="email" />
-                <Field label="Telefon" name="phone" className="sm:col-span-2" />
-                <div className="sm:col-span-2">
-                  <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-foreground">
-                    Ihre Anfrage
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    disabled
-                    placeholder="Container-Typ, gewünschte Maße, Einsatzort und Zeitraum…"
-                    className="w-full rounded-sm border border-input bg-muted px-3 py-2 text-sm text-foreground placeholder:text-foreground/40 disabled:cursor-not-allowed"
-                  />
-                </div>
-              </div>
-              <button
-                type="button"
-                disabled
-                className="mt-6 w-full cursor-not-allowed rounded-sm bg-primary/50 px-5 py-3 text-sm font-bold text-primary-foreground sm:w-auto"
-              >
-                Anfrage senden
-              </button>
-            </form>
+            <ContactForm />
           </div>
+        </section>
+
+        <section className="mx-auto max-w-screen-xl px-4 pb-16 sm:px-6">
+          <h2 className="mb-6 text-xl font-black text-foreground">Anfahrt</h2>
+          <ContactMap />
         </section>
       </main>
       <Footer />
     </>
-  );
-}
-
-function Field({
-  label,
-  name,
-  type = "text",
-  className = "",
-}: {
-  label: string;
-  name: string;
-  type?: string;
-  className?: string;
-}) {
-  return (
-    <div className={className}>
-      <label htmlFor={name} className="mb-1.5 block text-sm font-medium text-foreground">
-        {label}
-      </label>
-      <input
-        id={name}
-        name={name}
-        type={type}
-        disabled
-        className="w-full rounded-sm border border-input bg-muted px-3 py-2 text-sm text-foreground disabled:cursor-not-allowed"
-      />
-    </div>
   );
 }

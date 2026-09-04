@@ -111,18 +111,8 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
         <p className={PRODUCT_BUY_TOKENS.stockOff}>{t("outOfStock")}</p>
       )}
 
-      {/* La commande se valide par devis, pas par achat immédiat sur la
-          fiche : ce bouton est donc l'action principale, avant même le
-          panier. Le produit est identifié dans l'URL, le formulaire relit
-          lui-même son nom, sa référence et son prix côté serveur. */}
-      <Link
-        href={quoteHref}
-        className="flex items-center justify-center gap-2 rounded-sm bg-primary px-5 py-3 text-sm font-black uppercase tracking-wide text-primary-foreground transition-colors hover:brightness-110"
-      >
-        <Mail className="h-4 w-4" aria-hidden />
-        {t("requestQuote")}
-      </Link>
-
+      {/* Achat direct, avant même le devis : le client qui sait déjà ce qu'il
+          veut ne doit pas passer par une demande et attendre une réponse. */}
       <AddToCartButton
         productId={product.id ?? ""}
         slug={product.slug ?? ""}
@@ -132,7 +122,20 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
         path={product.href}
         priceCents={product.priceCents ?? 0}
         stock={product.stock ?? 0}
+        withBuyNow
       />
+
+      {/* Devis : en second choix, pour le client qui préfère être recontacté
+          plutôt que payer tout de suite. Le produit est identifié dans
+          l'URL, le formulaire relit lui-même son nom, sa référence et son
+          prix côté serveur. */}
+      <Link
+        href={quoteHref}
+        className="flex items-center justify-center gap-2 rounded-sm border border-primary px-5 py-3 text-sm font-bold text-primary transition-colors hover:bg-muted"
+      >
+        <Mail className="h-4 w-4" aria-hidden />
+        {t("requestQuote")}
+      </Link>
 
       {/* Même logique que le devis, en canal alternatif : message pré-rempli,
           rien à ressaisir pour le client qui préfère WhatsApp à l'e-mail. */}

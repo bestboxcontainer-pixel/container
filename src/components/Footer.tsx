@@ -49,7 +49,13 @@ const COMPANY_LINKS = [
   { href: "/suche", label: "Suche" },
 ] as const;
 
-/** Descendues dans la barre du bas : ce sont des mentions, pas de la navigation. */
+/**
+ * Colonne à part entière, au même titre que « Container » ou « Unternehmen » :
+ * c'est là qu'on cherche ces mentions sur la plupart des boutiques, plutôt
+ * que dans la barre du bas où elles étaient reléguées. Le § 312d BGB impose
+ * qu'elles restent joignables depuis chaque page ; une colonne du pied de
+ * page les couvre aussi bien qu'une ligne fine.
+ */
 const LEGAL_LINKS = [
   { href: "/impressum", label: "Impressum" },
   { href: "/datenschutz", label: "Datenschutz" },
@@ -64,7 +70,7 @@ export function Footer() {
     // Un filet orange de deux pixels au lieu de quatre : il signe le pied de
     // page sans le surmonter d'une barre pleine.
     <footer className="border-t-2 border-signal bg-footer text-footer-foreground">
-      <div className="mx-auto grid max-w-screen-xl gap-10 px-4 py-14 sm:grid-cols-2 sm:px-6 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-12">
+      <div className="mx-auto grid max-w-screen-xl gap-10 px-4 py-14 sm:grid-cols-2 sm:px-6 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr] lg:gap-12">
         <div>
           <div className="flex items-center gap-2.5">
             <Image
@@ -112,16 +118,17 @@ export function Footer() {
         <FooterColumn title="Container" links={CONTAINER_LINKS} />
         <FooterColumn title="Service & Ratgeber" links={SERVICE_LINKS} />
         <FooterColumn title="Unternehmen" links={COMPANY_LINKS} />
-      </div>
 
-      <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-screen-xl flex-col gap-4 px-4 py-5 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
-          <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
+        <div>
+          <p className="text-xs font-black uppercase tracking-[0.14em] text-white">
+            Rechtliches
+          </p>
+          <ul className="mt-4 space-y-2.5">
             {LEGAL_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-xs font-semibold text-white/70 transition-colors hover:text-white"
+                  className="text-sm text-white/65 transition-colors hover:text-white"
                 >
                   {link.label}
                 </Link>
@@ -132,11 +139,15 @@ export function Footer() {
                   facile que de le donner, ce lien rouvre le bandeau. */}
               <ConsentSettingsLink
                 label="Cookie-Einstellungen"
-                className="text-xs font-semibold text-white/70 transition-colors hover:text-white"
+                className="text-sm text-white/65 transition-colors hover:text-white"
               />
             </li>
           </ul>
+        </div>
+      </div>
 
+      <div className="border-t border-white/10">
+        <div className="mx-auto max-w-screen-xl px-4 py-5 sm:px-6">
           {/* Raison sociale, gérant et registre sur une seule ligne : ce sont
               des mentions d'identité, elles se lisent d'un bloc. */}
           <p className="text-xs leading-relaxed text-white/45">

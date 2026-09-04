@@ -398,11 +398,11 @@ export async function runRecoveryTick(
   if (!(await isRecoveryEnabled())) return result;
 
   // Sans configuration d'envoi, on ne touche à rien : consommer la séquence
-  // parce que le SMTP manque en local reviendrait à perdre les relances.
+  // parce que la clé Resend manque en local reviendrait à perdre les relances.
   if (!dryRun && !isMailConfigured()) {
     if (!mailWarningShown) {
       console.warn(
-        "[recovery] SMTP_HOST, SMTP_USER ou SMTP_PASSWORD manquant : les relances ne partent pas.",
+        "[recovery] RESEND_API_KEY ou MAIL_FROM manquant : les relances ne partent pas.",
       );
       mailWarningShown = true;
     }

@@ -270,8 +270,8 @@ CUSTOMER_SESSION_SECRET=…
 Elle **doit être différente** de `ADMIN_SESSION_SECRET`. Sans elle, l'espace client lève une
 erreur explicite au lieu de tomber sur une valeur par défaut.
 
-Les e-mails passent par le module existant `src/lib/mailer.ts` (SMTP Hostinger,
-`SMTP_HOST` / `SMTP_USER` / `SMTP_PASSWORD`). En développement, sans ces variables, le repli
+Les e-mails passent par le module existant `src/lib/mailer.ts` (API Resend,
+`RESEND_API_KEY` / `MAIL_FROM`). En développement, sans ces variables, le repli
 est conservé : le lien de réinitialisation est écrit dans la console du serveur et renvoyé à la
 page, exactement comme le code de connexion du back-office. Le garde-fou porte sur
 `NODE_ENV === "development"`.

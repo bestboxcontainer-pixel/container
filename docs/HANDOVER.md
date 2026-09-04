@@ -41,16 +41,18 @@ Integration, StockMovement, AdminUser, Setting, et les modèles de commande.
   Les codes sont hachés en base (table `AdminLoginChallenge`) et supprimés dès
   qu'ils sont utilisés, expirés ou épuisés.
 
-Envoi des codes : SMTP de la boîte Hostinger de la boutique
-(`kontakt@bestbox-containerhandel.de`, `smtp.hostinger.com:465`), via nodemailer. À
-renseigner dans `.env.local` : `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`,
-`SMTP_PASSWORD`, `MAIL_FROM` et `MAIL_FROM_NAME`. En développement, si ces
-variables manquent, le code s'affiche dans la console du serveur et sur la page
-de connexion : ce repli est verrouillé sur `NODE_ENV === "development"`. En
-production, la connexion échoue proprement (502) tant que l'envoi n'est pas
-possible.
+Envoi des codes : API Resend (`src/lib/mailer.ts`), expéditeur
+`kontakt@bestboxcontainer.de` sur le domaine vérifié dans Resend. À renseigner
+dans `.env.local` : `RESEND_API_KEY`, `MAIL_FROM` et `MAIL_FROM_NAME`. La clé
+est une clé « d'envoi seul » (elle ne peut appeler que `emails.send`).
+L'expéditeur doit rester sur un domaine dont les enregistrements SPF et DKIM
+sont publiés, sans quoi Resend rejette l'envoi (`invalid_from_address`). En
+développement, si `RESEND_API_KEY` ou `MAIL_FROM` manque, le code s'affiche
+dans la console du serveur et sur la page de connexion : ce repli est
+verrouillé sur `NODE_ENV === "development"`. En production, la connexion échoue
+proprement (502) tant que l'envoi n'est pas possible.
 
-Conséquence à ne pas perdre de vue : dès que le SMTP est configuré, le repli
+Conséquence à ne pas perdre de vue : dès que Resend est configuré, le repli
 console disparaît, y compris en développement. L'adresse du compte admin doit
 donc être une boîte réellement relevable, sinon plus personne n'entre dans le
 back-office.

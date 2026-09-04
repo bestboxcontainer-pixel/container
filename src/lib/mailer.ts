@@ -1,28 +1,27 @@
 /**
- * Envoi d'e-mails transactionnels par SMTP (boîte Hostinger de la boutique).
+ * Envoi d'e-mails transactionnels via l'API Resend.
  *
  * Variables d'environnement :
- *   SMTP_HOST       serveur d'envoi, ex. "smtp.hostinger.com"
- *   SMTP_PORT       465 (SSL implicite) ou 587 (STARTTLS)
- *   SMTP_USER       adresse complète du compte, ex. "kontakt@bestbox-containerhandel.de"
- *   SMTP_PASSWORD   mot de passe de cette boîte
- *   MAIL_FROM       adresse expéditrice (défaut : SMTP_USER)
+ *   RESEND_API_KEY  clé API Resend (https://resend.com/api-keys), commence par « re_ »
+ *   MAIL_FROM       adresse expéditrice, obligatoirement sur un domaine vérifié
+ *                   dans Resend, ex. « kontakt@bestboxcontainer.de »
  *   MAIL_FROM_NAME  nom affiché (facultatif, défaut « BBC Best Box Containerhandel e.K. »)
  *
- * Tant que la configuration est incomplète, `isMailConfigured()` renvoie false :
- * en développement le code de connexion est alors affiché dans la console au
- * lieu d'être envoyé, ce qui évite de bloquer le back-office en local.
+ * Tant que RESEND_API_KEY ou MAIL_FROM manque, `isMailConfigured()` renvoie
+ * false : en développement le code de connexion est alors affiché dans la
+ * console au lieu d'être envoyé, ce qui évite de bloquer le back-office en local.
  *
- * L'expéditeur doit rester une adresse de la boîte authentifiée. Écrire au nom
- * d'un autre domaine ferait échouer SPF et DKIM, et le message partirait droit
- * en indésirable : quand le serveur ne le refuse pas d'emblée.
+ * L'adresse d'expédition doit appartenir à un domaine vérifié dans Resend
+ * (enregistrements SPF et DKIM publiés). Écrire au nom d'un autre domaine ferait
+ * échouer l'authentification et le message partirait droit en indésirable,
+ * quand l'API ne le refuse pas d'emblée avec `invalid_from_address`.
  */
-import nodemailer, { type Transporter } from "nodemailer";
+import { Resend } from "resend";
 import { LOGO_CID, logoPngBytes } from "@/server/brandLogo";
 
 const DEFAULT_FROM_NAME = "BBC Best Box Containerhandel e.K.";
 
-/** Fichier joint au message, transmis tel quel à nodemailer. */
+/** Fichier joint au message. */
 export interface MailAttachment {
   filename: string;
   content: Buffer;
@@ -42,72 +41,56 @@ export interface MailMessage {
   /** Facture PDF de la confirmation de commande, le cas échéant. */
   attachments?: MailAttachment[];
   /**
-   * En-têtes supplémentaires transmis tels quels au serveur SMTP. Sert aux
-   * en-têtes List-Unsubscribe, que Gmail et Yahoo exigent depuis février 2024
-   * pour les envois automatisés : sans eux, la réputation du domaine chute.
+   * En-têtes supplémentaires transmis tels quels. Sert aux en-têtes
+   * List-Unsubscribe, que Gmail et Yahoo exigent depuis février 2024 pour les
+   * envois automatisés : sans eux, la réputation du domaine chute.
    */
   headers?: Record<string, string>;
 }
 
-interface SmtpSettings {
-  host: string;
-  port: number;
-  user: string;
-  password: string;
+interface ResendSettings {
+  apiKey: string;
   from: string;
 }
 
-function readSettings(): SmtpSettings | null {
-  const host = process.env.SMTP_HOST?.trim() ?? "";
-  const user = process.env.SMTP_USER?.trim() ?? "";
-  const password = process.env.SMTP_PASSWORD?.trim() ?? "";
-  if (!host || !user || !password) return null;
+function readSettings(): ResendSettings | null {
+  const apiKey = process.env.RESEND_API_KEY?.trim() ?? "";
+  const from = process.env.MAIL_FROM?.trim() ?? "";
+  if (!apiKey || !from) return null;
 
-  return {
-    host,
-    // 465 par défaut : c'est le port SSL, celui que Hostinger recommande.
-    port: Number(process.env.SMTP_PORT?.trim() || 465),
-    user,
-    password,
-    // Sans MAIL_FROM explicite, on expédie depuis le compte authentifié.
-    from: process.env.MAIL_FROM?.trim() || user,
-  };
+  return { apiKey, from };
 }
 
 export function isMailConfigured(): boolean {
   return readSettings() !== null;
 }
 
-function formatSender(settings: SmtpSettings): string {
+/**
+ * Assemble l'en-tête `From`. Le nom d'affichage « BBC Best Box Containerhandel
+ * e.K. » contient un point : il faut alors le guillemetter pour rester conforme
+ * à la RFC 5322, sans quoi Resend rejette l'adresse.
+ */
+function formatSender(settings: ResendSettings): string {
   const name = process.env.MAIL_FROM_NAME?.trim() || DEFAULT_FROM_NAME;
-  return `"${name}" <${settings.from}>`;
+  const needsQuoting = /[()<>@,;:\\".\[\]]/.test(name);
+  const display = needsQuoting ? `"${name.replace(/(["\\])/g, "\\$1")}"` : name;
+  return `${display} <${settings.from}>`;
 }
 
 /**
- * Le transporteur est réutilisé d'un envoi à l'autre : ouvrir une connexion
- * SMTP par message coûterait une poignée de main TLS à chaque fois, et les
- * campagnes en enchaînent des dizaines.
+ * Le client Resend est réutilisé d'un envoi à l'autre. Il n'ouvre pas de
+ * connexion persistante (chaque envoi est une requête HTTPS), mais recréer
+ * l'objet à chaque message n'apporte rien.
  */
-let transporter: Transporter | null = null;
-let transporterKey = "";
+let client: Resend | null = null;
+let clientKey = "";
 
-function getTransporter(settings: SmtpSettings): Transporter {
-  const key = `${settings.host}:${settings.port}:${settings.user}`;
-  if (transporter && transporterKey === key) return transporter;
+function getClient(apiKey: string): Resend {
+  if (client && clientKey === apiKey) return client;
 
-  transporter = nodemailer.createTransport({
-    host: settings.host,
-    port: settings.port,
-    // 465 chiffre dès la connexion ; les autres ports montent en TLS ensuite.
-    secure: settings.port === 465,
-    auth: { user: settings.user, pass: settings.password },
-    // Un envoi bloqué ne doit pas retenir une requête HTTP indéfiniment.
-    connectionTimeout: 15_000,
-    greetingTimeout: 10_000,
-    socketTimeout: 20_000,
-  });
-  transporterKey = key;
-  return transporter;
+  client = new Resend(apiKey);
+  clientKey = apiKey;
+  return client;
 }
 
 /**
@@ -134,39 +117,71 @@ function withEmbeddedLogo(message: MailMessage): MailAttachment[] | undefined {
   ];
 }
 
+/** Traduit nos pièces jointes vers la forme attendue par le SDK Resend. */
+function toResendAttachments(list: MailAttachment[] | undefined) {
+  if (!list?.length) return undefined;
+
+  return list.map((jointe) => ({
+    filename: jointe.filename,
+    content: jointe.content,
+    contentType: jointe.contentType,
+    // `contentId` bascule la pièce en incorporée, référençable par `cid:`.
+    ...(jointe.cid ? { contentId: jointe.cid } : {}),
+  }));
+}
+
 /**
- * Envoie un message. Lève une erreur si le serveur refuse, pour que l'appelant
+ * Envoie un message. Lève une erreur si Resend le refuse, pour que l'appelant
  * puisse répondre autre chose qu'un faux « code envoyé ».
  */
 export async function sendMail(message: MailMessage): Promise<void> {
   const settings = readSettings();
   if (!settings) {
-    throw new Error("SMTP_HOST, SMTP_USER ou SMTP_PASSWORD n'est pas configuré.");
+    throw new Error("RESEND_API_KEY ou MAIL_FROM n'est pas configuré.");
   }
 
-  const attachments = withEmbeddedLogo(message);
+  const attachments = toResendAttachments(withEmbeddedLogo(message));
 
-  await getTransporter(settings).sendMail({
+  // Resend renvoie l'erreur dans la réponse ({ data, error }) plutôt que de
+  // lever : il faut donc l'inspecter explicitement.
+  const { data, error } = await getClient(settings.apiKey).emails.send({
     from: formatSender(settings),
     to: message.to,
     subject: message.subject,
     text: message.text,
     html: message.html,
-    ...(attachments?.length ? { attachments } : {}),
-    ...(message.headers ? { headers: message.headers } : {}),
     // Les réponses arrivent dans la boîte de la boutique, pas dans le vide.
     replyTo: settings.from,
+    ...(attachments ? { attachments } : {}),
+    ...(message.headers ? { headers: message.headers } : {}),
   });
+
+  if (error) {
+    throw new Error(`Resend a refusé le message (${error.name}) : ${error.message}`);
+  }
+  if (!data?.id) {
+    throw new Error("Resend n'a pas confirmé l'envoi (réponse sans identifiant).");
+  }
 }
 
 /**
- * Ouvre une connexion et s'authentifie, sans envoyer de message. Sert au
- * diagnostic : distingue « identifiants refusés » de « message refusé ».
+ * Contrôle de configuration, sans envoyer de message ni appeler l'API.
+ *
+ * Resend n'ouvre pas de session à vérifier, et la clé de la boutique est une
+ * clé « d'envoi seul » : elle ne peut appeler que `emails.send`, tout autre
+ * point de terminaison (lister les domaines, les clés…) répond 401
+ * `restricted_api_key`. Un vrai aller-retour n'est donc possible qu'en
+ * expédiant un message ; ce diagnostic se limite à la forme des variables.
  */
 export async function verifyMailConnection(): Promise<void> {
   const settings = readSettings();
   if (!settings) {
-    throw new Error("SMTP_HOST, SMTP_USER ou SMTP_PASSWORD n'est pas configuré.");
+    throw new Error("RESEND_API_KEY ou MAIL_FROM n'est pas configuré.");
   }
-  await getTransporter(settings).verify();
+  if (!settings.apiKey.startsWith("re_")) {
+    throw new Error("RESEND_API_KEY ne ressemble pas à une clé Resend (préfixe « re_ » attendu).");
+  }
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(settings.from)) {
+    throw new Error(`MAIL_FROM n'est pas une adresse e-mail valide : « ${settings.from} ».`);
+  }
 }

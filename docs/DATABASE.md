@@ -74,7 +74,7 @@ Aucune des deux n'est transposable telle quelle.
 | `ADMIN_SESSION_SECRET` | Signature des cookies de session du back-office | `.env.local` |
 | `CUSTOMER_SESSION_SECRET` | Signature des cookies de session des clients | `.env.local` |
 | `INTEGRATION_ENCRYPTION_KEY` | Clé AES-256-GCM chiffrant les clés API saisies dans le back-office (32 octets en hexadécimal) | `.env.local` |
-| `SMTP_*` / `MAIL_FROM*` | Envoi des e-mails transactionnels (voir `docs/HANDOVER.md`) | `.env.local` |
+| `RESEND_API_KEY` / `MAIL_FROM*` | Envoi des e-mails transactionnels via Resend (voir `docs/HANDOVER.md`) | `.env.local` |
 | `CLOUDINARY_*` | Stockage des images produits (voir `docs/IMAGES.md`) | `.env.local` |
 
 `.env.local` prime sur `.env`, pour l'application Next comme pour la CLI Prisma

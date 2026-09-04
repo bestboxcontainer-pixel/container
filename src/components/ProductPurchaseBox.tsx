@@ -125,17 +125,24 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
         withBuyNow
       />
 
-      {/* Devis : en second choix, pour le client qui préfère être recontacté
-          plutôt que payer tout de suite. Le produit est identifié dans
-          l'URL, le formulaire relit lui-même son nom, sa référence et son
-          prix côté serveur. */}
-      <Link
-        href={quoteHref}
-        className="flex items-center justify-center gap-2 rounded-sm border border-primary px-5 py-3 text-sm font-bold text-primary transition-colors hover:bg-muted"
-      >
-        <Mail className="h-4 w-4" aria-hidden />
-        {t("requestQuote")}
-      </Link>
+      {/* Devis : en second choix, pour le client qui veut une version
+          différente de celle affichée (quantité, équipement, livraison
+          particulière) plutôt que payer tout de suite pour le produit tel
+          quel. La précision au-dessus du bouton dit explicitement ce qui
+          distingue les deux choix : sans elle, rien sur la fiche n'explique
+          pourquoi demander un devis plutôt que payer directement. Le produit
+          est identifié dans l'URL, le formulaire relit lui-même son nom, sa
+          référence et son prix côté serveur. */}
+      <div className="-mt-2 flex flex-col gap-1.5">
+        <p className="text-center text-xs text-muted-foreground">{t("customRequestHint")}</p>
+        <Link
+          href={quoteHref}
+          className="flex items-center justify-center gap-2 rounded-sm border border-primary px-5 py-3 text-sm font-bold text-primary transition-colors hover:bg-muted"
+        >
+          <Mail className="h-4 w-4" aria-hidden />
+          {t("requestQuote")}
+        </Link>
+      </div>
 
       {/* Même logique que le devis, en canal alternatif : message pré-rempli,
           rien à ressaisir pour le client qui préfère WhatsApp à l'e-mail. */}

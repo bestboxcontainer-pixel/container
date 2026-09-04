@@ -118,6 +118,7 @@
     "addToCart": "In den Warenkorb",
     "fastDelivery": "Standardversand kostenlos (3-5 Tage) · Express 70 € (24-48 Std.)",
     "warranty": "14 Tage Rückgaberecht ohne Angabe von Gründen",
+    "customRequestHint": "Andere Ausführung, Menge oder Sonderwunsch?",
     "requestQuote": "Angebot anfragen",
     "requestQuoteWhatsapp": "Anfrage per WhatsApp",
     "quoteWhatsappMessage": "Hallo, ich interessiere mich für folgendes Produkt und hätte gerne ein Angebot:\n\n{product}\nArt.-Nr.: {sku}\nPreis: {price}\n{url}",

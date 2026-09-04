@@ -1,9 +1,9 @@
 /**
  * Contenu légal et informatif en ALLEMAND : BBC Best Box Containerhandel e.K.
  *
- * ATTENTION : toutes les données d'entreprise sont des PLACEHOLDERS
- * (adresse, HRB, USt-IdNr., tarifs). Voir docs/LEGAL.md pour la liste
- * exhaustive des éléments à remplacer avant mise en ligne.
+ * Coordonnées d'entreprise réelles (adresse, HRA, USt-IdNr.). Voir
+ * docs/LEGAL.md pour ce qui reste à compléter avant mise en ligne
+ * (assurance, prestataires, hébergeur…).
  *
  * État du droit retenu : juillet 2026 (§ 5 DDG, § 356a BGB / Widerrufsbutton
  * depuis le 19.06.2026, PAngV, DSGVO/TDDDG, VSBG § 36 : plateforme ODR fermée
@@ -47,9 +47,7 @@ export const COMPANY = {
   // des Handelsregisters (HRA) geführt; für den Sitz in Großensee
   // (Schleswig-Holstein) ist das Amtsgericht Lübeck zuständig.
   register: "Amtsgericht Lübeck, HRA 3471",
-  // À RENSEIGNER : la facture doit porter le numéro de TVA (§ 14 Abs. 4 Nr. 2
-  // UStG). Tant que cette valeur reste un gabarit, chaque facture émise est
-  // incomplète.
+  // Doit figurer sur chaque facture (§ 14 Abs. 4 Nr. 2 UStG).
   vatId: "DE814218818",
   domain: "www.bestboxcontainer.de",
 } as const;
@@ -74,13 +72,13 @@ export const deLegalPages: LegalPageMap = {
     slug: "impressum",
     title: "Impressum",
     intro: intro(
-      "Anbieterkennzeichnung nach § 5 Digitale-Dienste-Gesetz (DDG) und § 18 Absatz 2 Medienstaatsvertrag (MStV).",
+      "Anbieterkennzeichnung nach § 5 Digitale-Dienste-Gesetz (DDG) und § 18 Absatz 2 Medienstaatsvertrag (MStV) für den Online-Shop der BBC Best Box Containerhandel e.K., Handel mit See-, Lager-, Büro- und Sanitärcontainern.",
     ),
     updatedAt: UPDATED_AT,
     sections: [
       {
         heading: "Diensteanbieter",
-        body: "Verantwortlich für diesen Onlineshop ist:",
+        body: "Verantwortlich für diesen Onlineshop für See-, Lager-, Büro- und Sanitärcontainer ist:",
         list: [
           COMPANY.name,
           COMPANY.street,
@@ -108,13 +106,6 @@ export const deLegalPages: LegalPageMap = {
       {
         heading: "Umsatzsteuer-Identifikationsnummer",
         body: `Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz: ${COMPANY.vatId}`,
-      },
-      {
-        heading: "Registrierung nach dem Verpackungsgesetz",
-        body: "Als Vertreiber verpackter Waren sind wir im Verpackungsregister LUCID gemeldet:",
-        list: [
-          "Verpackungsregister LUCID: DE0000000000000 (Platzhalter)",
-        ],
       },
       {
         heading: "Verantwortlich für den redaktionellen Inhalt",

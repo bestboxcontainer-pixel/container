@@ -35,7 +35,6 @@ Aucun HTML brut n'est stocké : le rendu doit découper sur `\n\n` et échapper 
 | `versand` | Versand und Lieferung | Shipping and Delivery | oui |
 | `zahlungsarten` | Zahlungsarten | Payment Methods | oui |
 | `retoure` | Retoure und Reklamation | Returns and Complaints | oui |
-| `elektroaltgeraete` | Elektroaltgeräte und Batterien | Waste Electrical Equipment and Batteries | oui |
 | `faq` | Häufige Fragen (20 questions) | Frequently Asked Questions | non |
 | `ueber-uns` | Über uns | About Us | non |
 | `kontakt` | Kontakt | Contact | non |
@@ -49,7 +48,7 @@ the event of any discrepancy, the German version of this page is the only legall
 // Constantes
 const DEFAULT_LEGAL_LOCALE: LegalLocale;                // "de"
 const LEGAL_LOCALES: readonly LegalLocale[];            // ["de", "en"]
-const LEGAL_SLUGS: readonly LegalSlug[];                // 11 slugs, ordre d'affichage
+const LEGAL_SLUGS: readonly LegalSlug[];                // 10 slugs, ordre d'affichage
 
 // Gardes de type (pour les segments d'URL dynamiques)
 function isLegalSlug(value: string): value is LegalSlug;
@@ -79,7 +78,7 @@ en découlent.
 Les colonnes du pied de page sont réparties ainsi :
 
 - **Service** : `versand`, `zahlungsarten`, `retoure`, `faq`
-- **Rechtliches / Legal** : `impressum`, `agb`, `datenschutz`, `widerruf`, `elektroaltgeraete`
+- **Rechtliches / Legal** : `impressum`, `agb`, `datenschutz`, `widerruf`
 - **Unternehmen / Company** : `ueber-uns`, `kontakt`
 
 ### Note d'intégration
@@ -94,7 +93,9 @@ Les slugs de ce corpus sont `widerruf` et `retoure`. Il faut soit aligner le foo
 
 - **Impressumspflicht** (§ 5 DDG, ex-TMG) : raison sociale, forme juridique, adresse physique,
   représentant légal, moyens de contact rapides, registre du commerce, numéro de TVA
-  intracommunautaire, responsable éditorial (§ 18 al. 2 MStV), numéros WEEE / batteries / LUCID.
+  intracommunautaire, responsable éditorial (§ 18 al. 2 MStV). Pas de registre d'emballages
+  LUCID ni de numéros WEEE/batteries : un conteneur n'est pas un emballage au sens du
+  Verpackungsgesetz, et la boutique ne vend pas d'appareils électriques.
 - **Streitbeilegung** : formulation § 36 VSBG **sans lien vers la plateforme ODR**, qui a été
   définitivement fermée le 20 juillet 2025. Maintenir un lien vers cette plateforme est
   aujourd'hui une pratique commerciale trompeuse et un motif d'`Abmahnung`.
@@ -110,8 +111,8 @@ Les slugs de ce corpus sont `widerruf` et `retoure`. Il faut soit aligner le foo
 - **AGB** B2C vente à distance : champ d'application, conclusion du contrat, correction des
   erreurs de saisie, langue et archivage, prix et frais de port, délais, paiement, réserve de
   propriété, droit de rétractation, garantie légale 2 ans + biens à éléments numériques
-  (§§ 475b/475c BGB), garanties fabricant, dommages de transport, reprise ElektroG,
-  compensation, limitation de responsabilité, droit applicable et for.
+  (§§ 475b/475c BGB), garanties fabricant, dommages de transport, compensation,
+  limitation de responsabilité, droit applicable et for.
 - **Datenschutzerklärung** : art. 13/14 RGPD, bases légales art. 6, hébergement et logs,
   commande et compte client, prestataires de paiement, contrôle de solvabilité, transporteurs
   et service de montage, avis clients, newsletter (double opt-in + § 7 al. 3 UWG), cookies
@@ -121,24 +122,17 @@ Les slugs de ce corpus sont `widerruf` et `retoure`. Il faut soit aligner le foo
 - **PAngV** : prix total TTC, mention de la TVA, frais de port annoncés avant le panier,
   prix de base pour les produits vendus au poids/volume/longueur/surface, règle du prix le
   plus bas des 30 derniers jours en cas de promotion.
-- **ElektroG / WEEE** : symbole de la poubelle barrée, obligation d'affichage sur les pages
-  produit depuis le 1er juillet 2026 (§ 18a ElektroG), reprise 1:1 lors de la livraison,
-  reprise 0:1 pour les petits appareils dont aucune dimension extérieure n'excède 25 cm
-  (max. 3 par type), question posée au client dans le tunnel de commande, suppression des
-  données personnelles (§ 10 al. 1 ElektroG), retrait préalable des piles et lampes.
-- **Batteriegesetz / BattDG** : interdiction du tout-venant, reprise gratuite à l'adresse
-  d'expédition, signification des symboles Pb / Cd / Hg, consigne de sécurité lithium-ion,
-  points de collecte communaux.
-- **Contenu commercial cohérent avec le site** : livraison gratuite dès 50 €, 1-3 jours
-  ouvrés, service de montage sur demande, reprise de l'ancien appareil, garantie 2 ans,
-  paiement facture / PayPal / carte / SEPA / virement, drones (< 250 g).
+- **Contenu commercial cohérent avec le site** : standard gratuit 7-10 jours ouvrés, express
+  199 €, service de montage sur demande, garantie légale 2 ans, paiement facture / PayPal /
+  carte / SEPA / virement.
 
 ## 5. À remplacer impérativement avant la mise en ligne
 
-### 5.1 Données d'entreprise (encore fictives sur certains points, voir ci-dessous)
+### 5.1 Données d'entreprise (réelles)
 
-Mis à jour en 2026-09 avec l'identité réelle de l'entreprise. Reste un placeholder :
-le numéro de registre d'emballages LUCID.
+Mis à jour en 2026-09 avec l'identité réelle de l'entreprise. Toutes les données du
+tableau ci-dessous sont réelles ; ce qui reste à compléter (assurance, prestataires…)
+est du texte, pas des coordonnées d'entreprise, voir § 5.2.
 
 | Élément | Valeur actuelle | Statut | Où |
 | --- | --- | --- | --- |
@@ -151,13 +145,14 @@ le numéro de registre d'emballages LUCID.
 | E-mail | `kontakt@bestboxcontainer.de` | réel, domaine vérifié dans Resend | `COMPANY.email` |
 | Téléphone | `+49 1525 9026450` | réel | `COMPANY.phone` |
 | N° TVA intracommunautaire | `DE814218818` | réel | `COMPANY.vatId` (dupliqué dans `IMPRESSUM` de `campaign.ts`, voir le commentaire à cet endroit) |
-| N° registre emballages LUCID | `DE0000000000000` | placeholder, à compléter (la boutique expédie des colis et des palettes, donc soumise à la LUCID) | `impressum` |
-
-Les mentions WEEE (stiftung ear) et registre batteries (BattDG) du gabarit d'origine
-(vente d'électroménager) ont été retirées de l'Impressum : une boutique de conteneurs n'est
-soumise ni à l'ElektroG ni au BattDG. Pas de placeholder à suivre pour elles.
 | Adresse de retour | identique au siège | réel | `RETURN_ADDRESS` |
 | Domaine | `www.bestboxcontainer.de` | réel, domaine vérifié dans Resend pour l'envoi d'e-mails | `COMPANY.domain` |
+
+Trois rubriques du gabarit d'origine (vente d'électroménager) ont été retirées de
+l'Impressum plutôt que complétées : WEEE (stiftung ear), registre batteries (BattDG) —
+la boutique ne vend pas d'appareils électriques — et registre d'emballages LUCID en
+2026-09 : un conteneur est le produit vendu, pas un emballage autour d'un autre produit,
+au sens du Verpackungsgesetz. Aucun placeholder à suivre pour ces trois-là.
 
 La vitrine publique bilingue (catalogue, devis, panier, back-office complet) est en
 service à `/` et `/en`, ce n'est plus un back-office isolé derrière une page vierge — voir
@@ -231,10 +226,6 @@ Ces obligations ne sont pas du contenu texte et relèvent d'autres chantiers :
 - **Mentions produit GPSR** (règlement (UE) 2023/988, applicable depuis le 13.12.2024, et
   nouveau ProdSG allemand en vigueur depuis le 19.02.2026) : fabricant, personne responsable
   dans l'UE, identifiants produit, avertissements de sécurité sur chaque fiche produit.
-- **Symbole poubelle barrée sur les fiches produit** (§ 18a ElektroG depuis le 01.07.2026)
-  et information sur les modalités d'enlèvement/reprise, pour les distributeurs assujettis.
-- **Étiquette énergie EU et fiche produit (EnVKV / règlement (UE) 2017/1369)** pour le gros
-  électroménager et les téléviseurs, avec lien vers la base EPREL.
 - **Indication du prix de base** générée par le catalogue là où elle s'applique.
 - **Affichage de l'ancien prix / prix le plus bas sur 30 jours** en cas de promotion (§ 11 PAngV).
 - **Bouton « Zahlungspflichtig bestellen »** et récapitulatif de commande conformes à
@@ -249,8 +240,6 @@ Recherche effectuée en juillet 2026. Sources officielles et cabinets spécialis
 - § 36 VSBG et Universalschlichtungsstelle des Bundes (Kehl), [gesetze-im-internet.de, § 36 VSBG](https://www.gesetze-im-internet.de/vsbg/__36.html), [Bundesamt für Justiz](https://www.bundesjustizamt.de/DE/Themen/Verbraucherrechte/Verbraucherstreitbeilegung/Unternehmen/Unternehmen_node.html)
 - Muster-Widerrufsbelehrung (Anlage 1 EGBGB) et Muster-Widerrufsformular (Anlage 2 EGBGB), [buzer.de, Anlage 1](https://www.buzer.de/Anlage_1_EGBGB.htm), [buzer.de, Anlage 2](https://www.buzer.de/Anlage_2_EGBGB.htm), [BMJ, Musterbelehrungen Widerrufsrecht im Fernabsatz](https://www.bmjv.de/DE/service/formulare/form_widerrufsrecht/form_widerrufsrecht_node.html)
 - Widerrufsbutton / § 356a BGB au 19.06.2026: [Wettbewerbszentrale](https://www.wettbewerbszentrale.de/die-zeit-laeuft-ab-19-06-2026-ist-der-widerrufsbutton-pflicht/), [Noerr, loi de transposition](https://www.noerr.com/de/insights/umsetzungsgesetz-zum-widerrufsbutton-veroeffentlicht), [Datenschutz-Generator, FAQ Widerrufsbutton](https://datenschutz-generator.de/widerrufsbutton/), [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/widerrufsbutton-ab-juni-2026-onlinevertraege-einfacher-widerrufen-118449)
-- ElektroG §§ 17, 18, 18a et nouvelles obligations au 01.07.2026, [buzer.de, § 17 ElektroG](https://www.buzer.de/17_ElektroG.htm), [elektrogesetz.de, reprise par le commerce](https://www.elektrogesetz.de/themen/ruecknahme-handel/), [IT-Recht Kanzlei, nouvelle obligation de marquage](https://www.it-recht-kanzlei.de/elektrogesetz-neue-informationspflicht-muelltonne.html), [Shopbetreiber-Blog](https://shopbetreiber-blog.de/elektrog-ab-1-7-2026-ruecknahmepflicht-fuer-e-zigaretten-und-neues-ruecknahmesymbol)
-- Batteries / BattDG: [batteriegesetz.de, obligations](https://www.batteriegesetz.de/umsetzung/pflichten/), [IT-Recht Kanzlei, obligations d'information en ligne](https://www.it-recht-kanzlei.de/informationspflichten-batterien-online-battdg.html), [IHK Mittlerer Niederrhein](https://mittlerer-niederrhein.ihk.de/themen/umwelt/abfall-und-kreislaufwirtschaft/batterierecht-durchfuehrungsgesetz)
 - PAngV: [gesetze-im-internet.de, PAngV](https://www.gesetze-im-internet.de/pangv_2022/BJNR492110021.html), [IT-Recht Kanzlei, guide PAngV](https://www.it-recht-kanzlei.de/preisangabenverordnung.html)
 - Datenschutzerklärung / RGPD / § 25 TDDDG: [IHK Schleswig-Holstein](https://www.ihk.de/schleswig-holstein/recht/recht-im-internet/pflichtangaben-internet-datenschutzerklaerung-1359834), [eRecht24, RGPD pour boutiques en ligne](https://www.e-recht24.de/datenschutz/7902-datenschutzerklaerung-fuer-online-shops-was-shopbetreiber-wissen-muessen.html)
 - GPSR et nouveau ProdSG (19.02.2026): [Dr. Bahr, FAQ GPSR](https://www.dr-bahr.com/infos/rechts-faq/rechts-faq-produktsicherheitsverordnung-gpsr-pflichten-fuer-online-shop-betreiber.html), [Händlerbund](https://www.haendlerbund.de/de/ratgeber/recht/produktsicherheitsverordnung), [eRecht24](https://www.e-recht24.de/ecommerce/13370-produktsicherheitsverordnung-im-e-commerce.html)

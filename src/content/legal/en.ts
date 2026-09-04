@@ -5,8 +5,8 @@
  * structure de sections. Pour les pages juridiques, une mention indique que
  * seule la version allemande fait foi (langue contractuelle = allemand).
  *
- * ATTENTION : toutes les données d'entreprise sont des PLACEHOLDERS.
- * Voir docs/LEGAL.md.
+ * Coordonnées d'entreprise réelles. Voir docs/LEGAL.md pour ce qui reste
+ * à compléter avant mise en ligne (assurance, prestataires, hébergeur…).
  *
  * ElektroG / BattDG (électroménager et électronique) volontairement absents,
  * pour la même raison que dans de.ts : hors du champ d'activité de
@@ -60,13 +60,13 @@ export const enLegalPages: LegalPageMap = {
     slug: "impressum",
     title: "Legal Notice (Impressum)",
     intro: intro(
-      "Provider identification pursuant to section 5 of the German Digital Services Act (Digitale-Dienste-Gesetz, DDG) and section 18(2) of the German Interstate Media Treaty (Medienstaatsvertrag, MStV).",
+      "Provider identification pursuant to section 5 of the German Digital Services Act (Digitale-Dienste-Gesetz, DDG) and section 18(2) of the German Interstate Media Treaty (Medienstaatsvertrag, MStV) for the online shop of BBC Best Box Containerhandel e.K., trading shipping, storage, office and sanitary containers.",
     ),
     updatedAt: UPDATED_AT,
     sections: [
       {
         heading: "Service provider",
-        body: "This online shop is operated by:",
+        body: "This online shop for shipping, storage, office and sanitary containers is operated by:",
         list: [COMPANY.name, COMPANY.street, COMPANY.city, COMPANY.country],
       },
       {
@@ -89,11 +89,6 @@ export const enLegalPages: LegalPageMap = {
       {
         heading: "VAT identification number",
         body: `VAT identification number pursuant to section 27a of the German VAT Act (Umsatzsteuergesetz): ${COMPANY.vatId}`,
-      },
-      {
-        heading: "Registration under the Packaging Act",
-        body: "As a distributor of packaged goods, we are registered with the packaging register:",
-        list: ["Packaging register LUCID: DE0000000000000 (placeholder)"],
       },
       {
         heading: "Responsible for editorial content",

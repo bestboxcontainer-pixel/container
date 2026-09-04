@@ -39,7 +39,7 @@ export const COMPANY = {
   postalCode: "22946",
   locality: "Großensee",
   country: "Deutschland",
-  email: "kontakt@bestbox-containerhandel.de",
+  email: "kontakt@bestboxcontainer.de",
   phone: "+49 1525 9026450",
   owner: "Peer Kunz",
   registeredSince: "20. April 2006",
@@ -298,7 +298,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "2. Datenschutzbeauftragter",
-        body: "Unseren betrieblichen Datenschutzbeauftragten erreichen Sie unter datenschutz@bestbox-containerhandel.de oder postalisch unter der oben genannten Anschrift mit dem Zusatz „Datenschutzbeauftragter“. Ob eine Bestellpflicht besteht, richtet sich nach § 38 BDSG; die Angabe ist vor der Veröffentlichung zu prüfen.",
+        body: "Unseren betrieblichen Datenschutzbeauftragten erreichen Sie unter datenschutz@bestboxcontainer.de oder postalisch unter der oben genannten Anschrift mit dem Zusatz „Datenschutzbeauftragter“. Ob eine Bestellpflicht besteht, richtet sich nach § 38 BDSG; die Angabe ist vor der Veröffentlichung zu prüfen.",
       },
       {
         heading: "3. Rechtsgrundlagen der Verarbeitung",
@@ -803,7 +803,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Arbeiten bei BBC Best Box Containerhandel e.K.",
-        body: "Wir suchen regelmäßig Verstärkung in Beratung, Technik und Logistik. Wenn Sie Freude daran haben, Menschen wirklich weiterzuhelfen, statt nur Bestellungen abzuarbeiten, schreiben Sie uns an kontakt@bestbox-containerhandel.de, auch Initiativbewerbungen sind willkommen.",
+        body: "Wir suchen regelmäßig Verstärkung in Beratung, Technik und Logistik. Wenn Sie Freude daran haben, Menschen wirklich weiterzuhelfen, statt nur Bestellungen abzuarbeiten, schreiben Sie uns an kontakt@bestboxcontainer.de, auch Initiativbewerbungen sind willkommen.",
       },
     ],
   },
@@ -844,7 +844,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Datenschutzanfragen",
-        body: "Auskunft, Berichtigung oder Löschung Ihrer Daten beantragen Sie unter datenschutz@bestbox-containerhandel.de oder postalisch mit dem Zusatz „Datenschutzbeauftragter“. Wir antworten innerhalb der gesetzlichen Frist von einem Monat.",
+        body: "Auskunft, Berichtigung oder Löschung Ihrer Daten beantragen Sie unter datenschutz@bestboxcontainer.de oder postalisch mit dem Zusatz „Datenschutzbeauftragter“. Wir antworten innerhalb der gesetzlichen Frist von einem Monat.",
       },
       {
         heading: "Presse und Kooperationen",

@@ -86,7 +86,7 @@ export const PAGE_MAINTENANCE = `<!doctype html>
     <p>Vielen Dank für Ihr Verständnis.</p>
     <p class="contact">
       Fragen? Schreiben Sie uns an
-      <a href="mailto:kontakt@bestbox-containerhandel.de">kontakt@bestbox-containerhandel.de</a>
+      <a href="mailto:kontakt@bestboxcontainer.de">kontakt@bestboxcontainer.de</a>
     </p>
   </main>
 </body>

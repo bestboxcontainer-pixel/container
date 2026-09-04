@@ -27,7 +27,7 @@ const COMPANY = {
   street: "Petersweg 11a",
   city: "22946 Großensee",
   country: "Germany",
-  email: "kontakt@bestbox-containerhandel.de",
+  email: "kontakt@bestboxcontainer.de",
   phone: "+49 1525 9026450",
   owner: "Peer Kunz",
   registeredSince: "20 April 2006",
@@ -277,7 +277,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "2. Data protection officer",
-        body: "You can contact our data protection officer at datenschutz@bestbox-containerhandel.de or by post at the address above, marked \"Datenschutzbeauftragter\". Whether an appointment is mandatory depends on section 38 of the German Federal Data Protection Act and must be verified before publication.",
+        body: "You can contact our data protection officer at datenschutz@bestboxcontainer.de or by post at the address above, marked \"Datenschutzbeauftragter\". Whether an appointment is mandatory depends on section 38 of the German Federal Data Protection Act and must be verified before publication.",
       },
       {
         heading: "3. Legal bases for processing",
@@ -781,7 +781,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Working at BBC Best Box Containerhandel e.K.",
-        body: "We regularly look for reinforcements in advice, technical service and logistics. If you enjoy genuinely helping people rather than just processing orders, write to us at kontakt@bestbox-containerhandel.de, speculative applications are welcome too.",
+        body: "We regularly look for reinforcements in advice, technical service and logistics. If you enjoy genuinely helping people rather than just processing orders, write to us at kontakt@bestboxcontainer.de, speculative applications are welcome too.",
       },
     ],
   },
@@ -822,7 +822,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Data protection requests",
-        body: "To request access to, rectification of or erasure of your data, write to datenschutz@bestbox-containerhandel.de or by post marked \"Datenschutzbeauftragter\". We respond within the statutory period of one month.",
+        body: "To request access to, rectification of or erasure of your data, write to datenschutz@bestboxcontainer.de or by post marked \"Datenschutzbeauftragter\". We respond within the statutory period of one month.",
       },
       {
         heading: "Press and partnerships",

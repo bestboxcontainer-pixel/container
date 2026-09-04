@@ -62,7 +62,7 @@ export function RichTextField({
 
     if (mark === "link") {
       const href = window.prompt(
-        "Adresse du lien\n\nExemples : /agb, https://example.de, mailto:kontakt@bestbox-containerhandel.de",
+        "Adresse du lien\n\nExemples : /agb, https://example.de, mailto:kontakt@bestboxcontainer.de",
         "https://",
       );
       if (href === null) return;

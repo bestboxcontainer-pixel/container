@@ -9,8 +9,13 @@ const lato = Lato({
   variable: "--font-lato",
 });
 
+// `NEXT_PUBLIC_SITE_URL` sans schéma (ex. « bestboxcontainer.de » au lieu de
+// « https://bestboxcontainer.de », déjà vu sur un panneau d'hébergeur) ferait
+// planter `new URL()` ci-dessous et casserait le build entier : le schéma est
+// donc rétabli ici plutôt que supposé présent.
+const SITE_URL_BRUT = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestboxcontainer.de";
 const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestboxcontainer.de"
+  /^https?:\/\//.test(SITE_URL_BRUT) ? SITE_URL_BRUT : `https://${SITE_URL_BRUT}`
 ).replace(/\/+$/, "");
 
 const TITLE = "BBC Best Box Containerhandel e.K.";

@@ -197,6 +197,12 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Filet de sécurité : un élément qui dépasse la largeur de l'écran (texte
+       non coupé, carrousel mal cadré...) ouvrait un défilement horizontal sur
+       toute la page plutôt que de rester invisible, entraînant avec lui
+       l'en-tête fixe. Le débordement lui-même reste un bug à corriger, mais
+       ne doit plus jamais rendre le site inutilisable en attendant. */
+    overflow-x: hidden;
   }
   html {
     @apply font-sans;

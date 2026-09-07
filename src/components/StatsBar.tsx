@@ -15,7 +15,7 @@ export function StatsBar({ items }: { items: readonly StatItem[] }) {
           <dd className="text-3xl font-black tracking-[-0.02em] whitespace-nowrap text-white sm:text-4xl">
             {item.value}
           </dd>
-          <dt className="mt-1 text-xs font-bold whitespace-nowrap uppercase tracking-[0.14em] text-white/55 sm:text-sm">
+          <dt className="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-white/55 sm:text-sm sm:whitespace-nowrap">
             {item.label}
           </dt>
         </div>

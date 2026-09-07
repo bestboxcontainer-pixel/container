@@ -115,9 +115,9 @@ export const deLegalPages: LegalPageMap = {
         heading: "Betriebshaftpflichtversicherung",
         body: "Angaben zur Betriebs- und Produkthaftpflichtversicherung (freiwillige Angabe, für Dienstleistungen nach § 2 DL-InfoV verpflichtend):",
         list: [
-          "Versicherer: Name der Versicherung (Platzhalter)",
-          "Anschrift des Versicherers (Platzhalter)",
-          "Räumlicher Geltungsbereich: Bundesrepublik Deutschland (Platzhalter)",
+          "Versicherer: AXA Versicherung AG",
+          "Anschrift des Versicherers: Colonia-Allee 10–20, 51067 Köln",
+          "Räumlicher Geltungsbereich: Bundesrepublik Deutschland",
         ],
       },
       {

@@ -98,9 +98,9 @@ export const enLegalPages: LegalPageMap = {
         heading: "Business liability insurance",
         body: "Details of our business and product liability insurance (voluntary disclosure; mandatory for service providers under section 2 of the German Service Information Obligations Ordinance):",
         list: [
-          "Insurer: name of the insurance company (placeholder)",
-          "Address of the insurer (placeholder)",
-          "Geographical scope: Federal Republic of Germany (placeholder)",
+          "Insurer: AXA Versicherung AG",
+          "Address of the insurer: Colonia-Allee 10–20, 51067 Cologne, Germany",
+          "Geographical scope: Federal Republic of Germany",
         ],
       },
       {

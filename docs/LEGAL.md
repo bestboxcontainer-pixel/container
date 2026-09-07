@@ -134,7 +134,7 @@ Les slugs de ce corpus sont `widerruf` et `retoure`. Il faut soit aligner le foo
 ### 5.1 Données d'entreprise (réelles)
 
 Mis à jour en 2026-09 avec l'identité réelle de l'entreprise. Toutes les données du
-tableau ci-dessous sont réelles ; ce qui reste à compléter (assurance, prestataires…)
+tableau ci-dessous sont réelles ; ce qui reste à compléter (prestataires, hébergeur…)
 est du texte, pas des coordonnées d'entreprise, voir § 5.2.
 
 | Élément | Valeur actuelle | Statut | Où |
@@ -169,9 +169,14 @@ diffère : `Deutschland` / `Germany`). Modifier les deux.
 
 ### 5.2 Éléments juridiques à compléter
 
-1. **Assurance responsabilité civile professionnelle / exploitation**, nom, adresse et
-   étendue géographique de l'assureur (`impressum`, section « Betriebshaftpflichtversicherung »).
-   Obligatoire pour les prestations de service au sens du § 2 DL-InfoV (service de montage).
+1. ~~**Assurance responsabilité civile d'exploitation**, nom, adresse et étendue
+   géographique de l'assureur (`impressum`, section « Betriebshaftpflichtversicherung »).~~
+   Fait (2026-09) : AXA Versicherung AG, Colonia-Allee 10–20, 51067 Köln. Volontairement
+   pas « Berufshaftpflicht » (responsabilité civile professionnelle, pour les métiers de
+   conseil) : une boutique qui vend un bien physique relève de la responsabilité civile
+   d'exploitation et, le cas échéant, de la responsabilité du fait des produits
+   (Produkthaftpflicht), toutes deux couvertes par la formulation du corpus. À confirmer
+   que la police souscrite auprès d'AXA couvre bien les deux volets avant mise en ligne.
 2. **Prestataires de paiement** : nommer explicitement chaque prestataire (PayPal (Europe)
    S.à r.l. et Cie, S.C.A., acquéreur carte, prestataire du paiement sur facture) avec adresse
    dans `datenschutz` §6 et `zahlungsarten`.

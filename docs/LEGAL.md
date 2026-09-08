@@ -175,8 +175,8 @@ diffère : `Deutschland` / `Germany`). Modifier les deux.
    pas « Berufshaftpflicht » (responsabilité civile professionnelle, pour les métiers de
    conseil) : une boutique qui vend un bien physique relève de la responsabilité civile
    d'exploitation et, le cas échéant, de la responsabilité du fait des produits
-   (Produkthaftpflicht), toutes deux couvertes par la formulation du corpus. À confirmer
-   que la police souscrite auprès d'AXA couvre bien les deux volets avant mise en ligne.
+   (Produkthaftpflicht), toutes deux couvertes par la formulation du corpus. Confirmé
+   (2026-09) : la police souscrite auprès d'AXA couvre bien les deux volets.
 2. **Prestataires de paiement** : nommer explicitement chaque prestataire (PayPal (Europe)
    S.à r.l. et Cie, S.C.A., acquéreur carte, prestataire du paiement sur facture) avec adresse
    dans `datenschutz` §6 et `zahlungsarten`.

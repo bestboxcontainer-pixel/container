@@ -123,8 +123,7 @@ export async function ProductReviewSection({
         </div>
       ) : (
         <div className={`${PRODUCT_REVIEW_TOKENS.empty} mb-5`}>
-          <p className="font-black text-foreground">{t("emptyTitle")}</p>
-          <p className="mt-2 text-sm text-muted-foreground">{t("emptyHint")}</p>
+          <p className="text-sm text-muted-foreground">{t("emptyHint")}</p>
           {typeof editorialRating === "number" && (
             <p className="mt-3 text-sm text-muted-foreground">
               {t("editorial", { rating: formatRating(editorialRating, locale) })}

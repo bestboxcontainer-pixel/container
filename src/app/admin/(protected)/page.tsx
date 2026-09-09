@@ -150,7 +150,7 @@ export default async function AdminDashboardPage() {
     .sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime())
     .slice(0, 6);
 
-  // Tranches de prix en centimes, bornes lisibles pour un catalogue d'électroménager
+  // Tranches de prix en centimes, bornes lisibles pour le catalogue de conteneurs
   const PRICE_STEPS = [20000, 50000, 100000, 150000];
   const priceBuckets: PriceBucket[] = [
     { label: "moins de 200 €", count: 0 },

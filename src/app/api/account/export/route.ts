@@ -21,7 +21,7 @@ export async function GET() {
   if (!data) return accountErrorResponse("not_found", 404);
 
   const stamp = new Date().toISOString().slice(0, 10);
-  const filename = `hausgeraete-pfeffer-datenauskunft-${stamp}.json`;
+  const filename = `bbc-best-box-datenauskunft-${stamp}.json`;
 
   return new NextResponse(JSON.stringify(data, null, 2), {
     status: 200,

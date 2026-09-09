@@ -122,26 +122,6 @@ export function AmexMark() {
   );
 }
 
-export function PaypalMark() {
-  return (
-    <Card label="PayPal">
-      {/* Bicolore comme le logotype : « Pay » foncé, « Pal » clair */}
-      <text
-        x="24"
-        y="20"
-        textAnchor="middle"
-        fontFamily="Helvetica, Arial, sans-serif"
-        fontSize="10"
-        fontWeight="700"
-        fontStyle="italic"
-      >
-        <tspan fill="#003087">Pay</tspan>
-        <tspan fill="#009CDE">Pal</tspan>
-      </text>
-    </Card>
-  );
-}
-
 export function SepaMark() {
   return (
     <Card label="SEPA-Lastschrift">
@@ -262,7 +242,6 @@ export function brandMarksFor(key: string, icon: string): Mark[] | null {
 
   const byKey: Record<string, Mark[]> = {
     rechnung: [InvoiceMark],
-    paypal: [PaypalMark],
     kreditkarte: [VisaMark, MastercardMark, AmexMark],
     creditcard: [VisaMark, MastercardMark, AmexMark],
     visa: [VisaMark],
@@ -284,7 +263,6 @@ export function brandMarksFor(key: string, icon: string): Mark[] | null {
   const byIcon: Record<string, Mark[]> = {
     "credit-card": [VisaMark, MastercardMark],
     "file-text": [InvoiceMark],
-    wallet: [PaypalMark],
     banknote: [SepaMark],
     zap: [SofortMark],
   };

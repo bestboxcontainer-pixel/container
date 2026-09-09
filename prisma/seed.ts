@@ -179,14 +179,13 @@ async function seedCatalog(): Promise<void> {
   console.log(`Katalog: ${groupSlugs.length} Gruppen, ${categories.length} Kategorien, ${products.length} Produkte`);
 }
 
-// L'achat sur facture (« Kauf auf Rechnung ») n'est plus proposé : la
-// La Vorkasse vient en tête : c'est le seul moyen qui aboutit à un
-// encaissement sans prestataire configuré. Les quatre suivants attendent
-// leurs clés d'accès et restent des libellés tant qu'elles manquent.
+// Deux moyens seulement, ceux réellement encaissés : la Vorkasse (virement,
+// aucun prestataire à configurer) et la carte via Stripe. PayPal,
+// Sofortüberweisung et SEPA-Lastschrift ont été retirés : aucun contrat, et un
+// logo affiché mais absent du tunnel se lit comme une information trompeuse
+// (voir aussi PaymentMethodsBar).
 //
-// Aucun n'annonce de remise : le tunnel de commande ne sait pas en appliquer,
-// et un escompte affiché mais jamais déduit se retournerait contre nous, le
-// client qui retire 2 % de son virement paierait moins que sa facture.
+// Aucun n'annonce de remise : le tunnel de commande ne sait pas en appliquer.
 const PAYMENT_METHODS = [
   {
     key: "vorkasse",
@@ -197,42 +196,12 @@ const PAYMENT_METHODS = [
     position: 0,
   },
   {
-    key: "paypal",
-    label: "PayPal",
-    description: "Bezahlen mit PayPal-Konto oder als Gast.",
-    icon: "wallet",
-    feeLabel: "kostenlos",
-    position: 1,
-  },
-  {
     key: "kreditkarte",
-    label: "Kreditkarte",
-    description: "Visa, Mastercard und American Express.",
+    label: "Kredit- und Debitkarte",
+    description: "Visa, Mastercard und American Express, abgewickelt über Stripe.",
     icon: "credit-card",
     feeLabel: "kostenlos",
-    position: 2,
-  },
-  // Sofortüberweisung et SEPA-Lastschrift ne correspondent à aucun contrat de
-  // la boutique. Ils restent décrits ici pour le jour où ils seront souscrits,
-  // mais naissent éteints : proposer à la caisse un moyen dont personne
-  // n'encaisse le produit enverrait le client dans une impasse.
-  {
-    key: "sofort",
-    label: "Sofortüberweisung",
-    description: "Direkte Überweisung über das Online-Banking.",
-    icon: "zap",
-    feeLabel: "kostenlos",
-    enabled: false,
-    position: 3,
-  },
-  {
-    key: "lastschrift",
-    label: "SEPA-Lastschrift",
-    description: "Abbuchung nach Versand der Bestellung.",
-    icon: "banknote",
-    enabled: false,
-    feeLabel: "kostenlos",
-    position: 4,
+    position: 1,
   },
 ];
 
@@ -246,21 +215,6 @@ const INTEGRATIONS = [
     key: "stripe_webhook_secret",
     label: "Stripe Webhook Secret",
     description: "Signaturprüfung eingehender Stripe-Webhooks (whsec_…).",
-  },
-  {
-    key: "paypal_client_id",
-    label: "PayPal Client ID",
-    description: "Öffentliche Kennung der PayPal-REST-App.",
-  },
-  {
-    key: "paypal_client_secret",
-    label: "PayPal Client Secret",
-    description: "Geheimnis der PayPal-REST-App.",
-  },
-  {
-    key: "klarna_api_key",
-    label: "Klarna API Key",
-    description: "Zugangsschlüssel für Klarna-Zahlungen.",
   },
   // Ni SMTP ni Cloudinary ici : l'envoi d'e-mails et le stockage des images se
   // configurent uniquement par variables d'environnement (voir docs/HANDOVER.md

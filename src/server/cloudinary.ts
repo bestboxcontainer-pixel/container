@@ -100,8 +100,9 @@ function randomSuffix(): string {
 }
 
 /**
- * public_id lisible dérivé du nom d'origine : « Bosch Serie 6.jpg » devient
- * « bosch-serie-6-k3f9a1 ». L'extension est retirée, Cloudinary gère le format.
+ * public_id lisible dérivé du nom d'origine : « 20 Fuss Seecontainer.jpg »
+ * devient « 20-fuss-seecontainer-k3f9a1 ». L'extension est retirée, Cloudinary
+ * gère le format.
  */
 function buildPublicId(filename?: string): string {
   const withoutExtension = (filename ?? "").replace(/\.[^.]+$/, "");

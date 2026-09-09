@@ -199,10 +199,10 @@ export const deLegalPages: LegalPageMap = {
       {
         heading: "§ 6 Zahlungsbedingungen",
         body:
-          "Wir bieten Vorkasse per Überweisung, Sofortüberweisung, PayPal, Kreditkarte und SEPA-Lastschrift an. Welche Zahlungsarten im Einzelfall zur Verfügung stehen, wird Ihnen im Bestellprozess angezeigt; wir behalten uns vor, einzelne Zahlungsarten auszuschließen.\n\n" +
+          "Wir bieten Vorkasse per Überweisung sowie Zahlung per Kredit- und Debitkarte an. Welche Zahlungsart im Einzelfall zur Verfügung steht, wird Ihnen im Bestellprozess angezeigt; wir behalten uns vor, einzelne Zahlungsarten auszuschließen.\n\n" +
           "Bei Vorkasse erhalten Sie unsere Bankdaten mit der Bestellbestätigung; die Bestellnummer dient als Verwendungszweck. Wir reservieren die Ware sieben Kalendertage und versenden nach Eingang der Zahlung. Geht die Zahlung innerhalb der Reservierungsfrist nicht ein, stornieren wir die Bestellung.\n\n" +
-          "Bei SEPA-Lastschrift erteilen Sie uns ein SEPA-Lastschriftmandat. Über den Einzug informieren wir Sie mindestens einen Bankarbeitstag im Voraus (verkürzte Vorabankündigung). Für Rücklastschriften, die Sie zu vertreten haben, können wir die tatsächlich angefallenen Bankentgelte in Rechnung stellen.\n\n" +
-          "Für die Nutzung gängiger SEPA-Zahlungsarten und Zahlungskarten berechnen wir kein zusätzliches Entgelt (§ 270a BGB). Kommen Sie in Zahlungsverzug, gelten die gesetzlichen Regelungen; als Verbraucher schulden Sie Verzugszinsen in Höhe von fünf Prozentpunkten über dem Basiszinssatz.",
+          "Kartenzahlungen werden über unseren Zahlungsdienstleister Stripe abgewickelt; die Karte wird mit dem Versand der Ware belastet, bei Teillieferungen anteilig.\n\n" +
+          "Für die Nutzung gängiger Überweisungen und Zahlungskarten berechnen wir kein zusätzliches Entgelt (§ 270a BGB). Kommen Sie in Zahlungsverzug, gelten die gesetzlichen Regelungen; als Verbraucher schulden Sie Verzugszinsen in Höhe von fünf Prozentpunkten über dem Basiszinssatz.",
       },
       {
         heading: "§ 7 Eigentumsvorbehalt",
@@ -549,7 +549,7 @@ export const deLegalPages: LegalPageMap = {
     slug: "zahlungsarten",
     title: "Zahlungsarten",
     intro: intro(
-      "Sie zahlen bei uns per Vorkasse-Überweisung, per Sofortüberweisung, mit PayPal, per Kreditkarte oder per SEPA-Lastschrift. Welche Zahlungsarten im Einzelfall verfügbar sind, sehen Sie im Bestellprozess.",
+      "Sie zahlen bei uns per Vorkasse-Überweisung oder mit Kredit- und Debitkarte. Welche Zahlungsart im Einzelfall verfügbar ist, sehen Sie im Bestellprozess.",
     ),
     updatedAt: UPDATED_AT,
     sections: [
@@ -560,30 +560,16 @@ export const deLegalPages: LegalPageMap = {
           "Wir reservieren die Ware sieben Kalendertage. Nach Eingang der Zahlung stimmen wir umgehend den Liefertermin mit Ihnen ab. Geht die Zahlung nicht innerhalb der Reservierungsfrist ein, stornieren wir die Bestellung und Sie erhalten eine Nachricht von uns.",
       },
       {
-        heading: "Sofortüberweisung",
-        body: "Sie werden am Ende des Bestellvorgangs zum Online-Banking Ihrer Bank weitergeleitet und geben die Überweisung dort direkt frei. Wir erhalten die Zahlungsbestätigung unmittelbar und können sofort mit dem Versand beginnen, ein eigenes Konto bei einem Zahlungsdienst brauchen Sie dafür nicht.",
-      },
-      {
-        heading: "PayPal",
-        body: "Sie werden am Ende des Bestellvorgangs zu PayPal weitergeleitet und bestätigen die Zahlung dort mit Ihren Zugangsdaten. Der Betrag wird unmittelbar nach dem Vertragsschluss abgebucht. Für die Nutzung benötigen Sie ein PayPal-Konto; es gelten zusätzlich die Nutzungsbedingungen von PayPal.",
-      },
-      {
-        heading: "Kreditkarte",
-        body: "Wir akzeptieren Visa, Mastercard und American Express. Die Belastung Ihrer Karte erfolgt mit dem Versand der Ware, bei Teillieferungen anteilig. Zur Sicherheit setzen wir das 3-D-Secure-Verfahren Ihrer Bank ein; Ihre Kartendaten werden ausschließlich verschlüsselt an unseren Zahlungsdienstleister übermittelt und nicht bei uns gespeichert.",
-      },
-      {
-        heading: "SEPA-Lastschrift",
-        body:
-          "Sie erteilen uns im Bestellprozess ein SEPA-Lastschriftmandat. Wir buchen den Rechnungsbetrag frühestens mit dem Versand der Ware von Ihrem Konto ab.\n\n" +
-          "Über den Einzug informieren wir Sie mindestens einen Bankarbeitstag vorher (verkürzte Vorabankündigung). Bitte sorgen Sie für ausreichende Kontodeckung: Für Rücklastschriften, die Sie zu vertreten haben, stellen wir die tatsächlich angefallenen Bankentgelte in Rechnung.",
+        heading: "Kredit- und Debitkarte",
+        body: "Wir akzeptieren Visa, Mastercard und American Express. Kartenzahlungen werden über unseren Zahlungsdienstleister Stripe abgewickelt. Die Belastung Ihrer Karte erfolgt mit dem Versand der Ware, bei Teillieferungen anteilig. Zur Sicherheit setzen wir das 3-D-Secure-Verfahren Ihrer Bank ein; Ihre Kartendaten werden ausschließlich verschlüsselt bei Stripe verarbeitet und nicht bei uns gespeichert.",
       },
       {
         heading: "Keine Zusatzentgelte",
-        body: "Für die Nutzung gängiger SEPA-Zahlungsarten und gängiger Zahlungskarten berechnen wir kein zusätzliches Entgelt (§ 270a BGB). Der im Warenkorb angezeigte Gesamtbetrag ist der Betrag, den Sie tatsächlich zahlen.",
+        body: "Für die Nutzung gängiger Überweisungen und gängiger Zahlungskarten berechnen wir kein zusätzliches Entgelt (§ 270a BGB). Der im Warenkorb angezeigte Gesamtbetrag ist der Betrag, den Sie tatsächlich zahlen.",
       },
       {
         heading: "Sicherheit Ihrer Zahlungsdaten",
-        body: "Alle Zahlungsvorgänge laufen über eine TLS-verschlüsselte Verbindung. Kreditkarten- und Kontodaten werden ausschließlich bei den jeweiligen Zahlungsdienstleistern verarbeitet, die den Sicherheitsstandard PCI DSS einhalten. Details zur Datenverarbeitung finden Sie in unserer Datenschutzerklärung.",
+        body: "Alle Zahlungsvorgänge laufen über eine TLS-verschlüsselte Verbindung. Kartendaten werden ausschließlich bei unserem Zahlungsdienstleister Stripe verarbeitet, der den Sicherheitsstandard PCI DSS einhält. Details zur Datenverarbeitung finden Sie in unserer Datenschutzerklärung.",
       },
       {
         heading: "Zahlungsverzug",
@@ -591,7 +577,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Rückerstattungen",
-        body: "Erstattungen erfolgen grundsätzlich über das ursprünglich verwendete Zahlungsmittel. Bei Vorkasse, Sofortüberweisung und SEPA-Lastschrift überweisen wir auf das Konto, von dem die Zahlung erfolgt ist. Kosten entstehen Ihnen dabei nicht.",
+        body: "Erstattungen erfolgen grundsätzlich über das ursprünglich verwendete Zahlungsmittel. Bei Zahlung per Überweisung erstatten wir auf das Konto, von dem die Zahlung erfolgt ist, bei Kartenzahlung auf die verwendete Karte. Kosten entstehen Ihnen dabei nicht.",
       },
     ],
   },
@@ -697,7 +683,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Welche Zahlungsarten kann ich nutzen?",
-        body: "Sie können per Vorkasse-Überweisung, per Sofortüberweisung, mit PayPal, mit Kreditkarte (Visa, Mastercard, American Express) oder per SEPA-Lastschrift bezahlen. Zusatzgebühren berechnen wir für keine dieser Zahlungsarten (§ 270a BGB). Bei Vorkasse reservieren wir die Ware sieben Kalendertage; geht die Zahlung bis dahin nicht ein, stornieren wir die Bestellung. Welche Zahlungsarten im Einzelfall zur Verfügung stehen, sehen Sie im Bestellprozess.",
+        body: "Sie können per Vorkasse-Überweisung oder mit Kredit- und Debitkarte (Visa, Mastercard, American Express) bezahlen. Kartenzahlungen laufen über unseren Zahlungsdienstleister Stripe. Zusatzgebühren berechnen wir für keine dieser Zahlungsarten (§ 270a BGB). Bei Vorkasse reservieren wir die Ware sieben Kalendertage; geht die Zahlung bis dahin nicht ein, stornieren wir die Bestellung. Welche Zahlungsart im Einzelfall zur Verfügung steht, sehen Sie im Bestellprozess.",
       },
       {
         heading: "Wie läuft die Zahlung per Vorkasse ab?",
@@ -737,7 +723,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Kann ich als Firma bestellen und eine Rechnung mit Umsatzsteuerausweis erhalten?",
-        body: "Ja. Tragen Sie im Bestellprozess Ihren Firmennamen in das Feld „Firma“ ein. Die Rechnung liegt der Bestellbestätigung als PDF bei und weist die enthaltene Umsatzsteuer aus. Benötigen Sie Ihre Umsatzsteuer-Identifikationsnummer auf der Rechnung, schreiben Sie sie bitte in das Anmerkungsfeld der Bestellung oder senden Sie sie uns nach; ein eigenes Feld dafür gibt es im Bestellprozess noch nicht. Bitte beachten Sie zwei Unterschiede zum Verbraucherkauf: Unternehmen haben kein gesetzliches Widerrufsrecht, und die Verjährungsfrist für Mängelansprüche beträgt bei neuen Waren ein Jahr ab Gefahrübergang statt zwei Jahre. Unser freiwilliges 30-tägiges Rückgaberecht gilt auch für Sie.",
+        body: "Ja. Tragen Sie im Bestellprozess Ihren Firmennamen in das Feld „Firma“ ein. Die Rechnung liegt der Bestellbestätigung als PDF bei und weist die enthaltene Umsatzsteuer aus. Benötigen Sie Ihre Umsatzsteuer-Identifikationsnummer auf der Rechnung, tragen Sie sie bitte in das Anmerkungsfeld der Bestellung ein oder senden Sie sie uns nach. Bitte beachten Sie zwei Unterschiede zum Verbraucherkauf: Unternehmen haben kein gesetzliches Widerrufsrecht, und die Verjährungsfrist für Mängelansprüche beträgt bei neuen Waren ein Jahr ab Gefahrübergang statt zwei Jahre. Unser freiwilliges 30-tägiges Rückgaberecht gilt auch für Sie.",
       },
       {
         heading: "Was mache ich, wenn mein Container nach Ablauf der zwei Jahre einen Schaden hat?",
@@ -823,7 +809,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Datenschutzanfragen",
-        body: "Auskunft, Berichtigung oder Löschung Ihrer Daten beantragen Sie unter datenschutz@bestboxcontainer.de oder postalisch mit dem Zusatz „Datenschutzbeauftragter“. Wir antworten innerhalb der gesetzlichen Frist von einem Monat.",
+        body: "Auskunft, Berichtigung oder Löschung Ihrer Daten beantragen Sie unter datenschutz@bestboxcontainer.de oder postalisch mit dem Zusatz „Datenschutz“. Wir antworten innerhalb der gesetzlichen Frist von einem Monat.",
       },
       {
         heading: "Presse und Kooperationen",

@@ -184,10 +184,10 @@ export const enLegalPages: LegalPageMap = {
       {
         heading: "Section 6 Payment terms",
         body:
-          "We offer advance payment by bank transfer, Sofortüberweisung, PayPal, credit card and SEPA direct debit. The payment methods available in each individual case are shown during the order process; we reserve the right to exclude individual payment methods.\n\n" +
+          "We offer advance payment by bank transfer and payment by credit or debit card. Which payment method is available in each individual case is shown during the order process; we reserve the right to exclude individual payment methods.\n\n" +
           "For advance payment you receive our bank details with the order confirmation; the order number serves as the payment reference. We reserve the goods for seven calendar days and dispatch them once payment has arrived. If payment does not reach us within that period, we cancel the order.\n\n" +
-          "For SEPA direct debit you grant us a SEPA direct debit mandate. We will notify you of the debit at least one banking day in advance (shortened pre-notification period). Where you are responsible for a returned direct debit, we may charge you the bank fees actually incurred.\n\n" +
-          "We do not charge any additional fee for the use of common SEPA payment methods or payment cards (section 270a BGB). If you default on payment, the statutory provisions apply; consumers owe default interest of five percentage points above the base rate.",
+          "Card payments are processed by our payment service provider Stripe; the card is charged when the goods are dispatched, on a pro rata basis for partial deliveries.\n\n" +
+          "We do not charge any additional fee for the use of common bank transfers or payment cards (section 270a BGB). If you default on payment, the statutory provisions apply; consumers owe default interest of five percentage points above the base rate.",
       },
       {
         heading: "Section 7 Retention of title",
@@ -533,7 +533,7 @@ export const enLegalPages: LegalPageMap = {
     slug: "zahlungsarten",
     title: "Payment Methods",
     intro: intro(
-      "Pay by advance bank transfer, by Sofortüberweisung, with PayPal, by credit card or by SEPA direct debit. The methods available in each case are shown during the order process.",
+      "Pay by advance bank transfer or by credit or debit card. Which method is available in each case is shown during the order process.",
     ),
     updatedAt: UPDATED_AT,
     sections: [
@@ -544,30 +544,16 @@ export const enLegalPages: LegalPageMap = {
           "We reserve the goods for seven calendar days. Once payment has arrived we agree a delivery date with you straight away. If payment does not reach us within the reservation period, we cancel the order and let you know.",
       },
       {
-        heading: "Sofortüberweisung",
-        body: "At the end of the order process you are redirected to your bank's online banking, where you authorise the transfer directly. We receive confirmation immediately and can start dispatch straight away, you do not need an account with a separate payment service.",
-      },
-      {
-        heading: "PayPal",
-        body: "At the end of the order process you are redirected to PayPal, where you confirm the payment using your login details. The amount is debited immediately after the contract is concluded. A PayPal account is required; PayPal's terms of use apply in addition.",
-      },
-      {
-        heading: "Credit card",
-        body: "We accept Visa, Mastercard and American Express. Your card is charged when the goods are dispatched, or proportionately in the case of partial deliveries. For security we use your bank's 3-D Secure procedure; your card details are transmitted to our payment service provider in encrypted form only and are not stored by us.",
-      },
-      {
-        heading: "SEPA direct debit",
-        body:
-          "You grant us a SEPA direct debit mandate during the order process. We collect the invoice amount from your account no earlier than the dispatch of the goods.\n\n" +
-          "We notify you of the debit at least one banking day in advance (shortened pre-notification period). Please ensure your account has sufficient funds: where you are responsible for a returned direct debit, we will invoice the bank charges actually incurred.",
+        heading: "Credit and debit card",
+        body: "We accept Visa, Mastercard and American Express. Card payments are processed by our payment service provider Stripe. Your card is charged when the goods are dispatched, or proportionately in the case of partial deliveries. For security we use your bank's 3-D Secure procedure; your card details are processed in encrypted form by Stripe only and are not stored by us.",
       },
       {
         heading: "No additional charges",
-        body: "We do not charge any additional fee for the use of common SEPA payment methods or common payment cards (section 270a BGB). The total shown in your shopping basket is the amount you actually pay.",
+        body: "We do not charge any additional fee for the use of common bank transfers or common payment cards (section 270a BGB). The total shown in your shopping basket is the amount you actually pay.",
       },
       {
         heading: "Security of your payment data",
-        body: "All payment transactions run over a TLS-encrypted connection. Credit card and bank details are processed exclusively by the respective payment service providers, which comply with the PCI DSS security standard. Details of the data processing can be found in our privacy policy.",
+        body: "All payment transactions run over a TLS-encrypted connection. Card details are processed exclusively by our payment service provider Stripe, which complies with the PCI DSS security standard. Details of the data processing can be found in our privacy policy.",
       },
       {
         heading: "Late payment",
@@ -575,7 +561,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Refunds",
-        body: "Refunds are generally made using the original payment method. For advance payment, Sofortüberweisung and SEPA direct debit we transfer the amount to the account from which payment was made. You incur no costs in doing so.",
+        body: "Refunds are generally made using the original payment method. For payment by bank transfer we refund to the account from which payment was made; for card payments, to the card used. You incur no costs in doing so.",
       },
     ],
   },
@@ -681,7 +667,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Which payment methods can I use?",
-        body: "You can pay by advance bank transfer, by Sofortüberweisung, with PayPal, by credit card (Visa, Mastercard, American Express) or by SEPA direct debit. We do not charge extra fees for any of these methods (section 270a of the German Civil Code). With advance transfer we reserve the goods for seven calendar days; if payment has not arrived by then, we cancel the order. Which methods are available in your case is shown during checkout.",
+        body: "You can pay by advance bank transfer or by credit or debit card (Visa, Mastercard, American Express). Card payments are handled by our payment service provider Stripe. We do not charge extra fees for any of these methods (section 270a of the German Civil Code). With advance transfer we reserve the goods for seven calendar days; if payment has not arrived by then, we cancel the order. Which method is available in your case is shown during checkout.",
       },
       {
         heading: "How does advance payment work?",
@@ -721,7 +707,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Can I order as a business and receive a VAT invoice?",
-        body: "Yes. Enter your company name in the \"Company\" field during the order process. The invoice is attached to your order confirmation as a PDF and shows the VAT included. If you need your VAT identification number on the invoice, please add it to the comments field of your order or send it to us afterwards, there is no dedicated field for it in the order process yet. Please note two differences from consumer purchases: businesses have no statutory right of withdrawal, and the limitation period for defect claims on new goods is one year from the passing of risk rather than two. Our voluntary 30-day return right does apply to you as well.",
+        body: "Yes. Enter your company name in the \"Company\" field during the order process. The invoice is attached to your order confirmation as a PDF and shows the VAT included. If you need your VAT identification number on the invoice, please add it to the comments field of your order or send it to us afterwards. Please note two differences from consumer purchases: businesses have no statutory right of withdrawal, and the limitation period for defect claims on new goods is one year from the passing of risk rather than two. Our voluntary 30-day return right does apply to you as well.",
       },
       {
         heading: "What if my container is damaged after the two years are up?",
@@ -807,7 +793,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Data protection requests",
-        body: "To request access to, rectification of or erasure of your data, write to datenschutz@bestboxcontainer.de or by post marked \"Datenschutzbeauftragter\". We respond within the statutory period of one month.",
+        body: "To request access to, rectification of or erasure of your data, write to datenschutz@bestboxcontainer.de or by post marked \"Datenschutz\". We respond within the statutory period of one month.",
       },
       {
         heading: "Press and partnerships",

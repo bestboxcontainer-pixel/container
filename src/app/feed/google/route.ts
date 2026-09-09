@@ -81,15 +81,18 @@ function itemXml(record: MerchantRecord): string {
   }
 
   // ---- Livraison ----
-  if (record.shipping) {
+  // Une balise par mode : Google en accepte plusieurs par article, et le coût
+  // de livraison vers l'Allemagne doit être explicite (Shopping / fiches
+  // gratuites).
+  for (const ship of record.shipping) {
     parts.push("    <g:shipping>\n");
-    parts.push(tag("g:country", record.shipping.country, "      "));
-    parts.push(tag("g:service", record.shipping.service, "      "));
-    parts.push(tag("g:price", record.shipping.price, "      "));
-    parts.push(tag("g:min_handling_time", record.shipping.minHandlingTime, "      "));
-    parts.push(tag("g:max_handling_time", record.shipping.maxHandlingTime, "      "));
-    parts.push(tag("g:min_transit_time", record.shipping.minTransitTime, "      "));
-    parts.push(tag("g:max_transit_time", record.shipping.maxTransitTime, "      "));
+    parts.push(tag("g:country", ship.country, "      "));
+    parts.push(tag("g:service", ship.service, "      "));
+    parts.push(tag("g:price", ship.price, "      "));
+    parts.push(tag("g:min_handling_time", ship.minHandlingTime, "      "));
+    parts.push(tag("g:max_handling_time", ship.maxHandlingTime, "      "));
+    parts.push(tag("g:min_transit_time", ship.minTransitTime, "      "));
+    parts.push(tag("g:max_transit_time", ship.maxTransitTime, "      "));
     parts.push("    </g:shipping>\n");
   }
   parts.push(tag("g:shipping_weight", record.shippingWeight));

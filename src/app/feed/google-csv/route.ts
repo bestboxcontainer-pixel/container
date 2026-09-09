@@ -69,17 +69,21 @@ function repeated(values: string[]): string {
 }
 
 function row(record: MerchantRecord): string {
+  // Plusieurs groupes de livraison : séparés par des virgules, chaque groupe
+  // au format country:service:price:minH:maxH:minT:maxT.
   const shipping = record.shipping
-    ? [
-        record.shipping.country,
-        record.shipping.service,
-        record.shipping.price,
-        record.shipping.minHandlingTime,
-        record.shipping.maxHandlingTime,
-        record.shipping.minTransitTime,
-        record.shipping.maxTransitTime,
-      ].join(":")
-    : "";
+    .map((s) =>
+      [
+        s.country,
+        s.service,
+        s.price,
+        s.minHandlingTime,
+        s.maxHandlingTime,
+        s.minTransitTime,
+        s.maxTransitTime,
+      ].join(":"),
+    )
+    .join(",");
 
   const values: (string | number | undefined)[] = [
     record.id,

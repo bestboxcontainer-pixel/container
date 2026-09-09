@@ -2,7 +2,6 @@ import { JsonLd, type JsonLdValue } from "@/components/seo/JsonLd";
 import {
   MERCHANT_CURRENCY,
   MERCHANT_RETURN_POLICY,
-  MERCHANT_SHIPPING,
   SHOP_NAME,
   absoluteUrl,
   buildMerchantRecord,
@@ -134,34 +133,37 @@ export async function ProductJsonLd({ product, reviews }: ProductJsonLdProps) {
     };
   }
 
-  if (record.shipping) {
-    offer.shippingDetails = {
+  // Un bloc par mode de livraison (Standard 0 €, Express 199 €), construit
+  // depuis les mêmes valeurs que le flux : prix, pays et délais ne peuvent
+  // pas diverger entre le balisage, le flux et la caisse.
+  if (record.shipping.length > 0) {
+    offer.shippingDetails = record.shipping.map((s) => ({
       "@type": "OfferShippingDetails",
       shippingRate: {
         "@type": "MonetaryAmount",
-        value: "0.00",
+        value: s.price.split(" ")[0],
         currency: MERCHANT_CURRENCY,
       },
       shippingDestination: {
         "@type": "DefinedRegion",
-        addressCountry: MERCHANT_SHIPPING.country,
+        addressCountry: s.country,
       },
       deliveryTime: {
         "@type": "ShippingDeliveryTime",
         handlingTime: {
           "@type": "QuantitativeValue",
-          minValue: MERCHANT_SHIPPING.minHandlingDays,
-          maxValue: MERCHANT_SHIPPING.maxHandlingDays,
+          minValue: s.minHandlingTime,
+          maxValue: s.maxHandlingTime,
           unitCode: "DAY",
         },
         transitTime: {
           "@type": "QuantitativeValue",
-          minValue: MERCHANT_SHIPPING.minTransitDays,
-          maxValue: MERCHANT_SHIPPING.maxTransitDays,
+          minValue: s.minTransitTime,
+          maxValue: s.maxTransitTime,
           unitCode: "DAY",
         },
       },
-    };
+    }));
   }
 
   offer.hasMerchantReturnPolicy = {

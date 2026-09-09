@@ -210,10 +210,10 @@ describe("Confirmation à l'acheteur", () => {
       locale: "en",
     });
     const en = buildOrderConfirmationEmail(express);
-    assert.match(en.html, /Express delivery \(max\. 5 working days\)/);
+    assert.match(en.html, /Express delivery \(4-5 working days\)/);
     // Le supplément doit apparaître comme un montant, jamais comme « free ».
     assert.match(en.html, /199,00 €/);
-    assert.doesNotMatch(en.text, /Shipping : Express delivery \(max\. 5 working days\): free/);
+    assert.doesNotMatch(en.text, /Shipping : Express delivery \(4-5 working days\): free/);
   });
 
   it("joint les coordonnées du virement à une commande en Vorkasse", () => {
@@ -317,7 +317,7 @@ describe("Notification au vendeur", () => {
     const express = buildOrderNotificationEmail(
       order({ shippingMethodKey: "express", shippingCents: 19_900 }),
     );
-    assert.match(express.html, /Livraison express \(5 jours ouvrés maximum\)/);
+    assert.match(express.html, /Livraison express \(4 à 5 jours ouvrés\)/);
     assert.match(express.html, /à préparer en priorité/);
     assert.match(express.text, /Livraison : Livraison express/);
   });

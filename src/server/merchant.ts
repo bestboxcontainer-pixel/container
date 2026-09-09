@@ -4,6 +4,7 @@ import {
   filterForFeed,
 } from "@/lib/merchantSelection";
 import { prixDuFlux } from "@/lib/merchantPrice";
+import { SHIPPING_METHODS } from "@/lib/cart";
 import { getMerchantSelection } from "@/server/merchantSelection";
 import {
   getActivePromotionForProduct,
@@ -60,30 +61,36 @@ export function absoluteUrl(pathOrUrl: string): string {
 }
 
 /**
- * Conditions de livraison annoncées sur la boutique (TrustBar :
- * « Standardversand: kostenlos (7-10 Tage) »). Ces valeurs DOIVENT rester
- * alignées sur ce qui est écrit sur le site : Google compare le flux et la page.
+ * Conditions de livraison portées, pour chaque produit, par le flux et le
+ * balisage. Merchant Center exige que le coût de livraison vers l'Allemagne
+ * soit connu pour Shopping et les fiches gratuites : on le déclare donc
+ * explicitement plutôt que de compter sur des règles au niveau du compte.
  *
- * Le mode express (199 €, 4-5 Werktage) n'est volontairement pas déclaré ici :
- * le flux ne porte qu'une offre de livraison par produit, et c'est le mode par
- * défaut donc le standard : qui doit y figurer. L'express reste proposé au panier.
+ * Les deux modes sont déclarés (plusieurs balises `g:shipping` par article,
+ * ce que Google accepte) : Standard gratuit et Express à 199 €. Prix, libellés
+ * et délais totaux viennent de SHIPPING_METHODS (src/lib/cart.ts), source
+ * unique partagée avec la caisse et l'affichage. Ici on ne fait que répartir
+ * le délai total entre préparation et transport.
  */
 export const MERCHANT_SHIPPING = {
   country: MERCHANT_COUNTRY,
-  service: "Standardversand",
   /**
-   * Au-dessus de ce montant, le port est offert. À zéro depuis que la boutique
-   * annonce le standard gratuit sans montant minimum d'achat.
+   * Au-dessus de ce montant, le port est offert. À zéro : le standard est
+   * gratuit sans montant minimum d'achat.
    */
   freeFromCents: 0,
-  /**
-   * Préparation en un à deux jours ouvrés, transport spécial (plateau, grue si
-   * besoin) en six à huit : 7 à 10 jours au total, comme un conteneur l'exige.
-   */
+  /** Préparation en un à deux jours ouvrés, commune aux deux modes. */
   minHandlingDays: 1,
   maxHandlingDays: 2,
+  /**
+   * Transport spécial (plateau, grue si besoin) : six à huit jours en standard,
+   * deux à trois en express. Avec la préparation, on retombe sur les délais
+   * totaux de SHIPPING_METHODS : 7 à 10 et 3 à 5 jours ouvrés.
+   */
   minTransitDays: 6,
   maxTransitDays: 8,
+  expressMinTransitDays: 2,
+  expressMaxTransitDays: 3,
 } as const;
 
 /**
@@ -399,18 +406,40 @@ export interface MerchantShippingEntry {
 }
 
 /**
- * Frais de port du produit : volontairement jamais renseigné dans le flux.
+ * Frais de port du produit, déclarés explicitement dans le flux et le balisage.
  *
- * Une balise `g:shipping` sur un produit prend le pas sur les règles définies au
- * niveau du compte Merchant Center pour ce même produit. La boutique propose
- * deux modes (Standardversand gratuit, Express à 199 €), tous deux configurés
- * comme conditions de livraison du compte : un seul peut être porté par le
- * flux (une seule balise par article), ce qui masquerait l'autre. Ne rien
- * déclarer ici laisse Google appliquer les deux règles du compte pour chaque
- * produit, plutôt qu'une seule imposée par le flux.
+ * Deux entrées : Standardversand à 0,00 € (7 à 10 jours ouvrés) et
+ * Expressversand à 199,00 € (3 à 5 jours ouvrés). Google accepte plusieurs
+ * balises `g:shipping` par article ; le prix produit annoncé n'a donc jamais
+ * besoin d'un supplément « nach Vereinbarung » pour être compris.
+ *
+ * Prix et libellés viennent de SHIPPING_METHODS (src/lib/cart.ts), pour que le
+ * flux, la caisse et la page ne puissent pas diverger (PAngV).
  */
-export function merchantShipping(): MerchantShippingEntry | undefined {
-  return undefined;
+export function merchantShipping(): MerchantShippingEntry[] {
+  const s = MERCHANT_SHIPPING;
+  const standard = SHIPPING_METHODS.find((m) => m.key === "standard")!;
+  const express = SHIPPING_METHODS.find((m) => m.key === "express")!;
+  return [
+    {
+      country: s.country,
+      service: standard.label,
+      price: formatFeedPrice(standard.cents),
+      minHandlingTime: s.minHandlingDays,
+      maxHandlingTime: s.maxHandlingDays,
+      minTransitTime: s.minTransitDays,
+      maxTransitTime: s.maxTransitDays,
+    },
+    {
+      country: s.country,
+      service: express.label,
+      price: formatFeedPrice(express.cents),
+      minHandlingTime: s.minHandlingDays,
+      maxHandlingTime: s.maxHandlingDays,
+      minTransitTime: s.expressMinTransitDays,
+      maxTransitTime: s.expressMaxTransitDays,
+    },
+  ];
 }
 
 // ---- Enregistrement complet ----
@@ -447,7 +476,8 @@ export interface MerchantRecord {
   googleProductCategory?: string;
   productType: string;
   productHighlights: string[];
-  shipping?: MerchantShippingEntry;
+  /** Une entrée par mode de livraison (Standard gratuit, Express 199 €). */
+  shipping: MerchantShippingEntry[];
   shippingWeight?: string;
   shipsFromCountry: string;
   /** Ne vaut plus que pour CH/NO/UK ; dans l'UE, Google attend certification/EPREL. */
@@ -655,6 +685,29 @@ export function auditMerchantProduct(
     });
   }
 
+  // -- État (new / refurbished / used) --
+  // Toute autre valeur est silencieusement ramenée à « new » par conditionFor() :
+  // un conteneur d'occasion partirait alors en « neuf » dans le flux et sur la
+  // fiche, une information trompeuse qui fait refuser le compte.
+  {
+    const raw = product.condition.trim().toLowerCase();
+    if (raw && raw !== "new" && raw !== "refurbished" && raw !== "used") {
+      issues.push({
+        level: "error",
+        attribute: "condition",
+        message: `État « ${product.condition} » non reconnu : il est transmis comme « new ». Utilisez new, refurbished ou used.`,
+      });
+    }
+  }
+
+  if (!product.sku.trim()) {
+    issues.push({
+      level: "warning",
+      attribute: "id / sku",
+      message: "SKU interne vide. L'identifiant d'offre reste dérivé du slug, mais renseignez le SKU pour le rapprochement avec la commande et la facture.",
+    });
+  }
+
   // -- Identifiants uniques --
   if (!record.gtin && !record.mpn) {
     issues.push({
@@ -718,9 +771,22 @@ export function auditMerchantProduct(
   }
 
   // -- Versand --
-  // Volontairement absent du flux pour chaque produit : voir merchantShipping().
-  // Les règles de livraison (Standard gratuit, Express 199 €) vivent au niveau du
-  // compte Merchant Center, pas ici : rien à signaler produit par produit.
+  // Chaque produit porte ses deux modes de livraison (Standard gratuit,
+  // Express 199 €) via merchantShipping(). Une entrée manquante ou un prix
+  // incohérent est un blocage Merchant Center pour l'Allemagne.
+  if (record.shipping.length === 0) {
+    issues.push({
+      level: "error",
+      attribute: "shipping",
+      message: "Aucune condition de livraison déclarée pour l'Allemagne.",
+    });
+  } else if (!record.shipping.some((s) => s.service === "Standardversand" && /^0\.00 /.test(s.price))) {
+    issues.push({
+      level: "error",
+      attribute: "shipping",
+      message: "Le Standardversand gratuit (0,00 €) n'est pas déclaré ; le prix final serait ambigu.",
+    });
+  }
 
   if (!record.shippingWeight) {
     issues.push({

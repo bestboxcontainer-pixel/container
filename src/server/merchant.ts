@@ -206,9 +206,19 @@ const merchantSelect = {
  * le back-office. Les deux flux le posent ; l'écran de contrôle, non, il doit
  * continuer d'auditer le catalogue entier, y compris ce qui n'est pas diffusé,
  * sinon un produit écarté du flux disparaîtrait aussi du diagnostic.
+ *
+ * `onlyPurchasable` retire les articles qu'on ne peut pas acheter directement :
+ * stock à zéro (« Auf Anfrage », Sonderanfertigung, prix sur devis) ou prix nul.
+ * Merchant Center attend une offre transactionnelle ; un article dont la page
+ * n'offre qu'un formulaire de devis mélange les deux modèles et doit rester
+ * hors du flux. Les deux flux le posent, l'audit non.
  */
 export async function loadMerchantProducts(
-  options: { includeInactive?: boolean; respectSelection?: boolean } = {},
+  options: {
+    includeInactive?: boolean;
+    respectSelection?: boolean;
+    onlyPurchasable?: boolean;
+  } = {},
 ): Promise<MerchantProduct[]> {
   const [rows, promotions, selection] = await Promise.all([
     prisma.product.findMany({
@@ -222,7 +232,10 @@ export async function loadMerchantProducts(
       : Promise.resolve(MERCHANT_SELECTION_DEFAULT),
   ]);
 
-  const retenus = filterForFeed(rows, selection);
+  let retenus = filterForFeed(rows, selection);
+  if (options.onlyPurchasable) {
+    retenus = retenus.filter((row) => row.stock > 0 && row.priceCents > 0);
+  }
 
   return retenus.map((row) => {
     const promotion = promotions.get(row.id);
@@ -674,7 +687,7 @@ export function auditMerchantProduct(
       level: "warning",
       attribute: "availability",
       message:
-        "Stock à 0 : le produit est transmis en out_of_stock et n'apparaît pas dans les annonces Shopping.",
+        "Stock à 0 (« Auf Anfrage » / Sonderanfertigung) : la fiche n'offre qu'un devis, l'article est donc exclu du flux Merchant Center jusqu'au réapprovisionnement.",
     });
   }
 
@@ -914,6 +927,8 @@ export async function auditCatalog(): Promise<MerchantOverview> {
     missingGtin: products.filter((product) => !product.gtin?.trim()).length,
     missingMpn: products.filter((product) => !product.mpn?.trim()).length,
     missingOwnImage: products.filter((product) => !product.image?.trim()).length,
-    feedCount: products.filter((product) => product.active).length,
+    feedCount: products.filter(
+      (product) => product.active && product.stock > 0 && product.priceCents > 0,
+    ).length,
   };
 }

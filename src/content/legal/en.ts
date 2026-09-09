@@ -120,7 +120,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Image credits",
-        body: "The container photos on this website come from Wikimedia Commons and are freely licensed:",
+        body: "The container photos on this website come from our own depots and from Wikimedia Commons and are freely licensed:",
         list: [
           "Igor Ovsyannykov: \"Shipping containers in a port\", CC0 (no attribution required)",
           "AgainErick: \"Shipping container stacks, Port of Rotterdam\", CC BY-SA 4.0",

@@ -135,7 +135,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Bildnachweis",
-        body: "Die Containerfotos auf dieser Website stammen von Wikimedia Commons und sind frei lizenziert:",
+        body: "Die Containerfotos auf dieser Website stammen aus unseren Lagern sowie von Wikimedia Commons und sind frei lizenziert:",
         list: [
           "Igor Ovsyannykov: „Shipping containers in a port“, CC0 (keine Namensnennung erforderlich)",
           "AgainErick: „Shipping container stacks, Port of Rotterdam“, CC BY-SA 4.0",

@@ -64,7 +64,7 @@ export function absoluteUrl(pathOrUrl: string): string {
  * « Standardversand: kostenlos (7-10 Tage) »). Ces valeurs DOIVENT rester
  * alignées sur ce qui est écrit sur le site : Google compare le flux et la page.
  *
- * Le mode express (199 €, max. 5 Werktage) n'est volontairement pas déclaré ici :
+ * Le mode express (199 €, 4-5 Werktage) n'est volontairement pas déclaré ici :
  * le flux ne porte qu'une offre de livraison par produit, et c'est le mode par
  * défaut donc le standard : qui doit y figurer. L'express reste proposé au panier.
  */

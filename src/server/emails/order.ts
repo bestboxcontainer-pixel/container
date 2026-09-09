@@ -222,7 +222,7 @@ function itemsTable(
     total: string;
     subtotal: string;
     shipping: string;
-    /** Mode retenu, déjà traduit : « Expressversand (max. 5 Werktage) ». */
+    /** Mode retenu, déjà traduit : « Expressversand (4-5 Werktage) ». */
     shippingMethod: string;
     freeShipping: string;
     /** Étiquette de la remise ; le code y est déjà accolé s'il y en a un. */
@@ -307,21 +307,21 @@ function discountLabel(order: OrderRecord, de: boolean): string {
  * Mode de livraison rendu dans la langue du message.
  *
  * Les délais sont écrits en clair plutôt que dérivés de `minDays`/`maxDays` :
- * l'express se dit « max. 5 Werktage », pas « 3-5 jours », et c'est bien cette
- * promesse-là qui a été faite au client dans le tunnel.
+ * l'express se dit « 4-5 Werktage », et c'est bien cette promesse-là qui a été
+ * faite au client dans le tunnel.
  */
 const SHIPPING_METHOD_TEXTS = {
   de: {
     standard: "Standardversand (7-10 Werktage)",
-    express: "Expressversand (max. 5 Werktage)",
+    express: "Expressversand (4-5 Werktage)",
   },
   en: {
     standard: "Standard delivery (7-10 working days)",
-    express: "Express delivery (max. 5 working days)",
+    express: "Express delivery (4-5 working days)",
   },
   fr: {
     standard: "Livraison standard (7 à 10 jours ouvrés)",
-    express: "Livraison express (5 jours ouvrés maximum)",
+    express: "Livraison express (4 à 5 jours ouvrés)",
   },
 } as const satisfies Record<string, Record<ShippingMethodKey, string>>;
 

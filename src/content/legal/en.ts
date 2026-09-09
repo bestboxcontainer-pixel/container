@@ -177,7 +177,7 @@ export const enLegalPages: LegalPageMap = {
         heading: "Section 5 Delivery and delivery times",
         body:
           "We deliver in Germany and Austria; on request we also deliver to certain other countries of the European Union. Containers are delivered exclusively by freight forwarder to a contactable street address.\n\n" +
-          "Items in stock are usually delivered by standard shipping within 7 to 10 working days of the conclusion of the contract, or from the date of receipt of payment in the case of advance payment; express shipping delivers within a maximum of 5 working days for the surcharge shown in your order. For items marked \"On request\" (made to order) we state the expected delivery time on the product page; it is typically around three weeks.\n\n" +
+          "Items in stock are usually delivered by standard shipping within 7 to 10 working days of the conclusion of the contract, or from the date of receipt of payment in the case of advance payment; express shipping delivers within 4 to 5 working days for the surcharge shown in your order. For items marked \"On request\" (made to order) we state the expected delivery time on the product page; it is typically around three weeks.\n\n" +
           "If an item is unavailable because our supplier failed to deliver to us despite a corresponding contractual obligation (congruent hedging transaction), we may withdraw from the contract. We will inform you without delay and immediately refund any payments already made. Your statutory rights remain unaffected.\n\n" +
           "Partial deliveries are permitted where reasonable for you. You will not incur any additional shipping costs as a result.",
       },
@@ -480,9 +480,9 @@ export const enLegalPages: LegalPageMap = {
       {
         heading: "Delivery times",
         body:
-          "Items in stock reach you within 7 to 10 working days with standard delivery, or within a maximum of 5 working days with express delivery. Working days are Monday to Saturday, excluding public holidays at the location of our warehouse.\n\n" +
+          "Items in stock reach you within 7 to 10 working days with standard delivery, or within 4 to 5 working days with express delivery. Working days are Monday to Friday, excluding public holidays at the location of our warehouse.\n\n" +
           "For advance payment, the delivery period begins on the day after the payment order is issued; for all other payment methods, on the day after the contract is concluded.\n\n" +
-          "Items marked \"On request\" are made-to-order containers, built specifically for you. Delivery in these cases usually takes around three weeks; the specific lead time is stated on the product page.",
+          "Items marked \"On request\" are made-to-order containers, built specifically for you. Delivery in these cases usually takes around three weeks.",
       },
       {
         heading: "Delivery area",
@@ -642,11 +642,11 @@ export const enLegalPages: LegalPageMap = {
     sections: [
       {
         heading: "How long does delivery take?",
-        body: "Items in stock reach you within 7 to 10 working days with standard delivery, or within a maximum of 5 working days with express delivery. The carrier contacts you in advance by phone to agree a delivery window. Items marked \"On request\" are made to order and normally take around three weeks.",
+        body: "Items in stock reach you within 7 to 10 working days with standard delivery, or within 4 to 5 working days with express delivery. The carrier contacts you in advance by phone to agree a delivery window. Items marked \"On request\" are made to order and normally take around three weeks.",
       },
       {
         heading: "How much does shipping cost?",
-        body: "Standard delivery within Germany and Austria is free, with no minimum order value, whatever the size or weight of the goods. If you want delivery within a maximum of 5 working days, express shipping costs a flat 199.00 euros. There are no other surcharges. The costs for your order are always shown in the shopping basket before you buy.",
+        body: "Standard delivery within Germany and Austria is free, with no minimum order value, whatever the size or weight of the goods. If you want delivery within 4 to 5 working days, express shipping costs a flat 199.00 euros. There are no other surcharges. The costs for your order are always shown in the shopping basket before you buy.",
       },
       {
         heading: "Do you ship outside Germany?",

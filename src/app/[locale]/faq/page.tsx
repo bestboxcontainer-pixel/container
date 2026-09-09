@@ -64,7 +64,7 @@ const GRUPPEN: readonly FaqGruppe[] = [
       {
         frage: "Wie lange dauert die Lieferung?",
         antwort:
-          "Container aus unserem Bestand liefern wir im Standardversand kostenlos innerhalb von 7 bis 10 Werktagen, im Expressversand für 199 € in maximal 5 Werktagen. Sonderanfertigungen (Sonderausstattung, Lackierung nach RAL oder umfangreicher Ausbau) dauern üblicherweise rund drei Wochen; der verbindliche Termin steht im Angebot.",
+          "Container aus unserem Bestand liefern wir im Standardversand kostenlos innerhalb von 7 bis 10 Werktagen, im Expressversand für 199 € in 4 bis 5 Werktagen. Sonderanfertigungen (Sonderausstattung, Lackierung nach RAL oder umfangreicher Ausbau) dauern üblicherweise rund drei Wochen; der verbindliche Termin steht im Angebot.",
       },
     ],
   },

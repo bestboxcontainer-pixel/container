@@ -192,7 +192,7 @@ export const deLegalPages: LegalPageMap = {
         heading: "§ 5 Lieferung und Lieferzeit",
         body:
           "Wir liefern in Deutschland und Österreich; auf Anfrage liefern wir auch in bestimmte weitere Länder der Europäischen Union. Container liefern wir ausschließlich per Spedition an eine erreichbare Straßenanschrift.\n\n" +
-          "Vorrätige Container liefern wir im Standardversand in der Regel innerhalb von 7 bis 10 Werktagen nach Vertragsschluss, bei Vorkasse ab dem Tag des Zahlungseingangs; im Expressversand innerhalb von maximal 5 Werktagen gegen den in der Bestellung ausgewiesenen Aufpreis. Bei Artikeln mit dem Hinweis „Auf Anfrage“ (Sonderanfertigung) nennen wir die voraussichtliche Lieferzeit auf der Produktseite; sie beträgt typischerweise rund drei Wochen.\n\n" +
+          "Vorrätige Container liefern wir im Standardversand in der Regel innerhalb von 7 bis 10 Werktagen nach Vertragsschluss, bei Vorkasse ab dem Tag des Zahlungseingangs; im Expressversand innerhalb von 4 bis 5 Werktagen gegen den in der Bestellung ausgewiesenen Aufpreis. Bei Artikeln mit dem Hinweis „Auf Anfrage“ (Sonderanfertigung) nennen wir die voraussichtliche Lieferzeit auf der Produktseite; sie beträgt typischerweise rund drei Wochen.\n\n" +
           "Ist ein Artikel nicht verfügbar, weil uns unser Zulieferer trotz vertraglicher Verpflichtung nicht beliefert hat (kongruentes Deckungsgeschäft), können wir vom Vertrag zurücktreten. Wir informieren Sie unverzüglich und erstatten bereits geleistete Zahlungen sofort. Ihre gesetzlichen Rechte bleiben unberührt.\n\n" +
           "Teillieferungen sind zulässig, soweit sie für Sie zumutbar sind. Zusätzliche Versandkosten entstehen Ihnen dadurch nicht.",
       },
@@ -496,9 +496,9 @@ export const deLegalPages: LegalPageMap = {
       {
         heading: "Lieferzeiten",
         body:
-          "Vorrätige Container erreichen Sie im Standardversand innerhalb von 7 bis 10 Werktagen, im Expressversand innerhalb von maximal 5 Werktagen. Werktage sind Montag bis Samstag, ausgenommen gesetzliche Feiertage am Sitz unseres Lagers.\n\n" +
+          "Vorrätige Container erreichen Sie im Standardversand innerhalb von 7 bis 10 Werktagen, im Expressversand innerhalb von 4 bis 5 Werktagen. Werktage sind Montag bis Freitag, ausgenommen gesetzliche Feiertage am Sitz unseres Lagers.\n\n" +
           "Bei Vorkasse beginnt die Lieferzeit am Tag nach Erteilung des Zahlungsauftrags, bei allen anderen Zahlungsarten am Tag nach Vertragsschluss.\n\n" +
-          "Artikel mit dem Hinweis „Auf Anfrage“ sind Sonderanfertigungen, die wir eigens für Sie fertigen lassen. Die Lieferzeit beträgt in diesen Fällen üblicherweise rund drei Wochen; die konkrete Angabe finden Sie auf der Produktseite.",
+          "Artikel mit dem Hinweis „Auf Anfrage“ sind Sonderanfertigungen, die wir eigens für Sie fertigen lassen. Die Lieferzeit beträgt in diesen Fällen üblicherweise rund drei Wochen.",
       },
       {
         heading: "Liefergebiet",
@@ -658,11 +658,11 @@ export const deLegalPages: LegalPageMap = {
     sections: [
       {
         heading: "Wie lange dauert die Lieferung?",
-        body: "Vorrätige Container sind im Standardversand innerhalb von 7 bis 10 Werktagen bei Ihnen, im Expressversand innerhalb von maximal 5 Werktagen. Die Spedition meldet sich vorab telefonisch und vereinbart ein Zeitfenster mit Ihnen. Artikel mit dem Hinweis „Auf Anfrage“ sind Sonderanfertigungen; hier dauert es üblicherweise rund drei Wochen.",
+        body: "Vorrätige Container sind im Standardversand innerhalb von 7 bis 10 Werktagen bei Ihnen, im Expressversand innerhalb von 4 bis 5 Werktagen. Die Spedition meldet sich vorab telefonisch und vereinbart ein Zeitfenster mit Ihnen. Artikel mit dem Hinweis „Auf Anfrage“ sind Sonderanfertigungen; hier dauert es üblicherweise rund drei Wochen.",
       },
       {
         heading: "Was kostet der Versand?",
-        body: "Der Standardversand innerhalb Deutschlands und Österreichs ist kostenlos, ohne Mindestbestellwert, unabhängig von Größe und Gewicht der Ware. Wünschen Sie die Lieferung innerhalb von maximal 5 Werktagen, kostet der Expressversand pauschal 199,00 Euro. Andere Zuschläge gibt es nicht. Die für Ihre Bestellung geltenden Kosten sehen Sie immer im Warenkorb, bevor Sie bestellen.",
+        body: "Der Standardversand innerhalb Deutschlands und Österreichs ist kostenlos, ohne Mindestbestellwert, unabhängig von Größe und Gewicht der Ware. Wünschen Sie die Lieferung innerhalb von 4 bis 5 Werktagen, kostet der Expressversand pauschal 199,00 Euro. Andere Zuschläge gibt es nicht. Die für Ihre Bestellung geltenden Kosten sehen Sie immer im Warenkorb, bevor Sie bestellen.",
       },
       {
         heading: "Liefern Sie auch ins Ausland?",

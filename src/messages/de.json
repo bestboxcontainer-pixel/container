@@ -35,7 +35,7 @@
   },
   "trust": {
     "shippingTitle": "Standardversand: kostenlos (7-10 Tage)",
-    "shippingDetail": "Expressversand: 199 € (max. 5 Tage)",
+    "shippingDetail": "Expressversand: 199 € (4-5 Tage)",
     "returnTitle": "14 Tage Rückgaberecht",
     "returnDetail": "Ohne Angabe von Gründen",
     "serviceTitle": "Aufbauservice vor Ort",
@@ -116,7 +116,7 @@
     "decreaseQuantity": "Anzahl um 1 verringern",
     "increaseQuantity": "Anzahl um 1 erhöhen",
     "addToCart": "In den Warenkorb",
-    "fastDelivery": "Standardversand kostenlos (7-10 Tage) · Express 199 € (max. 5 Tage)",
+    "fastDelivery": "Standardversand kostenlos (7-10 Tage) · Express 199 € (4-5 Tage)",
     "warranty": "14 Tage Rückgaberecht ohne Angabe von Gründen",
     "customRequestHint": "Andere Ausführung, Menge oder Sonderwunsch?",
     "requestQuote": "Angebot anfragen",
@@ -217,7 +217,7 @@
     "logoAlt": "BBC Best Box Containerhandel e.K.",
     "homeAriaLabel": "BBC Best Box Containerhandel e.K., Startseite",
     "deliveryTitle": "Standardversand: kostenlos (7-10 Tage)",
-    "deliveryDetail": "Expressversand: 199 € (max. 5 Tage)",
+    "deliveryDetail": "Expressversand: 199 € (4-5 Tage)",
     "warrantyTitle": "14 Tage Rückgaberecht",
     "warrantyDetail": "Ohne Angabe von Gründen",
     "paymentTitle": "Sichere Zahlung",
@@ -271,7 +271,7 @@
     "vatIncluded": "inkl. {rate} % MwSt. ({amount})",
     "vatNote": "Alle Preise inkl. gesetzlicher MwSt.",
     "shippingStandardHint": "Der Standardversand ist kostenlos, ohne Mindestbestellwert.",
-    "shippingRule": "Standardversand kostenlos (7-10 Werktage), Expressversand 199,00 € (max. 5 Werktage). Die Versandart wählen Sie an der Kasse.",
+    "shippingRule": "Standardversand kostenlos (7-10 Werktage), Expressversand 199,00 € (4-5 Werktage). Die Versandart wählen Sie an der Kasse.",
     "deliveryTime": "Der Versand erfolgt nach Zahlungseingang.",
     "withdrawalHint": "Als Verbraucher haben Sie ein 14-tägiges Widerrufsrecht (§ 355 BGB). Einzelheiten in der Widerrufsbelehrung.",
     "toCheckout": "Zur Kasse",
@@ -350,7 +350,7 @@
       },
       "express": {
         "label": "Expressversand",
-        "delay": "Lieferung in maximal 5 Werktagen"
+        "delay": "Lieferung in 4-5 Werktagen"
       }
     },
     "deliveryTitle": "Lieferung",

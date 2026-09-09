@@ -90,7 +90,7 @@ export function Footer() {
 
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/65">
             Verkauf und Vermietung von See-, Lager-, Büro- und Sonderfahrzeugcontainern
-            neu und gebraucht, deutschlandweite Lieferung.
+            neu und gebraucht, Lieferung in Deutschland und Österreich.
           </p>
 
           <ul className="mt-6 space-y-3 text-sm text-white/75">

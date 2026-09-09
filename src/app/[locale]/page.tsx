@@ -15,7 +15,7 @@ import { categoriesDeLAccueil, extraitDuCatalogue } from "@/server/homeData";
 export const metadata: Metadata = {
   title: "BBC Best Box Containerhandel e.K. | Container kaufen & mieten",
   description:
-    "Lager-, Büro-, Wohn- und Sanitärcontainer, neu und gebraucht. Verkauf und Vermietung, Lieferung deutschlandweit.",
+    "Lager-, Büro-, Wohn- und Sanitärcontainer, neu und gebraucht. Verkauf und Vermietung, Lieferung in Deutschland und Österreich.",
 };
 
 
@@ -25,7 +25,7 @@ const TRUST_FACTS = [
   "Inhabergeführtes Unternehmen",
   "300+ Container im Bestand",
   "Neu & geprüft gebraucht",
-  "Lieferung deutschlandweit",
+  "Lieferung in Deutschland & Österreich",
   "Persönliche Beratung",
 ] as const;
 
@@ -54,7 +54,7 @@ const STATS = [
   { value: "2006", label: "Gegründet" },
   { value: "300+", label: "Container im Bestand" },
   { value: "5", label: "Kategorien" },
-  { value: "DE", label: "Lieferung deutschlandweit" },
+  { value: "DE + AT", label: "Lieferung Deutschland & Österreich" },
 ] as const;
 
 const BENEFITS = [
@@ -70,7 +70,7 @@ const BENEFITS = [
   },
   {
     icon: MapPin,
-    title: "Lieferung deutschlandweit",
+    title: "Lieferung in Deutschland & Österreich",
     text: "Anlieferung und Aufstellung direkt auf Ihrem Gelände, organisiert aus einer Hand.",
   },
 ] as const;
@@ -108,7 +108,7 @@ export default async function HomePage() {
           <div className="relative z-10 mx-auto flex min-h-[28rem] w-full max-w-screen-xl items-center px-5 py-16 sm:px-6 md:min-h-[34rem] md:py-24">
             <div className="max-w-xl">
               <h1 className="text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
-                Container kaufen und mieten: schnell, zuverlässig, deutschlandweit
+                Container kaufen und mieten: schnell, zuverlässig, in Deutschland und Österreich
               </h1>
               <p className="mt-5 max-w-lg text-base leading-relaxed text-white/75">
                 BBC Best Box Containerhandel beliefert Gewerbe, Baustellen und Privatkunden mit

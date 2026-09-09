@@ -170,13 +170,13 @@ export const enLegalPages: LegalPageMap = {
         heading: "Section 4 Prices and shipping costs",
         body:
           "All prices stated are final prices in euros and include statutory VAT. They are exclusive of shipping costs unless stated otherwise on the product page.\n\n" +
-          "Standard delivery within Germany is free of charge, with no minimum order value. If you would like faster delivery, express shipping costs a flat 199.00 euros. Separate charges apply to optional additional services such as connection, installation or delivery to the installation location; you arrange these with our customer service team before or after placing your order. Shipping costs are shown in the shopping basket before you complete your order. Full details can be found on our \"Shipping & delivery\" page.\n\n" +
+          "Standard delivery within Germany and Austria is free of charge, with no minimum order value. If you would like faster delivery, express shipping costs a flat 199.00 euros. Separate charges apply to optional additional services such as connection, installation or delivery to the installation location; you arrange these with our customer service team before or after placing your order. Shipping costs are shown in the shopping basket before you complete your order. Full details can be found on our \"Shipping & delivery\" page.\n\n" +
           "For goods sold by weight, volume, length or area we also state the unit price in accordance with the German Price Indication Ordinance (Preisangabenverordnung). Where prices are reduced, we state the lowest total price we applied during the 30 days preceding the reduction.",
       },
       {
         heading: "Section 5 Delivery and delivery times",
         body:
-          "We deliver throughout Germany; on request we also deliver to other member states of the European Union. Delivery to parcel lockers is possible for parcel shipments only; containers are delivered exclusively by freight forwarder to a street address.\n\n" +
+          "We deliver in Germany and Austria; on request we also deliver to certain other countries of the European Union. Delivery to parcel lockers is possible for parcel shipments only; containers are delivered exclusively by freight forwarder to a street address.\n\n" +
           "Items in stock are usually delivered by standard shipping within 7 to 10 working days of the conclusion of the contract, or from the date of receipt of payment in the case of advance payment; express shipping delivers within a maximum of 5 working days for the surcharge shown in your order. For items marked \"On request\" (made to order) we state the expected delivery time on the product page; it is typically around three weeks.\n\n" +
           "If an item is unavailable because our supplier failed to deliver to us despite a corresponding contractual obligation (congruent hedging transaction), we may withdraw from the contract. We will inform you without delay and immediately refund any payments already made. Your statutory rights remain unaffected.\n\n" +
           "Partial deliveries are permitted where reasonable for you. You will not incur any additional shipping costs as a result.",
@@ -473,9 +473,8 @@ export const enLegalPages: LegalPageMap = {
         heading: "Shipping costs at a glance",
         body: "All prices include statutory VAT. The shipping costs applicable to your order are shown in the shopping basket before you complete your purchase.",
         list: [
-          "Standard delivery within Germany: free of charge, with no minimum order value",
-          "Express delivery within Germany: 199.00 euros",
-          "Additional services such as delivery to the installation location, connection or installation: by arrangement, see below",
+          "Standard delivery within Germany and Austria: free of charge, with no minimum order value",
+          "Express delivery within Germany and Austria: 199.00 euros",
         ],
       },
       {
@@ -487,7 +486,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Delivery area",
-        body: "We deliver throughout Germany, including the North Sea and Baltic Sea islands. On request we also deliver to other member states of the European Union; please arrange costs and delivery time with our customer service team in advance. Parcels can be sent to a parcel locker on request; freight forwarder deliveries require a street address and a contactable telephone number.",
+        body: "We deliver in Germany and Austria, including the German North Sea and Baltic Sea islands. On request we also deliver to certain other countries of the European Union; please arrange costs and delivery time with our customer service team in advance. Parcels can be sent to a parcel locker on request; freight forwarder deliveries require a street address and a contactable telephone number.",
       },
       {
         heading: "Freight forwarder delivery of containers",
@@ -647,11 +646,11 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "How much does shipping cost?",
-        body: "Standard delivery within Germany is free, with no minimum order value, whatever the size or weight of the goods. If you want delivery within a maximum of 5 working days, express shipping costs a flat 199.00 euros. There are no other surcharges. The costs for your order are always shown in the shopping basket before you buy.",
+        body: "Standard delivery within Germany and Austria is free, with no minimum order value, whatever the size or weight of the goods. If you want delivery within a maximum of 5 working days, express shipping costs a flat 199.00 euros. There are no other surcharges. The costs for your order are always shown in the shopping basket before you buy.",
       },
       {
         heading: "Do you ship outside Germany?",
-        body: "We deliver throughout Germany, including the islands. We also deliver to other member states of the European Union on request. Write to us before ordering and we will let you know feasibility, cost and delivery time for your address.",
+        body: "We deliver in Germany and Austria, including the islands. We also deliver to certain other countries of the European Union on request. Write to us before ordering and we will let you know feasibility, cost and delivery time for your address.",
       },
       {
         heading: "Will the container be brought onto my property?",

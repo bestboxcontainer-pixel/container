@@ -8,7 +8,7 @@ import { COMPANY } from "@/content/legal";
 export const metadata: Metadata = {
   title: "Container-Ankauf | BBC Best Box Containerhandel e.K.",
   description:
-    "Wir kaufen gebrauchte See-, Lager-, Büro- und Sanitärcontainer an. Bewertung anhand von Fotos, Abholung deutschlandweit.",
+    "Wir kaufen gebrauchte See-, Lager-, Büro- und Sanitärcontainer an. Bewertung anhand von Fotos, Abholung in Deutschland und Österreich.",
 };
 
 const ABLAUF = [
@@ -60,7 +60,7 @@ export default function AnkaufPage() {
             </h1>
             <p className="mt-4 max-w-xl text-white/75">
               Steht bei Ihnen ein Container, den Sie nicht mehr brauchen? Wir kaufen an, holen
-              deutschlandweit ab und zahlen nach der Sichtprüfung aus.
+              in Deutschland und Österreich ab und zahlen nach der Sichtprüfung aus.
             </p>
             <a
               href={`tel:${COMPANY.phone.replace(/\s+/g, "")}`}

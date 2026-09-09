@@ -34,7 +34,7 @@ const TRUST_BADGES = [
   { icon: Award, label: "Seit 2006 am Markt" },
   { icon: Users, label: "Inhabergeführt & persönlich" },
   { icon: Boxes, label: "Neu & geprüft gebraucht" },
-  { icon: MapPin, label: "Lieferung deutschlandweit" },
+  { icon: MapPin, label: "Lieferung in Deutschland & Österreich" },
 ] as const;
 
 const FINISH_LINES = [
@@ -93,7 +93,7 @@ export default function HomePageV2() {
               Ihr Partner für Container: Verkauf, Vermietung, Sonderanfertigung
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-white/75">
-              Aus eigenem Bestand in Großensee beliefern wir Kunden in ganz Deutschland mit
+              Aus eigenem Bestand in Großensee beliefern wir Kunden in Deutschland und Österreich mit
               Containern für Lager, Büro, Wohnen und Baustelle.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">

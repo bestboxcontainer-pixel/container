@@ -97,9 +97,9 @@ export const HOME_FAQS: readonly HomeFaqItem[] = [
       "Viele Modelle sind in mehreren Längen, Breiten und Höhen verfügbar. Dadurch lassen sich einzelne Module genauso planen wie kombinierte Anlagen für Büro, Lager, Sanitär oder Sondernutzung.",
   },
   {
-    question: "Liefert BBC Best Box auch bundesweit?",
+    question: "Liefert BBC Best Box auch über Deutschland hinaus?",
     answer:
-      "Ja. Wir organisieren Lieferung und Aufstellung deutschlandweit. Vorab klären wir mit Ihnen Zufahrt, Stellfläche, Untergrund und ob für die Entladung ein Kran oder ein anderes Hebemittel nötig ist.",
+      "Ja. Wir organisieren Lieferung und Aufstellung in Deutschland und Österreich; auf Anfrage auch in bestimmte weitere EU-Länder. Vorab klären wir mit Ihnen Zufahrt, Stellfläche, Untergrund und ob für die Entladung ein Kran oder ein anderes Hebemittel nötig ist.",
   },
   {
     question: "Sind auch Sonderanfertigungen möglich?",

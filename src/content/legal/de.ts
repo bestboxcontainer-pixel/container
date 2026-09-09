@@ -185,13 +185,13 @@ export const deLegalPages: LegalPageMap = {
         heading: "§ 4 Preise und Versandkosten",
         body:
           "Alle angegebenen Preise sind Endpreise in Euro und enthalten die gesetzliche Umsatzsteuer. Sie verstehen sich zuzüglich Versandkosten, sofern auf der Produktseite nichts anderes angegeben ist.\n\n" +
-          "Der Standardversand innerhalb Deutschlands ist kostenlos, ohne Mindestbestellwert. Wünschen Sie eine schnellere Zustellung, kostet der Expressversand pauschal 199,00 Euro. Für optionale Zusatzleistungen wie Anschluss, Montage oder die Lieferung bis zum Aufstellort gelten gesonderte Entgelte; diese Leistungen vereinbaren Sie vor oder nach der Bestellung mit unserem Kundenservice. Die Versandkosten werden vor Abschluss der Bestellung im Warenkorb ausgewiesen. Einzelheiten finden Sie auf der Seite „Versand & Lieferung“.\n\n" +
+          "Der Standardversand innerhalb Deutschlands und Österreichs ist kostenlos, ohne Mindestbestellwert. Wünschen Sie eine schnellere Zustellung, kostet der Expressversand pauschal 199,00 Euro. Für optionale Zusatzleistungen wie Anschluss, Montage oder die Lieferung bis zum Aufstellort gelten gesonderte Entgelte; diese Leistungen vereinbaren Sie vor oder nach der Bestellung mit unserem Kundenservice. Die Versandkosten werden vor Abschluss der Bestellung im Warenkorb ausgewiesen. Einzelheiten finden Sie auf der Seite „Versand & Lieferung“.\n\n" +
           "Bei Waren, die nach Gewicht, Volumen, Länge oder Fläche angeboten werden, weisen wir zusätzlich den Grundpreis gemäß Preisangabenverordnung aus. Bei Preisermäßigungen nennen wir den niedrigsten Gesamtpreis, den wir in den letzten 30 Tagen vor der Ermäßigung angewendet haben.",
       },
       {
         heading: "§ 5 Lieferung und Lieferzeit",
         body:
-          "Wir liefern deutschlandweit; auf Anfrage liefern wir auch in weitere Mitgliedstaaten der Europäischen Union. Lieferungen an Packstationen sind nur bei Paketversand möglich; Container liefern wir ausschließlich per Spedition an eine Adresse.\n\n" +
+          "Wir liefern in Deutschland und Österreich; auf Anfrage liefern wir auch in bestimmte weitere Länder der Europäischen Union. Lieferungen an Packstationen sind nur bei Paketversand möglich; Container liefern wir ausschließlich per Spedition an eine Adresse.\n\n" +
           "Vorrätige Container liefern wir im Standardversand in der Regel innerhalb von 7 bis 10 Werktagen nach Vertragsschluss, bei Vorkasse ab dem Tag des Zahlungseingangs; im Expressversand innerhalb von maximal 5 Werktagen gegen den in der Bestellung ausgewiesenen Aufpreis. Bei Artikeln mit dem Hinweis „Auf Anfrage“ (Sonderanfertigung) nennen wir die voraussichtliche Lieferzeit auf der Produktseite; sie beträgt typischerweise rund drei Wochen.\n\n" +
           "Ist ein Artikel nicht verfügbar, weil uns unser Zulieferer trotz vertraglicher Verpflichtung nicht beliefert hat (kongruentes Deckungsgeschäft), können wir vom Vertrag zurücktreten. Wir informieren Sie unverzüglich und erstatten bereits geleistete Zahlungen sofort. Ihre gesetzlichen Rechte bleiben unberührt.\n\n" +
           "Teillieferungen sind zulässig, soweit sie für Sie zumutbar sind. Zusätzliche Versandkosten entstehen Ihnen dadurch nicht.",
@@ -489,9 +489,8 @@ export const deLegalPages: LegalPageMap = {
         heading: "Versandkosten auf einen Blick",
         body: "Alle Preise verstehen sich inklusive der gesetzlichen Umsatzsteuer. Die für Ihre Bestellung geltenden Versandkosten werden Ihnen im Warenkorb ausgewiesen, bevor Sie die Bestellung abschließen.",
         list: [
-          "Standardversand innerhalb Deutschlands: kostenlos, ohne Mindestbestellwert",
-          "Expressversand innerhalb Deutschlands: 199,00 Euro",
-          "Zusatzleistungen wie Lieferung bis zum Aufstellort, Anschluss oder Montage: nach Vereinbarung, siehe unten",
+          "Standardversand innerhalb Deutschlands und Österreichs: kostenlos, ohne Mindestbestellwert",
+          "Expressversand innerhalb Deutschlands und Österreichs: 199,00 Euro",
         ],
       },
       {
@@ -503,7 +502,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Liefergebiet",
-        body: "Wir liefern deutschlandweit, einschließlich der Nordsee- und Ostseeinseln. Auf Anfrage liefern wir außerdem in weitere Mitgliedstaaten der Europäischen Union; sprechen Sie Kosten und Lieferzeit vorab mit unserem Kundenservice ab. Paketsendungen können auf Wunsch an eine Packstation gehen; Speditionslieferungen benötigen eine Straßenanschrift und eine erreichbare Telefonnummer.",
+        body: "Wir liefern in Deutschland und Österreich, einschließlich der deutschen Nordsee- und Ostseeinseln. Auf Anfrage liefern wir außerdem in bestimmte weitere Länder der Europäischen Union; sprechen Sie Kosten und Lieferzeit vorab mit unserem Kundenservice ab. Paketsendungen können auf Wunsch an eine Packstation gehen; Speditionslieferungen benötigen eine Straßenanschrift und eine erreichbare Telefonnummer.",
       },
       {
         heading: "Speditionslieferung von Containern",
@@ -663,11 +662,11 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Was kostet der Versand?",
-        body: "Der Standardversand innerhalb Deutschlands ist kostenlos, ohne Mindestbestellwert, unabhängig von Größe und Gewicht der Ware. Wünschen Sie die Lieferung innerhalb von maximal 5 Werktagen, kostet der Expressversand pauschal 199,00 Euro. Andere Zuschläge gibt es nicht. Die für Ihre Bestellung geltenden Kosten sehen Sie immer im Warenkorb, bevor Sie bestellen.",
+        body: "Der Standardversand innerhalb Deutschlands und Österreichs ist kostenlos, ohne Mindestbestellwert, unabhängig von Größe und Gewicht der Ware. Wünschen Sie die Lieferung innerhalb von maximal 5 Werktagen, kostet der Expressversand pauschal 199,00 Euro. Andere Zuschläge gibt es nicht. Die für Ihre Bestellung geltenden Kosten sehen Sie immer im Warenkorb, bevor Sie bestellen.",
       },
       {
         heading: "Liefern Sie auch ins Ausland?",
-        body: "Wir liefern deutschlandweit, einschließlich der Inseln. In weitere Mitgliedstaaten der Europäischen Union liefern wir auf Anfrage. Schreiben Sie uns vor der Bestellung, dann nennen wir Ihnen Machbarkeit, Kosten und Lieferzeit für Ihre Adresse.",
+        body: "Wir liefern in Deutschland und Österreich, einschließlich der Inseln. In bestimmte weitere Länder der Europäischen Union liefern wir auf Anfrage. Schreiben Sie uns vor der Bestellung, dann nennen wir Ihnen Machbarkeit, Kosten und Lieferzeit für Ihre Adresse.",
       },
       {
         heading: "Wird der Container bis auf mein Grundstück gebracht?",

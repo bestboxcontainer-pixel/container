@@ -41,7 +41,7 @@ export default function UeberUnsPage() {
             </h1>
             <p className="mt-4 max-w-xl text-white/75">
               {COMPANY.name} handelt seit {COMPANY.registeredSince} mit Containern für Gewerbe,
-              Bauwesen und Privatkunden: von {COMPANY.locality} aus, deutschlandweit.
+              Bauwesen und Privatkunden: von {COMPANY.locality} aus, in Deutschland und Österreich.
             </p>
           </div>
         </section>

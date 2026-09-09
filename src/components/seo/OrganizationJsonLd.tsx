@@ -10,6 +10,10 @@ import { MERCHANT_COUNTRY, MERCHANT_LANGUAGE, SHOP_NAME, SHOP_PHONE, siteUrl } f
 //
 // À placer une seule fois, dans la mise en page racine ou sur la page d'accueil.
 
+// Zone de livraison réelle : Allemagne et Autriche (le siège reste en DE, voir
+// MERCHANT_COUNTRY pour l'adresse et le pays d'expédition du flux).
+const AREA_SERVED = ["DE", "AT"];
+
 interface OrganizationJsonLdProps {
   /** Profils officiels de la boutique : renforce l'identification de l'entité. */
   sameAs?: string[];
@@ -47,12 +51,12 @@ export function OrganizationJsonLd({ sameAs, address = ADRESSE_SIEGE }: Organiza
     logo: `${base}/images/logo-full.png`,
     image: `${base}/images/logo-full.png`,
     telephone: SHOP_PHONE,
-    areaServed: MERCHANT_COUNTRY,
+    areaServed: AREA_SERVED,
     contactPoint: {
       "@type": "ContactPoint",
       telephone: SHOP_PHONE,
       contactType: "customer service",
-      areaServed: MERCHANT_COUNTRY,
+      areaServed: AREA_SERVED,
       availableLanguage: [MERCHANT_LANGUAGE, "en"],
     },
     sameAs: sameAs && sameAs.length > 0 ? sameAs : undefined,

@@ -18,8 +18,7 @@
  * de conteneurs, à la place du gabarit d'origine (vente au détail d'appareils
  * électroménagers/multimédia). La page dédiée ElektroG/BattDG a été retirée
  * (hors champ), de même que les clauses de reprise d'appareils usagés.
- * Reste un gabarit à faire valider par un juriste avant mise en ligne réelle
- * (voir l'avertissement DISCLAIMER en tête de chaque page juridique).
+ * Reste un gabarit à faire valider par un juriste avant mise en ligne réelle.
  */
 
 import type { LegalPageMap } from "./types";
@@ -55,13 +54,9 @@ export const COMPANY = {
 /** Adresse de retour (identique au siège dans ce modèle). */
 const RETURN_ADDRESS = `${COMPANY.name}, Retourenannahme, ${COMPANY.street}, ${COMPANY.city}, ${COMPANY.country}`;
 
-/** Avertissement placé en tête de chaque page juridique. */
-const DISCLAIMER =
-  "Rechtlicher Hinweis: Dieser Text ist eine sorgfältig erstellte Vorlage für den Onlineshop BBC Best Box Containerhandel e.K. Sämtliche Unternehmensangaben (Anschrift, Handelsregister, Umsatzsteuer-Identifikationsnummer, Versandkosten, Dienstleister) sind Platzhalter und müssen vor der Veröffentlichung durch die tatsächlichen Daten ersetzt werden. Lassen Sie den Text anschließend anwaltlich prüfen, erst dann ist er rechtssicher verwendbar.";
-
-/** Assemble le chapeau : avertissement puis texte d'introduction. */
+/** Chapeau de page : uniquement le texte d'introduction propre à la page. */
 function intro(lead: string): string {
-  return `${DISCLAIMER}\n\n${lead}`;
+  return lead;
 }
 
 export const deLegalPages: LegalPageMap = {
@@ -289,7 +284,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "2. Datenschutzbeauftragter",
-        body: "Unseren betrieblichen Datenschutzbeauftragten erreichen Sie unter datenschutz@bestboxcontainer.de oder postalisch unter der oben genannten Anschrift mit dem Zusatz „Datenschutzbeauftragter“. Ob eine Bestellpflicht besteht, richtet sich nach § 38 BDSG; die Angabe ist vor der Veröffentlichung zu prüfen.",
+        body: "Wir haben keinen Datenschutzbeauftragten bestellt, da die gesetzlichen Voraussetzungen hierfür (§ 38 BDSG) nicht vorliegen. Bei Fragen zum Datenschutz oder zur Wahrnehmung Ihrer Rechte wenden Sie sich bitte an die unter Ziffer 1 genannten Kontaktdaten oder an datenschutz@bestboxcontainer.de.",
       },
       {
         heading: "3. Rechtsgrundlagen der Verarbeitung",
@@ -302,10 +297,8 @@ export const deLegalPages: LegalPageMap = {
         ],
       },
       {
-        heading: "4. Hosting und Server-Logfiles",
-        body:
-          "Unser Onlineshop wird bei einem Dienstleister innerhalb der Europäischen Union gehostet (Name und Anschrift des Hosters sind vor der Veröffentlichung einzutragen). Mit dem Hoster besteht ein Auftragsverarbeitungsvertrag nach Artikel 28 DSGVO.\n\n" +
-          "Beim Aufruf unserer Seiten erhebt der Server automatisch Informationen, die Ihr Browser übermittelt: IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite, übertragene Datenmenge, Referrer-URL sowie Browser- und Betriebssystemtyp. Diese Daten sind für uns nicht bestimmten Personen zuordenbar und dienen der Auslieferung der Seiten, der Systemsicherheit und der Fehleranalyse. Rechtsgrundlage ist Artikel 6 Absatz 1 Buchstabe f DSGVO. Die Logfiles werden nach spätestens sieben Tagen gelöscht oder anonymisiert.",
+        heading: "4. Server-Logfiles",
+        body: "Beim Aufruf unserer Seiten erhebt der Server automatisch Informationen, die Ihr Browser übermittelt: IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite, übertragene Datenmenge, Referrer-URL sowie Browser- und Betriebssystemtyp. Diese Daten sind für uns nicht bestimmten Personen zuordenbar und dienen der Auslieferung der Seiten, der Systemsicherheit und der Fehleranalyse. Rechtsgrundlage ist Artikel 6 Absatz 1 Buchstabe f DSGVO. Die Logfiles werden nach spätestens sieben Tagen gelöscht oder anonymisiert.",
       },
       {
         heading: "5. Bestellabwicklung und Kundenkonto",
@@ -316,8 +309,10 @@ export const deLegalPages: LegalPageMap = {
       {
         heading: "6. Zahlungsdienstleister",
         body:
-          "Je nach gewählter Zahlungsart geben wir die für die Zahlungsabwicklung erforderlichen Daten an den jeweiligen Zahlungsdienstleister weiter (Name und Anschrift der eingesetzten Dienstleister sind vor der Veröffentlichung zu ergänzen, zum Beispiel für PayPal, Kreditkartenakzeptanz und Rechnungskauf).\n\n" +
-          "Die Zahlungsdienstleister verarbeiten die Daten in eigener Verantwortung. Rechtsgrundlage der Übermittlung ist Artikel 6 Absatz 1 Buchstabe b DSGVO. Kreditkarten- und Bankdaten werden ausschließlich beim jeweiligen Dienstleister erhoben; wir speichern keine vollständigen Zahlungsdaten.",
+          "In unserem Shop können Sie per Überweisung (Vorkasse) oder per Kredit- und Debitkarte bezahlen.\n\n" +
+          "Bei Zahlung per Überweisung geben wir keine Zahlungsdaten an Dritte weiter; Sie überweisen den Betrag direkt auf das in der Bestellbestätigung genannte Geschäftskonto.\n\n" +
+          "Kartenzahlungen wickeln wir über den Zahlungsdienstleister Stripe Payments Europe, Limited, 1 Grand Canal Street Lower, Grand Canal Dock, Dublin, Irland, ab. Die für die Zahlung erforderlichen Daten (insbesondere Karten- und Umsatzdaten sowie IP-Adresse) werden dabei unmittelbar bei Stripe erhoben und von Stripe in eigener Verantwortung verarbeitet. Rechtsgrundlage der Übermittlung ist Artikel 6 Absatz 1 Buchstabe b DSGVO. Stripe kann personenbezogene Daten hierbei auch an die Stripe, Inc. in den USA übermitteln; diese Übermittlung ist durch die Standardvertragsklauseln der Europäischen Kommission nach Artikel 46 DSGVO abgesichert.\n\n" +
+          "Vollständige Kartendaten werden ausschließlich bei Stripe erhoben; wir speichern keine vollständigen Zahlungsdaten.",
       },
       {
         heading: "7. Keine Bonitätsprüfung",
@@ -358,11 +353,11 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "14. Reichweitenmessung und Marketing",
-        body: "Soweit wir Web-Analyse-, Retargeting- oder Conversion-Tracking-Dienste einsetzen, geschieht dies ausschließlich auf Basis Ihrer Einwilligung. Die konkret eingesetzten Dienste, ihre Anbieter, die verarbeiteten Daten, die Speicherdauer und etwaige Drittlandübermittlungen sind vor der Veröffentlichung an dieser Stelle vollständig zu benennen.",
+        body: "Wir setzen derzeit keine Web-Analyse-, Retargeting- oder Conversion-Tracking-Dienste ein; eine Reichweitenmessung findet nicht statt. Sollten wir solche Dienste künftig einführen, geschieht dies ausschließlich auf Grundlage Ihrer vorherigen Einwilligung nach Artikel 6 Absatz 1 Buchstabe a DSGVO und § 25 Absatz 1 TDDDG. Wir passen diese Datenschutzerklärung vorher an und benennen dann die eingesetzten Dienste, ihre Anbieter, die verarbeiteten Daten, die Speicherdauer sowie etwaige Drittlandübermittlungen.",
       },
       {
         heading: "15. Empfänger und Übermittlung in Drittländer",
-        body: "Empfänger Ihrer Daten sind ausschließlich Dienstleister, die wir sorgfältig ausgewählt haben und die als Auftragsverarbeiter nach Artikel 28 DSGVO für uns tätig werden, sowie Stellen, an die wir aufgrund gesetzlicher Pflichten übermitteln müssen (etwa Finanzbehörden). Eine Übermittlung in Länder außerhalb der EU und des EWR findet nur statt, wenn Sie der Anfahrtskarte auf der Kontaktseite zustimmen: Dabei kann Google LLC mit Sitz in den USA Ihre IP-Adresse erhalten, gestützt auf die Standardvertragsklauseln der Europäischen Kommission gemäß Artikel 46 DSGVO. Ohne diese Einwilligung findet keine Übermittlung in ein Drittland statt; sollte künftig eine weitere erforderlich werden, geschieht dies nur auf Grundlage eines Angemessenheitsbeschlusses der Europäischen Kommission oder geeigneter Garantien im Sinne der Artikel 44 ff. DSGVO.",
+        body: "Empfänger Ihrer Daten sind ausschließlich Dienstleister, die wir sorgfältig ausgewählt haben und die als Auftragsverarbeiter nach Artikel 28 DSGVO für uns tätig werden, sowie Stellen, an die wir aufgrund gesetzlicher Pflichten übermitteln müssen (etwa Finanzbehörden). Eine Übermittlung in Länder außerhalb der EU und des EWR kommt in zwei Fällen in Betracht: Bei Kartenzahlungen kann der Zahlungsdienstleister Stripe Daten an die Stripe, Inc. in den USA übermitteln; und wenn Sie der Anfahrtskarte auf der Kontaktseite zustimmen, kann Google LLC mit Sitz in den USA Ihre IP-Adresse erhalten. Beide Übermittlungen sind durch die Standardvertragsklauseln der Europäischen Kommission gemäß Artikel 46 DSGVO abgesichert. Darüber hinaus findet keine Übermittlung in ein Drittland statt; sollte künftig eine weitere erforderlich werden, geschieht dies nur auf Grundlage eines Angemessenheitsbeschlusses der Europäischen Kommission oder geeigneter Garantien im Sinne der Artikel 44 ff. DSGVO.",
       },
       {
         heading: "16. Speicherdauer",
@@ -397,7 +392,7 @@ export const deLegalPages: LegalPageMap = {
         heading: "20. Datensicherheit und automatisierte Entscheidungen",
         body:
           "Wir sichern die Übertragung Ihrer Daten durch eine TLS-Verschlüsselung (erkennbar am Schloss-Symbol in der Adresszeile Ihres Browsers) und setzen technische sowie organisatorische Maßnahmen nach Artikel 32 DSGVO ein.\n\n" +
-          "Eine automatisierte Entscheidungsfindung einschließlich Profiling nach Artikel 22 DSGVO findet nicht statt, mit Ausnahme der im Abschnitt zur Bonitätsprüfung beschriebenen Prüfung, die einer manuellen Überprüfung zugänglich ist.",
+          "Eine automatisierte Entscheidungsfindung einschließlich Profiling nach Artikel 22 DSGVO findet nicht statt.",
       },
       {
         heading: "21. Änderungen dieser Datenschutzerklärung",

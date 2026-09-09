@@ -39,17 +39,13 @@ const COMPANY = {
 /** Adresse de retour (identique au siège dans ce modèle). */
 const RETURN_ADDRESS = `${COMPANY.name}, Returns Department, ${COMPANY.street}, ${COMPANY.city}, ${COMPANY.country}`;
 
-/** Avertissement placé en tête de chaque page juridique. */
-const DISCLAIMER =
-  "Legal notice: This text is a carefully prepared template for the BBC Best Box Containerhandel e.K. online shop. All company details (address, commercial register, VAT identification number, shipping rates, service providers) are placeholders and must be replaced with the actual data before publication. Have the text reviewed by a qualified lawyer afterwards, only then is it fit for live use.";
-
 /** Mention indiquant que la version allemande prévaut. */
 const GERMAN_PREVAILS =
   "This English text is a convenience translation. The contractual language is German; in the event of any discrepancy, the German version of this page is the only legally binding one.";
 
-/** Assemble le chapeau : avertissement, primauté de l'allemand, puis introduction. */
+/** Assemble le chapeau : primauté de l'allemand, puis introduction. */
 function intro(lead: string): string {
-  return `${DISCLAIMER}\n\n${GERMAN_PREVAILS}\n\n${lead}`;
+  return `${GERMAN_PREVAILS}\n\n${lead}`;
 }
 
 export const enLegalPages: LegalPageMap = {
@@ -272,7 +268,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "2. Data protection officer",
-        body: "You can contact our data protection officer at datenschutz@bestboxcontainer.de or by post at the address above, marked \"Datenschutzbeauftragter\". Whether an appointment is mandatory depends on section 38 of the German Federal Data Protection Act and must be verified before publication.",
+        body: "We have not appointed a data protection officer, as the statutory conditions for doing so (section 38 of the German Federal Data Protection Act) are not met. For any data protection questions or to exercise your rights, please use the contact details given in section 1 or write to datenschutz@bestboxcontainer.de.",
       },
       {
         heading: "3. Legal bases for processing",
@@ -285,10 +281,8 @@ export const enLegalPages: LegalPageMap = {
         ],
       },
       {
-        heading: "4. Hosting and server log files",
-        body:
-          "Our online shop is hosted by a service provider located within the European Union (the hosting provider's name and address must be inserted before publication). We have concluded a data processing agreement with the host in accordance with Article 28 GDPR.\n\n" +
-          "When you access our pages, the server automatically collects information transmitted by your browser: IP address, date and time of access, page requested, volume of data transferred, referrer URL and browser and operating system type. This data cannot be attributed to specific individuals by us and is used to deliver the pages, ensure system security and analyse faults. The legal basis is Article 6(1)(f) GDPR. Log files are deleted or anonymised after seven days at the latest.",
+        heading: "4. Server log files",
+        body: "When you access our pages, the server automatically collects information transmitted by your browser: IP address, date and time of access, page requested, volume of data transferred, referrer URL and browser and operating system type. This data cannot be attributed to specific individuals by us and is used to deliver the pages, ensure system security and analyse faults. The legal basis is Article 6(1)(f) GDPR. Log files are deleted or anonymised after seven days at the latest.",
       },
       {
         heading: "5. Order processing and customer accounts",
@@ -299,8 +293,10 @@ export const enLegalPages: LegalPageMap = {
       {
         heading: "6. Payment service providers",
         body:
-          "Depending on the payment method you select, we pass on the data required for payment processing to the relevant payment service provider (the names and addresses of the providers used must be added before publication, for example for PayPal, card acquiring and purchase on account).\n\n" +
-          "The payment service providers process this data under their own responsibility. The legal basis for the transfer is Article 6(1)(b) GDPR. Credit card and bank details are collected exclusively by the respective provider; we do not store complete payment data.",
+          "In our shop you can pay by bank transfer (advance payment) or by credit and debit card.\n\n" +
+          "For payment by bank transfer we do not pass any payment data to third parties; you transfer the amount directly to the business account stated in the order confirmation.\n\n" +
+          "Card payments are processed via the payment service provider Stripe Payments Europe, Limited, 1 Grand Canal Street Lower, Grand Canal Dock, Dublin, Ireland. The data required for the payment (in particular card and transaction data and your IP address) is collected directly by Stripe and processed by Stripe under its own responsibility. The legal basis for the transfer is Article 6(1)(b) GDPR. Stripe may also transfer personal data to Stripe, Inc. in the USA; this transfer is safeguarded by the European Commission's standard contractual clauses under Article 46 GDPR.\n\n" +
+          "Complete card details are collected exclusively by Stripe; we do not store complete payment data.",
       },
       {
         heading: "7. No credit checks",
@@ -340,11 +336,11 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "14. Web analytics and marketing",
-        body: "Where we use web analytics, retargeting or conversion tracking services, we do so exclusively on the basis of your consent. The specific services used, their providers, the data processed, the storage period and any third-country transfers must be listed in full at this point before publication.",
+        body: "We currently do not use any web analytics, retargeting or conversion tracking services; no reach measurement takes place. Should we introduce such services in future, we will do so exclusively on the basis of your prior consent under Article 6(1)(a) GDPR and section 25(1) TDDDG. We will update this privacy policy beforehand and then name the services used, their providers, the data processed, the storage period and any third-country transfers.",
       },
       {
         heading: "15. Recipients and transfers to third countries",
-        body: "Recipients of your data are exclusively service providers we have selected with care and who act for us as processors under Article 28 GDPR, as well as bodies to which we are legally required to transfer data (such as tax authorities). A transfer to countries outside the EU and the EEA only takes place if you consent to the map on the contact page: Google LLC, based in the USA, may then receive your IP address, based on the European Commission's standard contractual clauses under Article 46 GDPR. Without this consent, no such transfer takes place; should another one become necessary in future, it will only happen on the basis of an adequacy decision of the European Commission or appropriate safeguards within the meaning of Articles 44 et seq. GDPR.",
+        body: "Recipients of your data are exclusively service providers we have selected with care and who act for us as processors under Article 28 GDPR, as well as bodies to which we are legally required to transfer data (such as tax authorities). A transfer to countries outside the EU and the EEA may occur in two cases: for card payments, the payment service provider Stripe may transfer data to Stripe, Inc. in the USA; and if you consent to the map on the contact page, Google LLC, based in the USA, may receive your IP address. Both transfers are safeguarded by the European Commission's standard contractual clauses under Article 46 GDPR. Beyond this, no transfer to a third country takes place; should another one become necessary in future, it will only happen on the basis of an adequacy decision of the European Commission or appropriate safeguards within the meaning of Articles 44 et seq. GDPR.",
       },
       {
         heading: "16. Retention periods",
@@ -379,7 +375,7 @@ export const enLegalPages: LegalPageMap = {
         heading: "20. Data security and automated decision-making",
         body:
           "We secure the transmission of your data using TLS encryption (recognisable by the padlock symbol in your browser's address bar) and implement technical and organisational measures in accordance with Article 32 GDPR.\n\n" +
-          "Automated decision-making including profiling within the meaning of Article 22 GDPR does not take place, with the exception of the credit check described above, which is subject to manual review.",
+          "Automated decision-making including profiling within the meaning of Article 22 GDPR does not take place.",
       },
       {
         heading: "21. Changes to this privacy policy",

@@ -486,7 +486,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Delivery area",
-        body: "We deliver in Germany and Austria, including the German North Sea and Baltic Sea islands. On request we also deliver to certain other countries of the European Union; please arrange costs and delivery time with our customer service team in advance. Parcels can be sent to a parcel locker on request; freight forwarder deliveries require a street address and a contactable telephone number.",
+        body: "We deliver in Germany and Austria, including the German North Sea and Baltic Sea islands. On request we also deliver to certain other countries of the European Union.",
       },
       {
         heading: "Freight forwarder delivery of containers",

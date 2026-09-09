@@ -502,7 +502,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Liefergebiet",
-        body: "Wir liefern in Deutschland und Österreich, einschließlich der deutschen Nordsee- und Ostseeinseln. Auf Anfrage liefern wir außerdem in bestimmte weitere Länder der Europäischen Union; sprechen Sie Kosten und Lieferzeit vorab mit unserem Kundenservice ab. Paketsendungen können auf Wunsch an eine Packstation gehen; Speditionslieferungen benötigen eine Straßenanschrift und eine erreichbare Telefonnummer.",
+        body: "Wir liefern in Deutschland und Österreich, einschließlich der deutschen Nordsee- und Ostseeinseln. Auf Anfrage liefern wir außerdem in bestimmte weitere Länder der Europäischen Union.",
       },
       {
         heading: "Speditionslieferung von Containern",

@@ -191,7 +191,7 @@ export const deLegalPages: LegalPageMap = {
       {
         heading: "§ 5 Lieferung und Lieferzeit",
         body:
-          "Wir liefern in Deutschland und Österreich; auf Anfrage liefern wir auch in bestimmte weitere Länder der Europäischen Union. Lieferungen an Packstationen sind nur bei Paketversand möglich; Container liefern wir ausschließlich per Spedition an eine Adresse.\n\n" +
+          "Wir liefern in Deutschland und Österreich; auf Anfrage liefern wir auch in bestimmte weitere Länder der Europäischen Union. Container liefern wir ausschließlich per Spedition an eine erreichbare Straßenanschrift.\n\n" +
           "Vorrätige Container liefern wir im Standardversand in der Regel innerhalb von 7 bis 10 Werktagen nach Vertragsschluss, bei Vorkasse ab dem Tag des Zahlungseingangs; im Expressversand innerhalb von maximal 5 Werktagen gegen den in der Bestellung ausgewiesenen Aufpreis. Bei Artikeln mit dem Hinweis „Auf Anfrage“ (Sonderanfertigung) nennen wir die voraussichtliche Lieferzeit auf der Produktseite; sie beträgt typischerweise rund drei Wochen.\n\n" +
           "Ist ein Artikel nicht verfügbar, weil uns unser Zulieferer trotz vertraglicher Verpflichtung nicht beliefert hat (kongruentes Deckungsgeschäft), können wir vom Vertrag zurücktreten. Wir informieren Sie unverzüglich und erstatten bereits geleistete Zahlungen sofort. Ihre gesetzlichen Rechte bleiben unberührt.\n\n" +
           "Teillieferungen sind zulässig, soweit sie für Sie zumutbar sind. Zusätzliche Versandkosten entstehen Ihnen dadurch nicht.",
@@ -600,7 +600,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "So melden Sie eine Rücksendung an",
-        body: "Bitte melden Sie die Rücksendung vorab an, so ordnen wir Ihr Paket sofort zu und erstatten schneller.",
+        body: "Bitte melden Sie die Rücksendung vorab an, so können wir sie sofort zuordnen und erstatten schneller.",
         list: [
           `E-Mail an ${COMPANY.email} mit Bestellnummer und Artikelbezeichnung`,
           "Muster-Widerrufsformular von der Seite „Widerrufsrecht“, ausgefüllt per E-Mail oder Post, vorgeschrieben ist es nicht",
@@ -610,8 +610,8 @@ export const deLegalPages: LegalPageMap = {
       {
         heading: "Rücksendekosten",
         body:
-          "Die Kosten der Rücksendung tragen wir. Für Paketsendungen stellen wir Ihnen ein kostenloses Rücksendeetikett zur Verfügung.\n\n" +
-          "Container, die per Spedition geliefert wurden, holen wir bei Ihnen ab. Bitte vereinbaren Sie dafür einen Termin mit unserem Kundenservice.",
+          "Die Kosten der Rücksendung tragen wir.\n\n" +
+          "Container holen wir per Spedition bei Ihnen ab. Bitte vereinbaren Sie dafür einen Termin mit unserem Kundenservice.",
       },
       {
         heading: "Zubehör und Zustand",
@@ -706,7 +706,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Was kostet die Rücksendung?",
-        body: "Nichts. Wir tragen die Kosten der Rücksendung, sowohl für Pakete als auch für die Abholung von Containern durch die Spedition.",
+        body: "Nichts. Wir tragen die Kosten der Rücksendung; Container holen wir per Spedition bei Ihnen ab.",
       },
       {
         heading: "Wann bekomme ich mein Geld zurück?",

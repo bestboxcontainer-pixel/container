@@ -176,7 +176,7 @@ export const enLegalPages: LegalPageMap = {
       {
         heading: "Section 5 Delivery and delivery times",
         body:
-          "We deliver in Germany and Austria; on request we also deliver to certain other countries of the European Union. Delivery to parcel lockers is possible for parcel shipments only; containers are delivered exclusively by freight forwarder to a street address.\n\n" +
+          "We deliver in Germany and Austria; on request we also deliver to certain other countries of the European Union. Containers are delivered exclusively by freight forwarder to a contactable street address.\n\n" +
           "Items in stock are usually delivered by standard shipping within 7 to 10 working days of the conclusion of the contract, or from the date of receipt of payment in the case of advance payment; express shipping delivers within a maximum of 5 working days for the surcharge shown in your order. For items marked \"On request\" (made to order) we state the expected delivery time on the product page; it is typically around three weeks.\n\n" +
           "If an item is unavailable because our supplier failed to deliver to us despite a corresponding contractual obligation (congruent hedging transaction), we may withdraw from the contract. We will inform you without delay and immediately refund any payments already made. Your statutory rights remain unaffected.\n\n" +
           "Partial deliveries are permitted where reasonable for you. You will not incur any additional shipping costs as a result.",
@@ -584,7 +584,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "How to register a return",
-        body: "Please register your return in advance, that way we can allocate your parcel immediately and refund you faster.",
+        body: "Please register your return in advance, that way we can allocate it immediately and refund you faster.",
         list: [
           `Email to ${COMPANY.email} stating your order number and the item description`,
           "The model withdrawal form from our \"Right of withdrawal\" page, completed and sent by email or post, it is not obligatory",
@@ -594,8 +594,8 @@ export const enLegalPages: LegalPageMap = {
       {
         heading: "Return shipping costs",
         body:
-          "We bear the cost of returning the goods. For parcel shipments we provide a free return label.\n\n" +
-          "Containers delivered by freight forwarder are collected from you. Please arrange an appointment with our customer service team.",
+          "We bear the cost of returning the goods.\n\n" +
+          "Containers are collected from you by freight forwarder. Please arrange an appointment with our customer service team.",
       },
       {
         heading: "Accessories and condition",
@@ -690,7 +690,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "What does a return cost?",
-        body: "Nothing. We bear the return costs, both for parcels and for the collection of containers by the freight forwarder.",
+        body: "Nothing. We bear the return costs; containers are collected from you by freight forwarder.",
       },
       {
         heading: "When will I get my money back?",

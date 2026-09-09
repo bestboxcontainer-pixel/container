@@ -268,7 +268,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "2. Data protection officer",
-        body: "We have not appointed a data protection officer, as the statutory conditions for doing so (section 38 of the German Federal Data Protection Act) are not met. For any data protection questions or to exercise your rights, please use the contact details given in section 1 or write to datenschutz@bestboxcontainer.de.",
+        body: "We have not appointed a data protection officer, as the statutory conditions for doing so (section 38 of the German Federal Data Protection Act) are not met. For any data protection questions or to exercise your rights, please use the contact details given in section 1, in particular kontakt@bestboxcontainer.de.",
       },
       {
         heading: "3. Legal bases for processing",
@@ -793,7 +793,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Data protection requests",
-        body: "To request access to, rectification of or erasure of your data, write to datenschutz@bestboxcontainer.de or by post marked \"Datenschutz\". We respond within the statutory period of one month.",
+        body: "To request access to, rectification of or erasure of your data, write to kontakt@bestboxcontainer.de or by post marked \"Datenschutz\". We respond within the statutory period of one month.",
       },
       {
         heading: "Press and partnerships",

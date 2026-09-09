@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 const TRUST_FACTS = [
   "Seit 2006 am Markt",
   "Inhabergeführtes Unternehmen",
-  "500+ Container im Bestand",
+  "300+ Container im Bestand",
   "Neu & geprüft gebraucht",
   "Lieferung deutschlandweit",
   "Persönliche Beratung",
@@ -52,7 +52,7 @@ const HERO_PHOTOS: readonly PhotoSlide[] = [
 /** Faits vérifiables affichés juste sous le hero (voir COMPANY.registeredSince et le catalogue réel). */
 const STATS = [
   { value: "2006", label: "Gegründet" },
-  { value: "500+", label: "Container im Bestand" },
+  { value: "300+", label: "Container im Bestand" },
   { value: "5", label: "Kategorien" },
   { value: "DE", label: "Lieferung deutschlandweit" },
 ] as const;

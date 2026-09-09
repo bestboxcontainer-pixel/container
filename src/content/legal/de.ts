@@ -283,7 +283,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "2. Datenschutzbeauftragter",
-        body: "Wir haben keinen Datenschutzbeauftragten bestellt, da die gesetzlichen Voraussetzungen hierfür (§ 38 BDSG) nicht vorliegen. Bei Fragen zum Datenschutz oder zur Wahrnehmung Ihrer Rechte wenden Sie sich bitte an die unter Ziffer 1 genannten Kontaktdaten oder an datenschutz@bestboxcontainer.de.",
+        body: "Wir haben keinen Datenschutzbeauftragten bestellt, da die gesetzlichen Voraussetzungen hierfür (§ 38 BDSG) nicht vorliegen. Bei Fragen zum Datenschutz oder zur Wahrnehmung Ihrer Rechte wenden Sie sich bitte an die unter Ziffer 1 genannten Kontaktdaten, insbesondere an kontakt@bestboxcontainer.de.",
       },
       {
         heading: "3. Rechtsgrundlagen der Verarbeitung",
@@ -809,7 +809,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Datenschutzanfragen",
-        body: "Auskunft, Berichtigung oder Löschung Ihrer Daten beantragen Sie unter datenschutz@bestboxcontainer.de oder postalisch mit dem Zusatz „Datenschutz“. Wir antworten innerhalb der gesetzlichen Frist von einem Monat.",
+        body: "Auskunft, Berichtigung oder Löschung Ihrer Daten beantragen Sie unter kontakt@bestboxcontainer.de oder postalisch mit dem Zusatz „Datenschutz“. Wir antworten innerhalb der gesetzlichen Frist von einem Monat.",
       },
       {
         heading: "Presse und Kooperationen",

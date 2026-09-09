@@ -120,6 +120,7 @@ function commandeEssai(nbArticles: number, remiseCents: number): OrderRecord {
     shippingMethodKey: "standard",
     subtotalCents: subtotal,
     shippingCents: 0,
+    taxCents: Math.round(((subtotal - remiseCents) * 19) / 119),
     couponCode: remiseCents > 0 ? "SOMMER10" : "",
     discountCents: remiseCents,
     totalCents: subtotal - remiseCents,

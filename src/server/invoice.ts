@@ -385,7 +385,15 @@ export async function buildInvoicePdf(
 
   plume.y -= 24;
   let yVendeur = hautBloc - 24;
-  for (const ligne of [COMPANY.street, COMPANY.city, COMPANY.phone, COMPANY.email]) {
+  // USt-IdNr. du vendeur : mention obligatoire de la facture (§ 14 Abs. 4 Nr. 2
+  // UStG), au même titre que le montant de TVA.
+  for (const ligne of [
+    COMPANY.street,
+    COMPANY.city,
+    COMPANY.phone,
+    COMPANY.email,
+    `USt-IdNr. ${COMPANY.vatId}`,
+  ]) {
     texte(ligne, { taille: 11, couleur: GRIS, finX: DROITE, y: yVendeur });
     yVendeur -= 16;
   }
@@ -442,13 +450,15 @@ export async function buildInvoicePdf(
   // ligne par coordonnée, et le pied est à hauteur fixe. On en déduit la place
   // laissée aux articles, puis la densité qui la respecte.
   const virement = lignesVirement(order, bank);
-  const lignesDecompte = 2 + (order.discountCents > 0 ? 1 : 0); // sous-total, [remise], livraison
+  // sous-total, [remise], livraison, puis sous le total : Nettobetrag + USt.
+  const lignesDecompte = 2 + (order.discountCents > 0 ? 1 : 0);
   const hauteurDecompte =
     DECOMPTE_ENTETE +
     lignesDecompte * DECOMPTE_LIGNE +
     DECOMPTE_DELAI +
     DECOMPTE_FILET +
-    DECOMPTE_TOTAL;
+    DECOMPTE_TOTAL +
+    2 * DECOMPTE_LIGNE;
   const hauteurBanque = virement.length > 0 ? BANQUE_ENTETE + virement.length * BANQUE_LIGNE : 0;
   const placeArticles = plume.y - HAUTEUR_PIED - hauteurDecompte - hauteurBanque;
 
@@ -571,6 +581,15 @@ export async function buildInvoicePdf(
   plume.y -= DECOMPTE_FILET;
   ligneTotal("GESAMTBETRAG", euros(order.totalCents), { fort: true });
 
+  // La TVA est *contenue* dans le total (prix TTC, PAngV § 3) : on la présente
+  // en décomposition sous le total, « enthaltene USt. », jamais « zzgl. ».
+  // § 14 Abs. 4 UStG exige le montant net, le taux et le montant de TVA.
+  const ustCents =
+    order.taxCents ??
+    Math.round((order.totalCents * order.taxRatePercent) / (100 + order.taxRatePercent));
+  ligneTotal("davon Nettobetrag", euros(order.totalCents - ustCents));
+  ligneTotal(`enthaltene USt. (${order.taxRatePercent} %)`, euros(ustCents));
+
   // ---- Coordonnées bancaires, pour le virement seul ----
   if (virement.length > 0) {
     plume.y -= 12;
@@ -601,7 +620,7 @@ export async function buildInvoicePdf(
     "Lieferung : Das Lieferdatum entspricht dem Versanddatum und wird gesondert mitgeteilt.",
     `Zahlung : ${order.paymentMethodLabel}. Zahlbar sofort und ohne Abzug.`,
     "Bei Zahlungsverzug berechnen wir Verzugszinsen gemäß § 288 BGB.",
-    `${COMPANY.name} · ${COMPANY.street} · ${COMPANY.city} · Tel. ${COMPANY.phone} · ${COMPANY.email} · ${COMPANY.register}`,
+    `${COMPANY.name} · ${COMPANY.street} · ${COMPANY.city} · Tel. ${COMPANY.phone} · ${COMPANY.email} · ${COMPANY.register} · USt-IdNr. ${COMPANY.vatId}`,
   ];
 
   // La ligne d'identification de la société dépasse la justification à ce

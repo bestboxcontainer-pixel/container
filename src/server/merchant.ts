@@ -84,12 +84,12 @@ export const MERCHANT_SHIPPING = {
   maxHandlingDays: 2,
   /**
    * Transport spécial (plateau, grue si besoin) : six à huit jours en standard,
-   * deux à trois en express. Avec la préparation, on retombe sur les délais
-   * totaux de SHIPPING_METHODS : 7 à 10 et 3 à 5 jours ouvrés.
+   * trois en express. Avec la préparation (1–2 j), on retombe sur les délais
+   * totaux de SHIPPING_METHODS : 7 à 10 et 4 à 5 jours ouvrés.
    */
   minTransitDays: 6,
   maxTransitDays: 8,
-  expressMinTransitDays: 2,
+  expressMinTransitDays: 3,
   expressMaxTransitDays: 3,
 } as const;
 

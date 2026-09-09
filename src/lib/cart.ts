@@ -39,7 +39,7 @@ export const SHIPPING_METHODS = [
     key: "express",
     /** 199,00 €, supplément de service, soumis à la TVA comme la marchandise. */
     cents: 19_900,
-    minDays: 3,
+    minDays: 4,
     maxDays: 5,
     label: "Expressversand",
   },

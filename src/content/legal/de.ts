@@ -214,7 +214,7 @@ export const deLegalPages: LegalPageMap = {
         heading: "§ 8 Widerrufsrecht",
         body:
           "Verbraucherinnen und Verbrauchern steht ein gesetzliches Widerrufsrecht von 14 Tagen zu. Die vollständige Widerrufsbelehrung, die Online-Widerrufsfunktion nach § 356a BGB sowie das Muster-Widerrufsformular finden Sie auf der Seite „Widerrufsrecht“; beides ist auch Bestandteil unserer Bestellbestätigung.\n\n" +
-          "Zusätzlich zum gesetzlichen Widerrufsrecht räumen wir Ihnen freiwillig ein Rückgaberecht von 30 Tagen ab Erhalt der Ware ein. Dieses vertragliche Rückgaberecht setzt voraus, dass die Ware vollständig, unbeschädigt und in wiederverkaufsfähigem Zustand ist. Ihre gesetzlichen Rechte, insbesondere das 14-tägige Widerrufsrecht und die Mängelrechte, werden dadurch nicht eingeschränkt.",
+          "Ein über das gesetzliche Widerrufsrecht hinausgehendes freiwilliges Rückgaberecht gewähren wir nicht. Die Kosten der Rücksendung tragen wir; bei Containern organisieren wir die Abholung per Spedition. Den vollständigen Ablauf finden Sie auf den Seiten „Widerrufsrecht“ und „Retoure und Reklamation“.",
       },
       {
         heading: "§ 9 Mängelhaftung (Gewährleistung)",
@@ -468,8 +468,13 @@ export const deLegalPages: LegalPageMap = {
         ],
       },
       {
-        heading: "Freiwilliges 30-Tage-Rückgaberecht",
-        body: "Über das gesetzliche Widerrufsrecht hinaus räumen wir Ihnen ein vertragliches Rückgaberecht von 30 Tagen ab Erhalt der Ware ein. Es gilt für unbenutzte, vollständige und wiederverkaufsfähige Artikel und lässt Ihre gesetzlichen Rechte unberührt. Details finden Sie auf der Seite „Retoure & Reklamation“.",
+        heading: "Rückgabe eines Containers: So läuft es ab",
+        body:
+          "Wer organisiert die Rückgabe? Sie erklären den Widerruf (E-Mail, Brief oder Formular). Die Rücksendung selbst organisieren wir: Wir beauftragen die Spedition und stimmen mit Ihnen einen Abholtermin ab.\n\n" +
+          "Wer trägt die Transportkosten? Wir. Für die Rücksendung entstehen Ihnen keine Transport- oder Speditionskosten.\n\n" +
+          "Wie wird der Container abgeholt? Per Hakenlift-Spedition (Absetzkipper) oder, je nach Zufahrt und Aufstellung, mit Kranfahrzeug. Die Spedition meldet sich vorab telefonisch oder per SMS. Der Container muss von der frei zugänglichen Stellfläche aus wieder aufgenommen werden können.\n\n" +
+          "Was, wenn ein Kran nötig ist? Ist die Zufahrt eingeschränkt oder wurde der Container besonders positioniert, organisieren wir das passende Kranfahrzeug; auch diese Kosten tragen wir im Rahmen des Widerrufs. Bauliche Veränderungen am Aufstellort, die die Abholung erst erschweren oder verhindern (etwa nachträglich errichtete Einfriedungen, Fundamente oder Anbauten), gehen zu Ihren Lasten und können als Wertersatz berücksichtigt werden.\n\n" +
+          "Wie schnell wird erstattet? Wir erstatten den Kaufpreis einschließlich der Standard-Hinsendekosten spätestens 14 Tage nach Eingang Ihrer Widerrufserklärung, über dasselbe Zahlungsmittel wie bei der Bestellung und ohne Entgelt. Bis der Container wieder bei uns eingetroffen ist oder Sie die Übergabe an die Spedition nachgewiesen haben, dürfen wir die Rückzahlung zurückhalten.",
       },
     ],
   },
@@ -593,10 +598,10 @@ export const deLegalPages: LegalPageMap = {
     updatedAt: UPDATED_AT,
     sections: [
       {
-        heading: "Zwei Wege zurück",
+        heading: "Ihr Widerrufsrecht",
         body:
-          "Gesetzliches Widerrufsrecht: 14 Tage ab Erhalt der Ware, ohne Angabe von Gründen. Die maßgebliche Belehrung finden Sie auf der Seite „Widerrufsrecht“.\n\n" +
-          "Freiwilliges Rückgaberecht: Zusätzlich gewähren wir 30 Tage ab Erhalt der Ware. Voraussetzung ist, dass der Artikel unbenutzt, vollständig und wiederverkaufsfähig ist. Dieses zusätzliche Recht schränkt Ihre gesetzlichen Rechte nicht ein.",
+          "Als Verbraucherin oder Verbraucher haben Sie ein gesetzliches Widerrufsrecht von 14 Tagen ab Erhalt der Ware, ohne Angabe von Gründen. Die maßgebliche Widerrufsbelehrung und das Muster-Widerrufsformular finden Sie auf der Seite „Widerrufsrecht“.\n\n" +
+          "Ein darüber hinausgehendes freiwilliges Rückgaberecht gewähren wir nicht; es bleibt beim gesetzlichen 14-tägigen Widerrufsrecht. Ausgenommen sind maßgefertigte Container (§ 312g Absatz 2 BGB).",
       },
       {
         heading: "So melden Sie eine Rücksendung an",
@@ -608,10 +613,10 @@ export const deLegalPages: LegalPageMap = {
         ],
       },
       {
-        heading: "Rücksendekosten",
+        heading: "Rücksendekosten und Abholung",
         body:
           "Die Kosten der Rücksendung tragen wir.\n\n" +
-          "Container holen wir per Spedition bei Ihnen ab. Bitte vereinbaren Sie dafür einen Termin mit unserem Kundenservice.",
+          "Wir organisieren die Abholung: Wir beauftragen die Spedition und stimmen mit Ihnen einen Termin ab. Abgeholt wird per Hakenlift-Spedition (Absetzkipper) oder, je nach Zufahrt und Aufstellung, mit Kranfahrzeug. Ist für die Aufnahme des Containers ein Kran nötig, organisieren wir ihn; auch diese Kosten tragen wir. Bauliche Veränderungen am Aufstellort, die die Abholung erst erschweren oder verhindern, gehen zu Ihren Lasten.",
       },
       {
         heading: "Zubehör und Zustand",
@@ -641,7 +646,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Nicht zurückgenommene Artikel",
-        body: "Vom Widerrufs- und Rückgaberecht ausgeschlossen sind maßgefertigte Container, etwa mit individuellem Zuschnitt für Türen und Fenster, individueller Lackierung oder individuellem Innenausbau. Die vollständige Aufzählung finden Sie auf der Seite „Widerrufsrecht“.",
+        body: "Vom Widerrufsrecht ausgeschlossen sind maßgefertigte Container, etwa mit individuellem Zuschnitt für Türen und Fenster, individueller Lackierung oder individuellem Innenausbau. Die vollständige Aufzählung finden Sie auf der Seite „Widerrufsrecht“.",
       },
     ],
   },
@@ -698,11 +703,11 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Wie lange kann ich einen Artikel zurückgeben?",
-        body: "Es gibt zwei Wege zurück. Ihr gesetzliches Widerrufsrecht läuft 14 Tage ab Erhalt der Ware und verlangt keine Begründung; maßgeblich ist die Widerrufsbelehrung. Darüber hinaus räumen wir Ihnen freiwillig ein vertragliches Rückgaberecht von 30 Tagen ab Erhalt der Ware ein, vorausgesetzt, der Artikel ist unbenutzt, vollständig und wiederverkaufsfähig. Dieses zusätzliche Recht schränkt Ihre gesetzlichen Rechte nicht ein.",
+        body: "Ihr gesetzliches Widerrufsrecht läuft 14 Tage ab Erhalt der Ware und verlangt keine Begründung; maßgeblich ist die Widerrufsbelehrung. Ein darüber hinausgehendes freiwilliges Rückgaberecht bieten wir nicht. Maßgefertigte Container sind vom Widerruf ausgeschlossen (§ 312g Absatz 2 BGB).",
       },
       {
         heading: "Wie schicke ich etwas zurück?",
-        body: `Melden Sie die Rücksendung vorab an, per E-Mail an ${COMPANY.email} oder telefonisch unter ${COMPANY.phone}. Das Muster-Widerrufsformular finden Sie auf der Seite „Widerrufsrecht“; Sie müssen es aber nicht verwenden, eine formlose eindeutige Erklärung genügt. Container holen wir nach Terminabsprache bei Ihnen ab. Legen Sie bitte sämtliches Zubehör bei, etwa Schlüssel und Verriegelungsbolzen.`,
+        body: `Melden Sie den Widerruf vorab an, per E-Mail an ${COMPANY.email} oder telefonisch unter ${COMPANY.phone}. Das Muster-Widerrufsformular finden Sie auf der Seite „Widerrufsrecht“; Sie müssen es aber nicht verwenden, eine formlose eindeutige Erklärung genügt. Die Abholung organisieren wir: Die Spedition holt den Container nach Terminabsprache bei Ihnen ab, bei Bedarf mit Kranfahrzeug, auf unsere Kosten. Legen Sie bitte sämtliches Zubehör bei, etwa Schlüssel und Verriegelungsbolzen.`,
       },
       {
         heading: "Was kostet die Rücksendung?",
@@ -722,7 +727,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Kann ich als Firma bestellen und eine Rechnung mit Umsatzsteuerausweis erhalten?",
-        body: "Ja. Tragen Sie im Bestellprozess Ihren Firmennamen in das Feld „Firma“ ein. Die Rechnung liegt der Bestellbestätigung als PDF bei und weist die enthaltene Umsatzsteuer aus. Benötigen Sie Ihre Umsatzsteuer-Identifikationsnummer auf der Rechnung, tragen Sie sie bitte in das Anmerkungsfeld der Bestellung ein oder senden Sie sie uns nach. Bitte beachten Sie zwei Unterschiede zum Verbraucherkauf: Unternehmen haben kein gesetzliches Widerrufsrecht, und die Verjährungsfrist für Mängelansprüche beträgt bei neuen Waren ein Jahr ab Gefahrübergang statt zwei Jahre. Unser freiwilliges 30-tägiges Rückgaberecht gilt auch für Sie.",
+        body: "Ja. Tragen Sie im Bestellprozess Ihren Firmennamen in das Feld „Firma“ ein. Die Rechnung liegt der Bestellbestätigung als PDF bei und weist die enthaltene Umsatzsteuer aus. Benötigen Sie Ihre Umsatzsteuer-Identifikationsnummer auf der Rechnung, tragen Sie sie bitte in das Anmerkungsfeld der Bestellung ein oder senden Sie sie uns nach. Bitte beachten Sie zwei Unterschiede zum Verbraucherkauf: Unternehmen haben kein gesetzliches Widerrufsrecht, und die Verjährungsfrist für Mängelansprüche beträgt bei neuen Waren ein Jahr ab Gefahrübergang statt zwei Jahre.",
       },
       {
         heading: "Was mache ich, wenn mein Container nach Ablauf der zwei Jahre einen Schaden hat?",

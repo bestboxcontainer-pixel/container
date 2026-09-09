@@ -94,11 +94,12 @@ export const MERCHANT_SHIPPING = {
 } as const;
 
 /**
- * Politique de retour annoncée (TrustBar : « 14 Tage Rückgaberecht »).
- * Quatorze jours correspondent au droit de rétractation légal allemand
- * (§ 355 BGB) : la boutique n'accorde plus de délai contractuel au-delà.
- * `returnFees` n'est volontairement pas renseigné : le site ne précise pas qui
- * supporte les frais de retour, et Google refuse les informations inexactes.
+ * Politique de retour annoncée (TrustBar : « 14 Tage Widerrufsrecht »).
+ * Quatorze jours : le droit de rétractation légal allemand (§ 355 BGB), sans
+ * aucun délai contractuel volontaire au-delà.
+ * `fees` = FreeReturn : la boutique prend en charge les frais de retour, comme
+ * l'annoncent la Widerrufsbelehrung et la page « Retoure und Reklamation »
+ * (organisation de l'enlèvement par transporteur, grue comprise si nécessaire).
  */
 export const MERCHANT_RETURN_POLICY = {
   country: MERCHANT_COUNTRY,

@@ -199,7 +199,7 @@ export const enLegalPages: LegalPageMap = {
         heading: "Section 8 Right of withdrawal",
         body:
           "Consumers have a statutory right of withdrawal of 14 days. The full withdrawal instructions, the online withdrawal function pursuant to section 356a BGB and the model withdrawal form can be found on our \"Right of withdrawal\" page; both are also included in our order confirmation.\n\n" +
-          "In addition to the statutory right of withdrawal, we voluntarily grant you a contractual right of return of 30 days from receipt of the goods. This contractual right requires the goods to be complete, undamaged and in resaleable condition. Your statutory rights, in particular the 14-day right of withdrawal and your rights in respect of defects, are not restricted by this.",
+          "We do not grant any voluntary right of return beyond the statutory right of withdrawal. We bear the cost of the return; for containers we organise collection by freight forwarder. The full process is set out on our \"Right of withdrawal\" and \"Returns and complaints\" pages.",
       },
       {
         heading: "Section 9 Liability for defects (statutory warranty)",
@@ -452,8 +452,13 @@ export const enLegalPages: LegalPageMap = {
         ],
       },
       {
-        heading: "Voluntary 30-day return policy",
-        body: "In addition to the statutory right of withdrawal, we grant you a contractual right of return of 30 days from receipt of the goods. It applies to unused, complete and resaleable items and does not affect your statutory rights. Details can be found on our \"Returns & complaints\" page.",
+        heading: "Returning a container: how it works",
+        body:
+          "Who organises the return? You declare the withdrawal (email, letter or form). We organise the return itself: we instruct the freight forwarder and agree a collection date with you.\n\n" +
+          "Who pays for transport? We do. You incur no transport or freight costs for the return.\n\n" +
+          "How is the container collected? By hook-lift forwarder (skip loader) or, depending on access and positioning, by crane vehicle. The forwarder contacts you in advance by phone or text. The container must be able to be picked up again from the freely accessible standing area.\n\n" +
+          "What if a crane is needed? If access is restricted or the container was specially positioned, we arrange the appropriate crane vehicle; we also bear those costs as part of the withdrawal. Structural changes at the installation site that make collection harder or impossible (such as fences, foundations or extensions built afterwards) are at your expense and may be taken into account as a loss of value.\n\n" +
+          "How fast is the refund? We refund the purchase price including the standard outbound shipping no later than 14 days after we receive your withdrawal declaration, using the same means of payment as your order and at no charge. Until the container is back with us or you have proven it was handed to the forwarder, we may withhold the refund.",
       },
     ],
   },
@@ -577,10 +582,10 @@ export const enLegalPages: LegalPageMap = {
     updatedAt: UPDATED_AT,
     sections: [
       {
-        heading: "Two ways to send something back",
+        heading: "Your right of withdrawal",
         body:
-          "Statutory right of withdrawal: 14 days from receipt of the goods, without giving any reason. The binding instructions can be found on our \"Right of withdrawal\" page.\n\n" +
-          "Voluntary right of return: in addition we grant 30 days from receipt of the goods. The item must be unused, complete and resaleable. This additional right does not restrict your statutory rights.",
+          "As a consumer you have a statutory right of withdrawal of 14 days from receipt of the goods, without giving any reason. The binding withdrawal instructions and the model withdrawal form are on our \"Right of withdrawal\" page.\n\n" +
+          "We do not grant any voluntary right of return beyond this; the statutory 14-day right of withdrawal applies. Custom-made containers are excluded (section 312g(2) of the German Civil Code).",
       },
       {
         heading: "How to register a return",
@@ -592,10 +597,10 @@ export const enLegalPages: LegalPageMap = {
         ],
       },
       {
-        heading: "Return shipping costs",
+        heading: "Return costs and collection",
         body:
           "We bear the cost of returning the goods.\n\n" +
-          "Containers are collected from you by freight forwarder. Please arrange an appointment with our customer service team.",
+          "We organise the collection: we instruct the freight forwarder and agree a date with you. Collection is by hook-lift forwarder (skip loader) or, depending on access and positioning, by crane vehicle. If a crane is needed to pick up the container, we arrange it; we also bear those costs. Structural changes at the installation site that make collection harder or impossible are at your expense.",
       },
       {
         heading: "Accessories and condition",
@@ -625,7 +630,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Items excluded from return",
-        body: "Custom-made containers, for example with custom-cut doors and windows, a custom paint finish or a custom interior fit-out, are excluded from the right of withdrawal and the voluntary return policy. The full list can be found on our \"Right of withdrawal\" page.",
+        body: "Custom-made containers, for example with custom-cut doors and windows, a custom paint finish or a custom interior fit-out, are excluded from the right of withdrawal. The full list can be found on our \"Right of withdrawal\" page.",
       },
     ],
   },
@@ -682,11 +687,11 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "How long do I have to return an item?",
-        body: "There are two routes back. Your statutory right of withdrawal runs for 14 days from receipt of the goods and requires no reason; the binding text is the withdrawal policy. On top of that we voluntarily grant a contractual return right of 30 days from receipt, provided the item is unused, complete and fit for resale. This additional right does not restrict your statutory rights.",
+        body: "Your statutory right of withdrawal runs for 14 days from receipt of the goods and requires no reason; the binding text is the withdrawal policy. We do not offer any voluntary return right beyond this. Custom-made containers are excluded from withdrawal (section 312g(2) of the German Civil Code).",
       },
       {
         heading: "How do I send something back?",
-        body: `Register the return in advance, by email to ${COMPANY.email} or by phone on ${COMPANY.phone}. The model withdrawal form is on our "Right of withdrawal" page, though you need not use it: an unequivocal statement is enough. Containers are collected from you by appointment. Please enclose all accessories, such as keys and locking bolts.`,
+        body: `Declare the withdrawal in advance, by email to ${COMPANY.email} or by phone on ${COMPANY.phone}. The model withdrawal form is on our "Right of withdrawal" page, though you need not use it: an unequivocal statement is enough. We organise the collection: the freight forwarder picks the container up from you by appointment, with a crane vehicle if needed, at our expense. Please enclose all accessories, such as keys and locking bolts.`,
       },
       {
         heading: "What does a return cost?",
@@ -706,7 +711,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "Can I order as a business and receive a VAT invoice?",
-        body: "Yes. Enter your company name in the \"Company\" field during the order process. The invoice is attached to your order confirmation as a PDF and shows the VAT included. If you need your VAT identification number on the invoice, please add it to the comments field of your order or send it to us afterwards. Please note two differences from consumer purchases: businesses have no statutory right of withdrawal, and the limitation period for defect claims on new goods is one year from the passing of risk rather than two. Our voluntary 30-day return right does apply to you as well.",
+        body: "Yes. Enter your company name in the \"Company\" field during the order process. The invoice is attached to your order confirmation as a PDF and shows the VAT included. If you need your VAT identification number on the invoice, please add it to the comments field of your order or send it to us afterwards. Please note two differences from consumer purchases: businesses have no statutory right of withdrawal, and the limitation period for defect claims on new goods is one year from the passing of risk rather than two.",
       },
       {
         heading: "What if my container is damaged after the two years are up?",

@@ -234,11 +234,11 @@ export function ProductPreview({
 
           <div className="flex flex-col gap-1.5 border-t border-border pt-3 text-[11px] text-muted-foreground">
             <p className="flex items-center gap-2">
-              <Truck className="h-3.5 w-3.5 text-primary" /> Schnelle Lieferung in 1-3 Werktagen
+              <Truck className="h-3.5 w-3.5 text-primary" /> Standardversand kostenlos (7-10 Werktage)
             </p>
             <p className="flex items-center gap-2">
-              <ShieldCheck className="h-3.5 w-3.5 text-primary" /> 14 Tage Rückgaberecht ohne Angabe von
-              Gründen
+              <ShieldCheck className="h-3.5 w-3.5 text-primary" /> 14 Tage Widerrufsrecht ohne Angabe
+              von Gründen
             </p>
           </div>
         </div>

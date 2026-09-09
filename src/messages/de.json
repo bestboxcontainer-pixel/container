@@ -36,7 +36,7 @@
   "trust": {
     "shippingTitle": "Standardversand: kostenlos (7-10 Tage)",
     "shippingDetail": "Expressversand: 199 € (4-5 Tage)",
-    "returnTitle": "14 Tage Rückgaberecht",
+    "returnTitle": "14 Tage Widerrufsrecht",
     "returnDetail": "Ohne Angabe von Gründen",
     "serviceTitle": "Aufbauservice vor Ort",
     "serviceDetail": "Auf Wunsch, gegen Aufpreis"
@@ -117,7 +117,7 @@
     "increaseQuantity": "Anzahl um 1 erhöhen",
     "addToCart": "In den Warenkorb",
     "fastDelivery": "Standardversand kostenlos (7-10 Tage) · Express 199 € (4-5 Tage)",
-    "warranty": "14 Tage Rückgaberecht ohne Angabe von Gründen",
+    "warranty": "14 Tage Widerrufsrecht ohne Angabe von Gründen",
     "customRequestHint": "Andere Ausführung, Menge oder Sonderwunsch?",
     "requestQuote": "Angebot anfragen",
     "requestQuoteDetail": "um diesen Container anzupassen",
@@ -218,7 +218,7 @@
     "homeAriaLabel": "BBC Best Box Containerhandel e.K., Startseite",
     "deliveryTitle": "Standardversand: kostenlos (7-10 Tage)",
     "deliveryDetail": "Expressversand: 199 € (4-5 Tage)",
-    "warrantyTitle": "14 Tage Rückgaberecht",
+    "warrantyTitle": "14 Tage Widerrufsrecht",
     "warrantyDetail": "Ohne Angabe von Gründen",
     "paymentTitle": "Sichere Zahlung",
     "paymentDetail": "SSL-verschlüsselte Übertragung",

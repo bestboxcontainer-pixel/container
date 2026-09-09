@@ -39,9 +39,9 @@ const LOGO_HEIGHT = Math.round((LOGO_WIDTH * 406) / 1242);
  * Identification du fournisseur reprise de src/content/legal/de.ts.
  *
  * Recopiée ici et non importée : ce module ne doit dépendre d'aucun contenu de
- * page, et les valeurs sont de toute façon des données d'entreprise à figer une
- * fois pour toutes. Elles sont encore fictives, voir docs/LEGAL.md, et
- * doivent être remplacées ici EN MÊME TEMPS que dans les pages légales.
+ * page, et les valeurs sont de toute façon des données d'entreprise figées.
+ * Si elles changent, les mettre à jour ici EN MÊME TEMPS que dans les pages
+ * légales (src/content/legal/de.ts).
  */
 const IMPRESSUM = {
   name: "BBC Best Box Containerhandel e.K.",

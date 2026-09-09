@@ -5,8 +5,8 @@
  * structure de sections. Pour les pages juridiques, une mention indique que
  * seule la version allemande fait foi (langue contractuelle = allemand).
  *
- * Coordonnées d'entreprise réelles. Voir docs/LEGAL.md pour ce qui reste
- * à compléter avant mise en ligne (assurance, prestataires, hébergeur…).
+ * Coordonnées d'entreprise réelles (assurance AXA, prestataire de paiement
+ * Stripe inclus). Voir docs/LEGAL.md pour l'historique.
  *
  * ElektroG / BattDG (électroménager et électronique) volontairement absents,
  * pour la même raison que dans de.ts : hors du champ d'activité de
@@ -21,7 +21,7 @@ import type { LegalPageMap } from "./types";
 /** Date de dernière révision rédactionnelle du corpus anglais. */
 const UPDATED_AT = "2026-07-26";
 
-/** Coordonnées de l'entreprise : À REMPLACER par les données réelles. */
+/** Coordonnées réelles de l'entreprise. */
 const COMPANY = {
   name: "BBC Best Box Containerhandel e.K.",
   street: "Petersweg 11a",

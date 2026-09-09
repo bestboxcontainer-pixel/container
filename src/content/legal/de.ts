@@ -1,9 +1,8 @@
 /**
  * Contenu légal et informatif en ALLEMAND : BBC Best Box Containerhandel e.K.
  *
- * Coordonnées d'entreprise réelles (adresse, HRA, USt-IdNr.). Voir
- * docs/LEGAL.md pour ce qui reste à compléter avant mise en ligne
- * (assurance, prestataires, hébergeur…).
+ * Coordonnées d'entreprise réelles (adresse, HRA, USt-IdNr., assurance AXA,
+ * prestataire de paiement Stripe). Voir docs/LEGAL.md pour l'historique.
  *
  * État du droit retenu : juillet 2026 (§ 5 DDG, § 356a BGB / Widerrufsbutton
  * depuis le 19.06.2026, PAngV, DSGVO/TDDDG, VSBG § 36 : plateforme ODR fermée
@@ -18,7 +17,7 @@
  * de conteneurs, à la place du gabarit d'origine (vente au détail d'appareils
  * électroménagers/multimédia). La page dédiée ElektroG/BattDG a été retirée
  * (hors champ), de même que les clauses de reprise d'appareils usagés.
- * Reste un gabarit à faire valider par un juriste avant mise en ligne réelle.
+ * À faire relire par un juriste, comme tout corpus de pages légales.
  */
 
 import type { LegalPageMap } from "./types";
@@ -27,7 +26,7 @@ import type { LegalPageMap } from "./types";
 const UPDATED_AT = "2026-07-26";
 
 /**
- * Coordonnées de l'entreprise : À REMPLACER par les données réelles.
+ * Coordonnées réelles de l'entreprise.
  * Exportées : la facture PDF y puise les mentions exigées par le § 14 UStG,
  * et deux jeux de coordonnées qui divergeraient seraient pires qu'un seul faux.
  */

@@ -35,10 +35,15 @@ const TRUST_FACTS = [
  */
 /**
  * Visuels du hero, en rotation (fondu enchaîné, voir PhotoHeroCarousel).
- * Deux photos : la vue au sol d'origine, puis la vue aérienne du terminal de
+ * En tête, la vue du parc à conteneurs BBC (même visuel que le hero « Über
+ * uns ») ; puis la vue au sol dans le port et la vue aérienne du terminal de
  * Hambourg.
  */
 const HERO_PHOTOS: readonly PhotoSlide[] = [
+  {
+    src: "/images/hero-yard.jpg",
+    alt: "Containerplatz von BBC Best Box Containerhandel mit Reachstacker, Speditionsfahrzeug und gestapelten Containern",
+  },
   {
     src: "https://res.cloudinary.com/syxnblqk/image/upload/f_auto,q_auto/v1787403193/bbc-best-box/site/hero-port-1-8hwmc1.jpg",
     alt: "Stapel von Frachtcontainern im Hafen",

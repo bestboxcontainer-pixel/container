@@ -63,9 +63,9 @@ const CATEGORIES = [
 ] as const;
 
 const DIMENSIONS = [
-  { label: "Länge", value: "3 bis 12 m" },
-  { label: "Breite", value: "2,4 bis 3,0 m" },
-  { label: "Höhe", value: "2,6 bis 3,0 m" },
+  { label: "Länge", value: "ca. 3 bis 12 m" },
+  { label: "Breite", value: "ca. 2,4 bis 3,0 m" },
+  { label: "Höhe", value: "ca. 2,6 bis 3,0 m" },
 ] as const;
 
 const PROJECT_TYPES = [

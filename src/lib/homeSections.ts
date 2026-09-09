@@ -52,7 +52,9 @@ export const HOME_SIZE_GROUPS: readonly HomeSizeGroup[] = [
   {
     id: "laengen",
     title: "Längen",
-    subtitle: "3,00 m bis 12,00 m",
+    // Fourchette marketing, arrondie : les cotes exactes (2.991 / 6.058 /
+    // 12.192 mm) sont sur chaque fiche produit.
+    subtitle: "ca. 3 m bis 12 m",
     options: [
       { label: "3m", imageSrc: SIZE_IMAGES["3m"], imageAlt: "Container in 3 Meter Länge", imageWidthPercent: 100 },
       { label: "6m", imageSrc: SIZE_IMAGES["6m"], imageAlt: "Container in 6 Meter Länge", imageWidthPercent: 100 },

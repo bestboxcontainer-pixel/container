@@ -369,7 +369,7 @@ export async function buildInvoicePdf(
 
   // ---- Logo ----
   const logo = await doc.embedPng(logoPngBytes());
-  const hauteurLogo = 48;
+  const hauteurLogo = 54;
   plume.page.drawImage(logo, {
     x: MARGE,
     y: plume.y - hauteurLogo,

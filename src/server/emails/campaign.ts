@@ -31,9 +31,9 @@ import {
 } from "@/lib/campaigns";
 import { siteUrl } from "@/server/emails/customerAccount";
 
-const LOGO_WIDTH = 220;
-// Rapport d'origine du fichier : 1242 × 406
-const LOGO_HEIGHT = Math.round((LOGO_WIDTH * 406) / 1242);
+const LOGO_WIDTH = 128;
+// L'emblème du site est carré (256 × 256).
+const LOGO_HEIGHT = LOGO_WIDTH;
 
 /**
  * Identification du fournisseur reprise de src/content/legal/de.ts.

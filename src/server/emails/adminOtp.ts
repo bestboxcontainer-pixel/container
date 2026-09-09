@@ -16,9 +16,9 @@
 import { emailLogoSrc } from "@/server/brandLogo";
 import type { MailMessage } from "@/lib/mailer";
 
-const LOGO_WIDTH = 220;
-// Rapport d'origine du fichier : 1242 × 406
-const LOGO_HEIGHT = Math.round((LOGO_WIDTH * 406) / 1242);
+const LOGO_WIDTH = 128;
+// L'emblème du site est carré (256 × 256).
+const LOGO_HEIGHT = LOGO_WIDTH;
 
 function escapeHtml(value: string): string {
   return value

@@ -185,7 +185,7 @@ export const deLegalPages: LegalPageMap = {
         heading: "§ 4 Preise und Versandkosten",
         body:
           "Alle angegebenen Preise sind Endpreise in Euro und enthalten die gesetzliche Umsatzsteuer. Sie verstehen sich zuzüglich Versandkosten, sofern auf der Produktseite nichts anderes angegeben ist.\n\n" +
-          "Der Standardversand innerhalb Deutschlands und Österreichs ist kostenlos, ohne Mindestbestellwert. Wünschen Sie eine schnellere Zustellung, kostet der Expressversand pauschal 199,00 Euro. Für optionale Zusatzleistungen wie Anschluss, Montage oder die Lieferung bis zum Aufstellort gelten gesonderte Entgelte; diese Leistungen vereinbaren Sie vor oder nach der Bestellung mit unserem Kundenservice. Die Versandkosten werden vor Abschluss der Bestellung im Warenkorb ausgewiesen. Einzelheiten finden Sie auf der Seite „Versand & Lieferung“.\n\n" +
+          "Der Standardversand innerhalb Deutschlands und Österreichs ist kostenlos, ohne Mindestbestellwert. Die Lieferung erfolgt bis zur frei zugänglichen, geeigneten Stellfläche an der von Ihnen angegebenen Adresse. Wünschen Sie eine schnellere Zustellung, kostet der Expressversand pauschal 199,00 Euro. Kranentladung, besondere Positionierung sowie optionale Zusatzleistungen wie Ausrichten, Aufbau oder Anschluss sind kostenpflichtig und werden vorab angeboten; diese Leistungen vereinbaren Sie vor oder nach der Bestellung mit unserem Kundenservice. Die Versandkosten werden vor Abschluss der Bestellung im Warenkorb ausgewiesen. Einzelheiten finden Sie auf der Seite „Versand & Lieferung“.\n\n" +
           "Bei Waren, die nach Gewicht, Volumen, Länge oder Fläche angeboten werden, weisen wir zusätzlich den Grundpreis gemäß Preisangabenverordnung aus. Bei Preisermäßigungen nennen wir den niedrigsten Gesamtpreis, den wir in den letzten 30 Tagen vor der Ermäßigung angewendet haben.",
       },
       {
@@ -492,10 +492,12 @@ export const deLegalPages: LegalPageMap = {
     sections: [
       {
         heading: "Versandkosten auf einen Blick",
-        body: "Alle Preise verstehen sich inklusive der gesetzlichen Umsatzsteuer. Die für Ihre Bestellung geltenden Versandkosten werden Ihnen im Warenkorb ausgewiesen, bevor Sie die Bestellung abschließen.",
+        body: "Alle Preise verstehen sich inklusive der gesetzlichen Umsatzsteuer. „Kostenlos“ meint die Anlieferung bis zur frei zugänglichen, geeigneten Stellfläche an der angegebenen Adresse; sie umfasst nicht das Heben über Hindernisse, eine besondere Positionierung oder Aufbauleistungen. Die für Ihre Bestellung geltenden Versandkosten werden Ihnen im Warenkorb ausgewiesen, bevor Sie die Bestellung abschließen.",
         list: [
-          "Standardversand innerhalb Deutschlands und Österreichs: kostenlos, ohne Mindestbestellwert",
+          "Standardlieferung innerhalb Deutschlands und Österreichs bis zur Stellfläche: kostenlos, ohne Mindestbestellwert",
           "Expressversand innerhalb Deutschlands und Österreichs: 199,00 Euro",
+          "Kranentladung oder besondere Positionierung: kostenpflichtig, Angebot nach Aufmaß, vorab",
+          "Ausrichten, Unterbauen, Aufbau, Anschluss: kostenpflichtig, siehe unten",
         ],
       },
       {
@@ -667,7 +669,7 @@ export const deLegalPages: LegalPageMap = {
       },
       {
         heading: "Was kostet der Versand?",
-        body: "Der Standardversand innerhalb Deutschlands und Österreichs ist kostenlos, ohne Mindestbestellwert, unabhängig von Größe und Gewicht der Ware. Wünschen Sie die Lieferung innerhalb von 4 bis 5 Werktagen, kostet der Expressversand pauschal 199,00 Euro. Andere Zuschläge gibt es nicht. Die für Ihre Bestellung geltenden Kosten sehen Sie immer im Warenkorb, bevor Sie bestellen.",
+        body: "Der Standardversand innerhalb Deutschlands und Österreichs ist kostenlos, ohne Mindestbestellwert, unabhängig von Größe und Gewicht der Ware. Kostenlos ist die Anlieferung bis zur frei zugänglichen, geeigneten Stellfläche; das Heben über Hindernisse, eine besondere Positionierung oder Aufbauleistungen gehören nicht dazu. Wünschen Sie die Lieferung innerhalb von 4 bis 5 Werktagen, kostet der Expressversand pauschal 199,00 Euro. Kranentladung, besondere Positionierung und Zusatzleistungen (Ausrichten, Aufbau, Anschluss) sind kostenpflichtig und werden vorab angeboten. Die für Ihre Bestellung geltenden Kosten sehen Sie immer im Warenkorb, bevor Sie bestellen.",
       },
       {
         heading: "Liefern Sie auch ins Ausland?",

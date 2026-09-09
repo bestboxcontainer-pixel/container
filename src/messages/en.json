@@ -34,7 +34,7 @@
     "search": "Search"
   },
   "trust": {
-    "shippingTitle": "Standard delivery: free (7-10 days)",
+    "shippingTitle": "Standard delivery: free to the standing area (7-10 days)",
     "shippingDetail": "Express delivery: €199 (4-5 days)",
     "returnTitle": "14-day right of withdrawal",
     "returnDetail": "No reason required",
@@ -111,7 +111,7 @@
     "energyScale": "on a scale from {best} (most efficient) to {worst} (least efficient)",
     "energyDatasheet": "Product information sheet",
     "vatNote": "incl. VAT, plus service and shipping costs",
-    "inStock": "In stock, free standard delivery (7-10 days)",
+    "inStock": "In stock, free standard delivery to the standing area (7-10 days)",
     "outOfStock": "Made to order, delivery in about 3 weeks",
     "decreaseQuantity": "Decrease quantity by 1",
     "increaseQuantity": "Increase quantity by 1",
@@ -216,7 +216,7 @@
   "footer": {
     "logoAlt": "BBC Best Box Containerhandel e.K.",
     "homeAriaLabel": "BBC Best Box Containerhandel e.K., home page",
-    "deliveryTitle": "Standard delivery: free (7-10 days)",
+    "deliveryTitle": "Standard delivery: free to the standing area (7-10 days)",
     "deliveryDetail": "Express delivery: €199 (4-5 days)",
     "warrantyTitle": "14-day right of withdrawal",
     "warrantyDetail": "No reason required",
@@ -270,8 +270,8 @@
     "total": "Total",
     "vatIncluded": "incl. {rate} % VAT ({amount})",
     "vatNote": "All prices include statutory VAT.",
-    "shippingStandardHint": "Standard delivery is free, with no minimum order value.",
-    "shippingRule": "Standard delivery free (7-10 working days), express delivery 199.00 € (4-5 working days). You choose the shipping method at checkout.",
+    "shippingStandardHint": "Standard delivery is free, with no minimum order value – to the freely accessible standing area. Crane unloading and extra services are chargeable.",
+    "shippingRule": "Standard delivery free (7-10 working days), express delivery 199.00 € (4-5 working days). You choose the shipping method at checkout. Delivery to the standing area; crane unloading and extra services chargeable.",
     "deliveryTime": "Dispatch takes place after receipt of payment.",
     "withdrawalHint": "As a consumer you have a 14-day right of withdrawal (§ 355 BGB). See the withdrawal policy for details.",
     "toCheckout": "Proceed to checkout",

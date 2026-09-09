@@ -170,7 +170,7 @@ export const enLegalPages: LegalPageMap = {
         heading: "Section 4 Prices and shipping costs",
         body:
           "All prices stated are final prices in euros and include statutory VAT. They are exclusive of shipping costs unless stated otherwise on the product page.\n\n" +
-          "Standard delivery within Germany and Austria is free of charge, with no minimum order value. If you would like faster delivery, express shipping costs a flat 199.00 euros. Separate charges apply to optional additional services such as connection, installation or delivery to the installation location; you arrange these with our customer service team before or after placing your order. Shipping costs are shown in the shopping basket before you complete your order. Full details can be found on our \"Shipping & delivery\" page.\n\n" +
+          "Standard delivery within Germany and Austria is free of charge, with no minimum order value. Delivery is made to the freely accessible, suitable standing area at the address you provide. If you would like faster delivery, express shipping costs a flat 199.00 euros. Crane unloading, special positioning and optional additional services such as levelling, installation or connection are chargeable and are quoted in advance; you arrange these with our customer service team before or after placing your order. Shipping costs are shown in the shopping basket before you complete your order. Full details can be found on our \"Shipping & delivery\" page.\n\n" +
           "For goods sold by weight, volume, length or area we also state the unit price in accordance with the German Price Indication Ordinance (Preisangabenverordnung). Where prices are reduced, we state the lowest total price we applied during the 30 days preceding the reduction.",
       },
       {
@@ -476,10 +476,12 @@ export const enLegalPages: LegalPageMap = {
     sections: [
       {
         heading: "Shipping costs at a glance",
-        body: "All prices include statutory VAT. The shipping costs applicable to your order are shown in the shopping basket before you complete your purchase.",
+        body: "All prices include statutory VAT. \"Free\" means delivery to the freely accessible, suitable standing area at the address given; it does not include lifting over obstacles, special positioning or assembly work. The shipping costs applicable to your order are shown in the shopping basket before you complete your purchase.",
         list: [
-          "Standard delivery within Germany and Austria: free of charge, with no minimum order value",
+          "Standard delivery within Germany and Austria to the standing area: free of charge, with no minimum order value",
           "Express delivery within Germany and Austria: 199.00 euros",
+          "Crane unloading or special positioning: chargeable, quoted after a site assessment, in advance",
+          "Levelling, packing under, assembly, connection: chargeable, see below",
         ],
       },
       {
@@ -651,7 +653,7 @@ export const enLegalPages: LegalPageMap = {
       },
       {
         heading: "How much does shipping cost?",
-        body: "Standard delivery within Germany and Austria is free, with no minimum order value, whatever the size or weight of the goods. If you want delivery within 4 to 5 working days, express shipping costs a flat 199.00 euros. There are no other surcharges. The costs for your order are always shown in the shopping basket before you buy.",
+        body: "Standard delivery within Germany and Austria is free, with no minimum order value, whatever the size or weight of the goods. Free covers delivery to the freely accessible, suitable standing area; lifting over obstacles, special positioning or assembly work is not included. If you want delivery within 4 to 5 working days, express shipping costs a flat 199.00 euros. Crane unloading, special positioning and additional services (levelling, assembly, connection) are chargeable and quoted in advance. The costs for your order are always shown in the shopping basket before you buy.",
       },
       {
         heading: "Do you ship outside Germany?",

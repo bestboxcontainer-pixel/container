@@ -34,7 +34,7 @@
     "search": "Suchen"
   },
   "trust": {
-    "shippingTitle": "Standardversand: kostenlos (7-10 Tage)",
+    "shippingTitle": "Standardlieferung: kostenlos bis Stellfläche (7-10 Tage)",
     "shippingDetail": "Expressversand: 199 € (4-5 Tage)",
     "returnTitle": "14 Tage Widerrufsrecht",
     "returnDetail": "Ohne Angabe von Gründen",
@@ -111,7 +111,7 @@
     "energyScale": "auf einer Skala von {best} (höchste Effizienz) bis {worst} (geringste Effizienz)",
     "energyDatasheet": "Produktdatenblatt",
     "vatNote": "inkl. MwSt., zzgl. Service & Versandkosten",
-    "inStock": "Vorrätig, Standardversand kostenlos (7-10 Tage)",
+    "inStock": "Vorrätig, Standardlieferung kostenlos bis Stellfläche (7-10 Tage)",
     "outOfStock": "Sonderanfertigung, Lieferzeit ca. 3 Wochen",
     "decreaseQuantity": "Anzahl um 1 verringern",
     "increaseQuantity": "Anzahl um 1 erhöhen",
@@ -216,7 +216,7 @@
   "footer": {
     "logoAlt": "BBC Best Box Containerhandel e.K.",
     "homeAriaLabel": "BBC Best Box Containerhandel e.K., Startseite",
-    "deliveryTitle": "Standardversand: kostenlos (7-10 Tage)",
+    "deliveryTitle": "Standardlieferung: kostenlos bis Stellfläche (7-10 Tage)",
     "deliveryDetail": "Expressversand: 199 € (4-5 Tage)",
     "warrantyTitle": "14 Tage Widerrufsrecht",
     "warrantyDetail": "Ohne Angabe von Gründen",
@@ -270,8 +270,8 @@
     "total": "Gesamtsumme",
     "vatIncluded": "inkl. {rate} % MwSt. ({amount})",
     "vatNote": "Alle Preise inkl. gesetzlicher MwSt.",
-    "shippingStandardHint": "Der Standardversand ist kostenlos, ohne Mindestbestellwert.",
-    "shippingRule": "Standardversand kostenlos (7-10 Werktage), Expressversand 199,00 € (4-5 Werktage). Die Versandart wählen Sie an der Kasse.",
+    "shippingStandardHint": "Standardversand kostenlos, ohne Mindestbestellwert – bis zur frei zugänglichen Stellfläche. Kranentladung und Zusatzleistungen sind kostenpflichtig.",
+    "shippingRule": "Standardversand kostenlos (7-10 Werktage), Expressversand 199,00 € (4-5 Werktage). Die Versandart wählen Sie an der Kasse. Lieferung bis zur Stellfläche; Kranentladung und Zusatzleistungen kostenpflichtig.",
     "deliveryTime": "Der Versand erfolgt nach Zahlungseingang.",
     "withdrawalHint": "Als Verbraucher haben Sie ein 14-tägiges Widerrufsrecht (§ 355 BGB). Einzelheiten in der Widerrufsbelehrung.",
     "toCheckout": "Zur Kasse",

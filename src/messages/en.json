@@ -417,7 +417,7 @@
       "subtitle": "We have received your order.",
       "orderNumber": "Order number",
       "orderDate": "Order date",
-      "emailNotice": "Please check your email inbox: it contains all the details of your order as well as our bank details for the payment. If you need immediate assistance, use the WhatsApp button at the bottom left or the live chat at the bottom right to speak directly to one of our customer service advisers.",
+      "emailNotice": "Please check your email inbox: it contains all the details of your order as well as our bank details for the payment. If you need immediate assistance, use the WhatsApp button at the bottom left to speak directly to one of our customer service advisers.",
       "notFoundTitle": "Order not found",
       "notFoundText": "The link is incomplete or has expired. Please use the link from your order confirmation.",
       "itemsTitle": "Items ordered",

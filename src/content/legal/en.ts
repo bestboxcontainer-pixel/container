@@ -482,7 +482,7 @@ export const enLegalPages: LegalPageMap = {
         body:
           "Items in stock reach you within 7 to 10 working days with standard delivery, or within 4 to 5 working days with express delivery. Working days are Monday to Friday, excluding public holidays at the location of our warehouse.\n\n" +
           "For advance payment, the delivery period begins on the day after the payment order is issued; for all other payment methods, on the day after the contract is concluded.\n\n" +
-          "Items marked \"On request\" are made-to-order containers, built specifically for you. Delivery in these cases usually takes around three weeks.",
+          "Items marked \"On request\" are made-to-order containers, built specifically for you. Delivery in these cases usually takes around three weeks. In exceptional cases (for example high demand, adverse weather conditions or logistical constraints) delays may occur. We will inform you immediately if this happens.",
       },
       {
         heading: "Delivery area",

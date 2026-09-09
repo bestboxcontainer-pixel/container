@@ -498,7 +498,7 @@ export const deLegalPages: LegalPageMap = {
         body:
           "Vorrätige Container erreichen Sie im Standardversand innerhalb von 7 bis 10 Werktagen, im Expressversand innerhalb von 4 bis 5 Werktagen. Werktage sind Montag bis Freitag, ausgenommen gesetzliche Feiertage am Sitz unseres Lagers.\n\n" +
           "Bei Vorkasse beginnt die Lieferzeit am Tag nach Erteilung des Zahlungsauftrags, bei allen anderen Zahlungsarten am Tag nach Vertragsschluss.\n\n" +
-          "Artikel mit dem Hinweis „Auf Anfrage“ sind Sonderanfertigungen, die wir eigens für Sie fertigen lassen. Die Lieferzeit beträgt in diesen Fällen üblicherweise rund drei Wochen.",
+          "Artikel mit dem Hinweis „Auf Anfrage“ sind Sonderanfertigungen, die wir eigens für Sie fertigen lassen. Die Lieferzeit beträgt in diesen Fällen üblicherweise rund drei Wochen. In Ausnahmefällen (etwa bei hoher Nachfrage, ungünstigen Witterungsbedingungen oder logistischen Engpässen) kann es zu Verzögerungen kommen. Wir informieren Sie in diesem Fall umgehend.",
       },
       {
         heading: "Liefergebiet",

@@ -16,6 +16,7 @@
     "db:deploy": "prisma migrate deploy",
     "db:studio": "prisma studio",
     "audit:merchant": "tsx --env-file=.env.local scripts/audit-merchant.ts",
+    "audit:jsonld": "tsx --env-file=.env.local scripts/audit-jsonld.ts",
     "test:recovery": "tsx scripts/tests/recovery-pure.ts && tsx scripts/tests/recovery-mails.ts && tsx scripts/tests/recovery-flow.ts",
     "postinstall": "prisma generate"
   },

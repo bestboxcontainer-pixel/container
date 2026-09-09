@@ -17,13 +17,10 @@ import { brandMarksFor } from "@/components/PaymentIcons";
 /**
  * Moyens de paiement affichés en vitrine : fiche produit, pied de page, panier.
  *
- * Cette liste est volontairement figée dans le code et ne dépend pas de ce qui
- * est activé en base. Un bandeau qui change de contenu selon l'état du
- * back-office donne une boutique tantôt riche, tantôt réduite à un seul logo,
- * là où le visiteur attend une rangée stable qui inspire confiance.
- *
- * Le tunnel de commande, lui, continue de ne proposer que les moyens réellement
- * activés (`listEnabledPaymentMethods`) : c'est là que l'écart compterait.
+ * Liste figée dans le code (rangée stable qui inspire confiance), mais qui doit
+ * refléter les moyens réellement proposés à la caisse : Google contrôle la
+ * cohérence de la landing page, et un logo affiché mais absent du tunnel se lit
+ * comme une information trompeuse. Aujourd'hui : virement Vorkasse et carte.
  */
 interface DisplayMethod {
   id: string;
@@ -44,18 +41,10 @@ const DISPLAY_METHODS: DisplayMethod[] = [
     feeLabel: "kostenlos",
   },
   {
-    id: "paypal",
-    key: "paypal",
-    label: "PayPal",
-    description: "Bezahlen mit PayPal-Konto oder als Gast.",
-    icon: "wallet",
-    feeLabel: "kostenlos",
-  },
-  {
     id: "kreditkarte",
     key: "kreditkarte",
-    label: "Kreditkarte",
-    description: "Visa, Mastercard und American Express.",
+    label: "Kredit- und Debitkarte",
+    description: "Visa, Mastercard und American Express, abgewickelt über Stripe.",
     icon: "credit-card",
     feeLabel: "kostenlos",
   },

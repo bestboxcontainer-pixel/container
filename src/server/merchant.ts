@@ -698,6 +698,26 @@ export function auditMerchantProduct(
         message: `État « ${product.condition} » non reconnu : il est transmis comme « new ». Utilisez new, refurbished ou used.`,
       });
     }
+
+    // Google compare l'état du flux à ce que montre la fiche : le mot
+    // « gebraucht » (ou « occasion » / « used ») visible sur la page alors que
+    // le flux dit « neu », ou l'inverse, fait refuser le compte.
+    const fiche = `${product.name} ${product.shortDescription} ${product.description} ${product.bullets}`.toLowerCase();
+    const ficheDitGebraucht = /\bgebraucht|\boccasion\b|\bused\b|second[-\s]?hand/.test(fiche);
+    const fluxEtat = conditionFor(product.condition);
+    if (fluxEtat === "new" && ficheDitGebraucht) {
+      issues.push({
+        level: "error",
+        attribute: "condition",
+        message: "La fiche décrit un conteneur « gebraucht » mais le flux le déclare « neu ». Passez la condition à « used » ou corrigez le texte.",
+      });
+    } else if (fluxEtat === "used" && !ficheDitGebraucht) {
+      issues.push({
+        level: "warning",
+        attribute: "condition",
+        message: "Le flux déclare « used » mais le mot « gebraucht » n'apparaît nulle part sur la fiche : Google peut lire un état incohérent.",
+      });
+    }
   }
 
   if (!product.sku.trim()) {

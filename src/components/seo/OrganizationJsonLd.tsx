@@ -48,8 +48,8 @@ export function OrganizationJsonLd({ sameAs, address = ADRESSE_SIEGE }: Organiza
     // la boutique à une entité réelle.
     legalName: COMPANY.name,
     url: base,
-    logo: `${base}/images/logo-full.png`,
-    image: `${base}/images/logo-full.png`,
+    logo: `${base}/images/logo-icon.png`,
+    image: `${base}/seo/og-image.png`,
     telephone: SHOP_PHONE,
     areaServed: AREA_SERVED,
     contactPoint: {

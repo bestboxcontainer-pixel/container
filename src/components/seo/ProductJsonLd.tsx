@@ -121,7 +121,7 @@ export async function ProductJsonLd({ product, reviews }: ProductJsonLdProps) {
       "@type": "Organization",
       name: SHOP_NAME,
       url: siteUrl(),
-      logo: absoluteUrl("/images/logo-full.png"),
+      logo: absoluteUrl("/images/logo-icon.png"),
     },
   };
 

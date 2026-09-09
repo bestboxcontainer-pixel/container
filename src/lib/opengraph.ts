@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 // juste l'URL brute.
 
 const SITE_NAME = "BBC Best Box Containerhandel e.K.";
-const DEFAULT_OG_IMAGE = "/images/logo-full.png";
+const DEFAULT_OG_IMAGE = "/seo/og-image.png";
 
 function ogLocale(locale: string): string {
   return locale === "en" ? "en_US" : "de_DE";

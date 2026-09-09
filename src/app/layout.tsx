@@ -23,7 +23,7 @@ const DESCRIPTION = "BBC Best Box Containerhandel e.K., Petersweg 11a, 22946 Gro
 
 export const metadata: Metadata = {
   // Nécessaire pour que les images Open Graph données en chemin relatif
-  // (ex. "/images/logo-full.png") se résolvent en URL absolue : Facebook,
+  // (ex. "/seo/og-image.png") se résolvent en URL absolue : Facebook,
   // WhatsApp et consorts n'acceptent que des URL complètes.
   metadataBase: new URL(SITE_URL),
   title: TITLE,
@@ -36,13 +36,13 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
     locale: "de_DE",
-    images: [{ url: "/images/logo-full.png", alt: TITLE }],
+    images: [{ url: "/seo/og-image.png", width: 1200, height: 630, alt: TITLE }],
   },
   twitter: {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
-    images: ["/images/logo-full.png"],
+    images: ["/seo/og-image.png"],
   },
 };
 

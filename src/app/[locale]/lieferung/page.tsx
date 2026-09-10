@@ -11,12 +11,19 @@ import {
 import { Link } from "@/i18n/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { HowToJsonLd } from "@/components/seo/HowToJsonLd";
+
+const META_DESCRIPTION =
+  "Zufahrt, Untergrund, Fahrzeugtyp und Ablauf am Liefertag: was vor der Anlieferung eines Containers geklärt sein muss.";
 
 export const metadata: Metadata = {
   title: "Lieferung & Aufstellung | BBC Best Box Containerhandel e.K.",
-  description:
-    "Zufahrt, Untergrund, Fahrzeugtyp und Ablauf am Liefertag: was vor der Anlieferung eines Containers geklärt sein muss.",
+  description: META_DESCRIPTION,
 };
+
+// Matériaux d'assise, repris mot pour mot de la phrase « Verdichteter
+// Schotter, Betonplatten oder Streifenfundamente genügen. » ci-dessous.
+const UNTERGRUND_MATERIAL = ["Verdichteter Schotter", "Betonplatten", "Streifenfundamente"] as const;
 
 /**
  * Die drei Absetzverfahren. Die Maßangaben sind Planungsrichtwerte für die
@@ -77,6 +84,15 @@ const ABLAUF = [
 export default function LieferungPage() {
   return (
     <>
+      {/* Étapes reprises telles quelles de la section numérotée « Ablauf am
+          Liefertag » plus bas ; les matériaux d'assise de la phrase Untergrund. */}
+      <HowToJsonLd
+        name="Ablauf am Liefertag"
+        description={META_DESCRIPTION}
+        path="/lieferung"
+        steps={ABLAUF.map((item) => ({ name: item.titel, text: item.text }))}
+        supply={UNTERGRUND_MATERIAL}
+      />
       <Header variant="overlay" />
       <main className="flex-1">
         <section className="bg-secondary pt-[var(--header-height)] text-secondary-foreground">

@@ -11,18 +11,12 @@ import {
 import { Link } from "@/i18n/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { WebPageJsonLd } from "@/components/seo/WebPageJsonLd";
 
 export const metadata: Metadata = {
   title: "Lieferung & Aufstellung | BBC Best Box Containerhandel e.K.",
   description:
     "Zufahrt, Untergrund, Fahrzeugtyp und Ablauf am Liefertag: was vor der Anlieferung eines Containers geklärt sein muss.",
 };
-
-// Dernière modification substantielle du texte ci-dessous : à bumper à la
-// main en même temps que le contenu, jamais automatiquement (voir WebPageJsonLd).
-const DATE_PUBLICATION = "2026-08-23";
-const DATE_MODIFICATION = "2026-08-23";
 
 /**
  * Die drei Absetzverfahren. Die Maßangaben sind Planungsrichtwerte für die
@@ -83,12 +77,6 @@ const ABLAUF = [
 export default function LieferungPage() {
   return (
     <>
-      <WebPageJsonLd
-        path="/lieferung"
-        name="Damit der Container beim ersten Versuch steht"
-        datePublished={DATE_PUBLICATION}
-        dateModified={DATE_MODIFICATION}
-      />
       <Header variant="overlay" />
       <main className="flex-1">
         <section className="bg-secondary pt-[var(--header-height)] text-secondary-foreground">

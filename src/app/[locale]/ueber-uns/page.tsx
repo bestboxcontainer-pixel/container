@@ -5,7 +5,6 @@ import { Link } from "@/i18n/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { COMPANY } from "@/content/legal";
-import { WebPageJsonLd } from "@/components/seo/WebPageJsonLd";
 
 export const metadata: Metadata = {
   title: "Über uns | BBC Best Box Containerhandel e.K.",
@@ -15,11 +14,6 @@ export const metadata: Metadata = {
     images: [{ url: "/images/ueber-uns-hero.jpg", width: 1536, height: 1024, alt: "Containerplatz von BBC Best Box Containerhandel e.K." }],
   },
 };
-
-// Dernière réécriture substantielle du texte ci-dessous : à bumper à la main
-// en même temps que le contenu, jamais automatiquement (voir WebPageJsonLd).
-const DATE_PUBLICATION = "2026-07-28";
-const DATE_MODIFICATION = "2026-09-09";
 
 const VALUES = [
   {
@@ -57,12 +51,6 @@ const MEILENSTEINE = [
 export default function UeberUnsPage() {
   return (
     <>
-      <WebPageJsonLd
-        path="/ueber-uns"
-        name="Seit 2006 inhabergeführter Containerhandel aus Schleswig-Holstein"
-        datePublished={DATE_PUBLICATION}
-        dateModified={DATE_MODIFICATION}
-      />
       <Header variant="overlay" />
       <main className="flex-1">
         {/* Hero mit Titelbild */}

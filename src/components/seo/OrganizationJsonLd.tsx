@@ -78,6 +78,17 @@ export function OrganizationJsonLd({ sameAs, address = ADRESSE_SIEGE }: Organiza
     url: base,
     inLanguage: MERCHANT_LANGUAGE,
     publisher: { "@id": `${base}#organization` },
+    // Rend la boutique éligible à la sitelinks search box : Google peut alors
+    // afficher un champ de recherche sous le résultat de marque. La cible pointe
+    // sur /suche?q= de la langue par défaut (l'allemand vit à la racine).
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${base}/suche?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
   };
 
   return (

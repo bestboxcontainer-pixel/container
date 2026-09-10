@@ -11,6 +11,7 @@ import { SmartsuppChat } from "@/components/SmartsuppChat";
 import { ConsentBanner } from "@/components/ConsentBanner";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { PaymentMethodsBar } from "@/components/PaymentMethodsBar";
+import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
 
 // Chaque page rend elle-même <Header /> et <Footer /> (même convention que
 // LegalPageView) plutôt que ce layout : une page peut vouloir un chrome
@@ -49,6 +50,9 @@ export default async function LocaleLayout({
   // porte par laquelle on pourrait le désactiver.
   return (
     <NextIntlClientProvider>
+      {/* Données structurées Organization + WebSite : montées ici une seule
+          fois pour tout le routage multilingue. Google déduplique sur @id. */}
+      <OrganizationJsonLd />
       <CodeSnippets placement="head" />
       <CodeSnippets placement="bodyStart" />
       {/* Tout en haut, avant l'en-tête : une annonce placée plus bas passerait

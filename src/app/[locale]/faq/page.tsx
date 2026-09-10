@@ -35,17 +35,17 @@ const GRUPPEN: readonly FaqGruppe[] = [
       {
         frage: "Brauche ich eine Genehmigung, um einen Container aufzustellen?",
         antwort:
-          "Das hängt von Bundesland, Dauer und Nutzung ab. Ein Lagercontainer, der vorübergehend auf einem Gewerbegrundstück steht, ist meist verfahrensfrei. Sobald Menschen sich dauerhaft darin aufhalten, etwa im Büro- oder Wohncontainer, oder die Aufstellung dauerhaft ist, wird in der Regel eine Baugenehmigung nötig. Verbindlich ist immer die Auskunft Ihrer örtlichen Bauaufsichtsbehörde. Wir liefern die technischen Unterlagen, die Sie für den Antrag brauchen.",
+          "Für einen Lagercontainer, der vorübergehend auf einem Gewerbegrundstück steht, brauchen Sie meist keine Genehmigung. Sobald sich Menschen dauerhaft darin aufhalten, etwa im Büro- oder Wohncontainer, oder die Aufstellung dauerhaft ist, wird in der Regel eine Baugenehmigung nötig. Was gilt, hängt von Bundesland, Dauer und Nutzung ab; verbindlich ist immer die Auskunft Ihrer örtlichen Bauaufsichtsbehörde. Die technischen Unterlagen für den Antrag liefern wir.",
       },
       {
         frage: "Kaufen oder mieten, was lohnt sich wann?",
         antwort:
-          "Als Faustregel gilt: Ab etwa zwölf bis achtzehn Monaten Nutzungsdauer liegt der Kauf günstiger als die Miete, und ein gebrauchter Container behält zudem einen Wiederverkaufswert. Für befristete Projekte, saisonale Spitzen oder wenn Sie Kapital nicht binden wollen, ist die Miete die passendere Wahl.",
+          "Ab etwa zwölf bis achtzehn Monaten Nutzungsdauer liegt der Kauf günstiger als die Miete. Ein gebrauchter Container behält zudem einen Wiederverkaufswert. Für befristete Projekte, saisonale Spitzen oder wenn Sie Kapital nicht binden wollen, ist die Miete die passendere Wahl.",
       },
       {
         frage: "Was kostet ein Container?",
         antwort:
-          "Der Preis hängt an vier Faktoren: Größe, Zustandsklasse, Ausstattung und Lieferentfernung. Zwischen einem gebrauchten wind- und wasserdichten 20-Fuß-Container und einem fabrikneuen ausgebauten Bürocontainer liegt ein Vielfaches. Nennen Sie uns Einsatzzweck und Standort, dann erhalten Sie ein konkretes Angebot statt einer Spanne.",
+          "Einen Festpreis gibt es nicht: Er hängt an Größe, Zustandsklasse, Ausstattung und Lieferentfernung. Zwischen einem gebrauchten wind- und wasserdichten 20-Fuß-Container und einem fabrikneuen ausgebauten Bürocontainer liegt ein Vielfaches. Nennen Sie uns Einsatzzweck und Standort, dann erhalten Sie ein konkretes Angebot statt einer Spanne.",
       },
     ],
   },
@@ -75,7 +75,7 @@ const GRUPPEN: readonly FaqGruppe[] = [
       {
         frage: "Bildet sich im Container Kondenswasser?",
         antwort:
-          "Bei Temperaturunterschieden schlägt sich Feuchtigkeit an der Stahldecke nieder, im Fachjargon Containerregen. Abhilfe schaffen Lüftungsgitter, eine Dämmung der Decke oder Trockenmittel. Wenn Sie feuchtigkeitsempfindliche Ware einlagern, planen Sie das gleich mit ein.",
+          "Ja. Bei Temperaturunterschieden schlägt sich Feuchtigkeit an der Stahldecke nieder, im Fachjargon Containerregen. Abhilfe schaffen Lüftungsgitter, eine Dämmung der Decke oder Trockenmittel. Wenn Sie feuchtigkeitsempfindliche Ware einlagern, planen Sie das gleich mit ein.",
       },
       {
         frage: "Lässt sich ein Container nachträglich umbauen?",

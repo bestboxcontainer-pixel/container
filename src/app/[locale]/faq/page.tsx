@@ -92,9 +92,16 @@ const GRUPPEN: readonly FaqGruppe[] = [
 
 const ALLE_FRAGEN = GRUPPEN.flatMap((gruppe) => gruppe.fragen);
 
+// Mise en ligne d'origine et dernière modification du contenu ci-dessus
+// (GRUPPEN) : à bumper à la main quand une réponse change, pas à chaque build.
+const DATE_PUBLICATION = "2026-07-28";
+const DATE_MODIFICATION = "2026-09-09";
+
 const FAQ_SCHEMA: Record<string, JsonLdValue | undefined> = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  datePublished: DATE_PUBLICATION,
+  dateModified: DATE_MODIFICATION,
   mainEntity: ALLE_FRAGEN.map((item) => ({
     "@type": "Question",
     name: item.frage,

@@ -3,12 +3,18 @@ import { ArrowRight, BadgeCheck, Droplets, Ship, Wrench } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { WebPageJsonLd } from "@/components/seo/WebPageJsonLd";
 
 export const metadata: Metadata = {
   title: "Zustandsklassen | BBC Best Box Containerhandel e.K.",
   description:
     "Neu, One-Trip, cargo-worthy oder wind- und wasserdicht: was die Zustandsklassen im Containerhandel bedeuten und welche für welchen Einsatz taugt.",
 };
+
+// Dernière modification substantielle du texte ci-dessous : à bumper à la
+// main en même temps que le contenu, jamais automatiquement (voir WebPageJsonLd).
+const DATE_PUBLICATION = "2026-08-23";
+const DATE_MODIFICATION = "2026-08-23";
 
 /**
  * Die vier im Handel gebräuchlichen Klassen, absteigend nach Zustand.
@@ -71,6 +77,12 @@ const FRAGEN = [
 export default function ZustandsklassenPage() {
   return (
     <>
+      <WebPageJsonLd
+        path="/zustandsklassen"
+        name="Neu, cargo-worthy oder wind- und wasserdicht?"
+        datePublished={DATE_PUBLICATION}
+        dateModified={DATE_MODIFICATION}
+      />
       <Header variant="overlay" />
       <main className="flex-1">
         <section className="bg-secondary pt-[var(--header-height)] text-secondary-foreground">

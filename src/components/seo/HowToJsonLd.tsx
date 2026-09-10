@@ -1,5 +1,5 @@
 import { JsonLd, type JsonLdValue } from "@/components/seo/JsonLd";
-import { absoluteUrl } from "@/server/merchant";
+import { absoluteUrl, siteUrl } from "@/server/merchant";
 import type { LegalPage } from "@/content/legal/types";
 
 /**
@@ -27,6 +27,7 @@ export function HowToJsonLd({ page, path }: HowToJsonLdProps) {
     name: stepSection.heading,
     description: stepSection.body || page.title,
     url: absoluteUrl(path),
+    author: { "@id": `${siteUrl()}#organization` },
     step: stepSection.list.map((text) => ({
       "@type": "HowToStep",
       text,

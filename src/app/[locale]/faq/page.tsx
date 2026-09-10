@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd, type JsonLdValue } from "@/components/seo/JsonLd";
+import { siteUrl } from "@/server/merchant";
 
 export const metadata: Metadata = {
   title: "Häufige Fragen | BBC Best Box Containerhandel e.K.",
@@ -95,6 +96,9 @@ const ALLE_FRAGEN = GRUPPEN.flatMap((gruppe) => gruppe.fragen);
 const FAQ_SCHEMA: Record<string, JsonLdValue | undefined> = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  // Référence l'entité posée par OrganizationJsonLd (mêmes réponses partout,
+  // pas une signature personnelle qu'on ne pourrait pas justifier).
+  author: { "@id": `${siteUrl()}#organization` },
   mainEntity: ALLE_FRAGEN.map((item) => ({
     "@type": "Question",
     name: item.frage,

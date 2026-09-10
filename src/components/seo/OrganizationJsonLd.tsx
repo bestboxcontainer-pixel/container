@@ -76,6 +76,9 @@ export function OrganizationJsonLd({ sameAs, address = ADRESSE_SIEGE }: Organiza
     areaServed: AREA_SERVED,
     openingHoursSpecification: OPENING_HOURS,
     geo: SIEGE_GEO,
+    // Fait déjà public sur l'Impressum et /ueber-uns : relier l'inhaber donne
+    // un signal d'expertise/responsabilité (E-E-A-T) que l'entité seule ne porte pas.
+    founder: { "@id": `${base}#inhaber` },
     contactPoint: {
       "@type": "ContactPoint",
       telephone: SHOP_PHONE,
@@ -93,6 +96,18 @@ export function OrganizationJsonLd({ sameAs, address = ADRESSE_SIEGE }: Organiza
           addressCountry: MERCHANT_COUNTRY,
         }
       : undefined,
+  };
+
+  // Personne physique responsable, distincte de l'entité juridique : c'est ce
+  // que l'Impressum désigne comme le représentant légal (§ 5 TMG), pas une
+  // fiche marketing. Un eingetragener Kaufmann répond personnellement et sans
+  // limite, c'est un fait, pas une formule.
+  const inhaber: Record<string, JsonLdValue | undefined> = {
+    "@type": "Person",
+    "@id": `${base}#inhaber`,
+    name: COMPANY.owner,
+    jobTitle: "Inhaber",
+    worksFor: { "@id": `${base}#organization` },
   };
 
   const website: Record<string, JsonLdValue | undefined> = {
@@ -119,7 +134,7 @@ export function OrganizationJsonLd({ sameAs, address = ADRESSE_SIEGE }: Organiza
     <JsonLd
       data={{
         "@context": "https://schema.org",
-        "@graph": [organization, website],
+        "@graph": [organization, inhaber, website],
       }}
     />
   );

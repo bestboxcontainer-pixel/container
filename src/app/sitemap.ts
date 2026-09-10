@@ -69,7 +69,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const home = routing.locales.map((locale) => ({
     url: urlFor(locale),
     lastModified: now,
-    changeFrequency: "yearly" as const,
+    // C'est la page la plus souvent mise à jour du site (promos, AnnouncementBar),
+    // pas la moins : alignée sur le catalogue plutôt que sur les pages vitrine.
+    changeFrequency: "weekly" as const,
     priority: 1,
     alternates: { languages: alternates() },
   }));

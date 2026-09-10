@@ -23,6 +23,8 @@ const PATHS = [
   "impressum",
   "datenschutz",
   "agb",
+  "container-stellflaeche",
+  "baugenehmigung-container",
 ] as const;
 
 /**

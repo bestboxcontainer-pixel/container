@@ -32,6 +32,9 @@ ${COMPANY.name} ist ein eingetragener Kaufmann (${COMPANY.register}, eingetragen
 - [Häufige Fragen](${url("/faq")}): Genehmigung, Untergrund, Lieferzeit, Kauf oder Miete — sachlich beantwortet.
 - [Container Maße & Typen](${url("/container-masse")}): Maße für 10, 20, 40 Fuß und High Cube, Außen-/Innenmaße, Leergewicht, Nutzlast, Volumen.
 - [Zustandsklassen](${url("/zustandsklassen")}): Neu, One-Trip, cargo-worthy oder wind- und wasserdicht — Bedeutung und Einsatzzweck.
+- [Lieferung & Aufstellung](${url("/lieferung")}): Absetzverfahren, Zufahrt, Ablauf am Liefertag.
+- [Stellfläche vorbereiten](${url("/container-stellflaeche")}): Standort, Untergrund, Ausrichtung und Freiraum in fünf Schritten.
+- [Baugenehmigung für einen Container](${url("/baugenehmigung-container")}): wie man Nutzung, Dauer und Landesbauordnung prüft, um den Genehmigungsbedarf zu klären.
 
 ## Kontakt
 

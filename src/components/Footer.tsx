@@ -35,6 +35,8 @@ const CONTAINER_LINKS = [
 const SERVICE_LINKS = [
   { href: "/zustandsklassen", label: "Zustandsklassen" },
   { href: "/lieferung", label: "Lieferung & Aufstellung" },
+  { href: "/container-stellflaeche", label: "Stellfläche vorbereiten" },
+  { href: "/baugenehmigung-container", label: "Baugenehmigung" },
   { href: "/versand", label: "Versand & Lieferung" },
   { href: "/zahlungsarten", label: "Zahlungsarten" },
   { href: "/retoure", label: "Retoure" },

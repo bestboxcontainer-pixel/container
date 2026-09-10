@@ -14,6 +14,25 @@ import { MERCHANT_COUNTRY, MERCHANT_LANGUAGE, SHOP_NAME, SHOP_PHONE, siteUrl } f
 // MERCHANT_COUNTRY pour l'adresse et le pays d'expédition du flux).
 const AREA_SERVED = ["DE", "AT"];
 
+// Horaires réels du service client, cités en prose à plusieurs endroits
+// (Kontakt, FAQ, Impressum) : « montags bis freitags von 8 bis 18 Uhr ».
+// Reproduits ici sous forme structurée pour le balisage uniquement.
+const OPENING_HOURS = {
+  "@type": "OpeningHoursSpecification",
+  dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  opens: "08:00",
+  closes: "18:00",
+};
+
+// Coordonnées du siège (Petersweg 11a, 22946 Großensee), géocodées depuis
+// l'adresse de l'Impressum via Nominatim/OpenStreetMap. Précision au niveau
+// de la rue : à ajuster si un relevé plus précis est disponible.
+const SIEGE_GEO = {
+  "@type": "GeoCoordinates",
+  latitude: 53.6093404,
+  longitude: 10.3442712,
+};
+
 interface OrganizationJsonLdProps {
   /** Profils officiels de la boutique : renforce l'identification de l'entité. */
   sameAs?: string[];
@@ -40,7 +59,10 @@ export function OrganizationJsonLd({ sameAs, address = ADRESSE_SIEGE }: Organiza
   const base = siteUrl();
 
   const organization: Record<string, JsonLdValue | undefined> = {
-    "@type": "OnlineStore",
+    // Tableau de types plutôt qu'un second nœud : la boutique en ligne et le
+    // dépôt physique sont la même entité juridique, pas deux entités liées.
+    // `Store` (sous-type de LocalBusiness) porte les horaires et la géoloc.
+    "@type": ["OnlineStore", "Store"],
     "@id": `${base}#organization`,
     name: SHOP_NAME,
     // La raison sociale complète, distincte du nom commercial : c'est elle qui
@@ -52,6 +74,8 @@ export function OrganizationJsonLd({ sameAs, address = ADRESSE_SIEGE }: Organiza
     image: `${base}/seo/og-image.png`,
     telephone: SHOP_PHONE,
     areaServed: AREA_SERVED,
+    openingHoursSpecification: OPENING_HOURS,
+    geo: SIEGE_GEO,
     contactPoint: {
       "@type": "ContactPoint",
       telephone: SHOP_PHONE,

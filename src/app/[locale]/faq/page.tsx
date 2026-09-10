@@ -4,7 +4,10 @@ import { Link } from "@/i18n/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd, type JsonLdValue } from "@/components/seo/JsonLd";
+import { speakableSpecification } from "@/components/seo/speakable";
+import { TableOfContents } from "@/components/TableOfContents";
 import { siteUrl } from "@/server/merchant";
+import { slugify } from "@/lib/slugify";
 
 export const metadata: Metadata = {
   title: "Häufige Fragen | BBC Best Box Containerhandel e.K.",
@@ -93,12 +96,16 @@ const GRUPPEN: readonly FaqGruppe[] = [
 
 const ALLE_FRAGEN = GRUPPEN.flatMap((gruppe) => gruppe.fragen);
 
+// Paar, das ein Sprachassistent vorlesen soll: die erste Frage samt Antwort.
+const SPEAKABLE_FRAGE = GRUPPEN[0]?.fragen[0]?.frage;
+
 const FAQ_SCHEMA: Record<string, JsonLdValue | undefined> = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   // Référence l'entité posée par OrganizationJsonLd (mêmes réponses partout,
   // pas une signature personnelle qu'on ne pourrait pas justifier).
   author: { "@id": `${siteUrl()}#organization` },
+  speakable: speakableSpecification,
   mainEntity: ALLE_FRAGEN.map((item) => ({
     "@type": "Question",
     name: item.frage,
@@ -126,10 +133,21 @@ export default function FaqPage() {
         </section>
 
         <section className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
+          <div className="max-w-3xl">
+            <TableOfContents
+              items={GRUPPEN.map((gruppe) => ({ id: slugify(gruppe.titel), label: gruppe.titel }))}
+              label="Inhaltsverzeichnis"
+            />
+          </div>
           <div className="max-w-3xl space-y-12">
             {GRUPPEN.map((gruppe) => (
               <div key={gruppe.titel}>
-                <h2 className="text-xl font-black text-foreground sm:text-2xl">{gruppe.titel}</h2>
+                <h2
+                  id={slugify(gruppe.titel)}
+                  className="text-xl font-black text-foreground sm:text-2xl"
+                >
+                  {gruppe.titel}
+                </h2>
                 <div className="mt-6 space-y-3">
                   {gruppe.fragen.map((item) => (
                     <details
@@ -137,7 +155,10 @@ export default function FaqPage() {
                       className="group rounded-2xl border border-border bg-white p-5 open:bg-muted"
                     >
                       <summary className="cursor-pointer list-none font-bold text-foreground marker:content-none">
-                        <span className="flex items-start justify-between gap-4">
+                        <span
+                          className="flex items-start justify-between gap-4"
+                          data-speakable={item.frage === SPEAKABLE_FRAGE ? "" : undefined}
+                        >
                           {item.frage}
                           <span
                             className="mt-1 h-2.5 w-2.5 shrink-0 rotate-45 border-r-2 border-b-2 border-primary transition-transform group-open:-rotate-[135deg]"
@@ -145,7 +166,10 @@ export default function FaqPage() {
                           />
                         </span>
                       </summary>
-                      <p className="mt-3 text-sm leading-relaxed text-foreground/75">
+                      <p
+                        className="mt-3 text-sm leading-relaxed text-foreground/75"
+                        data-speakable={item.frage === SPEAKABLE_FRAGE ? "" : undefined}
+                      >
                         {item.antwort}
                       </p>
                     </details>

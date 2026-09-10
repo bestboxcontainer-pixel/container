@@ -3,6 +3,7 @@ import { ArrowRight, BadgeCheck, Droplets, Ship, Wrench } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { TableOfContents } from "@/components/TableOfContents";
 
 export const metadata: Metadata = {
   title: "Zustandsklassen | BBC Best Box Containerhandel e.K.",
@@ -88,6 +89,13 @@ export default function ZustandsklassenPage() {
         </section>
 
         <section className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
+          <TableOfContents
+            items={[
+              ...KLASSEN.map((klasse) => ({ id: klasse.id, label: klasse.name })),
+              { id: "haeufig-gefragt", label: "Häufig gefragt" },
+            ]}
+            label="Inhaltsverzeichnis"
+          />
           <div className="grid gap-6 lg:grid-cols-2">
             {KLASSEN.map((klasse) => (
               <article
@@ -104,7 +112,9 @@ export default function ZustandsklassenPage() {
                     </span>
                   ) : null}
                 </div>
-                <h2 className="mt-4 text-lg font-black text-foreground">{klasse.name}</h2>
+                <h2 id={klasse.id} className="mt-4 text-lg font-black text-foreground">
+                  {klasse.name}
+                </h2>
                 <p className="mt-1 text-sm font-semibold text-primary">{klasse.lead}</p>
                 <p className="mt-3 text-sm leading-relaxed text-foreground/75">{klasse.text}</p>
 
@@ -126,7 +136,12 @@ export default function ZustandsklassenPage() {
 
         <section className="bg-muted">
           <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6">
-            <h2 className="text-2xl font-black text-foreground sm:text-3xl">Häufig gefragt</h2>
+            <h2
+              id="haeufig-gefragt"
+              className="text-2xl font-black text-foreground sm:text-3xl"
+            >
+              Häufig gefragt
+            </h2>
             <div className="mt-8 grid gap-5 lg:grid-cols-3">
               {FRAGEN.map((item) => (
                 <div key={item.frage} className="rounded-2xl border border-border bg-white p-5">

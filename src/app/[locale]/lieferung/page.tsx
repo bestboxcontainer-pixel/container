@@ -92,6 +92,7 @@ export default function LieferungPage() {
         path="/lieferung"
         steps={ABLAUF.map((item) => ({ name: item.titel, text: item.text }))}
         supply={UNTERGRUND_MATERIAL}
+        speakable
       />
       <Header variant="overlay" />
       <main className="flex-1">
@@ -100,10 +101,13 @@ export default function LieferungPage() {
             <p className="text-sm font-bold uppercase tracking-wide text-signal">
               Lieferung & Aufstellung
             </p>
-            <h1 className="mt-3 max-w-2xl text-3xl font-black text-white sm:text-4xl">
+            <h1
+              className="mt-3 max-w-2xl text-3xl font-black text-white sm:text-4xl"
+              data-speakable
+            >
               Damit der Container beim ersten Versuch steht
             </h1>
-            <p className="mt-4 max-w-xl text-white/75">
+            <p className="mt-4 max-w-xl text-white/75" data-speakable>
               Die meisten gescheiterten Anlieferungen liegen nicht am Container, sondern an
               Zufahrt oder Untergrund. Hier steht, was vorher geklärt sein muss.
             </p>

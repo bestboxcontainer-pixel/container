@@ -4,9 +4,19 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { RichText } from "@/components/RichText";
+import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { findLegalPage } from "@/server/legalPages";
 import { paragraphsOf, stripMarks } from "@/lib/richText";
+import { slugify } from "@/lib/slugify";
 import type { LegalPage, LegalSection, LegalSlug } from "@/content/legal/types";
+
+/** Un sommaire n'a de sens que sur un texte long : seuil en mots, intro comprise. */
+const TOC_WORD_THRESHOLD = 600;
+
+function wordCount(page: LegalPage): number {
+  const parts = [page.intro ?? "", ...page.sections.flatMap((s) => [s.body, ...(s.list ?? [])])];
+  return stripMarks(parts.join(" ")).split(/\s+/).filter(Boolean).length;
+}
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bestboxcontainer.de";
 
@@ -88,7 +98,9 @@ export function SectionBody({ body }: { body: string }) {
 function SectionBlock({ section }: { section: LegalSection }) {
   return (
     <section>
-      <h2 className="mb-3 text-lg font-black text-foreground">{section.heading}</h2>
+      <h2 id={slugify(section.heading)} className="mb-3 text-lg font-black text-foreground">
+        {section.heading}
+      </h2>
       <SectionBody body={section.body} />
       {section.list && section.list.length > 0 && <SectionList items={section.list} />}
     </section>
@@ -97,6 +109,12 @@ function SectionBlock({ section }: { section: LegalSection }) {
 
 /** Corps de page réutilisé par la boutique et par l'aperçu du back-office. */
 export function LegalPageArticle({ page, locale }: { page: LegalPage; locale: string }) {
+  const tocItems: TocItem[] = page.sections.map((section) => ({
+    id: slugify(section.heading),
+    label: section.heading,
+  }));
+  const showToc = wordCount(page) > TOC_WORD_THRESHOLD && tocItems.length >= 3;
+
   return (
     <article className="mx-auto max-w-3xl px-3 py-8">
       <h1 className="mb-4 text-2xl font-black text-foreground sm:text-3xl">{page.title}</h1>
@@ -112,6 +130,14 @@ export function LegalPageArticle({ page, locale }: { page: LegalPage; locale: st
             </p>
           ))}
         </div>
+      )}
+
+      {showToc && (
+        <TableOfContents
+          items={tocItems}
+          label={locale === "en" ? "Table of contents" : "Inhaltsverzeichnis"}
+          title={locale === "en" ? "On this page" : "Auf dieser Seite"}
+        />
       )}
 
       <div className="flex flex-col gap-7">

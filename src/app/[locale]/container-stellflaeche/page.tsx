@@ -79,16 +79,20 @@ export default function ContainerStellflaechePage() {
         steps={SCHRITTE.map((s) => ({ name: s.titel, text: s.text }))}
         supply={MATERIAL}
         tool={WERKZEUG}
+        speakable
       />
       <Header variant="overlay" />
       <main className="flex-1">
         <section className="bg-secondary pt-[var(--header-height)] text-secondary-foreground">
           <div className="mx-auto max-w-screen-xl px-4 py-14 sm:px-6">
             <p className="text-sm font-bold uppercase tracking-wide text-signal">Ratgeber</p>
-            <h1 className="mt-3 max-w-2xl text-3xl font-black text-white sm:text-4xl">
+            <h1
+              className="mt-3 max-w-2xl text-3xl font-black text-white sm:text-4xl"
+              data-speakable
+            >
               Die Stellfläche vorbereiten
             </h1>
-            <p className="mt-4 max-w-xl text-white/75">
+            <p className="mt-4 max-w-xl text-white/75" data-speakable>
               Die meisten gescheiterten Anlieferungen liegen nicht am Container, sondern am
               Untergrund. Fünf Schritte, mit denen die Fläche vor dem Liefertag steht.
             </p>

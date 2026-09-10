@@ -1,4 +1,5 @@
 import { JsonLd, type JsonLdValue } from "@/components/seo/JsonLd";
+import { speakableSpecification } from "@/components/seo/speakable";
 import { absoluteUrl, siteUrl } from "@/server/merchant";
 
 /**
@@ -23,9 +24,11 @@ interface HowToJsonLdProps {
   supply?: readonly string[];
   /** Outillage ou véhicule cité dans le texte de la page (ex. Kranfahrzeug). */
   tool?: readonly string[];
+  /** Marque le titre et le chapô (data-speakable) comme lisibles à voix haute. */
+  speakable?: boolean;
 }
 
-export function HowToJsonLd({ name, description, path, steps, supply, tool }: HowToJsonLdProps) {
+export function HowToJsonLd({ name, description, path, steps, supply, tool, speakable }: HowToJsonLdProps) {
   if (steps.length === 0) return null;
 
   const data: Record<string, JsonLdValue | undefined> = {
@@ -35,6 +38,7 @@ export function HowToJsonLd({ name, description, path, steps, supply, tool }: Ho
     description,
     url: absoluteUrl(path),
     author: { "@id": `${siteUrl()}#organization` },
+    speakable: speakable ? speakableSpecification : undefined,
     step: steps.map((step) => ({
       "@type": "HowToStep",
       name: step.name,

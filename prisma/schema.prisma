@@ -94,7 +94,6 @@ model Product {
   googleProductCategory String   @default("")
   // Poids d'expédition en grammes, utilisé par le flux Merchant
   shippingWeightGrams   Int?
-  energyEfficiencyClass String?
   image                 String?
   // Vues complémentaires, en JSON comme `bullets`. `image` demeure la vignette
   // de référence (listes, panier, flux Google) ; ces images-ci n'apparaissent

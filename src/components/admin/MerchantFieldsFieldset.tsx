@@ -1,6 +1,6 @@
 "use client";
 
-import { EU_ENERGY_LABEL_SLUGS, GOOGLE_CATEGORY_BY_SLUG } from "@/lib/googleTaxonomy";
+import { GOOGLE_CATEGORY_BY_SLUG } from "@/lib/googleTaxonomy";
 
 // Bloc de champs « Google Merchant Center » à insérer dans le formulaire produit.
 // Composant contrôlé : le formulaire garde ses états, ce bloc ne fait que les
@@ -13,7 +13,6 @@ export interface MerchantFieldsValues {
   googleProductCategory: string;
   /** Poids en grammes, saisi en texte pour rester cohérent avec le reste du formulaire. */
   shippingWeightGrams: string;
-  energyEfficiencyClass: string;
 }
 
 export const EMPTY_MERCHANT_FIELDS: MerchantFieldsValues = {
@@ -22,7 +21,6 @@ export const EMPTY_MERCHANT_FIELDS: MerchantFieldsValues = {
   condition: "new",
   googleProductCategory: "",
   shippingWeightGrams: "",
-  energyEfficiencyClass: "",
 };
 
 interface MerchantFieldsFieldsetProps {
@@ -37,8 +35,6 @@ const CONDITIONS: { value: string; label: string }[] = [
   { value: "refurbished", label: "Reconditionné" },
   { value: "used", label: "Occasion" },
 ];
-
-const ENERGY_CLASSES = ["", "A", "B", "C", "D", "E", "F", "G", "A+", "A++", "A+++"];
 
 const inputClass =
   "w-full rounded-sm border border-input px-3 py-2 outline-none focus:border-primary";
@@ -100,7 +96,7 @@ export function MerchantFieldsFieldset({
         </label>
       </div>
 
-      <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
         <label className="text-sm">
           <span className="mb-1 block font-semibold text-foreground">État</span>
           <select
@@ -128,29 +124,6 @@ export function MerchantFieldsFieldset({
             className={inputClass}
           />
         </label>
-
-        {/* Étiquette énergie UE : aucune catégorie vendue ici n'y est soumise
-            (EU_ENERGY_LABEL_SLUGS est vide). Le champ ne s'affiche que pour une
-            catégorie qui y figurerait un jour ; sinon rien ne doit inviter à le
-            remplir sur un conteneur, ni côté flux ni côté balisage. */}
-        {categorySlug && EU_ENERGY_LABEL_SLUGS.has(categorySlug) && (
-          <label className="text-sm">
-            <span className="mb-1 block font-semibold text-foreground">
-              Classe d&apos;efficacité énergétique
-            </span>
-            <select
-              value={values.energyEfficiencyClass}
-              onChange={(event) => onChange({ energyEfficiencyClass: event.target.value })}
-              className={inputClass}
-            >
-              {ENERGY_CLASSES.map((energyClass) => (
-                <option key={energyClass || "none"} value={energyClass}>
-                  {energyClass || "aucune: "}
-                </option>
-              ))}
-            </select>
-          </label>
-        )}
       </div>
 
       <label className="block text-sm">

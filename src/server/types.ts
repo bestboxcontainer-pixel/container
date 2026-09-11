@@ -58,7 +58,6 @@ export interface ProductRecord {
   condition?: string;
   googleProductCategory?: string;
   shippingWeightGrams?: number;
-  energyEfficiencyClass?: string;
 }
 
 export type ReviewStatus = "pending" | "approved" | "rejected";

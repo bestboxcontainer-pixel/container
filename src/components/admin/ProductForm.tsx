@@ -64,7 +64,6 @@ export function ProductForm({
     condition: initialData?.condition ?? "new",
     googleProductCategory: initialData?.googleProductCategory ?? "",
     shippingWeightGrams: initialData?.shippingWeightGrams?.toString() ?? "",
-    energyEfficiencyClass: initialData?.energyEfficiencyClass ?? "",
   });
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
@@ -123,7 +122,6 @@ export function ProductForm({
     payload.shippingWeightGrams = merchant.shippingWeightGrams
       ? Number.parseInt(merchant.shippingWeightGrams, 10)
       : null;
-    payload.energyEfficiencyClass = merchant.energyEfficiencyClass;
 
     const url = mode === "new" ? "/api/admin/products" : `/api/admin/products/${initialData?.id}`;
     const method = mode === "new" ? "POST" : "PUT";

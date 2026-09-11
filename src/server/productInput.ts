@@ -273,10 +273,6 @@ export function parseProductInput(raw: unknown, mode: "create" | "update"): Prod
     }
   }
 
-  if (has("energyEfficiencyClass")) {
-    values.energyEfficiencyClass = asTrimmedString(body.energyEfficiencyClass) ?? "";
-  }
-
   return { values, errors };
 }
 

@@ -72,7 +72,6 @@ function itemXml(record: MerchantRecord): string {
   // ---- Attributs recommandés ----
   parts.push(tag("g:adult", record.adult));
   parts.push(tag("g:is_bundle", record.isBundle));
-  parts.push(tag("g:energy_efficiency_class", record.energyEfficiencyClass));
   parts.push(tag("g:age_group", record.ageGroup));
   parts.push(tag("g:gender", record.gender));
 

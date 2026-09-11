@@ -40,10 +40,3 @@ export function googleCategoryPath(id: string): string | undefined {
  * de containers n'en relève.
  */
 export const APPAREL_CATEGORY_IDS = new Set<string>([]);
-
-/**
- * Catégories soumises à l'étiquette énergie européenne (electroménager,
- * climatiseurs, téléviseurs…). Un container n'est pas un appareil couvert par
- * le règlement énergie UE : aucune de nos catégories n'y figure.
- */
-export const EU_ENERGY_LABEL_SLUGS = new Set<string>([]);

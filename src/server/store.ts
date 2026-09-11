@@ -103,7 +103,6 @@ interface ProductRow {
   condition: string;
   googleProductCategory: string;
   shippingWeightGrams: number | null;
-  energyEfficiencyClass: string | null;
   category: { slug: string; image: string; group: { slug: string } };
 }
 
@@ -166,7 +165,6 @@ function toProductRecord(row: ProductRow): ProductRecord {
     condition: row.condition,
     googleProductCategory: row.googleProductCategory,
     shippingWeightGrams: row.shippingWeightGrams ?? undefined,
-    energyEfficiencyClass: row.energyEfficiencyClass ?? undefined,
   };
 }
 
@@ -351,7 +349,6 @@ export async function createProduct(input: Omit<ProductRecord, "id">): Promise<P
       condition: input.condition || "new",
       googleProductCategory: input.googleProductCategory ?? "",
       shippingWeightGrams: input.shippingWeightGrams ?? null,
-      energyEfficiencyClass: input.energyEfficiencyClass || null,
     },
     include: productInclude,
   });
@@ -427,8 +424,6 @@ export async function updateProduct(
       googleProductCategory: patch.googleProductCategory ?? undefined,
       shippingWeightGrams:
         patch.shippingWeightGrams === undefined ? undefined : (patch.shippingWeightGrams ?? null),
-      energyEfficiencyClass:
-        patch.energyEfficiencyClass === undefined ? undefined : patch.energyEfficiencyClass || null,
     },
     include: productInclude,
   });
@@ -512,11 +507,6 @@ function toViewProduct(
     stock: row.stock,
     inStock: row.stock > 0,
     href: `/${groupSlug}/${row.category.slug}/${row.slug}`,
-    // Classe énergétique et rubrique de vente voyagent ensemble : la classe ne
-    // se lit que rapportée à l'échelle de sa famille, et c'est la catégorie qui
-    // désigne l'échelle applicable.
-    energyEfficiencyClass: row.energyEfficiencyClass ?? undefined,
-    categorySlug: row.category.slug,
   };
 
   if (!promotion) return view;

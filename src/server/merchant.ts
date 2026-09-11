@@ -11,11 +11,7 @@ import {
   getActivePromotions,
   type ProductPromotion,
 } from "@/server/promotions";
-import {
-  APPAREL_CATEGORY_IDS,
-  EU_ENERGY_LABEL_SLUGS,
-  GOOGLE_CATEGORY_BY_SLUG,
-} from "@/lib/googleTaxonomy";
+import { APPAREL_CATEGORY_IDS, GOOGLE_CATEGORY_BY_SLUG } from "@/lib/googleTaxonomy";
 import { COMPANY } from "@/content/legal";
 
 export { GOOGLE_CATEGORY_BY_SLUG, googleCategoryPath } from "@/lib/googleTaxonomy";
@@ -135,7 +131,6 @@ export interface MerchantProduct {
   condition: string;
   googleProductCategory: string;
   shippingWeightGrams: number | null;
-  energyEfficiencyClass: string | null;
   image: string | null;
   images: string;
   priceCents: number;
@@ -177,7 +172,6 @@ const merchantSelect = {
   condition: true,
   googleProductCategory: true,
   shippingWeightGrams: true,
-  energyEfficiencyClass: true,
   image: true,
   images: true,
   priceCents: true,
@@ -494,8 +488,6 @@ export interface MerchantRecord {
   shipping: MerchantShippingEntry[];
   shippingWeight?: string;
   shipsFromCountry: string;
-  /** Ne vaut plus que pour CH/NO/UK ; dans l'UE, Google attend certification/EPREL. */
-  energyEfficiencyClass?: string;
   ageGroup?: string;
   gender?: string;
   customLabel0: string;
@@ -546,7 +538,6 @@ export function buildMerchantRecord(product: MerchantProduct): MerchantRecord {
   });
   const googleCategory = merchantGoogleCategory(product);
   const isApparel = APPAREL_CATEGORY_IDS.has(googleCategory);
-  const isEnergyLabelled = EU_ENERGY_LABEL_SLUGS.has(product.category.slug);
 
   return {
     id: merchantOfferId(product),
@@ -581,11 +572,6 @@ export function buildMerchantRecord(product: MerchantProduct): MerchantRecord {
         ? formatShippingWeight(product.shippingWeightGrams)
         : undefined,
     shipsFromCountry: MERCHANT_COUNTRY,
-    // Aucune catégorie vendue ici (conteneurs) n'est soumise à l'étiquette
-    // énergie européenne : `EU_ENERGY_LABEL_SLUGS` est vide par construction.
-    // Le champ reste dans le formulaire pour un usage futur, mais ne doit
-    // jamais atteindre le flux ni le balisage hors de cette liste.
-    energyEfficiencyClass: isEnergyLabelled ? product.energyEfficiencyClass?.trim() || undefined : undefined,
     ageGroup: isApparel ? "adult" : undefined,
     gender: isApparel ? "unisex" : undefined,
     customLabel0: product.category.group.label,
@@ -832,31 +818,6 @@ export function auditMerchantProduct(
       level: "warning",
       attribute: "shipping_weight",
       message: "Poids d'expédition manquant, sans poids, impossible d'utiliser des règles de livraison basées sur le poids.",
-    });
-  }
-
-  // -- Energielabel (EU) --
-  //
-  // Google renseigne lui-même la certification EPREL à partir du GTIN ou du
-  // MPN de l'article : « Wenn Sie keine Zertifizierungsinformationen angeben,
-  // fügt Google diese unter Umständen automatisch anhand von GTIN- und/oder
-  // MPN-Daten hinzu » (aide Merchant Center, attribut certification).
-  //
-  // L'avertissement ne se justifie donc que pour un article qui ne porte ni
-  // l'un ni l'autre : là, l'étiquette énergie manquera réellement dans
-  // l'annonce. Le lever pour toute la catégorie marquait cent cinquante-trois
-  // fiches parfaitement diffusables et noyait les quarante-neuf qui, elles,
-  // demandaient une action.
-  if (
-    EU_ENERGY_LABEL_SLUGS.has(product.category.slug) &&
-    !record.gtin &&
-    !record.mpn
-  ) {
-    issues.push({
-      level: "warning",
-      attribute: "certification",
-      message:
-        "Appareil soumis à l'étiquetage énergétique, sans GTIN ni MPN : Google ne peut pas retrouver la fiche EPREL tout seul. Renseignez le code-barres, ou le numéro d'enregistrement EPREL dans l'attribut certification (EC/EPREL/numéro).",
     });
   }
 

@@ -37,16 +37,16 @@ secondary pages original/modern (not cloned).
   closer to villex-container.de) was built for comparison and **not chosen**, left in place
   unlinked/noindexed in case something from it (e.g. `HeroCarousel.tsx`, the finish-line
   concept) is worth reusing later. Safe to delete once no longer needed.
-- Secondary pages (original, not cloned): `/sortiment` (container types), `/vermietung`
-  (rental), `/ueber-uns` (about), `/kontakt` (contact, form present but not wired to a
-  backend yet). Legal pages (`/impressum`, `/datenschutz`, `/agb`) re-enabled using the
-  existing rebranded `src/content/legal/*.ts` content, NOTE: that legal prose still
-  describes a home-appliance business in places (narrative sections only, not the
-  company-identity fields) and should be rewritten for container trading before real-world
-  legal use; see the note at the top of `de.ts`/`en.ts`.
-- Content is static/mock (no live product database wiring), the admin's existing
-  Product/Category catalog still holds the old appliance mock catalog and is untouched.
-- No real container photography/video available: hero currently uses stat callouts (v1)
-  or a stylized gradient rotation (v2), not real images.
+- Secondary pages: `/vermietung` (rental), `/ueber-uns` (about), `/kontakt` (contact).
+  `/sortiment` was later replaced by the real category pages (see the redirect in
+  `next.config.ts`). Legal pages (`/impressum`, `/datenschutz`, `/agb`, …) use
+  `src/content/legal/*.ts`, rewritten for container trading (2026-09) — see the note at
+  the top of `de.ts`/`en.ts`; the ElektroG/BattDG appliance content was removed as
+  out of scope.
+- **Update (2026-09):** the appliance mock catalog has since been fully replaced —
+  `scripts/cleanup-old-project.ts` removed the old categories/products, and the live
+  catalog (`prisma`-backed, `data/store/*.json`) holds only real container listings.
+  Real container photography is in place (`public/images/container`, `public/images/hero`).
+  This section is kept as a historical record of the 2026-08 rebuild's starting point.
 - English (`/en`) routes exist structurally but currently render the same German copy
   (no translation pass done yet).

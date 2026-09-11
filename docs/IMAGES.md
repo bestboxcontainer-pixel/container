@@ -56,11 +56,11 @@ Un redémarrage de l'application est nécessaire après les avoir ajoutées.
 
 ## Où atterrissent les images
 
-Dossier Cloudinary : **`hausgeraete-pfeffer/products`**.
+Dossier Cloudinary : **`bbc-best-box/products`**.
 
 Chaque fichier reçoit un identifiant lisible dérivé de son nom d'origine, plus
 un suffixe aléatoire pour qu'un même nom n'écrase jamais un envoi précédent
-(`bosch-serie-6-k3f9a1`).
+(`buerocontainer-20-fuss-k3f9a1`).
 
 À l'envoi, l'image est bornée à **1600 × 1600 px** (réduction seulement, jamais
 d'agrandissement) et recompressée automatiquement. L'URL enregistrée en base
@@ -70,7 +70,7 @@ navigateur, à la compression la plus adaptée.
 Exemple d'URL stockée :
 
 ```
-https://res.cloudinary.com/dh8k2xqzv/image/upload/f_auto,q_auto/v1753500000/hausgeraete-pfeffer/products/bosch-serie-6-k3f9a1.jpg
+https://res.cloudinary.com/dh8k2xqzv/image/upload/f_auto,q_auto/v1753500000/bbc-best-box/products/buerocontainer-20-fuss-k3f9a1.jpg
 ```
 
 Le domaine `res.cloudinary.com` est déjà autorisé dans `next.config.ts`
@@ -122,7 +122,7 @@ moins d'une vingtaine d'images.
 ### Option 2 : téléverser en masse dans Cloudinary
 
 1. Dans Cloudinary, ouvrir **Media Library**, créer le dossier
-   `hausgeraete-pfeffer/products`.
+   `bbc-best-box/products`.
 2. Glisser-déposer tout le contenu de `public/uploads/`.
 3. Pour chaque image, copier l'URL (bouton **Copy URL**) et la coller dans le
    champ image du produit correspondant, dans le back-office.
@@ -131,7 +131,7 @@ Pour bénéficier de l'optimisation automatique sur ces URL copiées, insérer
 `f_auto,q_auto/` juste après `/upload/` :
 
 ```
-https://res.cloudinary.com/<cloud>/image/upload/f_auto,q_auto/v1753500000/hausgeraete-pfeffer/products/mon-image.jpg
+https://res.cloudinary.com/<cloud>/image/upload/f_auto,q_auto/v1753500000/bbc-best-box/products/mon-image.jpg
 ```
 
 ### Après la migration
@@ -157,7 +157,7 @@ vidé. Il est déjà ignoré par git (`.gitignore`), rien n'est donc versionné.
     "url": "https://res.cloudinary.com/…",
     "path": "https://res.cloudinary.com/…",
     "storage": "cloudinary",
-    "publicId": "hausgeraete-pfeffer/products/bosch-serie-6-k3f9a1",
+    "publicId": "bbc-best-box/products/buerocontainer-20-fuss-k3f9a1",
     "width": 1600,
     "height": 1200,
     "mime": "image/jpeg",

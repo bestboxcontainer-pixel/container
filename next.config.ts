@@ -53,6 +53,24 @@ const nextConfig: NextConfig = {
       },
     ];
 
+    /**
+     * `server.js` (hébergement Hostinger/Passenger) ouvre un `http.createServer`
+     * nu : rien n'y force le HTTPS, ce fichier devant rester minimal pour que
+     * Passenger sache le démarrer (voir ses commentaires). La terminaison TLS a
+     * lieu en amont (Apache/LiteSpeed côté Hostinger), qui pose l'en-tête
+     * standard `X-Forwarded-Proto`. Merchant Center exige des pages de
+     * destination servies en HTTPS : la redirection se fait donc ici plutôt que
+     * dans le serveur Node.
+     */
+    const httpsCanonique = [
+      {
+        source: "/:path*",
+        has: [{ type: "header" as const, key: "x-forwarded-proto", value: "http" }],
+        destination: "https://bestboxcontainer.de/:path*",
+        permanent: true,
+      },
+    ];
+
     // Anciennes adresses citées dans le pied de page et le tunnel d'achat :
     // on les conserve en redirection permanente vers les pages réelles.
     const pairs = [
@@ -107,6 +125,7 @@ const nextConfig: NextConfig = {
     ];
 
     return [
+      ...httpsCanonique,
       ...hostCanonique,
       ...pairs.flatMap(([source, destination]) => [
         { source, destination, permanent: true },

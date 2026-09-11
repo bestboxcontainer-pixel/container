@@ -33,10 +33,10 @@ function line(priceCents: number, quantity = 1): CartLine {
   return {
     productId: `p-${priceCents}-${quantity}`,
     slug: "artikel",
-    brand: "Bosch",
-    name: "Serie 6",
+    brand: "BBC",
+    name: "20-Fuß-Lagercontainer",
     image: "/images/artikel.jpg",
-    path: "/kuechengeraete/waschmaschinen/artikel",
+    path: "/container/lagercontainer/artikel",
     priceCents,
     quantity,
     stock: 10,

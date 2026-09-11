@@ -1,6 +1,6 @@
 "use client";
 
-import { GOOGLE_CATEGORY_BY_SLUG } from "@/lib/googleTaxonomy";
+import { EU_ENERGY_LABEL_SLUGS, GOOGLE_CATEGORY_BY_SLUG } from "@/lib/googleTaxonomy";
 
 // Bloc de champs « Google Merchant Center » à insérer dans le formulaire produit.
 // Composant contrôlé : le formulaire garde ses états, ce bloc ne fait que les
@@ -129,22 +129,28 @@ export function MerchantFieldsFieldset({
           />
         </label>
 
-        <label className="text-sm">
-          <span className="mb-1 block font-semibold text-foreground">
-            Classe d&apos;efficacité énergétique
-          </span>
-          <select
-            value={values.energyEfficiencyClass}
-            onChange={(event) => onChange({ energyEfficiencyClass: event.target.value })}
-            className={inputClass}
-          >
-            {ENERGY_CLASSES.map((energyClass) => (
-              <option key={energyClass || "none"} value={energyClass}>
-                {energyClass || "aucune: "}
-              </option>
-            ))}
-          </select>
-        </label>
+        {/* Étiquette énergie UE : aucune catégorie vendue ici n'y est soumise
+            (EU_ENERGY_LABEL_SLUGS est vide). Le champ ne s'affiche que pour une
+            catégorie qui y figurerait un jour ; sinon rien ne doit inviter à le
+            remplir sur un conteneur, ni côté flux ni côté balisage. */}
+        {categorySlug && EU_ENERGY_LABEL_SLUGS.has(categorySlug) && (
+          <label className="text-sm">
+            <span className="mb-1 block font-semibold text-foreground">
+              Classe d&apos;efficacité énergétique
+            </span>
+            <select
+              value={values.energyEfficiencyClass}
+              onChange={(event) => onChange({ energyEfficiencyClass: event.target.value })}
+              className={inputClass}
+            >
+              {ENERGY_CLASSES.map((energyClass) => (
+                <option key={energyClass || "none"} value={energyClass}>
+                  {energyClass || "aucune: "}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
       </div>
 
       <label className="block text-sm">

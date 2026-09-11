@@ -546,6 +546,7 @@ export function buildMerchantRecord(product: MerchantProduct): MerchantRecord {
   });
   const googleCategory = merchantGoogleCategory(product);
   const isApparel = APPAREL_CATEGORY_IDS.has(googleCategory);
+  const isEnergyLabelled = EU_ENERGY_LABEL_SLUGS.has(product.category.slug);
 
   return {
     id: merchantOfferId(product),
@@ -580,7 +581,11 @@ export function buildMerchantRecord(product: MerchantProduct): MerchantRecord {
         ? formatShippingWeight(product.shippingWeightGrams)
         : undefined,
     shipsFromCountry: MERCHANT_COUNTRY,
-    energyEfficiencyClass: product.energyEfficiencyClass?.trim() || undefined,
+    // Aucune catégorie vendue ici (conteneurs) n'est soumise à l'étiquette
+    // énergie européenne : `EU_ENERGY_LABEL_SLUGS` est vide par construction.
+    // Le champ reste dans le formulaire pour un usage futur, mais ne doit
+    // jamais atteindre le flux ni le balisage hors de cette liste.
+    energyEfficiencyClass: isEnergyLabelled ? product.energyEfficiencyClass?.trim() || undefined : undefined,
     ageGroup: isApparel ? "adult" : undefined,
     gender: isApparel ? "unisex" : undefined,
     customLabel0: product.category.group.label,

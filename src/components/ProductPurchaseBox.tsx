@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import { Check, Mail, ShieldCheck, Truck } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { COMPANY } from "@/content/legal";
-import { classeCoherente, echelleEnergie } from "@/lib/energieskala";
 import { AddToCartButton } from "@/components/cart/AddToCartButton";
 import { CampaignCountdown } from "@/components/CampaignCountdown";
 import { numeroWhatsApp, WhatsAppIcon } from "@/components/WhatsAppButton";
@@ -31,17 +30,6 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
   const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
     t("quoteWhatsappMessage", quoteVars),
   )}`;
-
-  // L'étiquette ne s'affiche que si les trois conditions sont réunies : une
-  // classe renseignée, une famille effectivement soumise à étiquetage, et une
-  // classe qui tient sur l'échelle de cette famille. Une donnée qui échoue à
-  // l'un des trois ne s'affiche pas : un « A+ » sur un lave-linge, par exemple,
-  // date d'avant le rééchelonnage de 2021 et induirait l'acheteur en erreur.
-  const echelle = product.categorySlug ? echelleEnergie(product.categorySlug) : undefined;
-  const classeEnergie =
-    product.energyEfficiencyClass && echelle && classeCoherente(product.energyEfficiencyClass, echelle)
-      ? product.energyEfficiencyClass.trim().toUpperCase()
-      : undefined;
 
   return (
     <div className={PRODUCT_BUY_TOKENS.card}>
@@ -85,19 +73,6 @@ export function ProductPurchaseBox({ product }: { product: Product }) {
           </Link>
         </p>
       </div>
-
-      {/* Classe d'efficacité énergétique, à proximité immédiate du prix comme
-          l'exige l'article 6 du règlement (UE) 2017/1369 pour la vente à
-          distance, avec l'étendue de l'échelle : sans elle, la lettre ne se
-          situe pas. */}
-      {classeEnergie && echelle && (
-        <p className={PRODUCT_BUY_TOKENS.energy}>
-          <span className={PRODUCT_BUY_TOKENS.energyClass}>{classeEnergie}</span>
-          <span>
-            {t("energyLabel")}: {t("energyScale", { best: echelle.meilleure, worst: echelle.pire })}
-          </span>
-        </p>
-      )}
 
       {/* La disponibilité passe d'une ligne de texte à un état coloré : c'est la
           seule information de la carte qui change d'un produit à l'autre sans

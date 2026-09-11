@@ -99,9 +99,6 @@ export const PRODUCT_BUY_TOKENS = {
   badge:
     "rounded-full bg-badge px-2.5 py-1 text-[0.7rem] font-black uppercase tracking-wide text-badge-foreground",
   vatNote: "mt-2 text-xs leading-relaxed text-muted-foreground",
-  energy:
-    "flex flex-wrap items-baseline gap-x-2 gap-y-1 rounded-xl bg-muted px-3 py-2 text-xs text-muted-foreground",
-  energyClass: "rounded-lg bg-primary px-2 py-0.5 text-sm font-bold text-primary-foreground",
   /** La disponibilité devient un état lisible d'un coup d'oeil, pas une ligne de texte. */
   stockOn:
     "inline-flex items-center gap-2 self-start rounded-xl bg-primary/8 px-3 py-2 text-sm font-bold text-primary",

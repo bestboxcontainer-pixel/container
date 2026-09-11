@@ -40,19 +40,6 @@ const CONDITION_URL: Record<string, string> = {
   used: "https://schema.org/UsedCondition",
 };
 
-const EU_ENERGY_CATEGORY: Record<string, string> = {
-  "A+++": "https://schema.org/EUEnergyEfficiencyCategoryA3Plus",
-  "A++": "https://schema.org/EUEnergyEfficiencyCategoryA2Plus",
-  "A+": "https://schema.org/EUEnergyEfficiencyCategoryA1Plus",
-  A: "https://schema.org/EUEnergyEfficiencyCategoryA",
-  B: "https://schema.org/EUEnergyEfficiencyCategoryB",
-  C: "https://schema.org/EUEnergyEfficiencyCategoryC",
-  D: "https://schema.org/EUEnergyEfficiencyCategoryD",
-  E: "https://schema.org/EUEnergyEfficiencyCategoryE",
-  F: "https://schema.org/EUEnergyEfficiencyCategoryF",
-  G: "https://schema.org/EUEnergyEfficiencyCategoryG",
-};
-
 /** Le nom de la propriété GTIN dépend de sa longueur (gtin8/12/13/14). */
 function gtinProperties(gtin: string | undefined): Record<string, JsonLdValue | undefined> {
   if (!gtin) return {};
@@ -187,14 +174,6 @@ export function buildProductJsonLdData(
       name: "Ausstattung",
       value: highlight,
     }));
-  }
-
-  const energyCategory = EU_ENERGY_CATEGORY[record.energyEfficiencyClass ?? ""];
-  if (energyCategory) {
-    data.hasEnergyConsumptionDetails = {
-      "@type": "EnergyConsumptionDetails",
-      hasEnergyEfficiencyCategory: energyCategory,
-    };
   }
 
   return data;

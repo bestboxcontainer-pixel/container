@@ -31,7 +31,7 @@ const BANK: BankTransferSettings = {
 const COMMANDE = {
   paymentMethodKey: "vorkasse",
   paidAt: undefined,
-  orderNumber: "HP-2026-000042",
+  orderNumber: "BBC-2026-000042",
 };
 
 /** Les paires sont mises à plat pour vérifier la présence d'une mention. */
@@ -48,14 +48,14 @@ describe("Bloc bancaire de la facture", () => {
     assert.match(lignes, /BIC: COBADEFFXXX/);
     assert.match(lignes, /Bank: Commerzbank/);
     assert.match(lignes, /Überweisungsart: SEPA-Echtzeitüberweisung/);
-    assert.match(lignes, /Verwendungszweck: HP-2026-000042/);
+    assert.match(lignes, /Verwendungszweck: BBC-2026-000042/);
   });
 
   it("passe le type de virement sous silence quand il n'est pas renseigné", () => {
     const lignes = aplati(lignesVirement(COMMANDE, { ...BANK, transferType: "" }));
 
     assert.doesNotMatch(lignes, /Überweisungsart/);
-    assert.match(lignes, /Verwendungszweck: HP-2026-000042/);
+    assert.match(lignes, /Verwendungszweck: BBC-2026-000042/);
   });
 
   it("ne réclame rien sur une commande déjà payée", () => {
@@ -75,7 +75,7 @@ describe("Bloc bancaire de la facture", () => {
   it("omet le nom de la banque quand il n'est pas renseigné", () => {
     const lignes = aplati(lignesVirement(COMMANDE, { ...BANK, bank: "" }));
     assert.doesNotMatch(lignes, /Bank:/);
-    assert.match(lignes, /Verwendungszweck: HP-2026-000042/);
+    assert.match(lignes, /Verwendungszweck: BBC-2026-000042/);
   });
 });
 
@@ -108,7 +108,7 @@ function commandeEssai(nbArticles: number, remiseCents: number): OrderRecord {
   const subtotal = items.reduce((somme, article) => somme + article.lineTotalCents, 0);
 
   return {
-    orderNumber: "HP-2026-000042",
+    orderNumber: "BBC-2026-000042",
     locale: "de",
     email: "maximilian.wagenknecht@example.de",
     phone: "+49 30 12345678",

@@ -328,16 +328,9 @@ export async function countOpenOrders(): Promise<number> {
  * L'unicité réelle est garantie par la contrainte en base ; la boucle d'appel
  * réessaie en cas de collision entre deux commandes simultanées.
  */
-/** Préfixe en vigueur. Les commandes déjà passées gardent le leur. */
+/** Seul préfixe existant : aucune commande en base n'en porte d'autre. */
 const ORDER_PREFIX = "BBC";
 
-/**
- * Préfixes utilisés avant celui d'aujourd'hui. Le compteur les relit pour
- * repartir du dernier numéro réellement attribué : sans eux, un changement de
- * préfixe ferait recommencer la numérotation à zéro le jour du déploiement, et
- * la commande suivante porterait un rang inférieur à celui de la veille.
- */
-const LEGACY_ORDER_PREFIXES = ["HP", "PFF"] as const;
 /**
  * Rang de départ de la numérotation des commandes.
  *
@@ -360,22 +353,13 @@ async function nextOrderNumber(): Promise<string> {
   const year = new Date().getFullYear();
   const prefix = `${ORDER_PREFIX}-${year}-`;
 
-  // Le rang le plus élevé de l'année, tous préfixes confondus : le compteur
-  // suit les commandes, pas l'étiquette qu'elles portent.
-  const rangs = await Promise.all(
-    [ORDER_PREFIX, ...LEGACY_ORDER_PREFIXES].map(async (candidat) => {
-      const debut = `${candidat}-${year}-`;
-      const last = await prisma.order.findFirst({
-        where: { orderNumber: { startsWith: debut } },
-        orderBy: { orderNumber: "desc" },
-        select: { orderNumber: true },
-      });
-      const rang = last ? Number.parseInt(last.orderNumber.slice(debut.length), 10) : 0;
-      return Number.isFinite(rang) ? rang : 0;
-    }),
-  );
-
-  const previous = Math.max(...rangs);
+  const last = await prisma.order.findFirst({
+    where: { orderNumber: { startsWith: prefix } },
+    orderBy: { orderNumber: "desc" },
+    select: { orderNumber: true },
+  });
+  const rang = last ? Number.parseInt(last.orderNumber.slice(prefix.length), 10) : 0;
+  const previous = Number.isFinite(rang) ? rang : 0;
   const suivant = previous + 1;
 
   // Le plancher ne s'applique qu'aux premières commandes de l'année : une fois

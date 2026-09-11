@@ -23,7 +23,7 @@ process.env.NEXT_PUBLIC_SITE_URL = SITE;
 function order(overrides: Partial<OrderRecord> = {}): OrderRecord {
   return {
     id: "ord_42",
-    orderNumber: "HP-2026-000042",
+    orderNumber: "BBC-2026-000042",
     accessToken: "9f2c1ab34de5",
     locale: "de",
     email: "anna.beispiel@example.de",
@@ -104,9 +104,9 @@ describe("Confirmation à l'acheteur", () => {
   it("récapitule le numéro, les articles et les montants", () => {
     const mail = buildOrderConfirmationEmail(order());
 
-    assert.match(mail.subject, /HP-2026-000042/);
+    assert.match(mail.subject, /BBC-2026-000042/);
     for (const part of [mail.html, mail.text]) {
-      assert.match(part, /HP-2026-000042/);
+      assert.match(part, /BBC-2026-000042/);
       assert.match(part, /Serie 6 Waschmaschine WAU28T00/);
       // Total, sous-total et port : le récapitulatif exigé par le § 312i BGB,
       // aux prix au format allemand.
@@ -128,9 +128,9 @@ describe("Confirmation à l'acheteur", () => {
     // même chose, à l'endroit où le client cherchait l'IBAN. La commande reste
     // consultable depuis la page de confirmation ouverte après l'achat.
     const mail = buildOrderConfirmationEmail(order());
-    assert.doesNotMatch(mail.html, /bestellung\/HP-2026-000042/);
+    assert.doesNotMatch(mail.html, /bestellung\/BBC-2026-000042/);
     assert.doesNotMatch(mail.html, /Bestellung ansehen/);
-    assert.doesNotMatch(mail.text, /bestellung\/HP-2026-000042/);
+    assert.doesNotMatch(mail.text, /bestellung\/BBC-2026-000042/);
   });
 
   it("écrit en allemand par défaut et en anglais sous /en", () => {
@@ -226,7 +226,7 @@ describe("Confirmation à l'acheteur", () => {
       assert.match(part, /Commerzbank/);
       // Instruction du vendeur, montant et numéro de commande substitués.
       assert.match(part, /Bitte überweisen Sie 903,95 €/);
-      assert.match(part, /HP-2026-000042/);
+      assert.match(part, /BBC-2026-000042/);
       assert.doesNotMatch(part, /\{total\}|\{orderNumber\}/);
     }
   });
@@ -282,7 +282,7 @@ describe("Confirmation à l'acheteur", () => {
 describe("Notification au vendeur", () => {
   it("annonce le numéro et le montant dès l'objet", () => {
     const mail = buildOrderNotificationEmail(order());
-    assert.match(mail.subject, /Nouvelle commande HP-2026-000042/);
+    assert.match(mail.subject, /Nouvelle commande BBC-2026-000042/);
     assert.match(mail.subject, /903,95 €/);
   });
 

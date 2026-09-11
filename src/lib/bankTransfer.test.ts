@@ -160,18 +160,18 @@ describe("Relecture des coordonnées enregistrées", () => {
 });
 
 describe("Rendu de l'instruction", () => {
-  const values = { total: "903,95 €", orderNumber: "HP-2026-000042" };
+  const values = { total: "903,95 €", orderNumber: "BBC-2026-000042" };
 
   it("remplace le montant et le numéro de commande", () => {
     const text = renderBankInstructions(BANK_TRANSFER_DEFAULTS.instructions.de, values);
     assert.match(text, /903,95 €/);
-    assert.match(text, /HP-2026-000042/);
+    assert.match(text, /BBC-2026-000042/);
     assert.doesNotMatch(text, /\{total\}|\{orderNumber\}/);
   });
 
   it("remplace toutes les occurrences d'un même repère", () => {
     const text = renderBankInstructions("{orderNumber}, Referenz: {orderNumber}", values);
-    assert.equal(text, "HP-2026-000042, Referenz: HP-2026-000042");
+    assert.equal(text, "BBC-2026-000042, Referenz: BBC-2026-000042");
   });
 
   it("laisse intact un repère inconnu", () => {
